@@ -147,13 +147,21 @@ const t = useTranslations(lang)
 
         try {
             const data = {
-                name: (document.getElementById("contact-name") as HTMLInputElement).value,
-                email: (document.getElementById("contact-email") as HTMLInputElement).value,
-                message: (document.getElementById("contact-message") as HTMLTextAreaElement).value,
+                name: (
+                    document.getElementById("contact-name") as HTMLInputElement
+                ).value,
+                email: (
+                    document.getElementById("contact-email") as HTMLInputElement
+                ).value,
+                message: (
+                    document.getElementById(
+                        "contact-message",
+                    ) as HTMLTextAreaElement
+                ).value,
             }
 
             const response = await fetch(
-                "https://n8n.zerosugar.studio/webhook-test/jpiedra",
+                "https://n8n.zerosugar.studio/webhook/jpiedra",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -161,7 +169,8 @@ const t = useTranslations(lang)
                 },
             )
 
-            if (!response.ok) throw new Error(`Server error: ${response.status}`)
+            if (!response.ok)
+                throw new Error(`Server error: ${response.status}`)
 
             feedback.textContent = messages.success
             feedback.classList.remove("hidden", "text-red-400")
