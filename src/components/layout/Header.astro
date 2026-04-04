@@ -1,0 +1,120 @@
+---
+import type { Lang } from '../../types';
+import { useTranslations } from '../../i18n/utils';
+import LanguageSwitcher from '../ui/LanguageSwitcher.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const navItems = [
+  { href: '#about', label: t.nav.about },
+  { href: '#approach', label: t.nav.approach },
+  { href: '#projects', label: t.nav.projects },
+  { href: '#contact', label: t.nav.contact },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 w-full z-50 transition-all duration-300"
+>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-20">
+    <!-- Logo -->
+    <a href={lang === 'es' ? '/' : '/en/'} class="relative z-10 group">
+      <span class="font-heading text-3xl text-text-primary tracking-tight">
+        J<span class="text-accent">.</span>P
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-8">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-sm text-text-secondary hover:text-accent transition-colors duration-200 tracking-wide uppercase"
+        >
+          {item.label}
+        </a>
+      ))}
+      <LanguageSwitcher lang={lang} />
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="lg:hidden relative z-10 w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+      aria-label="Menu"
+    >
+      <span class="mobile-menu-line w-6 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
+      <span class="mobile-menu-line w-6 h-0.5 bg-text-primary transition-all duration-300 origin-center"></span>
+      <span class="mobile-menu-line w-4 h-0.5 bg-text-primary transition-all duration-300 origin-center ml-auto"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-bg-primary/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
+  >
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class="mobile-nav-link text-2xl font-heading text-text-primary hover:text-accent transition-colors duration-200"
+      >
+        {item.label}
+      </a>
+    ))}
+    <div class="mt-4">
+      <LanguageSwitcher lang={lang} />
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const mobileBtn = document.getElementById('mobile-menu-btn')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const lines = mobileBtn.querySelectorAll('.mobile-menu-line');
+  const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+  let menuOpen = false;
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+      mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+      lines[0].classList.add('rotate-45', 'translate-y-[4px]');
+      lines[1].classList.add('opacity-0');
+      lines[2].classList.add('-rotate-45', '-translate-y-[8px]', 'w-6');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+      mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+      lines[0].classList.remove('rotate-45', 'translate-y-[4px]');
+      lines[1].classList.remove('opacity-0');
+      lines[2].classList.remove('-rotate-45', '-translate-y-[8px]', 'w-6');
+      document.body.style.overflow = '';
+    }
+  }
+
+  mobileBtn.addEventListener('click', toggleMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', () => {
+    if (menuOpen) toggleMenu();
+  }));
+
+  // Header scroll effect
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > 50) {
+      header.classList.add('bg-bg-primary/80', 'backdrop-blur-xl', 'border-b', 'border-border');
+    } else {
+      header.classList.remove('bg-bg-primary/80', 'backdrop-blur-xl', 'border-b', 'border-border');
+    }
+    lastScroll = currentScroll;
+  });
+</script>

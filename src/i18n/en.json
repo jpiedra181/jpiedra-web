@@ -1,0 +1,91 @@
+{
+  "nav": {
+    "about": "About",
+    "approach": "Approach",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "label": "DIGITAL ARCHITECT",
+    "title": "I design, connect and <em>build</em> digital solutions",
+    "subtitle": "I don't make pretty websites. I understand your problem, choose the right tools and connect them so your business works better.",
+    "cta": "Let's talk",
+    "tags": ["Automation", "Modern Web", "Applied AI", "Integrations", "APIs", "Technical Consulting"]
+  },
+  "about": {
+    "label": "ABOUT ME",
+    "title": "The one who understands the problem and solves it",
+    "text": "I've been in web development for years, but what really drives me isn't writing code — it's solving problems. Every business is a system with pieces that can work better. My job is to understand those pieces, choose the right technology for each one, and build the connections that make them work together."
+  },
+  "approach": {
+    "label": "APPROACH",
+    "title": "How I work",
+    "steps": [
+      {
+        "title": "Listen & diagnose",
+        "description": "I understand your business, your bottlenecks, where you lose time and money. No tech jargon."
+      },
+      {
+        "title": "Design the architecture",
+        "description": "I choose the right pieces from the digital ecosystem and design how to connect them. Every tool has a purpose."
+      },
+      {
+        "title": "I build it myself",
+        "description": "I don't delegate. I write the code, configure the automations and make everything work together."
+      }
+    ]
+  },
+  "projects": {
+    "label": "PROJECTS",
+    "title": "What I've built",
+    "cta": "View case",
+    "items": [
+      {
+        "category": "RAG + Conversational AI",
+        "title": "Smart tax assistant",
+        "description": "Chatbot that answers queries about income tax using RAG on real tax documentation. Precise answers with cited sources.",
+        "tags": ["Python", "LangChain", "OpenAI", "Pinecone", "FastAPI"]
+      },
+      {
+        "category": "Automation + AI",
+        "title": "Design Systems Generator",
+        "description": "Tool that generates complete design systems — tokens, components, documentation — from a brand brief.",
+        "tags": ["TypeScript", "Node.js", "OpenAI", "Figma API", "React"]
+      },
+      {
+        "category": "Web Scraping + Analysis",
+        "title": "Automated web audit",
+        "description": "System that analyzes complete websites and generates performance, SEO and accessibility reports in business language.",
+        "tags": ["Puppeteer", "Node.js", "Lighthouse", "OpenAI", "PDF Generation"]
+      },
+      {
+        "category": "EdTech + AI",
+        "title": "AI study platform",
+        "description": "Personalized assistant for exam preparation. Generates tests, explains topics and adapts content to the student's level.",
+        "tags": ["Next.js", "Supabase", "OpenAI", "Stripe", "TailwindCSS"]
+      }
+    ]
+  },
+  "contact": {
+    "label": "CONTACT",
+    "title": "Have a problem that technology can solve?",
+    "subtitle": "Tell me about it. No strings attached, no PowerPoints, no smoke.",
+    "cta": "Let's talk",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell me what you need...",
+      "submit": "Send message",
+      "sending": "Sending...",
+      "success": "Message sent. I'll get back to you as soon as possible.",
+      "error": "Something went wrong. Try again or email me directly."
+    }
+  },
+  "footer": {
+    "available": "Available for projects",
+    "rights": "All rights reserved."
+  }
+}

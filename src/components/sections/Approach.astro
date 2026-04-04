@@ -1,0 +1,46 @@
+---
+import type { Lang } from '../../types';
+import { useTranslations } from '../../i18n/utils';
+import SectionLabel from '../ui/SectionLabel.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="approach" class="py-32 relative">
+  <!-- Subtle background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-bg-primary via-bg-surface/50 to-bg-primary"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-20">
+      <SectionLabel text={t.approach.label} />
+      <h2 class="approach-title font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary">
+        {t.approach.title}
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {t.approach.steps.map((step, index) => {
+        const num = String(index + 1).padStart(2, '0');
+        return (
+          <div class="approach-card group relative bg-bg-surface/50 border border-border rounded-2xl p-8 hover:border-border-hover transition-all duration-300">
+            <!-- Big decorative number -->
+            <span class="block font-heading text-[5rem] leading-none text-accent/10 mb-4 select-none group-hover:text-accent/20 transition-colors duration-300">
+              {num}
+            </span>
+            <h3 class="font-heading text-2xl text-text-primary mb-3">
+              {step.title}
+            </h3>
+            <p class="text-text-secondary leading-relaxed">
+              {step.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

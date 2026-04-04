@@ -1,0 +1,20 @@
+---
+import type { Lang } from '../../types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const targetLang = lang === 'es' ? 'en' : 'es';
+const targetHref = lang === 'es' ? '/en/' : '/';
+const targetLabel = targetLang.toUpperCase();
+---
+
+<a
+  href={targetHref}
+  class="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-accent transition-colors duration-200 border border-border hover:border-border-hover rounded-full px-3 py-1"
+  aria-label={`Switch to ${targetLang === 'en' ? 'English' : 'Español'}`}
+>
+  <span class="text-xs">{targetLabel}</span>
+</a>

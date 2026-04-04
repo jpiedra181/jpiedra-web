@@ -1,0 +1,15 @@
+---
+---
+
+<div id="hero-canvas-container" class="w-full h-[300px] lg:h-[600px] max-w-[600px]">
+  <canvas id="hero-canvas" class="w-full h-full"></canvas>
+</div>
+
+<script>
+  import { initHeroScene } from '../../scripts/three-scene';
+
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    initHeroScene(canvas);
+  }
+</script>

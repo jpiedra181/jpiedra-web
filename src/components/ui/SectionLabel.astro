@@ -1,0 +1,12 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="section-label flex items-center gap-4 mb-6">
+  <span class="h-px w-8 bg-accent"></span>
+  <span class="text-xs font-body font-medium tracking-[0.2em] text-accent uppercase">{text}</span>
+</div>

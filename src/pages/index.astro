@@ -1,17 +1,29 @@
 ---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Approach from '../components/sections/Approach.astro';
+import Projects from '../components/sections/Projects.astro';
+import Contact from '../components/sections/Contact.astro';
 
+const lang = 'es' as const;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout lang={lang}>
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Approach lang={lang} />
+  <Projects lang={lang} />
+  <Contact lang={lang} />
+</BaseLayout>
+
+<script>
+  import { initHeroAnimations, initScrollAnimations, destroyAnimations } from '../scripts/gsap-animations';
+
+  initHeroAnimations();
+  initScrollAnimations();
+
+  document.addEventListener('astro:before-swap', () => {
+    destroyAnimations();
+  }, { once: true });
+</script>

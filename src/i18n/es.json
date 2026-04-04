@@ -1,0 +1,91 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "approach": "Cómo trabajo",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "label": "ARQUITECTO DIGITAL",
+    "title": "Diseño, conecto y <em>construyo</em> soluciones digitales",
+    "subtitle": "No hago webs bonitas. Entiendo tu problema, elijo las herramientas correctas y las conecto para que tu negocio funcione mejor.",
+    "cta": "Hablemos",
+    "tags": ["Automatización", "Web moderna", "IA aplicada", "Integraciones", "APIs", "Consultoría técnica"]
+  },
+  "about": {
+    "label": "SOBRE MÍ",
+    "title": "El que entiende el problema y lo resuelve",
+    "text": "Llevo años en el desarrollo web, pero lo que realmente me motiva no es escribir código — es resolver problemas. Cada negocio es un sistema con piezas que pueden funcionar mejor. Mi trabajo es entender esas piezas, elegir la tecnología adecuada para cada una, y construir las conexiones que las hacen funcionar juntas."
+  },
+  "approach": {
+    "label": "CÓMO TRABAJO",
+    "title": "Mi proceso",
+    "steps": [
+      {
+        "title": "Escucho y diagnostico",
+        "description": "Entiendo tu negocio, tus cuellos de botella, dónde pierdes tiempo y dinero. Sin jerga técnica."
+      },
+      {
+        "title": "Diseño la arquitectura",
+        "description": "Elijo las piezas correctas del ecosistema digital y diseño cómo conectarlas. Cada herramienta tiene un propósito."
+      },
+      {
+        "title": "Lo construyo yo mismo",
+        "description": "No delego. Escribo el código, configuro las automatizaciones y hago que todo funcione junto."
+      }
+    ]
+  },
+  "projects": {
+    "label": "PROYECTOS",
+    "title": "Lo que he construido",
+    "cta": "Ver caso",
+    "items": [
+      {
+        "category": "RAG + IA Conversacional",
+        "title": "Asistente fiscal inteligente",
+        "description": "Chatbot que responde consultas sobre el IRPF usando RAG sobre documentación fiscal real. Respuestas precisas con fuentes citadas.",
+        "tags": ["Python", "LangChain", "OpenAI", "Pinecone", "FastAPI"]
+      },
+      {
+        "category": "Automatización + IA",
+        "title": "Generador de Design Systems",
+        "description": "Herramienta que genera sistemas de diseño completos — tokens, componentes, documentación — a partir de un brief de marca.",
+        "tags": ["TypeScript", "Node.js", "OpenAI", "Figma API", "React"]
+      },
+      {
+        "category": "Web Scraping + Análisis",
+        "title": "Auditoría web automatizada",
+        "description": "Sistema que analiza webs completas y genera reportes de rendimiento, SEO y accesibilidad en lenguaje de negocio.",
+        "tags": ["Puppeteer", "Node.js", "Lighthouse", "OpenAI", "PDF Generation"]
+      },
+      {
+        "category": "EdTech + IA",
+        "title": "Plataforma de estudio con IA",
+        "description": "Asistente personalizado para preparación de oposiciones. Genera tests, explica temas y adapta el contenido al nivel del estudiante.",
+        "tags": ["Next.js", "Supabase", "OpenAI", "Stripe", "TailwindCSS"]
+      }
+    ]
+  },
+  "contact": {
+    "label": "CONTACTO",
+    "title": "¿Tienes un problema que la tecnología puede resolver?",
+    "subtitle": "Cuéntamelo. Sin compromiso, sin PowerPoints, sin humo.",
+    "cta": "Hablemos",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntame qué necesitas...",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando...",
+      "success": "Mensaje enviado. Te responderé lo antes posible.",
+      "error": "Hubo un error. Prueba de nuevo o escríbeme directamente."
+    }
+  },
+  "footer": {
+    "available": "Disponible para proyectos",
+    "rights": "Todos los derechos reservados."
+  }
+}

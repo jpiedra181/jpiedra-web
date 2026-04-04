@@ -1,0 +1,45 @@
+---
+import type { Lang } from '../../types';
+import { useTranslations } from '../../i18n/utils';
+import SectionLabel from '../ui/SectionLabel.astro';
+import ProjectCard from '../ui/ProjectCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const projectImages = [
+  'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80',
+  'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80',
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80',
+];
+---
+
+<section id="projects" class="py-32 relative">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="mb-20">
+      <SectionLabel text={t.projects.label} />
+      <h2 class="projects-title font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary">
+        {t.projects.title}
+      </h2>
+    </div>
+
+    <div class="flex flex-col gap-24">
+      {t.projects.items.map((project, index) => (
+        <ProjectCard
+          category={project.category}
+          title={project.title}
+          description={project.description}
+          tags={project.tags}
+          image={projectImages[index]}
+          cta={t.projects.cta}
+          reverse={index % 2 !== 0}
+        />
+      ))}
+    </div>
+  </div>
+</section>

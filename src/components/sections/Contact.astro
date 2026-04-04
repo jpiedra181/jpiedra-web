@@ -1,0 +1,173 @@
+---
+import type { Lang } from "../../types"
+import { useTranslations } from "../../i18n/utils"
+import { siteConfig } from "../../config/site"
+import SectionLabel from "../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<section id="contact" class="py-32 relative">
+    <div
+        class="absolute inset-0 bg-gradient-to-b from-bg-primary via-bg-surface/30 to-bg-primary"
+    >
+    </div>
+
+    <div class="relative max-w-3xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <SectionLabel text={t.contact.label} />
+
+            <h2
+                class="contact-title font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary mb-6"
+            >
+                {t.contact.title}
+            </h2>
+
+            <p class="contact-subtitle text-lg text-text-secondary">
+                {t.contact.subtitle}
+            </p>
+        </div>
+
+        <!-- Contact Form -->
+        <form
+            id="contact-form"
+            class="contact-form space-y-6"
+            data-success={t.contact.form.success}
+            data-error={t.contact.form.error}
+            data-sending={t.contact.form.sending}
+            data-submit={t.contact.form.submit}
+        >
+            <div class="grid sm:grid-cols-2 gap-6">
+                <div>
+                    <label
+                        for="contact-name"
+                        class="block text-sm text-text-secondary mb-2"
+                    >
+                        {t.contact.form.name}
+                    </label>
+                    <input
+                        type="text"
+                        id="contact-name"
+                        name="name"
+                        required
+                        placeholder={t.contact.form.namePlaceholder}
+                        class="w-full bg-bg-surface border border-border rounded-xl px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-line focus:ring-1 focus:ring-accent-line transition-colors duration-200"
+                    />
+                </div>
+                <div>
+                    <label
+                        for="contact-email"
+                        class="block text-sm text-text-secondary mb-2"
+                    >
+                        {t.contact.form.email}
+                    </label>
+                    <input
+                        type="email"
+                        id="contact-email"
+                        name="email"
+                        required
+                        placeholder={t.contact.form.emailPlaceholder}
+                        class="w-full bg-bg-surface border border-border rounded-xl px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-line focus:ring-1 focus:ring-accent-line transition-colors duration-200"
+                    />
+                </div>
+            </div>
+
+            <div>
+                <label
+                    for="contact-message"
+                    class="block text-sm text-text-secondary mb-2"
+                >
+                    {t.contact.form.message}
+                </label>
+                <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder={t.contact.form.messagePlaceholder}
+                    class="w-full bg-bg-surface border border-border rounded-xl px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-line focus:ring-1 focus:ring-accent-line transition-colors duration-200 resize-y min-h-[120px]"
+                ></textarea>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-6 pt-2">
+                <button
+                    type="submit"
+                    id="contact-submit"
+                    class="cursor-pointer inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <span id="submit-text">{t.contact.form.submit}</span>
+                    <svg
+                        class="w-4 h-4 transition-transform duration-200"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </button>
+
+                <p id="form-feedback" class="text-sm hidden"></p>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    const form = document.getElementById("contact-form") as HTMLFormElement
+    const submitBtn = document.getElementById(
+        "contact-submit",
+    ) as HTMLButtonElement
+    const submitText = document.getElementById("submit-text")!
+    const feedback = document.getElementById("form-feedback")!
+
+    const messages = {
+        success: form.dataset.success!,
+        error: form.dataset.error!,
+        sending: form.dataset.sending!,
+        submit: form.dataset.submit!,
+    }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault()
+
+        submitBtn.disabled = true
+        submitText.textContent = messages.sending
+        feedback.classList.add("hidden")
+
+        const formData = new FormData(form)
+        const data = Object.fromEntries(formData)
+
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            })
+
+            if (response.ok) {
+                feedback.textContent = messages.success
+                feedback.classList.remove("hidden", "text-red-400")
+                feedback.classList.add("text-green-400")
+                form.reset()
+            } else {
+                throw new Error("Server error")
+            }
+        } catch {
+            feedback.textContent = messages.error
+            feedback.classList.remove("hidden", "text-green-400")
+            feedback.classList.add("text-red-400")
+        } finally {
+            submitBtn.disabled = false
+            submitText.textContent = messages.submit
+        }
+    })
+</script>
