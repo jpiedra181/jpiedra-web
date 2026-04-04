@@ -145,25 +145,30 @@ const t = useTranslations(lang)
         submitText.textContent = messages.sending
         feedback.classList.add("hidden")
 
-        const formData = new FormData(form)
-        const data = Object.fromEntries(formData)
-
         try {
-            const response = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            })
-
-            if (response.ok) {
-                feedback.textContent = messages.success
-                feedback.classList.remove("hidden", "text-red-400")
-                feedback.classList.add("text-green-400")
-                form.reset()
-            } else {
-                throw new Error("Server error")
+            const data = {
+                name: (document.getElementById("contact-name") as HTMLInputElement).value,
+                email: (document.getElementById("contact-email") as HTMLInputElement).value,
+                message: (document.getElementById("contact-message") as HTMLTextAreaElement).value,
             }
-        } catch {
+
+            const response = await fetch(
+                "https://n8n.zerosugar.studio/webhook-test/jpiedra",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                },
+            )
+
+            if (!response.ok) throw new Error(`Server error: ${response.status}`)
+
+            feedback.textContent = messages.success
+            feedback.classList.remove("hidden", "text-red-400")
+            feedback.classList.add("text-green-400")
+            form.reset()
+        } catch (err) {
+            console.error("Form error:", err)
             feedback.textContent = messages.error
             feedback.classList.remove("hidden", "text-green-400")
             feedback.classList.add("text-red-400")
