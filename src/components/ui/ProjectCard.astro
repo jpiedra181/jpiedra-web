@@ -1,51 +1,72 @@
 ---
 interface Props {
-  category: string;
-  title: string;
-  description: string;
-  tags: string[];
-  image: string;
-  cta: string;
-  reverse?: boolean;
+    category: string
+    title: string
+    description: string
+    tags: string[]
+    image: string
+    cta: string
+    reverse?: boolean
 }
 
-const { category, title, description, tags, image, cta, reverse = false } = Astro.props;
+const {
+    category,
+    title,
+    description,
+    tags,
+    image,
+    cta,
+    reverse = false,
+} = Astro.props
 ---
 
-<article class={`project-card group grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${reverse ? 'direction-reverse' : ''}`}>
-  <!-- Image -->
-  <div class={`project-image relative overflow-hidden rounded-2xl ${reverse ? 'lg:order-2' : ''}`}>
-    <div class="aspect-[16/10] overflow-hidden rounded-2xl">
-      <img
-        src={image}
-        alt={title}
-        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        loading="lazy"
-      />
+<article
+    class={`project-card group grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${reverse ? "direction-reverse" : ""}`}
+>
+    <!-- Image -->
+    <div
+        class={`project-image relative overflow-hidden rounded-2xl ${reverse ? "lg:order-2" : ""}`}
+    >
+        <div class="aspect-[16/10] overflow-hidden rounded-2xl">
+            <img
+                src={image}
+                alt={title}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+            />
+        </div>
+        <!-- Overlay gradient -->
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-bg-primary/40 to-transparent rounded-2xl pointer-events-none"
+        >
+        </div>
     </div>
-    <!-- Overlay gradient -->
-    <div class="absolute inset-0 bg-gradient-to-t from-bg-primary/40 to-transparent rounded-2xl pointer-events-none"></div>
-  </div>
 
-  <!-- Content -->
-  <div class={reverse ? 'lg:order-1' : ''}>
-    <span class="text-xs font-medium tracking-[0.15em] text-accent uppercase mb-4 block">
-      {category}
-    </span>
-    <h3 class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] text-text-primary mb-4 leading-tight">
-      {title}
-    </h3>
-    <p class="text-text-secondary leading-relaxed mb-6">
-      {description}
-    </p>
-    <div class="flex flex-wrap gap-2 mb-8">
-      {tags.map((tag) => (
-        <span class="project-tag text-xs text-text-secondary bg-bg-elevated border border-border rounded-full px-3 py-1">
-          {tag}
+    <!-- Content -->
+    <div class={reverse ? "lg:order-1" : ""}>
+        <span
+            class="text-xs font-medium tracking-[0.15em] text-accent uppercase mb-4 block"
+        >
+            {category}
         </span>
-      ))}
-    </div>
-    <a
+        <h3
+            class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] text-text-primary mb-4 leading-tight"
+        >
+            {title}
+        </h3>
+        <p class="text-text-secondary leading-relaxed mb-6">
+            {description}
+        </p>
+        <div class="flex flex-wrap gap-2 mb-8">
+            {
+                tags.map((tag) => (
+                    <span class="project-tag text-xs text-text-secondary bg-bg-elevated border border-border rounded-full px-3 py-1">
+                        {tag}
+                    </span>
+                ))
+            }
+        </div>
+        <!-- <a
       href="#"
       class="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-hover transition-colors duration-200 group/link"
     >
@@ -53,6 +74,6 @@ const { category, title, description, tags, image, cta, reverse = false } = Astr
       <svg class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
       </svg>
-    </a>
-  </div>
+    </a> -->
+    </div>
 </article>

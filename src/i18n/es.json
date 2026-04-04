@@ -14,8 +14,10 @@
   },
   "about": {
     "label": "SOBRE MÍ",
-    "title": "El que entiende el problema y lo resuelve",
-    "text": "Llevo años en el desarrollo web, pero lo que realmente me motiva no es escribir código — es resolver problemas. Cada negocio es un sistema con piezas que pueden funcionar mejor. Mi trabajo es entender esas piezas, elegir la tecnología adecuada para cada una, y construir las conexiones que las hacen funcionar juntas."
+    "title": "Resolvía problemas antes de saber programar",
+    "text_1": "En la fábrica ya hacía lo mismo que hago ahora: mirar un proceso, encontrar lo que no funciona e imaginar cómo mejorarlo. La diferencia es que antes lo pensaba y ahora lo construyo.",
+    "text_2": "Estudié Ingeniería en Topografía — una carrera de medir, calcular y ser preciso. Trabajé de peón en fábricas — donde ves cómo funcionan las cosas de verdad, no en la teoría. Y un día descubrí que el desarrollo web me permitía juntar las dos cosas: la precisión técnica y la resolución práctica de problemas.",
+    "text_3": "Cuando me siento con un cliente, no le hablo de frameworks ni de APIs. Le pregunto qué le quita el sueño, dónde pierde dinero, qué hace a mano que debería estar automatizado. Y cuando ya entiendo el problema, ahí sí — elijo las herramientas, diseño la solución y la monto pieza a pieza."
   },
   "approach": {
     "label": "CÓMO TRABAJO",
@@ -43,25 +45,25 @@
       {
         "category": "RAG + IA Conversacional",
         "title": "Asistente fiscal inteligente",
-        "description": "Chatbot que responde consultas sobre el IRPF usando RAG sobre documentación fiscal real. Respuestas precisas con fuentes citadas.",
-        "tags": ["Python", "LangChain", "OpenAI", "Pinecone", "FastAPI"]
+        "description": "Un chat donde le preguntas tus dudas sobre la declaración de la renta y te responde con información real de Hacienda. Como tener un asesor fiscal disponible a cualquier hora.",
+        "tags": ["Astro", "n8n", "Claude AI", "Pinecone"]
       },
       {
         "category": "Automatización + IA",
         "title": "Generador de Design Systems",
-        "description": "Herramienta que genera sistemas de diseño completos — tokens, componentes, documentación — a partir de un brief de marca.",
-        "tags": ["TypeScript", "Node.js", "OpenAI", "Figma API", "React"]
+        "description":  "Le describes tu marca — colores, estilo, personalidad — y te genera una guía visual completa con todos los elementos que necesita tu web. Lista para usar.",
+        "tags": ["n8n", "email", "Stripe", "Landing Pages", "Design Systems"]
       },
       {
         "category": "Web Scraping + Análisis",
         "title": "Auditoría web automatizada",
-        "description": "Sistema que analiza webs completas y genera reportes de rendimiento, SEO y accesibilidad en lenguaje de negocio.",
-        "tags": ["Puppeteer", "Node.js", "Lighthouse", "OpenAI", "PDF Generation"]
+        "description":  "Metes la dirección de una web y te dice qué funciona bien, qué va lento y qué tiene que mejorar. Todo explicado en lenguaje normal, no en métricas crípticas.",
+        "tags": ["Claude Skills", "PageSpeed API", "Lighthouse", "SEO", "Accessibilidad", "Auditoría", "Informe PDF"]
       },
       {
         "category": "EdTech + IA",
-        "title": "Plataforma de estudio con IA",
-        "description": "Asistente personalizado para preparación de oposiciones. Genera tests, explica temas y adapta el contenido al nivel del estudiante.",
+        "title": "Plataforma de estudio con IA - En Prueba",
+        "description": "Un asistente que te ayuda a preparar oposiciones. Te hace exámenes, te explica lo que no entiendas y se adapta a tu nivel para que estudies mejor, no más.",
         "tags": ["Next.js", "Supabase", "OpenAI", "Stripe", "TailwindCSS"]
       }
     ]
