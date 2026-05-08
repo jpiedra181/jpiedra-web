@@ -73,6 +73,40 @@ export function initHeroAnimations(): void {
 }
 
 export function initScrollAnimations(): void {
+  // Context section — opt-in: skip if user prefers reduced motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    scrollReveal('#contexto .context-eyebrow', '#contexto',
+      { clipPath: 'inset(0 100% 0 0)' },
+      { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: EASE_IN_OUT },
+    );
+
+    scrollReveal('.context-title', '#contexto',
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 0.15, ease: EASE_OUT },
+    );
+
+    scrollReveal('.context-subtitle', '#contexto',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 0.25, ease: EASE_OUT },
+    );
+
+    scrollReveal('.context-stat', '#contexto',
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, stagger: STAGGER_MEDIUM, delay: 0.35, ease: EASE_OUT },
+    );
+
+    scrollReveal('.context-closing', '#contexto',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: EASE_OUT },
+    );
+
+    scrollReveal('.context-sources', '#contexto',
+      { y: 10, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, delay: 0.15, ease: EASE_OUT },
+    );
+  }
+
   // About section
   scrollReveal('.about-image', '#about',
     { y: 60, opacity: 0 },
@@ -95,7 +129,7 @@ export function initScrollAnimations(): void {
   );
 
   // Approach section
-  scrollReveal('#approach .section-label', '#approach',
+  scrollReveal('#approach .approach-eyebrow', '#approach',
     { clipPath: 'inset(0 100% 0 0)' },
     { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: EASE_IN_OUT },
   );
@@ -105,9 +139,14 @@ export function initScrollAnimations(): void {
     { y: 0, opacity: 1, duration: 0.8, delay: 0.15, ease: EASE_OUT },
   );
 
+  scrollReveal('.approach-subtitle', '#approach',
+    { y: 20, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.8, delay: 0.25, ease: EASE_OUT },
+  );
+
   scrollReveal('.approach-card', '#approach',
     { y: 40, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.8, stagger: STAGGER_MEDIUM, delay: 0.3, ease: EASE_OUT },
+    { y: 0, opacity: 1, duration: 0.8, stagger: STAGGER_MEDIUM, delay: 0.35, ease: EASE_OUT },
   );
 
   // Projects section
@@ -158,7 +197,7 @@ export function initScrollAnimations(): void {
   });
 
   // Contact section
-  scrollReveal('#contact .section-label', '#contact',
+  scrollReveal('#contact .contact-eyebrow', '#contact',
     { clipPath: 'inset(0 100% 0 0)' },
     { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: EASE_IN_OUT },
   );

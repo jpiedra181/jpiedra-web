@@ -1,0 +1,80 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../types"
+import { useTranslations } from "../../i18n/utils"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<section
+    id="contexto"
+    aria-labelledby="contexto-title"
+    class="relative py-32 lg:py-40"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <!-- Eyebrow -->
+        <div class="context-eyebrow max-w-[60ch] overflow-hidden">
+            <span
+                class="inline-block text-xs font-body font-medium tracking-[0.3em] text-accent uppercase"
+            >
+                {t.context.eyebrow}
+            </span>
+        </div>
+
+        <!-- Title -->
+        <h2
+            id="contexto-title"
+            class="context-title font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mt-8 max-w-[18ch] lg:max-w-[20ch]"
+        >
+            {t.context.title}
+        </h2>
+
+        <!-- Subtitle -->
+        <p
+            class="context-subtitle font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-primary mt-8 max-w-[45rem]"
+        >
+            {t.context.subtitle}
+        </p>
+
+        <!-- Stats -->
+        <ul
+            role="list"
+            class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 lg:gap-16 mt-20 lg:mt-28"
+        >
+            {
+                t.context.stats.map((stat) => (
+                    <li class="context-stat flex flex-col items-center text-center">
+                        <strong
+                            aria-label={stat.ariaLabel}
+                            class="font-heading font-normal text-accent leading-none text-[clamp(3rem,6vw,5.5rem)]"
+                        >
+                            {stat.value}
+                        </strong>
+                        <span class="font-body text-base lg:text-lg leading-snug text-text-primary mt-5 max-w-[28ch]">
+                            {stat.description}
+                        </span>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <!-- Closing line -->
+        <p
+            class="context-closing font-body text-[clamp(1.125rem,1.6vw,1.5rem)] leading-relaxed text-text-primary mt-16 lg:mt-16 max-w-[45rem]"
+        >
+            {t.context.closing}
+        </p>
+
+        <!-- Sources -->
+        <p
+            class="context-sources font-body text-xs lg:text-sm text-text-muted mt-6 max-w-[45rem]"
+        >
+            {t.context.sources}
+        </p>
+    </div>
+</section>

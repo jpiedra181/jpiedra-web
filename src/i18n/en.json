@@ -6,34 +6,61 @@
     "contact": "Contact"
   },
   "hero": {
-    "label": "DIGITAL ARCHITECT",
-    "title": "I design, connect and <em>build</em> digital solutions",
+    "label": "WEB DEVELOPER • WEB ACCESSIBILITY SPECIALIST",
+    "title": "Webs that work for everyone.",
+    "title_1": "No fines, no excuses, no smoke.",
     "subtitle": "I don't make pretty websites. I understand your problem, choose the right tools and connect them so your business works better.",
-    "cta": "Let's talk",
+    "cta": "Audit my website",
     "tags": ["Automation", "Modern Web", "Applied AI", "Integrations", "APIs", "Technical Consulting"]
+  },
+  "context": {
+    "eyebrow": "THE CONTEXT",
+    "title": "Web accessibility is no longer optional in Spain.",
+    "subtitle": "Since June 28, 2025, Law 11/2023 requires thousands of companies to make their websites accessible. Almost none of them are.",
+    "stats": [
+      {
+        "value": "98%",
+        "ariaLabel": "98 percent",
+        "description": "of Spanish websites fail to meet the regulation."
+      },
+      {
+        "value": "€1,000,000",
+        "ariaLabel": "one million euros",
+        "description": "maximum fine for non-compliance."
+      },
+      {
+        "value": "4.7M",
+        "ariaLabel": "4.7 million",
+        "description": "people with disabilities in Spain cannot use many websites."
+      }
+    ],
+    "closing": "If you sell online, take bookings, process services or receive public funds, this is about you.",
+    "sources": "Sources: 2025 Web Accessibility Barometer, INE, RDL 1/2013."
   },
   "about": {
     "label": "ABOUT ME",
     "title": "I was solving problems before I knew how to code",
-    "text_1": "Back in the factory, I was already doing what I do now: looking at a process, finding what's broken, and figuring out how to fix it. The only difference is that back then I could only think it. Now I build it.",
-    "text_2": "I studied Surveying Engineering — a degree built on measuring, calculating, and being precise. I worked as a factory hand — where you see how things actually work, not just in theory. And one day I realized that web development let me bring both worlds together: technical precision and hands-on problem solving.",
-    "text_3": "When I sit down with a client, I don't talk about frameworks or APIs. I ask what keeps them up at night, where they're losing money, what they're doing by hand that should be automated. And once I understand the problem — that's when I pick the tools, design the solution, and build it piece by piece."
+    "text_1": "In the factory, I was already doing the same thing I do now: looking at a process, finding what doesn't work and imagining how to make it better. The difference is that before I thought about it and now I build it.",
+    "text_2": "I studied Engineering in Topography — a career of measuring, calculating and being precise. I worked as a laborer in factories — where you see how things really work, not just the theory. And one day I discovered that web development allowed me to combine both things: technical precision and practical problem-solving.",
+    "text_3": "Today my focus is on web accessibility. Laws have changed, websites haven't. There are thousands of companies required to comply with regulations that almost no one understands, with serious fines and real deadlines. And that's exactly the type of problem I've been solving my whole life: seeing how something should work and making it work.",
+    "cta": "If your website is on that list, let's talk."
   },
   "approach": {
     "label": "APPROACH",
-    "title": "How I work",
+    "title": "Three steps. No surprises, no locked-in subscriptions, no smoke.",
+    "subtitle": "Every project follows the same process. You know it before we start and you know exactly where we are at any moment.",
     "steps": [
       {
-        "title": "Listen & diagnose",
-        "description": "I understand your business, your bottlenecks, where you lose time and money. No tech jargon."
+        "title": "Audit",
+        "description": "I review your site against WCAG 2.1 AA and Spain's Law 11/2023. I combine technical tools (axe, Lighthouse, screen readers) with manual evaluation. It's not a 200-page PDF full of jargon: I deliver a report anyone on your team can understand, with each issue, its impact, and how much it costs to fix."
       },
       {
-        "title": "Design the architecture",
-        "description": "I choose the right pieces from the digital ecosystem and design how to connect them. Every tool has a purpose."
+        "title": "Fix",
+        "description": "I take the report and apply it. Me — not an outsourced team on the other side of the world. Every fix is tested with a keyboard, with a screen reader, and with real users when needed. When we're done, I hand you an accessibility statement ready to publish."
       },
       {
-        "title": "I build it myself",
-        "description": "I don't delegate. I write the code, configure the automations and make everything work together."
+        "title": "Maintain (optional)",
+        "description": "Websites change. Plugins get updated, the marketing team uploads content, developers ship deploys. If you want to sleep at night, I review your site every month and keep accessibility up to date. No annual contract — leave whenever you want."
       }
     ]
   },
@@ -70,20 +97,33 @@
   },
   "contact": {
     "label": "CONTACT",
-    "title": "Have a problem that technology can solve?",
-    "subtitle": "Tell me about it. No strings attached, no PowerPoints, no smoke.",
+    "title": "Does your website comply with Law 11/2023?",
+    "subtitle": "If you're not sure, it probably doesn't. Tell me what you have and I'll tell you where you stand. No strings attached, no PowerPoints, no smoke.",
     "cta": "Let's talk",
+    "available": "Available for new projects",
+    "note": "I get back to you in under 24 hours. Business days.",
+    "privacyIntro": "By submitting this message you accept the ",
+    "privacyLinkText": "privacy policy",
+    "privacyOutro": ".",
     "form": {
-      "name": "Name",
+      "name": "What's your name",
       "namePlaceholder": "Your name",
-      "email": "Email",
+      "email": "Where I reply",
       "emailPlaceholder": "you@email.com",
-      "message": "Message",
-      "messagePlaceholder": "Tell me what you need...",
-      "submit": "Send message",
-      "sending": "Sending...",
-      "success": "Message sent. I'll get back to you as soon as possible.",
-      "error": "Something went wrong. Try again or email me directly."
+      "website": "Your website",
+      "websitePlaceholder": "So I can take a look before we talk",
+      "websiteHint": "(optional)",
+      "message": "In a few lines: what you have and what you need",
+      "messagePlaceholder": "What you have, what you need, what worries you…",
+      "submit": "Let's talk",
+      "sending": "Sending message…",
+      "success": "Message sent. I'll get back to you in under 24 hours.",
+      "error": "Something went wrong. Try again.",
+      "errors": {
+        "required": "This field is required.",
+        "email": "Enter a valid email.",
+        "url": "Enter a valid URL (with http:// or https://)."
+      }
     }
   },
   "footer": {

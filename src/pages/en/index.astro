@@ -1,29 +1,39 @@
 ---
-import BaseLayout from '../../components/layout/BaseLayout.astro';
-import Hero from '../../components/sections/Hero.astro';
-import About from '../../components/sections/About.astro';
-import Approach from '../../components/sections/Approach.astro';
-import Projects from '../../components/sections/Projects.astro';
-import Contact from '../../components/sections/Contact.astro';
+import BaseLayout from "../../components/layout/BaseLayout.astro"
+import Hero from "../../components/sections/Hero.astro"
+import Context from "../../components/sections/Context.astro"
+import About from "../../components/sections/About.astro"
+import Approach from "../../components/sections/Approach.astro"
+import Projects from "../../components/sections/Projects.astro"
+import Contact from "../../components/sections/Contact.astro"
 
-const lang = 'en' as const;
+const lang = "en" as const
 ---
 
 <BaseLayout lang={lang}>
-  <Hero lang={lang} />
-  <About lang={lang} />
-  <Approach lang={lang} />
-  <Projects lang={lang} />
-  <Contact lang={lang} />
+    <Hero lang={lang} />
+    <Context lang={lang} />
+    <About lang={lang} />
+    <Approach lang={lang} />
+    <!-- <Projects lang={lang} /> -->
+    <Contact lang={lang} />
 </BaseLayout>
 
 <script>
-  import { initHeroAnimations, initScrollAnimations, destroyAnimations } from '../../scripts/gsap-animations';
+    import {
+        initHeroAnimations,
+        initScrollAnimations,
+        destroyAnimations,
+    } from "../../scripts/gsap-animations"
 
-  initHeroAnimations();
-  initScrollAnimations();
+    initHeroAnimations()
+    initScrollAnimations()
 
-  document.addEventListener('astro:before-swap', () => {
-    destroyAnimations();
-  }, { once: true });
+    document.addEventListener(
+        "astro:before-swap",
+        () => {
+            destroyAnimations()
+        },
+        { once: true },
+    )
 </script>

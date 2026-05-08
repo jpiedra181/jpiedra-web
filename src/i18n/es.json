@@ -6,34 +6,61 @@
     "contact": "Contacto"
   },
   "hero": {
-    "label": "ARQUITECTO DIGITAL",
-    "title": "Diseño, conecto y <em>construyo</em> soluciones digitales",
-    "subtitle": "No hago webs bonitas. Entiendo tu problema, elijo las herramientas correctas y las conecto para que tu negocio funcione mejor.",
-    "cta": "Hablemos",
+    "label": "DESARROLLADOR WEB • ESPECIALISTA EN ACCESIBILIDAD WEB",
+    "title": "Webs que funcionan para todo el mundo.",
+    "title_1": "Sin multas, sin excusas, sin humo.",
+    "subtitle": "Construyo y audito webs según la Ley 11/2023 y WCAG 2.1 AA. Si vendes online, prestas servicios o estás obligado por la European Accessibility Act, te ayudo a cumplir antes de que te llegue una denuncia, una multa o una licitación pública.",
+    "cta": "Auditar mi web",
     "tags": ["Automatización", "Web moderna", "IA aplicada", "Integraciones", "APIs", "Consultoría técnica"]
+  },
+  "context": {
+    "eyebrow": "EL CONTEXTO",
+    "title": "La accesibilidad web ya no es opcional en España.",
+    "subtitle": "Desde el 28 de junio de 2025, la Ley 11/2023 obliga a miles de empresas a tener su web accesible. Casi ninguna lo está.",
+    "stats": [
+      {
+        "value": "98\u00A0%",
+        "ariaLabel": "98 por ciento",
+        "description": "de las webs españolas no cumple la normativa."
+      },
+      {
+        "value": "1.000.000\u00A0€",
+        "ariaLabel": "un millón de euros",
+        "description": "sanción máxima por incumplimiento."
+      },
+      {
+        "value": "4,7\u00A0M",
+        "ariaLabel": "4,7 millones",
+        "description": "de personas con discapacidad en España no pueden usar muchas webs."
+      }
+    ],
+    "closing": "Si vendes online, tienes reservas, tramitas servicios o recibes fondos públicos, esto va contigo.",
+    "sources": "Datos: Barómetro de Accesibilidad Web 2025, INE, RDL 1/2013."
   },
   "about": {
     "label": "SOBRE MÍ",
     "title": "Resolvía problemas antes de saber programar",
     "text_1": "En la fábrica ya hacía lo mismo que hago ahora: mirar un proceso, encontrar lo que no funciona e imaginar cómo mejorarlo. La diferencia es que antes lo pensaba y ahora lo construyo.",
     "text_2": "Estudié Ingeniería en Topografía — una carrera de medir, calcular y ser preciso. Trabajé de peón en fábricas — donde ves cómo funcionan las cosas de verdad, no en la teoría. Y un día descubrí que el desarrollo web me permitía juntar las dos cosas: la precisión técnica y la resolución práctica de problemas.",
-    "text_3": "Cuando me siento con un cliente, no le hablo de frameworks ni de APIs. Le pregunto qué le quita el sueño, dónde pierde dinero, qué hace a mano que debería estar automatizado. Y cuando ya entiendo el problema, ahí sí — elijo las herramientas, diseño la solución y la monto pieza a pieza."
+    "text_3": "Hoy mi foco está en accesibilidad web. Las leyes han cambiado, las webs no. Hay miles de empresas obligadas a cumplir una normativa que casi nadie entiende, con multas serias y plazos reales. Y eso es exactamente el tipo de problema que llevo toda la vida resolviendo: ver cómo algo tendría que funcionar y conseguir que funcione.",
+    "cta": "Si tu web está en esa lista, hablamos."
   },
   "approach": {
     "label": "CÓMO TRABAJO",
-    "title": "Mi proceso",
+    "title": "Tres pasos. Sin sorpresas, sin mensualidades atadas, sin humo.",
+    "subtitle": "Cada proyecto sigue el mismo proceso. Lo conoces antes de empezar y sabes en cada momento dónde estamos.",
     "steps": [
       {
-        "title": "Escucho y diagnostico",
-        "description": "Entiendo tu negocio, tus cuellos de botella, dónde pierdes tiempo y dinero. Sin jerga técnica."
+        "title": "Audito",
+        "description": "Reviso tu web según WCAG 2.1 AA y la Ley 11/2023. Combino herramientas técnicas (axe, Lighthouse, lectores de pantalla) con evaluación manual. No es un PDF de 200 páginas con jerga: te entrego un informe que entiende cualquiera de tu equipo, con cada problema, su impacto y cuánto cuesta arreglarlo."
       },
       {
-        "title": "Diseño la arquitectura",
-        "description": "Elijo las piezas correctas del ecosistema digital y diseño cómo conectarlas. Cada herramienta tiene un propósito."
+        "title": "Arreglo",
+        "description": "Cojo el informe y lo aplico. Yo, no un equipo subcontratado al otro lado del mundo. Cada corrección se prueba con teclado, con lector de pantalla y con usuarios reales cuando hace falta. Al terminar, te entrego una declaración de accesibilidad lista para publicar."
       },
       {
-        "title": "Lo construyo yo mismo",
-        "description": "No delego. Escribo el código, configuro las automatizaciones y hago que todo funcione junto."
+        "title": "Mantengo (opcional)",
+        "description": "Las webs cambian. Los plugins se actualizan, el equipo de marketing sube contenido, los desarrolladores hacen deploys. Si quieres dormir tranquilo, reviso tu web cada mes y mantengo la accesibilidad al día. Sin contrato anual, te vas cuando quieras."
       }
     ]
   },
@@ -70,20 +97,33 @@
   },
   "contact": {
     "label": "CONTACTO",
-    "title": "¿Tienes un problema que la tecnología puede resolver?",
-    "subtitle": "Cuéntamelo. Sin compromiso, sin PowerPoints, sin humo.",
+    "title": "¿Tu web cumple la Ley 11/2023?",
+    "subtitle": "Si no estás seguro, es muy probable que no. Cuéntame qué tienes y te digo en qué situación estás. Sin compromiso, sin PowerPoints, sin humo.",
     "cta": "Hablemos",
+    "available": "Disponible para nuevos proyectos",
+    "note": "Te respondo en menos de 24 horas. Días laborables.",
+    "privacyIntro": "Al enviar este mensaje aceptas la ",
+    "privacyLinkText": "política de privacidad",
+    "privacyOutro": ".",
     "form": {
-      "name": "Nombre",
+      "name": "Cómo te llamas",
       "namePlaceholder": "Tu nombre",
-      "email": "Email",
+      "email": "Donde te contesto",
       "emailPlaceholder": "tu@email.com",
-      "message": "Mensaje",
-      "messagePlaceholder": "Cuéntame qué necesitas...",
-      "submit": "Enviar mensaje",
-      "sending": "Enviando...",
-      "success": "Mensaje enviado. Te responderé lo antes posible.",
-      "error": "Hubo un error. Prueba de nuevo o escríbeme directamente."
+      "website": "Tu web",
+      "websitePlaceholder": "Para ir mirando antes de hablar",
+      "websiteHint": "(opcional)",
+      "message": "Cuéntame en pocas líneas qué tienes y qué necesitas",
+      "messagePlaceholder": "Qué tienes, qué necesitas, qué te preocupa…",
+      "submit": "Hablemos",
+      "sending": "Enviando mensaje…",
+      "success": "Mensaje enviado correctamente. Te respondo en menos de 24 horas.",
+      "error": "Hubo un problema al enviar. Inténtalo de nuevo.",
+      "errors": {
+        "required": "Este campo es obligatorio.",
+        "email": "Introduce un email válido.",
+        "url": "Introduce una URL válida (con http:// o https://)."
+      }
     }
   },
   "footer": {

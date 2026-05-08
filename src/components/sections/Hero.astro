@@ -1,58 +1,88 @@
 ---
-import type { Lang } from '../../types';
-import { useTranslations } from '../../i18n/utils';
-import Button from '../ui/Button.astro';
-import HeroScene from '../three/HeroScene.astro';
+//@ts-nocheck
+import type { Lang } from "../../types"
+import { useTranslations } from "../../i18n/utils"
+import Button from "../ui/Button.astro"
+import HeroScene from "../three/HeroScene.astro"
 
 interface Props {
-  lang: Lang;
+    lang: Lang
 }
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const { lang } = Astro.props
+const t = useTranslations(lang)
 ---
 
-<section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
-  <!-- Blueprint grid background -->
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(232,200,114,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(232,200,114,0.3) 1px, transparent 1px); background-size: 60px 60px;"></div>
+<section
+    id="hero"
+    class="relative min-h-screen flex items-center overflow-hidden"
+>
+    <!-- Blueprint grid background -->
+    <div
+        class="absolute inset-0 opacity-[0.03]"
+        style="background-image: linear-gradient(rgba(232,200,114,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(232,200,114,0.3) 1px, transparent 1px); background-size: 60px 60px;"
+    >
+    </div>
 
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20 lg:pt-0 lg:pb-0">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-screen">
-      <!-- Text Column -->
-      <div class="flex flex-col gap-8">
-        <div class="hero-label overflow-hidden">
-          <span class="inline-block text-xs font-body font-medium tracking-[0.3em] text-accent uppercase">
-            {t.hero.label}
-          </span>
-        </div>
+    <div
+        class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20 lg:pt-0 lg:pb-0"
+    >
+        <div
+            class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-screen"
+        >
+            <!-- Text Column -->
+            <div class="flex flex-col gap-8">
+                <div class="hero-label overflow-hidden">
+                    <span
+                        class="inline-block text-xs font-body font-medium tracking-[0.3em] text-accent uppercase"
+                    >
+                        {t.hero.label}
+                    </span>
+                </div>
 
-        <h1 class="hero-title font-heading text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] text-text-primary">
-          <Fragment set:html={t.hero.title.replace('<em>', '<em class="font-heading italic text-accent not-italic" style="font-style:italic">')} />
-        </h1>
+                <h1
+                    class="hero-title font-heading text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] text-text-primary"
+                >
+                    {
+                        t.hero.title_1 ? (
+                            <>
+                                <span class="text-accent">{t.hero.title}</span>
+                                <br />
+                                <span>{t.hero.title_1}</span>
+                            </>
+                        ) : (
+                            t.hero.title
+                        )
+                    }
+                </h1>
 
-        <p class="hero-subtitle text-lg lg:text-xl text-text-secondary leading-relaxed max-w-xl">
-          {t.hero.subtitle}
-        </p>
+                <p
+                    class="hero-subtitle text-lg lg:text-xl text-text-secondary leading-relaxed max-w-xl"
+                >
+                    {t.hero.subtitle}
+                </p>
 
-        <div class="hero-cta">
-          <Button href="#contact" variant="primary">
-            {t.hero.cta}
-          </Button>
-        </div>
+                <div class="hero-cta">
+                    <Button href="#contact" variant="primary">
+                        {t.hero.cta}
+                    </Button>
+                </div>
 
-        <div class="hero-tags flex flex-wrap gap-3 mt-2">
+                <!-- <div class="hero-tags flex flex-wrap gap-3 mt-2">
           {t.hero.tags.map((tag) => (
             <span class="hero-tag text-xs text-text-muted border border-border rounded-full px-4 py-1.5 hover:border-border-hover hover:text-text-secondary transition-colors duration-200">
               {tag}
             </span>
           ))}
-        </div>
-      </div>
+        </div> -->
+            </div>
 
-      <!-- Three.js Column -->
-      <div class="hero-canvas relative flex items-center justify-center lg:justify-end">
-        <HeroScene />
-      </div>
+            <!-- Three.js Column -->
+            <!-- <div
+                class="hero-canvas relative flex items-center justify-center lg:justify-end"
+            >
+                <HeroScene />
+            </div> -->
+        </div>
     </div>
-  </div>
 </section>

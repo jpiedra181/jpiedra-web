@@ -1,8 +1,7 @@
 ---
+//@ts-nocheck
 import type { Lang } from "../../types"
 import { useTranslations } from "../../i18n/utils"
-import { siteConfig } from "../../config/site"
-import SectionLabel from "../ui/SectionLabel.astro"
 
 interface Props {
     lang: Lang
@@ -10,154 +9,380 @@ interface Props {
 
 const { lang } = Astro.props
 const t = useTranslations(lang)
+
+const privacyHref = lang === "en" ? "/en/privacy-policy" : "/politica-de-privacidad"
 ---
 
-<section id="contact" class="py-32 relative">
-    <div
-        class="absolute inset-0 bg-gradient-to-b from-bg-primary via-bg-surface/30 to-bg-primary"
-    >
-    </div>
-
-    <div
-        class="relative max-w-7xl mx-auto px-6 lg:px-8 flex flex-col lg:flex-row gap-16"
-    >
-        <div class="max-w-2xl">
-            <SectionLabel text={t.contact.label} />
-
-            <h2
-                class="contact-title font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary mb-6"
+<section
+    id="contact"
+    aria-labelledby="contact-title"
+    class="relative py-32 lg:py-40"
+>
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <!-- Eyebrow -->
+        <div class="contact-eyebrow max-w-[60ch] overflow-hidden">
+            <span
+                class="inline-block text-xs font-body font-medium tracking-[0.3em] text-accent uppercase"
             >
-                {t.contact.title}
-            </h2>
-
-            <p class="contact-subtitle text-lg text-text-secondary">
-                {t.contact.subtitle}
-            </p>
+                {t.contact.label}
+            </span>
         </div>
 
-        <!-- Contact Form -->
+        <!-- Title -->
+        <h2
+            id="contact-title"
+            class="contact-title font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mt-8 max-w-[20ch]"
+        >
+            {t.contact.title}
+        </h2>
+
+        <!-- Subtitle -->
+        <p
+            class="contact-subtitle font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-primary mt-8 max-w-[45rem]"
+        >
+            {t.contact.subtitle}
+        </p>
+
+        <!-- Form -->
         <form
             id="contact-form"
-            class="contact-form space-y-6"
+            class="contact-form mt-16 lg:mt-20 w-full max-w-[600px] flex flex-col gap-10"
+            novalidate
+            data-lang={lang}
             data-success={t.contact.form.success}
             data-error={t.contact.form.error}
             data-sending={t.contact.form.sending}
             data-submit={t.contact.form.submit}
+            data-error-required={t.contact.form.errors.required}
+            data-error-email={t.contact.form.errors.email}
+            data-error-url={t.contact.form.errors.url}
         >
-            <div class="grid sm:grid-cols-2 gap-6">
-                <div>
-                    <label
-                        for="contact-name"
-                        class="block text-sm text-text-secondary mb-2"
-                    >
-                        {t.contact.form.name}
-                    </label>
-                    <input
-                        type="text"
-                        id="contact-name"
-                        name="name"
-                        required
-                        placeholder={t.contact.form.namePlaceholder}
-                        class="w-full bg-bg-surface border border-border rounded-xl px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-line focus:ring-1 focus:ring-accent-line transition-colors duration-200"
-                    />
-                </div>
-                <div>
-                    <label
-                        for="contact-email"
-                        class="block text-sm text-text-secondary mb-2"
-                    >
-                        {t.contact.form.email}
-                    </label>
-                    <input
-                        type="email"
-                        id="contact-email"
-                        name="email"
-                        required
-                        placeholder={t.contact.form.emailPlaceholder}
-                        class="w-full bg-bg-surface border border-border rounded-xl px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-line focus:ring-1 focus:ring-accent-line transition-colors duration-200"
-                    />
-                </div>
+            <!-- Name -->
+            <div class="flex flex-col gap-3">
+                <label
+                    for="contact-name"
+                    class="font-body text-sm font-medium text-text-primary"
+                >
+                    <span>{t.contact.form.name}</span>
+                </label>
+                <input
+                    type="text"
+                    id="contact-name"
+                    name="name"
+                    required
+                    aria-required="true"
+                    aria-describedby="contact-name-error"
+                    autocomplete="name"
+                    placeholder={t.contact.form.namePlaceholder}
+                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
+                />
+                <p
+                    id="contact-name-error"
+                    class="contact-error text-sm text-red-400 font-body"
+                    hidden
+                >
+                </p>
             </div>
 
-            <div>
+            <!-- Email -->
+            <div class="flex flex-col gap-3">
+                <label
+                    for="contact-email"
+                    class="font-body text-sm font-medium text-text-primary"
+                >
+                    <span>{t.contact.form.email}</span>
+                </label>
+                <input
+                    type="email"
+                    id="contact-email"
+                    name="email"
+                    required
+                    aria-required="true"
+                    aria-describedby="contact-email-error"
+                    autocomplete="email"
+                    placeholder={t.contact.form.emailPlaceholder}
+                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
+                />
+                <p
+                    id="contact-email-error"
+                    class="contact-error text-sm text-red-400 font-body"
+                    hidden
+                >
+                </p>
+            </div>
+
+            <!-- Website (optional) -->
+            <div class="flex flex-col gap-3">
+                <label
+                    for="contact-website"
+                    class="font-body text-sm font-medium text-text-primary"
+                >
+                    <span>{t.contact.form.website}</span>
+                    <span class="text-text-muted text-xs font-normal ml-2">
+                        {t.contact.form.websiteHint}
+                    </span>
+                </label>
+                <input
+                    type="url"
+                    id="contact-website"
+                    name="website"
+                    aria-required="false"
+                    aria-describedby="contact-website-error"
+                    autocomplete="url"
+                    inputmode="url"
+                    placeholder={t.contact.form.websitePlaceholder}
+                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
+                />
+                <p
+                    id="contact-website-error"
+                    class="contact-error text-sm text-red-400 font-body"
+                    hidden
+                >
+                </p>
+            </div>
+
+            <!-- Message -->
+            <div class="flex flex-col gap-3">
                 <label
                     for="contact-message"
-                    class="block text-sm text-text-secondary mb-2"
+                    class="font-body text-sm font-medium text-text-primary"
                 >
-                    {t.contact.form.message}
+                    <span>{t.contact.form.message}</span>
                 </label>
                 <textarea
                     id="contact-message"
                     name="message"
                     required
+                    aria-required="true"
+                    aria-describedby="contact-message-error"
                     rows={5}
                     placeholder={t.contact.form.messagePlaceholder}
-                    class="w-full bg-bg-surface border border-border rounded-xl px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-line focus:ring-1 focus:ring-accent-line transition-colors duration-200 resize-y min-h-[120px]"
+                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 resize-y min-h-[140px] aria-[invalid=true]:border-red-400"
                 ></textarea>
+                <p
+                    id="contact-message-error"
+                    class="contact-error text-sm text-red-400 font-body"
+                    hidden
+                >
+                </p>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center gap-6 pt-2">
+            <!-- Honeypot (anti-spam, invisible to humans, present for bots) -->
+            <div
+                aria-hidden="true"
+                class="absolute -left-[9999px] w-px h-px overflow-hidden"
+            >
+                <label for="contact-company">Empresa</label>
+                <input
+                    type="text"
+                    id="contact-company"
+                    name="company"
+                    tabindex="-1"
+                    autocomplete="off"
+                />
+            </div>
+
+            <!-- Submit + feedback + note + privacy + availability -->
+            <div class="flex flex-col gap-3 pt-2">
                 <button
                     type="submit"
                     id="contact-submit"
-                    class="cursor-pointer inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="cursor-pointer self-start inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px] mb-1"
                 >
-                    <span id="submit-text">{t.contact.form.submit}</span>
-                    <svg
-                        class="w-4 h-4 transition-transform duration-200"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
+                    <span id="contact-submit-text">{t.contact.form.submit}</span>
                 </button>
 
-                <p id="form-feedback" class="text-sm hidden"></p>
+                <p
+                    id="contact-feedback"
+                    role="status"
+                    aria-live="polite"
+                    class="text-sm font-body empty:hidden"
+                >
+                </p>
+
+                <p class="text-sm text-text-muted font-body">
+                    {t.contact.note}
+                </p>
+
+                <p class="text-sm text-text-muted font-body">
+                    {t.contact.privacyIntro}<a
+                        href={privacyHref}
+                        class="text-text-secondary underline underline-offset-2 hover:text-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-sm"
+                    >
+                        {t.contact.privacyLinkText}
+                    </a>{t.contact.privacyOutro}
+                </p>
+
+                <div class="flex items-center gap-3">
+                    <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+                        <span
+                            class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                        ></span>
+                        <span
+                            class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
+                        ></span>
+                    </span>
+                    <span class="text-sm text-text-secondary font-body">
+                        {t.contact.available}
+                    </span>
+                </div>
             </div>
         </form>
     </div>
 </section>
 
 <script>
+    type FieldId =
+        | "contact-name"
+        | "contact-email"
+        | "contact-website"
+        | "contact-message"
+
     const form = document.getElementById("contact-form") as HTMLFormElement
     const submitBtn = document.getElementById(
         "contact-submit",
     ) as HTMLButtonElement
-    const submitText = document.getElementById("submit-text")!
-    const feedback = document.getElementById("form-feedback")!
+    const submitText = document.getElementById("contact-submit-text")!
+    const feedback = document.getElementById("contact-feedback")!
 
     const messages = {
         success: form.dataset.success!,
         error: form.dataset.error!,
         sending: form.dataset.sending!,
         submit: form.dataset.submit!,
+        required: form.dataset.errorRequired!,
+        email: form.dataset.errorEmail!,
+        url: form.dataset.errorUrl!,
+    }
+
+    function getField(id: FieldId) {
+        return document.getElementById(id) as
+            | HTMLInputElement
+            | HTMLTextAreaElement
+    }
+
+    function getError(id: FieldId) {
+        return document.getElementById(`${id}-error`)!
+    }
+
+    function setError(id: FieldId, message: string | null) {
+        const field = getField(id)
+        const errorEl = getError(id)
+        if (message) {
+            field.setAttribute("aria-invalid", "true")
+            errorEl.textContent = message
+            errorEl.hidden = false
+        } else {
+            field.setAttribute("aria-invalid", "false")
+            errorEl.textContent = ""
+            errorEl.hidden = true
+        }
+    }
+
+    function clearAllErrors() {
+        ;(
+            [
+                "contact-name",
+                "contact-email",
+                "contact-website",
+                "contact-message",
+            ] as FieldId[]
+        ).forEach((id) => setError(id, null))
+    }
+
+    function validate(): { valid: boolean; firstInvalid: FieldId | null } {
+        let firstInvalid: FieldId | null = null
+
+        const name = getField("contact-name").value.trim()
+        if (!name) {
+            setError("contact-name", messages.required)
+            firstInvalid ??= "contact-name"
+        } else setError("contact-name", null)
+
+        const emailField = getField("contact-email") as HTMLInputElement
+        const email = emailField.value.trim()
+        if (!email) {
+            setError("contact-email", messages.required)
+            firstInvalid ??= "contact-email"
+        } else if (!emailField.checkValidity()) {
+            setError("contact-email", messages.email)
+            firstInvalid ??= "contact-email"
+        } else setError("contact-email", null)
+
+        const websiteField = getField("contact-website") as HTMLInputElement
+        const website = websiteField.value.trim()
+        if (website && !websiteField.checkValidity()) {
+            setError("contact-website", messages.url)
+            firstInvalid ??= "contact-website"
+        } else setError("contact-website", null)
+
+        const message = getField("contact-message").value.trim()
+        if (!message) {
+            setError("contact-message", messages.required)
+            firstInvalid ??= "contact-message"
+        } else setError("contact-message", null)
+
+        return { valid: firstInvalid === null, firstInvalid }
+    }
+
+    // Clear field error as the user fixes it
+    ;(
+        [
+            "contact-name",
+            "contact-email",
+            "contact-website",
+            "contact-message",
+        ] as FieldId[]
+    ).forEach((id) => {
+        getField(id).addEventListener("input", () => {
+            if (getField(id).getAttribute("aria-invalid") === "true") {
+                setError(id, null)
+            }
+        })
+    })
+
+    function setFeedback(text: string, tone: "neutral" | "success" | "error") {
+        feedback.textContent = text
+        feedback.classList.remove(
+            "text-red-400",
+            "text-green-400",
+            "text-text-secondary",
+        )
+        if (tone === "success") feedback.classList.add("text-green-400")
+        else if (tone === "error") feedback.classList.add("text-red-400")
+        else feedback.classList.add("text-text-secondary")
     }
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault()
 
+        const { valid, firstInvalid } = validate()
+        if (!valid) {
+            if (firstInvalid) getField(firstInvalid).focus()
+            return
+        }
+
+        // Honeypot — if filled, silently bail
+        const honeypot = document.getElementById(
+            "contact-company",
+        ) as HTMLInputElement
+        if (honeypot && honeypot.value.trim() !== "") {
+            setFeedback(messages.success, "success")
+            form.reset()
+            return
+        }
+
         submitBtn.disabled = true
         submitText.textContent = messages.sending
-        feedback.classList.add("hidden")
+        setFeedback(messages.sending, "neutral")
 
         try {
             const data = {
-                name: (
-                    document.getElementById("contact-name") as HTMLInputElement
-                ).value,
-                email: (
-                    document.getElementById("contact-email") as HTMLInputElement
-                ).value,
-                message: (
-                    document.getElementById(
-                        "contact-message",
-                    ) as HTMLTextAreaElement
-                ).value,
+                name: getField("contact-name").value.trim(),
+                email: getField("contact-email").value.trim(),
+                website: getField("contact-website").value.trim(),
+                message: getField("contact-message").value.trim(),
+                lang: form.dataset.lang,
             }
 
             const response = await fetch(
@@ -172,15 +397,12 @@ const t = useTranslations(lang)
             if (!response.ok)
                 throw new Error(`Server error: ${response.status}`)
 
-            feedback.textContent = messages.success
-            feedback.classList.remove("hidden", "text-red-400")
-            feedback.classList.add("text-green-400")
+            setFeedback(messages.success, "success")
             form.reset()
+            clearAllErrors()
         } catch (err) {
             console.error("Form error:", err)
-            feedback.textContent = messages.error
-            feedback.classList.remove("hidden", "text-green-400")
-            feedback.classList.add("text-red-400")
+            setFeedback(messages.error, "error")
         } finally {
             submitBtn.disabled = false
             submitText.textContent = messages.submit
