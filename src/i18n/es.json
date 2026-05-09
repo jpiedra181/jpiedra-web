@@ -1,10 +1,9 @@
 {
   "nav": {
-    "about": "Sobre mí",
-    "approach": "Cómo trabajo",
-    "projects": "Proyectos",
+    "audit": "Auditoría",
+    "blog": "Blog",
     "contact": "Contacto"
-  },
+},
   "hero": {
     "label": "DESARROLLADOR WEB • ESPECIALISTA EN ACCESIBILIDAD WEB",
     "title": "Webs que funcionan para todo el mundo.",

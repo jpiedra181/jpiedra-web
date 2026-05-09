@@ -1,10 +1,9 @@
 {
   "nav": {
-    "about": "About",
-    "approach": "Approach",
-    "projects": "Projects",
+    "audit": "Audit",
+    "blog": "Blog",
     "contact": "Contact"
-  },
+},
   "hero": {
     "label": "WEB DEVELOPER • WEB ACCESSIBILITY SPECIALIST",
     "title": "Webs that work for everyone.",

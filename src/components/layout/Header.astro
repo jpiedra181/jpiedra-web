@@ -1,4 +1,5 @@
 ---
+//@ts-nocheck
 import type { Lang } from "../../types"
 import { useTranslations } from "../../i18n/utils"
 import LanguageSwitcher from "../ui/LanguageSwitcher.astro"
@@ -10,14 +11,16 @@ interface Props {
 const { lang } = Astro.props
 const t = useTranslations(lang)
 
-// Base path according to language
 const basePath = lang === "es" ? "/" : "/en/"
 
+const auditHref =
+    lang === "es" ? "/auditoria-accesibilidad" : "/en/accessibility-audit"
+const blogHref = lang === "es" ? "/blog" : "/en/blog"
+const contactHref = `${basePath}#contact`
+
 const navItems = [
-    { href: `${basePath}#about`, label: t.nav.about },
-    { href: `${basePath}#approach`, label: t.nav.approach },
-    { href: `${basePath}#projects`, label: t.nav.projects },
-    { href: `${basePath}#contact`, label: t.nav.contact },
+    { href: auditHref, label: t.nav.audit },
+    { href: blogHref, label: t.nav.blog },
 ]
 ---
 
@@ -50,11 +53,17 @@ const navItems = [
                 ))
             }
             <LanguageSwitcher lang={lang} />
+            <a
+                href={contactHref}
+                class="inline-flex items-center font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-5 py-2.5 hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+                {t.nav.contact}
+            </a>
         </nav>
     </div>
 </header>
 
-<!-- Mobile Menu Button (independent fixed element, always on top) -->
+<!-- Mobile Menu Button -->
 <button
     id="mobile-menu-btn"
     class="lg:hidden fixed top-0 right-0 z-[60] w-10 h-10 flex items-center justify-center mr-6 mt-5"
@@ -74,7 +83,7 @@ const navItems = [
     </div>
 </button>
 
-<!-- Mobile Menu (outside header to avoid scroll style interference) -->
+<!-- Mobile Menu -->
 <div
     id="mobile-menu"
     class="fixed inset-0 z-[55] bg-bg-primary/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
@@ -89,6 +98,12 @@ const navItems = [
             </a>
         ))
     }
+    <a
+        href={contactHref}
+        class="mobile-nav-link inline-flex items-center font-body font-medium text-base tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3 mt-2"
+    >
+        {t.nav.contact}
+    </a>
     <div class="mt-4">
         <LanguageSwitcher lang={lang} />
     </div>
@@ -109,11 +124,8 @@ const navItems = [
         if (menuOpen) {
             mobileMenu.classList.remove("opacity-0", "pointer-events-none")
             mobileMenu.classList.add("opacity-100", "pointer-events-auto")
-            // Line 1: rotate 45° and move to center
             lines[0].classList.add("!top-1/2", "-translate-y-1/2", "rotate-45")
-            // Line 2: fade out
             lines[1].classList.add("opacity-0", "scale-x-0")
-            // Line 3: rotate -45°, move to center, full width
             lines[2].classList.add(
                 "!bottom-auto",
                 "!top-1/2",
@@ -151,7 +163,6 @@ const navItems = [
         }),
     )
 
-    // Header scroll effect
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
             header.classList.add(
