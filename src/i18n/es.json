@@ -105,6 +105,9 @@
     "privacyIntro": "Al enviar este mensaje aceptas la ",
     "privacyLinkText": "política de privacidad",
     "privacyOutro": ".",
+    "privacyConsent": "He leído y acepto la ",
+    "privacyConsentLink": "política de privacidad",
+    "privacyConsentEnd": ".",
     "form": {
       "name": "Cómo te llamas",
       "namePlaceholder": "Tu nombre",
@@ -122,7 +125,8 @@
       "errors": {
         "required": "Este campo es obligatorio.",
         "email": "Introduce un email válido.",
-        "url": "Introduce una URL válida (con http:// o https://)."
+        "url": "Introduce una URL válida (con http:// o https://).",
+        "privacy": "Debes aceptar la política de privacidad para continuar"
       }
     }
   },

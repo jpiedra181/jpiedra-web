@@ -10,7 +10,8 @@ interface Props {
 const { lang } = Astro.props
 const t = useTranslations(lang)
 
-const privacyHref = lang === "en" ? "/en/privacy-policy" : "/politica-de-privacidad"
+const privacyHref =
+    lang === "en" ? "/en/privacy-policy" : "/politica-de-privacidad"
 ---
 
 <section
@@ -184,50 +185,72 @@ const privacyHref = lang === "en" ? "/en/privacy-policy" : "/politica-de-privaci
 
             <!-- Submit + feedback + note + privacy + availability -->
             <div class="flex flex-col gap-3 pt-2">
-                <button
-                    type="submit"
-                    id="contact-submit"
-                    class="cursor-pointer self-start inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px] mb-1"
-                >
-                    <span id="contact-submit-text">{t.contact.form.submit}</span>
-                </button>
-
-                <p
-                    id="contact-feedback"
-                    role="status"
-                    aria-live="polite"
-                    class="text-sm font-body empty:hidden"
-                >
-                </p>
-
-                <p class="text-sm text-text-muted font-body">
-                    {t.contact.note}
-                </p>
-
-                <p class="text-sm text-text-muted font-body">
-                    {t.contact.privacyIntro}<a
-                        href={privacyHref}
-                        class="text-text-secondary underline underline-offset-2 hover:text-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-sm"
+                <!-- Privacy consent checkbox -->
+                <div class="flex flex-col gap-2 mb-4">
+                    <label
+                        for="contact-privacy"
+                        class="flex items-start gap-3 cursor-pointer text-sm font-body text-text-primary"
                     >
-                        {t.contact.privacyLinkText}
-                    </a>{t.contact.privacyOutro}
-                </p>
-
-                <div class="flex items-center gap-3">
-                    <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
-                        <span
-                            class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-                        ></span>
-                        <span
-                            class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
-                        ></span>
-                    </span>
-                    <span class="text-sm text-text-secondary font-body">
-                        {t.contact.available}
-                    </span>
+                        <input
+                            type="checkbox"
+                            id="contact-privacy"
+                            name="privacy"
+                            required
+                            aria-required="true"
+                            aria-describedby="contact-privacy-error"
+                            class="w-4 h-4 accent-accent cursor-pointer flex-shrink-0"
+                        />
+                        <span class="text-text-primary">
+                            {t.contact.privacyConsent}<a
+                                href={privacyHref}
+                                target="_blank"
+                                class="underline underline-offset-2 hover:text-accent-hover focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-sm"
+                                >{t.contact.privacyConsentLink}</a
+                            >{t.contact.privacyConsentEnd}
+                        </span>
+                    </label>
                 </div>
             </div>
+            <p
+                id="contact-privacy-error"
+                class="contact-error text-sm text-red-400 font-body ml-7"
+                hidden
+            >
+            </p>
         </form>
+        <button
+            type="submit"
+            id="contact-submit"
+            class="cursor-pointer self-start inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px] mb-1"
+        >
+            <span id="contact-submit-text">{t.contact.form.submit}</span>
+        </button>
+
+        <p
+            id="contact-feedback"
+            role="status"
+            aria-live="polite"
+            class="text-sm font-body empty:hidden"
+        >
+        </p>
+
+        <p class="text-sm text-text-muted font-body">
+            {t.contact.note}
+        </p>
+
+        <div class="flex items-center gap-3">
+            <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+                <span
+                    class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                ></span>
+                <span
+                    class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
+                ></span>
+            </span>
+            <span class="text-sm text-text-secondary font-body">
+                {t.contact.available}
+            </span>
+        </div>
     </div>
 </section>
 
