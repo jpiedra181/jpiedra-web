@@ -132,6 +132,17 @@
   },
   "footer": {
     "available": "Available for projects",
-    "rights": "All rights reserved."
-  }
+    "rights": "All rights reserved.",
+    "services": {
+        "label": "Services",
+        "audit": "Accessibility audit",
+        "blog": "Blog"
+    },
+    "legal": {
+        "label": "Legal",
+        "legalNotice": "Legal Notice",
+        "privacy": "Privacy Policy",
+        "cookies": "Cookie Policy"
+    }
+}
 }

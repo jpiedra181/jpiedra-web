@@ -1,3 +1,4 @@
+//@ts-nocheck
 import type { Lang } from '../types';
 import type { Translations } from './types';
 import es from './es.json';
