@@ -120,7 +120,7 @@
       "messagePlaceholder": "What you have, what you need, what worries you…",
       "submit": "Let's talk",
       "sending": "Sending message…",
-      "success": "Message sent. I'll get back to you in under 24 hours.",
+      "success": "Message sent.",
       "error": "Something went wrong. Try again.",
       "errors": {
         "required": "This field is required.",

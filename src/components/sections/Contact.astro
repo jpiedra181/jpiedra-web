@@ -57,6 +57,7 @@ const privacyHref =
             data-error-required={t.contact.form.errors.required}
             data-error-email={t.contact.form.errors.email}
             data-error-url={t.contact.form.errors.url}
+            data-error-privacy={t.contact.form.errors.privacy}
         >
             <!-- Name -->
             <div class="flex flex-col gap-3">
@@ -209,22 +210,23 @@ const privacyHref =
                             >{t.contact.privacyConsentEnd}
                         </span>
                     </label>
+                    <p
+                        id="contact-privacy-error"
+                        class="contact-error text-sm text-red-400 font-body ml-7"
+                        hidden
+                    >
+                    </p>
                 </div>
+                <button
+                    type="submit"
+                    id="contact-submit"
+                    class="cursor-pointer self-start inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px] mb-1"
+                >
+                    <span id="contact-submit-text">{t.contact.form.submit}</span
+                    >
+                </button>
             </div>
-            <p
-                id="contact-privacy-error"
-                class="contact-error text-sm text-red-400 font-body ml-7"
-                hidden
-            >
-            </p>
         </form>
-        <button
-            type="submit"
-            id="contact-submit"
-            class="cursor-pointer self-start inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px] mb-1"
-        >
-            <span id="contact-submit-text">{t.contact.form.submit}</span>
-        </button>
 
         <p
             id="contact-feedback"
@@ -276,6 +278,7 @@ const privacyHref =
         required: form.dataset.errorRequired!,
         email: form.dataset.errorEmail!,
         url: form.dataset.errorUrl!,
+        privacy: form.dataset.errorPrivacy!,
     }
 
     function getField(id: FieldId) {
@@ -345,6 +348,24 @@ const privacyHref =
             firstInvalid ??= "contact-message"
         } else setError("contact-message", null)
 
+        const privacyField = document.getElementById(
+            "contact-privacy",
+        ) as HTMLInputElement
+        const privacyError = document.getElementById("contact-privacy-error")!
+        if (!privacyField.checked) {
+            privacyField.setAttribute("aria-invalid", "true")
+            privacyError.textContent = messages.privacy
+            privacyError.hidden = false
+            if (!firstInvalid) {
+                privacyField.focus()
+            }
+            return { valid: false, firstInvalid }
+        } else {
+            privacyField.setAttribute("aria-invalid", "false")
+            privacyError.textContent = ""
+            privacyError.hidden = true
+        }
+
         return { valid: firstInvalid === null, firstInvalid }
     }
 
@@ -363,6 +384,23 @@ const privacyHref =
             }
         })
     })
+
+    // Clear privacy error when checkbox is checked
+    document
+        .getElementById("contact-privacy")!
+        .addEventListener("change", () => {
+            const privacyField = document.getElementById(
+                "contact-privacy",
+            ) as HTMLInputElement
+            const privacyError = document.getElementById(
+                "contact-privacy-error",
+            )!
+            if (privacyField.checked) {
+                privacyField.setAttribute("aria-invalid", "false")
+                privacyError.textContent = ""
+                privacyError.hidden = true
+            }
+        })
 
     function setFeedback(text: string, tone: "neutral" | "success" | "error") {
         feedback.textContent = text
@@ -406,6 +444,8 @@ const privacyHref =
                 website: getField("contact-website").value.trim(),
                 message: getField("contact-message").value.trim(),
                 lang: form.dataset.lang,
+                privacy_accepted: true,
+                privacy_accepted_at: new Date().toISOString(),
             }
 
             const response = await fetch(

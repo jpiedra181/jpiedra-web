@@ -120,7 +120,7 @@
       "messagePlaceholder": "Qué tienes, qué necesitas, qué te preocupa…",
       "submit": "Hablemos",
       "sending": "Enviando mensaje…",
-      "success": "Mensaje enviado correctamente. Te respondo en menos de 24 horas.",
+      "success": "Mensaje enviado correctamente.",
       "error": "Hubo un problema al enviar. Inténtalo de nuevo.",
       "errors": {
         "required": "Este campo es obligatorio.",
