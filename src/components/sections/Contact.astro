@@ -17,7 +17,7 @@ const privacyHref =
 <section
     id="contact"
     aria-labelledby="contact-title"
-    class="relative py-32 lg:py-40"
+    class="relative py-24 md:py-32 lg:py-40"
 >
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <!-- Eyebrow -->
@@ -32,14 +32,14 @@ const privacyHref =
         <!-- Title -->
         <h2
             id="contact-title"
-            class="contact-title font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mt-8 max-w-[20ch]"
+            class="contact-title font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mt-6 md:mt-8 max-w-[20ch]"
         >
             {t.contact.title}
         </h2>
 
         <!-- Subtitle -->
         <p
-            class="contact-subtitle font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-primary mt-8 max-w-[45rem]"
+            class="contact-subtitle font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-primary mt-6 md:mt-8 max-w-[45rem]"
         >
             {t.contact.subtitle}
         </p>
@@ -47,7 +47,7 @@ const privacyHref =
         <!-- Form -->
         <form
             id="contact-form"
-            class="contact-form mt-16 lg:mt-20 w-full max-w-[600px] flex flex-col gap-10"
+            class="contact-form mt-12 md:mt-16 lg:mt-20 w-full max-w-[600px] flex flex-col gap-8 md:gap-10"
             novalidate
             data-lang={lang}
             data-success={t.contact.form.success}
@@ -228,30 +228,32 @@ const privacyHref =
             </div>
         </form>
 
-        <p
-            id="contact-feedback"
-            role="status"
-            aria-live="polite"
-            class="text-sm font-body empty:hidden"
-        >
-        </p>
+        <div class="mt-10 md:mt-12 flex flex-col gap-5 max-w-[600px]">
+            <p
+                id="contact-feedback"
+                role="status"
+                aria-live="polite"
+                class="text-sm font-body empty:hidden"
+            >
+            </p>
 
-        <p class="text-sm text-text-muted font-body">
-            {t.contact.note}
-        </p>
+            <p class="text-sm text-text-muted font-body">
+                {t.contact.note}
+            </p>
 
-        <div class="flex items-center gap-3">
-            <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
-                <span
-                    class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-                ></span>
-                <span
-                    class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
-                ></span>
-            </span>
-            <span class="text-sm text-text-secondary font-body">
-                {t.contact.available}
-            </span>
+            <div class="flex items-center gap-3">
+                <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+                    <span
+                        class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                    ></span>
+                    <span
+                        class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
+                    ></span>
+                </span>
+                <span class="text-sm text-text-secondary font-body">
+                    {t.contact.available}
+                </span>
+            </div>
         </div>
     </div>
 </section>

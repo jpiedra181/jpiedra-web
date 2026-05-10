@@ -14,7 +14,7 @@ const t = useTranslations(lang)
 <section
     id="approach"
     aria-labelledby="approach-title"
-    class="relative py-32 lg:py-40"
+    class="relative py-24 md:py-32 lg:py-40"
 >
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <!-- Eyebrow -->
@@ -29,32 +29,32 @@ const t = useTranslations(lang)
         <!-- Title -->
         <h2
             id="approach-title"
-            class="approach-title font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mt-8 max-w-[22ch]"
+            class="approach-title font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mt-6 md:mt-8 max-w-[22ch]"
         >
             {t.approach.title}
         </h2>
 
         <!-- Subtitle -->
         <p
-            class="approach-subtitle font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-primary mt-8 max-w-[45rem]"
+            class="approach-subtitle font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-primary mt-6 md:mt-8 max-w-[45rem]"
         >
             {t.approach.subtitle}
         </p>
 
         <!-- Steps -->
-        <ol role="list" class="mt-20 lg:mt-28 flex flex-col gap-20 lg:gap-24">
+        <ol role="list" class="mt-16 md:mt-20 lg:mt-28 flex flex-col gap-14 md:gap-16 lg:gap-24">
             {
                 t.approach.steps.map((step, index) => {
                     const num = String(index + 1).padStart(2, "0")
                     return (
-                        <li class="approach-card flex flex-col md:flex-row md:items-start gap-4 md:gap-10 max-w-[60rem]">
+                        <li class="approach-card flex flex-col md:flex-row md:items-start gap-3 md:gap-10 max-w-[60rem]">
                             <span
                                 aria-hidden="true"
-                                class="font-heading font-normal text-accent leading-none text-[clamp(3rem,6vw,5.5rem)] shrink-0 md:w-[6ch]"
+                                class="font-heading font-normal text-accent leading-none text-5xl md:text-[clamp(3rem,6vw,5.5rem)] shrink-0 md:w-[6ch]"
                             >
                                 {num}
                             </span>
-                            <div class="flex flex-col gap-4 md:pt-3">
+                            <div class="flex flex-col gap-3 md:gap-4 md:pt-3">
                                 <h3 class="font-heading text-[clamp(1.75rem,3vw,2.75rem)] leading-[1.15] text-accent">
                                     {step.title}
                                 </h3>
