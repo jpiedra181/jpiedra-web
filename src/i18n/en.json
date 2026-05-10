@@ -129,6 +129,16 @@
       }
     }
   },
+  "notFound": {
+    "eyebrow": "ERROR 404",
+    "title": "This page doesn't exist",
+    "subtitle": "But at least I'm telling you straight, no excuses. Maybe the address is wrong, or maybe it's a page that's no longer here.",
+    "ctaHomeLabel": "Back to home",
+    "ctaAuditLabel": "Audit my website",
+    "ctaContactLabel": "Let's talk",
+    "metaTitle": "Page not found — Javier Piedra",
+    "metaDescription": "The page you're looking for doesn't exist. Head back home or tell me what you needed."
+  },
   "footer": {
     "available": "Available for projects",
     "rights": "All rights reserved.",

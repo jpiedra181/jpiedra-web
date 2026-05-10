@@ -129,6 +129,16 @@
       }
     }
   },
+  "notFound": {
+    "eyebrow": "ERROR 404",
+    "title": "Esta página no existe",
+    "subtitle": "Pero al menos te lo digo claro y sin rodeos. Quizá la dirección está mal escrita, o quizá es una página que ya no está aquí.",
+    "ctaHomeLabel": "Volver al inicio",
+    "ctaAuditLabel": "Auditar mi web",
+    "ctaContactLabel": "Hablemos",
+    "metaTitle": "Página no encontrada — Javier Piedra",
+    "metaDescription": "La página que buscas no existe. Vuelve al inicio o cuéntame qué necesitabas."
+  },
   "footer": {
     "available": "Disponible para proyectos",
     "rights": "Todos los derechos reservados.",
