@@ -153,5 +153,314 @@
         "privacy": "Privacy Policy",
         "cookies": "Cookie Policy"
     }
-}
+  },
+  "audit": {
+    "hero": {
+      "eyebrow": "WEB ACCESSIBILITY AUDIT",
+      "titlePrefix": "Complete audit of your website to comply with",
+      "titleHighlight1": "Spain's Law 11/2023",
+      "titleConnector": "and",
+      "titleHighlight2": "WCAG 2.1 AA",
+      "titleSuffix": ".",
+      "subtitle": "In 5–7 business days you get a report your whole team can understand, with every issue, its legal impact, and how much it costs to fix. No jargon, no 200-page PDFs, no smoke.",
+      "price": "€1,200",
+      "priceAriaLabel": "one thousand two hundred euros",
+      "priceNote": "For websites with up to 8 unique pages.",
+      "priceSubnote": "Larger sites: fixed quote in 24 h, no surprises.",
+      "cta": "Request audit"
+    },
+    "problem": {
+      "eyebrow": "THE PROBLEM",
+      "title": "Not optional. Not for 2030. Right now.",
+      "subtitle": "Since June 28, 2025, Spain's Law 11/2023 requires thousands of companies to make their websites accessible. The vast majority haven't. And this is not a small problem.",
+      "risks": [
+        {
+          "value": "€1,000,000",
+          "ariaLabel": "one million euros",
+          "title": "Real fines",
+          "description": "The sanctioning regime of RDL 1/2013 is already in force. Spanish regions can inspect. Disability associations are already filing real cases."
+        },
+        {
+          "value": "January 2025",
+          "ariaLabel": "January 2025",
+          "title": "Locked out of public tenders",
+          "description": "If you work or want to work with the Spanish public sector, it's no longer optional. RD 193/2023 applies to every supplier since this date."
+        },
+        {
+          "value": "4.7 M",
+          "ariaLabel": "four point seven million",
+          "title": "Customers who can't use your site",
+          "description": "People with disabilities in Spain. If your ecommerce, your booking system or your form fails with a screen reader, those customers go to your competition."
+        }
+      ],
+      "closing": "Auditing your website is not a compliance whim. It's what separates the companies that are ready from those who will end up with the fine, the lawsuit, or both."
+    },
+    "deliverables": {
+      "eyebrow": "WHAT THE AUDIT DELIVERS",
+      "title": "A clear report. A closed roadmap. Zero jargon.",
+      "subtitle": "This is what you receive when the audit is done, in 5–7 business days, in a single document anyone on your team can read.",
+      "items": [
+        {
+          "title": "Executive summary",
+          "description": "A 2-page summary with your site's real compliance level, the specific legal risk you carry today, and the priorities to resolve it. Designed for management to understand without being technical."
+        },
+        {
+          "title": "Catalog of findings by WCAG criterion",
+          "description": "Every issue documented with screenshot, violated WCAG criterion, severity level, and affected page or component. No gratuitous jargon, enough detail for your tech team to act."
+        },
+        {
+          "title": "Prioritized remediation plan",
+          "description": "Every finding with its concrete solution, estimated effort in hours, and the optimal order to resolve it. You know what to fix first, how long it takes, and how much it costs."
+        },
+        {
+          "title": "Accessibility statement ready to publish",
+          "description": "Legal document written under Spain's RD 1112/2018 with your real compliance level. You publish it on your site and start meeting the formal requirement from day one."
+        },
+        {
+          "title": "Results presentation meeting",
+          "description": "A one-hour video call to review the report with you and your team, answer questions and prioritize actions. I don't send a PDF and disappear."
+        }
+      ]
+    },
+    "whoMustComply": {
+      "eyebrow": "WHO MUST COMPLY",
+      "title": "Does this apply to you?",
+      "subtitle": "Not all websites are obligated equally. Spain's Law 11/2023 and RD 193/2023 define three groups with different deadlines. These are.",
+      "groups": [
+        {
+          "tag": "IMMEDIATE OBLIGATION — LAW 11/2023",
+          "headline": "If you sell online or run digital services for consumers, you are already obligated.",
+          "body": "Ecommerce of any size. Online banking. Hotels with online booking. Airlines, rail, sea carriers. Telecom operators. Streaming platforms. Electricity, gas and water utilities. Online education platforms. Online travel agencies and tour operators.",
+          "note": "Exception: micro-enterprises (under 10 employees AND under €2M revenue) that only provide services without product sales."
+        },
+        {
+          "tag": "DEADLINE JANUARY 2029 — RD 193/2023",
+          "headline": "If your sector runs a public-facing website, you're up in 2029.",
+          "body": "Clinics and healthcare services with online booking. Restaurants with online orders or bookings. Academies and training. Cultural, sports companies and museums with online sales. Mid-sized real estate. Financial services and insurance.",
+          "note": "Getting ahead now is a competitive advantage: most of your sector will only comply at the last minute."
+        },
+        {
+          "tag": "IMMEDIATE OBLIGATION — PUBLIC FUNDING",
+          "headline": "If you receive public funds, the obligation is now, with no grace period.",
+          "body": "Spain's Kit Digital, EU funds, regional grants, contracts with the public sector. The Accessibility Review Report (IRA) is already required. Without compliance, risk of fund refund.",
+          "note": null
+        }
+      ],
+      "closing": "If you don't fit any of the three groups, you probably don't need this audit right now. If you fit at least one, you do."
+    },
+    "process": {
+      "eyebrow": "HOW I DO IT",
+      "title": "5 phases. 7 days. Zero improvisation.",
+      "subtitle": "From the moment you confirm the audit to the moment you get the report in your inbox, this is the process. You know at every step where we are and what I need from you.",
+      "steps": [
+        {
+          "duration": "DAY 0 · 30 MIN",
+          "title": "Briefing and access",
+          "description": "A short call to understand your site: type of business, unique templates, integrations, private areas if any, accesses I'll need. If there's something specific you're worried about, we mark it as a priority focus.",
+          "clientInput": "What I need from you: 30 minutes on a video call and access credentials if applicable."
+        },
+        {
+          "duration": "DAYS 1-2",
+          "title": "Automated analysis and mapping",
+          "description": "I run tools (axe, Lighthouse, Pa11y) on the selected templates. I map the site's structure, identify critical components and flows to evaluate. I generate the first inventory of automated findings.",
+          "clientInput": "What I need from you: nothing. I work, you keep on with your stuff."
+        },
+        {
+          "duration": "DAYS 3-5",
+          "title": "Manual and technical evaluation",
+          "description": "70% of the real work. Keyboard navigation, screen reader checks with NVDA and VoiceOver, color contrast validation, focus visibility, forms, ARIA, error messages. Every finding documented with screenshot, WCAG criterion and impact level.",
+          "clientInput": "What I need from you: nothing. If something critical comes up, I'll let you know right away."
+        },
+        {
+          "duration": "DAY 6",
+          "title": "Report writing and remediation plan",
+          "description": "I structure all findings in the final document: executive summary, catalog by criterion, prioritized plan with estimated hours, accessibility statement. I review twice before delivering.",
+          "clientInput": "What I need from you: nothing. What I need from myself: rigor."
+        },
+        {
+          "duration": "DAY 7 · 1 H",
+          "title": "Delivery and presentation meeting",
+          "description": "I send you the full report. We schedule a 1-hour video call to review it with you and your team, prioritize actions and resolve doubts. From here, you decide: you apply it yourself, we apply it together, or we continue with the remediation plan.",
+          "clientInput": "What I need from you: 1 hour on a video call and the team involved."
+        }
+      ]
+    },
+    "afterAudit": {
+      "eyebrow": "WHAT COMES NEXT",
+      "title": "The audit is the beginning, not the end.",
+      "subtitle": "Once you have the report, you decide. These are the two ways I can keep working with you if you need it.",
+      "options": [
+        {
+          "title": "Apply the corrections",
+          "optionalTag": "(optional)",
+          "description": "If you want me to implement the solutions from the report, we can do that. I work package by package by priority: critical first, accessory later. Each package with a closed scope, estimated hours and fixed price before starting.",
+          "priceNote": "Typical investment: between €1,800 and €6,000, depending on the volume of findings. You know for sure at the end of the audit, never before."
+        },
+        {
+          "title": "Keep it from breaking again",
+          "optionalTag": "(optional)",
+          "description": "Websites change. Plugins update, marketing uploads content, devs ship deploys. If you want to sleep at night, I review your site every month and keep compliance up to date. The accessibility statement gets updated, new findings get fixed.",
+          "priceNote": "From €149/month. No annual contract, you leave when you want."
+        }
+      ],
+      "closing": "Neither of the two is mandatory. The audit alone, with the report in hand, already meets the legal requirement of evaluation. The rest is up to you."
+    },
+    "whyMe": {
+      "eyebrow": "WHY ME",
+      "title": "No team. Just me. That's why it works.",
+      "subtitle": "I don't sell you a corporate process. I sell you the work of one professional who takes responsibility for what they deliver.",
+      "reasons": [
+        {
+          "title": "I audit, I fix, I answer",
+          "description": "There's no junior taking the data, account manager presenting it and external developer implementing it. You talk to me at every stage. The person signing the report is the same one writing it and the same one picking up the phone if something doesn't fit."
+        },
+        {
+          "title": "I know the law, not just the tech",
+          "description": "Any developer with a script can find problems. Few know what exactly Spain's RD 193/2023 requires, what exceptions Law 11/2023 applies or how the accessibility statement is drafted. I spend weeks studying the legal framework before applying it to your site."
+        },
+        {
+          "title": "Closed price, closed scope, closed deadline",
+          "description": "No 'estimate subject to scope'. No 'depends on scope'. No surprise invoices. What you see on this page is what you pay, no more, no less. If I discover your case needs more, I tell you before, never after."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FREQUENTLY ASKED QUESTIONS",
+      "title": "What people usually ask before hiring.",
+      "items": [
+        {
+          "question": "How long does the audit take exactly?",
+          "answer": "5-7 business days from the initial briefing. Most audits I deliver in 5. Larger sites can require up to 7."
+        },
+        {
+          "question": "What if my site has more than 8 unique pages?",
+          "answer": "I send you a fixed quote in 24 hours based on the real volume. No surprises, no negotiation. Tiers go by size brackets, not by hour worked."
+        },
+        {
+          "question": "Does the audit include implementing the corrections?",
+          "answer": "No. The audit is only the diagnosis: I deliver the full report with every finding and the remediation plan. Implementation is optional, with a separate quote, and only if you decide I do it."
+        },
+        {
+          "question": "Do I need anything ready before starting?",
+          "answer": "Just access to your site (if it has private areas or staging). If you don't have any of that, even better: the audit is faster."
+        },
+        {
+          "question": "Can I apply the corrections myself?",
+          "answer": "Yes. The report is designed so your technical team can act on it directly. If you have an in-house developer or agency, you hand them the document and they apply it."
+        },
+        {
+          "question": "Does this fulfill the legal requirement of Law 11/2023?",
+          "answer": "Yes. The audit includes the accessibility statement drafted under RD 1112/2018, ready to publish on your site. It meets the formal evaluation requirement of the regulation."
+        },
+        {
+          "question": "How is it invoiced?",
+          "answer": "50% at confirmation of the audit start, 50% at report delivery. Formal invoice with VAT, valid for deduction."
+        },
+        {
+          "question": "What if your audit misses something and I get reported later?",
+          "answer": "I work with WCAG 2.1 AA + EN 301549 methodology. It's the legal standard in Spain. If a finding slips and appears later, I fix it at no additional cost within 60 days after report delivery."
+        }
+      ]
+    },
+    "priceAndDeadline": {
+      "eyebrow": "PRICE AND DEADLINE",
+      "srTitle": "Audit price and deadline",
+      "pillars": [
+        {
+          "value": "€1,200",
+          "label": "Complete audit under Spain's Law 11/2023 and WCAG 2.1 AA"
+        },
+        {
+          "value": "5-7 days",
+          "label": "From the briefing to the delivered report"
+        },
+        {
+          "value": "No surprises",
+          "label": "Closed price, closed scope, closed deadline"
+        }
+      ],
+      "closing": "If it fits, we talk. If it doesn't fit, I tell you that too."
+    },
+    "requestForm": {
+      "eyebrow": "REQUEST AUDIT",
+      "title": "Tell me about your site and I'll answer in 24 hours.",
+      "subtitle": "Once you have the scope clear, I send you a fixed proposal by email. No mandatory meetings, no pressure. If you decide to go ahead, we set a start date.",
+      "fields": {
+        "name": {
+          "label": "Your name",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "Where I reply",
+          "placeholder": "you@email.com"
+        },
+        "company": {
+          "label": "Your company",
+          "placeholder": "Company name"
+        },
+        "url": {
+          "label": "Your website URL",
+          "placeholder": "https://"
+        },
+        "sector": {
+          "label": "Sector",
+          "placeholder": "Select a sector",
+          "options": [
+            { "value": "ecommerce", "label": "Ecommerce" },
+            { "value": "hosteleria", "label": "Hospitality and tourism" },
+            { "value": "sanitario", "label": "Healthcare" },
+            { "value": "educativo", "label": "Education / training" },
+            { "value": "banca", "label": "Banking / fintech" },
+            { "value": "transporte", "label": "Transport" },
+            { "value": "servicios", "label": "Professional services" },
+            { "value": "otros", "label": "Other" }
+          ]
+        },
+        "size": {
+          "label": "Approximate site size",
+          "placeholder": "Select a size",
+          "options": [
+            { "value": "small", "label": "Up to 10 pages" },
+            { "value": "medium", "label": "10 to 30 pages" },
+            { "value": "large", "label": "30 to 100 pages" },
+            { "value": "xl", "label": "More than 100 pages" }
+          ]
+        },
+        "timing": {
+          "label": "When do you need the audit",
+          "placeholder": "Select urgency",
+          "options": [
+            { "value": "urgent", "label": "As soon as possible" },
+            { "value": "1-3m", "label": "In 1-3 months" },
+            { "value": "3-6m", "label": "In 3-6 months" },
+            { "value": "no-urgency", "label": "No urgency, exploring" }
+          ]
+        },
+        "comments": {
+          "label": "Comments",
+          "optional": "(optional)",
+          "placeholder": "Anything you want to add..."
+        }
+      },
+      "cta": "Request audit",
+      "sending": "Sending request…",
+      "success": "Request sent.",
+      "error": "Something went wrong. Try again.",
+      "responseTime": "I reply within 24 hours. Business days.",
+      "privacy": {
+        "prefix": "By submitting this message you accept the",
+        "linkText": "privacy policy"
+      },
+      "privacyConsent": "I have read and accept the ",
+      "privacyConsentLink": "privacy policy",
+      "privacyConsentEnd": ".",
+      "errors": {
+        "required": "This field is required.",
+        "email": "Enter a valid email.",
+        "url": "Enter a valid URL (with http:// or https://).",
+        "select": "Select an option.",
+        "privacy": "You must accept the privacy policy to continue"
+      }
+    }
+  }
 }

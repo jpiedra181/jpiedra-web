@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../components/layout/BaseLayout.astro"
+import AfterAudit from "../../components/sections/audit/AfterAudit.astro"
+import Deliverables from "../../components/sections/audit/Deliverables.astro"
+import Faq from "../../components/sections/audit/Faq.astro"
+import Hero from "../../components/sections/audit/Hero.astro"
+import PriceAndDeadline from "../../components/sections/audit/PriceAndDeadline.astro"
+import Problem from "../../components/sections/audit/Problem.astro"
+import Process from "../../components/sections/audit/Process.astro"
+import RequestForm from "../../components/sections/audit/RequestForm.astro"
+import WhoMustComply from "../../components/sections/audit/WhoMustComply.astro"
+import WhyMe from "../../components/sections/audit/WhyMe.astro"
+
+const lang = "en" as const
+
+const title =
+    "Web accessibility audit under Spain's Law 11/2023 — €1,200 | Javier Piedra"
+const description =
+    "Complete web accessibility audit under WCAG 2.1 AA and Spain's Law 11/2023. From €1,200 for websites up to 8 pages. Report in 5–7 business days. No smoke."
+---
+
+<BaseLayout lang={lang} title={title} description={description}>
+    <Hero lang={lang} />
+    <Problem lang={lang} />
+    <Deliverables lang={lang} />
+    <Process lang={lang} />
+    <Faq lang={lang} />
+    <RequestForm lang={lang} />
+</BaseLayout>

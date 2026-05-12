@@ -1,0 +1,71 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<section
+    id="audit-problem"
+    class="relative py-24 md:py-32 lg:py-40"
+    aria-labelledby="audit-problem-title"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <!-- Encabezado: asimetría a la izquierda -->
+        <div class="max-w-3xl mb-16 md:mb-24">
+            <SectionLabel text={t.audit.problem.eyebrow} />
+
+            <h2
+                id="audit-problem-title"
+                class="audit-problem-title font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary mb-8 md:mb-10"
+                style="text-wrap: balance;"
+            >
+                {t.audit.problem.title}
+            </h2>
+
+            <p
+                class="audit-problem-subtitle text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl"
+            >
+                {t.audit.problem.subtitle}
+            </p>
+        </div>
+
+        <!-- 3 datos a lo ancho -->
+        <ul
+            class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 lg:gap-16 mb-16 md:mb-24"
+        >
+            {
+                t.audit.problem.risks.map((risk) => (
+                    <li class="audit-problem-risk">
+                        <p
+                            class="font-heading text-5xl md:text-6xl lg:text-7xl text-accent leading-none mb-6"
+                            aria-label={risk.ariaLabel}
+                        >
+                            {risk.value}
+                        </p>
+                        <h3 class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3">
+                            {risk.title}
+                        </h3>
+                        <p class="text-base text-text-secondary leading-relaxed">
+                            {risk.description}
+                        </p>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <!-- Cierre: asimetría a la izquierda -->
+        <p
+            class="audit-problem-closing text-base md:text-lg text-text-primary leading-relaxed max-w-3xl"
+        >
+            {t.audit.problem.closing}
+        </p>
+    </div>
+</section>

@@ -153,5 +153,314 @@
         "privacy": "Política de Privacidad",
         "cookies": "Política de Cookies"
     }
-}
+  },
+  "audit": {
+    "hero": {
+      "eyebrow": "AUDITORÍA DE ACCESIBILIDAD WEB",
+      "titlePrefix": "Auditoría completa de tu web según la",
+      "titleHighlight1": "Ley 11/2023",
+      "titleConnector": "y",
+      "titleHighlight2": "WCAG 2.1 AA",
+      "titleSuffix": ".",
+      "subtitle": "En 5-7 días laborables tienes un informe que entiende todo tu equipo, con cada problema, su impacto legal y cuánto cuesta arreglarlo. Sin jerga, sin PDFs de 200 páginas, sin humo.",
+      "price": "1.200 €",
+      "priceAriaLabel": "mil doscientos euros",
+      "priceNote": "Para webs con hasta 8 páginas únicas.",
+      "priceSubnote": "Webs más grandes: presupuesto cerrado en 24 h, sin sorpresas.",
+      "cta": "Solicitar auditoría"
+    },
+    "problem": {
+      "eyebrow": "EL PROBLEMA",
+      "title": "No es opcional. No es para 2030. Es ahora.",
+      "subtitle": "Desde el 28 de junio de 2025 la Ley 11/2023 obliga a miles de empresas españolas a tener su web accesible. La inmensa mayoría no lo está. Y no es un problema menor.",
+      "risks": [
+        {
+          "value": "1.000.000 €",
+          "ariaLabel": "un millón de euros",
+          "title": "Multas reales",
+          "description": "El régimen sancionador del RDL 1/2013 ya está vigente. Las CCAA pueden inspeccionar. Las asociaciones de personas con discapacidad ya están denunciando casos reales."
+        },
+        {
+          "value": "Enero 2025",
+          "ariaLabel": "enero de 2025",
+          "title": "Fuera de licitaciones públicas",
+          "description": "Si trabajas o quieres trabajar con la Administración, ya no es opcional. El RD 193/2023 lo aplica a cualquier proveedor desde esta fecha."
+        },
+        {
+          "value": "4,7 M",
+          "ariaLabel": "cuatro coma siete millones",
+          "title": "Clientes que no pueden usar tu web",
+          "description": "Personas con discapacidad en España. Si tu ecommerce, tu reserva online o tu formulario falla con un lector de pantalla, esos clientes se van a la competencia."
+        }
+      ],
+      "closing": "Auditar tu web no es un capricho de cumplimiento. Es lo que separa a las empresas que están preparadas de las que se van a llevar la multa, la denuncia o las dos cosas."
+    },
+    "deliverables": {
+      "eyebrow": "QUÉ ENTREGA LA AUDITORÍA",
+      "title": "Un informe claro. Una hoja de ruta cerrada. Cero jerga.",
+      "subtitle": "Esto es lo que recibes al terminar la auditoría, en 5-7 días laborables, en un único documento que puede leer cualquiera de tu equipo.",
+      "items": [
+        {
+          "title": "Informe ejecutivo",
+          "description": "Resumen de 2 páginas con el nivel real de cumplimiento de tu web, el riesgo legal específico que asumes hoy y las prioridades para resolverlo. Diseñado para que lo entienda dirección sin necesidad de ser técnico."
+        },
+        {
+          "title": "Catálogo de hallazgos por criterio WCAG",
+          "description": "Cada problema documentado con captura, criterio WCAG vulnerado, nivel de impacto y página o componente afectado. Sin tecnicismo gratuito, con suficiente detalle para que tu equipo técnico pueda actuar."
+        },
+        {
+          "title": "Plan de remediación priorizado",
+          "description": "Cada hallazgo con su solución concreta, el esfuerzo estimado en horas y el orden óptimo para resolverlo. Sabes qué arreglar primero, cuánto tiempo lleva y cuánto cuesta."
+        },
+        {
+          "title": "Declaración de accesibilidad lista para publicar",
+          "description": "Documento legal redactado según RD 1112/2018 con tu nivel real de cumplimiento. Lo publicas en tu web y empiezas a cumplir el requisito formal desde el día siguiente."
+        },
+        {
+          "title": "Reunión de presentación de resultados",
+          "description": "Una hora por videollamada para revisar el informe contigo y con tu equipo, resolver dudas y priorizar acciones. No te mando un PDF y desaparezco."
+        }
+      ]
+    },
+    "whoMustComply": {
+      "eyebrow": "QUIÉN ESTÁ OBLIGADO",
+      "title": "¿Esto te aplica a ti?",
+      "subtitle": "No todas las webs están obligadas igual. La Ley 11/2023 y el RD 193/2023 marcan tres grupos con plazos distintos. Estos son.",
+      "groups": [
+        {
+          "tag": "OBLIGACIÓN INMEDIATA — LEY 11/2023",
+          "headline": "Si vendes online o gestionas servicios digitales al consumidor, ya estás obligado.",
+          "body": "Ecommerce de cualquier tamaño. Banca online. Hoteles con reservas online. Aerolíneas, ferroviarias, navieras. Operadores de telecomunicaciones. Plataformas de streaming. Compañías de luz, gas, agua. Plataformas educativas online. Agencias de viajes y turoperadores online.",
+          "note": "Excepción: microempresas (menos de 10 empleados Y menos de 2 M€ de facturación) que solo prestan servicios sin venta de productos."
+        },
+        {
+          "tag": "PLAZO ENERO 2029 — RD 193/2023",
+          "headline": "Si tu sector tiene web operativa al público, te toca en 2029.",
+          "body": "Clínicas y servicios sanitarios con reservas online. Restaurantes con pedidos o reservas. Academias y formación. Empresas culturales, deportivas, museos con venta online. Inmobiliarias medianas. Webs de servicios financieros y seguros.",
+          "note": "Anticiparte ahora es ventaja competitiva: la mayoría de tu sector no cumplirá hasta el último minuto."
+        },
+        {
+          "tag": "OBLIGACIÓN INMEDIATA — FINANCIACIÓN PÚBLICA",
+          "headline": "Si recibes fondos públicos, la obligación es ya, sin plazo de gracia.",
+          "body": "Kit Digital, fondos europeos, subvenciones autonómicas, contratos con la Administración. El Informe de Revisión de Accesibilidad (IRA) ya es exigible. Sin cumplimiento, riesgo de devolución de fondos.",
+          "note": null
+        }
+      ],
+      "closing": "Si no encajas en ninguno de los tres grupos, probablemente no necesitas esta auditoría ahora mismo. Si encajas en al menos uno, sí."
+    },
+    "process": {
+      "eyebrow": "CÓMO LO HAGO",
+      "title": "5 fases. 7 días. Cero improvisación.",
+      "subtitle": "Desde que confirmas la auditoría hasta que tienes el informe en tu correo, este es el proceso. Sabes en cada momento dónde estamos y qué necesito de ti.",
+      "steps": [
+        {
+          "duration": "DÍA 0 · 30 MIN",
+          "title": "Briefing y acceso",
+          "description": "Llamada corta para entender tu web: tipo de negocio, plantillas únicas, integraciones, áreas privadas si las hay, accesos que necesito. Si tienes algo específico que te preocupa, lo apuntamos como foco prioritario.",
+          "clientInput": "Lo que necesito de ti: 30 minutos en videollamada y datos de acceso si aplica."
+        },
+        {
+          "duration": "DÍAS 1-2",
+          "title": "Análisis automatizado y mapeo",
+          "description": "Paso herramientas (axe, Lighthouse, Pa11y) sobre las plantillas seleccionadas. Mapeo de la estructura del sitio, identificación de componentes críticos y flujos a evaluar. Genero el primer inventario de hallazgos automáticos.",
+          "clientInput": "Lo que necesito de ti: nada. Yo trabajo, tú sigues con lo tuyo."
+        },
+        {
+          "duration": "DÍAS 3-5",
+          "title": "Evaluación manual y técnica",
+          "description": "El 70% del trabajo real. Navegación por teclado, lectura con NVDA y VoiceOver, validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con captura, criterio WCAG y nivel de impacto.",
+          "clientInput": "Lo que necesito de ti: nada. Si surgiera algo crítico, te aviso al momento."
+        },
+        {
+          "duration": "DÍA 6",
+          "title": "Redacción del informe y plan de remediación",
+          "description": "Estructuro todos los hallazgos en el documento final: resumen ejecutivo, catálogo por criterio, plan priorizado con horas estimadas, declaración de accesibilidad. Reviso dos veces antes de entregar.",
+          "clientInput": "Lo que necesito de ti: nada. Lo que necesito de mí: rigor."
+        },
+        {
+          "duration": "DÍA 7 · 1 H",
+          "title": "Entrega y reunión de presentación",
+          "description": "Te envío el informe completo. Programamos videollamada de 1 hora para revisarlo contigo y con tu equipo, priorizar acciones y resolver dudas. A partir de aquí, decides: lo aplicas tú, lo aplicamos juntos, o seguimos con el plan de remediación.",
+          "clientInput": "Lo que necesito de ti: 1 hora en videollamada y el equipo que toque."
+        }
+      ]
+    },
+    "afterAudit": {
+      "eyebrow": "QUÉ VIENE DESPUÉS",
+      "title": "La auditoría es el principio, no el final.",
+      "subtitle": "Una vez tengas el informe, decides. Estas son las dos formas en las que puedo seguir contigo si lo necesitas.",
+      "options": [
+        {
+          "title": "Aplicar las correcciones",
+          "optionalTag": "(opcional)",
+          "description": "Si quieres que sea yo quien implemente las soluciones del informe, podemos hacerlo. Trabajo paquete a paquete según prioridad: lo crítico primero, lo accesorio después. Cada paquete con alcance cerrado, horas estimadas y precio fijo antes de empezar.",
+          "priceNote": "Inversión típica: entre 1.800 y 6.000 €, según el volumen de hallazgos. Lo sabes con certeza al terminar la auditoría, nunca antes."
+        },
+        {
+          "title": "Que no se vuelva a romper",
+          "optionalTag": "(opcional)",
+          "description": "Las webs cambian. Plugins que se actualizan, contenido que sube el equipo de marketing, deploys del equipo técnico. Si quieres dormir tranquilo, reviso tu web cada mes y mantengo el cumplimiento al día. La declaración de accesibilidad se actualiza, los nuevos hallazgos se arreglan.",
+          "priceNote": "Desde 149 €/mes. Sin contrato anual, te vas cuando quieras."
+        }
+      ],
+      "closing": "Ninguno de los dos es imprescindible. La auditoría sola, con el informe en la mano, ya cumple con el requisito legal de evaluación. Lo demás es decisión tuya."
+    },
+    "whyMe": {
+      "eyebrow": "POR QUÉ YO",
+      "title": "No hay equipo. Solo yo. Por eso funciona.",
+      "subtitle": "No te vendo un proceso corporativo. Te vendo trabajo de un solo profesional que se responsabiliza de lo que entrega.",
+      "reasons": [
+        {
+          "title": "Yo audito, yo arreglo, yo respondo",
+          "description": "No hay junior que tome los datos, account manager que los presente y desarrollador externo que los implemente. Hablas conmigo en cada fase. El que firma el informe es el mismo que lo escribe y el mismo que coge el teléfono si algo no encaja."
+        },
+        {
+          "title": "Conozco la ley, no solo la técnica",
+          "description": "Cualquier desarrollador con un script encuentra problemas. Pocos saben qué exige exactamente el RD 193/2023, qué excepciones aplica la Ley 11/2023 o cómo se redacta la declaración de accesibilidad. Yo paso semanas estudiando el marco legal antes de aplicarlo a tu web."
+        },
+        {
+          "title": "Precio cerrado, alcance cerrado, plazo cerrado",
+          "description": "Sin 'presupuesto sujeto a alcance'. Sin 'depende del scope'. Sin facturas sorpresa. Lo que ves en esta página es lo que pagas, ni más ni menos. Si descubro que tu caso necesita más, te lo digo antes, nunca después."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "PREGUNTAS FRECUENTES",
+      "title": "Lo que la gente suele preguntar antes de contratar.",
+      "items": [
+        {
+          "question": "¿Cuánto tarda exactamente la auditoría?",
+          "answer": "5-7 días laborables desde el briefing inicial. La mayoría de auditorías las entrego en 5. Las webs grandes pueden requerir hasta 7."
+        },
+        {
+          "question": "¿Qué pasa si mi web tiene más de 8 páginas únicas?",
+          "answer": "Te paso presupuesto cerrado en 24 horas según el volumen real. Sin sorpresas, sin negociación. Los tramos son por escalones de tamaño, no por hora trabajada."
+        },
+        {
+          "question": "¿La auditoría incluye la implementación de las correcciones?",
+          "answer": "No. La auditoría es solo el diagnóstico: te entrego el informe completo con todos los hallazgos y el plan de remediación. La implementación es opcional, con presupuesto aparte, y solo si decides que la haga yo."
+        },
+        {
+          "question": "¿Necesito tener algo preparado antes de empezar?",
+          "answer": "Solo acceso a tu web (si tiene áreas privadas o staging). Si no tienes nada de eso, mejor todavía: la auditoría es más rápida."
+        },
+        {
+          "question": "¿Puedo aplicar yo mismo las correcciones del informe?",
+          "answer": "Sí. El informe está pensado para que tu equipo técnico pueda actuar sobre él directamente. Si tienes desarrollador interno o agencia, le entregas el documento y lo aplica."
+        },
+        {
+          "question": "¿Sirve para cumplir el requisito legal de la Ley 11/2023?",
+          "answer": "Sí. La auditoría incluye la declaración de accesibilidad redactada según RD 1112/2018, lista para publicar en tu web. Cumple con el requisito formal de evaluación que exige la normativa."
+        },
+        {
+          "question": "¿Cómo se factura?",
+          "answer": "50% al confirmar el inicio de la auditoría, 50% al entregar el informe. Factura formal con IVA, válida para deducción."
+        },
+        {
+          "question": "¿Qué pasa si tu auditoría no detecta algún problema y luego me denuncian?",
+          "answer": "Trabajo con metodología WCAG 2.1 AA + EN 301549. Es el estándar legal en España. Si hay un hallazgo que se me escapa y aparece después, lo corrijo sin coste adicional dentro de los 60 días posteriores a la entrega del informe."
+        }
+      ]
+    },
+    "priceAndDeadline": {
+      "eyebrow": "PRECIO Y PLAZO",
+      "srTitle": "Precio y plazo de la auditoría",
+      "pillars": [
+        {
+          "value": "1.200 €",
+          "label": "Auditoría completa según Ley 11/2023 y WCAG 2.1 AA"
+        },
+        {
+          "value": "5-7 días",
+          "label": "Desde el briefing hasta el informe entregado"
+        },
+        {
+          "value": "Sin sorpresas",
+          "label": "Precio cerrado, alcance cerrado, plazo cerrado"
+        }
+      ],
+      "closing": "Si encaja, hablamos. Si no encaja, también te lo digo."
+    },
+    "requestForm": {
+      "eyebrow": "SOLICITAR AUDITORÍA",
+      "title": "Cuéntame de tu web y te respondo en 24 horas.",
+      "subtitle": "Una vez tengas claro el alcance, te paso propuesta cerrada por email. Sin reuniones obligatorias, sin presión. Si decides seguir adelante, fijamos día de inicio.",
+      "fields": {
+        "name": {
+          "label": "Cómo te llamas",
+          "placeholder": "Tu nombre"
+        },
+        "email": {
+          "label": "Donde te contesto",
+          "placeholder": "tu@email.com"
+        },
+        "company": {
+          "label": "Tu empresa",
+          "placeholder": "Nombre de la empresa"
+        },
+        "url": {
+          "label": "URL de tu web",
+          "placeholder": "https://"
+        },
+        "sector": {
+          "label": "Sector",
+          "placeholder": "Selecciona un sector",
+          "options": [
+            { "value": "ecommerce", "label": "Ecommerce" },
+            { "value": "hosteleria", "label": "Hostelería y turismo" },
+            { "value": "sanitario", "label": "Sanitario" },
+            { "value": "educativo", "label": "Educativo / formación" },
+            { "value": "banca", "label": "Banca / fintech" },
+            { "value": "transporte", "label": "Transporte" },
+            { "value": "servicios", "label": "Servicios profesionales" },
+            { "value": "otros", "label": "Otros" }
+          ]
+        },
+        "size": {
+          "label": "Tamaño aproximado de la web",
+          "placeholder": "Selecciona un tamaño",
+          "options": [
+            { "value": "small", "label": "Hasta 10 páginas" },
+            { "value": "medium", "label": "10 a 30 páginas" },
+            { "value": "large", "label": "30 a 100 páginas" },
+            { "value": "xl", "label": "Más de 100 páginas" }
+          ]
+        },
+        "timing": {
+          "label": "Cuándo necesitas la auditoría",
+          "placeholder": "Selecciona una urgencia",
+          "options": [
+            { "value": "urgent", "label": "Cuanto antes" },
+            { "value": "1-3m", "label": "En 1-3 meses" },
+            { "value": "3-6m", "label": "En 3-6 meses" },
+            { "value": "no-urgency", "label": "Sin urgencia, explorando" }
+          ]
+        },
+        "comments": {
+          "label": "Comentarios",
+          "optional": "(opcional)",
+          "placeholder": "Lo que quieras añadir..."
+        }
+      },
+      "cta": "Solicitar auditoría",
+      "sending": "Enviando solicitud…",
+      "success": "Solicitud enviada correctamente.",
+      "error": "Hubo un problema al enviar. Inténtalo de nuevo.",
+      "responseTime": "Te respondo en menos de 24 horas. Días laborables.",
+      "privacy": {
+        "prefix": "Al enviar este mensaje aceptas la",
+        "linkText": "política de privacidad"
+      },
+      "privacyConsent": "He leído y acepto la ",
+      "privacyConsentLink": "política de privacidad",
+      "privacyConsentEnd": ".",
+      "errors": {
+        "required": "Este campo es obligatorio.",
+        "email": "Introduce un email válido.",
+        "url": "Introduce una URL válida (con http:// o https://).",
+        "select": "Selecciona una opción.",
+        "privacy": "Debes aceptar la política de privacidad para continuar"
+      }
+    }
+  }
 }

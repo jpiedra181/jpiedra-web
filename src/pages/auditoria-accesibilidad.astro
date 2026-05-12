@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro"
+import Hero from "../components/sections/audit/Hero.astro"
+import Problem from "../components/sections/audit/Problem.astro"
+import Deliverables from "../components/sections/audit/Deliverables.astro"
+import WhoMustComply from "../components/sections/audit/WhoMustComply.astro"
+import Process from "../components/sections/audit/Process.astro"
+import AfterAudit from "../components/sections/audit/AfterAudit.astro"
+import WhyMe from "../components/sections/audit/WhyMe.astro"
+import Faq from "../components/sections/audit/Faq.astro"
+import PriceAndDeadline from "../components/sections/audit/PriceAndDeadline.astro"
+import RequestForm from "../components/sections/audit/RequestForm.astro"
+
+const lang = "es" as const
+
+const title =
+    "Auditoría de accesibilidad web según Ley 11/2023 — 1.200 € | Javier Piedra"
+const description =
+    "Auditoría completa de accesibilidad web según WCAG 2.1 AA y la Ley 11/2023. Desde 1.200 € para webs hasta 8 páginas. Informe en 5-7 días laborables. Sin humo."
+---
+
+<BaseLayout lang={lang} title={title} description={description}>
+    <Hero lang={lang} />
+    <Problem lang={lang} />
+    <Deliverables lang={lang} />
+    <Process lang={lang} />
+    <Faq lang={lang} />
+    <RequestForm lang={lang} />
+</BaseLayout>
