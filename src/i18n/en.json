@@ -420,9 +420,9 @@
           "label": "Approximate site size",
           "placeholder": "Select a size",
           "options": [
-            { "value": "small", "label": "Up to 10 pages" },
-            { "value": "medium", "label": "10 to 30 pages" },
-            { "value": "large", "label": "30 to 100 pages" },
+            { "value": "small", "label": "Up to 8 pages" },
+            { "value": "medium", "label": "9 to 20 pages" },
+            { "value": "large", "label": "21 to 100 pages" },
             { "value": "xl", "label": "More than 100 pages" }
           ]
         },

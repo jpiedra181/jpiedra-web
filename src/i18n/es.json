@@ -420,9 +420,9 @@
           "label": "Tamaño aproximado de la web",
           "placeholder": "Selecciona un tamaño",
           "options": [
-            { "value": "small", "label": "Hasta 10 páginas" },
-            { "value": "medium", "label": "10 a 30 páginas" },
-            { "value": "large", "label": "30 a 100 páginas" },
+            { "value": "small", "label": "Hasta 8 páginas" },
+            { "value": "medium", "label": "9 a 20 páginas" },
+            { "value": "large", "label": "21 a 100 páginas" },
             { "value": "xl", "label": "Más de 100 páginas" }
           ]
         },
