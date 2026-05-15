@@ -75,6 +75,19 @@ const canonicalURL = new URL(`/blog/${post.id}`, Astro.site).toString()
                 >
                     {post.data.description}
                 </p>
+                {
+                    post.data.heroImage && (
+                        <figure class="mt-12">
+                            <img
+                                src={post.data.heroImage}
+                                alt={post.data.heroImageAlt ?? ""}
+                                loading="eager"
+                                decoding="async"
+                                class="w-full rounded-lg"
+                            />
+                        </figure>
+                    )
+                }
             </header>
 
             <div class="blog-prose max-w-3xl">
