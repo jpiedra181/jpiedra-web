@@ -1,0 +1,87 @@
+---
+//@ts-nocheck
+import { getCollection } from "astro:content"
+import BaseLayout from "../../components/layout/BaseLayout.astro"
+
+const lang = "es" as const
+
+// Filtra borradores en producción
+const posts = (await getCollection("blog"))
+    .filter((post) => (import.meta.env.PROD ? !post.data.draft : true))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+
+const title = "Blog — Javier Piedra"
+const description =
+    "Artículos sobre accesibilidad web, Ley 11/2023, WCAG y cumplimiento legal en España."
+---
+
+<BaseLayout lang={lang} title={title} description={description}>
+    <section class="relative py-24 md:py-32 lg:py-40">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div class="max-w-3xl mb-16 md:mb-20">
+                <p
+                    class="text-xs font-medium uppercase tracking-[0.2em] text-accent mb-6"
+                >
+                    Blog
+                </p>
+                <h1
+                    class="font-heading text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] text-text-primary mb-8"
+                    style="text-wrap: balance;"
+                >
+                    Artículos sobre accesibilidad web y la Ley 11/2023.
+                </h1>
+                <p
+                    class="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl"
+                >
+                    Lo que explico aquí es lo que aplico cada día con clientes
+                    reales. Sin teoría inflada, sin humo.
+                </p>
+            </div>
+
+            {
+                posts.length === 0 ? (
+                    <p class="text-text-muted text-base">
+                        Aún no hay artículos publicados. Vuelve pronto.
+                    </p>
+                ) : (
+                    <ul class="flex flex-col">
+                        {posts.map((post, index) => (
+                            <li
+                                class={
+                                    index === 0
+                                        ? "pb-12 md:pb-16"
+                                        : "py-12 md:py-16 border-t border-accent/20"
+                                }
+                            >
+                                <a
+                                    href={`/blog/${post.id}`}
+                                    class="group block max-w-3xl"
+                                >
+                                    <time
+                                        datetime={post.data.pubDate.toISOString()}
+                                        class="block text-sm text-text-muted mb-3"
+                                    >
+                                        {post.data.pubDate.toLocaleDateString(
+                                            "es-ES",
+                                            {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                            },
+                                        )}
+                                    </time>
+                                    <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl text-text-primary leading-tight mb-4 group-hover:text-accent transition-colors duration-300">
+                                        {post.data.title}
+                                    </h2>
+                                    <p class="text-base md:text-lg text-text-secondary leading-relaxed">
+                                        {post.data.description}
+                                    </p>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                )
+            }
+        </div>
+    </section>
+</BaseLayout>
