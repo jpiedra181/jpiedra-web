@@ -213,4 +213,66 @@ const canonicalURL = new URL(`/blog/${post.id}`, Astro.site).toString()
         margin-top: 2em;
         margin-bottom: 2em;
     }
+
+    .blog-prose table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2em;
+        margin-bottom: 2em;
+        font-size: 0.95em;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .blog-prose thead {
+        background-color: var(--color-bg-elevated);
+    }
+
+    .blog-prose th {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        text-align: left;
+        padding: 0.85em 1em;
+        color: var(--color-text-primary);
+        border-bottom: 2px solid var(--color-accent);
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .blog-prose td {
+        padding: 0.85em 1em;
+        border-bottom: 1px solid var(--color-border);
+        vertical-align: top;
+        line-height: 1.5;
+    }
+
+    .blog-prose tbody tr:hover {
+        background-color: var(--color-bg-elevated);
+    }
+
+    .blog-prose tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Primera columna ligeramente destacada (útil para tablas comparativas) */
+    .blog-prose td:first-child {
+        font-weight: 500;
+        color: var(--color-text-primary);
+    }
+
+    /* Estado vacío visual en celdas con guion */
+    .blog-prose td:has(:only-child) {
+        /* opcional, no crítico */
+    }
+
+    @media (max-width: 640px) {
+        .blog-prose table {
+            font-size: 0.85em;
+        }
+        .blog-prose th,
+        .blog-prose td {
+            padding: 0.6em 0.5em;
+        }
+    }
 </style>
