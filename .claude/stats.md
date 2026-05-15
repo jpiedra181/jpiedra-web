@@ -51,17 +51,79 @@
 
 ## Régimen sancionador
 
-### Ley 11/2023 (privado)
+> **Nota crítica**: este bloque fue corregido el 15-05-2026 contra el texto consolidado del BOE. Las cifras previas estaban tomadas de fuentes secundarias y eran incorrectas. Cualquier dato sancionador debe verificarse contra el BOE antes de citarse en posts. Las leyes se modifican.
 
-- Infracciones leves: hasta 10.000 €.
-- Infracciones graves: 10.001 € a 600.000 €.
-- Infracciones muy graves: 600.001 € a 1.000.000 €.
-- Reincidencia y agravantes pueden duplicar la cuantía.
+### Cómo se aplica a la Ley 11/2023
+
+El artículo 30 de la Ley 11/2023 NO contiene tipificación ni cuantías propias. Remite a:
+
+1. La legislación sectorial correspondiente (banca, telecos, ecommerce, etc.).
+2. Supletoriamente: el Título III del Real Decreto Legislativo 1/2013, de 29 de noviembre (Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social).
+
+Cuando se cita "sanciones de la Ley 11/2023" en webs y posts, lo que se está describiendo es, en realidad, el régimen del RDL 1/2013 aplicado vía Ley 11/2023.
+
+### Cuantías (RDL 1/2013, artículos 83 y 96)
+
+Tope global del sistema: **301 € a 1.000.000 €**.
+
+Topes por gravedad (art. 83):
+- Infracciones leves: hasta **30.000 €**.
+- Infracciones graves: hasta **90.000 €**.
+- Infracciones muy graves: hasta **1.000.000 €**.
+
+Tramos detallados en el ámbito AGE (art. 96, cuando la conducta es supraautonómica):
+
+| Gravedad | Grado mínimo | Grado medio | Grado máximo |
+|---|---|---|---|
+| Leves | 301 – 6.000 € | 6.001 – 18.000 € | 18.001 – 30.000 € |
+| Graves | 30.001 – 60.000 € | 60.001 – 78.000 € | 78.001 – 90.000 € |
+| Muy graves | 90.001 – 300.000 € | 300.001 – 600.000 € | 600.001 – 1.000.000 € |
+
+### Tipificación principal aplicable a accesibilidad web
+
+- El incumplimiento de las exigencias de accesibilidad es infracción **grave** (art. 81.3.b RDL 1/2013; ampliado por art. 95.3.e en ámbito AGE).
+- La negativa a adoptar ajustes razonables es infracción **grave** (art. 81.3.b y 95.3.f).
+- El incumplimiento reiterado tras requerimiento, o que impida derechos fundamentales (art. 95.4.f y 95.4.g), es **muy grave**.
+- Tres infracciones graves en un año → muy grave (art. 95.4.h).
+- Tres infracciones leves en tres meses → grave (art. 95.3.i).
+
+### Criterios de graduación (art. 84 RDL 1/2013)
+
+Intencionalidad, negligencia, fraude, incumplimiento de advertencias previas, cifra de negocios, número de personas afectadas, permanencia de las repercusiones, reincidencia, alteración social y beneficio económico.
+
+La reincidencia NO duplica automáticamente la cuantía: es un criterio para situar la sanción en grado mínimo/medio/máximo dentro del tramo que corresponda.
+
+### Sanciones accesorias (art. 85 RDL 1/2013)
+
+- Infracciones graves: prohibición de concurrir a subvenciones y ayudas oficiales del sector, hasta 1 año.
+- Infracciones muy graves: prohibición hasta 2 años + supresión, cancelación o suspensión de ayudas ya concedidas.
+- Servicios sociales con infracción muy grave: inhabilitación hasta 5 años.
+
+Implicación práctica para PYMEs: una sanción grave puede dejar a la empresa fuera de Kit Digital y convocatorias similares durante un año.
+
+### Prescripción (arts. 82 y 87 RDL 1/2013)
+
+- Infracciones: leves 1 año, graves 3 años, muy graves 4 años.
+- Sanciones impuestas: leves 1 año, graves 4 años, muy graves 5 años.
+
+### Autoridad competente
+
+- Conducta que afecta a una sola CCAA: autoridad de vigilancia autonómica (art. 27.3 Ley 11/2023; cada CCAA designa).
+- Conducta supraautonómica (típico de webs y ecommerce con tráfico nacional): AGE (art. 94 RDL 1/2013).
+- En AGE (art. 105 RDL 1/2013):
+  - Leves: Dirección General competente del Ministerio de Derechos Sociales y Agenda 2030.
+  - Graves: Secretaría de Estado de Derechos Sociales.
+  - Muy graves: titular del Ministerio. Si la sanción supera 300.000 €, requiere acuerdo previo del Consejo de Ministros.
 
 ### RD 1112/2018 (público)
 
 - Régimen sancionador remitido a normativa autonómica/local.
 - No hay multas fijas estatales, pero sí responsabilidad administrativa.
+
+> Fuentes:
+> - Ley 11/2023, art. 30 (BOE-A-2023-11022).
+> - RDL 1/2013, Título III, arts. 78–105 (BOE-A-2013-12632).
+> - Texto consolidado vigente verificado en BOE a 15-05-2026.
 
 ## Datos del sector verificables
 

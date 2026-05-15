@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# BOE source dumps and other research scratchpad files
+.claude/sources/
