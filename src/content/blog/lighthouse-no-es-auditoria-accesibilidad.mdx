@@ -1,0 +1,124 @@
+---
+title: "Lighthouse no es una auditoría de accesibilidad: lo que detecta y lo que no"
+description: "Un Lighthouse de 95 no es una auditoría de accesibilidad. Lo que detecta, lo que se le escapa y por qué su score no acredita cumplir la Ley 11/2023."
+pubDate: 2026-05-15
+updatedDate: 2026-05-15
+category: "tecnico"
+tags: ["lighthouse", "auditoria-accesibilidad", "axe-core", "wcag", "herramientas"]
+heroImage: "/blog/lighthouse-no-es-auditoria-accesibilidad/hero.webp"
+heroImageAlt: "Manómetro vintage con aguja apuntando a la zona verde del dial"
+draft: true
+---
+
+# Lighthouse no es una auditoría de accesibilidad: lo que detecta y lo que no
+
+Lighthouse detecta automáticamente, en el mejor de los casos, el 57% de los problemas de accesibilidad de una web. Lo dice el estudio del propio fabricante del motor que usa por dentro. Y aun así, miles de empresas presentan su score de 95 como prueba de que cumplen la ley. Ahí está el problema, y no es de Lighthouse.
+
+## Qué es Lighthouse y para qué sirve de verdad
+
+Lighthouse es una herramienta gratuita de Google integrada en Chrome DevTools. Audita cinco cosas: rendimiento, accesibilidad, buenas prácticas, SEO y PWA. Abres las DevTools, le das a "Analyze page load" y en treinta segundos te devuelve cinco puntuaciones del 0 al 100.
+
+Para la parte de accesibilidad usa por debajo axe-core, la librería de código abierto de Deque Systems que es, hoy por hoy, la referencia técnica del sector. Concretamente la versión 4.11, según la documentación oficial. Lighthouse ejecuta unas 62 reglas automatizadas, sacadas del catálogo completo de axe-core, que pasa de 90 reglas.
+
+Conviene reconocer una cosa antes de criticar nada: como puerta de entrada, Lighthouse es excelente. Gratis, sin instalación, integrado en el navegador, con resultados en menos de un minuto. Para que un equipo de desarrollo detecte los problemas más obvios sin levantarse de la silla, no hay alternativa comparable en facilidad de uso. Como filtro inicial en una integración continua, también funciona.
+
+El problema no aparece cuando alguien usa Lighthouse. Aparece cuando alguien deja de buscar después de ejecutarlo.
+
+## El 57% que sí detecta — y lo que ese número significa
+
+En marzo de 2021, Deque publicó un estudio sobre la cobertura real de las pruebas automatizadas de accesibilidad. Analizó más de 13.000 páginas y unos 300.000 problemas, sacados de más de 2.000 auditorías reales en sectores muy distintos. La conclusión: las pruebas automatizadas con axe-core identifican el 57% de los problemas de accesibilidad de un sitio web. La fuente original está aquí, [publicada por Deque](https://www.deque.com/blog/automated-testing-study-identifies-57-percent-of-digital-accessibility-issues/).
+
+Es la mejor cifra disponible con metodología publicada. Y conviene leerla con dos matices.
+
+El primero: el estudio lo firma el fabricante del motor. Deque vende axe DevTools, axe Monitor y servicios profesionales construidos sobre axe-core. No es razón para descartar el dato (la metodología y el volumen lo respaldan), pero sí para citarlo nombrando quién lo publica. Cualquier cifra de cobertura de la propia herramienta tiene un sesgo natural hacia arriba.
+
+El segundo, más importante: el 57% mide *problemas detectados*, no *criterios WCAG cubiertos*. Son cosas distintas. Una página puede tener muchos problemas del mismo tipo (cinco campos sin etiqueta, treinta enlaces vacíos) y todos cuentan en ese cómputo. Si lo que te interesa es saber si cumples WCAG 2.1 AA criterio por criterio, el porcentaje real de criterios verificables automáticamente baja bastante. Hay criterios de éxito que, por definición, requieren juicio humano.
+
+Lo importante para una PYME es entender lo que dice el dato en la práctica. Si Lighthouse no encuentra nada, eso no significa que tu web sea accesible. Significa solo que las cosas que esta herramienta concreta sabe buscar, no las ha encontrado. El 43% restante puede estar ahí, intacto, sin que nadie lo haya mirado.
+
+## Por qué el score de Lighthouse miente por diseño
+
+Aquí está la trampa. Un score de Lighthouse no mide cuán accesible es tu web. Mide cuántos chequeos automatizables han pasado completos. Y "completos" es la palabra clave.
+
+Lo dice la propia documentación de Google sobre el sistema de puntuación de accesibilidad:
+
+> *"Each accessibility audit is pass or fail. Unlike the Performance audits, a page doesn't get points for partially passing an accessibility audit."*
+>
+> — Google, [Lighthouse Accessibility Scoring](https://developer.chrome.com/docs/lighthouse/accessibility/scoring)
+
+En castellano práctico: cada chequeo solo tiene dos estados, pasa o no pasa. No hay puntos parciales.
+
+Veámoslo con un caso. Imagina una web con 50 botones. En el caso A, 1 de esos 50 no tiene nombre accesible. La auditoría "Buttons do not have an accessible name" falla entera. Cero puntos en esa regla. En el caso B, los 50 botones están sin nombre accesible. La misma auditoría falla. Exactamente los mismos cero puntos. Para Lighthouse, fallar el 2% es idéntico a fallar el 100%.
+
+Lo simétrico es lo que infla scores. Arreglas ese único botón del caso A. La auditoría pasa entera. El score sube ocho o diez puntos de golpe. Tu web no es ahora "diez puntos más accesible". Solo has cruzado un umbral.
+
+Hay otra pista, esta vez del propio Google. La sección "Additional items to manually check" lista los chequeos que la herramienta sabe que no puede automatizar. ¿Cuánto pesan esos chequeos en el score? Cero. No suman, no restan. Justo los criterios que separan "web técnicamente correcta" de "web usable con un lector de pantalla" están fuera del número final.
+
+El score no está roto. Hace exactamente lo que dice hacer. El problema es que el sector lo ha leído como lo que no es.
+
+## Lo que Lighthouse no puede ver
+
+Los chequeos que Lighthouse no hace no son rincones oscuros del WCAG. Son los que más impacto tienen en usuarios reales. Estos son los que veo fallar más en auditorías.
+
+**Texto alternativo que existe pero no sirve.** Lighthouse comprueba si una `<img>` tiene atributo `alt`. No puede comprobar si ese alt describe lo que la imagen aporta al contenido. Un `alt="imagen1.jpg"` pasa la auditoría. Un `alt="foto"` también. Lo segundo es peor que no tener alt, porque le hace perder el tiempo al lector de pantalla sin aportar información.
+
+**Orden de tabulación y foco visible.** Que los elementos tengan `tabindex` válido no significa que el orden tenga sentido. He visto formularios donde tabular saltaba del nombre al asunto, del asunto al teléfono, y volvía atrás al email. Lighthouse no lo nota. Tampoco nota si el foco visible es realmente visible: muchas webs eliminan el outline por estética y dejan al usuario de teclado navegando a ciegas. La regla automatizable detecta `:focus { outline: none }` solo en algunos casos.
+
+**ARIA mal aplicado.** Lighthouse detecta atributos ARIA inválidos. No detecta atributos ARIA correctos sintácticamente pero inútiles o contraproducentes. Un `role="button"` puesto sobre un `<div>` sin gestionar el evento de teclado pasa la validación y rompe la experiencia de cualquiera que use NVDA o JAWS.
+
+**Formularios.** La auditoría comprueba si los inputs tienen `<label>` asociada. No comprueba si los campos obligatorios están correctamente marcados ni si los mensajes de error se anuncian al lector de pantalla.
+
+**Comprensibilidad del contenido.** Esto es la pauta 3.1 del WCAG entera, y no se puede automatizar. Que el texto se entienda. Que las instrucciones tengan sentido. Que los enlaces digan a dónde llevan en lugar de "más info". Lighthouse no puede leer. Solo verifica que haya cosas que leer.
+
+## Lighthouse, axe, WAVE y Pa11y: dónde encaja cada uno
+
+Las cuatro herramientas que vas a encontrar mencionadas en cualquier conversación sobre accesibilidad automatizada son Lighthouse, axe, WAVE y Pa11y. Cada una tiene un sitio. Ninguna sustituye a las demás.
+
+| Herramienta | Motor | Output | Ideal para |
+|---|---|---|---|
+| **Lighthouse** | [axe-core](https://github.com/dequelabs/axe-core) (subconjunto) | Score 0-100 + lista de fallos | Filtro rápido en desarrollo, primera lectura |
+| **axe DevTools** | axe-core completo | Violations + incomplete + passed | Auditoría técnica profunda en navegador |
+| **WAVE** | Motor propio de WebAIM | Iconos visuales sobre la página | Equipos no técnicos, editores de contenido |
+| **Pa11y** | [HTML_CodeSniffer](https://github.com/pa11y/pa11y) (axe opcional) | Issues binarios | Integración continua, builds automatizados |
+
+Cuatro matices que la tabla no captura.
+
+axe DevTools es la versión "sin recortes" del mismo motor que usa Lighthouse. Si Lighthouse te ha dado un 85, axe te va a dar más detalle sobre lo mismo. No es comparar manzanas con peras: es comparar la manzana con la huerta.
+
+WAVE no compite en exhaustividad. Compite en visualización. Renderiza los problemas encima de la web, lo que lo hace útil para que un editor de contenido entienda dónde está el error sin abrir el inspector.
+
+Pa11y por defecto usa HTML_CodeSniffer, un motor distinto y con criterios distintos a axe-core. Puede dar resultados diferentes para la misma web. No es un error, es otra interpretación del mismo WCAG.
+
+Ninguna de las cuatro detecta lo que sí detecta un humano con un lector de pantalla y media hora.
+
+## Cuándo Lighthouse sí vale y cuándo no
+
+Llegados aquí, conviene cerrar con la parte práctica.
+
+**Para qué Lighthouse sí vale:**
+
+- ✅ Detectar los problemas más obvios y frecuentes (alt faltante, contraste roto, labels ausentes) en menos de un minuto.
+- ✅ Servir de filtro previo en CI/CD: bloquear merges que rompan accesibilidad básica.
+- ✅ Verificar que un fix hecho a mano no haya introducido regresiones.
+- ✅ Dar a un equipo no especialista una primera lectura comprensible sobre el estado de su web.
+- ✅ Presentar mejora a dirección con una métrica simple: "subimos de 62 a 91 en seis semanas".
+
+**Para qué Lighthouse no vale:**
+
+- ❌ Acreditar cumplimiento legal de la Ley 11/2023 o del RD 193/2023.
+- ❌ Sustituir una auditoría conforme a UNE-EN 301 549.
+- ❌ Decidir si la web es usable con lector de pantalla.
+- ❌ Verificar comprensibilidad del contenido o lógica de navegación.
+- ❌ Demostrar nada a un inspector. "Tenemos 95 en Lighthouse" no es una respuesta técnica, es una métrica de DevOps.
+
+Si lo usas para lo primero y te abstienes de lo segundo, Lighthouse es una herramienta extraordinaria. La mayoría de problemas del sector vienen de hacer al revés.
+
+## Lighthouse y cumplimiento legal
+
+Aquí cerramos la parte legal sin entrar en lo que ya cubre el [pilar sobre la Ley 11/2023](/blog/ley-11-2023-empresas-espanolas).
+
+Un score de Lighthouse, por alto que sea, no es una evaluación de conformidad con la norma técnica UNE-EN 301 549, que es a la que remiten tanto la Ley 11/2023 como el RD 193/2023. Y por tanto, un Lighthouse de 95 no acredita que tu web cumpla la Ley 11/2023 ni te exime del [régimen sancionador](/blog/sanciones-ley-11-2023), que tiene tramos de hasta un millón de euros para infracciones muy graves. La conformidad se documenta con una evaluación contra la norma. No con una captura de pantalla del navegador.
+
+---
+
+Si necesitas saber dónde está exactamente tu web hoy, más allá de lo que cuenta Lighthouse, [hago auditorías de accesibilidad](/auditoria-accesibilidad). Trabajo contra WCAG 2.1 AA y UNE-EN 301 549, con problemas localizados, priorizados y con el plan de remediación incluido.
