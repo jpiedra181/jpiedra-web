@@ -181,16 +181,16 @@
           "description": "El régimen sancionador del RDL 1/2013 ya está vigente. Las CCAA pueden inspeccionar. Las asociaciones de personas con discapacidad ya están denunciando casos reales."
         },
         {
-          "value": "Enero 2025",
-          "ariaLabel": "enero de 2025",
-          "title": "Fuera de licitaciones públicas",
-          "description": "Si trabajas o quieres trabajar con la Administración, ya no es opcional. El RD 193/2023 lo aplica a cualquier proveedor desde esta fecha."
+          "value": "Junio 2025",
+          "ariaLabel": "Junio de 2025",
+          "title": "Filtro de licitaciones públicas",
+          "description": "Desde la plena aplicación de la Ley 11/2023, los pliegos públicos exigen conformidad de accesibilidad como requisito de admisión a cualquier proveedor. Si trabajas o quieres trabajar con la Administración, ya no es opcional."
         },
         {
-          "value": "4,7 M",
-          "ariaLabel": "cuatro coma siete millones",
+          "value": "~4,4 M",
+          "ariaLabel": "cuatro coma cuatro millones",
           "title": "Clientes que no pueden usar tu web",
-          "description": "Personas con discapacidad en España. Si tu ecommerce, tu reserva online o tu formulario falla con un lector de pantalla, esos clientes se van a la competencia."
+          "description": "Personas con discapacidad reconocida en España (INE). Si tu ecommerce, tu reserva online o tu formulario falla con un lector de pantalla, esos clientes se van a la competencia."
         }
       ],
       "closing": "Auditar tu web no es un capricho de cumplimiento. Es lo que separa a las empresas que están preparadas de las que se van a llevar la multa, la denuncia o las dos cosas."
@@ -213,8 +213,8 @@
           "description": "Cada hallazgo con su solución concreta, el esfuerzo estimado en horas y el orden óptimo para resolverlo. Sabes qué arreglar primero, cuánto tiempo lleva y cuánto cuesta."
         },
         {
-          "title": "Declaración de accesibilidad lista para publicar",
-          "description": "Documento legal redactado según RD 1112/2018 con tu nivel real de cumplimiento. Lo publicas en tu web y empiezas a cumplir el requisito formal desde el día siguiente."
+          "title": "Documento de cumplimiento listo para publicar",
+          "description": "Lo redacto según el régimen que te aplica: declaración formal del RD 1112/2018 si eres sector público o asimilado, información del art. 13.2 Ley 11/2023 si eres empresa privada. Lo publicas en tu web y empiezas a cumplir el requisito documental desde el día siguiente."
         },
         {
           "title": "Reunión de presentación de resultados",
@@ -274,7 +274,7 @@
         {
           "duration": "DÍA 6",
           "title": "Redacción del informe y plan de remediación",
-          "description": "Estructuro todos los hallazgos en el documento final: resumen ejecutivo, catálogo por criterio, plan priorizado con horas estimadas, declaración de accesibilidad. Reviso dos veces antes de entregar.",
+          "description": "Estructuro todos los hallazgos en el documento final: resumen ejecutivo, catálogo por criterio, plan priorizado con horas estimadas y documento de cumplimiento adaptado a tu régimen. Reviso dos veces antes de entregar.",
           "clientInput": "Lo que necesito de ti: nada. Lo que necesito de mí: rigor."
         },
         {
@@ -346,11 +346,11 @@
         },
         {
           "question": "¿Puedo aplicar yo mismo las correcciones del informe?",
-          "answer": "Sí. El informe está pensado para que tu equipo técnico pueda actuar sobre él directamente. Si tienes desarrollador interno o agencia, le entregas el documento y lo aplica."
+          "answer": "Sí. El informe está pensado para que cualquier perfil técnico pueda actuar sobre él directamente. Si tienes desarrollador interno, agencia o freelance habitual, le entregas el documento y lo aplica."
         },
         {
           "question": "¿Sirve para cumplir el requisito legal de la Ley 11/2023?",
-          "answer": "Sí. La auditoría incluye la declaración de accesibilidad redactada según RD 1112/2018, lista para publicar en tu web. Cumple con el requisito formal de evaluación que exige la normativa."
+          "answer": "Sí. La auditoría incluye el documento de cumplimiento listo para publicar, redactado según el régimen que te aplica: declaración formal del RD 1112/2018 si eres sector público, información del art. 13.2 Ley 11/2023 si eres empresa privada. En ambos casos cumples el requisito documental que exige la normativa desde el día que lo publicas."
         },
         {
           "question": "¿Cómo se factura?",
