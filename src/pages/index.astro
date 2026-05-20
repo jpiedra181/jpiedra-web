@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../components/layout/BaseLayout.astro"
 import Hero from "../components/sections/Hero.astro"
+import AutoevaluadorCTA from "../components/sections/AutoevaluadorCTA.astro"
 import Context from "../components/sections/Context.astro"
 import About from "../components/sections/About.astro"
 import Approach from "../components/sections/Approach.astro"
@@ -12,11 +13,12 @@ const lang = "es" as const
 
 <BaseLayout lang={lang}>
     <Hero lang={lang} />
+    <AutoevaluadorCTA />
     <Context lang={lang} />
     <About lang={lang} />
     <Approach lang={lang} />
     <!-- <Projects lang={lang} /> -->
-    <Contact lang={lang} />
+    <!-- <Contact lang={lang} /> -->
 </BaseLayout>
 
 <script>
