@@ -2,7 +2,7 @@
   "nav": {
     "audit": "Auditoría",
     "blog": "Blog",
-    "contact": "Contacto"
+    "law": "¿Te aplica la Ley 11/2023?"
 },
   "hero": {
     "label": "DESARROLLADOR WEB • ESPECIALISTA EN ACCESIBILIDAD WEB",
@@ -55,7 +55,7 @@
       },
       {
         "title": "Arreglo",
-        "description": "Cojo el informe y lo aplico. Yo, no un equipo subcontratado al otro lado del mundo. Cada corrección se prueba con teclado, con lector de pantalla y con usuarios reales cuando hace falta. Al terminar, te entrego una declaración de accesibilidad lista para publicar."
+        "description": "Cojo el informe y lo aplico. Yo, no un equipo subcontratado al otro lado del mundo. Cada corrección se prueba con teclado, con lector de pantalla y con usuarios reales cuando hace falta. Al terminar, te entrego el documento de cumplimiento adaptado a tu régimen, listo para publicar."
       },
       {
         "title": "Mantengo (opcional)",

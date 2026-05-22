@@ -16,10 +16,10 @@ const basePath = lang === "es" ? "/" : "/en/"
 const auditHref =
     lang === "es" ? "/auditoria-accesibilidad" : "/en/accessibility-audit"
 const blogHref = lang === "es" ? "/blog" : "/en/blog"
-const contactHref = `${basePath}#contact`
+const contactHref = "/te-aplica-ley-11-2023"
 
 const navItems = [
-    { href: auditHref, label: t.nav.audit },
+    { href: contactHref, label: t.nav.law },
     { href: blogHref, label: t.nav.blog },
 ]
 ---
@@ -57,7 +57,7 @@ const navItems = [
                 href={contactHref}
                 class="inline-flex items-center font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-5 py-2.5 hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-                {t.nav.contact}
+                {t.nav.audit}
             </a>
         </nav>
     </div>
@@ -102,7 +102,7 @@ const navItems = [
         href={contactHref}
         class="mobile-nav-link inline-flex items-center font-body font-medium text-base tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3 mt-2"
     >
-        {t.nav.contact}
+        {t.nav.audit}
     </a>
     <!-- <div class="mt-4">
         <LanguageSwitcher lang={lang} />
