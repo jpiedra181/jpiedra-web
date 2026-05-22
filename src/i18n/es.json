@@ -54,7 +54,7 @@
         "description": "Reviso tu web según WCAG 2.1 AA y la Ley 11/2023. Combino herramientas técnicas (axe, Lighthouse, lectores de pantalla) con evaluación manual. No es un PDF de 200 páginas con jerga: te entrego un informe que entiende cualquiera de tu equipo, con cada problema, su impacto y cuánto cuesta arreglarlo."
       },
       {
-        "title": "Arreglo",
+        "title": "Arreglo (opcional)",
         "description": "Cojo el informe y lo aplico. Yo, no un equipo subcontratado al otro lado del mundo. Cada corrección se prueba con teclado, con lector de pantalla y con usuarios reales cuando hace falta. Al terminar, te entrego el documento de cumplimiento adaptado a tu régimen, listo para publicar."
       },
       {
