@@ -1,0 +1,117 @@
+---
+title: "Los 6 errores de accesibilidad más comunes en las webs (y qué te exigen legalmente)"
+description: "Seis errores concentran el 96% de los fallos de accesibilidad y llevan repitiéndose siete años. Cuáles son y por qué la Ley 11/2023 los hace un riesgo legal."
+pubDate: 2026-05-24
+updatedDate: 2026-05-24
+category: "tecnico"
+tags: ["accesibilidad", "wcag", "errores-accesibilidad", "ley-11-2023", "auditoria-web"]
+heroImage: "/blog/errores-accesibilidad-web-mas-comunes/hero.webp"
+heroImageAlt: "Lupa de aumento sobre una pantalla con líneas de código"
+draft: false
+---
+
+Hay una estadística que lleva siete años diciendo lo mismo: la inmensa mayoría de las webs del mundo fallan en accesibilidad por las mismas seis razones. No son fallos exóticos ni casos límite. Son seis errores básicos, conocidos, fáciles de explicar y, en su mayoría, fáciles de corregir. Y aun así, ahí siguen.
+
+El dato viene del **WebAIM Million**, un estudio anual que analiza la accesibilidad del millón de páginas de inicio más visitadas del mundo. En su edición de 2026, el resultado es demoledor: el **96% de todos los errores detectados se concentran en solo seis categorías**, y esas seis categorías son las mismas desde hace siete años consecutivos.
+
+Hasta hace poco, tener estos errores era un problema de calidad y de alcance: tu web dejaba fuera a parte de tus usuarios. Desde 2025, en España, además es un problema legal. La Ley 11/2023 obliga a muchas empresas a cumplir los criterios técnicos de accesibilidad (WCAG 2.1 AA a través de la norma UNE-EN 301 549), y estos seis errores son, precisamente, incumplimientos directos de esos criterios.
+
+En este artículo te explico cuáles son, a quién afectan, qué criterio concreto incumplen y por qué deberías tomártelos en serio aunque tu web "se vea bien".
+
+## Antes de empezar: qué mide el WebAIM Million (y qué no)
+
+El WebAIM Million usa una herramienta automática (WAVE) para escanear un millón de páginas. Eso tiene una implicación importante que conviene entender antes de seguir.
+
+Las herramientas automáticas **solo detectan una parte de los problemas de accesibilidad**: los que se pueden comprobar mediante reglas de código. No detectan si el orden de tabulación tiene sentido, si una imagen tiene un texto alternativo correcto (solo si lo tiene o no), o si tu web es navegable de principio a fin con el teclado. Eso requiere revisión manual.
+
+Por eso, cuando el WebAIM Million dice que el 96% de errores se concentran en seis categorías, está hablando de **los errores automáticamente detectables**. Los reales, contando los que solo se ven con pruebas manuales, son más. Si quieres profundizar en por qué el testing automático no basta, lo expliqué en detalle en [por qué Lighthouse no es una auditoría de accesibilidad](/blog/lighthouse-no-es-auditoria-accesibilidad).
+
+Dicho esto, vamos con los seis.
+
+## 1. Texto con contraste insuficiente
+
+Es, año tras año, el error número uno. En el informe de 2026, el texto con bajo contraste apareció en el **83,9% de las páginas analizadas**, con una media de 34 instancias por página. Es decir: en cuatro de cada cinco webs hay texto que no se lee bien.
+
+El contraste mide la diferencia de luminosidad entre el texto y su fondo. Un gris claro sobre blanco, un texto de color sobre una imagen, botones con poco contraste... todo eso deja fuera a personas con baja visión, daltonismo o, simplemente, a cualquiera mirando la pantalla bajo el sol.
+
+**Qué criterio incumple**: WCAG 2.1, criterio **1.4.3 Contraste (mínimo), nivel AA**. Exige un ratio mínimo de 4,5:1 para texto normal y 3:1 para texto grande.
+
+**Cómo detectarlo de forma básica**: cualquier herramienta de contraste (hay extensiones de navegador y comprobadores online) te da el ratio de un color sobre otro. Si tu texto principal está por debajo de 4,5:1, tienes un problema.
+
+## 2. Imágenes sin texto alternativo
+
+El texto alternativo (el atributo `alt`) es lo que describe una imagen para quien no puede verla: personas que usan lectores de pantalla. Sin él, un lector de pantalla anuncia "imagen" y nada más, o peor, lee el nombre del archivo (`IMG_4821.jpg`).
+
+En el estudio, una parte significativa de las imágenes carecía de texto alternativo. Y un detalle importante: cuando una imagen sin `alt` es además un enlace, el problema se multiplica, porque el usuario no sabe a dónde lleva ese enlace.
+
+**Qué criterio incumple**: WCAG 2.1, criterio **1.1.1 Contenido no textual, nivel A**. Es nivel A, el más básico. Fallar aquí es fallar en lo mínimo.
+
+**Cómo detectarlo de forma básica**: revisa que tus imágenes informativas tengan descripción. Ojo: las imágenes puramente decorativas deben llevar `alt` vacío (`alt=""`), no quedarse sin atributo. Y el `alt` debe describir la función o el contenido, no ser un relleno de palabras clave.
+
+## 3. Campos de formulario sin etiqueta
+
+Un formulario donde los campos no tienen una etiqueta correctamente asociada es una trampa para quien usa lector de pantalla: oye "campo de texto" sin saber si le piden el nombre, el email o el teléfono. El placeholder (ese texto gris dentro del campo) no cuenta como etiqueta: desaparece al escribir y muchos lectores no lo anuncian.
+
+Este error es especialmente grave porque los formularios son justo el punto donde el usuario tiene que **hacer algo**: comprar, contactar, registrarse. Si el formulario no es accesible, pierdes la conversión directamente.
+
+**Qué criterio incumple**: WCAG 2.1, criterio **3.3.2 Etiquetas o instrucciones, nivel A**. También se relaciona con el 4.1.2 (nombre, función, valor).
+
+**Cómo detectarlo de forma básica**: pulsa sobre la etiqueta de texto de un campo. Si al hacerlo el cursor salta al campo correspondiente, está bien asociada. Si no pasa nada, la etiqueta no está vinculada.
+
+## 4. Enlaces vacíos o sin texto descriptivo
+
+Un enlace vacío es un enlace que no tiene texto que un lector de pantalla pueda anunciar. Suele pasar con iconos enlazados (una lupa, un carrito, un icono de redes sociales) que no tienen ningún texto asociado. El usuario oye "enlace" y no sabe a dónde va.
+
+Una variante del mismo problema son los enlaces tipo "haz clic aquí" o "leer más" repetidos por toda la página: técnicamente tienen texto, pero fuera de contexto no dicen nada. Quien navega saltando de enlace en enlace con un lector de pantalla se encuentra con quince "leer más" sin saber qué es cada uno.
+
+**Qué criterio incumple**: WCAG 2.1, criterio **2.4.4 Propósito del enlace (en contexto), nivel A**.
+
+**Cómo detectarlo de forma básica**: revisa tus iconos enlazados (menú, redes sociales, buscador). Cada uno debería tener un texto accesible que diga a dónde lleva, aunque visualmente solo se vea el icono.
+
+## 5. Botones vacíos
+
+Mismo problema que los enlaces vacíos, pero con botones. Un botón sin texto ni nombre accesible (típicamente un botón que solo contiene un icono) deja al usuario de lector de pantalla sin saber qué hace. "Botón", dice. ¿Botón de qué? ¿Enviar? ¿Cerrar? ¿Menú?
+
+Es un error muy común en interfaces modernas llenas de iconos: el botón de hamburguesa del menú móvil, la X de cerrar un pop-up, el botón de reproducir un vídeo.
+
+**Qué criterio incumple**: WCAG 2.1, criterio **4.1.2 Nombre, función, valor, nivel A**.
+
+**Cómo detectarlo de forma básica**: los botones que solo muestran un icono deben tener un nombre accesible (con `aria-label` o texto oculto visualmente). Si tu menú móvil es un icono de tres rayas sin texto, probablemente falle aquí.
+
+## 6. Idioma de la página sin declarar
+
+Este es el más invisible de los seis y, paradójicamente, uno de los más fáciles de arreglar. Cada página web debería declarar en qué idioma está escrita, mediante el atributo `lang` en la etiqueta `<html>`. Los lectores de pantalla lo usan para elegir la pronunciación correcta: si una página en español no declara su idioma, el lector puede leerla con fonética inglesa, volviéndola incomprensible.
+
+**Qué criterio incumple**: WCAG 2.1, criterio **3.1.1 Idioma de la página, nivel A**.
+
+**Cómo detectarlo de forma básica**: mira el código fuente de tu web. La etiqueta `<html>` debería tener algo como `lang="es"`. Si no lo tiene, es un arreglo de cinco segundos con impacto real.
+
+## Por qué estos seis errores son ahora un riesgo legal
+
+Hasta 2025, tener estos errores era una cuestión de calidad: tu web era peor de lo que podía ser y dejaba fuera a parte de tus usuarios. Mal, pero sin consecuencias legales directas para la mayoría de empresas privadas.
+
+Eso cambió. La **Ley 11/2023** (que traspone el Acta Europea de Accesibilidad) obliga, desde el 28 de junio de 2025, a un amplio conjunto de empresas privadas a cumplir los requisitos de accesibilidad. Y esos requisitos se concretan en la norma **UNE-EN 301 549**, cuyo núcleo es precisamente **WCAG 2.1 nivel AA**.
+
+¿Ves la conexión? Los seis errores que acabamos de repasar no son "buenas prácticas recomendables". Son incumplimientos directos de los criterios WCAG que la ley convierte en obligatorios. Cinco de los seis (todos menos el contraste) son incluso de **nivel A**, el mínimo absoluto.
+
+Esto significa que una web con estos errores, si pertenece a una empresa obligada por la Ley 11/2023, está en situación de incumplimiento. Y el régimen sancionador no es simbólico: puede llegar hasta el millón de euros en las infracciones más graves. Lo expliqué en detalle en [el régimen sancionador de la Ley 11/2023](/blog/sanciones-ley-11-2023).
+
+Si no tienes claro si tu empresa está entre las obligadas, antes de preocuparte por los errores conviene resolver esa duda. Para eso monté un [autoevaluador de 2 minutos](/te-aplica-ley-11-2023): siete preguntas y te dice exactamente qué régimen te aplica.
+
+## La diferencia entre "no tener estos seis errores" y "ser accesible"
+
+Una advertencia importante para terminar, porque es justo donde mucha gente se confía.
+
+Corregir estos seis errores te pone por delante de la mayoría de webs. Pero **no significa que tu web sea accesible**. Recuerda lo del principio: estos son los errores que detecta una herramienta automática. Hay toda una capa de problemas que solo se ven probando la web de verdad:
+
+- ¿Se puede usar entera solo con el teclado, sin ratón?
+- ¿El foco del teclado sigue un orden lógico y es siempre visible?
+- ¿Los mensajes de error de los formularios se anuncian correctamente?
+- ¿Un menú desplegable funciona con lector de pantalla?
+- ¿El texto alternativo de las imágenes describe de verdad lo que muestran, o es relleno?
+
+Nada de eso lo detecta un escáner automático. Y son, muchas veces, los problemas que más excluyen a usuarios reales.
+
+Por eso una auditoría de accesibilidad seria combina herramientas automáticas (para barrer rápido los seis errores comunes) con **pruebas manuales**: navegación por teclado, lector de pantalla, y revisión criterio por criterio contra WCAG 2.1 AA. Es la única forma de saber de verdad dónde estás.
+
+Si quieres saber exactamente qué problemas tiene tu web y qué necesitas corregir para cumplir la Ley 11/2023, eso es justo lo que hago: una [auditoría de accesibilidad](/auditoria-accesibilidad) con informe técnico priorizado y el documento de cumplimiento adaptado a tu régimen, listo para publicar.
