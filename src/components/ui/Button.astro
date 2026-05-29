@@ -8,7 +8,7 @@ interface Props {
 const { href, variant = "primary", class: className = "" } = Astro.props
 
 const baseClasses =
-    "inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full"
+    "inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
 const variants = {
     primary:
         "bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20",

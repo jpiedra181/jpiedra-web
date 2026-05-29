@@ -49,11 +49,9 @@ const t = useTranslations(lang)
             {
                 t.context.stats.map((stat) => (
                     <li class="context-stat flex flex-col items-center text-center">
-                        <strong
-                            aria-label={stat.ariaLabel}
-                            class="font-heading font-normal text-accent leading-none text-[clamp(3rem,6vw,5.5rem)]"
-                        >
-                            {stat.value}
+                        <strong class="font-heading font-normal text-accent leading-none text-[clamp(3rem,6vw,5.5rem)]">
+                            <span aria-hidden="true">{stat.value}</span>
+                            <span class="sr-only">{stat.ariaLabel}</span>
                         </strong>
                         <span class="font-body text-base lg:text-lg leading-snug text-text-primary mt-5 max-w-[28ch]">
                             {stat.description}

@@ -41,7 +41,12 @@ const navItems = [
         </a>
 
         <!-- Desktop Nav -->
-        <nav class="hidden lg:flex items-center gap-8">
+        <nav
+            aria-label={lang === "es"
+                ? "Navegación principal"
+                : "Main navigation"}
+            class="hidden lg:flex items-center gap-8"
+        >
             {
                 navItems.map((item) => (
                     <a
@@ -115,7 +120,18 @@ const navItems = [
     const mobileMenu = document.getElementById("mobile-menu")!
     const lines = mobileBtn.querySelectorAll(".mobile-menu-line")
     const mobileLinks = mobileMenu.querySelectorAll(".mobile-nav-link")
+    const mainEl = document.getElementById("main-content")
+    const footerEl = document.querySelector("footer")
     let menuOpen = false
+
+    function setBackgroundInert(on: boolean) {
+        const targets = [header, mainEl, footerEl]
+        for (const el of targets) {
+            if (!el) continue
+            if (on) el.setAttribute("inert", "")
+            else el.removeAttribute("inert")
+        }
+    }
 
     function toggleMenu() {
         menuOpen = !menuOpen
@@ -135,6 +151,7 @@ const navItems = [
                 "!left-0",
             )
             document.body.style.overflow = "hidden"
+            setBackgroundInert(true)
         } else {
             mobileMenu.classList.add("opacity-0", "pointer-events-none")
             mobileMenu.classList.remove("opacity-100", "pointer-events-auto")
@@ -153,6 +170,7 @@ const navItems = [
                 "!left-0",
             )
             document.body.style.overflow = ""
+            setBackgroundInert(false)
         }
     }
 
@@ -162,6 +180,37 @@ const navItems = [
             if (menuOpen) toggleMenu()
         }),
     )
+
+    // Escape cierra el menú y devuelve el foco al botón hamburguesa.
+    // Tab/Shift+Tab quedan atrapados entre la hamburguesa y los enlaces del menú.
+    document.addEventListener("keydown", (e) => {
+        if (!menuOpen) return
+
+        if (e.key === "Escape") {
+            toggleMenu()
+            mobileBtn.focus()
+            return
+        }
+
+        if (e.key === "Tab") {
+            const inMenu = Array.from(
+                mobileMenu.querySelectorAll<HTMLElement>(
+                    'a, button, [tabindex]:not([tabindex="-1"])',
+                ),
+            )
+            const focusables = [mobileBtn, ...inMenu]
+            if (focusables.length === 0) return
+            const first = focusables[0]
+            const last = focusables[focusables.length - 1]
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault()
+                last.focus()
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault()
+                first.focus()
+            }
+        }
+    })
 
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {

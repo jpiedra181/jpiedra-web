@@ -36,6 +36,10 @@ interface Pulse {
 export function initHeroScene(canvas: HTMLCanvasElement): void {
   const container = canvas.parentElement!;
   const isMobile = window.innerWidth < 1024;
+  // WCAG 2.3.3: con movimiento reducido, la escena se renderiza estática (sin
+  // autorotación, pulsos ni deformación), pero permanece visible en su estado
+  // de reposo — nunca en negro ni oculta.
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
@@ -146,7 +150,7 @@ export function initHeroScene(canvas: HTMLCanvasElement): void {
   const mouse = new Vector2(9999, 9999);
   const mouseWorld = new Vector3();
 
-  if (!isMobile) {
+  if (!isMobile && !prefersReducedMotion) {
     canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -295,7 +299,12 @@ export function initHeroScene(canvas: HTMLCanvasElement): void {
     renderer.render(scene, camera);
   }
 
-  animate(0);
+  if (prefersReducedMotion) {
+    // Render único del estado de reposo: la red queda visible pero inmóvil.
+    renderer.render(scene, camera);
+  } else {
+    animate(0);
+  }
 
   // Resize handler
   const resizeObserver = new ResizeObserver(() => {
@@ -304,6 +313,10 @@ export function initHeroScene(canvas: HTMLCanvasElement): void {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    // Sin loop de animación, el resize debe re-renderizar para no quedar en negro.
+    if (prefersReducedMotion) {
+      renderer.render(scene, camera);
+    }
   });
   resizeObserver.observe(container);
 

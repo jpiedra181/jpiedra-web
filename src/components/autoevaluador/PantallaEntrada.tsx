@@ -12,13 +12,13 @@ export function PantallaEntrada({ onEmpezar }: Props) {
         </span>
       </div>
 
-      <h1
+      <h2
         className="font-heading text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] text-text-primary mb-6"
         style={{ textWrap: "balance" }}
       >
         ¿Te aplica la Ley 11/2023?{" "}
         <span className="text-accent italic">Averígualo en 2 minutos.</span>
-      </h1>
+      </h2>
 
       <p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-2xl mb-10">
         La nueva ley de accesibilidad ha cambiado las reglas para muchas

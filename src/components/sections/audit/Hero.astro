@@ -45,9 +45,9 @@ const t = useTranslations(lang)
             <div class="audit-hero-price mb-8 md:mb-10">
                 <p
                     class="font-heading text-[clamp(3.5rem,8vw,6rem)] leading-none text-accent mb-4"
-                    aria-label={t.audit.hero.priceAriaLabel}
                 >
-                    {t.audit.hero.price}
+                    <span aria-hidden="true">{t.audit.hero.price}</span>
+                    <span class="sr-only">{t.audit.hero.priceAriaLabel}</span>
                 </p>
                 <p class="text-sm md:text-base text-text-primary font-medium">
                     {t.audit.hero.priceNote}

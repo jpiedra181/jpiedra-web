@@ -44,11 +44,9 @@ const t = useTranslations(lang)
             {
                 t.audit.problem.risks.map((risk) => (
                     <li class="audit-problem-risk">
-                        <p
-                            class="font-heading text-5xl md:text-6xl lg:text-7xl text-accent leading-none mb-6"
-                            aria-label={risk.ariaLabel}
-                        >
-                            {risk.value}
+                        <p class="font-heading text-5xl md:text-6xl lg:text-7xl text-accent leading-none mb-6">
+                            <span aria-hidden="true">{risk.value}</span>
+                            <span class="sr-only">{risk.ariaLabel}</span>
                         </p>
                         <h3 class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3">
                             {risk.title}
