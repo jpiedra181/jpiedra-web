@@ -7,13 +7,17 @@ interface Props {
 
 const { href, variant = "primary", class: className = "" } = Astro.props
 
+// El color del anillo de foco se define por variante para garantizar contraste
+// (WCAG 1.4.11): el dorado del botón primary se confundiría con un anillo dorado,
+// así que usa anillo blanco; la variante outline mantiene el anillo dorado, que
+// contrasta con el fondo oscuro.
 const baseClasses =
-    "inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    "inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2"
 const variants = {
     primary:
-        "bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20",
+        "bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-white",
     outline:
-        "border border-accent-line text-accent hover:bg-accent-subtle px-7 py-3.5",
+        "border border-accent-line text-accent hover:bg-accent-subtle px-7 py-3.5 focus-visible:outline-accent",
 }
 
 const classes = `${baseClasses} ${variants[variant]} ${className}`
