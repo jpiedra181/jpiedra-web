@@ -51,7 +51,7 @@ export function PantallaEntrada({ onEmpezar }: Props) {
       <button
         type="button"
         onClick={onEmpezar}
-        className="cursor-pointer inline-flex items-center gap-3 bg-accent text-bg-primary px-8 py-4 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent min-h-[44px]"
+        className="cursor-pointer inline-flex items-center gap-3 bg-accent text-bg-primary px-8 py-4 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white min-h-[44px]"
       >
         Empezar el autoevaluador
         <span aria-hidden="true">→</span>

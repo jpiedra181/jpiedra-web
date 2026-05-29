@@ -102,7 +102,7 @@ export function PantallaDictamen({ dictamen, onContinuar, onVolver }: Props) {
           <button
             type="button"
             onClick={onContinuar}
-            className="cursor-pointer inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px]"
+            className="cursor-pointer inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
           >
             Recibir el PDF
             <span aria-hidden="true">→</span>
@@ -110,7 +110,7 @@ export function PantallaDictamen({ dictamen, onContinuar, onVolver }: Props) {
           <button
             type="button"
             onClick={onVolver}
-            className="cursor-pointer inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors duration-200 px-4 py-3 rounded-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px]"
+            className="cursor-pointer inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors duration-200 px-4 py-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
           >
             <span aria-hidden="true">←</span>
             Revisar respuestas

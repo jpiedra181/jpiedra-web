@@ -177,7 +177,7 @@ export function PantallaCaptura({
           <button
             type="submit"
             disabled={estado === "enviando"}
-            className="cursor-pointer inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px]"
+            className="cursor-pointer inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:opacity-60 disabled:cursor-not-allowed min-h-[44px]"
           >
             {estado === "enviando" ? (
               <>
@@ -195,7 +195,7 @@ export function PantallaCaptura({
             type="button"
             onClick={onVolver}
             disabled={estado === "enviando"}
-            className="cursor-pointer inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors duration-200 px-4 py-3 rounded-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60 min-h-[44px]"
+            className="cursor-pointer inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors duration-200 px-4 py-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:opacity-60 min-h-[44px]"
           >
             <span aria-hidden="true">←</span>
             Volver al dictamen

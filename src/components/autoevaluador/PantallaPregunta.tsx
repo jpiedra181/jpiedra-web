@@ -127,7 +127,7 @@ export function PantallaPregunta({
           <button
             type="button"
             onClick={onAnterior}
-            className="cursor-pointer inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors duration-200 px-4 py-3 rounded-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px]"
+            className="cursor-pointer inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors duration-200 px-4 py-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
           >
             <span aria-hidden="true">←</span>
             Anterior
@@ -138,7 +138,7 @@ export function PantallaPregunta({
           <button
             type="button"
             onClick={handleSiguienteClick}
-            className="cursor-pointer ml-auto inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent min-h-[44px]"
+            className="cursor-pointer ml-auto inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
           >
             Siguiente
             <span aria-hidden="true">→</span>
@@ -241,7 +241,7 @@ function OpcionBloque({
               onBlur={() => setTooltipAbierto(false)}
               aria-label="Más información"
               aria-expanded={tooltipAbierto}
-              className="cursor-help inline-flex items-center justify-center w-5 h-5 rounded-full border border-text-muted text-text-muted text-xs font-bold hover:border-accent hover:text-accent transition-colors duration-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="cursor-help inline-flex items-center justify-center w-5 h-5 rounded-full border border-text-muted text-text-muted text-xs font-bold hover:border-accent hover:text-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               ?
             </button>
