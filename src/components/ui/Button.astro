@@ -7,17 +7,19 @@ interface Props {
 
 const { href, variant = "primary", class: className = "" } = Astro.props
 
-// El color del anillo de foco se define por variante para garantizar contraste
-// (WCAG 1.4.11): el dorado del botón primary se confundiría con un anillo dorado,
-// así que usa anillo blanco; la variante outline mantiene el anillo dorado, que
-// contrasta con el fondo oscuro.
+// Anillo de foco blanco con separación (outline-offset): contrasta con el fondo
+// oscuro y con el dorado de los botones (WCAG 1.4.11 / 2.4.7).
+// IMPORTANTE: no usar `focus:outline-none` junto a `focus-visible:outline-2`. En
+// Tailwind 4 `outline-2` toma el estilo de --tw-outline-style, y `outline-none`
+// pone esa variable a `none`; como al tabular se cumplen :focus y :focus-visible
+// a la vez, el anillo quedaría anulado y no se vería.
 const baseClasses =
-    "inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2"
+    "inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 const variants = {
     primary:
-        "bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-white",
+        "bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20",
     outline:
-        "border border-accent-line text-accent hover:bg-accent-subtle px-7 py-3.5 focus-visible:outline-accent",
+        "border border-accent-line text-accent hover:bg-accent-subtle px-7 py-3.5",
 }
 
 const classes = `${baseClasses} ${variants[variant]} ${className}`
