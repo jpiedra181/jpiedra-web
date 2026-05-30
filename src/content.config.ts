@@ -12,7 +12,7 @@ const blog = defineCollection({
     heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    category: z.enum(['normativa', 'tecnico', 'opinion', 'tutorial']).default('normativa'),
+    category: z.enum(['normativa', 'tecnico', 'opinion', 'tutorial', 'casos']).default('normativa'),
     draft: z.boolean().default(false),
   }),
 })

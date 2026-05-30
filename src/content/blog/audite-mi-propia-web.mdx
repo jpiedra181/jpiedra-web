@@ -1,0 +1,94 @@
+---
+title: "Audité mi propia web de accesibilidad: 100 en Lighthouse y 12 problemas reales"
+description: "Mi web sacaba 100 en Lighthouse y 0 errores automáticos. Aun así tenía 12 problemas reales de accesibilidad. Qué eran, a quién afectaban y cómo los corregí."
+pubDate: 2026-05-30
+updatedDate: 2026-05-30
+category: "casos"
+tags: ["caso-de-estudio", "auditoria-accesibilidad", "wcag", "nvda", "ley-11-2023"]
+heroImage: "/blog/audite-mi-propia-web/hero.webp"
+heroImageAlt: "Espejo reflejando una pantalla de ordenador con código"
+draft: false
+---
+
+## Audité mi propia web de accesibilidad: 100 en Lighthouse y 12 problemas reales
+
+Vendo auditorías de accesibilidad. Lo mínimo que podía hacer era auditar la mía antes de pedirle a nadie que me dejara auditar la suya. Así que lo hice. Y encontré 12 problemas reales en una web que sacaba 100 sobre 100 en Lighthouse y cero errores en las herramientas automáticas.
+
+Te cuento qué había, a quién afectaba y cómo quedó. Sin maquillar nada, porque el sentido de esto es justo lo contrario.
+
+## El punto de partida: todo verde
+
+Antes de tocar nada, pasé las cuatro herramientas automáticas estándar por todas las páginas de la web. Estos fueron los resultados:
+
+- **Lighthouse**: 100 en escritorio, 100 en móvil. En todas las páginas.
+- **axe DevTools**: 0 errores.
+- **WAVE**: 0 errores.
+- **IBM Equal Access**: un par de avisos menores y poco más.
+
+Si me hubiera quedado ahí, habría cerrado el portátil pensando que mi web era impecable. Y habría estado equivocado.
+
+Porque las herramientas automáticas detectan, en el mejor de los casos, algo más de la mitad de los problemas de accesibilidad de una web. El resto solo aparece cuando usas la página como la usa una persona con discapacidad: navegando solo con teclado, escuchándola con un lector de pantalla, ampliándola al 400%. Lo conté en detalle en [por qué Lighthouse no es una auditoría de accesibilidad](/blog/lighthouse-no-es-auditoria-accesibilidad). Este caso es la demostración práctica de aquel argumento.
+
+Así que dejé las herramientas automáticas a un lado y empecé la parte que de verdad importa.
+
+## Lo que encontré cuando dejé el ratón
+
+Aquí es donde aparecieron los 12 problemas. Te enseño los más representativos, porque seguramente algunos los tengas tú también sin saberlo.
+
+### El menú del móvil era una trampa
+
+Mi menú de navegación en móvil se abría bien. Hasta ahí, perfecto. El problema venía después.
+
+No se cerraba con la tecla Escape, que es lo que cualquiera que use teclado espera. Y peor: cuando lo abrías y seguías tabulando, el foco se escapaba al contenido de detrás del menú, ese que está visualmente tapado. Para alguien que navega con teclado, eso significa perderse: estás "tocando" enlaces que no puedes ver, sin saber dónde estás.
+
+Para una persona ciega era aún más confuso, porque su lector de pantalla leía el contenido de fondo como si el menú no estuviera abierto.
+
+**Cómo quedó:** el menú ahora se cierra con Escape, el foco se queda atrapado dentro del menú mientras está abierto (como debe ser), y el contenido de fondo queda en silencio para el lector de pantalla hasta que cierras.
+
+### El autoevaluador no se podía usar sin ratón
+
+Tengo una herramienta en la web, un autoevaluador de 7 preguntas que te dice si la Ley 11/2023 te aplica. Es una de las funciones que más uso esperaba. Y resulta que era imposible de completar solo con teclado.
+
+Las opciones de respuesta no se dejaban seleccionar con las teclas habituales, y al intentar moverte entre ellas con las flechas, el sistema entendía que ya habías elegido y te saltaba a la siguiente pregunta sin que tú lo hubieras decidido. Un desastre.
+
+Lo más revelador es que el problema no era técnico de accesibilidad en abstracto. Era un problema de lógica: la herramienta confundía "moverse entre opciones" con "confirmar una opción". Algo que con ratón no se notaba, pero que con teclado la hacía inservible.
+
+**Cómo quedó:** reescribí la lógica entera. Ahora avanzas solo cuando pulsas un botón "Siguiente", nunca por error. Funciona igual de bien con ratón, con teclado y con lector de pantalla.
+
+### Los botones no decían dónde estabas
+
+Cuando navegas con teclado, necesitas ver en qué elemento estás en cada momento. Es ese recuadro o resaltado que aparece al ir pulsando Tab. Pues mis botones principales no lo mostraban. Tabulabas hasta ellos y no pasaba nada visible. Para alguien que no usa ratón, eso es como moverse por una habitación a oscuras.
+
+**Cómo quedó:** todos los botones muestran ahora un indicador claro cuando reciben el foco.
+
+### Faltaba el atajo para saltar el menú
+
+En cada página, una persona que navega con teclado tenía que recorrer todo el menú de navegación, enlace por enlace, antes de llegar al contenido. En todas y cada una de las páginas. Es tedioso y se soluciona con un detalle que casi nadie ve: un enlace de "saltar al contenido" que aparece al pulsar Tab al inicio.
+
+**Cómo quedó:** ahora está. Invisible para quien no lo necesita, un ahorro de tiempo enorme para quien sí.
+
+### Las animaciones no se podían desactivar
+
+Mi web tiene animaciones cuando haces scroll. Quedan bien. Pero hay personas a las que el movimiento en pantalla les provoca mareo o náuseas de verdad, y por eso activan en su sistema una opción de "reducir movimiento". Mi web se la saltaba: animaba igualmente.
+
+**Cómo quedó:** ahora la web detecta esa preferencia y, si está activa, el contenido aparece sin movimiento.
+
+## El resto
+
+Hubo más, menos llamativos pero igual de reales: una cifra que el lector de pantalla pronunciaba mal, citas en inglés que sonaban como un español leyendo inglés sin saber, una jerarquía de títulos con un salto, una zona de navegación sin etiquetar.
+
+Y un detalle honesto que merece la pena contar: de los problemas que había anotado al principio, uno resultó no serlo cuando fui a corregirlo. Ya estaba bien. Me había equivocado al detectarlo. Lo cuento porque auditar también es eso: verificar, dudar de tus propias conclusiones y comprobarlo todo dos veces. Mejor descubrir el error en mi web que en la factura de un cliente.
+
+## Por qué te cuento esto
+
+Por dos razones.
+
+La primera, porque mi web es la prueba de lo que defiendo. Un 100 en Lighthouse y cero errores automáticos no significan que una web sea accesible. Significan que las herramientas no han encontrado lo que saben buscar. Lo demás sigue ahí hasta que alguien se sienta, suelta el ratón y la usa como la usaría una persona con discapacidad.
+
+La segunda, porque seguramente algunos de estos problemas los tengas en tu web ahora mismo. ¿Tu menú móvil se cierra con Escape? ¿Tus formularios se pueden completar sin ratón? ¿Se ve dónde estás al navegar con teclado? Si no lo sabes, es buena señal de que conviene mirarlo. Casi nadie lo sabe, porque casi nadie lo prueba.
+
+Lo importante no es que mi web tuviera 12 problemas. Es que los tenía pese a estar hecha por alguien que se dedica a esto, y pese a pasar todas las pruebas automáticas. Si me pasó a mí auditándome a conciencia, imagina una web que nadie ha mirado nunca con estos ojos.
+
+---
+
+Si quieres saber qué problemas de accesibilidad tiene tu web de verdad, más allá de lo que diga una herramienta automática, [hago auditorías de accesibilidad](/auditoria-accesibilidad). Trabajo contra WCAG 2.1 AA y la Ley 11/2023, con cada problema localizado, explicado en lenguaje claro, priorizado y con su solución. Como el que acabas de leer, pero de tu web.
