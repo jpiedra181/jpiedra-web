@@ -131,12 +131,7 @@ export const PREGUNTAS: Pregunta[] = [
         valor: "no_micro",
         label: "Tengo 10 o más empleados, o facturación superior a 2 millones de euros",
       },
-      { valor: "no_seguro", label: "No estoy seguro" },
     ],
-    tooltips: {
-      no_seguro:
-        "Si no estás seguro, asumimos que no eres microempresa para que el dictamen sea conservador.",
-    },
   },
   {
     id: "p5",
