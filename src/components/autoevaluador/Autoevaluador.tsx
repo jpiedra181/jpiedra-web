@@ -16,8 +16,6 @@ import { PantallaConfirmacion } from "./PantallaConfirmacion";
 
 type Fase = "entrada" | "preguntas" | "dictamen" | "captura" | "confirmacion";
 
-const AUTOAVANCE_MS = 300;
-
 export function Autoevaluador() {
   const [fase, setFase] = useState<Fase>("entrada");
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -86,7 +84,6 @@ export function Autoevaluador() {
       }
       return next;
     });
-    window.setTimeout(avanzar, AUTOAVANCE_MS);
   }
 
   function aplicarMulti(valores: string[]) {

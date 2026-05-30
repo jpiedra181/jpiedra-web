@@ -54,6 +54,10 @@ export function PantallaPregunta({
   }
 
   function handleSiguienteClick() {
+    if (pregunta.tipo === "single" && valorSingle === "") {
+      setError("Selecciona una opción para continuar");
+      return;
+    }
     if (pregunta.tipo === "multi" && valoresMulti.length === 0) {
       setError("Selecciona al menos una opción");
       return;
@@ -103,8 +107,12 @@ export function PantallaPregunta({
                   tooltip={tooltip}
                   seleccionado={seleccionado}
                   onSeleccionar={() => {
-                    if (pregunta.tipo === "single") onSingle(opcion.valor);
-                    else handleMultiToggle(opcion.valor);
+                    if (pregunta.tipo === "single") {
+                      setError(null);
+                      onSingle(opcion.valor);
+                    } else {
+                      handleMultiToggle(opcion.valor);
+                    }
                   }}
                 />
               );
@@ -134,16 +142,14 @@ export function PantallaPregunta({
           </button>
         )}
 
-        {pregunta.tipo === "multi" && (
-          <button
-            type="button"
-            onClick={handleSiguienteClick}
-            className="cursor-pointer ml-auto inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
-          >
-            Siguiente
-            <span aria-hidden="true">→</span>
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={handleSiguienteClick}
+          className="cursor-pointer ml-auto inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
+        >
+          Siguiente
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
     </div>
   );
