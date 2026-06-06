@@ -51,11 +51,11 @@
     "steps": [
       {
         "title": "Audito",
-        "description": "Reviso tu web según WCAG 2.1 AA y la Ley 11/2023. Combino herramientas técnicas (axe, Lighthouse, lectores de pantalla) con evaluación manual. No es un PDF de 200 páginas con jerga: te entrego un informe que entiende cualquiera de tu equipo, con cada problema, su impacto y cuánto cuesta arreglarlo."
+        "description": "Reviso tu web según WCAG 2.1 AA y la Ley 11/2023. Combino herramientas técnicas (axe, Lighthouse, lectores de pantalla) con evaluación manual. No es un PDF de 200 páginas con jerga: te entrego un informe que entiende cualquiera de tu equipo —con cada problema, su impacto y por dónde empezar— y el documento de cumplimiento adaptado a tu régimen, listo para publicar."
       },
       {
         "title": "Arreglo (opcional)",
-        "description": "Cojo el informe y lo aplico. Yo, no un equipo subcontratado al otro lado del mundo. Cada corrección se prueba con teclado, con lector de pantalla y con usuarios reales cuando hace falta. Al terminar, te entrego el documento de cumplimiento adaptado a tu régimen, listo para publicar."
+        "description": "Cojo el informe y lo aplico. Yo, no un equipo subcontratado al otro lado del mundo. Cada corrección se prueba con teclado, con lector de pantalla y con usuarios reales cuando hace falta. Y actualizo el documento de cumplimiento para que refleje el nuevo estado."
       },
       {
         "title": "Mantengo (opcional)",
@@ -162,7 +162,7 @@
       "titleConnector": "y",
       "titleHighlight2": "WCAG 2.1 AA",
       "titleSuffix": ".",
-      "subtitle": "En 5-7 días laborables tienes un informe que entiende todo tu equipo, con cada problema, su impacto legal y cuánto cuesta arreglarlo. Sin jerga, sin PDFs de 200 páginas, sin humo.",
+      "subtitle": "En 5-7 días laborables tienes un informe que entiende todo tu equipo, con cada problema, su impacto legal y por dónde empezar. Sin jerga, sin PDFs de 200 páginas, sin humo.",
       "price": "1.200 €",
       "priceAriaLabel": "mil doscientos euros",
       "priceNote": "Para webs con hasta 8 páginas únicas.",
@@ -198,19 +198,19 @@
     "deliverables": {
       "eyebrow": "QUÉ ENTREGA LA AUDITORÍA",
       "title": "Un informe claro. Una hoja de ruta cerrada. Cero jerga.",
-      "subtitle": "Esto es lo que recibes al terminar la auditoría, en 5-7 días laborables, en un único documento que puede leer cualquiera de tu equipo.",
+      "subtitle": "Esto es lo que recibes al terminar la auditoría, en 5-7 días laborables, pensado para que lo entienda cualquiera de tu equipo.",
       "items": [
         {
           "title": "Informe ejecutivo",
-          "description": "Resumen de 2 páginas con el nivel real de cumplimiento de tu web, el riesgo legal específico que asumes hoy y las prioridades para resolverlo. Diseñado para que lo entienda dirección sin necesidad de ser técnico."
+          "description": "Resumen con el nivel real de cumplimiento de tu web, el riesgo legal específico que asumes hoy y las prioridades para resolverlo. Diseñado para que lo entienda dirección sin necesidad de ser técnico."
         },
         {
           "title": "Catálogo de hallazgos por criterio WCAG",
-          "description": "Cada problema documentado con captura, criterio WCAG vulnerado, nivel de impacto y página o componente afectado. Sin tecnicismo gratuito, con suficiente detalle para que tu equipo técnico pueda actuar."
+          "description": "Cada problema con su criterio WCAG vulnerado, el nivel de impacto, la página o componente afectado y, donde ilustra, una captura. Sin tecnicismo gratuito, con suficiente detalle para que tu equipo técnico pueda actuar."
         },
         {
           "title": "Plan de remediación priorizado",
-          "description": "Cada hallazgo con su solución concreta, el esfuerzo estimado en horas y el orden óptimo para resolverlo. Sabes qué arreglar primero, cuánto tiempo lleva y cuánto cuesta."
+          "description": "Cada hallazgo con su solución concreta y el orden óptimo para resolverlo. Sabes qué arreglar primero y en qué orden."
         },
         {
           "title": "Documento de cumplimiento listo para publicar",
@@ -268,13 +268,13 @@
         {
           "duration": "DÍAS 3-5",
           "title": "Evaluación manual y técnica",
-          "description": "El 70% del trabajo real. Navegación por teclado, lectura con NVDA y VoiceOver, validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con captura, criterio WCAG y nivel de impacto.",
+          "description": "El 70% del trabajo real. Navegación por teclado, lectura con NVDA y VoiceOver, validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con su criterio WCAG, su nivel de impacto y, donde ilustra, una captura.",
           "clientInput": "Lo que necesito de ti: nada. Si surgiera algo crítico, te aviso al momento."
         },
         {
           "duration": "DÍA 6",
           "title": "Redacción del informe y plan de remediación",
-          "description": "Estructuro todos los hallazgos en el documento final: resumen ejecutivo, catálogo por criterio, plan priorizado con horas estimadas y documento de cumplimiento adaptado a tu régimen. Reviso dos veces antes de entregar.",
+          "description": "Estructuro todos los hallazgos en el documento final: resumen ejecutivo, catálogo por criterio, plan priorizado (qué resolver primero y en qué orden) y documento de cumplimiento adaptado a tu régimen. Reviso dos veces antes de entregar.",
           "clientInput": "Lo que necesito de ti: nada. Lo que necesito de mí: rigor."
         },
         {
@@ -303,7 +303,7 @@
           "priceNote": "Desde 149 €/mes. Sin contrato anual, te vas cuando quieras."
         }
       ],
-      "closing": "Ninguno de los dos es imprescindible. La auditoría sola, con el informe en la mano, ya cumple con el requisito legal de evaluación. Lo demás es decisión tuya."
+      "closing": "Ninguno de los dos es imprescindible. Ninguno de los dos es imprescindible. Con la auditoría tienes el diagnóstico completo y el documento de cumplimiento listo para publicar; arreglar lo que haga falta lo decides tú."
     },
     "whyMe": {
       "eyebrow": "POR QUÉ YO",
@@ -359,6 +359,14 @@
         {
           "question": "¿Qué pasa si tu auditoría no detecta algún problema y luego me denuncian?",
           "answer": "Trabajo con metodología WCAG 2.1 AA + EN 301549. Es el estándar legal en España. Si hay un hallazgo que se me escapa y aparece después, lo corrijo sin coste adicional dentro de los 60 días posteriores a la entrega del informe."
+        },
+        {
+          "question": "¿Puedo contratar solo el mantenimiento mensual sin hacer la auditoría completa?",
+          "answer": "No. El mantenimiento es un servicio complementario que solo tiene sentido después de la auditoría. Sin el diagnóstico inicial, no hay forma de saber qué revisar cada mes ni cómo priorizar."
+        },
+        {
+          "question": "¿Y la WCAG 2.2? ¿Me afecta lo de 2026?",
+          "answer": "Hoy la ley te pide WCAG 2.1 AA, y es lo que audito por defecto. La 2.2 entra como nuevo estándar europeo hacia octubre de 2026 y añade seis criterios más. Aún no es obligatoria: no la necesitas para cumplir hoy. Pero si quieres adelantarte y no repetir auditoría el año que viene, te la reviso también como extra — lo hablamos y lo incluyo en la propuesta. Lo que cumplas ahora en 2.1 sigue valiendo: la 2.2 se construye encima, no lo sustituye."
         }
       ]
     },

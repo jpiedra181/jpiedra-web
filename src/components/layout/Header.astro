@@ -71,7 +71,7 @@ const navItems = [
 <!-- Mobile Menu Button -->
 <button
     id="mobile-menu-btn"
-    class="lg:hidden fixed top-0 right-0 z-[60] w-10 h-10 flex items-center justify-center mr-6 mt-5"
+    class="lg:hidden fixed top-0 right-0 z-[60] w-10 h-10 flex items-center justify-center mr-6 mt-5 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
     aria-label="Menu"
     aria-expanded="false"
 >
@@ -97,7 +97,7 @@ const navItems = [
         navItems.map((item) => (
             <a
                 href={item.href}
-                class="mobile-nav-link text-2xl font-heading text-text-primary hover:text-accent transition-colors duration-200"
+                class="mobile-nav-link text-2xl font-heading text-text-primary hover:text-accent transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
                 {item.label}
             </a>
@@ -105,7 +105,7 @@ const navItems = [
     }
     <a
         href={auditHref}
-        class="mobile-nav-link inline-flex items-center font-body font-medium text-base tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3 mt-2"
+        class="mobile-nav-link inline-flex items-center font-body font-medium text-base tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3 mt-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
     >
         {t.nav.audit}
     </a>
