@@ -1,0 +1,93 @@
+---
+title: "Accesibilidad web para tu tienda online: qué te obliga la ley desde el 28 de junio de 2025"
+description: "Desde el 28 de junio de 2025 tu tienda online debe ser accesible. Qué te obliga, qué falla en el checkout y por qué el \"plazo hasta 2030\" no es para ti."
+pubDate: 2026-06-10
+updatedDate: 2026-06-10
+category: "normativa"
+tags: ["accesibilidad-ecommerce", "tienda-online", "european-accessibility-act", "ley-11-2023", "checkout-accesible", "wcag"]
+heroImage: "/blog/accesibilidad-web-ecommerce/hero.webp"
+heroImageAlt: "Carrito de la compra metálico en miniatura, vacío, sobre un fondo negro con iluminación dramática."
+draft: false
+---
+
+Si vendes online en España, desde el 28 de junio de 2025 tu tienda tiene que ser accesible. No es una recomendación ni una buena práctica de marketing: es una obligación legal. Y casi todo lo que has leído sobre el tema mezcla dos cosas que conviene separar: lo que dice la ley y lo que te quieren vender encima.
+
+El comercio electrónico está nombrado, con todas las letras, entre los servicios obligados. Así que la pregunta no es *si* te aplica. Es *qué tienes que hacer* y *qué te están contando mal*.
+
+## ¿A tu tienda online le aplica? Casi seguro que sí
+
+El comercio electrónico aparece explícitamente en la lista de servicios cubiertos por la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas), la norma que traspone en España la directiva europea de accesibilidad. No hay letra pequeña que te salve por vender zapatillas en vez de muebles: si tienes una tienda online dirigida a consumidores en la UE, estás dentro.
+
+La única puerta de salida real es ser **microempresa que solo presta servicios**: menos de 10 personas empleadas **y** menos de 2 millones de euros de volumen de negocio anual. Las dos condiciones a la vez. Si superas cualquiera de las dos, la excepción no es para ti. Y ojo, porque mucha tienda pequeña de un solo dueño factura más de 2 millones sin tener a nadie en plantilla: en ese caso, dentro.
+
+Si no tienes claro de qué lado caes, lo despejas en dos minutos con el [autoevaluador de la ley](/te-aplica-ley-11-2023): siete preguntas y te dice tu régimen exacto.
+
+## El espejismo de 2030 (esto lo cuentan mal en casi todas partes)
+
+Aquí está el primer punto donde la mayoría de guías para ecommerce te confunde. Habrás leído que las webs ya existentes "tienen hasta el 28 de junio de 2030 para adaptarse". Suena tranquilizador. Y aplicado a tu tienda online, es **falso**.
+
+Esa fecha sale de la disposición transitoria de la ley, que protege dos cosas muy concretas: los **productos físicos** (cajeros, terminales de autoservicio, máquinas) que ya estabas usando antes de 2025, y los **contratos de servicios** firmados antes de esa fecha. Hardware y contratos. Tu web no es ni lo uno ni lo otro: una tienda online **es el servicio en sí**, y los servicios no entran en esa prórroga.
+
+Lo desarrollo con el texto del BOE delante en [por qué la prórroga de 2030 no existe](/blog/mito-prorroga-2030-ley-11-2023), pero el resumen para un ecommerce es directo: tu tienda tiene que cumplir desde el 28 de junio de 2025, sea nueva o lleve diez años online. Quien te diga que vas con cinco años de margen te está dando una media verdad que sale cara.
+
+## Qué tiene que cumplir tu tienda, en concreto
+
+La vara de medir es la **WCAG 2.1, nivel AA**, a través de la norma europea UNE-EN 301 549 que la ley toma como referencia técnica. Un matiz que conviene fijar, porque también lo verás mal contado: el listón legal **hoy es la 2.1, no la 2.2**. Hay quien ya te exige la 2.2 como si fuera obligatoria; no lo es todavía, aunque [adelantarse tenga sentido por otros motivos](/blog/wcag-2-2-merece-la-pena-adelantarse).
+
+En cristiano, y bajando al terreno de una tienda, esto es lo que más se incumple:
+
+- **El checkout.** El proceso de pago tiene que poder completarse entero con el teclado y con un lector de pantalla. Cada campo, etiquetado. Cada error, anunciado y explicado. Es la parte más crítica y, casualmente, la que más falla.
+
+- **Los formularios.** Registro, login, contacto, dirección de envío. Si la única pista de qué va en cada campo es el texto gris del `placeholder`, lo estás haciendo mal: en cuanto el usuario escribe, ese texto desaparece y ya no sabe qué pedía cada casilla.
+
+- **Los filtros y el buscador.** Filtrar por talla, color o precio tiene que funcionar sin ratón. Muchos configuradores y filtros de tienda son inservibles con teclado.
+
+- **El "botón que no es botón".** El clásico del sector. Te pongo el caso que veo constantemente: el botón "Añadir al carrito" se ve perfecto —fondo de color, texto blanco, contrastado— pero por dentro es un `<div>` con un `onclick`, no un botón de verdad. Para tu ratón funciona. Para un lector de pantalla, ese elemento no existe como botón, y quien navega con teclado no llega a él. Es decir: el usuario no puede comprar.
+
+- **Las imágenes de producto.** Cada foto necesita un texto alternativo que describa lo que muestra. Una galería preciosa sin `alt` es, para quien usa lector de pantalla, una sucesión de "imagen, imagen, imagen".
+
+Si quieres el panorama completo de fallos típicos, lo tienes en [los errores de accesibilidad más comunes](/blog/errores-accesibilidad-web-mas-comunes). Pero si solo vas a mirar una cosa, mira el checkout.
+
+## Lo que NO te salva (aunque te lo vendan)
+
+Dos atajos muy populares entre tiendas con prisa. Ninguno te pone a cumplir.
+
+**El primero, el overlay**: ese plugin de "accesibilidad en un clic" con el botoncito flotante. No te hace accesible y no te protege legalmente; te lo cuento entero en [por qué los overlays no te protegen de nada](/blog/overlays-accesibilidad-no-protegen). Si lo tienes instalado pensando que con eso cumples, malas noticias.
+
+**El segundo, la plantilla "accesible" de tu CMS.** Que Shopify, WooCommerce o PrestaShop digan que su plataforma "soporta accesibilidad" no significa que *tu* tienda sea accesible. La plataforma te da los cimientos; lo que rompe la accesibilidad casi siempre es lo de encima: el tema que elegiste, las apps y plugins que instalaste, las personalizaciones que pediste, las fotos que subiste sin `alt`. Una plataforma accesible mal usada da una tienda inaccesible. Lo veo a diario.
+
+La accesibilidad no es una casilla que activas. Es el resultado de cómo está construida tu tienda de arriba abajo.
+
+## Qué te juegas de verdad
+
+Vamos con las cifras, porque también circulan exageradas. Habrás visto titulares de "multas de hasta un millón de euros". Ese millón es el tope teórico del sistema sancionador completo, reservado a las infracciones muy graves y reincidentes. No es lo que le cae a una tienda media por tener el checkout inaccesible.
+
+Para un ecommerce, el incumplimiento de los requisitos de accesibilidad es, de partida, una infracción **grave**, con sanciones de hasta **90.000 euros**. Lo desgloso tramo a tramo, con los artículos del BOE, en [sanciones de la Ley 11/2023](/blog/sanciones-ley-11-2023). Suficiente para que duela, sin necesidad de inflar la cifra.
+
+Y hay un riesgo que no aparece en ningún régimen sancionador pero que llega antes que la multa: **el cliente que te exige cumplir**. Cada vez más empresas grandes y administraciones piden a sus proveedores prueba de accesibilidad antes de firmar. Si vendes B2B o aspiras a contratos con cierto tamaño, el día que te pidan esa prueba y no la tengas, el problema deja de ser hipotético. Es un pedido que se cae.
+
+## Lo que has leído frente a lo que dice la ley
+
+Para que no te la cuelen, este es el resumen de las medias verdades que más circulan sobre accesibilidad y ecommerce:
+
+| Lo que te cuentan | Lo que dice la ley |
+|---|---|
+| "Tienes hasta 2030 para adaptar la web" | Tu tienda cumple **desde el 28 de junio de 2025**; la prórroga es para hardware y contratos, no para webs |
+| "Hay que cumplir la WCAG 2.2" | El listón legal hoy es la **WCAG 2.1 AA**; la 2.2 aún no obliga |
+| "Con el plugin de accesibilidad ya cumples" | El overlay no te hace accesible ni te cubre legalmente |
+| "Mi plataforma ya es accesible" | La plataforma son los cimientos; tu tema, apps y contenido pueden romperla |
+| "Las multas llegan al millón de euros" | Para un ecommerce, la infracción grave llega hasta **90.000 €** |
+
+Ninguna de esas frases es del todo inventada. El problema es que todas se quedan a medias, y a medias tranquilizan en la dirección equivocada.
+
+## Por dónde empezar
+
+No hace falta el drama de "rehacer la tienda entera". Hace falta orden:
+
+1. **Saber dónde estás.** Una auditoría real, con pruebas manuales de teclado y lector de pantalla, no solo el informe automático que detecta una parte. Sin esto, arreglas a ciegas.
+2. **Arreglar primero el checkout y los formularios.** Es donde se cae el dinero y donde más usuarios se quedan fuera. Prioriza el embudo de compra antes que la página "Sobre nosotros".
+3. **Que no se vuelva a romper.** Cada cambio de tema, cada app nueva, cada subida de productos puede reintroducir barreras. La accesibilidad se mantiene, no se termina.
+
+Empezar por el checkout no es solo cumplimiento: es la parte de la tienda que, si funciona para todos, convierte para todos.
+
+Si lo que necesitas es saber exactamente en qué estado está tu tienda hoy y qué corregir, eso es justo lo que hago: una [auditoría de accesibilidad](/auditoria-accesibilidad) con informe técnico y el documento de cumplimiento adaptado a tu caso. Empezando por donde más te importa, que es por donde cobras.

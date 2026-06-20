@@ -1,0 +1,90 @@
+---
+title: "Overlays de accesibilidad: por qué el plugin de \"accesibilidad en un clic\" no te protege de nada"
+description: "Los overlays de accesibilidad prometen cumplir la ley de un clic. Ni te hacen accesible ni te protegen legalmente. Te cuento por qué y qué hacer en su lugar."
+pubDate: 2026-06-20
+updatedDate: 2026-06-20
+category: "opinion"
+tags: ["overlays-accesibilidad", "plugins-accesibilidad", "accessibe", "userway", "ley-11-2023", "widget-accesibilidad"]
+heroImage: "/blog/overlays-accesibilidad-no-protegen/hero.webp"
+heroImageAlt: "Muro de hormigón oscuro y agrietado con la capa superficial desconchada, dejando ver el daño que hay debajo."
+draft: false
+---
+
+Has pagado 49 € al mes por un botón flotante que cambia el contraste y promete dejarte la web "100% conforme con la ley". Dos malas noticias y una buena. La primera: no te hace accesible. La segunda: no te protege de nada. La buena: estás a tiempo de dejar de pagarlo.
+
+Si has llegado aquí buscando si el plugin de accesibilidad que te vendieron sirve para algo, te ahorro el suspense. Sirve para que te quedes tranquilo. Que es justo lo contrario de lo que necesitas.
+
+## Qué es un overlay y qué te promete
+
+Un overlay de accesibilidad —también lo verás como widget, capa, plugin o "accesibilidad en un clic"— es un trozo de JavaScript que se instala en tu web en cinco minutos. Lo reconoces por el botoncito con el muñeco que aparece flotando en una esquina. Al pulsarlo, se abre un panel para cambiar el contraste, agrandar la letra, subrayar enlaces o activar una "lectura en voz alta".
+
+Los más conocidos son AccessiBe y UserWay, pero hay docenas. Todos venden lo mismo: cumplimiento legal automático, sin tocar tu web, sin desarrollador, por una cuota mensual. El argumento comercial es irresistible para cualquier PYME con prisa y poco presupuesto. Cumplir la ley sin enterarte, mientras desayunas.
+
+Suena demasiado bien. Y como casi todo lo que suena demasiado bien, no es verdad.
+
+## Por qué técnicamente no funciona
+
+Un overlay actúa por encima de tu web, intentando adivinar y parchear los problemas sobre la marcha desde el navegador del usuario. El problema es que la mayoría de los fallos de accesibilidad están en el origen —en el HTML mal construido— y desde fuera no se arreglan. Se tapan, como mucho.
+
+Y ni siquiera se tapan todos. Las herramientas automáticas detectan en torno al 30% de los problemas reales; el resto solo aparece probando con teclado y lector de pantalla, a mano. Es el mismo motivo por el que [un 100 en Lighthouse no significa que tu web sea accesible](/blog/lighthouse-no-es-auditoria-accesibilidad): la máquina ve una parte, no el todo.
+
+Lo grave viene después. Un overlay que intenta reescribir tu web al vuelo a menudo **choca con el lector de pantalla** que la persona ya está usando. NVDA o JAWS tienen su propia forma de leer la página; el widget se mete en medio, duplica anuncios, mueve el foco a sitios que no tocan y deja al usuario más perdido que antes. Le pones una segunda voz encima a alguien que ya tenía la suya. No es una mejora: es ruido.
+
+Esto enlaza con los [errores de accesibilidad más comunes](/blog/errores-accesibilidad-web-mas-comunes), que ningún botón flotante corrige porque están cosidos al código.
+
+## El dato que el comercial no te enseña
+
+Aquí está la parte que las páginas de venta de estos productos no ponen en la portada.
+
+WebAIM preguntó directamente a los usuarios con discapacidad qué les parecían los overlays. El **72% los calificó de poco o nada eficaces**. Solo un 2,4% los consideró muy eficaces ([encuesta de WebAIM, 2021](https://webaim.org/projects/practitionersurvey3/)). Es decir: la herramienta que has comprado *para* las personas con discapacidad es rechazada *por* las personas con discapacidad, por una mayoría aplastante.
+
+No es una rabieta de cuatro técnicos. En mayo de 2023, la IAAP (la asociación internacional de profesionales de accesibilidad) y el European Disability Forum publicaron [un comunicado conjunto](https://www.edf-feph.org/publications/joint-statement-on-accessibility-overlays/) advirtiendo de que estos widgets no garantizan el cumplimiento de la legislación europea. La propia Comisión Europea ha señalado que la promesa de "conformidad total automática" no es realista.
+
+Cuando el colectivo al que dices servir, sus profesionales y el regulador europeo coinciden en que la herramienta no vale, quizá no sean todos los que se equivocan.
+
+## Lo que de verdad te juegas: el overlay no te exime de la ley
+
+Llegamos a la parte incómoda, la que ninguno de los artículos que compiten por esta búsqueda termina de contar.
+
+Instalar un overlay **no es una medida de cumplimiento legal**. La [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas) y la norma técnica que la respalda (la UNE-EN 301 549, que remite a WCAG 2.1 AA) te exigen que el servicio sea accesible. No te exigen que pongas un botón que diga que lo es. La responsabilidad de que tu web cumpla sigue siendo tuya, hayas instalado el widget o no.
+
+Dicho de otro modo: si un cliente con discapacidad no puede terminar una compra en tu tienda, da exactamente igual que tengas el muñequito flotando en la esquina. El servicio no es accesible, y eso es lo que mira la norma. El incumplimiento de las exigencias de accesibilidad es una infracción **grave**, y te cuento [lo que eso significa en euros en este otro post](/blog/sanciones-ley-11-2023). Spoiler: bastantes más de los 49 € al mes.
+
+Hay un agravante que casi nadie menciona. En Estados Unidos, donde estos productos nacieron, no han frenado las demandas: hay empresas que instalaron un overlay *y aun así* fueron demandadas por inaccesibilidad. El widget no fue el escudo que prometía; en algún caso fue la prueba de que sabían del problema y eligieron el atajo. Aquí todavía no tenemos esa jurisprudencia, pero el razonamiento legal es el mismo a los dos lados del Atlántico.
+
+Y sí, ya sé que el comercial te enseñó un "certificado de conformidad" generado por el propio plugin. Ese certificado lo firma quien te cobra la cuota. No es quien decide si cumples la ley.
+
+## Siendo justos: ¿sirven para algo?
+
+Por no ser injusto, que también lo hay. Algunas funciones sueltas de estos paneles —agrandar la letra, cambiar el contraste— pueden venirle bien a algún usuario puntual. El problema no es que esas opciones existan. El problema es **venderlas como cumplimiento legal completo** cuando son, en el mejor de los casos, un complemento cosmético.
+
+La distinción importa: un overlay como *ayuda extra* sobre una web ya bien construida no hace daño. Un overlay como *única medida* sobre una web mal construida es humo, y caro. La inmensa mayoría de las PYMEs que los instalan están en el segundo caso, no en el primero.
+
+Además, casi todo lo que ofrecen esos paneles (zoom, contraste alto, lectura) ya lo trae el navegador o el sistema operativo del usuario, mejor hecho y sin un widget de por medio. Estás pagando por reempaquetar funciones que tus clientes ya tenían gratis.
+
+## Overlay frente a hacerlo de verdad, en una tabla
+
+Para que la decisión quede en una sola mirada, esto es lo que compras con cada opción:
+
+| | Overlay / widget | Auditoría + corrección |
+|---|---|---|
+| **Tiempo de instalación** | Cinco minutos | Lo que dure arreglar la web |
+| **Qué arregla de verdad** | Tapa una parte de lo automático (~30%) | El problema, en el origen |
+| **Protección legal** | Ninguna: la responsabilidad sigue siendo tuya | El servicio cumple, que es lo que mira la norma |
+| **Qué opinan los usuarios** | 72% lo califica de poco o nada útil | Funciona con su lector de pantalla |
+| **Coste** | Cuota mensual, para siempre | Pago de una vez, queda hecho |
+| **Si dejas de pagar** | Vuelves a la casilla de salida | Sigue accesible |
+
+Visto así, lo barato sale caro y lo caro sale barato. Como casi siempre.
+
+## Qué hacer en su lugar
+
+La accesibilidad [no es un producto que se instala, es un proceso](/blog/ley-11-2023-empresas-espanolas). No hay atajo de cinco minutos, pero tampoco hace falta el drama que algunos venden. El camino real es corto de explicar:
+
+1. **Saber dónde estás.** Una auditoría de verdad, con pruebas manuales de teclado y lector de pantalla, no solo el informe automático de turno. Sin esto, estás arreglando a ciegas.
+2. **Corregir en el origen.** Los problemas se arreglan en el HTML y en el diseño, donde están. Una vez corregidos, lo están para todo el mundo y para siempre, sin cuota mensual.
+3. **No volver a romperlo.** Que el equipo sepa lo básico y que la accesibilidad entre en el proceso de cada cambio. Si no, en seis meses estás igual.
+
+Cuesta más que pulsar "instalar". También funciona, que es la diferencia.
+
+Si has instalado un overlay y ahora no sabes qué hay realmente debajo, el primer paso es averiguarlo. Para eso [hago auditorías de accesibilidad](/auditoria-accesibilidad): te digo, con pruebas, dónde está tu web hoy y qué cuesta dejarla bien. Sin botón flotante.

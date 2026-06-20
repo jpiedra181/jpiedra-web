@@ -5,6 +5,7 @@ dist/
 
 # dependencies
 node_modules/
+node_modules_roto/
 
 # logs
 npm-debug.log*
@@ -22,9 +23,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+.tmp-bote-demo/
 
 # BOE source dumps and other research scratchpad files
-.claude/sources/
+.claude/
+docs/
 
 # Playwright MCP scratch (snapshots, console logs, screenshots temporales)
 .playwright-mcp/

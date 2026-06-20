@@ -1,0 +1,179 @@
+---
+title: "Cómo hacer un formulario accesible: guía práctica sin morir en ARIA"
+description: "Cómo hacer un formulario accesible en HTML: labels, errores, foco y teclado, con código real y sin abusar de ARIA. Y qué te exige la ley en España."
+pubDate: 2026-06-16
+updatedDate: 2026-06-16
+category: "tutorial"
+tags: ["formulario-accesible", "accesibilidad", "wcag", "html", "aria", "ley-11-2023"]
+heroImage: "/blog/formulario-accesible/hero.webp"
+heroImageAlt: "Una mano rellena con un bolígrafo un documento impreso con filas y casillas, sobre una mesa de madera."
+draft: false
+---
+
+En el 70% de las auditorías que hago, el problema de accesibilidad más grave está en el formulario. Justo en la página que capta los leads. Es el sitio donde un fallo no solo deja a alguien fuera: te cuesta dinero directamente, porque el usuario que no puede rellenar tu formulario de contacto es un cliente que no te escribe.
+
+La buena noticia es que un formulario accesible es de lo más agradecido de arreglar. No necesitas librerías raras ni un máster en ARIA. Necesitas HTML bien escrito y un puñado de reglas. Vamos con ellas, en orden y con código.
+
+## La regla de oro: HTML nativo primero
+
+Antes de tocar una sola línea de ARIA, grábate esto: **la mejor regla de ARIA es no usar ARIA**. No es una boutade; es literalmente lo que recomienda la especificación. Un elemento HTML nativo ya trae de fábrica su rol, su comportamiento de teclado y su compatibilidad con lectores de pantalla. Cuando lo reescribes con `<div>` y atributos ARIA, te toca reconstruir a mano todo eso, y casi siempre se reconstruye peor.
+
+La mayoría de los tutoriales de formularios sueltan `aria-required`, `aria-label` y `role` por todas partes. La mayoría de esos atributos sobran. Si usas `<label>`, `<input>`, `<button>` y `required` de verdad, el 90% del trabajo ya está hecho sin un solo ARIA. Lo veremos: ARIA aparece solo al final, y solo donde el HTML no llega.
+
+## El `label`: la base de todo
+
+Cada campo necesita una etiqueta asociada en el código, no solo un texto que esté al lado. La asociación se hace con `for` en el `<label>` apuntando al `id` del campo:
+
+```html
+<label for="email">Correo electrónico</label>
+<input type="email" id="email" name="email" autocomplete="email">
+```
+
+Con eso, quien usa un lector de pantalla escucha "Correo electrónico, campo de edición" al llegar al input. Y, de regalo, al pulsar sobre la etiqueta el foco salta al campo: un área de clic más grande que agradece todo el mundo, no solo quien tiene problemas de motricidad.
+
+### No, el `placeholder` no es un `label`
+
+Este es el error que más repito en las auditorías. El formulario "limpio y minimalista" que solo tiene texto gris dentro del campo:
+
+```html
+<!-- MAL: la única pista de qué va aquí es el placeholder -->
+<input type="text" placeholder="Nombre">
+```
+
+Pasan dos cosas, las dos malas. La primera: en cuanto el usuario empieza a escribir, el placeholder desaparece y ya no recuerda qué pedía la casilla. La segunda: el gris claro de los placeholders casi nunca llega al contraste mínimo, así que para mucha gente es ilegible de entrada. Un placeholder está bien como **ejemplo** de formato, nunca como sustituto de la etiqueta.
+
+```html
+<!-- BIEN: label visible + placeholder solo como ejemplo -->
+<label for="tel">Teléfono</label>
+<input type="tel" id="tel" name="tel" autocomplete="tel"
+       placeholder="Ej.: 600 123 456">
+```
+
+## Tipos correctos y campos obligatorios
+
+El atributo `type` no es decorativo. Marca el teclado que sale en el móvil y la validación que el navegador hace gratis. `type="email"` saca el teclado con arroba; `type="tel"`, el numérico. Acompáñalo de `autocomplete` para que el navegador rellene solo, y de `inputmode` cuando quieras afinar el teclado:
+
+```html
+<label for="cp">Código postal</label>
+<input type="text" id="cp" name="postal-code"
+       autocomplete="postal-code" inputmode="numeric">
+```
+
+Para los campos obligatorios, usa el `required` nativo: el navegador valida y los lectores de pantalla lo anuncian sin que añadas nada. Y, importante, **indica la obligatoriedad con texto, no solo con un asterisco rojo**. El asterisco a secas falla por dos motivos: el color no lo percibe todo el mundo, y el símbolo `*` no siempre se anuncia. Si lo usas, explica qué significa:
+
+```html
+<label for="nombre">Nombre (obligatorio)</label>
+<input type="text" id="nombre" name="nombre" autocomplete="name" required>
+```
+
+Fíjate en que aquí no hace falta `aria-required="true"`. El `required` nativo ya hace ese trabajo. Añadir el ARIA encima es redundante: el caso de manual de "ARIA que sobra".
+
+## Agrupar campos: `fieldset` y `legend`
+
+Cuando varios campos forman una pregunta —un grupo de opciones, una dirección, un sí/no— necesitan un encabezado común que los relacione. Para eso están `<fieldset>` y `<legend>`:
+
+```html
+<fieldset>
+  <legend>¿Cómo prefieres que te contactemos?</legend>
+
+  <input type="radio" id="c-email" name="contacto" value="email">
+  <label for="c-email">Por correo</label>
+
+  <input type="radio" id="c-tel" name="contacto" value="telefono">
+  <label for="c-tel">Por teléfono</label>
+</fieldset>
+```
+
+Sin el `fieldset`, el lector de pantalla anuncia "Por correo" y "Por teléfono" sueltos, sin la pregunta que les da sentido. Con él, escucha primero "¿Cómo prefieres que te contactemos?" y luego cada opción. Es la diferencia entre una pregunta y dos palabras huérfanas.
+
+## Errores que ayudan, no que castigan
+
+Aquí es donde la mayoría de formularios suspende, y donde —por fin— ARIA gana su sitio. Un mensaje de error accesible cumple tres condiciones: **se entiende, no depende solo del color, y el lector de pantalla se entera.**
+
+Empecemos por el mensaje. "Campo inválido" no ayuda a nadie. Di qué pasa y cómo se arregla:
+
+```html
+<label for="email">Correo electrónico (obligatorio)</label>
+<input type="email" id="email" name="email" autocomplete="email" required
+       aria-describedby="email-error" aria-invalid="true">
+<p id="email-error" class="campo-error">
+  Falta la arroba. Un correo válido es así: nombre@dominio.com
+</p>
+```
+
+Dos atributos hacen el trabajo:
+
+- **`aria-describedby="email-error"`** une el campo con el texto del error, para que el lector de pantalla lea el mensaje justo después del nombre del campo.
+- **`aria-invalid="true"`** marca el campo como erróneo. Ojo: ponlo solo *cuando hay error*, no de entrada. Si lo dejas fijo en `true`, mientes.
+
+Sobre el color: marca el error con un texto y un icono o un borde, no solo pintando de rojo. Quien no distingue el rojo del verde necesita otra señal además del color. Es el criterio "uso del color" de la WCAG, y se incumple constantemente.
+
+Y para que el usuario que navega a ciegas sepa que algo ha fallado al enviar, muestra un **resumen de errores** al principio del formulario y manda el foco ahí:
+
+```html
+<!-- Aparece tras un envío fallido; recibe el foco al instante -->
+<div role="alert" tabindex="-1" id="resumen-errores">
+  <h2>No hemos podido enviar el formulario</h2>
+  <ul>
+    <li><a href="#email">Revisa el correo electrónico</a></li>
+  </ul>
+</div>
+```
+
+El `role="alert"` hace que el lector de pantalla lo anuncie en cuanto aparece. El `tabindex="-1"` permite moverle el foco con JavaScript (`.focus()`), de modo que el usuario aterriza directamente en el resumen en lugar de quedarse sin saber qué ha pasado. Cada error enlaza a su campo. Esto es ARIA bien usado: resuelve algo que el HTML solo no resuelve.
+
+## Navegación por teclado y foco visible
+
+Todo el formulario tiene que poder completarse sin ratón: llegar a cada campo con el tabulador, en un orden lógico, y enviarlo con Enter. Si has usado HTML nativo, esto ya funciona solo. Donde casi todos meten la pata es en el paso siguiente: **el foco visible.**
+
+Hay una línea de CSS que sigue apareciendo en medio mundo y que es un fallo de accesibilidad por sí sola:
+
+```css
+/* NUNCA hagas esto: deja sin rastro a quien navega con teclado */
+:focus { outline: none; }
+```
+
+Si quitas el contorno del foco, la persona que tabula no sabe en qué campo está. Si el contorno por defecto te parece feo, cámbialo, no lo borres:
+
+```css
+:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
+}
+```
+
+## Cómo comprobarlo en 10 minutos
+
+No necesitas una auditoría completa para detectar el 80% de los fallos de un formulario. Necesitas dos pruebas que ninguna herramienta automática sustituye:
+
+1. **Aparca el ratón.** Recorre el formulario entero con el tabulador. ¿Llegas a todos los campos y al botón? ¿En un orden que tiene sentido? ¿Se ve siempre dónde está el foco? ¿Puedes enviarlo con Enter?
+2. **Enciende un lector de pantalla.** NVDA en Windows es gratis. Ve campo por campo: ¿anuncia el nombre de cada uno? ¿Avisa de los obligatorios? ¿Lee los errores?
+
+Lo que un Lighthouse en verde no te dice es precisamente esto, porque son comprobaciones manuales. Lo expliqué a fondo en [por qué Lighthouse no es una auditoría de accesibilidad](/blog/lighthouse-no-es-auditoria-accesibilidad): el informe automático ve si falta el `label`, pero no si el orden de tabulación es absurdo ni si el mensaje de error se entiende.
+
+Y no, un overlay de accesibilidad tampoco arregla esto: [el plugin del botón flotante](/blog/overlays-accesibilidad-no-protegen) no reescribe tu HTML mal hecho. Los problemas del formulario se arreglan en el formulario.
+
+## Checklist rápida
+
+Para revisar cualquier formulario de un vistazo:
+
+- ✅ Cada campo tiene un `<label>` visible asociado con `for`/`id`.
+- ✅ El `placeholder` se usa solo como ejemplo, nunca como única etiqueta.
+- ✅ Cada `<input>` tiene el `type` correcto y `autocomplete` cuando aplica.
+- ✅ Los campos obligatorios usan `required` y se indican con texto, no solo con un asterisco.
+- ✅ Los grupos de opciones van dentro de `<fieldset>` con su `<legend>`.
+- ✅ Los mensajes de error explican qué pasa y cómo arreglarlo.
+- ✅ El error no se señala solo con color: hay texto y, mejor, un icono o borde.
+- ✅ El campo con error lleva `aria-invalid="true"` y `aria-describedby` apuntando al mensaje.
+- ✅ Tras un envío fallido, un resumen con `role="alert"` recibe el foco.
+- ✅ Todo el formulario se completa con teclado y el foco se ve siempre (`:focus-visible`, nunca `outline: none`).
+
+Si los diez salen verdes a mano —no en un informe automático—, tu formulario está en muy buena forma.
+
+## Qué dice la ley (porque aquí también cuenta)
+
+Todo lo anterior no es solo buena práctica. En España, desde el 28 de junio de 2025, la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas) obliga a muchas empresas a cumplir los criterios técnicos de accesibilidad: la **WCAG 2.1, nivel AA**, a través de la norma UNE-EN 301 549. Un apunte que conviene fijar, porque se cuenta mal a menudo: el listón legal hoy es la 2.1, no la 2.2.
+
+Los fallos de formulario que hemos visto incumplen criterios concretos de esa norma: campos sin etiqueta, errores que no se identifican, dependencia del color, foco invisible. Es decir, no son cuestión de estilo. Un formulario de contacto inaccesible es, a la vez, un fallo de captación y un incumplimiento legal. De hecho los campos sin etiqueta están entre [los errores de accesibilidad más comunes](/blog/errores-accesibilidad-web-mas-comunes), y si tu formulario es el de un checkout, te juegas [bastante más que un lead](/blog/accesibilidad-web-ecommerce).
+
+Si quieres saber en qué estado están de verdad los formularios de tu web —y el resto—, eso es justo lo que hago: una [auditoría de accesibilidad](/auditoria-accesibilidad) con pruebas manuales de teclado y lector de pantalla, no solo el informe automático de turno. Empezando por donde más te importa, que suele ser por donde te escriben los clientes.
