@@ -28,6 +28,7 @@ pnpm-debug.log*
 # BOE source dumps and other research scratchpad files
 .claude/
 docs/
+auditoria-enlaces/
 
 # Playwright MCP scratch (snapshots, console logs, screenshots temporales)
 .playwright-mcp/

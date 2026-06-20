@@ -38,4 +38,137 @@ const schema = {
         set:html={JSON.stringify(schema)}
     />
     <Autoevaluador client:load />
+
+    {/* Salidas contextuales: el autoevaluador recibe mucho enlazado interno
+        pero no repartía nada (callejón sin salida). Estos enlaces estáticos
+        envían su autoridad hacia la landing y el cluster del blog. */}
+    <section
+        id="autoeval-recursos"
+        class="relative py-20 md:py-28 border-t border-border"
+        aria-labelledby="autoeval-recursos-title"
+    >
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div class="max-w-3xl mb-10 md:mb-12">
+                <div class="section-label flex items-center gap-4 mb-6">
+                    <span class="h-px w-8 bg-accent"></span>
+                    <span
+                        class="text-xs font-body font-medium tracking-[0.2em] text-accent uppercase"
+                        >Y ahora qué</span
+                    >
+                </div>
+                <h2
+                    id="autoeval-recursos-title"
+                    class="font-heading text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.15] text-text-primary mb-6"
+                    style="text-wrap: balance;"
+                >
+                    Sabes si te aplica. El siguiente paso depende de ti
+                </h2>
+                <p
+                    class="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl"
+                >
+                    Si la ley te obliga, lo que toca es saber qué arreglar y qué
+                    riesgo corres. Si quieres delegarlo, también.
+                </p>
+            </div>
+
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+                <li class="bg-bg-primary">
+                    <a
+                        href="/auditoria-accesibilidad/"
+                        class="group block h-full p-8 md:p-10 transition-colors hover:bg-bg-surface focus-visible:bg-bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+                    >
+                        <h3
+                            class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3 group-hover:text-accent transition-colors"
+                        >
+                            Que te audite la web
+                            <span
+                                class="text-accent inline-block transition-transform group-hover:translate-x-1"
+                                aria-hidden="true"
+                            >
+                                {" "}→
+                            </span>
+                        </h3>
+                        <p
+                            class="text-sm md:text-base text-text-secondary leading-relaxed"
+                        >
+                            Informe de conformidad según WCAG 2.1 AA y la Ley
+                            11/2023, con prioridades y plazos. Desde 1.200 €.
+                        </p>
+                    </a>
+                </li>
+                <li class="bg-bg-primary">
+                    <a
+                        href="/blog/sanciones-ley-11-2023/"
+                        class="group block h-full p-8 md:p-10 transition-colors hover:bg-bg-surface focus-visible:bg-bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+                    >
+                        <h3
+                            class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3 group-hover:text-accent transition-colors"
+                        >
+                            Cuánto cuesta incumplir
+                            <span
+                                class="text-accent inline-block transition-transform group-hover:translate-x-1"
+                                aria-hidden="true"
+                            >
+                                {" "}→
+                            </span>
+                        </h3>
+                        <p
+                            class="text-sm md:text-base text-text-secondary leading-relaxed"
+                        >
+                            Los tramos de sanción por gravedad y quién las impone,
+                            verificado contra el texto del BOE.
+                        </p>
+                    </a>
+                </li>
+                <li class="bg-bg-primary">
+                    <a
+                        href="/blog/ley-11-2023-empresas-espanolas/"
+                        class="group block h-full p-8 md:p-10 transition-colors hover:bg-bg-surface focus-visible:bg-bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+                    >
+                        <h3
+                            class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3 group-hover:text-accent transition-colors"
+                        >
+                            Cómo te afecta exactamente
+                            <span
+                                class="text-accent inline-block transition-transform group-hover:translate-x-1"
+                                aria-hidden="true"
+                            >
+                                {" "}→
+                            </span>
+                        </h3>
+                        <p
+                            class="text-sm md:text-base text-text-secondary leading-relaxed"
+                        >
+                            Tus obligaciones según seas fabricante, importador,
+                            distribuidor o prestador de servicios.
+                        </p>
+                    </a>
+                </li>
+                <li class="bg-bg-primary">
+                    <a
+                        href="/blog/errores-accesibilidad-web-mas-comunes/"
+                        class="group block h-full p-8 md:p-10 transition-colors hover:bg-bg-surface focus-visible:bg-bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+                    >
+                        <h3
+                            class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3 group-hover:text-accent transition-colors"
+                        >
+                            Empieza por los fallos más comunes
+                            <span
+                                class="text-accent inline-block transition-transform group-hover:translate-x-1"
+                                aria-hidden="true"
+                            >
+                                {" "}→
+                            </span>
+                        </h3>
+                        <p
+                            class="text-sm md:text-base text-text-secondary leading-relaxed"
+                        >
+                            Seis errores concentran el 96% de los problemas. Si
+                            tienes alguno, ya sabes por dónde tirar.
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
 </BaseLayout>

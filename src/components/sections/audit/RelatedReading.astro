@@ -1,0 +1,107 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+
+// Enlaces contextuales hacia el cluster del blog. Cierran la reciprocidad
+// pilar↔cluster: el blog ya apunta a esta landing; aquí la landing devuelve el
+// empuje hacia abajo en vez de comportarse como un sumidero de autoridad.
+// Anchors descriptivos y variados (no exact-match) para no sobreoptimizar.
+const posts = [
+    {
+        slug: "ley-11-2023-empresas-espanolas",
+        anchor: "A quién obliga la Ley 11/2023",
+        blurb: "Qué te exige según seas fabricante, importador, distribuidor o prestador de servicios, con los plazos reales.",
+    },
+    {
+        slug: "sanciones-ley-11-2023",
+        anchor: "Cuánto cuesta incumplir",
+        blurb: "Los tramos de multa por gravedad, la prescripción y quién las impone, verificado contra el BOE.",
+    },
+    {
+        slug: "errores-accesibilidad-web-mas-comunes",
+        anchor: "Los errores que encuentro una y otra vez",
+        blurb: "Seis fallos concentran el 96% de los problemas. Cuáles son y por qué la ley los convierte en riesgo legal.",
+    },
+    {
+        slug: "lighthouse-no-es-auditoria-accesibilidad",
+        anchor: "Por qué un Lighthouse de 95 no basta",
+        blurb: "Lo que detecta una herramienta automática, lo que se le escapa y por qué su score no acredita cumplimiento.",
+    },
+    {
+        slug: "overlays-accesibilidad-no-protegen",
+        anchor: "El mito del plugin de accesibilidad",
+        blurb: "Por qué los overlays de \"accesibilidad en un clic\" no te hacen accesible ni te protegen de nada.",
+    },
+    {
+        slug: "formulario-accesible",
+        anchor: "Hacer un formulario accesible bien",
+        blurb: "Labels, errores, foco y teclado con código real y sin abusar de ARIA. Y qué te exige la ley.",
+    },
+]
+---
+
+<section
+    id="audit-reading"
+    class="relative py-24 md:py-32 lg:py-40"
+    aria-labelledby="audit-reading-title"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl mb-12 md:mb-16">
+            <SectionLabel text="Antes de decidir" />
+
+            <h2
+                id="audit-reading-title"
+                class="audit-reading-title font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary mb-8 md:mb-10"
+                style="text-wrap: balance;"
+            >
+                Si quieres entender el terreno antes de auditar
+            </h2>
+
+            <p
+                class="audit-reading-subtitle text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl"
+            >
+                No hace falta que te fíes de mi palabra. He escrito sobre lo que
+                obliga la normativa, lo que de verdad falla en las webs y por qué
+                los atajos no funcionan. Y si aún no sabes si la ley te obliga,
+                pásate antes por el <a
+                    href="/te-aplica-ley-11-2023/"
+                    class="text-accent underline underline-offset-4 decoration-1 hover:text-accent-hover transition-colors"
+                    >autoevaluador de dos minutos</a
+                >. Por lo demás, empieza por aquí:
+            </p>
+        </div>
+
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+            {
+                posts.map((post) => (
+                    <li class="audit-reading-item bg-bg-primary">
+                        <a
+                            href={`/blog/${post.slug}/`}
+                            class="group block h-full p-8 md:p-10 transition-colors hover:bg-bg-surface focus-visible:bg-bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+                        >
+                            <h3 class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3 group-hover:text-accent transition-colors">
+                                {post.anchor}
+                                <span
+                                    class="text-accent inline-block transition-transform group-hover:translate-x-1"
+                                    aria-hidden="true"
+                                >
+                                    {" "}→
+                                </span>
+                            </h3>
+                            <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+                                {post.blurb}
+                            </p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>
