@@ -1,0 +1,86 @@
+---
+title: "Contraste de color en accesibilidad web: qué ratio exige la WCAG (y por qué falla el 84% de las webs)"
+description: "Qué ratio de contraste exige la WCAG (4.5:1, 3:1), qué cuenta como texto grande, cómo medirlo bien y los errores de contraste que más veo en auditorías."
+pubDate: 2026-06-12
+updatedDate: 2026-06-12
+category: "tutorial"
+tags: ["contraste-de-color", "wcag", "accesibilidad", "diseno-accesible", "ratio-contraste", "compliance"]
+heroImage: "/blog/contraste-de-color-accesibilidad-web/hero.webp"
+heroImageAlt: "Comparativa de un mismo texto con contraste suficiente e insuficiente sobre fondo"
+draft: false
+---
+
+El fallo de accesibilidad más común del mundo no es exótico: es texto que no se lee bien. El [WebAIM Million 2026](https://webaim.org/projects/million/) detectó contraste insuficiente en el **83,9% de las páginas de inicio** analizadas. Es el error número uno, y el más fácil de evitar, porque se decide en una hoja de estilos, no en una refactorización.
+
+El problema de fondo es que el contraste se elige a ojo, en un monitor caro, con la persiana bajada. Y luego el usuario real lo lee como tú lees la letra pequeña de un contrato bancario en la playa a las tres de la tarde: entrecerrando los ojos y adivinando. La WCAG pone número a eso para que deje de ser una cuestión de gusto.
+
+## Qué es el ratio de contraste
+
+El ratio de contraste mide la diferencia de luminosidad entre dos colores —típicamente, el texto y su fondo—. Se expresa como una proporción que va de **1:1** (mismo color, invisible) a **21:1** (negro puro sobre blanco puro).
+
+No tienes que calcularlo a mano: la fórmula es fea y para eso están las herramientas. Lo que sí conviene interiorizar es la escala. Un gris clarito sobre blanco puede dar 2:1 y parecerte "elegante" en tu pantalla; para mucha gente, simplemente no está ahí. Cuanto más alto el número, más gente puede leerlo.
+
+## Los ratios que exige la WCAG (y la ley)
+
+La WCAG fija mínimos concretos según el tamaño del texto y el tipo de elemento. Para cumplimiento legal en España, el nivel de referencia es **AA**:
+
+| Elemento | Ratio mínimo | Criterio WCAG | Nivel |
+|---|---|---|---|
+| Texto normal | **4,5:1** | [1.4.3 Contraste mínimo](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) | AA |
+| Texto grande | **3:1** | 1.4.3 Contraste mínimo | AA |
+| Componentes de UI y gráficos | **3:1** | [1.4.11 Contraste no textual](https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html) | AA |
+| Texto normal (nivel reforzado) | 7:1 | 1.4.6 Contraste mejorado | AAA |
+
+El nivel AAA (7:1) no es exigible legalmente para una web comercial completa, así que no pierdas el sueño con él. La diana es AA: **4,5:1 para texto normal y 3:1 para texto grande**.
+
+¿Qué cuenta como "texto grande"? La WCAG lo define por tamaño, no por intención:
+
+- **24px o más** (18pt), o
+- **18,66px o más en negrita** (14pt en negrita).
+
+Por debajo de eso, tu texto es "normal" y necesita 4,5:1, por mucho que en tu maqueta parezca un titular.
+
+## Lo que casi nadie mira: estados y elementos no textuales
+
+Aquí es donde la mayoría de webs que "creen cumplir" se caen. El criterio 1.4.3 habla de texto, pero el 1.4.11 mete en la ecuación todo lo demás que tiene que verse para funcionar:
+
+- **El borde de un campo de formulario.** Si la única señal de que ahí hay un input es un borde gris clarito a 1,8:1, para mucha gente ese formulario no tiene campos.
+- **Los iconos que comunican algo.** Un icono de "carrito" o de "error" que no llega a 3:1 contra su fondo es decorativo para quien no lo distingue.
+- **El indicador de foco.** Cuando navegas con teclado, el recuadro que marca dónde estás tiene que verse: debe contrastar 3:1. Un foco azul tenue sobre fondo oscuro no vale.
+
+Y los **estados** son el punto ciego clásico. El texto en reposo cumple, pero ¿y al pasar el ratón (hover)? ¿Y el botón deshabilitado? ¿Y el enlace ya visitado? Cada estado visible tiene que cumplir su ratio. No basta con que el color "de catálogo" pase el test.
+
+Una nota sobre versiones: los criterios de contraste (1.4.3 y 1.4.11) son **idénticos en WCAG 2.1 y 2.2**, así que no cambia nada por ahí. Lo que la 2.2 añadió es refuerzo alrededor del foco (2.4.11 Foco no oscurecido, AA; 2.4.13 Apariencia del foco, AAA). Si te preguntas si conviene adelantarte a la 2.2, lo desarrollo en [WCAG 2.2: ¿merece la pena adelantarse?](/blog/wcag-2-2-merece-la-pena-adelantarse).
+
+## Cómo medirlo bien (y no a ojo)
+
+Medir el contraste es gratis y lleva segundos. No hacerlo es la única excusa que no se sostiene. Herramientas que uso:
+
+- **WebAIM Contrast Checker**: metes los dos colores en HEX y te dice si pasa AA/AAA. Para comprobaciones rápidas.
+- **Colour Contrast Analyser (TPGi)**: un cuentagotas de escritorio para medir colores reales en pantalla, no los teóricos del manual de marca.
+- **axe DevTools o WAVE**: barren la página entera y marcan los fallos de contraste en contexto.
+- **DevTools del navegador**: Chrome y Firefox muestran el ratio en el propio selector de color del inspector.
+
+Tres trampas donde la medición rápida engaña:
+
+1. **Texto sobre imagen o gradiente.** No hay un único color de fondo, hay cientos. El texto blanco sobre una foto clara desaparece en la mitad superior. Solución honesta: una capa de oscurecimiento (overlay) detrás del texto, no cruzar los dedos.
+2. **El placeholder gris como si fuera texto.** Lo veo en una de cada dos auditorías: un formulario donde la etiqueta del campo vive solo en el `placeholder` gris claro, por debajo del mínimo. Falla el contraste y, además, desaparece al escribir. Por qué eso rompe el formulario entero lo cuento en [cómo hacer un formulario accesible](/blog/formulario-accesible).
+3. **El modo oscuro.** Una paleta puede cumplir en claro y suspender en oscuro (o al revés). Si ofreces los dos, hay que medir los dos.
+
+## Los errores de contraste que más veo en auditorías
+
+Casi siempre son los mismos, y casi siempre tienen el mismo origen: el color se eligió por estética y nadie lo midió.
+
+- **El gris corporativo sobre blanco.** El "gris elegante" para texto secundario suele rondar 3:1 o menos. Se ve precioso en la presentación y es ilegible para quien tiene baja visión.
+- **El color de marca que no llega.** Un dorado, un amarillo o un verde lima de marca sobre blanco rara vez alcanza 4,5:1. Aquí toca una verdad incómoda del gremio: he visto manuales de marca con 47 páginas sobre el uso del logo y cero menciones al contraste de color. El diseño se preocupó de todo menos de que se leyera.
+- **Botones con texto a contraste justito.** El típico botón de marca con texto blanco encima que pasa por los pelos en reposo y suspende al hacer hover.
+
+Y no, el truco no es renunciar a tu identidad visual. Es ajustar: oscurecer ese dorado un 15% para el texto, reservar el color "puro" para fondos grandes o elementos no textuales, y usar el color accesible donde hay que leer. La marca sobrevive. La multa, no necesariamente.
+
+## Por qué esto no es opcional
+
+El contraste no es una recomendación de buen gusto. La [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas) remite, para el contenido web, a la norma técnica UNE-EN 301 549, que incorpora la WCAG 2.1 nivel AA. Los criterios 1.4.3 y 1.4.11 están dentro de ese nivel. Es decir: el contraste insuficiente es, literalmente, un incumplimiento de la norma de referencia, y el incumplimiento de los requisitos de accesibilidad es [infracción grave](/blog/sanciones-ley-11-2023).
+
+Dicho de otro modo: es el fallo más extendido, el más barato de arreglar y, a la vez, uno de los más fáciles de detectar para quien venga a comprobar si cumples. Mala combinación si lo ignoras.
+
+Si quieres saber cuántos de tus colores pasan el corte —incluidos los estados y los formularios que las herramientas automáticas no terminan de pillar—, [hago auditorías de accesibilidad](/auditoria-accesibilidad) que te dejan la lista exacta, color por color y criterio por criterio.

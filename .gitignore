@@ -29,6 +29,8 @@ pnpm-debug.log*
 .claude/
 docs/
 auditoria-enlaces/
+gsc-analisis/
+analisis-huecos/
 
 # Playwright MCP scratch (snapshots, console logs, screenshots temporales)
 .playwright-mcp/

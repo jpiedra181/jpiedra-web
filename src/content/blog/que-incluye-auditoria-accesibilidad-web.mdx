@@ -1,0 +1,91 @@
+---
+title: "Qué incluye una auditoría de accesibilidad web (y de qué depende el precio)"
+description: "Qué incluye una auditoría de accesibilidad web, qué entregables debe darte y por qué el precio varía tanto. La parte que nadie te cuenta del coste."
+pubDate: 2026-06-23
+updatedDate: 2026-06-23
+category: "tutorial"
+tags: ["auditoria-accesibilidad", "wcag", "precio-auditoria", "informe-accesibilidad", "accesibilidad", "compliance"]
+heroImage: "/blog/que-incluye-auditoria-accesibilidad-web/hero.webp"
+heroImageAlt: "Lupa sobre una lista de verificación con elementos marcados"
+draft: false
+---
+
+"¿Cuánto cuesta una auditoría de accesibilidad web?" Es la pregunta correcta, pero tiene truco: la respuesta que recibes te dice más sobre lo que te están vendiendo que sobre lo que vas a recibir. Hay quien te suelta un precio plano de 100 € y hay quien te pide hablar media hora antes de dar cifra. La diferencia no es el margen comercial. Es que no están vendiendo lo mismo.
+
+Vamos a separar las dos cosas: qué incluye una auditoría de verdad, y qué factores mueven su precio. Cuando entiendas lo primero, lo segundo deja de parecer arbitrario.
+
+## Qué es (y qué no es) una auditoría de accesibilidad
+
+Una auditoría de accesibilidad es la evaluación de tu web contra los criterios de la WCAG 2.1 / 2.2 nivel AA —la norma técnica de referencia legal en España— para detectar qué barreras impiden que la usen personas con discapacidad, y documentarlo con suficiente detalle como para poder arreglarlo.
+
+Eso es lo que es. Esto es lo que **no** es:
+
+- **No es pasar Lighthouse y exportar el PDF.** Las herramientas automáticas detectan en torno al 30% de los problemas reales. El otro 70% solo aparece probando a mano. Lo desarrollo en [por qué Lighthouse no es una auditoría de accesibilidad](/blog/lighthouse-no-es-auditoria-accesibilidad): un 100/100 en Lighthouse y una web inutilizable con teclado conviven perfectamente.
+- **No es instalar un overlay.** El plugin de "accesibilidad en un clic" no audita nada; superpone una capa que falla en las pruebas manuales y [no te protege legalmente](/blog/overlays-accesibilidad-no-protegen).
+- **No es un certificado.** Nadie "certifica" tu web como accesible con sello oficial en el sector privado. Quien te venda un sello, te está vendiendo humo con membrete.
+
+Una auditoría es un diagnóstico. Como el del taller: no arregla el coche, te dice exactamente qué está roto, con qué gravedad y en qué orden conviene tocarlo.
+
+## Qué incluye de verdad: las fases
+
+Una auditoría seria sigue una metodología. La referencia internacional es la [WCAG-EM](https://www.w3.org/TR/WCAG-EM/) del W3C (la metodología de evaluación de conformidad). En la práctica, el trabajo tiene cuatro fases.
+
+**1. Análisis automático.** Se pasan herramientas como axe, WAVE o Pa11y sobre una muestra de páginas. Esto detecta lo evidente y barato: contrastes flagrantes, imágenes sin `alt`, campos sin etiqueta. Es el punto de partida, no el final. Quien termina aquí te está cobrando por darle a un botón.
+
+**2. Evaluación manual.** Aquí está el 70% que las máquinas no ven, y es donde se va la mayor parte del tiempo:
+
+- **Navegación solo con teclado**: ¿se llega a todo sin ratón? ¿El foco se ve? ¿Hay trampas donde el teclado se queda atascado?
+- **Lector de pantalla** (NVDA, VoiceOver): se recorre la web escuchándola, como la recorrería una persona ciega. Aquí caen los botones que no son botones y los formularios que no se entienden.
+- **[Contraste de color](/blog/contraste-de-color-accesibilidad-web)** medido con herramienta, no a ojo, incluyendo estados (hover, foco, deshabilitado).
+- **Zoom y reflujo**: ampliar al 200-400% y comprobar que el contenido no se rompe ni desaparece.
+- **Contenido dinámico**: menús, modales, carruseles, mensajes de error. El [carrusel sin pausa ni control de teclado](/blog/errores-accesibilidad-web-mas-comunes) es un clásico que ninguna herramienta automática penaliza bien.
+
+**3. Contraste con los criterios WCAG AA.** Cada hallazgo se mapea al criterio concreto que incumple (por ejemplo, 1.4.3 Contraste mínimo, 2.1.1 Teclado, 4.1.2 Nombre, función, valor). Esto no es burocracia: es lo que convierte "esto se ve mal" en "esto incumple este criterio y por esto es sancionable".
+
+**4. Informe.** El entregable. Y aquí hay matiz suficiente como para dedicarle su propia sección.
+
+## Los dos informes que deberías recibir
+
+Un hallazgo recurrente: el cliente recibe un Excel de 300 filas con códigos de error y nadie en la empresa sabe qué hacer con él. Una auditoría útil entrega **dos** documentos, porque tiene dos lectores distintos:
+
+| Informe técnico (para quien lo arregla) | Informe ejecutivo (para quien decide) |
+|---|---|
+| Cada error con su criterio WCAG, su ubicación exacta y la solución a nivel de código | Nivel de conformidad global y por secciones, en lenguaje de negocio |
+| Severidad y esfuerzo estimado | Riesgo legal y prioridades: qué tocar primero |
+| Capturas y pasos para reproducir | Resumen de qué cuesta y qué pasa si no se hace |
+
+Si solo te dan el primero, marketing y dirección no entienden el problema. Si solo te dan el segundo, el equipo técnico no sabe por dónde empezar. Hacen falta los dos.
+
+## Por qué no hay un precio único
+
+Aquí está la respuesta honesta a "cuánto cuesta": **depende**, y depende de cosas medibles. Una auditoría no se cobra por web, se cobra por trabajo, y el trabajo lo determinan estos factores:
+
+- **Número de plantillas únicas, no de páginas.** Una tienda con 5.000 productos pero 6 plantillas (home, categoría, ficha, carrito, checkout, contacto) se audita evaluando esas 6 plantillas más una muestra. No se auditan 5.000 páginas iguales. Lo que cuenta es la variedad estructural, no el volumen.
+- **Complejidad funcional.** Una web informativa de 8 páginas no tiene el mismo trabajo que una con login, carrito, pasarela de pago, área privada y formularios complejos. Los procesos interactivos son donde más se rompe la accesibilidad y donde más se tarda en probar.
+- **Profundidad manual.** ¿Solo teclado y lector de pantalla en las páginas clave, o recorrido completo con varias tecnologías de apoyo? A más cobertura, más horas.
+- **Si incluye reauditoría.** Lo serio es auditar, esperar a que el equipo arregle, y **volver a comprobar** que lo arreglado quedó bien. Esa segunda pasada es trabajo extra que algunos presupuestos incluyen y otros no. Pregúntalo siempre.
+
+Por eso un proveedor riguroso te hace preguntas antes de dar precio. No es que se haga de rogar: es que sin saber cuántas plantillas y qué funcionalidades tiene tu web, cualquier cifra es inventada.
+
+## Qué compra cada tramo
+
+Lo que el mercado no te dice claro: el precio bajo no es una ganga, es otro producto. Sin nombrar a nadie, esto es lo que sueles encontrar:
+
+- **El "desde 100 €" (tipo Kit Digital o tarifa plana baja).** A ese precio no caben horas de prueba manual. Casi siempre es un informe automático con membrete. Te vale para detectar lo evidente; no te vale para saber si cumples ni para defenderte ante un requerimiento. Es el equivalente a la ITV que te hace un sobrino mirando el coche desde la acera.
+- **El rango intermedio.** Suele incluir automático + algo de manual en páginas clave + un informe. Razonable para una web pequeña y honesta sobre su alcance. Pregunta exactamente qué páginas se prueban a mano.
+- **La auditoría manual completa.** Cobertura amplia, varias tecnologías de apoyo, los dos informes y reauditoría. Es lo que necesitas si te juegas un contrato, una licitación o un requerimiento legal. Cuesta más porque son muchas más horas de persona, no de máquina.
+
+No hay tramo "malo". Hay tramos honestos sobre lo que dan y tramos que te dejan creer que has cumplido cuando solo has pasado un escáner. El problema no es pagar poco; es pagar poco pensando que pagas por lo otro.
+
+## Cómo saber si te venden una auditoría de verdad
+
+Cuatro preguntas al proveedor te lo dicen en treinta segundos:
+
+1. **¿Cuántas horas de prueba manual incluye y en qué páginas?** Si la respuesta es vaga o "lo hace la herramienta", es un escáner.
+2. **¿Con qué lector de pantalla y navegador prueban?** Si no saben decir NVDA, VoiceOver o JAWS, no prueban con lector de pantalla.
+3. **¿Mapean cada error a su criterio WCAG?** Sin esto, el informe no sirve para demostrar conformidad.
+4. **¿Incluye reauditoría tras los arreglos?** Si no, presupuéstala aparte desde el principio.
+
+Yo mismo me apliqué este proceso entero antes de venderlo: lo conté en [cómo audité mi propia web](/blog/audite-mi-propia-web), con los fallos que encontré incluidos. Una auditoría que no te enseña su metodología es una caja negra, y las cajas negras en cumplimiento legal salen caras.
+
+Si necesitas saber dónde está tu web hoy —con los dos informes y la prueba manual de verdad—, [hago auditorías de accesibilidad](/auditoria-accesibilidad) y te digo el alcance y el precio después de mirar qué tiene tu web, no antes.

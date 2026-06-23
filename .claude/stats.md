@@ -129,19 +129,22 @@ Implicación práctica para PYMEs: una sanción grave puede dejar a la empresa f
 
 ### WebAIM Million (estudio anual de referencia)
 
-**Edición 2024** (análisis automatizado del millón de páginas de inicio más visitadas del mundo, marzo 2024):
+**Edición 2026** (análisis automatizado del millón de páginas de inicio más visitadas del mundo, publicada en febrero de 2026):
 - **95,9%** de páginas analizadas tenían fallos detectables de WCAG.
-- Promedio de **56,8 errores** por página de inicio.
-- Categorías de error más comunes:
-  1. Texto con contraste insuficiente: 81% de páginas
-  2. Imágenes sin texto alternativo: 54,5%
-  3. Enlaces vacíos: 48,9%
-  4. Campos de formulario sin etiqueta: 48,6%
-  5. Enlaces con texto genérico ("clic aquí", "más info"): 44,6%
+- Promedio de **56,1 errores** por página de inicio (56.114.377 errores en total).
+- Categorías de error más comunes (el 96% de los errores caen en estas seis, y son las mismas desde hace 7 años):
+  1. Texto con contraste insuficiente: 83,9% de páginas
+  2. Imágenes sin texto alternativo: 53,1%
+  3. Campos de formulario sin etiqueta: 51%
+  4. Enlaces vacíos: 46,3%
+  5. Botones vacíos: 30,6%
+  6. Enlaces con texto genérico/ambiguo ("clic aquí", "más info"): 15,2%
 
-> Fuente: WebAIM Million 2024 — https://webaim.org/projects/million/
+> Fuente: WebAIM Million 2026 — https://webaim.org/projects/million/ (verificado contra la fuente el 23-06-2026)
 >
 > Importante: son fallos detectables **automáticamente**. Los problemas reales (los que afectan a usuarios reales) son siempre más, porque muchos solo se detectan con pruebas manuales.
+>
+> Nota de versiones anteriores: la edición 2024 daba 56,8 errores/página y 81% de contraste insuficiente. Si un post antiguo cita esas cifras, está desactualizado.
 
 ### Población afectada (España)
 

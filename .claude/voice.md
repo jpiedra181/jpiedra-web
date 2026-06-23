@@ -27,7 +27,7 @@ Esto es lo más importante de cada post. Define si el lector se queda o se va.
 
 **Patrones que SÍ funcionan:**
 
-- **Dato concreto incómodo**: "El 96,8% de las páginas de inicio analizadas en el WebAIM Million 2024 incumplen WCAG. Tu web está en ese 96,8%, casi seguro."
+- **Dato concreto incómodo**: "El 95,9% de las páginas de inicio analizadas en el WebAIM Million 2026 incumplen WCAG. Tu web está en ese 95,9%, casi seguro."
 - **Pregunta directa que reformula la duda del lector**: "¿La ley te obliga? Spoiler: probablemente sí, y desde junio de 2025."
 - **Escenario reconocible**: "Llega un email del departamento legal preguntando si la web cumple la Ley 11/2023. Tienes dos semanas. Esto es lo que toca hacer."
 - **Afirmación contraintuitiva**: "Hacer tu web accesible no es un coste. Es la forma más barata de mejorar el SEO que vas a encontrar este año."
@@ -87,6 +87,6 @@ Patrones PROHIBIDOS en cierres:
 
 ## Ejemplo de párrafo "marca de la casa"
 
-> El WebAIM Million del año pasado auditó automáticamente el millón de webs más visitadas del mundo. El 95,9% incumplían WCAG. El promedio detectó 51 errores por página. Y esto es solo lo que detecta una herramienta automatizada: los problemas reales (los que afectan a usuarios reales) son siempre más. Si tu web está entre las visitadas, está prácticamente garantizado que incumple. No es opinión, es estadística.
+> El WebAIM Million del año pasado auditó automáticamente el millón de webs más visitadas del mundo. El 95,9% incumplían WCAG. El promedio detectó 56,1 errores por página. Y esto es solo lo que detecta una herramienta automatizada: los problemas reales (los que afectan a usuarios reales) son siempre más. Si tu web está entre las visitadas, está prácticamente garantizado que incumple. No es opinión, es estadística.
 
 Fíjate: dato concreto + fuente + matización honesta ("solo lo automatizado") + frase corta de cierre con afirmación rotunda. Ese es el ritmo.
