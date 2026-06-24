@@ -1,0 +1,120 @@
+---
+title: "Vídeo accesible: subtítulos, transcripción y lo que la ley te exige"
+description: "Cómo hacer un vídeo accesible: subtítulos, transcripción y audiodescripción, qué te exige la ley en España y por qué los subtítulos automáticos no bastan."
+pubDate: 2026-06-24
+updatedDate: 2026-06-24
+category: "tutorial"
+tags: ["video-accesible", "subtitulos", "transcripcion", "audiodescripcion", "wcag", "ley-11-2023"]
+heroImage: "/blog/video-accesible-subtitulos-transcripcion/hero.webp"
+heroImageAlt: "Reproductor de vídeo mostrando una línea de subtítulos en la parte inferior de la imagen."
+draft: false
+---
+
+Subes el vídeo a YouTube, activas los subtítulos automáticos y das el tema por cerrado. Es justo ahí donde la mayoría de las webs incumplen sin saberlo. Esos subtítulos no cumplen la norma, y el motivo es más simple de lo que parece: están pensados para "hacerse una idea", no para sustituir al audio.
+
+Hacer un vídeo accesible no es complicado, pero tiene tres piezas y casi nadie sabe cuál necesita ni cuándo. Vamos a verlas en orden, con lo que de verdad te exige la ley en España.
+
+## Qué dice exactamente la ley sobre tu vídeo
+
+Empecemos por lo que importa, que es de dónde sale la obligación.
+
+Las pautas técnicas que definen un vídeo accesible son las WCAG, en concreto su grupo de criterios 1.2 ("medios tempodependientes", que es la jerga del W3C para "audio y vídeo"). Esas pautas se vuelven obligatorias en España a través de la norma UNE-EN 301 549, que es la que la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas) toma como vara de medir. Desde el **28 de junio de 2025**, muchas empresas privadas están obligadas a cumplir la **WCAG 2.1, nivel AA**.
+
+Traducido: si tu web tiene vídeos y a tu empresa le aplica la ley, esos vídeos tienen que cumplir varios criterios concretos. No es opcional y no es "recomendable". Es el listón legal vigente. Un apunte que conviene fijar, porque se cuenta mal a menudo: el nivel exigible hoy es la **2.1**, no la 2.2, aunque [adelantarse a la 2.2 tenga sentido](/blog/wcag-2-2-merece-la-pena-adelantarse) por otros motivos.
+
+¿Qué vídeos disparan la obligación? Prácticamente todos los que tengan contenido real: el vídeo corporativo de la home, el tutorial de producto, la grabación del webinar, el testimonio de cliente. Un vídeo **puramente decorativo y sin sonido** (un fondo en bucle de tres segundos, sin información) es la excepción, no la regla. Si transmite algo, hay que hacerlo accesible.
+
+## Las tres piezas y cuándo necesitas cada una
+
+Aquí está el lío que ningún artículo aclara. "Vídeo accesible" no es una cosa, son tres, y no siempre necesitas las tres. Depende del vídeo y del nivel que te exijan.
+
+| Pieza | Para qué sirve | Criterio WCAG | Nivel |
+|---|---|---|---|
+| **Subtítulos** | Quien no oye, lee lo que se dice | 1.2.2 Subtítulos (grabado) | A |
+| **Transcripción o audiodescripción** | Quien no ve, accede a la información visual | 1.2.3 Alternativa multimedia | A |
+| **Audiodescripción** | Quien no ve, accede a lo visual *imprescindible* | 1.2.5 Audiodescripción | AA |
+| **Subtítulos en directo** | Igual que los subtítulos, pero en streaming | 1.2.4 Subtítulos (en directo) | AA |
+
+Como en España el listón es el nivel **AA**, te aplican todos los de la tabla. Pero hay un matiz que ahorra mucho trabajo y que casi nadie cuenta.
+
+La audiodescripción solo hace falta cuando hay **información visual que no está ya narrada en el audio**. Si tu vídeo es una persona hablando a cámara (el clásico "talking head") y todo lo importante se dice en voz alta, no hay nada que audiodescribir: ya está todo en el audio. La audiodescripción se vuelve obligatoria cuando en pantalla pasan cosas que el sonido no cuenta: un gráfico que aparece, una demostración silenciosa, un rótulo que no se lee en voz alta.
+
+Esto es importante porque mucha gente cree que cada vídeo necesita una pista de audiodescripción profesional carísima. La mayoría de vídeos de PYME, no. Necesitan subtítulos buenos y una transcripción. Punto.
+
+## Por qué los subtítulos automáticos no te valen
+
+Vuelvo al inicio, porque es el error que más veo. Los subtítulos automáticos de YouTube (o de cualquier transcriptor de IA sin revisar) no cumplen la WCAG, y no es por purismo. Es por cuatro fallos concretos:
+
+- **Precisión.** Confunden términos, nombres propios y cualquier palabra técnica. Para un vídeo de producto, donde la palabra clave es justo la que la máquina no conoce, es un desastre.
+- **Puntuación.** Sueltan un muro de palabras sin comas ni puntos. Léelo en alto y verás: cambia el significado.
+- **Identificación de quién habla.** En una entrevista o un panel, los subtítulos automáticos no distinguen entre dos voces. El criterio WCAG exige saber **quién** dice cada cosa.
+- **Sonidos relevantes.** Una alarma, una risa, "suena el teléfono". Si ese sonido aporta información, tiene que estar en el subtítulo. La máquina no lo pone.
+
+> Los subtítulos automáticos son a los subtítulos accesibles lo que el traductor de Google es a un traductor jurado. Sirven para enterarte de la idea. No sirven para firmar nada.
+
+La buena noticia: no tienes que escribirlos a mano desde cero. Genera el borrador automático **y revísalo**. El 80% del trabajo lo hace la máquina; el 20% que la convierte en cumplimiento legal lo pones tú con quince minutos de repaso.
+
+## Cómo hacerlo bien, pieza por pieza
+
+### Subtítulos
+
+Un subtítulo accesible cumple cuatro cosas, más allá de transcribir bien:
+
+1. **Sincronía.** Aparecen cuando se dice cada frase, no dos segundos tarde.
+2. **Identificación de hablante** cuando hay más de una voz: `— María:` antes de su frase, por ejemplo.
+3. **Sonidos con significado** entre corchetes: `[aplausos]`, `[suena un aviso]`.
+4. **Legibilidad.** Si los incrustas en el vídeo (subtítulos "quemados"), cuida el [contraste de color](/blog/contraste-de-color-accesibilidad-web): texto claro sobre una banda oscura, no blanco sobre un fondo que a ratos también es blanco.
+
+Prioriza siempre los subtítulos **como pista activable** (un archivo de subtítulos que el reproductor enciende y apaga) frente a los quemados en la imagen. Son más flexibles y el usuario decide. Si usas YouTube o Vimeo, súbelos como pista; ambos lo soportan de fábrica.
+
+### Transcripción
+
+La transcripción es un texto, en la propia página, con **todo** lo que ocurre en el vídeo: lo que se dice y lo que se ve si es relevante. No es lo mismo que los subtítulos. Los subtítulos van sincronizados dentro del vídeo; la transcripción es un bloque de texto leíble (y rastreable por Google, dicho sea de paso) junto al reproductor.
+
+Tiene una ventaja doble que la mayoría ignora: cubre a la vez al usuario sordociego —que ni oye ni ve el vídeo, y solo con la transcripción accede al contenido— y te regala un buen pedazo de texto indexable bajo tu vídeo. Accesibilidad y SEO tirando del mismo carro, que es la pareja de la que ya he hablado otras veces.
+
+### Audiodescripción
+
+Solo si hace falta (revisa el matiz de antes). Cuando la información visual es imprescindible y no está en el audio, tienes dos caminos:
+
+- **Audiodescripción**: una voz extra que, en los silencios del vídeo, describe lo que se ve. Es lo que exige el nivel AA para vídeos con contenido visual crítico.
+- **Producir el vídeo "autodescriptivo" desde el guion**: que el propio narrador diga en voz alta lo que aparece en pantalla. Si grabas tú los vídeos, esta es la jugada inteligente: te ahorras la pista extra haciendo que el audio ya lo cuente todo.
+
+## El reproductor también cuenta
+
+Aquí es donde casi todos miran al techo. Puedes tener subtítulos perfectos y transcripción impecable, y suspender igual, porque **el reproductor** no es accesible. Los fallos típicos:
+
+- **No se maneja con teclado.** Si para darle a play, pausar o subir el volumen hay que usar el ratón sí o sí, el reproductor incumple. Todo control tiene que llegarse con el tabulador y activarse con Enter o la barra espaciadora.
+- **Autoplay con sonido.** El vídeo que arranca solo y a todo volumen no es solo molesto: para alguien que usa un lector de pantalla, ese audio pisa la voz del lector y lo deja a ciegas. Si algo se reproduce solo más de tres segundos, tiene que poder pararse.
+- **Foco invisible.** Cuando tabulas por los controles, tiene que verse cuál tienes seleccionado.
+
+El reproductor nativo de YouTube y Vimeo cumple bastante bien de serie. Los problemas suelen aparecer con reproductores "a medida" que un diseñador montó bonito y sin teclado. Es el mismo patrón del [botón que no es un botón](/blog/errores-accesibilidad-web-mas-comunes): se ve, funciona con ratón, y para nadie más.
+
+## Casos que la gente da por hecho mal
+
+**El vídeo de fondo decorativo.** Ese vídeo en bucle, sin sonido, detrás del titular de la home. Si es puramente decorativo y no comunica nada, no necesita subtítulos. Pero sí debe poder **pausarse** si dura más de cinco segundos y se reproduce solo (criterio 2.2.2). Mucho movimiento de fondo marea a más gente de la que crees.
+
+**El YouTube embebido.** Embeber un vídeo de YouTube en tu web no te exime de nada. La responsabilidad de que ese vídeo tenga subtítulos correctos es **tuya**, no de YouTube. Que esté alojado fuera no cambia que se ve en tu web.
+
+**El directo.** Un webinar o una retransmisión en vivo entra en el criterio 1.2.4 (nivel AA): necesita subtítulos en directo. Es lo más caro y lo más incómodo de resolver, así que un atajo razonable y muy habitual: graba el directo y **publica después la versión con subtítulos revisados**. No sustituye al subtitulado en vivo si el directo es el servicio en sí, pero para el vídeo que luego queda colgado en tu web, es la solución sensata.
+
+## Qué te juegas si lo ignoras
+
+Tentación habitual: "son solo unos vídeos, ¿qué más da?". Da, por dos vías.
+
+La primera es de negocio y es la que más duele en silencio. Un vídeo sin subtítulos lo pierdes con todo el que lo abre sin sonido —que en redes y en el móvil es la mayoría— y con quien no oye bien. Es contenido por el que has pagado producción y que se ve a medias. La accesibilidad aquí no es un coste: es recuperar audiencia que ya tenías y estabas tirando.
+
+La segunda es legal. El incumplimiento de los requisitos de accesibilidad es una infracción tipificada, y según la gravedad las cuantías no son simbólicas. Lo desgloso en el post sobre [las sanciones de la Ley 11/2023](/blog/sanciones-ley-11-2023), pero el resumen es que el rango llega muy por encima de lo que cuesta subtitular bien tus vídeos. Sale más barato hacerlo que explicar por qué no se hizo.
+
+## En resumen
+
+Para un vídeo de PYME corriente —alguien hablando a cámara, un tutorial, un testimonio— el camino es corto:
+
+- ✅ Subtítulos revisados a mano (no los automáticos tal cual).
+- ✅ Transcripción en texto bajo el vídeo.
+- ✅ Audiodescripción solo si hay info visual que el audio no cuenta.
+- ✅ Reproductor manejable con teclado y sin autoplay con sonido.
+
+No es un proyecto de meses. Es un proceso que, una vez montado, aplicas a cada vídeo nuevo casi en automático.
+
+Si tienes vídeos en tu web y no sabes cuáles cumplen y cuáles te están dejando fuera a clientes —y fuera de la ley—, eso es justo lo que reviso en una [auditoría de accesibilidad](/auditoria-accesibilidad): con pruebas reales de teclado y lector de pantalla, no con el informe automático que da todo por bueno. Y como suele pasar, lo que falla casi nunca es lo que esperabas.

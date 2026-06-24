@@ -31,6 +31,7 @@ docs/
 auditoria-enlaces/
 gsc-analisis/
 analisis-huecos/
+_linkedin/
 
 # Playwright MCP scratch (snapshots, console logs, screenshots temporales)
 .playwright-mcp/
