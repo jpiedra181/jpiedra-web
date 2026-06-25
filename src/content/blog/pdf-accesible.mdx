@@ -1,0 +1,108 @@
+---
+title: "PDF accesible: qué es, cómo se hace y por qué empieza en Word"
+description: "Cómo hacer un PDF accesible: etiquetas, orden de lectura, texto alternativo y qué te exige la ley en España. Y por qué se hace en Word, no en Acrobat."
+pubDate: 2026-06-2
+updatedDate: 2026-06-2
+category: "tutorial"
+tags: ["pdf-accesible", "accesibilidad", "pdf-ua", "documentos-accesibles", "wcag", "ley-11-2023"]
+heroImage: "/blog/pdf-accesible/hero.webp"
+heroImageAlt: "Documento PDF con su estructura de etiquetas visible: encabezados, párrafos y una imagen con texto alternativo."
+draft: false
+---
+
+La empresa publica su informe anual en PDF. Ochenta páginas, muy bien maquetadas. Lo abre alguien con un lector de pantalla y lo que escucha no son ochenta páginas: son tres mil celdas inconexas, imágenes mudas y un texto que salta de columna sin orden. El documento existe. La información, para esa persona, no.
+
+Ese es el problema del PDF inaccesible, y es más común de lo que parece porque casi nadie piensa en él al exportar. La buena noticia: hacerlo bien no es difícil. La mala: no se arregla donde casi todo el mundo cree.
+
+## Qué es un PDF accesible (y qué no)
+
+Un PDF accesible es un documento **etiquetado**. Por debajo del texto que ves hay una estructura invisible —un árbol de etiquetas— que dice qué es cada cosa: "esto es un encabezado de nivel 1", "esto es un párrafo", "esto es una tabla con estas filas y columnas", "esto es una imagen y significa esto". Esa estructura es lo que un lector de pantalla necesita para leer el documento en orden y con sentido.
+
+Un PDF **no accesible** es lo contrario: una mancha de texto sin jerarquía, o directamente una imagen. Para tu vista los dos se ven igual de bien. Para una tecnología de asistencia, la diferencia es entre un documento y un muro.
+
+Aquí conviene distinguir dos siglas que se mezclan:
+
+- **WCAG** es la norma de accesibilidad web que ya conoces si has leído otros posts de este blog. Sus principios aplican también a los documentos.
+- **PDF/UA** (de *Universal Accessibility*, norma ISO 14289-1) es la norma técnica específica para PDF: traduce esos principios al formato concreto del PDF. Es la vara de medir cuando hablamos de documentos, no de páginas.
+
+No necesitas memorizar las siglas. Necesitas quedarte con la idea: un PDF accesible está etiquetado y estructurado, no solo "bien maquetado".
+
+## Lo que la ley dice de tus PDF
+
+Mucha gente cree que la accesibilidad es cosa de la web y que los documentos van aparte. No van aparte.
+
+En el **sector público**, el [Real Decreto 1112/2018](/blog/declaracion-accesibilidad-obligatoria) es claro: la obligación no cubre solo las webs y apps, también los **documentos ofimáticos publicados** —y el PDF es el rey de esa categoría—. Un ayuntamiento que cuelga sus ordenanzas en un PDF sin etiquetar está incumpliendo, igual que si su web fallara.
+
+En el **sector privado**, desde el **28 de junio de 2025** la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas) extiende la obligación de accesibilidad a muchas empresas, y los documentos que forman parte de un servicio digital entran en el mismo paquete. El catálogo en PDF de tu tienda, las condiciones que el cliente descarga, la factura: si forman parte del servicio, cuentan.
+
+Dicho de otro modo: el PDF no es un refugio donde la accesibilidad no llega. Es uno de los sitios donde más se incumple precisamente porque casi nadie lo mira.
+
+## El PDF accesible empieza en Word, no en Acrobat
+
+Esta es la parte que casi ningún tutorial cuenta, y es la que más tiempo te ahorra.
+
+La mayoría de la gente imagina que un PDF se hace accesible **después**, abriéndolo en Acrobat y etiquetándolo a mano. Se puede, pero es el camino lento, caro y propenso a errores. Es como construir la casa y luego picar las paredes para meter las tuberías.
+
+El camino bueno es al revés: **la accesibilidad se construye en el documento de origen** —Word, Google Docs, InDesign— y al exportar a PDF, las etiquetas se generan solas. Para eso, en el documento original:
+
+- **Usa los estilos de encabezado de verdad** (Título 1, Título 2…), no "texto grande en negrita". Para tu ojo se ven igual; para el PDF, solo el estilo real crea la etiqueta de encabezado. Es el error número uno.
+- **Escribe el texto alternativo de las imágenes** en el propio Word. Word lo arrastra al PDF. (Si no tienes claro qué es un buen alt, es el mismo criterio que en la web: lo trato dentro de [los errores de accesibilidad más comunes](/blog/errores-accesibilidad-web-mas-comunes).)
+- **Crea las listas con la herramienta de listas**, no poniendo guiones a mano.
+- **Haz las tablas con la función de tabla real** y marca su fila de encabezado. Nada de simular columnas con tabuladores.
+- **Exporta bien**: en Word, "Guardar como PDF" con la opción de etiquetas de estructura activada (no "Imprimir a PDF", que las tira a la basura).
+
+Haz esto y el 90% del trabajo está hecho antes de abrir Acrobat. Acrobat queda para lo que de verdad es: revisar y rematar, no reconstruir.
+
+## Las piezas de un PDF accesible
+
+Tanto si lo haces en origen como si rematas en Acrobat, estas son las piezas que tienen que estar. Úsalo como checklist:
+
+| Pieza | Qué significa | Por qué |
+|---|---|---|
+| **Etiquetas (tags)** | El árbol de estructura del documento | Sin él, el lector de pantalla no entiende nada |
+| **Orden de lectura** | La secuencia en que se lee el contenido | En diseños a varias columnas, el orden visual y el real no siempre coinciden |
+| **Texto alternativo** | Descripción de imágenes y gráficos | Quien no ve la imagen accede a su información |
+| **Tablas con encabezados** | Filas/columnas marcadas como cabecera | El lector anuncia "fila Ventas, columna Marzo" en vez de números sueltos |
+| **Idioma del documento** | El idioma marcado en las propiedades | El lector usa la pronunciación correcta; sin él, lee español con fonética inglesa |
+| **Título en metadatos** | Un título descriptivo, no "documento_final_v3.pdf" | Es lo que se anuncia al abrir y lo que sale en la pestaña |
+| **Contraste suficiente** | Texto legible sobre su fondo | El mismo criterio de [contraste de color](/blog/contraste-de-color-accesibilidad-web) que en la web |
+
+Fíjate en el idioma y el título: son dos casillas que se tardan diez segundos en marcar y que casi todo el mundo olvida. El título en metadatos, en concreto, es de esas cosas pequeñas que delatan al instante si alguien pensó en accesibilidad o exportó con prisa.
+
+## El caso peor: el PDF escaneado
+
+Hay un tipo de PDF que suspende antes de empezar: el **escaneado**. Cuando alguien pasa un papel por el escáner y guarda el resultado en PDF, lo que tienes no es texto. Es una **fotografía** del texto.
+
+Para tu vista da igual: lees perfectamente. Para un lector de pantalla no hay nada que leer, porque no hay texto, hay píxeles. Es el equivalente a colgar una foto de un documento y esperar que alguien la "escuche".
+
+La solución se llama **OCR** (reconocimiento óptico de caracteres): un proceso que detecta el texto dentro de la imagen y lo convierte en texto real. Acrobat lo hace, y muchos escáneres lo ofrecen al guardar. Pero ojo: el OCR es el **primer** paso, no el último. Después de pasar el OCR, el documento sigue necesitando sus etiquetas, su orden de lectura y todo lo demás. El OCR te saca de "imposible"; no te lleva hasta "accesible".
+
+## Cómo comprobarlo
+
+No hace falta ser experto para detectar si un PDF va bien encaminado. Tres niveles, de menos a más fiable:
+
+1. **El comprobador integrado de Acrobat Pro.** Tiene una función de "Comprobación de accesibilidad" que lista los fallos detectables automáticamente: etiquetas que faltan, imágenes sin alt, idioma sin marcar. Es el primer filtro.
+2. **PAC (PDF Accessibility Checker).** Una herramienta **gratuita** que valida contra PDF/UA con más detalle que Acrobat. Si vas en serio con documentos, es la referencia.
+3. **La prueba de verdad: un lector de pantalla.** Igual que pasa con la web, ninguna herramienta automática sustituye a abrir el PDF con un lector y escucharlo. ¿Se lee en orden? ¿Anuncia los encabezados? ¿Describe las imágenes? ¿Las tablas tienen sentido? Eso solo lo dice la prueba manual.
+
+Como con cualquier informe automático, el verde no es un certificado. Te dice que no faltan las etiquetas obvias; no te dice si el orden de lectura es un caos o si el alt text de un gráfico es inútil. Eso lo juzga una persona.
+
+## ¿De verdad necesitas un PDF?
+
+Llegamos a la pregunta que ningún tutorial de PDF se atreve a hacer, porque va contra su propio tema: **¿necesitas que eso sea un PDF?**
+
+Muchas veces, no. Una página HTML normal es, casi siempre, **más accesible que el mejor PDF**: se adapta sola al móvil, el texto se agranda sin romperse, el lector de pantalla la maneja de fábrica y, de propina, Google la indexa mucho mejor que un PDF colgado. Si tu "documento" es una página de tarifas, unas preguntas frecuentes o unas condiciones, plantéate publicarlo como página web y ofrecer el PDF solo para quien quiera imprimirlo.
+
+El PDF tiene sentido cuando el formato fijo importa de verdad: un contrato que se firma, un documento que se imprime tal cual, un material con una maquetación que no puede moverse. Para el resto, el PDF suele ser una costumbre, no una necesidad. Y la accesibilidad más barata es la del documento que no tuviste que etiquetar porque era una página web.
+
+## En resumen
+
+- ✅ Un PDF accesible está **etiquetado y estructurado**, no solo bien maquetado (norma PDF/UA).
+- ✅ En España, los PDF cuentan: **RD 1112/2018** en el sector público y **Ley 11/2023** en el privado desde junio de 2025.
+- ✅ Se hace **en el origen** (Word, InDesign) con estilos reales, no remediando en Acrobat al final.
+- ✅ Las piezas: etiquetas, orden de lectura, alt text, tablas con encabezados, idioma, título y contraste.
+- ✅ El PDF escaneado necesita **OCR** antes que nada, y aun así no basta.
+- ✅ Compruébalo con PAC (gratis) y, sobre todo, con un lector de pantalla.
+- ✅ Y antes de todo eso: pregúntate si no sería mejor una **página web**.
+
+Si tu organización publica documentos —informes, catálogos, formularios en PDF— y no sabes cuáles aguantarían una prueba real, eso es justo lo que reviso en una [auditoría de accesibilidad](/auditoria-accesibilidad): web y documentos, con pruebas de lector de pantalla, no solo el comprobador automático que da todo por bueno. Empezando, como casi siempre, por el documento que dabas por hecho que estaba bien.

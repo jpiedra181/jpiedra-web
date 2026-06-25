@@ -1,0 +1,159 @@
+---
+title: "Navegación por teclado accesible: la guía con código que casi nadie escribe"
+description: "Cómo hacer tu web navegable por teclado: foco visible, orden de tabulación, skip links y trampas de foco, con código real y lo que te exige la ley en España."
+pubDate: 2026-06-24
+updatedDate: 2026-06-24
+category: "tecnico"
+tags: ["navegacion-teclado", "accesibilidad", "wcag", "foco-visible", "tabindex", "ley-11-2023"]
+heroImage: "/blog/navegacion-por-teclado-accesible/hero.webp"
+heroImageAlt: "Tecla de tabulador resaltada en un teclado, con un contorno luminoso alrededor del elemento enfocado."
+draft: false
+---
+
+Aparca el ratón ahora mismo. Recorre tu web entera solo con la tecla Tab. ¿Llegas a todos los enlaces y botones? ¿Ves siempre dónde estás? ¿Puedes comprar, enviar el formulario, cerrar el aviso de cookies? Si en algún punto te has quedado encallado, acabas de encontrar a la gente que tu web deja fuera todos los días.
+
+Navegar solo con teclado no es un caso raro de laboratorio. Lo hacen quien no puede usar un ratón por motricidad, quien usa un lector de pantalla, quien navega con un conmutador, y también cualquiera al que se le acaba de morir el ratón. Es la prueba de accesibilidad más barata que existe y la que más fallos destapa. Vamos con ella, con código y sin humo.
+
+## Qué significa "operable con teclado" (y qué te obliga)
+
+La regla de fondo es de una sola frase: **todo lo que se hace con ratón tiene que poder hacerse con teclado.** Cada enlace, cada botón, cada menú, cada campo. Sin excepciones "porque ese control es muy especial".
+
+Eso no es una opinión de purista. Es el criterio 2.1.1 de las WCAG ("Teclado", nivel A), el escalón más básico de la accesibilidad. Y en España es obligatorio: desde el **28 de junio de 2025**, la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas) exige a muchas empresas cumplir la **WCAG 2.1, nivel AA** a través de la norma UNE-EN 301 549. La navegación por teclado cae de lleno ahí: varios de sus criterios son nivel A, el mínimo de mínimos. Si tu web no se maneja con teclado, no es que cumpla a medias; es que falla por la base.
+
+Lo incómodo es que este es de los fallos más fáciles de detectar y de los más ignorados. No hace falta una auditoría de tres semanas para verlo: hace falta soltar el ratón treinta segundos. Casi nadie lo hace.
+
+## Las cuatro teclas que todo usuario espera
+
+Antes del código, el contrato. Quien navega con teclado espera un comportamiento concreto y universal, y tu web tiene que respetarlo:
+
+- **Tab**: salta al siguiente elemento interactivo (enlace, botón, campo).
+- **Shift + Tab**: vuelve al anterior.
+- **Enter**: activa enlaces y botones. **Espacio**: activa botones y marca casillas.
+- **Flechas**: se mueven *dentro* de un componente —las opciones de un menú, los radios de un grupo, las pestañas de un tab—.
+
+Esa última es la que más se rompe. Si construyes un menú o un grupo de pestañas a medida y las flechas no funcionan, el usuario nota que algo va mal aunque no sepa explicar qué. La buena noticia: si usas HTML nativo (`<a>`, `<button>`, `<input>`), casi todo esto te viene **gratis y de fábrica**. Los problemas empiezan cuando lo reinventas con `<div>`.
+
+## Foco visible: el fallo de una sola línea
+
+Hay una línea de CSS que sigue viva en medio internet y que es, ella sola, un incumplimiento legal:
+
+```css
+/* El causante de más fallos de teclado del mundo */
+*:focus { outline: none; }
+```
+
+Quien escribió eso quería quitar el "borde feo" que sale al pulsar. Lo que consiguió fue dejar a ciegas a quien navega con Tab: el foco sigue moviéndose, pero **ya no se ve dónde está**. Es como conducir de noche con las luces apagadas. El coche avanza; tú no ves nada.
+
+Que el foco se vea es el criterio 2.4.7 ("Foco visible", nivel AA), y es obligatorio en España. La solución no es resignarse al borde por defecto: es diseñar uno propio. Para eso existe `:focus-visible`, que muestra el indicador cuando se navega con teclado y no molesta al hacer clic con ratón:
+
+```css
+/* BIEN: un foco claro, propio, solo cuando navegas con teclado */
+:focus-visible {
+  outline: 3px solid #E8C872;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+```
+
+Tres condiciones para que ese foco cuente: que **contraste** con el fondo (un foco gris claro sobre blanco no vale; aplica lo mismo que en el [contraste de color](/blog/contraste-de-color-accesibilidad-web)), que sea **grueso** (1px se pierde), y que **rodee** al elemento, no que lo tape. Si te parece feo el de serie, cámbialo. Borrarlo, nunca.
+
+## Orden de tabulación lógico y el `tabindex`
+
+Cuando pulsas Tab, el foco debe recorrer la página en un orden que tenga sentido: como lees, de arriba abajo y de izquierda a derecha. Es el criterio 2.4.3 ("Orden del foco", nivel A).
+
+La clave que poca gente tiene clara: **el orden de tabulación sigue al HTML, no al CSS.** El navegador tabula en el orden en que los elementos están escritos en el código, no en el orden en que se ven en pantalla. Así que si con CSS (Flexbox, Grid, `position`) has movido visualmente un bloque a otro sitio, el foco seguirá yendo por donde está en el HTML. Resultado: el foco salta de arriba a abajo y de vuelta, sin lógica aparente. La solución no es parchear con `tabindex`: es **ordenar bien el HTML** para que coincida con lo que se ve.
+
+Sobre el `tabindex`, tres reglas y se acabó:
+
+- **`tabindex="0"`**: mete en el orden de tabulación un elemento que normalmente no entraría (un componente a medida). Útil, con cuidado.
+- **`tabindex="-1"`**: lo saca del recorrido con Tab, pero permite enfocarlo por código con JavaScript (`.focus()`). Es lo que usas para mandar el foco a un mensaje o a un modal.
+- **`tabindex="1"` o cualquier positivo**: no lo uses. Nunca. Fuerza un orden artificial que se pelea con el natural y acaba siendo un caos imposible de mantener.
+
+> El `tabindex` positivo es como colarte saltando la cola del súper: técnicamente avanzas, pero rompes el orden de todos los demás. Y siempre hay alguien detrás.
+
+## La trampa de foco
+
+Aquí llega el fallo más vistoso. Un usuario abre tu ventana modal —un aviso, un formulario emergente, el selector de cookies— pulsa Tab para recorrerla y, al llegar al final, el foco **se escapa por detrás del modal**, a la página que hay debajo, que sigue ahí. Empieza a tabular por enlaces que no ve, atrapado fuera de lo único que importa. O peor: el foco se queda **encerrado** y no hay forma de salir ni con Tab ni con Escape.
+
+El criterio 2.1.2 ("Sin trampas para el foco del teclado", nivel A) exige que de cualquier componente se pueda entrar **y salir** solo con teclado. Un modal bien hecho hace tres cosas:
+
+1. Al abrirse, **manda el foco dentro** (al primer campo o al botón de cerrar).
+2. **Retiene el foco dentro mientras está abierto**: al tabular más allá del último elemento, vuelve al primero (esto es un "focus trap" *intencionado* y correcto, no confundir con la trampa que prohíbe la norma).
+3. Se **cierra con Escape** y devuelve el foco al botón que lo abrió.
+
+La diferencia entre el modal accesible y el que no lo es no está en cómo se ve. Está en lo que pasa cuando sueltas el ratón. Y es, casualmente, lo que ningún plugin mágico te va a arreglar: [los overlays de accesibilidad no reescriben tu modal roto](/blog/overlays-accesibilidad-no-protegen).
+
+## El "saltar al contenido"
+
+Imagina que cada vez que entras a una página tienes que tabular por las veinte entradas del menú principal **antes** de llegar al contenido. En cada página. El usuario de ratón se salta el menú de un vistazo; el de teclado lo sufre entero, una y otra vez.
+
+Para eso existe el "saltar al contenido" (skip link), que cubre el criterio 2.4.1 ("Evitar bloques", nivel A). Es un enlace, normalmente el primero del HTML, que aparece solo cuando recibe el foco y lleva directo al contenido principal:
+
+```html
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+  <header><!-- menú largo --></header>
+
+  <main id="contenido">
+    <!-- aquí el contenido de verdad -->
+  </main>
+</body>
+```
+
+```css
+/* Oculto hasta que se enfoca con Tab; entonces aparece */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  /* ...estilos para que se vea bien al recibir foco */
+}
+```
+
+Ojo a un detalle que casi todos fallan: el skip link tiene que **verse al recibir el foco**. Si lo escondes con `display: none`, desaparece también para el teclado y no sirve de nada. Se oculta visualmente, pero sigue siendo enfocable.
+
+## Donde casi todos suspenden: los componentes a medida
+
+Si tu web falla en teclado, el 90% de las veces el culpable es el mismo: un elemento interactivo construido con `<div>` o `<span>` en lugar de con el HTML que tocaba. Es el clásico [botón que no es un botón](/blog/errores-accesibilidad-web-mas-comunes):
+
+```html
+<!-- MAL: para el ratón es un botón; para el teclado no existe -->
+<div class="boton" onclick="comprar()">Comprar</div>
+```
+
+Un `<div>` no recibe el foco, no se activa con Enter ni con Espacio, y un lector de pantalla no lo anuncia como botón. Para arreglarlo no hace falta nada exótico: hace falta el elemento correcto.
+
+```html
+<!-- BIEN: un botón de verdad. Foco, teclado y rol, gratis -->
+<button type="button" onclick="comprar()">Comprar</button>
+```
+
+La misma historia con los menús desplegables, los carruseles y los acordeones hechos a mano: si los montas con `<div>` y los animas con JavaScript pero te olvidas del teclado, quedan preciosos y rotos. La regla de oro es la misma que repito siempre: **HTML nativo primero.** Un `<button>`, un `<a href>` y un `<input>` traen de fábrica todo el comportamiento de teclado que tendrías que reconstruir a mano —casi siempre peor— si usas un `<div>`.
+
+## Cómo probarlo en 10 minutos
+
+No necesitas comprar nada ni instalar nada. Necesitas tu teclado y diez minutos. Esta es la rutina:
+
+1. **Aparca el ratón** físicamente, lejos. La tentación de cogerlo es real.
+2. **Recorre la página con Tab** de arriba abajo. Comprueba: ¿llegas a todos los enlaces, botones y campos? ¿En un orden que tiene sentido? ¿**Ves siempre** dónde está el foco?
+3. **Activa cosas con Enter y Espacio.** ¿Funcionan los botones? ¿Se despliegan los menús?
+4. **Abre un modal o el aviso de cookies.** ¿El foco entra dentro? ¿Puedes recorrerlo sin escaparte por detrás? ¿Cierra con Escape?
+5. **Vuelve atrás con Shift + Tab.** ¿El camino de vuelta es coherente?
+
+Si algo de esto falla, tienes un problema de accesibilidad real y, en España, probablemente también un incumplimiento. Y es exactamente el tipo de fallo que un informe automático **no** detecta: Lighthouse te puede dar verde y aun así tu modal atrapar el foco, porque eso solo se ve probando a mano. Lo cuento a fondo en [por qué Lighthouse no es una auditoría](/blog/lighthouse-no-es-auditoria-accesibilidad). La prueba de teclado la hace una persona, no una herramienta.
+
+## En resumen
+
+La navegación por teclado se sostiene sobre cosas concretas y arreglables:
+
+- ✅ Todo lo que se hace con ratón se hace con teclado (2.1.1).
+- ✅ El foco se ve siempre: `:focus-visible`, nunca `outline: none` (2.4.7).
+- ✅ El orden de tabulación sigue al HTML y tiene sentido; sin `tabindex` positivos (2.4.3).
+- ✅ De los modales se entra y se sale; cierran con Escape (2.1.2).
+- ✅ Hay un "saltar al contenido" visible al enfocarlo (2.4.1).
+- ✅ Los controles son HTML nativo, no `<div>` disfrazados.
+
+Casi todo esto se arregla escribiendo el HTML correcto desde el principio, que sale más barato que parchearlo después. Si quieres saber por dónde se escapa el foco en tu web —y dónde se quedan fuera tus clientes—, eso es justo lo que reviso en una [auditoría de accesibilidad](/auditoria-accesibilidad): con pruebas reales de teclado y lector de pantalla, no con el informe automático de turno. Empezando, como casi siempre, por donde menos te lo esperas.
