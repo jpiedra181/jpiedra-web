@@ -64,6 +64,13 @@ alternativos (no solo su presencia), semántica de encabezados y landmarks,
 claridad de etiquetas de formulario, reflow a 320px / zoom 400%, y contraste
 en casos límite (texto sobre imagen, estados hover/focus).
 
+**Lectores de pantalla.** Para verificar la experiencia de lector (nombres
+accesibles, orden de lectura) usa la herramienta `sr-audit`: el screen reader
+**virtual** sobre la muestra y **NVDA real** sobre el/los flujo(s) crítico(s).
+Ojo: el cálculo del árbol/virtual y NVDA real pueden discrepar (p. ej. una
+`<label>` en `display:none` da nombre en el árbol pero NVDA la ignora). Método,
+comandos y reglas duras en `references/lectores-pantalla.md`.
+
 **Paso 5 — Clasificar y redactar** según la tabla, la escala de severidad y
 la estructura de informe de abajo.
 
@@ -143,7 +150,21 @@ fallo en una página remota y poco visitada puede bajar.
    - Etiqueta de cómo se detectó: [Auto] / [Confirmado manualmente].
 5. **Resumen de conformidad por principio** (Perceptible, Operable,
    Comprensible, Robusto).
-6. **Próximos pasos y prioridades.**
+6. **Tabla de conformidad por criterio** — los **50 criterios A+AA**, cada uno con
+   su estado: Conforme / No conforme / No aplica / No evaluado (+ nota). Es la
+   **prueba de cobertura** de una auditoría exhaustiva y la columna que alimenta la
+   situación de cumplimiento de la declaración y la puntuación OAW. Lista de los 50
+   en `references/criterios-wcag.md`. Una auditoría exhaustiva no deja "No evaluado":
+   ese estado solo aplica a una pasada de muestra parcial, y debe declararse.
+7. **Próximos pasos y prioridades.**
+
+## Entrega: Markdown de trabajo → PDF de cliente
+
+Se **redacta y versiona en Markdown** (fuente de verdad), pero al cliente se le entrega el **PDF**
+con marca, generado con la herramienta `../jpiedra-clientes/_herramientas/pdf-entregables/`
+(`md2pdf.py`). **Nunca entregues el `.md`.** Genera el PDF de cada entregable cliente: `informe.pdf`
+(con `--confidencial`), `declaracion-accesibilidad.pdf` (sin confidencial: se publica) y, si aplica,
+`revision-oaw.pdf`. Ver el README de la herramienta para los comandos.
 
 ## Documento de cumplimiento (entregable aparte del informe)
 
@@ -157,6 +178,13 @@ redactado según el régimen del cliente (dictamen de marco-legal §2). Genéral
 - Es información de transparencia, no certificación legal.
 - El documento privado está PROVISIONAL hasta cerrar la §9 de marco-legal: no lo
   emitas como entregable de pago sin esa verificación.
+
+> **Sector público (dictamen A/F):** para la declaración usa la skill dedicada
+> `declaracion-accesibilidad` (modelo oficial 2018/1523 con literalidad verificada),
+> no la plantilla pública de `documento-cumplimiento.md`. Y si el cliente quiere
+> saber cómo saldría en el seguimiento oficial o un informe con la puntuación del
+> Observatorio, usa la skill `revision-oaw`. La situación de cumplimiento debe ser
+> coherente entre auditoría, revisión OAW y declaración.
 
 ## Dónde se guardan los entregables
 

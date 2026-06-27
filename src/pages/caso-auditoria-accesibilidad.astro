@@ -1,0 +1,226 @@
+---
+//@ts-nocheck
+import BaseLayout from "../components/layout/BaseLayout.astro"
+import SectionLabel from "../components/ui/SectionLabel.astro"
+import Button from "../components/ui/Button.astro"
+import { useTranslations } from "../i18n/utils"
+
+const lang = "es" as const
+const t = useTranslations(lang)
+const c = t.caso
+---
+
+<BaseLayout lang={lang} title={c.meta.title} description={c.meta.description}>
+    <!-- HERO -->
+    <section
+        class="relative py-24 md:py-32 lg:py-40"
+        aria-labelledby="caso-hero-title"
+    >
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="max-w-2xl">
+                    <SectionLabel text={c.hero.eyebrow} />
+                    <h1
+                        id="caso-hero-title"
+                        class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.1] text-text-primary mb-8"
+                        style="text-wrap: balance;"
+                    >
+                        {c.hero.titleStart}{" "}
+                        <span class="text-accent">{c.hero.titleHighlight}</span
+                        >{c.hero.titleEnd}
+                    </h1>
+                    <p
+                        class="text-base md:text-lg text-text-secondary leading-relaxed mb-10 max-w-xl"
+                    >
+                        {c.hero.subtitle}
+                    </p>
+                    <Button href="/auditoria-accesibilidad" variant="primary"
+                        >{c.hero.cta}</Button
+                    >
+                </div>
+                <div class="relative">
+                    <img
+                        src="/caso-auditoria/informe-portada.png"
+                        alt={c.entregables.imgPortadaAlt}
+                        width="800"
+                        height="1131"
+                        loading="eager"
+                        class="w-full max-w-xs sm:max-w-sm mx-auto rounded-lg border border-accent-line shadow-2xl shadow-black/50"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTEXTO -->
+    <section class="relative py-16 md:py-24" aria-labelledby="caso-contexto-title">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <SectionLabel text={c.contexto.eyebrow} />
+                <h2
+                    id="caso-contexto-title"
+                    class="font-heading text-[clamp(1.75rem,3.5vw,3rem)] leading-tight text-text-primary mb-8"
+                >
+                    {c.contexto.title}
+                </h2>
+                <p
+                    class="text-base md:text-lg text-text-secondary leading-relaxed mb-5"
+                >
+                    {c.contexto.body1}
+                </p>
+                <p
+                    class="text-base md:text-lg text-text-secondary leading-relaxed"
+                >
+                    {c.contexto.body2}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- METODO -->
+    <section class="relative py-16 md:py-24" aria-labelledby="caso-metodo-title">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <SectionLabel text={c.metodo.eyebrow} />
+            <h2
+                id="caso-metodo-title"
+                class="font-heading text-[clamp(1.75rem,3.5vw,3rem)] leading-tight text-text-primary mb-6"
+            >
+                {c.metodo.title}
+            </h2>
+            <p
+                class="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl mb-12"
+            >
+                {c.metodo.intro}
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+                {
+                    c.metodo.steps.map((s, i) => (
+                        <div class="border border-accent-line rounded-lg p-6 md:p-8">
+                            <span
+                                class="font-heading text-4xl text-accent/70 block mb-4"
+                                aria-hidden="true"
+                            >
+                                {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <h3 class="font-heading text-xl text-text-primary mb-3">
+                                {s.title}
+                            </h3>
+                            <p class="text-text-secondary leading-relaxed">
+                                {s.text}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- HALLAZGOS -->
+    <section
+        class="relative py-16 md:py-24"
+        aria-labelledby="caso-hallazgos-title"
+    >
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <SectionLabel text={c.hallazgos.eyebrow} />
+            <h2
+                id="caso-hallazgos-title"
+                class="font-heading text-[clamp(1.75rem,3.5vw,3rem)] leading-tight text-text-primary mb-6"
+            >
+                {c.hallazgos.title}
+            </h2>
+            <p
+                class="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl mb-12"
+            >
+                {c.hallazgos.intro}
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+                {
+                    c.hallazgos.items.map((h) => (
+                        <div class="border-l-2 border-accent pl-6 py-2">
+                            <h3 class="font-heading text-xl text-text-primary mb-2">
+                                {h.title}
+                            </h3>
+                            <p class="text-text-secondary leading-relaxed">
+                                {h.text}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTREGABLES -->
+    <section
+        class="relative py-16 md:py-24"
+        aria-labelledby="caso-entregables-title"
+    >
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <SectionLabel text={c.entregables.eyebrow} />
+            <h2
+                id="caso-entregables-title"
+                class="font-heading text-[clamp(1.75rem,3.5vw,3rem)] leading-tight text-text-primary mb-6"
+            >
+                {c.entregables.title}
+            </h2>
+            <p
+                class="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl mb-12"
+            >
+                {c.entregables.intro}
+            </p>
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <figure class="m-0">
+                    <img
+                        src="/caso-auditoria/tabla-conformidad.png"
+                        alt={c.entregables.imgTablaAlt}
+                        width="800"
+                        height="1131"
+                        loading="lazy"
+                        class="w-full rounded-lg border border-accent-line shadow-2xl shadow-black/50"
+                    />
+                    <figcaption class="text-sm text-text-muted mt-4">
+                        {c.entregables.imgTablaCaption}
+                    </figcaption>
+                </figure>
+                <ul class="space-y-6 list-none p-0">
+                    {
+                        c.entregables.items.map((d) => (
+                            <li class="border-b border-accent-line pb-6">
+                                <h3 class="font-heading text-xl text-text-primary mb-2">
+                                    {d.title}
+                                </h3>
+                                <p class="text-text-secondary leading-relaxed">
+                                    {d.text}
+                                </p>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CIERRE / CTA -->
+    <section class="relative py-24 md:py-32" aria-labelledby="caso-cierre-title">
+        <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+            <h2
+                id="caso-cierre-title"
+                class="font-heading text-[clamp(2rem,4vw,3.5rem)] leading-tight text-text-primary mb-6"
+                style="text-wrap: balance;"
+            >
+                {c.cierre.title}
+            </h2>
+            <p
+                class="text-base md:text-lg text-text-secondary leading-relaxed mb-10"
+            >
+                {c.cierre.text}
+            </p>
+            <Button href="/auditoria-accesibilidad" variant="primary"
+                >{c.cierre.cta}</Button
+            >
+            <p class="text-sm text-text-muted mt-12 max-w-xl mx-auto">
+                {c.cierre.note}
+            </p>
+        </div>
+    </section>
+</BaseLayout>

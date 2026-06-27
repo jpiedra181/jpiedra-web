@@ -268,7 +268,7 @@
         {
           "duration": "DÍAS 3-5",
           "title": "Evaluación manual y técnica",
-          "description": "El 70% del trabajo real. Navegación por teclado, lectura con NVDA y VoiceOver, validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con su criterio WCAG, su nivel de impacto y, donde ilustra, una captura.",
+          "description": "El 70% del trabajo real. Navegación por teclado, lectura con lector de pantalla NVDA (VoiceOver/iOS bajo petición), validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con su criterio WCAG, su nivel de impacto y, donde ilustra, una captura.",
           "clientInput": "Lo que necesito de ti: nada. Si surgiera algo crítico, te aviso al momento."
         },
         {
@@ -469,6 +469,68 @@
         "select": "Selecciona una opción.",
         "privacy": "Debes aceptar la política de privacidad para continuar"
       }
+    }
+  },
+  "caso": {
+    "meta": {
+      "title": "Caso real: auditoría exhaustiva de accesibilidad | Javier Piedra",
+      "description": "Una web pública real auditada a fondo: los 50 criterios uno a uno, a mano y con lector de pantalla real. Esto es lo que encuentro y lo que recibes."
+    },
+    "hero": {
+      "eyebrow": "Caso real",
+      "titleStart": "Una web pública real, auditada",
+      "titleHighlight": "a fondo",
+      "titleEnd": ". Esto es lo que encuentro.",
+      "subtitle": "Un caso real, anonimizado. Te enseño cómo audito de verdad —los 50 criterios uno a uno, a mano y con lector de pantalla— y qué recibe el cliente al terminar. Sin nombres y sin señalar a nadie: el valor está en el método.",
+      "cta": "Quiero auditar mi web"
+    },
+    "contexto": {
+      "eyebrow": "El contexto",
+      "title": "Una gran web del sector turístico, con reserva online",
+      "body1": "El caso es una web pública grande del sector turístico, con reserva en línea. Por su naturaleza le aplican a la vez dos marcos: el del sector público y, en el servicio de reserva a consumidores, la Ley 11/2023. El listón técnico es el mismo en ambos: la norma UNE-EN 301 549, que equivale a la WCAG 2.1 AA.",
+      "body2": "Es el perfil que un escáner no cubre: mucha página, plantillas repetidas y un proceso de reserva donde se juega el dinero. Justo donde una auditoría seria marca la diferencia."
+    },
+    "metodo": {
+      "eyebrow": "Cómo audito de verdad",
+      "title": "No es pasar una herramienta. Es esto.",
+      "intro": "Un test automático detecta alrededor del 30 % de los problemas reales. El resto se ve a mano. Así trabajo cada auditoría:",
+      "steps": [
+        { "title": "Muestra representativa", "text": "No se audita la web entera (es inviable), sino una muestra que cubre portada, proceso de reserva, formularios, login y plantillas comunes. Si la plantilla falla, falla en todas las páginas que la usan." },
+        { "title": "Los 50 criterios, uno a uno", "text": "Evalúo los 50 criterios A y AA de la WCAG 2.1 sobre la muestra, no solo los que detecta la máquina. Cada uno con su estado: conforme, no conforme o no aplica." },
+        { "title": "A mano y con lector real", "text": "Navegación por teclado, contraste, foco y lectura con NVDA, el lector de pantalla que usa la gente de verdad. Lo automático no ve si un campo se anuncia bien; el lector, sí." },
+        { "title": "Entregables que prueban el trabajo", "text": "Informe técnico, tabla de conformidad de los 50 criterios, declaración de accesibilidad lista para publicar y, si procede, la puntuación al estilo del Observatorio de Accesibilidad Web." }
+      ]
+    },
+    "hallazgos": {
+      "eyebrow": "Lo que encontré",
+      "title": "Fallos reales, en lenguaje de personas",
+      "intro": "Algunos de los hallazgos del caso, contados sin jerga. Ninguno es raro: se repiten en casi todas las webs que audito.",
+      "items": [
+        { "title": "El formulario de reserva sin etiquetas", "text": "Campos que para la vista son obvios, pero que un lector de pantalla anuncia como cuadro de texto sin más. Quien no ve no sabe qué le piden. En la reserva, eso es una compra que no se completa." },
+        { "title": "El foco invisible", "text": "Al navegar con teclado no se veía dónde estabas: como moverte por casa a oscuras. Se arregla con una línea de CSS, pero afecta a todo el sitio." },
+        { "title": "El calendario que el teclado no toca", "text": "El selector de fechas solo respondía al ratón. Sin ratón, no hay reserva posible." },
+        { "title": "Lo que la máquina aprobaba y el lector no", "text": "Un campo que la herramienta daba por bueno —tenía etiqueta— pero que el lector real anunciaba sin nombre, porque esa etiqueta estaba oculta por CSS. La teoría decía sí; el usuario, no." }
+      ]
+    },
+    "entregables": {
+      "eyebrow": "Lo que recibe el cliente",
+      "title": "Un informe que se entiende y prueba lo que se hizo",
+      "intro": "Ni un PDF de 200 páginas ni un volcado de herramienta. Documentos claros, con marca, pensados para que dirección los entienda y tu equipo técnico pueda actuar.",
+      "items": [
+        { "title": "Informe técnico", "text": "Veredicto, hallazgos por gravedad, impacto en personas y corrección concreta, con código cuando aplica." },
+        { "title": "Tabla de conformidad de los 50 criterios", "text": "El estado de cada criterio A y AA. La prueba de que se ha revisado todo, no solo lo que salta a la vista." },
+        { "title": "Declaración de accesibilidad", "text": "Redactada según el régimen que te aplica, lista para publicar y cumplir el requisito documental." },
+        { "title": "Reunión de resultados", "text": "Una hora para revisarlo contigo y tu equipo y priorizar. No te mando un PDF y desaparezco." }
+      ],
+      "imgTablaAlt": "Página del informe con la tabla de conformidad de los 50 criterios WCAG, cada uno con su nivel y su estado.",
+      "imgTablaCaption": "Extracto real (anonimizado) de la tabla de conformidad: los 50 criterios, uno a uno.",
+      "imgPortadaAlt": "Portada del informe de accesibilidad con la marca de Javier Piedra."
+    },
+    "cierre": {
+      "title": "¿Quieres saber en qué estado está tu web hoy?",
+      "text": "Eso es justo lo que hago: una auditoría a fondo, con informe y documento de cumplimiento adaptado a tu caso. Sin humo y sin sorpresas.",
+      "cta": "Pídeme una auditoría",
+      "note": "Caso real anonimizado. No se nombra ni se identifica a la organización auditada: el objetivo es enseñar el método, no señalar a nadie."
     }
   }
 }

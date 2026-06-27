@@ -268,7 +268,7 @@
         {
           "duration": "DAYS 3-5",
           "title": "Manual and technical evaluation",
-          "description": "70% of the real work. Keyboard navigation, screen reader checks with NVDA and VoiceOver, color contrast validation, focus visibility, forms, ARIA, error messages. Every finding documented with screenshot, WCAG criterion and impact level.",
+          "description": "70% of the real work. Keyboard navigation, screen reader checks with NVDA (VoiceOver/iOS on request), color contrast validation, focus visibility, forms, ARIA, error messages. Every finding documented with screenshot, WCAG criterion and impact level.",
           "clientInput": "What I need from you: nothing. If something critical comes up, I'll let you know right away."
         },
         {

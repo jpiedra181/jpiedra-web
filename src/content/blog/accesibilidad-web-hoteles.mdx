@@ -1,0 +1,99 @@
+---
+title: "Accesibilidad web para hoteles: qué falla de verdad en tu web de reservas (y qué exige la ley)"
+description: "Tu web de hotel puede ser preciosa y dejar fuera a quien reserva con teclado o lector de pantalla. Qué falla en el motor de reservas y qué exige la ley."
+pubDate: 2026-06-26
+updatedDate: 2026-06-26
+category: "tecnico"
+tags: ["accesibilidad-web-hoteles", "sector-turistico", "motor-de-reservas-accesible", "ley-11-2023", "wcag", "turismo-accesible"]
+draft: false
+---
+
+Tu hotel puede tener rampas, habitaciones adaptadas y un sello de turismo accesible colgado en recepción. Y aun así dejar fuera a una persona ciega justo en el paso que paga: la reserva online.
+
+Accesibilidad física y accesibilidad web no son lo mismo. La primera la cuidáis desde hace años porque se ve y se inspecciona. La segunda vive en el código, no se ve en la foto, y casi nadie del sector la mira hasta que llega un correo del departamento legal. Vamos a separar las dos cosas y a bajar al detalle que las guías del sector suelen esquivar: qué falla técnicamente en una web de hotel y a quién deja fuera.
+
+## ¿A tu web de hotel le aplica la ley? Sí, y desde junio de 2025
+
+El comercio electrónico de servicios turísticos —reservar una habitación desde tu web— aparece entre los servicios obligados por la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas), la norma que traspone en España la directiva europea de accesibilidad. Si un usuario puede reservar en tu sitio, estás dentro. La fecha no es futura ni difusa: se aplica **desde el 28 de junio de 2025**.
+
+La única salida real es ser **microempresa que solo presta servicios**: menos de 10 personas empleadas **y** menos de 2 millones de euros de facturación anual. Las dos a la vez. Un hotel con plantilla de temporada o con un volumen medio se sale de esa excepción enseguida. Si no tienes claro de qué lado caes, lo despejas en dos minutos con el [autoevaluador de la ley](/te-aplica-ley-11-2023).
+
+El listón técnico es la norma **UNE-EN 301 549**, que en la práctica equivale a cumplir las **WCAG 2.1 nivel AA**. Y ojo con una confusión habitual: esto va de tu **servicio digital** (web, app, motor de reservas), no de las rampas del edificio. Son obligaciones distintas, de normas distintas. Cumplir una no cumple la otra.
+
+## "Accesible" no es lo que ves
+
+Aquí está el malentendido que arrastra medio sector. Una web de hotel puede ser una maravilla visual —fotos de la suite con vistas, tipografía elegante, un buscador de fechas monísimo— y ser, a la vez, inutilizable para una parte de tus clientes.
+
+Porque la accesibilidad no se ve en el render. Se juega en el HTML y en la interacción. Un lector de pantalla no "ve" tu web bonita: la lee. Si el código no le dice qué es cada cosa, da igual lo bien que se vea en pantalla. Es como un edificio precioso cuya única entrada es una escalera: impecable en la foto del folleto, infranqueable para quien va en silla.
+
+En las auditorías que hago, las webs de hotel fallan siempre por los mismos sitios. Y curiosamente, casi nunca por las fotos de las habitaciones.
+
+## Lo que falla de verdad en una web de hotel
+
+### El motor de reservas no se puede usar con teclado
+
+Mucha gente con discapacidad motora o visual no usa ratón: navega con el teclado, tabulando. El calendario de selección de fechas es, casi siempre, el primer muro. Calendarios que solo responden al clic del ratón, con los días puestos como celdas que ni se enfocan ni se anuncian. Resultado: el usuario llega al paso de elegir fechas y no puede avanzar. Fin de la reserva.
+
+Si tu motor de reservas no se puede recorrer entero con la tecla Tab y las flechas, no es accesible. Lo explico a fondo en [navegación por teclado accesible](/blog/navegacion-por-teclado-accesible).
+
+### Los campos de fechas y ocupación, sin etiqueta
+
+Entrada, salida, adultos, niños. Para tu vista están clarísimos, con su iconito y su texto al lado. Para un lector de pantalla, si esos campos no tienen una etiqueta asociada **en el código**, lo que se oye es "cuadro de texto, edición". Sin más. La persona no sabe si ese hueco es para la fecha de llegada o para el número de niños.
+
+Los campos de formulario sin etiqueta son el tercer error más común de toda la web mundial: el 51% de las páginas analizadas en el WebAIM Million 2026 lo tienen. En reservas, ese fallo no es estético: bloquea la compra. Te lo cuento en detalle en [formularios accesibles](/blog/formulario-accesible).
+
+### El mapa de "dónde estamos", sin alternativa
+
+El mapa interactivo para elegir destino o ver la ubicación es un clásico del sector. Y un clásico de lo inaccesible: una imagen o un widget que quien no ve no puede usar, y del que no se ofrece ninguna alternativa en texto (una dirección, una lista de destinos enlazada). La información existe, pero solo por un canal. Si ese canal es visual, hay gente que se queda fuera.
+
+### Las galerías de fotos, sin texto alternativo
+
+Las webs de hotel viven de la imagen, y ahí está la ironía: galerías preciosas, decenas de fotos, y ni una con texto alternativo. Para quien usa lector de pantalla, esa galería es una sucesión de "imagen, imagen, imagen". La habitación con vistas al mar, la piscina infinita, el desayuno de revista: invisibles. No se trata de describir cada píxel, sino de que la foto que aporta información la aporte también en texto.
+
+### El contraste: los precios y el botón "Reservar"
+
+El contraste insuficiente es el error más común del mundo (el 83,9% de las páginas según el WebAIM Million 2026). En hoteles tiene un sitio favorito: el precio en gris claro sobre blanco, y el botón "Reservar" con un dorado elegante que no llega al mínimo legal de 4,5:1. Leerlo es como [leer la letra pequeña de un contrato en la playa a las tres de la tarde](/blog/contraste-de-color-accesibilidad-web). Para una persona con baja visión, o para cualquiera con el móvil al sol, deja de ser un detalle de diseño.
+
+### El foco invisible
+
+Cuando navegas con teclado, necesitas ver dónde estás: ese recuadro que marca el elemento activo. Muchas plantillas lo eliminan por estética (`outline: none`) y no ponen nada en su lugar. La consecuencia es que tabular por la web es como moverte por una casa a oscuras dándote con los muebles: avanzas, pero no sabes dónde estás. Y sí, esto se arregla con una sola línea de CSS bien puesta.
+
+## Por qué el escáner gratis no lo detecta
+
+Aquí llega la parte incómoda. Habrás pasado un test automático —Lighthouse, alguna extensión— y te habrá dado un número alto. Tranquilizador. Y engañoso.
+
+Las herramientas automáticas detectan **alrededor del 30%** de los problemas reales: lo mecánico (falta un alt, contraste, un atributo). El resto —si el calendario se puede usar de verdad con teclado, si un lector anuncia bien cada campo, si el orden de lectura tiene sentido— solo se ve probando a mano y con un lector de pantalla real. Te lo desarrollo en [por qué Lighthouse no es una auditoría](/blog/lighthouse-no-es-auditoria-accesibilidad).
+
+Lo resumo con algo que veo constantemente: el informe automático aprueba un campo "porque tiene etiqueta", y el lector de pantalla real, en esa misma página, no lee ningún nombre. Las dos cosas a la vez. La máquina mira el código en teoría; el lector lo ejecuta en la práctica. Un campo "aprobado" que nadie puede rellenar con lector sigue siendo un campo roto.
+
+Si quieres ver cómo es esto en una web real, lo cuento paso a paso en [un caso de auditoría a fondo](/caso-auditoria-accesibilidad) (anonimizado).
+
+## Siete comprobaciones que puedes hacer hoy
+
+Sin herramientas, sin presupuesto, en diez minutos. Aparta el ratón:
+
+1. **Reserva con el teclado.** Intenta completar una reserva usando solo Tab, flechas y Enter. ¿Llegas al final? ¿Puedes elegir fechas?
+2. **Mira el foco.** Mientras tabulas, ¿se ve siempre dónde estás? Si en algún punto "desaparece", ahí tienes un fallo.
+3. **Reduce la ventana o haz zoom al 200%.** ¿Aparece scroll horizontal o se rompe el contenido?
+4. **El botón "Reservar".** ¿Se lee con claridad o el color lo deja a medias?
+5. **La galería.** Inspecciona una foto que aporte información. ¿Tiene texto alternativo o está vacío?
+6. **El buscador.** Si borras mentalmente los iconos, ¿sabrías qué pide cada campo solo por el texto asociado?
+7. **El mapa o el "cómo llegar".** ¿Hay la misma información en texto, o solo en la imagen?
+
+Si fallas tres o más, no es mala suerte: es el patrón. Y es exactamente lo que mide una auditoría de verdad.
+
+## La declaración y la ley, sin humo
+
+Un par de aclaraciones para que no te la cuelen. La **declaración de accesibilidad** con formato cerrado solo es obligatoria para el sector público (RD 1112/2018). Como hotel privado, lo que te toca es informar del cumplimiento de accesibilidad en tus condiciones del servicio, además de cumplir técnicamente. No es lo mismo que el aviso legal, y no se resuelve con una frase tipo en el pie de página.
+
+Y no, un plugin de "accesibilidad en un clic" no te hace accesible ni te cubre. Corrige una fracción mínima de lo que de verdad falla, y deja intacto justo lo importante: el motor de reservas. Lo que arregla los problemas que hemos visto es tocar el código, no taparlo.
+
+## Por dónde empezar
+
+No hace falta rehacer la web entera. Hace falta orden:
+
+1. **Saber dónde estás.** Una [auditoría real](/blog/que-incluye-auditoria-accesibilidad-web), con pruebas manuales de teclado y lector de pantalla, no solo el informe automático que ve una parte. Sin esto, arreglas a ciegas.
+2. **Arreglar primero el motor de reservas.** Es donde se cae el dinero y donde más gente se queda fuera. El buscador, el calendario y los datos del cliente van antes que la página "Nuestra historia".
+3. **Que no se vuelva a romper.** Cada cambio de plantilla, cada plugin nuevo, cada subida de fotos puede reintroducir barreras. La accesibilidad se mantiene, no se termina.
+
+Que tu web de reservas funcione para todos no es solo cumplir la ley: es dejar de perder reservas que ahora mismo no llegan a completarse. Si quieres saber exactamente en qué estado está la tuya y por dónde empezar, eso es justo lo que hago: [auditar tu web a fondo](/auditoria-accesibilidad), con informe técnico y el documento de cumplimiento adaptado a tu caso. Empezando por donde cobras.
