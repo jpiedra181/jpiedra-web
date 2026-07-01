@@ -1,0 +1,156 @@
+---
+title: "Texto alternativo en imágenes: la guía por tipos (con código)"
+description: "Cómo escribir el texto alternativo (alt) según el tipo de imagen: decorativa, informativa, funcional o compleja. Con código real y sin los mitos de siempre."
+pubDate: 2026-07-01
+updatedDate: 2026-07-01
+category: "tutorial"
+tags: ["texto-alternativo", "atributo-alt", "alt-text", "imagenes-accesibles", "accesibilidad", "wcag"]
+heroImage: "/blog/texto-alternativo-imagenes/hero.webp"
+heroImageAlt: "Una lupa apoyada sobre una fotografía impresa en blanco y negro, sobre una mesa de madera."
+draft: false
+---
+
+El 53,1% de las webs analizadas en el WebAIM Million 2026 tienen imágenes sin texto alternativo. Es el segundo fallo de accesibilidad más común del planeta, solo por detrás del contraste. Y el consejo que te vas a encontrar en casi todos los tutoriales —"describe la imagen"— es justamente el que hace que salga mal.
+
+Porque el texto alternativo no describe la imagen. Describe lo que la imagen *aporta* en ese punto de la página. No es lo mismo, y esa diferencia es todo el artículo. Vamos por tipos, con código, y de paso desmonto tres mitos que arrastra medio internet.
+
+## Qué "lee" exactamente un lector de pantalla
+
+Antes de escribir un solo `alt`, hay que entender qué pasa con él. Cuando un lector de pantalla llega a una imagen, lee en voz alta el contenido del atributo `alt`. Nada más y nada menos.
+
+Y aquí está el detalle que casi nadie explica: **no es lo mismo un `alt` vacío que un `alt` ausente.**
+
+```html
+<!-- alt vacío: el lector de pantalla IGNORA la imagen y sigue -->
+<img src="adorno.svg" alt="">
+
+<!-- alt ausente: el lector de pantalla no sabe qué hacer y suele
+     leer el nombre del archivo: "IMG guion 4832 punto jpg" -->
+<img src="IMG_4832.jpg">
+```
+
+El `alt=""` es una decisión: le estás diciendo al lector de pantalla "esto no aporta nada, pásalo de largo". La ausencia de `alt` es un agujero: la tecnología improvisa, y lo que improvisa es leer el nombre del fichero en alto, letra por letra. Imagina que alguien te describe la web por teléfono mientras conduces y de repente te deletrea "IMG guion 4832". Esa es la experiencia.
+
+Regla cero, entonces: **todas las imágenes llevan `alt`. Siempre.** Lo que cambia es qué metes dentro.
+
+## La pregunta correcta no es "qué se ve", es "qué aporta"
+
+El criterio 1.1.1 de las [WCAG](https://www.w3.org/TR/WCAG22/#non-text-content) exige que todo contenido no textual tenga una alternativa textual que cumpla el mismo propósito. Fíjate: el mismo *propósito*, no la misma apariencia.
+
+Un ejemplo. La misma foto de una llave inglesa puede necesitar tres `alt` distintos:
+
+- En un artículo sobre herramientas: `alt="Llave inglesa ajustable de 30 cm"`.
+- Como icono de un botón de ajustes: `alt="Configuración"`.
+- Como adorno de fondo en una cabecera: `alt=""`.
+
+Misma imagen, tres propósitos, tres alternativas. Por eso "describe la imagen" es mal consejo: describir la llave en el botón de ajustes ("llave inglesa metálica sobre fondo azul") es ruido inútil para quien solo quiere saber que ese botón abre la configuración.
+
+La pregunta que sí funciona: **si quitara esta imagen y la sustituyera por texto, ¿qué texto pondría para que la página siga teniendo sentido?** Eso es tu `alt`.
+
+## El árbol de decisión por tipo de imagen
+
+Toda imagen cae en uno de estos seis casos. Identifica el tipo y el `alt` casi se escribe solo.
+
+| Tipo | Qué hace | Qué va en el `alt` |
+|---|---|---|
+| Decorativa | Adorna, no informa | Vacío: `alt=""` |
+| Informativa | Aporta contenido | El contenido, en contexto |
+| Funcional | Es un enlace o botón | La acción, no el dibujo |
+| Compleja | Gráfico, mapa, infografía | Resumen corto + descripción larga aparte |
+| Texto en imagen | Un cartel, un logo con lema | El mismo texto que se ve |
+| CAPTCHA | Verifica que eres humano | El propósito, no la solución |
+
+### Decorativa
+
+Fondos, líneas separadoras, orlas, esa foto de stock de gente sonriendo que no dice nada. Si la imagen desapareciera y no se perdiera información, es decorativa.
+
+```html
+<img src="ondas-decorativas.svg" alt="">
+```
+
+Mejor aún: si es puramente estética, sácala del HTML y ponla como fondo por CSS. Lo que vive en `background-image` no lo anuncia el lector de pantalla, y te ahorras el `alt` vacío.
+
+### Informativa
+
+Aporta datos que el texto de alrededor no da. Aquí describes el contenido relevante, en contexto y sin florituras.
+
+```html
+<!-- MAL: literal, aislado y con "imagen de" redundante -->
+<img src="grafico.jpg" alt="Imagen de una foto de un edificio de oficinas">
+
+<!-- BIEN: lo que aporta al contenido -->
+<img src="sede.jpg" alt="Fachada de la nueva sede de la empresa en Málaga">
+```
+
+No empieces con "imagen de" ni "foto de": el lector de pantalla ya anuncia que es una imagen antes de leer el `alt`. Decírselo otra vez es como contestar el teléfono diciendo "esto es una llamada telefónica".
+
+### Funcional
+
+La imagen *es* un enlace o el contenido de un botón. Lo que importa no es qué se ve, sino a dónde lleva o qué hace. Este es el caso que más se falla.
+
+```html
+<!-- Logo que enlaza al inicio: el alt describe el destino -->
+<a href="/"><img src="logo.svg" alt="Inicio - Bufete Ejemplo"></a>
+
+<!-- Botón con icono de lupa: el alt es la acción -->
+<button><img src="lupa.svg" alt="Buscar"></button>
+```
+
+`alt="Lupa"` describe el dibujo. `alt="Buscar"` describe la función. Quien no ve el icono necesita lo segundo, no lo primero.
+
+### Compleja
+
+Un gráfico, un mapa, una infografía con mucha información. No cabe en un `alt` de una línea, y forzarlo deja fuera datos. La solución es doble: un `alt` corto que identifica la imagen y una descripción larga cerca, en el propio texto de la página.
+
+```html
+<img src="ventas-2025.png"
+     alt="Gráfico de ventas por trimestre en 2025. Descripción detallada debajo.">
+<p>En 2025 las ventas crecieron cada trimestre: 1,2 M€ en el primero,
+   1,5 M€ en el segundo, 1,8 M€ en el tercero y 2,1 M€ en el cuarto.</p>
+```
+
+La descripción larga en el cuerpo tiene un premio extra: la lee todo el mundo, no solo quien usa lector de pantalla. Un gráfico bien explicado en texto también ayuda a quien mira desde el móvil bajo el sol.
+
+### Texto dentro de imagen
+
+Un cartel, una cita maquetada como imagen, un logo con eslogan. El `alt` reproduce el texto, tal cual.
+
+```html
+<img src="oferta.png" alt="Rebajas de verano: hasta el 40% de descuento">
+```
+
+Y un apunte: meter texto en una imagen es mala idea de entrada. No se puede seleccionar, no escala bien y se pixela al hacer zoom. Si puedes ponerlo como texto real con CSS, hazlo. La imagen con texto es deuda técnica con buena presencia.
+
+### CAPTCHA
+
+El caso raro que nadie cubre. Un CAPTCHA visual es una imagen que, por definición, no puedes describir sin romperla. El `alt` describe el *propósito*, no la solución, y la página debe ofrecer una alternativa no visual (por ejemplo, un CAPTCHA de audio).
+
+```html
+<img src="captcha.png" alt="CAPTCHA: verificación de seguridad. Usa la alternativa en audio si no puedes verla.">
+```
+
+## Los tres mitos que arrastra medio internet
+
+**Mito 1: "El `alt` tiene un máximo de 125 (o 150) caracteres".** No existe tal límite en HTML ni en las WCAG. Nació porque una versión antigua de un lector de pantalla troceaba los textos largos; los lectores actuales no lo hacen. Dicho esto, si necesitas un párrafo, probablemente es una imagen compleja y toca descripción larga aparte. Concisión por usabilidad, no por una regla inventada.
+
+**Mito 2: "Empieza siempre con 'imagen de…'".** No. Redundante y molesto, como ya vimos.
+
+**Mito 3: "El `alt` es para el SEO, así que métele palabras clave".** El `alt` es para las personas. Que Google también lo lea es un efecto secundario agradable, no el objetivo. Rellenar el `alt` de keywords es de los [errores de accesibilidad más comunes](/blog/errores-accesibilidad-web-mas-comunes) y, además, Google penaliza el keyword stuffing. Pierdes por los dos lados.
+
+## Lo que ninguna herramienta automática detecta
+
+Aquí está el límite que conviene tener claro. Una herramienta automática te dice si *falta* el `alt`. No te dice si el `alt` es basura.
+
+`alt="imagen"`, `alt="foto"`, `alt="DSC_0042"` o `alt="zapatos zapatillas calzado comprar barato online"` pasan la validación automática con nota: técnicamente el atributo existe. Y los cuatro son inservibles para quien depende de ellos. Por eso [Lighthouse no es una auditoría de accesibilidad](/blog/lighthouse-no-es-auditoria-accesibilidad): valida la presencia, no la calidad. La calidad del `alt` solo la juzga una persona leyendo la página con criterio.
+
+## Checklist rápido
+
+Antes de dar una imagen por buena, tres preguntas:
+
+- ¿Tiene `alt`? Todas, siempre. Decorativas incluidas (con `alt=""`).
+- ¿El `alt` cumple el mismo propósito que la imagen, o solo describe el dibujo?
+- Si es enlace o botón, ¿el `alt` dice la acción y no la apariencia?
+
+Si respondes bien a las tres en cada imagen, estás por delante de la mitad del internet español.
+
+¿Quieres saber cuántas de tus imágenes tienen `alt` de verdad y cuántas lo tienen de mentira? Es una de las cosas que reviso, imagen a imagen, en una [auditoría de accesibilidad](/auditoria-accesibilidad).
