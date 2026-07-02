@@ -1,0 +1,107 @@
+---
+title: "Accesibilidad web para inmobiliarias: qué falla en tu portal (y qué exige la ley)"
+description: "Tu inmobiliaria vende pisos, pero tu web puede dejar fuera al comprador antes de ver la ficha. Qué falla de verdad y qué te exige la Ley 11/2023."
+pubDate: 2026-07-02
+updatedDate: 2026-07-02
+category: "tecnico"
+tags: ["accesibilidad-web-inmobiliaria", "sector-inmobiliario", "portal-inmobiliario-accesible", "ley-11-2023", "wcag", "ficha-de-inmueble-accesible"]
+heroImage: "/blog/accesibilidad-web-inmobiliaria/hero.webp"
+heroImageAlt: "Maqueta de viviendas de madera sobre un plano arquitectónico impreso."
+draft: false
+---
+
+Puedes tener en cartera el piso más accesible del barrio —planta baja, sin barreras, ascensor a cota cero— y aun así dejar fuera a quien podría comprarlo. No en la visita. Antes: en tu web, cuando intenta filtrar los inmuebles y no puede.
+
+La accesibilidad del edificio y la accesibilidad de tu web son dos cosas distintas, con dos normas distintas. Una la conoces bien porque se ve y se mide en obra. La otra vive en el código, no sale en la foto del anuncio, y casi nadie del sector la mira hasta que llega un correo. Vamos a separarlas y a bajar al detalle que las guías genéricas de la Ley 11/2023 esquivan: qué falla técnicamente en una web inmobiliaria y a quién deja fuera.
+
+## "Accesibilidad" en inmobiliaria significa dos cosas, y se confunden
+
+Busca "accesibilidad en portales inmobiliarios" y medio internet te hablará de rampas, ascensores y la Ley de Propiedad Horizontal. Lógico: en este sector "portal" es la entrada del edificio. Pero aquí hablamos del otro portal, el digital, y de otra norma.
+
+- **Accesibilidad física del inmueble**: rampas, anchos de puerta, ascensor. La regula el Código Técnico de la Edificación y la normativa de vivienda. Va del ladrillo.
+- **Accesibilidad de tu web**: que una persona ciega, con baja visión o que navega con teclado pueda usar tu portal para buscar, ver una ficha y contactar. La regula la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas). Va del código.
+
+Cumplir una no cumple la otra. Puedes anunciar "vivienda adaptada" en una web que un lector de pantalla no sabe leer. La contradicción es más común de lo que parece.
+
+## ¿A tu inmobiliaria le aplica la ley? Depende, y conviene saberlo
+
+La respuesta honesta no es un sí rotundo. La Ley 11/2023 —que traspone en España la directiva europea de accesibilidad— obliga a los servicios prestados por vía electrónica al consumidor, y una web donde el cliente busca inmuebles, solicita visitas o firma reservas entra de lleno. Se aplica **desde el 28 de junio de 2025**. No es una fecha futura ni difusa.
+
+La salida es la excepción de **microempresa que solo presta servicios**: menos de 10 personas empleadas **y** menos de 2 millones de euros de facturación anual. Las dos condiciones a la vez. Y aquí el sector inmobiliario es un caso peculiar: hay muchas agencias pequeñas de barrio que sí caben en esa excepción. Pero en cuanto hay franquicia, red de oficinas, un portal con volumen o facturación por encima del umbral, se sale. Si no tienes claro de qué lado caes, lo despejas en dos minutos con el [autoevaluador de la ley](/te-aplica-ley-11-2023).
+
+El listón técnico es la norma **UNE-EN 301 549**, que en la práctica equivale a cumplir las **WCAG 2.1 nivel AA**. Traducido: no basta con que la web se vea bien. Tiene que poder usarse sin ratón y sin vista.
+
+## Lo que falla de verdad en una web inmobiliaria
+
+En las auditorías que hago, las webs del sector fallan casi siempre por los mismos sitios. Y rara vez por las fotos de las viviendas.
+
+### El buscador y los filtros no funcionan con teclado
+
+El corazón de una web inmobiliaria es el buscador: zona, precio, habitaciones, metros, obra nueva. Y es, casi siempre, el primer muro. Sliders de precio que solo se arrastran con el ratón, desplegables personalizados hechos con `<div>` que el teclado no puede abrir, mapas de "dibuja tu zona" imposibles de usar sin cursor.
+
+Mucha gente con discapacidad motora o visual no usa ratón: navega con la tecla Tab y las flechas. Si tu filtro no se puede recorrer y activar así, esa persona no llega ni a ver un inmueble. Se va antes de empezar. Lo desarrollo en [navegación por teclado accesible](/blog/navegacion-por-teclado-accesible).
+
+### La ficha del inmueble: galerías sin texto alternativo
+
+Aquí está la ironía del sector. Vivís de la imagen —el salón con luz, la cocina reformada, la terraza— y esas galerías suelen llegar sin una sola descripción en el código. Para quien usa lector de pantalla, la ficha es una sucesión de "imagen, imagen, imagen". La reforma que justifica el precio: invisible.
+
+No se trata de describir cada píxel, sino de que la foto que aporta información la aporte también en texto. Las imágenes sin texto alternativo son el segundo error más común de la web mundial: el 53,1% de las páginas analizadas en el WebAIM Million 2026 lo tienen. Cómo escribir un alt útil sin pasarte lo cuento en [texto alternativo para imágenes](/blog/texto-alternativo-imagenes).
+
+### El tour virtual 360º sin alternativa
+
+El tour inmersivo es el argumento de venta del momento. También es un agujero de accesibilidad de manual: un widget que quien no ve no puede recorrer, y del que no se ofrece **ninguna** alternativa. La información existe —distribución, estancias, orientación— pero solo por un canal, y ese canal es visual.
+
+No hace falta renunciar al tour. Hace falta que junto a él haya lo mismo en texto: una descripción de la distribución, un plano etiquetado, una lista de estancias. Quien pueda usar el tour, que lo use. Quien no, que no se quede sin la información.
+
+### El formulario de "solicitar visita", sin etiquetas
+
+Nombre, teléfono, email, "me interesa este inmueble". Para tu vista está clarísimo con su iconito y su texto al lado. Para un lector de pantalla, si esos campos no tienen una etiqueta asociada **en el código**, lo que se oye es "cuadro de texto, edición". Sin más.
+
+Y este fallo no es estético: es directamente una fuga de leads. El formulario de contacto es la página que capta al cliente, y es justo donde más veces encuentro el problema más grave. Los campos sin etiqueta son el tercer error más frecuente del mundo (51% de las páginas, según el WebAIM Million 2026). Te pongo un patrón que veo constantemente: una agencia con el formulario de visita identificado solo por el `placeholder` gris. En cuanto el usuario empieza a escribir, ya no ve qué pedía cada campo. La tasa de abandono no era mala suerte. Cómo arreglarlo, campo a campo, en [formularios accesibles](/blog/formulario-accesible).
+
+### El contraste: el precio y el botón de contacto
+
+El contraste insuficiente es el error más común del mundo (83,9% de las páginas, WebAIM Million 2026). En inmobiliaria tiene su sitio favorito: el precio en gris claro sobre blanco "para que quede elegante", y el botón "Contactar" o "Solicitar visita" con un color de marca que no llega al mínimo legal de 4,5:1.
+
+Para una persona con baja visión, o para cualquiera mirando el móvil al sol de mediodía, ese precio es [la letra pequeña de un contrato bancario en la playa a las tres de la tarde](/blog/contraste-de-color-accesibilidad-web). Deja de ser un detalle de diseño en el momento en que esconde el dato que decide la compra.
+
+### El mapa de ubicación, sin dirección en texto
+
+El mapa embebido con el "dónde está" es un clásico. Y un clásico de lo inaccesible cuando es la única forma de saber la ubicación. La solución es de las baratas: junto al mapa, la dirección en texto y, si aplica, la zona y los puntos de interés enlazados. El mapa, para quien lo pueda ver; el texto, para todos.
+
+## El dossier en PDF que nadie puede leer
+
+La memoria de calidades, el plano de la promoción de obra nueva, el dossier del local comercial: casi siempre un PDF. Y casi siempre un PDF sin etiquetas estructurales, con el plano como imagen plana y las tablas de superficies que el lector de pantalla interpreta como un amasijo de celdas inconexas.
+
+Ojo con esto, porque mucha gente lo pasa por alto: la accesibilidad no termina en el HTML. El PDF también cuenta. Si el documento clave para cerrar una operación no se puede leer con lector de pantalla, es una barrera más, y de las que salen caras en obra nueva, donde el dossier *es* el producto.
+
+## Por qué el test automático te dice que todo va bien
+
+Aquí llega la parte incómoda. Habrás pasado alguna extensión gratis o el Lighthouse del navegador y te habrá dado una nota alta. Tranquilizadora. Y engañosa.
+
+Las herramientas automáticas detectan **alrededor del 30%** de los problemas reales: lo mecánico —falta un alt, el contraste, un atributo suelto—. El resto es justo lo que hemos visto: si el filtro se puede usar de verdad con teclado, si el lector anuncia bien cada campo del formulario, si el tour tiene alternativa. Eso solo se ve probando a mano, con un lector de pantalla real. Lo explico en [por qué Lighthouse no es una auditoría](/blog/lighthouse-no-es-auditoria-accesibilidad).
+
+Y sí, ya sé que la plantilla de tu portal venía "optimizada y accesible" según el proveedor. Casi todas lo dicen. Casi ninguna lo cumple en el buscador, que es donde importa.
+
+## Seis comprobaciones que puedes hacer hoy
+
+Sin herramientas, sin presupuesto, en diez minutos. Aparta el ratón:
+
+1. **Busca con el teclado.** Intenta filtrar por zona y precio usando solo Tab, flechas y Enter. ¿Puedes mover el slider de precio? ¿Abrir los desplegables?
+2. **Mira el foco.** Mientras tabulas, ¿se ve siempre dónde estás? Si en algún punto el recuadro "desaparece", ahí hay un fallo.
+3. **La galería de la ficha.** Inspecciona una foto que aporte información. ¿Tiene texto alternativo o está vacío?
+4. **El tour 360º.** ¿Hay la misma información en texto (plano, distribución) o solo dentro del visor?
+5. **El formulario de visita.** Si borras mentalmente los iconos, ¿sabrías qué pide cada campo solo por el texto asociado?
+6. **Haz zoom al 200%.** ¿El listado de inmuebles se reordena y se lee, o aparece scroll horizontal y se rompe?
+
+Si fallas tres o más, no es casualidad: es el patrón del sector. Y es exactamente lo que mide una auditoría de verdad. Si quieres ver cómo se ve esto en una web real, lo cuento paso a paso en [un caso de auditoría a fondo](/caso-auditoria-accesibilidad) (anonimizado).
+
+## Por dónde empezar
+
+No hace falta rehacer el portal entero. Hace falta orden:
+
+1. **Saber dónde estás.** Una [auditoría real](/blog/que-incluye-auditoria-accesibilidad-web), con pruebas manuales de teclado y lector de pantalla, no solo el informe automático que ve una parte. Sin esto, arreglas a ciegas.
+2. **Arreglar primero el buscador y la ficha.** Es por donde entra el cliente y por donde se cae. El filtro, la galería y el formulario de visita van antes que la página "Quiénes somos".
+3. **Que no se vuelva a romper.** Cada nuevo inmueble, cada plugin, cada cambio de plantilla puede reintroducir barreras. La accesibilidad se mantiene, no se termina.
+
+Que tu web funcione para todos no es solo cumplir la ley: es dejar de perder solicitudes de visita que ahora mismo no llegan a enviarse. Si quieres saber exactamente en qué estado está la tuya y por dónde empezar, eso es justo lo que hago: [auditar tu web a fondo](/auditoria-accesibilidad), con informe técnico y el documento de cumplimiento adaptado a tu caso. Empezando por donde captas.
