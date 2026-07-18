@@ -34,6 +34,7 @@ analisis-huecos/
 _linkedin/
 _blog-export/
 videos/
+_recursos/
 
 # Playwright MCP scratch (snapshots, console logs, screenshots temporales)
 .playwright-mcp/

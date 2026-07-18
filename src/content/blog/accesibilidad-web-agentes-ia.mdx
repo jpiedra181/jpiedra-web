@@ -1,0 +1,69 @@
+---
+title: "Los agentes de IA leen tu web por el árbol de accesibilidad. El mismo que ya exige la ley"
+description: "Google puntúa ya si un agente de IA puede usar tu web, y mide el mismo árbol de accesibilidad que exigen WCAG y la Ley 11/2023. Qué significa para tu PYME."
+pubDate: 2026-07-18
+updatedDate: 2026-07-18
+category: "opinion"
+tags: ["agentes-ia", "arbol-de-accesibilidad", "pagespeed", "wcag", "ley-11-2023"]
+heroImage: "/blog/accesibilidad-web-agentes-ia/hero.webp"
+heroImageAlt: "Diagrama del árbol de accesibilidad de una web: el nodo de un botón sin nombre accesible, resaltado en rojo, bloquea por igual a un lector de pantalla y a un agente de IA"
+draft: false
+---
+
+## Los agentes de IA leen tu web por el árbol de accesibilidad. El mismo que ya exige la ley
+
+Google ha empezado a puntuar tu web según si un agente de IA es capaz de usarla. Y para decidirlo mira exactamente lo mismo que un lector de pantalla: si tus botones tienen nombre, si tus campos tienen etiqueta, si el árbol de accesibilidad está bien montado. Justo lo que el sector lleva años dejando para el final.
+
+El sector del posicionamiento ya le ha puesto nombre —Navegación Agéntica, Agent Experience, GEO— y lo está vendiendo como una tarea nueva. No lo es del todo. Buena parte de eso es accesibilidad, la de siempre, la que la Ley 11/2023 ya te obliga a tener desde junio de 2025. Lo que ha cambiado no es el trabajo. Es quién lo reclama.
+
+## Qué acaba de cambiar en PageSpeed
+
+Lighthouse —el motor que hay detrás de PageSpeed Insights— incorporó en mayo de 2026 una categoría nueva a su configuración por defecto: Navegación Agéntica (*Agentic Browsing*). Google todavía la etiqueta como experimental y requiere Chrome 150 o superior, así que aún no le sale a todo el mundo. Pero ya no es un experimento de laboratorio: está en el producto, en la configuración por defecto.
+
+No puntúa como el resto. En vez de un número del 0 al 100, da una fracción: cuántos de los chequeos de "preparación para agentes" pasa tu web sobre el total. Comprueba cuatro cosas por defecto: el árbol de accesibilidad, la estabilidad visual de la página (el CLS de siempre), la presencia de un fichero `llms.txt` en la raíz, y el registro de herramientas vía WebMCP.
+
+De esas cuatro, tres son novedad y una no. El árbol de accesibilidad no es una métrica nueva inventada para la IA. Es la misma estructura que evalúa cualquier auditoría de accesibilidad desde hace años. Google no ha añadido un examen: ha cogido un subconjunto de sus auditorías de accesibilidad de siempre y las ha puesto a puntuar para otro público.
+
+## Por dónde te lee un agente
+
+Para entender por qué esto importa hace falta saber qué es el árbol de accesibilidad. Imagina que alguien te describe una web por teléfono: "hay un encabezado que dice Ofertas, debajo un botón que pone Comprar, y un campo para escribir tu email". Esa descripción hablada, sin colores ni tipografías, es más o menos lo que un navegador construye por debajo a partir de tu HTML. Roles, nombres y estados de cada elemento. Un lector de pantalla lo usa para narrarle la página a una persona ciega. Y ahora, un agente de IA lo usa para lo mismo.
+
+Un agente puede leer una web de tres maneras. Puede mirarla como una imagen (capturas de pantalla), puede leer el HTML en bruto, o puede leer el árbol de accesibilidad. La tendencia va hacia el árbol por dos razones prácticas. Una, el coste: una captura obliga al modelo a gastar un montón de tokens en interpretar una foto; el árbol es texto compacto. Dos, la fiabilidad: con la imagen el modelo tiene que adivinar qué píxeles son un botón; el árbol se lo dice con todas las letras, con su rol y su nombre. Por eso las herramientas de automatización para agentes, como Playwright de Microsoft, trabajan directamente sobre instantáneas del árbol de accesibilidad.
+
+No todos los agentes funcionan igual, y sería deshonesto decir lo contrario. Pero la dirección es esa, y Google la ha hecho oficial. Lo dice su propia documentación:
+
+> <span lang="en"><em>"Agents rely on the accessibility tree as their primary data model."</em></span>
+>
+> — Google, [Lighthouse Agentic Browsing Scoring](https://developer.chrome.com/docs/lighthouse/agentic-browsing/scoring)
+
+El modelo de datos *principal* del agente. No un extra. La vía por defecto por la que una IA entiende tu página.
+
+## El detalle incómodo: es lo mismo que ya te pedía la ley
+
+Aquí está el punto que casi nadie está contando, y es el que a ti te toca de lleno.
+
+Un botón sin nombre accesible rompe el árbol. Un campo de formulario sin etiqueta rompe el árbol. Un `<div onclick>` haciéndose pasar por botón no aparece en el árbol como algo pulsable. Esos tres fallos no son "cosas de la IA": son [incumplimientos de WCAG que llevo señalando en auditorías](/blog/errores-accesibilidad-web-mas-comunes) desde siempre. El criterio 4.1.2 (Nombre, función, valor) exige precisamente que cada elemento interactivo tenga un nombre y un rol accesibles por programación. Las etiquetas de formulario son el criterio 3.3.2. El árbol de accesibilidad *es* eso.
+
+Dicho de otro modo: lo que Google audita ahora para los agentes es un trozo de lo que la [Ley 11/2023](/blog/ley-11-2023-empresas-espanolas) ya te obliga a cumplir. Y no lo digo yo forzando la analogía. Lo dice Google, que en la misma frase mete al usuario con discapacidad y al agente:
+
+> <span lang="en"><em>"Missing labels can block users with visual disabilities and agents from completing a task."</em></span>
+>
+> — Google, [Accessibility for agents](https://developer.chrome.com/docs/lighthouse/agentic-browsing/accessibility-for-agents)
+
+La misma etiqueta que falta. El mismo usuario bloqueado. La única diferencia es que a uno lo protege la ley y al otro lo trae la tarjeta de un cliente que le ha mandado a comprar. Durante años, la objeción que más he oído en las reuniones iniciales es "nuestros usuarios no son ciegos". Ahora resulta que el que no puede usar tu web es un bot al que alguien iba a dejar comprar. Da un poco de vértigo lo rápido que se vuelve interesante un problema cuando cambia a quién afecta.
+
+## Lo que no es (para no vender humo)
+
+Antes de que un consultor de posicionamiento te venda un paquete de "optimización para agentes", conviene separar lo que es opcional de lo que ya te aplicaba.
+
+De las cuatro cosas que mira PageSpeed, dos son ficheros y protocolos nuevos. El `llms.txt` es un resumen en la raíz de tu web para que los modelos la interpreten mejor; no es obligatorio, no lo exige ninguna ley y es trabajo neto adicional. WebMCP va todavía más atrás: la propia documentación de Google avisa de que sus auditorías requieren apuntarse a un *origin trial*. O sea, es una prueba de campo, no algo asentado.
+
+El árbol de accesibilidad es lo contrario. No es opcional, no está en pruebas y no es una moda: es una obligación legal que tienes desde 2025 y una norma técnica (UNE-EN 301 549, que remite a WCAG) que existe desde mucho antes. Si alguien te plantea "prepararte para los agentes" y te empieza por el `llms.txt` en vez de por los botones sin nombre, te está vendiendo el adorno y saltándose los cimientos. El cimiento es gratis en el sentido de que ya lo debías. Lo caro es haberlo dejado sin hacer.
+
+## Qué hacer con esto
+
+La buena noticia es que no es doble trabajo. Arreglas el árbol una vez y sirve para las dos cosas: cumples la parte técnica de la ley y, de paso, tu web queda legible para los agentes. Los botones que son botones de verdad, los campos con su etiqueta, el foco visible, el orden lógico. Lo aburrido de siempre, que resulta que era lo importante.
+
+Una advertencia, que si no no sería yo. Que PageSpeed te dé buena nota en Navegación Agéntica no significa que tu web sea accesible, igual que [un 95 en Lighthouse nunca significó que cumplieras](/blog/lighthouse-no-es-auditoria-accesibilidad). Es una comprobación automática, y lo automático detecta una parte de los problemas, no todos. Un `alt="foto"` pasa el chequeo y no describe nada. Un `role="button"` sobre un `<div>` sin gestionar el teclado valida y no funciona con NVDA. El score es un suelo, no un certificado. Sirve para saber que hay trabajo pendiente; no para acreditar que no lo hay.
+
+Si quieres una foto real de por dónde falla tu árbol de accesibilidad —el mismo que leen los agentes y el que te mira la ley—, [puedo hacerte una auditoría manual](/auditoria-accesibilidad) contra WCAG 2.1 AA y UNE-EN 301 549, con los problemas localizados y priorizados. La IA no ha cambiado lo que hay que arreglar. Solo ha traído un motivo más para dejar de posponerlo.
