@@ -132,6 +132,18 @@ export function PantallaCaptura({
         dictamen detallado.
       </p>
 
+      <p className="text-sm text-text-muted leading-relaxed mb-8 max-w-xl">
+        Uso tu email únicamente para enviarte este dictamen. Al pedirlo aceptas
+        la{" "}
+        <a
+          href="/politica-de-privacidad"
+          className="underline hover:text-accent transition-colors duration-200"
+        >
+          política de privacidad
+        </a>
+        .
+      </p>
+
       <form
         onSubmit={handleSubmit}
         noValidate

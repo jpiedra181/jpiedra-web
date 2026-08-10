@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../components/layout/BaseLayout.astro"
+import Hero from "../../components/sections/services/Hero.astro"
+import Ladder from "../../components/sections/services/Ladder.astro"
+import NotDoing from "../../components/sections/services/NotDoing.astro"
+import Faq from "../../components/sections/services/Faq.astro"
+import FinalCta from "../../components/sections/services/FinalCta.astro"
+import { useTranslations } from "../../i18n/utils"
+import { siteConfig } from "../../config/site"
+import { buildServicesSchema } from "../../lib/services-schema"
+
+const lang = "en" as const
+const t = useTranslations(lang)
+
+const schema = buildServicesSchema({
+    lang,
+    pageUrl: `${siteConfig.url}/en/services`,
+    items: t.services.ladder.items,
+})
+---
+
+<BaseLayout
+    lang={lang}
+    title={t.services.meta.title}
+    description={t.services.meta.description}
+>
+    <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+    />
+
+    <Hero lang={lang} />
+    <Ladder lang={lang} />
+    <NotDoing lang={lang} />
+    <Faq lang={lang} />
+    <FinalCta lang={lang} />
+</BaseLayout>

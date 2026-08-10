@@ -2,39 +2,235 @@
   "nav": {
     "audit": "Audit",
     "blog": "Blog",
-    "contact": "Contact"
-},
+    "contact": "Contact",
+    "law": "Does Law 11/2023 apply to you?",
+    "services": "Services"
+  },
+  "services": {
+    "meta": {
+      "title": "Web accessibility services and pricing | Javier Piedra",
+      "description": "Express diagnosis for €290, audit from €1,200, remediation in fixed tiers and ongoing compliance from €149/month. Fixed price agreed before we start."
+    },
+    "hero": {
+      "eyebrow": "SERVICES AND PRICING",
+      "title": "Four ways to work together.",
+      "titleHighlight": "All at a fixed price.",
+      "subtitle": "From a 48-hour review to keeping your site compliant month after month. You choose where to start, and none of them commits you to the next one.",
+      "note": "All prices exclude VAT. None of them has a lock-in period."
+    },
+    "ladder": {
+      "eyebrow": "THE CATALOGUE",
+      "srTitle": "Service and pricing catalogue",
+      "forWhoLabel": "Who it's for",
+      "includesLabel": "What's included",
+      "items": [
+        {
+          "step": "01",
+          "id": "express-diagnosis",
+          "name": "Express diagnosis",
+          "price": "€290",
+          "priceAriaLabel": "two hundred and ninety euros",
+          "deadline": "48 hours",
+          "tagline": "I review your homepage and the three journeys where money actually leaks: the one that buys, the one that books and the one that fills in the form. In 48 hours you know what's broken and who you're locking out.",
+          "forWho": "For anyone who suspects there's a problem and wants it confirmed before investing properly.",
+          "includes": [
+            "Homepage and up to 3 critical journeys, quick pass along the main path",
+            "The 10 highest-impact findings, prioritised — if I find more, I tell you how many",
+            "Short PDF report, no jargon",
+            "20-minute call to go through it"
+          ],
+          "note": "The diagnosis locates what is costing you most; it does not evaluate the 50 WCAG criteria or deliver the compliance document — that is what the audit is for. The €290 is deducted in full if you book it within the following 30 days.",
+          "ctaLabel": "Request the diagnosis"
+        },
+        {
+          "step": "02",
+          "id": "full-audit",
+          "name": "Full audit",
+          "price": "From €1,200",
+          "priceAriaLabel": "from one thousand two hundred euros",
+          "deadline": "5-7 working days",
+          "tagline": "The complete diagnosis of your site against WCAG 2.1 AA and Law 11/2023, with a prioritised remediation plan and the compliance document ready to publish.",
+          "forWho": "For anyone who already knows they're covered by the law and needs the full diagnosis, not a sample.",
+          "includes": [
+            "Executive report that management can read",
+            "Catalogue of findings by WCAG criterion",
+            "Prioritised remediation plan",
+            "Compliance document ready to publish",
+            "1-hour presentation meeting"
+          ],
+          "note": "Auditing “every” page isn't how it's done: WCAG-EM 2.0 evaluates the whole site from a representative sample, and the report lists every URL evaluated one by one. I verify the size in your sitemap myself.",
+          "ctaLabel": "See the audit in detail",
+          "tiers": [
+            {
+              "name": "Essential",
+              "price": "€1,200",
+              "description": "Your site informs and people contact you. No buying, no booking, no login."
+            },
+            {
+              "name": "Commercial",
+              "price": "€2,200",
+              "description": "People can buy, book or request an appointment. That process is audited in full, start to finish."
+            },
+            {
+              "name": "Complex",
+              "price": "Quote within 24 h",
+              "description": "Several of those processes, a private area with login, or an unusually large site."
+            }
+          ]
+        },
+        {
+          "step": "03",
+          "id": "remediation",
+          "name": "Remediation",
+          "price": "From €1,800",
+          "priceAriaLabel": "from one thousand eight hundred euros",
+          "deadline": "Depends on tier",
+          "tagline": "I fix what the audit found. Three fixed tiers, and you pick the one you want: nobody forces you to go all the way.",
+          "forWho": "For anyone without an available technical team, or with one that would rather not spend the next few weeks on this.",
+          "tiers": [
+            {
+              "name": "Essential",
+              "price": "€1,800",
+              "description": "The blocking findings: whatever stops someone completing a purchase, submitting a form or navigating by keyboard today."
+            },
+            {
+              "name": "Complete",
+              "price": "€3,400",
+              "description": "Blocking and serious findings. Your main journeys stop pushing people out along the way."
+            },
+            {
+              "name": "AA conformance",
+              "price": "€5,900",
+              "description": "Every finding in the report until the audited scope reaches WCAG 2.1 AA."
+            }
+          ],
+          "note": "The tier is agreed once the audit is done and we know the real volume. Fixed price before a single line of code is touched.",
+          "ctaLabel": "Talk about remediation"
+        },
+        {
+          "step": "04",
+          "id": "ongoing-compliance",
+          "name": "Ongoing compliance",
+          "price": "€149 / €349 per month",
+          "priceAriaLabel": "one hundred and forty-nine or three hundred and forty-nine euros per month",
+          "deadline": "Monthly, no lock-in",
+          "tagline": "Websites change. Plugins update, marketing uploads content, deploys break things. I review yours every month so what you fixed stays fixed.",
+          "forWho": "For anyone who has already invested in becoming compliant and doesn't want to start over in a year.",
+          "tiers": [
+            {
+              "name": "Review",
+              "price": "€149/month",
+              "description": "Monthly review, a heads-up on what broke, and your compliance document always up to date."
+            },
+            {
+              "name": "Review and fixes",
+              "price": "€349/month",
+              "description": "The above, plus 4 monthly hours of fixes applied by me. What breaks gets fixed, with no separate quote."
+            }
+          ],
+          "note": "Requires a prior audit: without a diagnosis there's no way to know what to review each month or how to prioritise it.",
+          "ctaLabel": "Talk about ongoing compliance"
+        }
+      ]
+    },
+    "notDoing": {
+      "eyebrow": "WHAT I DON'T SELL",
+      "title": "Four things you won't find here.",
+      "subtitle": "Worth saying before you ask, because the industry is full of all four.",
+      "items": [
+        {
+          "title": "Accessibility overlays and widgets",
+          "description": "That floating button promising to fix everything with one line of script. It doesn't touch the code, it hides the problem, and in the United States there are lawsuits against sites that had one installed. If you have one, I'll tell you to remove it."
+        },
+        {
+          "title": "Conformance seals and certificates",
+          "description": "Neither Law 11/2023 nor RD 1112/2018 provides for an official seal that anyone can issue you. What does exist is the accessibility statement or information that you publish and that you answer for. That I do deliver, written and ready."
+        },
+        {
+          "title": "Open-ended retainers with no scope",
+          "description": "A monthly fee nobody can define ends up being a monthly fee that covers nothing. Everything on this page has a written scope and a fixed price before we start."
+        },
+        {
+          "title": "Automated-only audits",
+          "description": "Tools find some of the problems, never all of them: they catch contrast, but not focus getting lost halfway through your form, nor a screen reader announcing your buy button as “empty link”. That only shows up navigating by hand. An axe report exported to PDF is not an audit."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "BEFORE YOU BOOK",
+      "title": "What everyone asks.",
+      "items": [
+        {
+          "question": "How does billing work?",
+          "answer": "50% on confirmation and 50% on delivery. Formal invoice with VAT, valid for deduction. Ongoing compliance is billed monthly in arrears."
+        },
+        {
+          "question": "What is the difference between the express diagnosis and the audit?",
+          "answer": "Depth, and what you take away. The diagnosis walks your homepage and up to three journeys along their main path and gives you the 10 findings costing you most: it answers \"do I have a problem, and how big?\". The audit evaluates the 50 WCAG 2.1 AA criteria over a documented sample, audits every complete process including its error states, and delivers the remediation plan and the compliance document the law requires: it answers \"what am I missing, and how do I close it?\". That is why one costs €290 and the other from €1,200."
+        },
+        {
+          "question": "Can I book remediation without the audit?",
+          "answer": "If you bring me a recent and sufficiently detailed accessibility report, yes. If you don't have one, the audit is the prior step: you can't seriously fix what hasn't been diagnosed."
+        },
+        {
+          "question": "How do I know which tier my site falls into?",
+          "answer": "By what people can do on it. If it only informs and receives enquiries, Essential. If people can buy, book or request an appointment, Commercial. If there are several of those processes or a private area with login, a fixed quote within 24 hours. I verify the size in your sitemap — you don't have to count pages."
+        },
+        {
+          "question": "Do you work with my in-house team or my agency?",
+          "answer": "Yes, and that's the most common setup. The report is written so any technical profile can act on it directly. If you'd rather they apply it, that's fine: I audit, and then I review the result."
+        },
+        {
+          "question": "What if you miss a finding?",
+          "answer": "I fix it at no additional cost within 60 days of delivering the report."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Not sure which one you need?",
+      "subtitle": "Tell me what you have and I will tell you which step makes sense to start from. No commitment, no PowerPoints.",
+      "primaryLabel": "Write to me directly",
+      "secondaryLabel": "Write to me directly"
+    }
+  },
   "hero": {
     "label": "WEB DEVELOPER • WEB ACCESSIBILITY SPECIALIST",
-    "title": "Webs that work for everyone.",
-    "title_1": "No fines, no excuses, no smoke.",
-    "subtitle": "I don't make pretty websites. I understand your problem, choose the right tools and connect them so your business works better.",
-    "cta": "Audit my website",
-    "tags": ["Automation", "Modern Web", "Applied AI", "Integrations", "APIs", "Technical Consulting"]
+    "title": "There are people trying to buy from you",
+    "title_1": "and your website won't let them.",
+    "subtitle": "A button the screen reader announces as “empty link”. A form nobody can complete by keyboard. Text that never quite gets read. These aren't technical details: they're orders walking away without you ever hearing about it. I audit and fix websites against WCAG 2.1 AA and Spain's Law 11/2023.",
+    "cta": "See services and pricing",
+    "tags": [
+      "Automation",
+      "Modern Web",
+      "Applied AI",
+      "Integrations",
+      "APIs",
+      "Technical Consulting"
+    ]
   },
   "context": {
-    "eyebrow": "THE CONTEXT",
-    "title": "Web accessibility is no longer optional in Spain.",
-    "subtitle": "Since June 28, 2025, Law 11/2023 requires thousands of companies to make their websites accessible. Almost none of them are.",
+    "eyebrow": "WHY IT MATTERS",
+    "title": "Before it's a legal problem, it's a revenue problem.",
+    "subtitle": "When someone can't complete a purchase on your site, they almost never write to tell you. They leave and buy somewhere else. You pay for it either way; what you don't get is an invoice showing it.",
     "stats": [
       {
-        "value": "98%",
-        "ariaLabel": "98 percent",
-        "description": "of Spanish websites fail to meet the regulation."
+        "value": "8%",
+        "ariaLabel": "8 percent",
+        "description": "of shoppers with access needs tell the site owner when something is broken. The rest leave in silence."
       },
       {
-        "value": "€1,000,000",
-        "ariaLabel": "one million euros",
-        "description": "maximum fine for non-compliance."
+        "value": "4.32 M",
+        "ariaLabel": "four point three two million",
+        "description": "people aged six or over live with a disability in Spain. And 21.1% of the population is already 65 or older."
       },
       {
-        "value": "~4,4M",
-        "ariaLabel": "4.7 million",
-        "description": "people with disabilities in Spain cannot use many websites."
+        "value": "95.9%",
+        "ariaLabel": "95.9 percent",
+        "description": "of the world's most visited websites fail automated accessibility checks. Yours very probably does too."
       }
     ],
-    "closing": "If you sell online, take bookings, process services or receive public funds, this is about you.",
-    "sources": "Sources: 2025 Web Accessibility Barometer, INE, RDL 1/2013."
+    "closing": "And yes, it's also mandatory: Spain's Law 11/2023 has required it since 28 June 2025. But the cost of not doing it started running long before the first fine.",
+    "sources": "Sources: Click-Away Pound 2019 (United Kingdom), INE (EDAD 2020 and Population Projections 2026-2076) and WebAIM Million 2026. There is no equivalent of the Click-Away Pound study for the Spanish market."
   },
   "about": {
     "label": "ABOUT ME",
@@ -71,26 +267,51 @@
       {
         "category": "RAG + Conversational AI",
         "title": "Smart tax assistant",
-        "description":  "A chat where you ask your tax questions and get answers based on real tax authority documentation. Like having a tax advisor available around the clock.",
-        "tags": ["Astro", "n8n", "Claude AI", "Pinecone"]
+        "description": "A chat where you ask your tax questions and get answers based on real tax authority documentation. Like having a tax advisor available around the clock.",
+        "tags": [
+          "Astro",
+          "n8n",
+          "Claude AI",
+          "Pinecone"
+        ]
       },
       {
         "category": "Automation + AI",
         "title": "Design Systems Generator",
         "description": "You describe your brand — colors, style, personality — and it generates a complete visual guide with every element your website needs. Ready to use.",
-        "tags": ["n8n", "email", "Stripe", "Landing Pages", "Design Systems"]
+        "tags": [
+          "n8n",
+          "email",
+          "Stripe",
+          "Landing Pages",
+          "Design Systems"
+        ]
       },
       {
         "category": "Web Scraping + Analysis",
         "title": "Automated web audit",
         "description": "You enter a website address and it tells you what's working well, what's running slow, and what needs fixing. All explained in plain language, not cryptic metrics.",
-        "tags": ["Claude Skills", "PageSpeed API", "Lighthouse", "SEO", "Accessibility", "Audit", "PDF Report"]
+        "tags": [
+          "Claude Skills",
+          "PageSpeed API",
+          "Lighthouse",
+          "SEO",
+          "Accessibility",
+          "Audit",
+          "PDF Report"
+        ]
       },
       {
         "category": "EdTech + AI",
         "title": "AI study platform - In Testing",
-        "description":  "A study assistant that helps you prepare for public exams. It quizzes you, explains what you don't understand, and adapts to your level so you study smarter, not harder.",
-        "tags": ["Next.js", "Supabase", "OpenAI", "Stripe", "TailwindCSS"]
+        "description": "A study assistant that helps you prepare for public exams. It quizzes you, explains what you don't understand, and adapts to your level so you study smarter, not harder.",
+        "tags": [
+          "Next.js",
+          "Supabase",
+          "OpenAI",
+          "Stripe",
+          "TailwindCSS"
+        ]
       }
     ]
   },
@@ -143,15 +364,16 @@
     "available": "Available for projects",
     "rights": "All rights reserved.",
     "services": {
-        "label": "Services",
-        "audit": "Accessibility audit",
-        "blog": "Blog"
+      "label": "Services",
+      "audit": "Accessibility audit",
+      "blog": "Blog",
+      "services": "Services and pricing"
     },
     "legal": {
-        "label": "Legal",
-        "legalNotice": "Legal Notice",
-        "privacy": "Privacy Policy",
-        "cookies": "Cookie Policy"
+      "label": "Legal",
+      "legalNotice": "Legal Notice",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
     }
   },
   "audit": {
@@ -163,37 +385,37 @@
       "titleHighlight2": "WCAG 2.1 AA",
       "titleSuffix": ".",
       "subtitle": "In 5–7 business days you get a report your whole team can understand, with every issue, its legal impact, and how much it costs to fix. No jargon, no 200-page PDFs, no smoke.",
-      "price": "€1,200",
-      "priceAriaLabel": "one thousand two hundred euros",
-      "priceNote": "For websites with up to 8 unique pages.",
-      "priceSubnote": "Larger sites: fixed quote in 24 h, no surprises.",
+      "price": "From €1,200",
+      "priceAriaLabel": "from one thousand two hundred euros",
+      "priceNote": "For websites that inform and receive enquiries, with no online purchase or booking.",
+      "priceSubnote": "If people can buy, book or log in on your site, the tier goes up. Fixed quote within 24 hours.",
       "cta": "Request audit"
     },
     "problem": {
       "eyebrow": "THE PROBLEM",
-      "title": "Not optional. Not for 2030. Right now.",
-      "subtitle": "Since June 28, 2025, Spain's Law 11/2023 requires thousands of companies to make their websites accessible. The vast majority haven't. And this is not a small problem.",
+      "title": "First you lose customers. The fine comes later.",
+      "subtitle": "Since 28 June 2025, Spain's Law 11/2023 has required thousands of companies to have an accessible website, and the vast majority don't. But the problem didn't start there: every barrier on your site is someone who doesn't finish buying.",
       "risks": [
+        {
+          "value": "8%",
+          "ariaLabel": "8 percent",
+          "title": "Customers who leave without telling you",
+          "description": "Only 8 in 100 shoppers with access needs contact the site owner when something doesn't work for them (Click-Away Pound, United Kingdom, 2019). The other 92 leave and buy from a competitor. In your analytics that just looks like another bounce."
+        },
         {
           "value": "€1,000,000",
           "ariaLabel": "one million euros",
           "title": "Real fines",
-          "description": "The sanctioning regime of RDL 1/2013 is already in force. Spanish regions can inspect. Disability associations are already filing real cases."
+          "description": "The penalty regime of RDL 1/2013, which Law 11/2023 refers to, is already in force. Failing accessibility requirements is a serious infringement, and repeat offences can escalate to very serious."
         },
         {
-          "value": "January 2025",
-          "ariaLabel": "January 2025",
-          "title": "Locked out of public tenders",
-          "description": "If you work or want to work with the Spanish public sector, it's no longer optional. RD 193/2023 applies to every supplier since this date."
-        },
-        {
-          "value": "4.7 M",
-          "ariaLabel": "four point seven million",
-          "title": "Customers who can't use your site",
-          "description": "People with disabilities in Spain. If your ecommerce, your booking system or your form fails with a screen reader, those customers go to your competition."
+          "value": "June 2025",
+          "ariaLabel": "June 2025",
+          "title": "Public procurement",
+          "description": "Spanish public procurement already requires accessibility criteria in technical specifications. If you work with the public sector, or want to, a conformant website stops being a nice-to-have and becomes a written requirement."
         }
       ],
-      "closing": "Auditing your website is not a compliance whim. It's what separates the companies that are ready from those who will end up with the fine, the lawsuit, or both."
+      "closing": "Auditing your site isn't a compliance whim. It's about no longer losing customers who had already chosen you — and clearing the legal risk while you're at it."
     },
     "deliverables": {
       "eyebrow": "WHAT THE AUDIT DELIVERS",
@@ -294,16 +516,17 @@
           "title": "Apply the corrections",
           "optionalTag": "(optional)",
           "description": "If you want me to implement the solutions from the report, we can do that. I work package by package by priority: critical first, accessory later. Each package with a closed scope, estimated hours and fixed price before starting.",
-          "priceNote": "Typical investment: between €1,800 and €6,000, depending on the volume of findings. You know for sure at the end of the audit, never before."
+          "priceNote": "Three fixed tiers: €1,800, €3,400 or €5,900. Yours is decided once the audit is done and we know the real volume."
         },
         {
           "title": "Keep it from breaking again",
           "optionalTag": "(optional)",
           "description": "Websites change. Plugins update, marketing uploads content, devs ship deploys. If you want to sleep at night, I review your site every month and keep compliance up to date. The accessibility statement gets updated, new findings get fixed.",
-          "priceNote": "From €149/month. No annual contract, you leave when you want."
+          "priceNote": "€149 or €349 per month, depending on whether you want review only or the fixes applied too. No lock-in."
         }
       ],
-      "closing": "Neither of the two is mandatory. The audit alone, with the report in hand, already meets the legal requirement of evaluation. The rest is up to you."
+      "closing": "Neither of the two is mandatory. The audit gives you the full diagnosis and the compliance document ready to publish; fixing what needs fixing is your call.",
+      "ctaLabel": "See services and pricing"
     },
     "whyMe": {
       "eyebrow": "WHY ME",
@@ -333,8 +556,16 @@
           "answer": "5-7 business days from the initial briefing. Most audits I deliver in 5. Larger sites can require up to 7."
         },
         {
-          "question": "What if my site has more than 8 unique pages?",
-          "answer": "I send you a fixed quote in 24 hours based on the real volume. No surprises, no negotiation. Tiers go by size brackets, not by hour worked."
+          "question": "Are you going to audit every page on my website?",
+          "answer": "No, and I shouldn't. The W3C reference methodology, WCAG-EM 2.0, evaluates the conformance of a whole site from a representative sample: common views, one instance of each template, every technology you rely on, and an additional 10% picked at random to catch what a targeted selection would miss. Processes — buying, booking, signing up — are audited in full, start to finish, including their error states. The report lists every single URL evaluated, so the sample is verifiable and reproducible."
+        },
+        {
+          "question": "How do I know which tier I fall into?",
+          "answer": "By what people can do on your site, not by its size. If your site informs and people contact you, that's the Essential tier: €1,200. If people can buy, book or request an appointment, that's Commercial: €2,200. If there are several of those processes or a private area with login, you get a fixed quote within 24 hours. I check the page count in your sitemap myself — you don't have to count anything."
+        },
+        {
+          "question": "What is the difference between the express diagnosis and the audit?",
+          "answer": "Depth, and what you take away. The diagnosis walks your homepage and up to three journeys along their main path and gives you the 10 findings costing you most: it answers \"do I have a problem, and how big?\". The audit evaluates the 50 WCAG 2.1 AA criteria over a documented sample, audits every complete process including its error states, and delivers the remediation plan and the compliance document the law requires: it answers \"what am I missing, and how do I close it?\". That is why one costs €290 and the other from €1,200."
         },
         {
           "question": "Does the audit include implementing the corrections?",
@@ -367,8 +598,8 @@
       "srTitle": "Audit price and deadline",
       "pillars": [
         {
-          "value": "€1,200",
-          "label": "Complete audit under Spain's Law 11/2023 and WCAG 2.1 AA"
+          "value": "From €1,200",
+          "label": "Three tiers based on what people can do on your site"
         },
         {
           "value": "5-7 days",
@@ -406,34 +637,82 @@
           "label": "Sector",
           "placeholder": "Select a sector",
           "options": [
-            { "value": "ecommerce", "label": "Ecommerce" },
-            { "value": "hosteleria", "label": "Hospitality and tourism" },
-            { "value": "sanitario", "label": "Healthcare" },
-            { "value": "educativo", "label": "Education / training" },
-            { "value": "banca", "label": "Banking / fintech" },
-            { "value": "transporte", "label": "Transport" },
-            { "value": "servicios", "label": "Professional services" },
-            { "value": "otros", "label": "Other" }
+            {
+              "value": "ecommerce",
+              "label": "Ecommerce"
+            },
+            {
+              "value": "hosteleria",
+              "label": "Hospitality and tourism"
+            },
+            {
+              "value": "sanitario",
+              "label": "Healthcare"
+            },
+            {
+              "value": "educativo",
+              "label": "Education / training"
+            },
+            {
+              "value": "banca",
+              "label": "Banking / fintech"
+            },
+            {
+              "value": "transporte",
+              "label": "Transport"
+            },
+            {
+              "value": "servicios",
+              "label": "Professional services"
+            },
+            {
+              "value": "otros",
+              "label": "Other"
+            }
           ]
         },
         "size": {
           "label": "Approximate site size",
           "placeholder": "Select a size",
           "options": [
-            { "value": "small", "label": "Up to 8 pages" },
-            { "value": "medium", "label": "9 to 20 pages" },
-            { "value": "large", "label": "21 to 100 pages" },
-            { "value": "xl", "label": "More than 100 pages" }
+            {
+              "value": "small",
+              "label": "Up to 8 pages"
+            },
+            {
+              "value": "medium",
+              "label": "9 to 20 pages"
+            },
+            {
+              "value": "large",
+              "label": "21 to 100 pages"
+            },
+            {
+              "value": "xl",
+              "label": "More than 100 pages"
+            }
           ]
         },
         "timing": {
           "label": "When do you need the audit",
           "placeholder": "Select urgency",
           "options": [
-            { "value": "urgent", "label": "As soon as possible" },
-            { "value": "1-3m", "label": "In 1-3 months" },
-            { "value": "3-6m", "label": "In 3-6 months" },
-            { "value": "no-urgency", "label": "No urgency, exploring" }
+            {
+              "value": "urgent",
+              "label": "As soon as possible"
+            },
+            {
+              "value": "1-3m",
+              "label": "In 1-3 months"
+            },
+            {
+              "value": "3-6m",
+              "label": "In 3-6 months"
+            },
+            {
+              "value": "no-urgency",
+              "label": "No urgency, exploring"
+            }
           ]
         },
         "comments": {

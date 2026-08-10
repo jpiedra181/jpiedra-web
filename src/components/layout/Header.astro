@@ -16,10 +16,13 @@ const basePath = lang === "es" ? "/" : "/en/"
 const auditHref =
     lang === "es" ? "/auditoria-accesibilidad" : "/en/accessibility-audit"
 const blogHref = lang === "es" ? "/blog" : "/en/blog"
+const servicesHref = lang === "es" ? "/servicios" : "/en/services"
 const contactHref = "/te-aplica-ley-11-2023"
 
+// El autoevaluador solo existe en español: en inglés no se ofrece el enlace.
 const navItems = [
-    { href: contactHref, label: t.nav.law },
+    { href: servicesHref, label: t.nav.services },
+    ...(lang === "es" ? [{ href: contactHref, label: t.nav.law }] : []),
     { href: blogHref, label: t.nav.blog },
 ]
 ---

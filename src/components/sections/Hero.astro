@@ -11,6 +11,10 @@ interface Props {
 
 const { lang } = Astro.props
 const t = useTranslations(lang)
+
+// El catálogo es ahora la puerta de entrada: deja elegir peldaño en lugar de
+// empujar directamente al servicio de 1.200 €.
+const servicesHref = lang === "es" ? "/servicios" : "/en/services"
 ---
 
 <section
@@ -61,7 +65,7 @@ const t = useTranslations(lang)
                 </p>
 
                 <div class="hero-cta">
-                    <Button href="/auditoria-accesibilidad" variant="primary">
+                    <Button href={servicesHref} variant="primary">
                         {t.hero.cta}
                     </Button>
                 </div>

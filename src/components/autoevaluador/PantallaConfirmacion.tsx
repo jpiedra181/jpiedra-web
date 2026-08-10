@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { Dictamen } from "../../lib/autoevaluador";
+import { DICTAMENES, type Dictamen } from "../../lib/autoevaluador";
 
 type Props = {
   email: string;
@@ -49,20 +49,40 @@ export function PantallaConfirmacion({ email, dictamen }: Props) {
         Si no lo ves en bandeja en 5 minutos, revisa la carpeta de spam.
       </p>
 
-      {dictamen !== "G" && (
+      {DICTAMENES[dictamen].cta === "auditoria" ? (
         <div className="rounded-2xl border border-border bg-bg-surface p-6 md:p-8 mb-10 text-left">
           <h3 className="font-heading text-2xl md:text-3xl text-text-primary mb-3">
-            ¿Necesitas ayuda para cumplir?
+            ¿Quieres saber dónde está tu web hoy?
           </h3>
           <p className="text-text-secondary mb-6 leading-relaxed">
-            Hago auditorías de accesibilidad según WCAG 2.1 AA y la Ley
-            11/2023. Sin humo, sin mensualidades atadas.
+            Audito tu web contra WCAG 2.1 AA y te entrego el informe, el plan
+            de remediación y el documento de cumplimiento listo para publicar.
+            Precio cerrado antes de empezar.
           </p>
           <a
             href="/auditoria-accesibilidad"
             className="inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
           >
-            Conocer mi servicio de auditoría
+            Ver la auditoría en detalle
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      ) : (
+        <div className="rounded-2xl border border-border bg-bg-surface p-6 md:p-8 mb-10 text-left">
+          <h3 className="font-heading text-2xl md:text-3xl text-text-primary mb-3">
+            La ley hoy te deja en paz. Tus clientes no.
+          </h3>
+          <p className="text-text-secondary mb-6 leading-relaxed">
+            Cada barrera de tu web es alguien que no termina de comprar o de
+            contactar. Por 290 € reviso tu home y tus tres recorridos críticos
+            y en 48 horas sabes qué está fallando — se descuentan enteros si
+            algún día quieres la auditoría completa.
+          </p>
+          <a
+            href="/servicios#diagnostico-expres"
+            className="inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
+          >
+            Ver el diagnóstico exprés
             <span aria-hidden="true">→</span>
           </a>
         </div>

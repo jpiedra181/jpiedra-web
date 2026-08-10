@@ -70,33 +70,17 @@ export function PantallaDictamen({ dictamen, onContinuar, onVolver }: Props) {
           ¿Te envío el dictamen detallado?
         </h3>
         <p className="text-text-secondary leading-relaxed mb-6">
-          He preparado un PDF con análisis completo de tu situación:
+          He preparado un PDF con el análisis completo de tu caso:
         </p>
         <ul className="space-y-2 mb-8 text-text-secondary">
-          <li className="flex gap-2">
-            <span className="text-accent" aria-hidden="true">
-              •
-            </span>
-            Marco legal con artículos del BOE
-          </li>
-          <li className="flex gap-2">
-            <span className="text-accent" aria-hidden="true">
-              •
-            </span>
-            Obligaciones concretas que te aplican
-          </li>
-          <li className="flex gap-2">
-            <span className="text-accent" aria-hidden="true">
-              •
-            </span>
-            Plan de acción de 30 días
-          </li>
-          <li className="flex gap-2">
-            <span className="text-accent" aria-hidden="true">
-              •
-            </span>
-            Sanciones que arriesgas si no cumples
-          </li>
+          {dictamen.pdfIncluye.map((punto) => (
+            <li key={punto} className="flex gap-2">
+              <span className="text-accent" aria-hidden="true">
+                •
+              </span>
+              {punto}
+            </li>
+          ))}
         </ul>
         <div className="flex flex-wrap items-center gap-4">
           <button

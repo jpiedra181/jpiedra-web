@@ -21,9 +21,10 @@ export function PantallaEntrada({ onEmpezar }: Props) {
       </h2>
 
       <p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-2xl mb-10">
-        La nueva ley de accesibilidad ha cambiado las reglas para muchas
-        empresas. Te hago 7 preguntas concretas y te digo exactamente qué te
-        aplica, qué tienes que hacer y cuánto te puede costar no hacerlo.
+        La ley de accesibilidad ha cambiado las reglas para muchas empresas.
+        Te hago como mucho 7 preguntas — a la mayoría le salen 5 — y te digo
+        exactamente qué te aplica, qué tienes que hacer y qué te juegas si lo
+        dejas pasar. Sin jerga.
       </p>
 
       <div className="rounded-2xl border border-border bg-bg-surface p-6 md:p-8 mb-10">
@@ -33,16 +34,22 @@ export function PantallaEntrada({ onEmpezar }: Props) {
         <ul className="space-y-3">
           <li className="flex items-start gap-3 text-text-secondary">
             <CheckIcon />
-            <span>Dictamen claro de tu situación legal</span>
-          </li>
-          <li className="flex items-start gap-3 text-text-secondary">
-            <CheckIcon />
-            <span>PDF con análisis completo y plan de acción de 30 días</span>
+            <span>
+              Tu dictamen en pantalla, al momento: qué norma te aplica y qué
+              te exige
+            </span>
           </li>
           <li className="flex items-start gap-3 text-text-secondary">
             <CheckIcon />
             <span>
-              Referencias normativas concretas (artículos del BOE)
+              Si lo quieres, un PDF con el análisis completo y tus primeros 30
+              días resueltos
+            </span>
+          </li>
+          <li className="flex items-start gap-3 text-text-secondary">
+            <CheckIcon />
+            <span>
+              Todo con su artículo y su norma citados — nada de «según la ley»
             </span>
           </li>
         </ul>

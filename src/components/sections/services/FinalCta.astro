@@ -1,0 +1,64 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+
+const auditHref =
+    lang === "es" ? "/auditoria-accesibilidad" : "/en/accessibility-audit"
+const formHref = `${auditHref}#solicitar-auditoria`
+
+// El autoevaluador solo existe en español; en inglés el único camino es el
+// formulario, así que evitamos ofrecer un enlace que no lleva a ninguna parte.
+const selfAssessmentHref = lang === "es" ? "/te-aplica-ley-11-2023" : null
+---
+
+<section
+    id="services-cta"
+    class="relative py-24 md:py-32 lg:py-40 border-t border-border"
+    aria-labelledby="services-cta-title"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+            <h2
+                id="services-cta-title"
+                class="font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary mb-8"
+                style="text-wrap: balance;"
+            >
+                {t.services.cta.title}
+            </h2>
+
+            <p
+                class="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl mb-10 md:mb-12"
+            >
+                {t.services.cta.subtitle}
+            </p>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                {
+                    selfAssessmentHref && (
+                        <a
+                            href={selfAssessmentHref}
+                            class="inline-flex items-center justify-center self-start bg-accent text-bg-primary px-8 py-4 rounded-full text-base font-medium hover:bg-accent-hover transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                        >
+                            {t.services.cta.primaryLabel}
+                        </a>
+                    )
+                }
+
+                <a
+                    href={formHref}
+                    class="inline-flex items-center justify-center self-start border border-accent-line text-accent px-8 py-4 rounded-full text-base font-medium hover:bg-accent-subtle transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                    {t.services.cta.secondaryLabel}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

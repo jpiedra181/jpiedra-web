@@ -8,9 +8,14 @@ import Projects from "../../components/sections/Projects.astro"
 import Contact from "../../components/sections/Contact.astro"
 
 const lang = "en" as const
+
+const title =
+    "Web accessibility for businesses — Law 11/2023 and WCAG 2.1 AA | Javier Piedra"
+const description =
+    "Every barrier on your site is a customer who doesn't finish buying. I audit and fix websites against WCAG 2.1 AA and Spain's Law 11/2023. Diagnosis from €290."
 ---
 
-<BaseLayout lang={lang}>
+<BaseLayout lang={lang} title={title} description={description}>
     <Hero lang={lang} />
     <Context lang={lang} />
     <About lang={lang} />

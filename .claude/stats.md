@@ -148,11 +148,34 @@ Implicación práctica para PYMEs: una sanción grave puede dejar a la empresa f
 
 ### Población afectada (España)
 
-- **Personas con discapacidad reconocida en España**: 4,38 millones (INE, EDAD 2020 actualizada).
-- **Mayores de 65 años**: 9,55 millones (INE, padrón 2024) — colectivo con alta prevalencia de limitaciones visuales, motoras y cognitivas relacionadas con edad.
-- **Total potencial con beneficio directo de accesibilidad**: aproximadamente 15% de la población.
+- **Personas con discapacidad en España**: **4,32 millones de personas de seis o más años** en 2020, un 14% más que en 2008. Fuente: INE, Encuesta de Discapacidad, Autonomía Personal y Situaciones de Dependencia (EDAD 2020), nota de prensa de 20-04-2022.
+  - ⚠ **Corregido el 01-08-2026**: este archivo decía antes "4,38 millones", cifra que no aparece en la nota del INE. La correcta es 4,32, y siempre con la coletilla "de seis o más años" (la encuesta no cubre a los menores de 6).
+- **Población de 65 años y más**: **21,1% del total**. Fuente: INE, Proyecciones de población 2026-2076, nota de prensa de 17-06-2026 (literal: "El porcentaje de población de 65 años y más, que actualmente se sitúa en el 21,1% del total"). Colectivo con alta prevalencia de limitaciones visuales, motoras y cognitivas ligadas a la edad.
+
+> **NO sumar los dos grupos.** Se solapan mucho (la mayor parte de la discapacidad en España es de origen degenerativo/asociado a la edad). Cualquier "total potencial" obtenido sumándolos está inflado. Si hace falta un orden de magnitud, decir que ronda el 15% de la población y marcarlo como estimación, no como dato del INE.
 
 > Antes de citar estos datos, verificar fechas en INE y CERMI.
+
+### Comportamiento de compra ante barreras (Click-Away Pound)
+
+Único estudio que mide qué hace un comprador con necesidades de acceso cuando se topa con una web inaccesible. **Reino Unido**, datos de 2019, publicado en febrero de 2020 por Rick Williams y Steve Brownlow (Freeney Williams Ltd).
+
+Sobre 7,15 millones de usuarios británicos de internet con necesidades de acceso, con un poder de compra combinado de 24,8 mil millones £:
+
+| Indicador | 2016 | 2019 |
+|---|---|---|
+| Abandonan una web que les resulta difícil de usar | 71% | **69%** |
+| Limitan sus compras a webs que saben libres de barreras | 85% | **83%** |
+| Gastarían más si hubiera menos barreras | 82% | **86%** |
+| Contactan con el propietario del sitio | 7% | **8%** |
+| Han pagado más por comprar en una web accesible | — | **75%** |
+| "Click-away pound" (gasto que se va) | 11,75 mil M £ | **17,1 mil M £** |
+
+> Fuente: clickawaypound.com (informe 2019, verificado contra la fuente el 01-08-2026).
+>
+> **Trampa habitual:** medios y proveedores mezclan las dos ediciones. Si ves 71% / 7% / 85% / 82% / £11,75bn, son las cifras de **2016**, no las de 2019.
+>
+> **Límites de uso (importantes):** son datos británicos y de 2019. **En España no existe un estudio equivalente**, así que estas cifras se citan siempre con país y año delante, y **NUNCA** se extrapolan a euros para el mercado español. Si alguien pide "cuánto pierdo yo", la respuesta honesta es que no hay dato público español.
 
 ### Coste y ROI
 

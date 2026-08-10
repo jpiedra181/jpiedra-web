@@ -1,11 +1,9 @@
 import { useMemo, useState } from "react";
 import {
-  PREGUNTAS,
   RESPUESTAS_INICIALES,
   calcularDictamen,
   DICTAMENES,
-  debeMostrarP7,
-  totalPreguntas,
+  preguntasVisibles,
   type Respuestas,
 } from "../../lib/autoevaluador";
 import { PantallaEntrada } from "./PantallaEntrada";
@@ -22,14 +20,16 @@ export function Autoevaluador() {
   const [respuestas, setRespuestas] = useState<Respuestas>(RESPUESTAS_INICIALES);
   const [emailEnviado, setEmailEnviado] = useState("");
 
-  const preguntasOrdenadas = useMemo(() => {
-    return debeMostrarP7(respuestas)
-      ? PREGUNTAS
-      : PREGUNTAS.filter((p) => p.id !== "p7");
-  }, [respuestas]);
+  const preguntasOrdenadas = useMemo(
+    () => preguntasVisibles(respuestas),
+    [respuestas],
+  );
 
-  const pregunta = preguntasOrdenadas[indicePregunta];
-  const total = totalPreguntas(respuestas);
+  // La lista puede acortarse al cambiar una respuesta anterior; el índice se
+  // acota para no quedarnos apuntando fuera de ella.
+  const indiceSeguro = Math.min(indicePregunta, preguntasOrdenadas.length - 1);
+  const pregunta = preguntasOrdenadas[indiceSeguro];
+  const total = preguntasOrdenadas.length;
   const dictamenId = useMemo(() => calcularDictamen(respuestas), [respuestas]);
 
   function obtenerValor(): string | string[] {
@@ -104,10 +104,10 @@ export function Autoevaluador() {
 
   function avanzar() {
     setIndicePregunta((idx) => {
-      const siguiente = idx + 1;
+      const siguiente = Math.min(idx, preguntasOrdenadas.length - 1) + 1;
       if (siguiente >= preguntasOrdenadas.length) {
         setFase("dictamen");
-        return idx;
+        return Math.min(idx, preguntasOrdenadas.length - 1);
       }
       return siguiente;
     });
@@ -122,10 +122,7 @@ export function Autoevaluador() {
   }
 
   function reiniciarDesdeDictamenAUltimaPregunta() {
-    const lista = debeMostrarP7(respuestas)
-      ? PREGUNTAS
-      : PREGUNTAS.filter((p) => p.id !== "p7");
-    setIndicePregunta(lista.length - 1);
+    setIndicePregunta(preguntasOrdenadas.length - 1);
     setFase("preguntas");
   }
 
@@ -151,14 +148,15 @@ export function Autoevaluador() {
           <PantallaPregunta
             key={pregunta.id}
             pregunta={pregunta}
-            paso={indicePregunta + 1}
+            paso={indiceSeguro + 1}
             total={total}
             valor={obtenerValor()}
             onSingle={aplicarSingle}
             onMulti={aplicarMulti}
             onSiguiente={avanzar}
             onAnterior={retroceder}
-            mostrarAnterior={indicePregunta > 0}
+            mostrarAnterior={indiceSeguro > 0}
+            esUltima={indiceSeguro === preguntasOrdenadas.length - 1}
           />
         )}
 

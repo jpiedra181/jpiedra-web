@@ -2,39 +2,234 @@
   "nav": {
     "audit": "Auditoría",
     "blog": "Blog",
-    "law": "¿Te aplica la Ley 11/2023?"
-},
+    "law": "¿Te aplica la Ley 11/2023?",
+    "services": "Servicios"
+  },
+  "services": {
+    "meta": {
+      "title": "Servicios y precios de accesibilidad web | Javier Piedra",
+      "description": "Diagnóstico exprés por 290 €, auditoría desde 1.200 €, remediación en tramos cerrados y conformidad desde 149 €/mes. Precio cerrado antes de empezar."
+    },
+    "hero": {
+      "eyebrow": "SERVICIOS Y PRECIOS",
+      "title": "Cuatro formas de trabajar juntos.",
+      "titleHighlight": "Todas con precio cerrado.",
+      "subtitle": "Desde una revisión de 48 horas hasta mantener tu web conforme mes a mes. Eliges por dónde entrar, y ninguno te obliga al siguiente.",
+      "note": "Todos los precios son sin IVA. Ninguno tiene permanencia."
+    },
+    "ladder": {
+      "eyebrow": "EL CATÁLOGO",
+      "srTitle": "Catálogo de servicios y precios",
+      "forWhoLabel": "Para quién",
+      "includesLabel": "Qué incluye",
+      "items": [
+        {
+          "step": "01",
+          "id": "diagnostico-expres",
+          "name": "Diagnóstico exprés",
+          "price": "290 €",
+          "priceAriaLabel": "doscientos noventa euros",
+          "deadline": "48 horas",
+          "tagline": "Reviso tu home y los tres recorridos donde de verdad se pierde dinero: el que compra, el que reserva y el que rellena el formulario. En 48 horas sabes qué está roto y a quién estás dejando fuera.",
+          "forWho": "Para quien sospecha que tiene un problema y quiere confirmarlo antes de invertir de verdad.",
+          "includes": [
+            "Home y hasta 3 recorridos críticos, en pasada rápida por el camino principal",
+            "Los 10 hallazgos con más impacto, priorizados — si encuentro más, te digo cuántos son",
+            "Informe corto en PDF, sin jerga",
+            "20 minutos de videollamada para repasarlo"
+          ],
+          "note": "El diagnóstico localiza lo que más te está costando; no evalúa los 50 criterios WCAG ni entrega el documento de cumplimiento — para eso está la auditoría. Los 290 € se descuentan íntegros si la contratas en los 30 días siguientes.",
+          "ctaLabel": "Pedir el diagnóstico"
+        },
+        {
+          "step": "02",
+          "id": "auditoria-completa",
+          "name": "Auditoría completa",
+          "price": "Desde 1.200 €",
+          "priceAriaLabel": "desde mil doscientos euros",
+          "deadline": "5-7 días laborables",
+          "tagline": "El diagnóstico entero de tu web según WCAG 2.1 AA y la Ley 11/2023, con el plan de remediación priorizado y el documento de cumplimiento listo para publicar.",
+          "forWho": "Para quien ya sabe que está obligado y necesita el diagnóstico completo, no una muestra.",
+          "includes": [
+            "Informe ejecutivo que entiende dirección",
+            "Catálogo de hallazgos por criterio WCAG",
+            "Plan de remediación priorizado",
+            "Documento de cumplimiento listo para publicar",
+            "Reunión de presentación de 1 hora"
+          ],
+          "note": "Auditar «todas» las páginas no es como se hace: WCAG-EM 2.0 evalúa el sitio completo a partir de una muestra representativa, y el informe lista una a una las URLs evaluadas. El tamaño lo verifico yo en tu sitemap.",
+          "ctaLabel": "Ver la auditoría en detalle",
+          "tiers": [
+            {
+              "name": "Esencial",
+              "price": "1.200 €",
+              "description": "Tu web informa y te contactan. No se compra, no se reserva, no hay que iniciar sesión."
+            },
+            {
+              "name": "Comercial",
+              "price": "2.200 €",
+              "description": "En tu web se puede comprar, reservar o pedir cita. Ese proceso se audita entero, de principio a fin."
+            },
+            {
+              "name": "Compleja",
+              "price": "Presupuesto en 24 h",
+              "description": "Varios de esos procesos, área privada con login, o un sitio especialmente extenso."
+            }
+          ]
+        },
+        {
+          "step": "03",
+          "id": "remediacion",
+          "name": "Remediación",
+          "price": "Desde 1.800 €",
+          "priceAriaLabel": "desde mil ochocientos euros",
+          "deadline": "Según tramo",
+          "tagline": "Arreglo yo lo que encontró la auditoría. Tres tramos cerrados y eliges el que quieras: nadie te obliga a ir al completo.",
+          "forWho": "Para quien no tiene equipo técnico disponible, o lo tiene y prefiere no gastar sus próximas semanas en esto.",
+          "tiers": [
+            {
+              "name": "Esencial",
+              "price": "1.800 €",
+              "description": "Los hallazgos bloqueantes: lo que hoy impide terminar una compra, enviar un formulario o navegar con teclado."
+            },
+            {
+              "name": "Completo",
+              "price": "3.400 €",
+              "description": "Bloqueantes y serios. Tus recorridos principales dejan de expulsar gente por el camino."
+            },
+            {
+              "name": "Conformidad AA",
+              "price": "5.900 €",
+              "description": "Todos los hallazgos del informe hasta alcanzar WCAG 2.1 AA en el alcance auditado."
+            }
+          ],
+          "note": "El tramo se cierra al terminar la auditoría, cuando ya sabemos el volumen real. Precio fijo antes de tocar una línea de código.",
+          "ctaLabel": "Hablar de la remediación"
+        },
+        {
+          "step": "04",
+          "id": "conformidad-continua",
+          "name": "Conformidad continua",
+          "price": "149 € / 349 € al mes",
+          "priceAriaLabel": "ciento cuarenta y nueve o trescientos cuarenta y nueve euros al mes",
+          "deadline": "Mensual, sin permanencia",
+          "tagline": "Las webs cambian. Plugins que se actualizan, contenido que sube marketing, deploys que rompen cosas. Reviso la tuya cada mes para que lo que arreglaste siga arreglado.",
+          "forWho": "Para quien ya ha invertido en ponerla conforme y no quiere volver a empezar dentro de un año.",
+          "tiers": [
+            {
+              "name": "Revisión",
+              "price": "149 €/mes",
+              "description": "Revisión mensual, aviso de lo que se ha roto y tu documento de cumplimiento siempre al día."
+            },
+            {
+              "name": "Revisión y corrección",
+              "price": "349 €/mes",
+              "description": "Lo anterior, más 4 horas mensuales de corrección aplicadas por mí. Lo que se rompe se arregla, sin presupuesto aparte."
+            }
+          ],
+          "note": "Requiere auditoría previa: sin diagnóstico no hay forma de saber qué revisar cada mes ni cómo priorizarlo.",
+          "ctaLabel": "Hablar de la conformidad continua"
+        }
+      ]
+    },
+    "notDoing": {
+      "eyebrow": "LO QUE NO VENDO",
+      "title": "Cuatro cosas que no vas a encontrar aquí.",
+      "subtitle": "Conviene decirlo antes de que lo preguntes, porque el sector está lleno de las cuatro.",
+      "items": [
+        {
+          "title": "Overlays y widgets de accesibilidad",
+          "description": "Ese botón flotante que promete arreglarlo todo con una línea de script. No toca el código, tapa el problema, y en Estados Unidos hay demandas contra webs que llevaban uno instalado. Si tienes uno, te voy a decir que lo quites."
+        },
+        {
+          "title": "Sellos y certificados de conformidad",
+          "description": "Ni la Ley 11/2023 ni el RD 1112/2018 prevén un sello oficial que alguien pueda emitirte. Lo que sí existe es la declaración o la información de accesibilidad que publicas tú y de la que respondes tú. Eso sí te lo entrego, redactado y listo."
+        },
+        {
+          "title": "Igualas indefinidas sin alcance",
+          "description": "Una cuota mensual que nadie sabe qué cubre acaba siendo una cuota que no cubre nada. Todo lo que hay en esta página tiene alcance escrito y precio cerrado antes de empezar."
+        },
+        {
+          "title": "Auditorías solo automáticas",
+          "description": "Las herramientas encuentran una parte de los problemas, nunca todos: detectan el contraste, pero no que el foco se pierda a mitad del formulario ni que el lector de pantalla anuncie tu botón de comprar como «enlace vacío». Eso solo aparece navegando a mano. Un informe de axe exportado a PDF no es una auditoría."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "ANTES DE CONTRATAR",
+      "title": "Lo que se pregunta todo el mundo.",
+      "items": [
+        {
+          "question": "¿Cómo se factura?",
+          "answer": "50 % al confirmar el inicio y 50 % a la entrega. Factura formal con IVA, válida para deducción. La conformidad continua se factura por meses vencidos."
+        },
+        {
+          "question": "¿Qué diferencia hay entre el diagnóstico exprés y la auditoría?",
+          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 50 criterios WCAG 2.1 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
+        },
+        {
+          "question": "¿Puedo contratar la remediación sin hacer la auditoría?",
+          "answer": "Si me traes un informe de accesibilidad reciente y suficientemente detallado, sí. Si no lo tienes, la auditoría es el paso previo: no se puede arreglar en serio lo que no está diagnosticado."
+        },
+        {
+          "question": "¿Cómo sé en qué tramo entra mi web?",
+          "answer": "Por lo que se puede hacer en ella. Si solo informa y recibe contactos, Esencial. Si se puede comprar, reservar o pedir cita, Comercial. Si hay varios de esos procesos o zona privada con login, presupuesto cerrado en 24 horas. El tamaño lo verifico yo en tu sitemap: no tienes que contar páginas."
+        },
+        {
+          "question": "¿Trabajas con mi equipo interno o con mi agencia?",
+          "answer": "Sí, y es lo más habitual. El informe está escrito para que cualquier perfil técnico lo aplique directamente. Si prefieres que lo apliquen ellos, perfecto: yo audito y después reviso el resultado."
+        },
+        {
+          "question": "¿Qué pasa si se te escapa un hallazgo?",
+          "answer": "Lo corrijo sin coste adicional dentro de los 60 días posteriores a la entrega del informe."
+        }
+      ]
+    },
+    "cta": {
+      "title": "¿No sabes cuál te toca?",
+      "subtitle": "Contesta siete preguntas y te digo si estás obligado, bajo qué norma y por dónde te conviene empezar. Dos minutos y sin registro.",
+      "primaryLabel": "Ver si me aplica la ley",
+      "secondaryLabel": "Escribirme directamente"
+    }
+  },
   "hero": {
     "label": "DESARROLLADOR WEB • ESPECIALISTA EN ACCESIBILIDAD WEB",
-    "title": "Webs que funcionan para todo el mundo.",
-    "title_1": "Sin multas, sin excusas, sin humo.",
-    "subtitle": "Construyo y audito webs según la Ley 11/2023 y WCAG 2.1 AA. Si vendes online, prestas servicios o estás obligado por la European Accessibility Act, te ayudo a cumplir antes de que te llegue una denuncia, una multa o una licitación pública.",
-    "cta": "Auditar mi web",
-    "tags": ["Automatización", "Web moderna", "IA aplicada", "Integraciones", "APIs", "Consultoría técnica"]
+    "title": "Hay gente que quiere comprarte",
+    "title_1": "y tu web no se lo permite.",
+    "subtitle": "Un botón que el lector de pantalla anuncia como «enlace vacío». Un formulario que no se puede rellenar con teclado. Un texto que no llega a leerse. No son detalles técnicos: son pedidos que se van sin que llegues a enterarte. Audito y arreglo webs según WCAG 2.1 AA y la Ley 11/2023.",
+    "cta": "Ver servicios y precios",
+    "tags": [
+      "Automatización",
+      "Web moderna",
+      "IA aplicada",
+      "Integraciones",
+      "APIs",
+      "Consultoría técnica"
+    ]
   },
   "context": {
-    "eyebrow": "EL CONTEXTO",
-    "title": "La accesibilidad web ya no es opcional en España.",
-    "subtitle": "Desde el 28 de junio de 2025, la Ley 11/2023 obliga a miles de empresas a tener su web accesible. Casi ninguna lo está.",
+    "eyebrow": "POR QUÉ IMPORTA",
+    "title": "Antes que un problema legal, es un problema de facturación.",
+    "subtitle": "Cuando alguien no consigue terminar una compra en tu web, casi nunca te escribe para contártelo. Se va y lo compra en otro sitio. El coste lo pagas igual; lo que no tienes es la factura donde verlo.",
     "stats": [
       {
-        "value": "98\u00A0%",
-        "ariaLabel": "98 por ciento",
-        "description": "de las webs españolas no cumple la normativa."
+        "value": "8 %",
+        "ariaLabel": "8 por ciento",
+        "description": "de los compradores con necesidades de acceso avisa al dueño de la web cuando algo falla. El resto abandona en silencio."
       },
       {
-        "value": "1.000.000\u00A0€",
-        "ariaLabel": "un millón de euros",
-        "description": "sanción máxima por incumplimiento."
+        "value": "4,32 M",
+        "ariaLabel": "cuatro coma treinta y dos millones",
+        "description": "de personas con discapacidad de seis o más años viven en España. Y el 21,1 % de la población ya tiene 65 años o más."
       },
       {
-        "value": "~4,4\u00A0M",
-        "ariaLabel": "4,4 millones",
-        "description": "de personas con discapacidad en España no pueden usar muchas webs."
+        "value": "95,9 %",
+        "ariaLabel": "95,9 por ciento",
+        "description": "de las webs más visitadas del mundo falla comprobaciones automáticas de accesibilidad. La tuya, probablemente, también."
       }
     ],
-    "closing": "Si vendes online, tienes reservas, tramitas servicios o recibes fondos públicos, esto va contigo.",
-    "sources": "Datos: Barómetro de Accesibilidad Web 2025, INE, RDL 1/2013."
+    "closing": "Y sí, además es obligatorio: desde el 28 de junio de 2025 la Ley 11/2023 lo exige. Pero el coste de no hacerlo empezó a correr mucho antes que la primera multa.",
+    "sources": "Fuentes: Click-Away Pound 2019 (Reino Unido), INE (EDAD 2020 y Proyecciones de población 2026-2076) y WebAIM Million 2026. No existe un estudio equivalente al Click-Away Pound para el mercado español."
   },
   "about": {
     "label": "SOBRE MÍ",
@@ -72,25 +267,50 @@
         "category": "RAG + IA Conversacional",
         "title": "Asistente fiscal inteligente",
         "description": "Un chat donde le preguntas tus dudas sobre la declaración de la renta y te responde con información real de Hacienda. Como tener un asesor fiscal disponible a cualquier hora.",
-        "tags": ["Astro", "n8n", "Claude AI", "Pinecone"]
+        "tags": [
+          "Astro",
+          "n8n",
+          "Claude AI",
+          "Pinecone"
+        ]
       },
       {
         "category": "Automatización + IA",
         "title": "Generador de Design Systems",
-        "description":  "Le describes tu marca — colores, estilo, personalidad — y te genera una guía visual completa con todos los elementos que necesita tu web. Lista para usar.",
-        "tags": ["n8n", "email", "Stripe", "Landing Pages", "Design Systems"]
+        "description": "Le describes tu marca — colores, estilo, personalidad — y te genera una guía visual completa con todos los elementos que necesita tu web. Lista para usar.",
+        "tags": [
+          "n8n",
+          "email",
+          "Stripe",
+          "Landing Pages",
+          "Design Systems"
+        ]
       },
       {
         "category": "Web Scraping + Análisis",
         "title": "Auditoría web automatizada",
-        "description":  "Metes la dirección de una web y te dice qué funciona bien, qué va lento y qué tiene que mejorar. Todo explicado en lenguaje normal, no en métricas crípticas.",
-        "tags": ["Claude Skills", "PageSpeed API", "Lighthouse", "SEO", "Accessibilidad", "Auditoría", "Informe PDF"]
+        "description": "Metes la dirección de una web y te dice qué funciona bien, qué va lento y qué tiene que mejorar. Todo explicado en lenguaje normal, no en métricas crípticas.",
+        "tags": [
+          "Claude Skills",
+          "PageSpeed API",
+          "Lighthouse",
+          "SEO",
+          "Accessibilidad",
+          "Auditoría",
+          "Informe PDF"
+        ]
       },
       {
         "category": "EdTech + IA",
         "title": "Plataforma de estudio con IA - En Prueba",
         "description": "Un asistente que te ayuda a preparar oposiciones. Te hace exámenes, te explica lo que no entiendas y se adapta a tu nivel para que estudies mejor, no más.",
-        "tags": ["Next.js", "Supabase", "OpenAI", "Stripe", "TailwindCSS"]
+        "tags": [
+          "Next.js",
+          "Supabase",
+          "OpenAI",
+          "Stripe",
+          "TailwindCSS"
+        ]
       }
     ]
   },
@@ -143,15 +363,16 @@
     "available": "Disponible para proyectos",
     "rights": "Todos los derechos reservados.",
     "services": {
-        "label": "Servicios",
-        "audit": "Auditoría de accesibilidad",
-        "blog": "Blog"
+      "label": "Servicios",
+      "audit": "Auditoría de accesibilidad",
+      "blog": "Blog",
+      "services": "Servicios y precios"
     },
     "legal": {
-        "label": "Legal",
-        "legalNotice": "Aviso Legal",
-        "privacy": "Política de Privacidad",
-        "cookies": "Política de Cookies"
+      "label": "Legal",
+      "legalNotice": "Aviso Legal",
+      "privacy": "Política de Privacidad",
+      "cookies": "Política de Cookies"
     }
   },
   "audit": {
@@ -163,37 +384,37 @@
       "titleHighlight2": "WCAG 2.1 AA",
       "titleSuffix": ".",
       "subtitle": "En 5-7 días laborables tienes un informe que entiende todo tu equipo, con cada problema, su impacto legal y por dónde empezar. Sin jerga, sin PDFs de 200 páginas, sin humo.",
-      "price": "1.200 €",
-      "priceAriaLabel": "mil doscientos euros",
-      "priceNote": "Para webs con hasta 8 páginas únicas.",
-      "priceSubnote": "Webs más grandes: presupuesto cerrado en 24 h, sin sorpresas.",
+      "price": "Desde 1.200 €",
+      "priceAriaLabel": "desde mil doscientos euros",
+      "priceNote": "Para webs que informan y reciben contactos, sin compra ni reserva online.",
+      "priceSubnote": "Si en tu web se compra, se reserva o hay que iniciar sesión, el tramo sube. Presupuesto cerrado en 24 h.",
       "cta": "Solicitar auditoría"
     },
     "problem": {
       "eyebrow": "EL PROBLEMA",
-      "title": "No es opcional. No es para 2030. Es ahora.",
-      "subtitle": "Desde el 28 de junio de 2025 la Ley 11/2023 obliga a miles de empresas españolas a tener su web accesible. La inmensa mayoría no lo está. Y no es un problema menor.",
+      "title": "Primero pierdes clientes. Después llega la multa.",
+      "subtitle": "Desde el 28 de junio de 2025 la Ley 11/2023 obliga a miles de empresas españolas a tener su web accesible, y la inmensa mayoría no lo está. Pero el problema no empezó ahí: cada barrera de tu web es alguien que no termina de comprar.",
       "risks": [
+        {
+          "value": "8 %",
+          "ariaLabel": "8 por ciento",
+          "title": "Clientes que se van sin decírtelo",
+          "description": "Solo 8 de cada 100 compradores con necesidades de acceso avisan al dueño de la web cuando algo no les funciona (Click-Away Pound, Reino Unido, 2019). Los otros 92 abandonan y compran en la competencia. En tu analítica eso se ve como un rebote más."
+        },
         {
           "value": "1.000.000 €",
           "ariaLabel": "un millón de euros",
           "title": "Multas reales",
-          "description": "El régimen sancionador del RDL 1/2013 ya está vigente. Las CCAA pueden inspeccionar. Las asociaciones de personas con discapacidad ya están denunciando casos reales."
+          "description": "El régimen sancionador del RDL 1/2013, al que remite la Ley 11/2023, ya está vigente. El incumplimiento de las exigencias de accesibilidad es infracción grave, y la reincidencia puede escalar a muy grave."
         },
         {
           "value": "Junio 2025",
           "ariaLabel": "Junio de 2025",
-          "title": "Filtro de licitaciones públicas",
-          "description": "Desde la plena aplicación de la Ley 11/2023, los pliegos públicos exigen conformidad de accesibilidad como requisito de admisión a cualquier proveedor. Si trabajas o quieres trabajar con la Administración, ya no es opcional."
-        },
-        {
-          "value": "~4,4 M",
-          "ariaLabel": "cuatro coma cuatro millones",
-          "title": "Clientes que no pueden usar tu web",
-          "description": "Personas con discapacidad reconocida en España (INE). Si tu ecommerce, tu reserva online o tu formulario falla con un lector de pantalla, esos clientes se van a la competencia."
+          "title": "Contratación pública",
+          "description": "La contratación pública española ya exige incorporar criterios de accesibilidad en las prescripciones técnicas. Si trabajas o quieres trabajar con la Administración, tener la web conforme deja de ser un extra y pasa a ser un requisito que te piden por escrito."
         }
       ],
-      "closing": "Auditar tu web no es un capricho de cumplimiento. Es lo que separa a las empresas que están preparadas de las que se van a llevar la multa, la denuncia o las dos cosas."
+      "closing": "Auditar tu web no es un capricho de cumplimiento. Es dejar de perder clientes que ya te habían elegido y, de paso, quitarte el riesgo legal de encima."
     },
     "deliverables": {
       "eyebrow": "QUÉ ENTREGA LA AUDITORÍA",
@@ -294,16 +515,17 @@
           "title": "Aplicar las correcciones",
           "optionalTag": "(opcional)",
           "description": "Si quieres que sea yo quien implemente las soluciones del informe, podemos hacerlo. Trabajo paquete a paquete según prioridad: lo crítico primero, lo accesorio después. Cada paquete con alcance cerrado, horas estimadas y precio fijo antes de empezar.",
-          "priceNote": "Inversión típica: entre 1.800 y 6.000 €, según el volumen de hallazgos. Lo sabes con certeza al terminar la auditoría, nunca antes."
+          "priceNote": "Tres tramos cerrados: 1.800 €, 3.400 € o 5.900 €. El tuyo se decide al terminar la auditoría, cuando ya sabemos el volumen real."
         },
         {
           "title": "Que no se vuelva a romper",
           "optionalTag": "(opcional)",
           "description": "Las webs cambian. Plugins que se actualizan, contenido que sube el equipo de marketing, deploys del equipo técnico. Si quieres dormir tranquilo, reviso tu web cada mes y mantengo el cumplimiento al día. La declaración de accesibilidad se actualiza, los nuevos hallazgos se arreglan.",
-          "priceNote": "Desde 149 €/mes. Sin contrato anual, te vas cuando quieras."
+          "priceNote": "149 € o 349 € al mes, según si quieres solo revisión o también las correcciones aplicadas. Sin permanencia."
         }
       ],
-      "closing": "Ninguno de los dos es imprescindible. Ninguno de los dos es imprescindible. Con la auditoría tienes el diagnóstico completo y el documento de cumplimiento listo para publicar; arreglar lo que haga falta lo decides tú."
+      "closing": "Ninguno de los dos es imprescindible. Con la auditoría tienes el diagnóstico completo y el documento de cumplimiento listo para publicar; arreglar lo que haga falta lo decides tú.",
+      "ctaLabel": "Ver servicios y precios"
     },
     "whyMe": {
       "eyebrow": "POR QUÉ YO",
@@ -333,8 +555,16 @@
           "answer": "5-7 días laborables desde el briefing inicial. La mayoría de auditorías las entrego en 5. Las webs grandes pueden requerir hasta 7."
         },
         {
-          "question": "¿Qué pasa si mi web tiene más de 8 páginas únicas?",
-          "answer": "Te paso presupuesto cerrado en 24 horas según el volumen real. Sin sorpresas, sin negociación. Los tramos son por escalones de tamaño, no por hora trabajada."
+          "question": "¿Vas a auditar todas las páginas de mi web?",
+          "answer": "No, y no debería. La metodología de referencia del W3C, WCAG-EM 2.0, evalúa la conformidad de un sitio completo a partir de una muestra representativa: las vistas comunes, un ejemplar de cada plantilla, cada tecnología que usas y un 10 % adicional elegido al azar para detectar lo que la selección dirigida no vería. Los procesos —comprar, reservar, registrarse— sí se auditan enteros, de principio a fin, con sus estados de error. El informe lista una a una todas las URLs evaluadas, para que la muestra sea verificable y reproducible."
+        },
+        {
+          "question": "¿Cómo sé qué tramo me toca?",
+          "answer": "Por lo que se puede hacer en tu web, no por su tamaño. Si tu web informa y te contactan, es el tramo Esencial: 1.200 €. Si se puede comprar, reservar o pedir cita, es Comercial: 2.200 €. Si hay varios de esos procesos o un área privada con login, te paso presupuesto cerrado en 24 horas. El número de páginas lo compruebo yo en tu sitemap: no tienes que contarlas."
+        },
+        {
+          "question": "¿Qué diferencia hay entre el diagnóstico exprés y la auditoría?",
+          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 50 criterios WCAG 2.1 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
         },
         {
           "question": "¿La auditoría incluye la implementación de las correcciones?",
@@ -375,8 +605,8 @@
       "srTitle": "Precio y plazo de la auditoría",
       "pillars": [
         {
-          "value": "1.200 €",
-          "label": "Auditoría completa según Ley 11/2023 y WCAG 2.1 AA"
+          "value": "Desde 1.200 €",
+          "label": "Tres tramos según lo que se pueda hacer en tu web"
         },
         {
           "value": "5-7 días",
@@ -414,34 +644,82 @@
           "label": "Sector",
           "placeholder": "Selecciona un sector",
           "options": [
-            { "value": "ecommerce", "label": "Ecommerce" },
-            { "value": "hosteleria", "label": "Hostelería y turismo" },
-            { "value": "sanitario", "label": "Sanitario" },
-            { "value": "educativo", "label": "Educativo / formación" },
-            { "value": "banca", "label": "Banca / fintech" },
-            { "value": "transporte", "label": "Transporte" },
-            { "value": "servicios", "label": "Servicios profesionales" },
-            { "value": "otros", "label": "Otros" }
+            {
+              "value": "ecommerce",
+              "label": "Ecommerce"
+            },
+            {
+              "value": "hosteleria",
+              "label": "Hostelería y turismo"
+            },
+            {
+              "value": "sanitario",
+              "label": "Sanitario"
+            },
+            {
+              "value": "educativo",
+              "label": "Educativo / formación"
+            },
+            {
+              "value": "banca",
+              "label": "Banca / fintech"
+            },
+            {
+              "value": "transporte",
+              "label": "Transporte"
+            },
+            {
+              "value": "servicios",
+              "label": "Servicios profesionales"
+            },
+            {
+              "value": "otros",
+              "label": "Otros"
+            }
           ]
         },
         "size": {
           "label": "Tamaño aproximado de la web",
           "placeholder": "Selecciona un tamaño",
           "options": [
-            { "value": "small", "label": "Hasta 8 páginas" },
-            { "value": "medium", "label": "9 a 20 páginas" },
-            { "value": "large", "label": "21 a 100 páginas" },
-            { "value": "xl", "label": "Más de 100 páginas" }
+            {
+              "value": "small",
+              "label": "Hasta 8 páginas"
+            },
+            {
+              "value": "medium",
+              "label": "9 a 20 páginas"
+            },
+            {
+              "value": "large",
+              "label": "21 a 100 páginas"
+            },
+            {
+              "value": "xl",
+              "label": "Más de 100 páginas"
+            }
           ]
         },
         "timing": {
           "label": "Cuándo necesitas la auditoría",
           "placeholder": "Selecciona una urgencia",
           "options": [
-            { "value": "urgent", "label": "Cuanto antes" },
-            { "value": "1-3m", "label": "En 1-3 meses" },
-            { "value": "3-6m", "label": "En 3-6 meses" },
-            { "value": "no-urgency", "label": "Sin urgencia, explorando" }
+            {
+              "value": "urgent",
+              "label": "Cuanto antes"
+            },
+            {
+              "value": "1-3m",
+              "label": "En 1-3 meses"
+            },
+            {
+              "value": "3-6m",
+              "label": "En 3-6 meses"
+            },
+            {
+              "value": "no-urgency",
+              "label": "Sin urgencia, explorando"
+            }
           ]
         },
         "comments": {
@@ -495,10 +773,22 @@
       "title": "No es pasar una herramienta. Es esto.",
       "intro": "Un test automático detecta alrededor del 30 % de los problemas reales. El resto se ve a mano. Así trabajo cada auditoría:",
       "steps": [
-        { "title": "Muestra representativa", "text": "No se audita la web entera (es inviable), sino una muestra que cubre portada, proceso de reserva, formularios, login y plantillas comunes. Si la plantilla falla, falla en todas las páginas que la usan." },
-        { "title": "Los 50 criterios, uno a uno", "text": "Evalúo los 50 criterios A y AA de la WCAG 2.1 sobre la muestra, no solo los que detecta la máquina. Cada uno con su estado: conforme, no conforme o no aplica." },
-        { "title": "A mano y con lector real", "text": "Navegación por teclado, contraste, foco y lectura con NVDA, el lector de pantalla que usa la gente de verdad. Lo automático no ve si un campo se anuncia bien; el lector, sí." },
-        { "title": "Entregables que prueban el trabajo", "text": "Informe técnico, tabla de conformidad de los 50 criterios, declaración de accesibilidad lista para publicar y, si procede, la puntuación al estilo del Observatorio de Accesibilidad Web." }
+        {
+          "title": "Muestra representativa",
+          "text": "No se audita la web entera (es inviable), sino una muestra que cubre portada, proceso de reserva, formularios, login y plantillas comunes. Si la plantilla falla, falla en todas las páginas que la usan."
+        },
+        {
+          "title": "Los 50 criterios, uno a uno",
+          "text": "Evalúo los 50 criterios A y AA de la WCAG 2.1 sobre la muestra, no solo los que detecta la máquina. Cada uno con su estado: conforme, no conforme o no aplica."
+        },
+        {
+          "title": "A mano y con lector real",
+          "text": "Navegación por teclado, contraste, foco y lectura con NVDA, el lector de pantalla que usa la gente de verdad. Lo automático no ve si un campo se anuncia bien; el lector, sí."
+        },
+        {
+          "title": "Entregables que prueban el trabajo",
+          "text": "Informe técnico, tabla de conformidad de los 50 criterios, declaración de accesibilidad lista para publicar y, si procede, la puntuación al estilo del Observatorio de Accesibilidad Web."
+        }
       ]
     },
     "hallazgos": {
@@ -506,10 +796,22 @@
       "title": "Fallos reales, en lenguaje de personas",
       "intro": "Algunos de los hallazgos del caso, contados sin jerga. Ninguno es raro: se repiten en casi todas las webs que audito.",
       "items": [
-        { "title": "El formulario de reserva sin etiquetas", "text": "Campos que para la vista son obvios, pero que un lector de pantalla anuncia como cuadro de texto sin más. Quien no ve no sabe qué le piden. En la reserva, eso es una compra que no se completa." },
-        { "title": "El foco invisible", "text": "Al navegar con teclado no se veía dónde estabas: como moverte por casa a oscuras. Se arregla con una línea de CSS, pero afecta a todo el sitio." },
-        { "title": "El calendario que el teclado no toca", "text": "El selector de fechas solo respondía al ratón. Sin ratón, no hay reserva posible." },
-        { "title": "Lo que la máquina aprobaba y el lector no", "text": "Un campo que la herramienta daba por bueno —tenía etiqueta— pero que el lector real anunciaba sin nombre, porque esa etiqueta estaba oculta por CSS. La teoría decía sí; el usuario, no." }
+        {
+          "title": "El formulario de reserva sin etiquetas",
+          "text": "Campos que para la vista son obvios, pero que un lector de pantalla anuncia como cuadro de texto sin más. Quien no ve no sabe qué le piden. En la reserva, eso es una compra que no se completa."
+        },
+        {
+          "title": "El foco invisible",
+          "text": "Al navegar con teclado no se veía dónde estabas: como moverte por casa a oscuras. Se arregla con una línea de CSS, pero afecta a todo el sitio."
+        },
+        {
+          "title": "El calendario que el teclado no toca",
+          "text": "El selector de fechas solo respondía al ratón. Sin ratón, no hay reserva posible."
+        },
+        {
+          "title": "Lo que la máquina aprobaba y el lector no",
+          "text": "Un campo que la herramienta daba por bueno —tenía etiqueta— pero que el lector real anunciaba sin nombre, porque esa etiqueta estaba oculta por CSS. La teoría decía sí; el usuario, no."
+        }
       ]
     },
     "entregables": {
@@ -517,10 +819,22 @@
       "title": "Un informe que se entiende y prueba lo que se hizo",
       "intro": "Ni un PDF de 200 páginas ni un volcado de herramienta. Documentos claros, con marca, pensados para que dirección los entienda y tu equipo técnico pueda actuar.",
       "items": [
-        { "title": "Informe técnico", "text": "Veredicto, hallazgos por gravedad, impacto en personas y corrección concreta, con código cuando aplica." },
-        { "title": "Tabla de conformidad de los 50 criterios", "text": "El estado de cada criterio A y AA. La prueba de que se ha revisado todo, no solo lo que salta a la vista." },
-        { "title": "Declaración de accesibilidad", "text": "Redactada según el régimen que te aplica, lista para publicar y cumplir el requisito documental." },
-        { "title": "Reunión de resultados", "text": "Una hora para revisarlo contigo y tu equipo y priorizar. No te mando un PDF y desaparezco." }
+        {
+          "title": "Informe técnico",
+          "text": "Veredicto, hallazgos por gravedad, impacto en personas y corrección concreta, con código cuando aplica."
+        },
+        {
+          "title": "Tabla de conformidad de los 50 criterios",
+          "text": "El estado de cada criterio A y AA. La prueba de que se ha revisado todo, no solo lo que salta a la vista."
+        },
+        {
+          "title": "Declaración de accesibilidad",
+          "text": "Redactada según el régimen que te aplica, lista para publicar y cumplir el requisito documental."
+        },
+        {
+          "title": "Reunión de resultados",
+          "text": "Una hora para revisarlo contigo y tu equipo y priorizar. No te mando un PDF y desaparezco."
+        }
       ],
       "imgTablaAlt": "Página del informe con la tabla de conformidad de los 50 criterios WCAG, cada uno con su nivel y su estado.",
       "imgTablaCaption": "Extracto real (anonimizado) de la tabla de conformidad: los 50 criterios, uno a uno.",

@@ -1,0 +1,158 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+
+const auditHref =
+    lang === "es" ? "/auditoria-accesibilidad" : "/en/accessibility-audit"
+const formHref = `${auditHref}#solicitar-auditoria`
+
+// La auditoría es el único peldaño con landing propia; el resto entra
+// directamente por el formulario de solicitud.
+const CTA_HREF_BY_STEP = {
+    "01": formHref,
+    "02": auditHref,
+    "03": formHref,
+    "04": formHref,
+}
+---
+
+<section
+    id="services-ladder"
+    class="relative pb-24 md:pb-32 lg:pb-40"
+    aria-labelledby="services-ladder-title"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+            <SectionLabel text={t.services.ladder.eyebrow} />
+
+            <h2 id="services-ladder-title" class="sr-only">
+                {t.services.ladder.srTitle}
+            </h2>
+        </div>
+
+        <ul class="flex flex-col gap-6 md:gap-8 mt-4">
+            {
+                t.services.ladder.items.map((item) => (
+                    <li>
+                        <article
+                            id={item.id}
+                            class="scroll-mt-28 border border-border rounded-2xl p-6 md:p-10 lg:p-12 bg-bg-surface/40 transition-colors duration-300 hover:border-border-hover"
+                            aria-labelledby={`${item.id}-name`}
+                        >
+                            <div class="grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-start">
+                                {/* Identidad y promesa del servicio */}
+                                <div class="max-w-2xl">
+                                    <div class="flex items-baseline gap-4 mb-4">
+                                        <span
+                                            class="font-heading text-xl md:text-2xl text-accent/50 leading-none"
+                                            aria-hidden="true"
+                                        >
+                                            {item.step}
+                                        </span>
+                                        <h3
+                                            id={`${item.id}-name`}
+                                            class="font-heading text-3xl md:text-4xl text-text-primary leading-tight"
+                                        >
+                                            {item.name}
+                                        </h3>
+                                    </div>
+
+                                    <p class="text-base md:text-lg text-text-secondary leading-relaxed mb-6">
+                                        {item.tagline}
+                                    </p>
+
+                                    <p class="text-sm md:text-base text-text-primary leading-relaxed">
+                                        <span class="text-text-muted">
+                                            {t.services.ladder.forWhoLabel}:
+                                        </span>{" "}
+                                        {item.forWho}
+                                    </p>
+                                </div>
+
+                                {/* Precio y plazo, alineados a la derecha en desktop */}
+                                <div class="lg:text-right lg:min-w-[14rem]">
+                                    <p class="font-heading text-[clamp(2rem,4vw,3rem)] leading-none text-accent mb-2">
+                                        <span aria-hidden="true">
+                                            {item.price}
+                                        </span>
+                                        <span class="sr-only">
+                                            {item.priceAriaLabel}
+                                        </span>
+                                    </p>
+                                    <p class="text-sm text-text-muted">
+                                        {item.deadline}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Cada servicio se detalla con lo que incluye, con
+                                sus tramos de precio, o con ambos: la auditoría
+                                necesita las dos cosas. */}
+                            {item.includes && (
+                                <div class="mt-8 md:mt-10 pt-8 md:pt-10 border-t border-border">
+                                    <h4 class="text-xs font-body font-medium tracking-[0.2em] text-text-muted uppercase mb-5">
+                                        {t.services.ladder.includesLabel}
+                                    </h4>
+                                    <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-3 max-w-3xl">
+                                        {item.includes.map((entry) => (
+                                            <li class="flex items-start gap-3 text-base text-text-secondary leading-relaxed">
+                                                <span
+                                                    class="text-accent mt-1 shrink-0"
+                                                    aria-hidden="true"
+                                                >
+                                                    —
+                                                </span>
+                                                <span>{entry}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {item.tiers && (
+                                <div class="mt-8 md:mt-10 pt-8 md:pt-10 border-t border-border">
+                                    <ul class="grid md:grid-cols-3 gap-6 md:gap-8">
+                                        {item.tiers.map((tier) => (
+                                            <li class="border-l-2 border-accent-line pl-5">
+                                                <p class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-1">
+                                                    {tier.name}
+                                                </p>
+                                                <p class="font-heading text-lg text-accent mb-3">
+                                                    {tier.price}
+                                                </p>
+                                                <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+                                                    {tier.description}
+                                                </p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            <div class="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8">
+                                <a
+                                    href={CTA_HREF_BY_STEP[item.step]}
+                                    class="inline-flex items-center self-start bg-accent text-bg-primary px-7 py-3.5 rounded-full text-sm font-medium hover:bg-accent-hover transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                                >
+                                    {item.ctaLabel}
+                                </a>
+                                <p class="text-sm text-text-muted leading-relaxed max-w-xl">
+                                    {item.note}
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>

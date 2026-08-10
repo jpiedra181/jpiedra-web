@@ -12,6 +12,7 @@ type Props = {
   onSiguiente: () => void;
   onAnterior: () => void;
   mostrarAnterior: boolean;
+  esUltima: boolean;
 };
 
 export function PantallaPregunta({
@@ -24,6 +25,7 @@ export function PantallaPregunta({
   onSiguiente,
   onAnterior,
   mostrarAnterior,
+  esUltima,
 }: Props) {
   const [error, setError] = useState<string | null>(null);
   const tituloRef = useRef<HTMLHeadingElement>(null);
@@ -147,7 +149,7 @@ export function PantallaPregunta({
           onClick={handleSiguienteClick}
           className="cursor-pointer ml-auto inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
         >
-          Siguiente
+          {esUltima ? "Ver mi dictamen" : "Siguiente"}
           <span aria-hidden="true">→</span>
         </button>
       </div>

@@ -10,6 +10,9 @@ interface Props {
 
 const { lang } = Astro.props
 const t = useTranslations(lang)
+
+// El detalle de tramos y precios vive en el catálogo; aquí solo se resume.
+const servicesHref = lang === "es" ? "/servicios" : "/en/services"
 ---
 
 <section
@@ -58,10 +61,17 @@ const t = useTranslations(lang)
             </ul>
 
             <p
-                class="audit-after-closing text-base md:text-lg text-text-primary leading-relaxed max-w-2xl"
+                class="audit-after-closing text-base md:text-lg text-text-primary leading-relaxed max-w-2xl mb-8 md:mb-10"
             >
                 {t.audit.afterAudit.closing}
             </p>
+
+            <a
+                href={servicesHref}
+                class="inline-flex items-center border border-accent-line text-accent px-7 py-3.5 rounded-full text-sm font-medium hover:bg-accent-subtle transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+                {t.audit.afterAudit.ctaLabel}
+            </a>
         </div>
     </div>
 </section>
