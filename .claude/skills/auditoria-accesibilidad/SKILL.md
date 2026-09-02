@@ -7,7 +7,9 @@ description: >-
   auditar, revisar o evaluar la accesibilidad de una web, mencione WCAG,
   EN 301 549, Ley 11/2023, conformidad, "te aplica la ley", lectores de
   pantalla, navegación por teclado o accesibilidad en general, aunque no
-  diga explícitamente "auditoría". Requiere Playwright MCP para inspeccionar
+  diga explícitamente "auditoría". NO es para el diagnóstico exprés (la
+  pasada rápida de pago de 48 h con top-10 de hallazgos): para eso usa la
+  skill diagnostico-expres. Requiere Playwright MCP para inspeccionar
   el sitio en un navegador real.
 ---
 
@@ -46,6 +48,19 @@ como supuesto en el informe. Para determinar el régimen legal aplicable o citar
 se audita una muestra representativa: portada, una página de proceso clave
 (formulario / checkout / contacto), una página de contenido típica, y una
 página de plantilla común (legal, listado). Anota las URLs muestreadas.
+
+**Procesos transaccionales — cómo recorrerlos sin pagar.** Los procesos que
+terminan en pago se auditan enteros, con sus estados de error, pero **nunca
+completando una transacción real con medios de pago propios**. Pregunta al
+auditor qué vía hay disponible, por este orden: (1) **staging/preproducción**,
+(2) **modo test de la pasarela** con tarjetas de prueba, (3) **cupón del 100 %**
+con el pedido anulado después. Empieza siempre por los **estados de error**
+(campo obligatorio vacío, tarjeta rechazada, cupón caducado, CVV mal, sesión
+expirada): se provocan sin necesidad de completar la compra y es donde vive lo
+peor — errores no anunciados al lector de pantalla, foco que no salta al campo
+que falla, error indicado solo con color. Si no hay ninguna de las tres vías, no
+lo inventes ni lo des por conforme: recorre hasta donde se pueda y documenta en
+el informe qué parte del proceso no ha sido evaluable y por qué.
 
 **Paso 2 — Pasada automática.** Con Playwright MCP, recorre cada página de la
 muestra, inyecta axe-core y recoge las violaciones automáticas. Estos son
@@ -220,6 +235,9 @@ esas subcarpetas; no dejes evidencias sueltas en la raíz del repo ni en `.playw
 - Las correcciones se redactan como acción concreta (idealmente con código),
   no como "mejorar la accesibilidad".
 - El impacto se explica en términos de personas, no de criterios.
+- Nunca completes una compra o reserva real con medios de pago propios. Sin
+  staging, modo test ni cupón del 100 %, el proceso queda parcialmente evaluado
+  y eso se declara explícitamente en el informe.
 - Cita solo evidencia que exista: los archivos reales (axe-home-full.json,
   verificacion-manual.md, urls-muestreadas.txt) y, dentro de la verificación
   manual, la sección concreta. No inventes nombres de archivo de evidencia.

@@ -30,7 +30,7 @@
           "name": "Express diagnosis",
           "price": "€290",
           "priceAriaLabel": "two hundred and ninety euros",
-          "deadline": "48 hours",
+          "deadline": "48 working hours",
           "tagline": "I review your homepage and the three journeys where money actually leaks: the one that buys, the one that books and the one that fills in the form. In 48 hours you know what's broken and who you're locking out.",
           "forWho": "For anyone who suspects there's a problem and wants it confirmed before investing properly.",
           "includes": [
@@ -39,7 +39,7 @@
             "Short PDF report, no jargon",
             "20-minute call to go through it"
           ],
-          "note": "The diagnosis locates what is costing you most; it does not evaluate the 50 WCAG criteria or deliver the compliance document — that is what the audit is for. The €290 is deducted in full if you book it within the following 30 days.",
+          "note": "The diagnosis locates what is costing you most; it does not evaluate the 50 WCAG criteria or deliver the compliance document — that is what the audit is for. The €290 is paid in full when you book, and the clock starts there. It is deducted in full if you book the audit within the following 30 days.",
           "ctaLabel": "Request the diagnosis"
         },
         {
@@ -162,7 +162,7 @@
       "items": [
         {
           "question": "How does billing work?",
-          "answer": "50% on confirmation and 50% on delivery. Formal invoice with VAT, valid for deduction. Ongoing compliance is billed monthly in arrears."
+          "answer": "50% on confirmation and 50% on delivery. Formal invoice with VAT, valid for deduction. Ongoing compliance is billed monthly in arrears. The express diagnosis is the exception: it is paid in full up front, in a single payment."
         },
         {
           "question": "What is the difference between the express diagnosis and the audit?",

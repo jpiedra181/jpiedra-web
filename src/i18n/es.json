@@ -29,7 +29,7 @@
           "name": "Diagnóstico exprés",
           "price": "290 €",
           "priceAriaLabel": "doscientos noventa euros",
-          "deadline": "48 horas",
+          "deadline": "48 horas laborables",
           "tagline": "Reviso tu home y los tres recorridos donde de verdad se pierde dinero: el que compra, el que reserva y el que rellena el formulario. En 48 horas sabes qué está roto y a quién estás dejando fuera.",
           "forWho": "Para quien sospecha que tiene un problema y quiere confirmarlo antes de invertir de verdad.",
           "includes": [
@@ -38,7 +38,7 @@
             "Informe corto en PDF, sin jerga",
             "20 minutos de videollamada para repasarlo"
           ],
-          "note": "El diagnóstico localiza lo que más te está costando; no evalúa los 50 criterios WCAG ni entrega el documento de cumplimiento — para eso está la auditoría. Los 290 € se descuentan íntegros si la contratas en los 30 días siguientes.",
+          "note": "El diagnóstico localiza lo que más te está costando; no evalúa los 50 criterios WCAG ni entrega el documento de cumplimiento — para eso está la auditoría. Se abona íntegro al contratar y el plazo empieza en ese momento. Los 290 € se descuentan íntegros si la contratas en los 30 días siguientes.",
           "ctaLabel": "Pedir el diagnóstico"
         },
         {
@@ -161,7 +161,7 @@
       "items": [
         {
           "question": "¿Cómo se factura?",
-          "answer": "50 % al confirmar el inicio y 50 % a la entrega. Factura formal con IVA, válida para deducción. La conformidad continua se factura por meses vencidos."
+          "answer": "50 % al confirmar el inicio y 50 % a la entrega. Factura formal con IVA, válida para deducción. La conformidad continua se factura por meses vencidos. El diagnóstico exprés es la excepción: se abona íntegro al contratar, en un solo pago."
         },
         {
           "question": "¿Qué diferencia hay entre el diagnóstico exprés y la auditoría?",

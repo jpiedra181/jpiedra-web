@@ -35,6 +35,7 @@ _linkedin/
 _blog-export/
 videos/
 _recursos/
+_servicios/
 
 # Playwright MCP scratch (snapshots, console logs, screenshots temporales)
 .playwright-mcp/
