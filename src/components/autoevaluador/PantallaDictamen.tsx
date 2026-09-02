@@ -58,6 +58,9 @@ export function PantallaDictamen({ dictamen, onContinuar, onVolver }: Props) {
                 <WarningIcon color={dictamen.color} />
               )}
               <span className="text-text-primary leading-relaxed">
+                {bullet.tipo === "warning" && (
+                  <span className="sr-only">Aviso: </span>
+                )}
                 {bullet.texto}
               </span>
             </li>

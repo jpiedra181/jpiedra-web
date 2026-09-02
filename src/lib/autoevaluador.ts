@@ -448,12 +448,17 @@ export const DICTAMENES: Record<Dictamen, DictamenContent> = {
       {
         tipo: "warning",
         texto:
+          "La exención es solo de la Ley 11/2023: el RD 193/2023 (art. 14.2) te alcanza igualmente, con plazo 2029 para webs nuevas y 2030 para las existentes",
+      },
+      {
+        tipo: "warning",
+        texto:
           "Mientras tanto, cada barrera de tu web te sigue costando clientes — y eso no lo decide ninguna ley",
       },
     ],
     pdfIncluye: [
       "Por qué estás exenta hoy (art. 3.3), sin letra pequeña",
-      "Las tres puertas por las que se pierde la exención",
+      "Las tres puertas por las que se pierde la exención, y la fecha del RD 193/2023",
       "Lo que las barreras te cuestan aunque la ley calle",
       "Un plan de 30 días a coste mínimo, por si decides adelantarte",
     ],
@@ -530,18 +535,23 @@ export const DICTAMENES: Record<Dictamen, DictamenContent> = {
   },
   G: {
     id: "G",
-    titulo: "Hoy ninguna norma te obliga",
-    subtitulo: "Sin obligación legal directa de accesibilidad web",
+    titulo: "Hoy no tienes obligación inmediata",
+    subtitulo: "Ninguna norma te obliga ya. El RD 193/2023 te alcanza en 2029",
     color: "#10B981",
     bullets: [
       {
         tipo: "ok",
-        texto: "No tienes obligación legal directa de accesibilidad web hoy",
+        texto: "No tienes obligación legal inmediata de accesibilidad web hoy",
       },
       {
         tipo: "warning",
         texto:
-          "Crecer, cambiar de actividad o pedir ayudas públicas puede cambiarlo",
+          "El RD 193/2023 (art. 14.2) sí te alcanzará: webs nuevas desde el 1 de enero de 2029; las existentes, con ajustes razonables antes del 1 de enero de 2030",
+      },
+      {
+        tipo: "warning",
+        texto:
+          "Crecer, cambiar de actividad o pedir ayudas públicas puede adelantarlo",
       },
       {
         tipo: "warning",
@@ -555,8 +565,9 @@ export const DICTAMENES: Record<Dictamen, DictamenContent> = {
       },
     ],
     pdfIncluye: [
-      "Por qué no te aplica, respuesta a respuesta",
-      "Las tres situaciones que te meterían en la ley",
+      "Por qué no te aplica hoy, respuesta a respuesta",
+      "Qué te exige el RD 193/2023 y en qué fecha",
+      "Las tres situaciones que te meterían en la ley antes",
       "Lo que las barreras te cuestan aunque la ley calle",
       "Un plan de 30 días si decides adelantarte",
     ],

@@ -71,11 +71,10 @@ export function PantallaPregunta({
     <div className="max-w-3xl mx-auto">
       <BarraProgreso paso={paso} total={total} />
 
-      <div
-        className="mt-12 md:mt-16"
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      {/* Sin aria-live: el foco se mueve al título en cada pregunta y eso ya
+          anuncia el cambio; una región viva atómica repetiría el bloque entero
+          con cada selección. El error tiene su propio role="alert". */}
+      <div className="mt-12 md:mt-16">
         <h2
           ref={tituloRef}
           tabIndex={-1}

@@ -75,7 +75,8 @@ const navItems = [
 <button
     id="mobile-menu-btn"
     class="lg:hidden fixed top-0 right-0 z-[60] w-10 h-10 flex items-center justify-center mr-6 mt-5 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-    aria-label="Menu"
+    aria-label={lang === "es" ? "Menú de navegación" : "Navigation menu"}
+    aria-controls="mobile-menu"
     aria-expanded="false"
 >
     <div class="relative w-6 h-5">

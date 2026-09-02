@@ -406,7 +406,7 @@
           "value": "€1,000,000",
           "ariaLabel": "one million euros",
           "title": "Real fines",
-          "description": "The penalty regime of RDL 1/2013, which Law 11/2023 refers to, is already in force. Failing accessibility requirements is a serious infringement, and repeat offences can escalate to very serious."
+          "description": "The penalty regime of RDL 1/2013, which Law 11/2023 refers to, is already in force. Failing accessibility requirements is a serious infringement (up to €90,000); three serious infringements within a year escalate to very serious (art. 95.4.h RDL 1/2013)."
         },
         {
           "value": "June 2025",
@@ -452,19 +452,19 @@
         {
           "tag": "IMMEDIATE OBLIGATION — LAW 11/2023",
           "headline": "If you sell online or run digital services for consumers, you are already obligated.",
-          "body": "Ecommerce of any size. Online banking. Hotels with online booking. Airlines, rail, sea carriers. Telecom operators. Streaming platforms. Electricity, gas and water utilities. Online education platforms. Online travel agencies and tour operators.",
+          "body": "Ecommerce of any size. Online banking. Hotels with online booking. Airlines, rail, sea carriers. Telecom operators. Streaming platforms. Electricity, gas and water utilities. Academies and platforms selling courses online to consumers. Online travel agencies and tour operators.",
           "note": "Exception: micro-enterprises (under 10 employees AND under €2M revenue) that only provide services without product sales."
         },
         {
           "tag": "DEADLINE JANUARY 2029 — RD 193/2023",
-          "headline": "If your sector runs a public-facing website, you're up in 2029.",
-          "body": "Clinics and healthcare services with online booking. Restaurants with online orders or bookings. Academies and training. Cultural, sports companies and museums with online sales. Mid-sized real estate. Financial services and insurance.",
+          "headline": "If your website offers goods or services to the public, you have a date: new sites from January 2029, existing ones with adjustments before 2030.",
+          "body": "Clinics and healthcare services with online booking. Restaurants with online orders or bookings. Academies and training. Cultural, sports companies and museums with online sales. Real estate. Insurers and non-bank financial services. Any company website describing what it sells, with no size exemption (RD 193/2023, art. 14.2).",
           "note": "Getting ahead now is a competitive advantage: most of your sector will only comply at the last minute."
         },
         {
           "tag": "IMMEDIATE OBLIGATION — PUBLIC FUNDING",
           "headline": "If you receive public funds, the obligation is now, with no grace period.",
-          "body": "Spain's Kit Digital, EU funds, regional grants, contracts with the public sector. The Accessibility Review Report (IRA) is already required. Without compliance, risk of fund refund.",
+          "body": "Spain's Kit Digital, EU funds, regional grants, contracts with the public sector. The condition travels with the grant (1st Additional Provision of RD 1112/2018): the funded website must meet WCAG 2.1 AA now. Without compliance, risk of having to refund the grant.",
           "note": null
         }
       ],
@@ -490,7 +490,7 @@
         {
           "duration": "DAYS 3-5",
           "title": "Manual and technical evaluation",
-          "description": "70% of the real work. Keyboard navigation, screen reader checks with NVDA (VoiceOver/iOS on request), color contrast validation, focus visibility, forms, ARIA, error messages. Every finding documented with screenshot, WCAG criterion and impact level.",
+          "description": "70% of the real work. Keyboard navigation, checks with a real screen reader (NVDA on Windows), color contrast validation, focus visibility, forms, ARIA, error messages. Every finding documented with screenshot, WCAG criterion and impact level.",
           "clientInput": "What I need from you: nothing. If something critical comes up, I'll let you know right away."
         },
         {

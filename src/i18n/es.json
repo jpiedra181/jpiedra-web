@@ -405,7 +405,7 @@
           "value": "1.000.000 €",
           "ariaLabel": "un millón de euros",
           "title": "Multas reales",
-          "description": "El régimen sancionador del RDL 1/2013, al que remite la Ley 11/2023, ya está vigente. El incumplimiento de las exigencias de accesibilidad es infracción grave, y la reincidencia puede escalar a muy grave."
+          "description": "El régimen sancionador del RDL 1/2013, al que remite la Ley 11/2023, ya está vigente. El incumplimiento de las exigencias de accesibilidad es infracción grave (hasta 90.000 €); tres graves en un año escalan a muy grave (art. 95.4.h RDL 1/2013)."
         },
         {
           "value": "Junio 2025",
@@ -451,19 +451,19 @@
         {
           "tag": "OBLIGACIÓN INMEDIATA — LEY 11/2023",
           "headline": "Si vendes online o gestionas servicios digitales al consumidor, ya estás obligado.",
-          "body": "Ecommerce de cualquier tamaño. Banca online. Hoteles con reservas online. Aerolíneas, ferroviarias, navieras. Operadores de telecomunicaciones. Plataformas de streaming. Compañías de luz, gas, agua. Plataformas educativas online. Agencias de viajes y turoperadores online.",
+          "body": "Ecommerce de cualquier tamaño. Banca online. Hoteles con reservas online. Aerolíneas, ferroviarias, navieras. Operadores de telecomunicaciones. Plataformas de streaming. Compañías de luz, gas, agua. Academias y plataformas que venden cursos online a particulares. Agencias de viajes y turoperadores online.",
           "note": "Excepción: microempresas (menos de 10 empleados Y menos de 2 M€ de facturación) que solo prestan servicios sin venta de productos."
         },
         {
           "tag": "PLAZO ENERO 2029 — RD 193/2023",
-          "headline": "Si tu sector tiene web operativa al público, te toca en 2029.",
-          "body": "Clínicas y servicios sanitarios con reservas online. Restaurantes con pedidos o reservas. Academias y formación. Empresas culturales, deportivas, museos con venta online. Inmobiliarias medianas. Webs de servicios financieros y seguros.",
+          "headline": "Si tu web ofrece bienes o servicios al público, te toca con fecha: webs nuevas desde enero de 2029, las existentes con ajustes antes de 2030.",
+          "body": "Clínicas y servicios sanitarios con reservas online. Restaurantes con pedidos o reservas. Academias y formación. Empresas culturales, deportivas, museos con venta online. Inmobiliarias. Aseguradoras y servicios financieros no bancarios. Cualquier web de empresa que informe de lo que vende, sin exención por tamaño (RD 193/2023, art. 14.2).",
           "note": "Anticiparte ahora es ventaja competitiva: la mayoría de tu sector no cumplirá hasta el último minuto."
         },
         {
           "tag": "OBLIGACIÓN INMEDIATA — FINANCIACIÓN PÚBLICA",
           "headline": "Si recibes fondos públicos, la obligación es ya, sin plazo de gracia.",
-          "body": "Kit Digital, fondos europeos, subvenciones autonómicas, contratos con la Administración. El Informe de Revisión de Accesibilidad (IRA) ya es exigible. Sin cumplimiento, riesgo de devolución de fondos.",
+          "body": "Kit Digital, fondos europeos, subvenciones autonómicas, contratos con la Administración. La condición viaja con la ayuda (DA 1ª del RD 1112/2018): la web financiada debe cumplir WCAG 2.1 AA ya. Sin cumplimiento, riesgo de reintegro.",
           "note": null
         }
       ],
@@ -489,7 +489,7 @@
         {
           "duration": "DÍAS 3-5",
           "title": "Evaluación manual y técnica",
-          "description": "El 70% del trabajo real. Navegación por teclado, lectura con lector de pantalla NVDA (VoiceOver/iOS bajo petición), validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con su criterio WCAG, su nivel de impacto y, donde ilustra, una captura.",
+          "description": "El 70% del trabajo real. Navegación por teclado, lectura con lector de pantalla real (NVDA en Windows), validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con su criterio WCAG, su nivel de impacto y, donde ilustra, una captura.",
           "clientInput": "Lo que necesito de ti: nada. Si surgiera algo crítico, te aviso al momento."
         },
         {

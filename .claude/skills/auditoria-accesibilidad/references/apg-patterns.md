@@ -221,6 +221,27 @@ compuesta · Superposiciones y avisos · Estructuras de datos y rango
 
 ---
 
+## Fallos recurrentes vistos en auditorías reales (2026)
+
+- **Label oculta con `display:none`** en campos de buscadores de reserva: el
+  árbol da nombre, NVDA no. Reportar bajo 4.1.2 / 3.3.2 (Paradores).
+- **Cookies (Cookiebot y similares)**: `role=dialog` + `aria-modal` sin mover el
+  foco al abrir y sin cerrar con Escape; el chat flotante tapa el botón
+  «Rechazar». Global por definición (Online Tours, Singularu).
+- **Precios y subtotales en `aria-live`**: ruido constante en lector; 4.1.3 /
+  1.3.1 (Singularu).
+- **Calendario de reserva** como rejilla de `div` sin roles ni teclado; 2.1.1 +
+  4.1.2 (Paradores).
+- **`alert()` de JavaScript** como única validación de formulario: bloqueante,
+  uno a uno, sin asociar al campo; 3.3.1 / 3.3.3 (Paradores contacto).
+- **Radios ocultos con `hidden` y un `div onclick` como cuarta opción** en pasos
+  de cita: 2.1.1 (Clínica Baviera).
+- **Enlaces de imagen vacíos en escaparates y listados por provincia**: 2.4.4 /
+  1.1.1 con decenas de instancias (Clínica Baviera, Singularu).
+- **Menú de navegación con `role="menu"`** sobre enlaces de sitio: patrón de
+  aplicación mal aplicado; se reporta bajo 4.1.2 con la corrección
+  `button[aria-expanded]` + lista de enlaces.
+
 ## Nota de ampliación
 La amplitud (patrones) está completa con el set de la APG. La profundidad de los
 "fallos típicos" es lo que se enriquece con auditorías reales: cuando una web saque

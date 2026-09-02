@@ -1,112 +1,147 @@
-# Criterios WCAG 2.1 A+AA — mapeo EN 301 549 y detección
+# Criterios WCAG 2.1 A+AA — mapeo EN 301 549, procedimiento de verificación y detección
 
-> Archivo de REFERENCIA para el agente. Se consulta al clasificar hallazgos y al
-> componer el resumen de conformidad. Es la lista completa de criterios; las
-> pasadas (automática, teclado, criterio) y la severidad están en el SKILL.md.
+> Archivo de REFERENCIA para el agente. Se consulta al ejecutar la pasada de
+> criterio (Paso 4 de `SKILL.md`), al clasificar cada hallazgo y al rellenar la
+> matriz de cobertura y la tabla de conformidad. Es la lista completa de los 50
+> criterios A+AA de WCAG 2.1 con **cómo se verifica cada uno de forma
+> repetible**. Las pasadas, la muestra y la severidad están en
+> `protocolo-auditoria.md`.
+>
+> Fuentes: WCAG 2.1 (`.claude/sources/wcag21.html`), EN 301 549 V3.2.1 cap. 9
+> (`en_301549v030201p.pdf`), Understanding WCAG 2.1. Reglas axe según axe-core
+> 4.11.x. Verificado 2026-09-02.
 
 ## Cómo usar
 
 - **Regla de mapeo EN:** la cláusula web de EN 301 549 V3.2.1 es `9.` + el nº de
-  criterio WCAG. Ej.: WCAG 2.4.7 → EN 9.2.4.7. Mecánico para todos.
-- **Detección:** `Auto` = axe lo detecta de forma fiable · `Parcial` = axe señala
-  candidatos pero requiere confirmación humana · `Manual` = solo criterio humano.
-  Nunca marques conforme un criterio `Manual`/`Parcial` sin haberlo verificado.
-- El nivel (A/AA) importa para el veredicto: conformidad AA = cumplir todos los A
-  **y** todos los AA.
+  criterio WCAG. Ej.: WCAG 2.4.7 → EN 9.2.4.7. Mecánico para los 50.
+- **Detección:** `Auto` = axe lo detecta de forma fiable y su ausencia de
+  violaciones es evidencia razonable de conformidad · `Parcial` = axe señala
+  candidatos o una parte del criterio; la conformidad exige confirmación
+  humana · `Manual` = solo criterio humano; axe no aporta nada o casi nada.
+  **Un criterio `Parcial` o `Manual` nunca se marca Conforme sin haber
+  ejecutado el procedimiento de su fila y anotado el resultado en la matriz
+  de cobertura.**
+- **Ámbito del criterio:** `P` = se evalúa página a página · `S` = es una
+  propiedad del sitio o del conjunto (se evalúa una vez sobre la muestra
+  completa, p. ej. navegación consistente) · `Pr` = se evalúa además sobre cada
+  proceso completo.
+- El nivel (A/AA) importa para el veredicto: conformidad AA = cumplir todos
+  los A **y** todos los AA en todas las páginas de la muestra y en los
+  procesos completos.
+- **Evidencia mínima**: lo que hay que guardar para que el equipo del cliente
+  pueda repetir la comprobación. Se nombra en `protocolo-auditoria.md` §9.
+
+Abreviaturas: **AT** = árbol de accesibilidad (snapshot de Playwright);
+**DOM** = inspección del marcado; **SR** = lector de pantalla (virtual o NVDA);
+**Tec** = teclado real; **Vis** = inspección visual con captura.
 
 ---
 
 ## Principio 1 — Perceptible
 
-| WCAG (nivel) | Qué comprobar | EN | Detección |
-|---|---|---|---|
-| 1.1.1 Contenido no textual (A) | Imágenes informativas con `alt` útil; decorativas con `alt=""`. Calidad del alt = manual. | 9.1.1.1 | Parcial |
-| 1.2.1 Solo audio / solo vídeo pregrabado (A) | Alternativa textual (audio) o descripción/transcripción (vídeo). | 9.1.2.1 | Manual |
-| 1.2.2 Subtítulos pregrabados (A) | Vídeo con audio lleva subtítulos sincronizados. | 9.1.2.2 | Manual |
-| 1.2.3 Audiodescripción o alternativa (A) | Vídeo pregrabado con descripción o alternativa textual. | 9.1.2.3 | Manual |
-| 1.2.4 Subtítulos en directo (AA) | Streaming con audio lleva subtítulos en vivo. | 9.1.2.4 | Manual |
-| 1.2.5 Audiodescripción pregrabada (AA) | Vídeo pregrabado con audiodescripción. | 9.1.2.5 | Manual |
-| 1.3.1 Información y relaciones (A) | Encabezados, listas, tablas, labels y landmarks reales (no solo visuales). | 9.1.3.1 | Parcial |
-| 1.3.2 Secuencia con significado (A) | El orden de lectura del DOM conserva el sentido. | 9.1.3.2 | Manual |
-| 1.3.3 Características sensoriales (A) | Las instrucciones no dependen solo de forma/color/posición ("el botón redondo de la derecha"). | 9.1.3.3 | Manual |
-| 1.3.4 Orientación (AA) | No se bloquea a vertical u horizontal salvo que sea esencial. | 9.1.3.4 | Parcial |
-| 1.3.5 Identificar propósito de entrada (AA) | Campos de datos del usuario con `autocomplete` adecuado. | 9.1.3.5 | Parcial |
-| 1.4.1 Uso del color (A) | El color no es el único medio para transmitir información (p. ej. errores, enlaces). | 9.1.4.1 | Manual |
-| 1.4.2 Control del audio (A) | Audio que suena solo >3 s se puede pausar/silenciar. | 9.1.4.2 | Manual |
-| 1.4.3 Contraste mínimo (AA) | 4.5:1 texto normal, 3:1 texto grande. | 9.1.4.3 | Auto |
-| 1.4.4 Redimensionar texto (AA) | Texto al 200% sin pérdida de contenido o función. | 9.1.4.4 | Parcial |
-| 1.4.5 Imágenes de texto (AA) | No usar imágenes de texto salvo que sea esencial. | 9.1.4.5 | Manual |
-| 1.4.10 Reflow (AA) | Sin scroll horizontal a 320 px / zoom 400%. | 9.1.4.10 | Parcial |
-| 1.4.11 Contraste no textual (AA) | 3:1 en componentes de UI y en el indicador de foco. | 9.1.4.11 | Parcial |
-| 1.4.12 Espaciado de texto (AA) | Sin pérdida al forzar interlineado/espaciado de párrafo, letra y palabra. | 9.1.4.12 | Parcial |
-| 1.4.13 Contenido al hover/focus (AA) | Lo que aparece al pasar/enfocar es descartable, apuntable y persistente. | 9.1.4.13 | Manual |
+| WCAG (nivel) · EN | Ámbito | Qué exige | Cómo se verifica (procedimiento repetible) | axe (wcag2a/aa) | Evidencia | Detección |
+|---|---|---|---|---|---|---|
+| 1.1.1 Contenido no textual (A) · 9.1.1.1 | P | Toda imagen informativa tiene alternativa equivalente; las decorativas están ocultas a la AT; CAPTCHA y controles de imagen tienen nombre. | 1) Lista todas las `img`, `svg`, `input[type=image]`, `area`, iconos de fuente y fondos CSS con función. 2) Para cada una decide si es informativa, funcional o decorativa **mirando la página**. 3) Informativas: el `alt` describe lo que aporta (no «imagen», no el nombre del archivo). Funcionales (dentro de enlace/botón): el nombre dice el destino o la acción. Decorativas: `alt=""` o `aria-hidden`. 4) Anota cada fallo con selector y alt real. | `image-alt`, `input-image-alt`, `area-alt`, `object-alt`, `svg-img-alt`, `role-img-alt` | Captura con la imagen señalada + `alt` real en la ficha | Parcial (la presencia es Auto; la calidad, Manual) |
+| 1.2.1 Solo audio / solo vídeo pregrabado (A) · 9.1.2.1 | P | Solo audio: transcripción. Solo vídeo: transcripción o pista de audio equivalente. | 1) Inventaria `audio`, `video`, iframes de YouTube/Vimeo y reproductores JS. 2) Para cada medio, reprodúcelo y clasifica: solo audio / solo vídeo / audiovisual. 3) Busca la alternativa junto al medio o enlazada. Si el contenido es anterior al 28-06-2025 y el cliente es dictamen B/C/D, anota la exclusión del art. 2.4.a) de la Ley 11/2023 pero evalúa igual. | — | Captura del reproductor + URL del medio + dónde está o no la alternativa | Manual |
+| 1.2.2 Subtítulos pregrabados (A) · 9.1.2.2 | P | Vídeo con audio: subtítulos sincronizados (no autogenerados sin revisar). | 1) Reproduce cada vídeo con audio. 2) Activa CC: ¿existen? ¿Sincronizados y fieles (comprueba 30 s)? ¿Incluyen sonidos relevantes? En YouTube distingue subtítulos subidos de los automáticos. | `video-caption` (solo detecta ausencia de `track`) | Captura con CC activados o mensaje de «no disponibles» | Manual |
+| 1.2.3 Audiodescripción o alternativa (A) · 9.1.2.3 | P | Vídeo pregrabado: audiodescripción **o** alternativa textual completa. | 1) Para cada vídeo con contenido visual relevante, ¿hay pista de audiodescripción, versión descrita o transcripción que incluya lo visual? 2) Si el vídeo es solo una persona hablando sin información visual, se cumple con la transcripción de 1.2.2. | — | Captura + enlace a la alternativa | Manual |
+| 1.2.4 Subtítulos en directo (AA) · 9.1.2.4 | S | Emisiones en directo con audio llevan subtítulos en vivo. | 1) ¿Hay streaming en directo en el sitio (eventos, webinars)? Si no, **No aplica** con nota. 2) Si hay, comprobar durante una emisión o pedir evidencia al cliente. | — | Captura o declaración de No aplica | Manual |
+| 1.2.5 Audiodescripción pregrabada (AA) · 9.1.2.5 | P | Vídeo pregrabado con audiodescripción (la alternativa textual ya no basta en AA). | Igual que 1.2.3 pero exigiendo pista o versión audiodescrita. Un vídeo sin información visual relevante puede cumplir por no necesitarla: anótalo. | — | Captura + ubicación de la pista | Manual |
+| 1.3.1 Información y relaciones (A) · 9.1.3.1 | P | Estructura visual = estructura programática: encabezados, listas, tablas, etiquetas, agrupaciones, landmarks. | 1) AT de la página: compara la jerarquía de encabezados con lo que se ve (títulos visuales que no son `h*`, `h*` usados por tamaño). 2) Listas visuales son `ul/ol`; tablas de datos son `table` con `th`/`scope`/`caption`; formularios: cada campo asociado a su etiqueta (`label for`, `aria-labelledby`), grupos de radios en `fieldset/legend` o `role=group`. 3) Texto con significado por formato (negrita = obligatorio, color = error) tiene equivalente programático. 4) Landmarks: `main` único, `nav` con nombre si hay varias. | `label`, `list`, `listitem`, `definition-list`, `dlitem`, `th-has-data-cells`, `td-headers-attr`, `p-as-heading`, `aria-required-children`, `aria-required-parent`, `table-duplicate-name` | Snapshot del AT + captura de la estructura visual | Parcial |
+| 1.3.2 Secuencia con significado (A) · 9.1.3.2 | P | El orden de lectura del DOM conserva el sentido. | 1) Lector virtual o modo lectura de NVDA de arriba abajo: ¿el orden narrado tiene sentido? 2) Desactiva CSS (o compara con el AT) en layouts con `order`, `flex-direction: row-reverse`, grid reordenado, columnas. 3) Atención a tarjetas donde el precio/título se leen antes que la imagen enlazada, y a menús con orden DOM distinto del visual. | — | Extracto de `sr-*.txt` + captura del layout | Manual |
+| 1.3.3 Características sensoriales (A) · 9.1.3.3 | P | Las instrucciones no dependen solo de forma, tamaño, posición, orientación o sonido. | 1) Busca textos de instrucción («pulse el botón verde», «el menú de la derecha», «cuando oiga el pitido»). 2) Cada uno debe tener referencia no sensorial (nombre del botón, encabezado). | — | Captura del texto | Manual |
+| 1.3.4 Orientación (AA) · 9.1.3.4 | P | El contenido no se bloquea en una orientación salvo esencial. | 1) Emulación móvil: 375×812 y 812×375. 2) Si en una orientación aparece «gire el dispositivo» o el contenido no se muestra, falla. 3) Revisa CSS `@media (orientation)` con `display:none` sobre el contenido. | `css-orientation-lock` (experimental; solo indicio) | Dos capturas (vertical y horizontal) | Parcial |
+| 1.3.5 Identificar el propósito de la entrada (AA) · 9.1.3.5 | P·Pr | Campos que recogen datos de la persona (nombre, email, teléfono, dirección, tarjeta…) llevan `autocomplete` con el token correcto. | 1) Inventaria campos personales en formularios y procesos. 2) Cada uno tiene `autocomplete` válido y coherente (`given-name`, `email`, `tel`, `street-address`, `postal-code`, `cc-number`…). Sin atributo = No conforme; con token inválido = No conforme. | `autocomplete-valid` (solo valida tokens presentes; la ausencia no la detecta) | Tabla campo → atributo en la ficha | Parcial |
+| 1.4.1 Uso del color (A) · 9.1.4.1 | P·Pr | El color no es el único medio: enlaces en texto, errores, estados seleccionados, gráficos. | 1) Enlaces dentro de párrafos: ¿se distinguen sin color (subrayado, 3:1 con el texto + cambio al foco/hover)? 2) Errores de formulario: ¿además del rojo hay texto o icono? 3) Filtros/pestañas activas: ¿además del color hay otro indicador? 4) Gráficos: leyenda con patrón o etiqueta. Prueba en escala de grises (`filter: grayscale(1)` sobre `html`). | `link-in-text-block` | Captura en escala de grises | Manual |
+| 1.4.2 Control del audio (A) · 9.1.4.2 | P | Audio que arranca solo y dura más de 3 s se puede pausar, parar o silenciar. | 1) Carga cada página con sonido activado; ¿algo reproduce audio automáticamente (vídeo hero con sonido, jingle)? 2) Si sí, ¿hay control visible al principio de la página o se para en 3 s? | `no-autoplay-audio` (indicio) | Captura del reproductor y su control | Manual |
+| 1.4.3 Contraste mínimo (AA) · 9.1.4.3 | P | Texto y texto en imágenes: 4,5:1; texto grande (≥24 px o ≥18,66 px negrita): 3:1. Excepciones: texto decorativo, deshabilitado, logotipos. | 1) axe mide el contraste del texto sobre fondo sólido. 2) Los `incomplete` de axe (texto sobre imagen o degradado, texto posicionado) se miden a mano con cuentagotas en el punto más desfavorable. 3) Comprueba estados: placeholder, hover, foco, deshabilitado (este último exento pero se anota), texto sobre imágenes hero. 4) Anota ratio medido y umbral. | `color-contrast` | Captura + ratio y umbral en la ficha | Auto (sobre fondo sólido) / Manual (sobre imagen) |
+| 1.4.4 Redimensionar texto (AA) · 9.1.4.4 | P | Al 200 % el texto se lee y nada se pierde ni se solapa. | 1) Zoom del navegador al 200 % (viewport 1280 → contenido como a 640 px de ancho efectivo). 2) Recorre la página: ¿texto cortado, solapado, oculto tras contenedores con altura fija? 3) `meta viewport` no impide el zoom (`user-scalable=no`, `maximum-scale<2`). | `meta-viewport` | Captura al 200 % del bloque afectado | Parcial |
+| 1.4.5 Imágenes de texto (AA) · 9.1.4.5 | P | No se usa imagen para mostrar texto salvo esencial (logotipos) o personalizable. | 1) Busca banners, botones, títulos y precios que sean imágenes con texto (`img`, SVG con `text` rasterizado, fondos CSS). 2) Salvo logotipo, falla. | — | Captura + selector | Manual |
+| 1.4.10 Reflow (AA) · 9.1.4.10 | P·Pr | A 320 px CSS de ancho (= zoom 400 % en 1280) no hay scroll horizontal ni pérdida de contenido o función, salvo tablas, mapas, editores. | 1) Viewport 320×(alto libre) en escritorio, o zoom 400 % a 1280 px. 2) Recorre toda la página y cada paso del proceso: ¿scroll horizontal (`document.documentElement.scrollWidth > 320`)?, ¿contenido cortado?, ¿menús o botones inalcanzables? 3) Las excepciones (tablas de datos, mapas) se anotan como tales. | — (medición propia con `scrollWidth`) | Captura a 320 px + valor de `scrollWidth` | Parcial |
+| 1.4.11 Contraste no textual (AA) · 9.1.4.11 | P·Pr | 3:1 para el **indicador de foco**, bordes/estados de controles necesarios para identificarlos, y partes informativas de gráficos e iconos. | 1) Indicador de foco: mide el contraste del anillo/borde contra el fondo adyacente (y contra el propio control). 2) Campos de formulario: el borde o el fondo que delimita el campo, 3:1 contra el fondo. 3) Iconos funcionales sin texto (lupa, hamburguesa, cesta): 3:1. 4) Casillas y radios: el estado marcado se distingue con 3:1. | — (axe no cubre; `color-contrast` es solo texto) | Captura + ratios medidos | Parcial |
+| 1.4.12 Espaciado del texto (AA) · 9.1.4.12 | P | Al forzar interlineado 1,5, espacio entre párrafos 2 em, entre letras 0,12 em y entre palabras 0,16 em, no se pierde contenido ni función. | 1) Inyecta la hoja de estilos de prueba (`* { line-height:1.5 !important; letter-spacing:.12em !important; word-spacing:.16em !important } p { margin-bottom:2em !important }`). 2) Recorre la página: ¿texto cortado, solapado, botones con texto fuera, contenedores de altura fija? | `avoid-inline-spacing` (solo estilos inline que lo impedirían) | Captura con la hoja inyectada | Parcial |
+| 1.4.13 Contenido al pasar el puntero o enfocar (AA) · 9.1.4.13 | P | Tooltips, submenús y popovers que aparecen al hover/foco son descartables (Escape), apuntables (se puede mover el puntero encima) y persistentes. | 1) Inventaria hover/foco que revela contenido (menús desplegables, tooltips, tarjetas). 2) Para cada uno: Escape lo cierra sin mover el foco; mover el puntero desde el disparador al contenido no lo cierra; no desaparece solo. 3) Los `title` nativos se anotan como no descartables (fallo habitual). | — | Captura del contenido revelado + notas de las tres pruebas | Manual |
 
 ## Principio 2 — Operable
 
-| WCAG (nivel) | Qué comprobar | EN | Detección |
-|---|---|---|---|
-| 2.1.1 Teclado (A) | Toda funcionalidad operable solo con teclado. | 9.2.1.1 | Manual |
-| 2.1.2 Sin trampa de teclado (A) | Se puede entrar y SALIR de todo con teclado. | 9.2.1.2 | Manual |
-| 2.1.4 Atajos de una tecla (A) | Atajos de un solo carácter se pueden desactivar/remapear. | 9.2.1.4 | Manual |
-| 2.2.1 Tiempo ajustable (A) | Límites de tiempo se pueden apagar, ajustar o ampliar. | 9.2.2.1 | Manual |
-| 2.2.2 Pausar, detener, ocultar (A) | Movimiento/parpadeo/auto-actualización >5 s se puede pausar (carruseles). | 9.2.2.2 | Manual |
-| 2.3.1 Tres destellos o menos (A) | Nada parpadea más de 3 veces por segundo. | 9.2.3.1 | Manual |
-| 2.4.1 Evitar bloques (A) | Enlace de salto operativo / landmarks para saltar al contenido. | 9.2.4.1 | Parcial |
-| 2.4.2 Página titulada (A) | `<title>` presente y descriptivo. | 9.2.4.2 | Parcial |
-| 2.4.3 Orden del foco (A) | El orden de tabulación preserva el significado y la operabilidad. | 9.2.4.3 | Manual |
-| 2.4.4 Propósito del enlace en contexto (A) | El destino se entiende por el texto del enlace (o su contexto). | 9.2.4.4 | Parcial |
-| 2.4.5 Múltiples vías (AA) | Más de una forma de llegar a una página (menú + buscador/mapa). | 9.2.4.5 | Manual |
-| 2.4.6 Encabezados y etiquetas (AA) | Encabezados y labels describen su tema o propósito. | 9.2.4.6 | Parcial |
-| 2.4.7 Foco visible (AA) | Indicador de foco visible en todo lo interactivo. | 9.2.4.7 | Parcial |
-| 2.5.1 Gestos del puntero (A) | Funciones con gestos multipunto/trayectoria tienen alternativa simple. | 9.2.5.1 | Manual |
-| 2.5.2 Cancelación del puntero (A) | La acción se dispara al soltar, con opción de abortar. | 9.2.5.2 | Manual |
-| 2.5.3 Etiqueta en el nombre (A) | El nombre accesible incluye el texto visible del control. | 9.2.5.3 | Parcial |
-| 2.5.4 Actuación por movimiento (A) | Funciones por agitar/inclinar tienen alternativa y se pueden desactivar. | 9.2.5.4 | Manual |
+| WCAG (nivel) · EN | Ámbito | Qué exige | Cómo se verifica (procedimiento repetible) | axe | Evidencia | Detección |
+|---|---|---|---|---|---|---|
+| 2.1.1 Teclado (A) · 9.2.1.1 | P·Pr | Toda funcionalidad se opera con teclado sin requerir tiempos específicos por pulsación. | 1) Barrido de Tab registrado (protocolo §5). 2) **Opera** cada control con Enter/Espacio/flechas: menús, acordeones, carruseles, selectores personalizados, calendarios, sliders, mapas, cerrar modales, añadir a cesta, pasos del proceso. 3) Todo lo que hace algo con ratón debe hacerlo con teclado. Los `div` con `onclick` sin `tabindex`/rol son el fallo típico. 4) Regiones con scroll interno son enfocables. | `scrollable-region-focusable`, `frame-focusable-content`, `server-side-image-map` | Extracto del barrido + captura del control inoperable | Manual |
+| 2.1.2 Sin trampa de teclado (A) · 9.2.1.2 | P·Pr | De todo componente se puede salir con Tab/Shift+Tab o Escape, y si hace falta otra tecla, se informa. | 1) Durante el barrido, en cada widget (modal, reproductor, iframe, editor, mapa) comprueba que Tab sigue y Shift+Tab vuelve. 2) Modales: el foco queda dentro (correcto) pero Escape o el botón de cerrar deben devolverlo. 3) Iframes de terceros (chat, mapas): entra y sale. | — | Nota del barrido con la parada donde se queda + captura | Manual |
+| 2.1.4 Atajos de teclado de un carácter (A) · 9.2.1.4 | S | Si hay atajos de una sola tecla, se pueden desactivar, remapear o solo actúan con foco en el componente. | 1) Busca en el JS o en la ayuda del sitio atajos de una tecla (`keydown` sobre `document` con teclas sin modificador). 2) Pulsa letras y números sueltos fuera de campos: ¿pasa algo (abre búsqueda, navega el carrusel)? Si sí, ¿hay forma de desactivarlo? Sin atajos = Conforme con nota. | — | Nota de las teclas probadas | Manual |
+| 2.2.1 Tiempo ajustable (A) · 9.2.2.1 | P·Pr | Límites de tiempo se pueden desactivar, ajustar o ampliar antes de expirar (aviso con 20 s y acción simple), salvo esenciales. | 1) Sesiones de compra/reserva con cuenta atrás, cierre de sesión, carruseles con avance temporal que impiden leer, redirecciones automáticas. 2) Para cada uno: ¿se avisa?, ¿se puede ampliar? Sin límites de tiempo = Conforme con nota. | `meta-refresh` | Captura del aviso o del contador | Manual |
+| 2.2.2 Poner en pausa, detener, ocultar (A) · 9.2.2.2 | P | Contenido que se mueve, parpadea o se desplaza automáticamente más de 5 s, o que se actualiza solo, tiene control para pausar, parar u ocultar. | 1) Carruseles y vídeos de fondo con autoplay, tickers, animaciones de fondo: ¿duran más de 5 s?, ¿hay botón de pausa operable con teclado?, ¿la pausa al hover no basta? 2) `prefers-reduced-motion` no sustituye al control, pero se anota si lo respeta. | `blink`, `marquee` | Captura del carrusel y de su control (o de su ausencia) | Manual |
+| 2.3.1 Umbral de tres destellos o menos (A) · 9.2.3.1 | P | Nada destella más de tres veces por segundo. | 1) Vídeos, animaciones y GIF: ¿hay destellos rápidos? Si hay duda, análisis con PEAT o descarte visual justificado. Normalmente Conforme con nota. | — | Nota | Manual |
+| 2.4.1 Evitar bloques (A) · 9.2.4.1 | S | Mecanismo para saltar los bloques repetidos: enlace de salto **o** landmarks/encabezados correctos. | 1) Desde carga limpia, primer Tab: ¿aparece «Saltar al contenido» y al activarlo el foco va a `main`? 2) Si no hay enlace: ¿`main` presente y encabezados que permitan saltar con SR? Solo landmarks bien puestos también cumple, se anota cuál de las dos vías. | `bypass` | Captura del enlace de salto visible al foco o snapshot de landmarks | Parcial |
+| 2.4.2 Página titulada (A) · 9.2.4.2 | P | `title` presente y describe el tema o propósito de la página. | 1) Lee `document.title` en cada página de la muestra y en cada paso del proceso. 2) ¿Distinto por página y descriptivo («Carrito – Tienda X»), no «Inicio» en todas ni el nombre del sitio solo? | `document-title` (solo presencia) | Tabla URL → title en la ficha | Parcial |
+| 2.4.3 Orden del foco (A) · 9.2.4.3 | P·Pr | El orden de tabulación preserva significado y operabilidad. | 1) Del barrido: ¿el orden sigue el visual/lógico? 2) Modales: al abrir, el foco entra; al cerrar, vuelve al disparador. 3) Contenido que se inserta dinámicamente (mensajes, desplegables) queda a continuación del disparador en el orden. 4) `tabindex` positivos. | — (`tabindex` es best-practice) | Barrido con la anomalía marcada + captura | Manual |
+| 2.4.4 Propósito de los enlaces en contexto (A) · 9.2.4.4 | P | El destino se entiende por el texto del enlace o por su contexto programático (frase, ítem de lista, celda, encabezado). | 1) Lista de enlaces del AT: los «leer más», «aquí», «ver», iconos sin nombre y enlaces de imagen vacíos. 2) Para cada uno decide si el contexto programático lo salva (misma frase o ítem). 3) Enlaces con el mismo texto y distinto destino, distinto texto. | `link-name` (solo vacíos) | Snapshot de la lista de enlaces + captura | Parcial |
+| 2.4.5 Múltiples vías (AA) · 9.2.4.5 | S | Más de una forma de localizar cada página (menú + buscador, mapa del sitio, índice), salvo pasos de un proceso. | 1) ¿Hay navegación principal + buscador funcional, o mapa del sitio, o enlaces relacionados? 2) Comprueba que el buscador encuentra una página de la muestra. | — | Captura de las dos vías | Manual |
+| 2.4.6 Encabezados y etiquetas (AA) · 9.2.4.6 | P | Encabezados y etiquetas describen tema o propósito (no exige que existan, sino que los que hay sean descriptivos). | 1) Lista de encabezados: ¿vacíos, genéricos («Sección»), repetidos sin distinción? 2) Etiquetas de campos: ¿dicen qué se pide («Correo electrónico», no «Campo 1»)? | `empty-heading` es best-practice; no cuenta | Snapshot de encabezados | Parcial |
+| 2.4.7 Foco visible (AA) · 9.2.4.7 | P·Pr | Todo elemento enfocable muestra un indicador de foco visible. | 1) En el barrido, columna «Foco visible» por parada. 2) Reglas CSS `outline: none/0` sobre `:focus` sin sustituto en `:focus-visible`. 3) Especial atención a cabecera, cookies, tarjetas de producto, botones de icono y pasos del proceso. 4) El indicador debe verse en el fondo real (blanco sobre fondo claro no cuenta; eso además es 1.4.11). | — | Captura del elemento enfocado sin indicador + captura de uno del mismo sitio que sí lo muestra | Parcial (CSS es indicio) |
+| 2.5.1 Gestos del puntero (A) · 9.2.5.1 | P | Funciones con gestos multipunto o de trayectoria (pellizcar, deslizar) tienen alternativa de un solo puntero. | 1) Emulación móvil: carruseles solo por swipe sin botones, mapas solo con pellizco, sliders de arrastre. 2) Cada uno con alternativa de toque simple (botones anterior/siguiente, +/−). | — | Captura del componente + nota de la alternativa | Manual |
+| 2.5.2 Cancelación del puntero (A) · 9.2.5.2 | P | Las acciones se ejecutan al soltar (`click`/`up`), no al pulsar (`mousedown`/`touchstart`), o se pueden abortar/deshacer. | 1) Busca manejadores `mousedown`/`pointerdown`/`touchstart` que disparen acciones. 2) Prueba: pulsa sobre un botón, arrastra fuera y suelta: no debe ejecutarse. | — | Nota con el selector y el resultado | Manual |
+| 2.5.3 Etiqueta en el nombre (A) · 9.2.5.3 | P | El nombre accesible de un control contiene el texto visible de su etiqueta. | 1) Controles con texto visible y `aria-label`/`aria-labelledby` distinto: ¿el nombre accesible incluye el texto visible? («Buscar» visible con `aria-label="Enviar formulario"` falla). 2) Prioridad a botones y enlaces del proceso. | `label-content-name-mismatch` (experimental; indicio) | Tabla texto visible → nombre accesible | Parcial |
+| 2.5.4 Activación por movimiento (A) · 9.2.5.4 | P | Funciones activadas por movimiento del dispositivo (agitar, inclinar) tienen alternativa y se pueden desactivar. | 1) Busca `devicemotion`/`deviceorientation` en el JS. Si no hay, Conforme con nota. | — | Nota | Manual |
 
 ## Principio 3 — Comprensible
 
-| WCAG (nivel) | Qué comprobar | EN | Detección |
-|---|---|---|---|
-| 3.1.1 Idioma de la página (A) | `lang` correcto en `<html>`. | 9.3.1.1 | Auto |
-| 3.1.2 Idioma de las partes (AA) | `lang` en fragmentos en otro idioma. | 9.3.1.2 | Parcial |
-| 3.2.1 Al recibir el foco (A) | Enfocar un elemento no provoca un cambio de contexto. | 9.3.2.1 | Manual |
-| 3.2.2 Al introducir datos (A) | Cambiar un campo no provoca cambio de contexto inesperado. | 9.3.2.2 | Manual |
-| 3.2.3 Navegación consistente (AA) | La navegación repetida aparece en el mismo orden entre páginas. | 9.3.2.3 | Manual |
-| 3.2.4 Identificación consistente (AA) | Componentes con la misma función se identifican igual entre páginas. | 9.3.2.4 | Manual |
-| 3.3.1 Identificación de errores (A) | Los errores de formulario se describen en texto. | 9.3.3.1 | Manual |
-| 3.3.2 Etiquetas o instrucciones (A) | Todo campo tiene label o instrucción clara. | 9.3.3.2 | Parcial |
-| 3.3.3 Sugerencia ante errores (AA) | Si se conoce la corrección, se sugiere. | 9.3.3.3 | Manual |
-| 3.3.4 Prevención de errores legales/financieros (AA) | Envíos sensibles son reversibles, verificables o confirmables. | 9.3.3.4 | Manual |
+| WCAG (nivel) · EN | Ámbito | Qué exige | Cómo se verifica (procedimiento repetible) | axe | Evidencia | Detección |
+|---|---|---|---|---|---|---|
+| 3.1.1 Idioma de la página (A) · 9.3.1.1 | P | `html[lang]` presente y correcto para el idioma principal. | 1) Lee `document.documentElement.lang` en cada página. 2) Presente, válido (`es`, `es-ES`, `en`) y coincide con el idioma real del contenido (una plantilla en `en` con contenido en castellano falla). | `html-has-lang`, `html-lang-valid`, `html-xml-lang-mismatch` | Valor real en la ficha | Auto |
+| 3.1.2 Idioma de las partes (AA) · 9.3.1.2 | P | Fragmentos en otro idioma llevan `lang` propio (salvo nombres propios, términos técnicos asimilados). | 1) Busca bloques en otro idioma: selector de idioma («English»), citas, avisos legales en inglés, nombres de productos con descripción en otro idioma. 2) Cada bloque con `lang` correcto. | `valid-lang` (solo valida los presentes) | Captura del fragmento + marcado | Parcial |
+| 3.2.1 Al recibir el foco (A) · 9.3.2.1 | P·Pr | Enfocar un elemento no provoca cambio de contexto (nueva ventana, envío, cambio de página, salto de foco). | 1) Durante el barrido, observa si al llegar el foco a un control se abre algo o cambia la página sin activar. 2) Selectores que navegan al enfocar, campos que abren un calendario y atrapan el foco. | — | Nota del barrido + captura | Manual |
+| 3.2.2 Al introducir datos (A) · 9.3.2.2 | P·Pr | Cambiar un campo no provoca cambio de contexto salvo aviso previo. | 1) Selects que navegan al cambiar (`onchange` → `location`), casillas que envían el formulario, campos que reordenan el formulario sin aviso. 2) Con teclado: cambia el valor con flechas sin Enter; si navega, falla. | — | Captura + selector | Manual |
+| 3.2.3 Navegación consistente (AA) · 9.3.2.3 | S | La navegación repetida aparece en el mismo orden relativo en todas las páginas. | 1) Compara cabecera, menú y pie en toda la muestra: mismo orden de ítems. 2) Cambios de orden entre plantillas (blog vs tienda) sin motivo. | — | Capturas comparadas | Manual |
+| 3.2.4 Identificación consistente (AA) · 9.3.2.4 | S | Componentes con la misma función se identifican igual (mismo texto/icono/nombre accesible) en todo el sitio. | 1) Buscador, cesta, cerrar, «Enviar», «Añadir»: mismo nombre y mismo icono en todas las páginas. 2) Nombres accesibles distintos para la misma función (`aria-label="Cerrar"` vs «Cerrar ventana») se anotan. | — | Tabla componente → nombres encontrados | Manual |
+| 3.3.1 Identificación de errores (A) · 9.3.3.1 | Pr | Cuando se detecta un error de entrada, el elemento se identifica y el error se describe en texto. | 1) En cada formulario y paso de proceso, envía vacío y con datos inválidos (email sin @, DNI mal, tarjeta rechazada en modo test). 2) ¿Aparece texto que dice qué campo y qué error? ¿Se asocia al campo (`aria-describedby`, `aria-invalid`)? ¿El SR lo anuncia (live region o foco al error)? 3) Un `alert()` de JS o un borde rojo solo, falla. | — | Captura del estado de error + snapshot del campo | Manual |
+| 3.3.2 Etiquetas o instrucciones (A) · 9.3.3.2 | P·Pr | Todo campo tiene etiqueta o instrucción visible (obligatoriedad, formato esperado). | 1) Cada campo con etiqueta visible y persistente (el `placeholder` solo no vale: desaparece al escribir). 2) Campos obligatorios indicados, formato indicado (fecha, teléfono). 3) Grupos de radios/casillas con leyenda. | `label`, `select-name`, `form-field-multiple-labels` | Captura del formulario + tabla campo → etiqueta | Parcial |
+| 3.3.3 Sugerencias ante errores (AA) · 9.3.3.3 | Pr | Si se conoce cómo corregir, se sugiere (salvo que comprometa seguridad). | 1) Con los errores provocados en 3.3.1: ¿el mensaje dice cómo corregir («el correo debe incluir @», «formato 12345678A»)? «Campo inválido» no basta. | — | Captura del mensaje | Manual |
+| 3.3.4 Prevención de errores (legales, financieros, datos) (AA) · 9.3.3.4 | Pr | Envíos con consecuencias legales/financieras o que modifican datos: reversibles, verificados o confirmables antes de enviar. | 1) En el proceso de compra/reserva: ¿hay pantalla de resumen editable antes de pagar?, ¿se puede corregir?, ¿confirmación explícita? 2) Formularios de baja o modificación de datos: confirmación. | — | Captura de la pantalla de revisión | Manual |
 
 ## Principio 4 — Robusto
 
-| WCAG (nivel) | Qué comprobar | EN | Detección |
-|---|---|---|---|
-| 4.1.1 Análisis sintáctico (A) | Marcado sin errores que afecten a la AT. *(Retirado en WCAG 2.2; sigue en 2.1.)* | 9.4.1.1 | Auto |
-| 4.1.2 Nombre, función, valor (A) | Controles exponen nombre, rol y estado (ARIA correcto). | 9.4.1.2 | Parcial |
-| 4.1.3 Mensajes de estado (AA) | Avisos dinámicos se anuncian sin mover el foco (`role=status`/`alert`/live). | 9.4.1.3 | Manual |
+| WCAG (nivel) · EN | Ámbito | Qué exige | Cómo se verifica (procedimiento repetible) | axe | Evidencia | Detección |
+|---|---|---|---|---|---|---|
+| 4.1.1 Procesamiento (A) · 9.4.1.1 | P | Marcado con etiquetas completas, anidamiento correcto, sin atributos duplicados, IDs únicos, salvo lo que la especificación permita. **Nota vigente del W3C (errata 2023): «este criterio debe considerarse siempre satisfecho para cualquier contenido que use HTML o XML»**, porque los navegadores gestionan esos errores de forma definida. WCAG 2.2 lo retira. EN 301 549 V3.2.1 sigue incluyendo 9.4.1.1. | 1) Se marca **Conforme** con la nota del W3C, salvo que un error de marcado provoque un fallo real en la AT, que entonces se reporta bajo 4.1.2 o 1.3.1 (p. ej. IDs duplicados que rompen `aria-labelledby` o `label for`). 2) Los IDs duplicados se comprueban y se anotan igualmente como observación técnica, porque afectan a otras asociaciones. | `duplicate-id-aria` (axe lo etiqueta bajo 4.1.2) | Nota en la tabla; si hay impacto real, hallazgo en 4.1.2/1.3.1 | Auto (por convención) |
+| 4.1.2 Nombre, función, valor (A) · 9.4.1.2 | P·Pr | Todo componente de interfaz expone nombre, rol, estados y valores a la AT, y los cambios se notifican. | 1) AT de cada página: controles sin nombre (botones de icono, enlaces de imagen, campos), roles incorrectos (`div` clicable, enlaces que actúan como botones), estados ausentes (`aria-expanded`, `aria-selected`, `aria-checked`, `aria-current`) o que no cambian al operar. 2) Widgets personalizados contra `apg-patterns.md`. 3) Confirma con lector virtual y, en el proceso crítico, con NVDA (`lectores-pantalla.md`): lo que el AT da por bueno puede no anunciarse (labels en `display:none`). 4) `iframe` con `title`. | `button-name`, `link-name`, `input-button-name`, `select-name`, `frame-title`, `aria-allowed-attr`, `aria-required-attr`, `aria-roles`, `aria-valid-attr`, `aria-valid-attr-value`, `aria-hidden-focus`, `aria-command-name`, `aria-input-field-name`, `aria-toggle-field-name`, `aria-meter-name`, `aria-progressbar-name`, `aria-tooltip-name`, `nested-interactive`, `duplicate-id-aria` | Snapshot del AT del control + línea de `sr-*.txt` + HTML del nodo | Parcial |
+| 4.1.3 Mensajes de estado (AA) · 9.4.1.3 | P·Pr | Los mensajes de estado (resultado de una acción, progreso, errores no modales, «añadido a la cesta», «3 resultados») se anuncian a la AT sin recibir el foco. | 1) Provoca cada mensaje: añadir a cesta, filtrar resultados, enviar formulario con error no modal, «guardado». 2) El contenedor tiene `role=status`/`alert` o `aria-live` **existente antes** de insertar el texto. 3) Confirma con NVDA que se anuncia. 4) Precios o contenido normal marcado como live region (ruido) también es hallazgo. | — | Snapshot del contenedor + línea de NVDA | Manual |
 
 ---
 
-## WCAG 2.2 — próximo estándar (NO obligatorio aún)
+## WCAG 2.2 — add-on (NO obligatorio a 2026-09-02)
 
-Estos criterios A/AA entran con EN 301 549 V4.1.1 (referencia en el DOUE prevista
-oct-2026). **Hoy no son exigibles**: úsalos solo como servicio premium "adelántate",
-nunca como incumplimiento legal. (2.2 es retrocompatible: cumplir 2.2 cumple 2.1.)
+Entran con EN 301 549 V4.1.1, cuya referencia en el DOUE se espera entre
+octubre y noviembre de 2026 (`marco-legal-es.md` §7). Hasta entonces, solo si
+el intake indica que el cliente contrató el add-on. Van en sección aparte y
+no alteran el veredicto. WCAG 2.2 además **retira 4.1.1**.
 
-| WCAG (nivel) | Qué comprobar | EN | Detección |
+| WCAG (nivel) · EN V4 | Qué exige | Cómo se verifica | Detección |
 |---|---|---|---|
-| 2.4.11 Foco no oscurecido mínimo (AA) | El elemento enfocado no queda totalmente tapado por otro contenido. | 9.2.4.11 | Manual |
-| 2.5.7 Movimientos de arrastre (AA) | Lo que se hace arrastrando tiene alternativa de un solo toque/clic. | 9.2.5.7 | Manual |
-| 2.5.8 Tamaño del objetivo mínimo (AA) | Objetivos táctiles de al menos 24×24 px (con excepciones). | 9.2.5.8 | Parcial |
-| 3.2.6 Ayuda consistente (A) | Los mecanismos de ayuda aparecen en el mismo orden relativo entre páginas. | 9.3.2.6 | Manual |
-| 3.3.7 Entrada redundante (A) | No volver a pedir info ya facilitada en el mismo proceso. | 9.3.3.7 | Manual |
-| 3.3.8 Autenticación accesible mínima (AA) | El login no exige una prueba cognitiva sin alternativa (recordar, transcribir). | 9.3.3.8 | Manual |
+| 2.4.11 Foco no oscurecido (mínimo) (AA) · 9.2.4.11 | El elemento enfocado no queda totalmente tapado por contenido fijo (cabeceras sticky, banners de cookies, chats). | En el barrido, con cabecera sticky y banner abiertos: ¿algún elemento enfocado queda completamente oculto? Captura del estado. | Manual |
+| 2.5.7 Movimientos de arrastre (AA) · 9.2.5.7 | Lo que se hace arrastrando tiene alternativa de un solo puntero sin arrastre. | Sliders de precio, reordenar, mapas: ¿hay botones o campos equivalentes? | Manual |
+| 2.5.8 Tamaño del objetivo (mínimo) (AA) · 9.2.5.8 | Objetivos de al menos 24×24 px CSS, o separación equivalente; excepciones para enlaces en línea y controles nativos. | Mide `getBoundingClientRect()` de botones de icono, paginación, cerrar, carrusel; en emulación móvil. Tabla de los que no llegan. | Parcial (`target-size` en axe, tag wcag22aa) |
+| 3.2.6 Ayuda consistente (A) · 9.3.2.6 | Los mecanismos de ayuda (contacto, chat, FAQ) aparecen en el mismo orden relativo en todas las páginas. | Compara ubicación de contacto/chat en la muestra. | Manual |
+| 3.3.7 Entrada redundante (A) · 9.3.3.7 | No se vuelve a pedir información ya facilitada en el mismo proceso (salvo esencial o seguridad); se autocompleta o se puede seleccionar. | En el proceso: dirección de envío y facturación, email repetido; ¿se rellena solo o hay «igual que…»? | Manual |
+| 3.3.8 Autenticación accesible (mínimo) (AA) · 9.3.3.8 | El login no exige prueba cognitiva (recordar, transcribir, resolver) sin alternativa: permitir pegar, gestores de contraseñas, o reconocimiento de objetos/contenido personal. | Login: ¿se puede pegar la contraseña?, ¿CAPTCHA con alternativa?, ¿código por SMS que se puede pegar? | Manual |
 
 ---
 
-## Nota de verificación
-Las columnas "Qué comprobar" y "Detección" están redactadas desde conocimiento
-del modelo (fiable en WCAG, contenido técnico). Cotéjalas con tu estudio de
-WCAG 2.1 y ajústalas si tu criterio difiere — sobre todo las clasificaciones
-Auto/Parcial/Manual, que dependen de la versión de axe y de tu metodología.
+## Criterios que se evalúan a nivel de sitio o de proceso (recordatorio)
+
+- **Sitio (S)**: 1.2.4, 2.1.4, 2.4.1, 2.4.5, 3.2.3, 3.2.4. Se evalúan una vez sobre
+  la muestra completa; su estado en la tabla es único.
+- **Proceso (Pr)**: 1.3.5, 1.4.1, 1.4.10, 1.4.11, 2.1.1, 2.1.2, 2.2.1, 2.4.3,
+  2.4.7, 3.2.1, 3.2.2, 3.3.1-3.3.4, 4.1.2, 4.1.3. Se evalúan en **cada paso** y en
+  sus **estados de error**. Si el proceso no pudo recorrerse entero (sin vía
+  de prueba), los criterios `Pr` que dependen del tramo no recorrido quedan
+  **No evaluable** con esa causa; nunca Conforme.
+
+## Nota de mantenimiento
+
+Las reglas axe citadas corresponden a axe-core 4.11.x con etiquetas `wcag2a`,
+`wcag2aa`, `wcag21a`, `wcag21aa`. Al subir de versión, revisar
+`https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md`
+y actualizar esta columna. Las reglas marcadas experimental o best-practice no
+sostienen un hallazgo por sí solas.
