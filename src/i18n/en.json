@@ -182,7 +182,7 @@
         },
         {
           "question": "What if you miss a finding?",
-          "answer": "I fix it at no additional cost within 60 days of delivering the report."
+          "answer": "It depends on the service. In the audit: if a finding within the audited scope slips past me, I document it and correct the report at no cost within 60 days of delivery. In remediation: if a fix fails the test it was verified with, I redo it at no cost within that same period. The express diagnosis does not carry this guarantee: by design it is a top 10, not a complete evaluation; what I do guarantee is that every finding is confirmed and reproducible."
         }
       ]
     },
@@ -589,7 +589,7 @@
         },
         {
           "question": "What if your audit misses something and I get reported later?",
-          "answer": "I work with WCAG 2.1 AA + EN 301549 methodology. It's the legal standard in Spain. If a finding slips and appears later, I fix it at no additional cost within 60 days after report delivery."
+          "answer": "I work with WCAG 2.1 AA + EN 301549 methodology. It's the legal standard in Spain. If a finding within the audited scope slips past me and shows up later, I document it and correct the report at no additional cost within 60 days after delivery."
         }
       ]
     },

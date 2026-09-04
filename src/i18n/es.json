@@ -181,7 +181,7 @@
         },
         {
           "question": "¿Qué pasa si se te escapa un hallazgo?",
-          "answer": "Lo corrijo sin coste adicional dentro de los 60 días posteriores a la entrega del informe."
+          "answer": "Depende del servicio. En la auditoría: si dentro del alcance auditado se me escapa un hallazgo, lo documento y corrijo el informe sin coste en los 60 días siguientes a la entrega. En la remediación: si una corrección no supera la prueba con la que se verificó, la rehago sin coste en ese mismo plazo. El diagnóstico exprés no lleva esta garantía: por diseño es un top 10, no una evaluación completa; lo que sí te aseguro es que cada hallazgo está confirmado y es reproducible."
         }
       ]
     },
@@ -588,7 +588,7 @@
         },
         {
           "question": "¿Qué pasa si tu auditoría no detecta algún problema y luego me denuncian?",
-          "answer": "Trabajo con metodología WCAG 2.1 AA + EN 301549. Es el estándar legal en España. Si hay un hallazgo que se me escapa y aparece después, lo corrijo sin coste adicional dentro de los 60 días posteriores a la entrega del informe."
+          "answer": "Trabajo con metodología WCAG 2.1 AA + EN 301549. Es el estándar legal en España. Si dentro del alcance auditado se me escapa un hallazgo y aparece después, lo documento y corrijo el informe sin coste adicional dentro de los 60 días posteriores a la entrega."
         },
         {
           "question": "¿Puedo contratar solo el mantenimiento mensual sin hacer la auditoría completa?",
