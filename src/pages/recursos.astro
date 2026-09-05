@@ -11,13 +11,13 @@ const recursos = [
         href: "/recursos/plantilla-informacion-accesibilidad-art-13-2.pdf",
         meta: "PDF · 3 páginas · septiembre de 2026",
     },
-    {
-        titulo: "Checklist de accesibilidad web: autodiagnóstico en 18 puntos",
-        descripcion:
-            "La primera pasada que hago a cualquier web antes de auditarla a fondo, convertida en lista: cada punto con cómo comprobarlo en 30 segundos y el criterio WCAG que incumple si falla.",
-        href: "/recursos/checklist-accesibilidad-web.pdf",
-        meta: "PDF · 5 páginas · septiembre de 2026",
-    },
+    // {
+    //     titulo: "Checklist de accesibilidad web: autodiagnóstico en 18 puntos",
+    //     descripcion:
+    //         "La primera pasada que hago a cualquier web antes de auditarla a fondo, convertida en lista: cada punto con cómo comprobarlo en 30 segundos y el criterio WCAG que incumple si falla.",
+    //     href: "/recursos/checklist-accesibilidad-web.pdf",
+    //     meta: "PDF · 5 páginas · septiembre de 2026",
+    // },
 ]
 ---
 
@@ -38,17 +38,23 @@ const recursos = [
             >
                 Lo que reparto por privado en LinkedIn, aquí sin pedirlo
             </h1>
-            <p class="text-lg text-text-secondary font-body leading-relaxed mb-4">
-                Son los recursos que envío a quien los pide en mis posts. Cortos,
-                para resolver una cosa concreta esta semana. PDF con estructura,
-                que se leen con lector de pantalla. Sin registro ni correo.
+            <p
+                class="text-lg text-text-secondary font-body leading-relaxed mb-4"
+            >
+                Son los recursos que envío a quien los pide en mis posts.
+                Cortos, para resolver una cosa concreta esta semana. PDF con
+                estructura, que se leen con lector de pantalla. Sin registro ni
+                correo.
             </p>
             <p class="text-sm text-text-muted font-body">
                 Última actualización: {lastUpdated}
             </p>
         </header>
 
-        <ul class="flex flex-col gap-px bg-border" aria-label="Recursos descargables">
+        <ul
+            class="flex flex-col gap-px bg-border"
+            aria-label="Recursos descargables"
+        >
             {
                 recursos.map((r) => (
                     <li class="bg-bg-primary">
@@ -58,8 +64,12 @@ const recursos = [
                         >
                             <h2 class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3 group-hover:text-accent transition-colors">
                                 {r.titulo}
-                                <span class="text-accent inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">
-                                    {" "}→
+                                <span
+                                    class="text-accent inline-block transition-transform group-hover:translate-x-1"
+                                    aria-hidden="true"
+                                >
+                                    {" "}
+                                    →
                                 </span>
                             </h2>
                             <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">
