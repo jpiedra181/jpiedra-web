@@ -56,7 +56,8 @@
             "Catalogue of findings by WCAG criterion",
             "Prioritised remediation plan",
             "Compliance document ready to publish",
-            "1-hour presentation meeting"
+            "1-hour presentation meeting",
+            "Verification of the fixes once your team applies them, with the document updated"
           ],
           "note": "Auditing “every” page isn't how it's done: WCAG-EM 2.0 evaluates the whole site from a representative sample, and the report lists every URL evaluated one by one. I verify the size in your sitemap myself.",
           "ctaLabel": "See the audit in detail",
@@ -104,7 +105,7 @@
               "description": "Every finding in the report until the audited scope reaches WCAG 2.1 AA."
             }
           ],
-          "note": "The tier is agreed once the audit is done and we know the real volume. Fixed price before a single line of code is touched.",
+          "note": "The tier is agreed once the audit is done and we know the real volume. Fixed price before a single line of code is touched. If you would rather have your own team fix things, verifying their fixes is already included in the audit.",
           "ctaLabel": "Talk about remediation"
         },
         {
@@ -441,6 +442,10 @@
         {
           "title": "Results presentation meeting",
           "description": "A one-hour video call to review the report with you and your team, answer questions and prioritize actions. I don't send a PDF and disappear."
+        },
+        {
+          "title": "Verification of the fixes",
+          "description": "Once your team or agency applies the fixes, I re-check every finding in the report with the same test, run a regression pass and update your compliance document with a date. One round, within the following 6 months, in 3 business days. It is included: the loop closes without buying anything else."
         }
       ]
     },
@@ -569,7 +574,7 @@
         },
         {
           "question": "Does the audit include implementing the corrections?",
-          "answer": "No. The audit is only the diagnosis: I deliver the full report with every finding and the remediation plan. Implementation is optional, with a separate quote, and only if you decide I do it."
+          "answer": "No. The audit is the diagnosis: I deliver the full report with every finding and the remediation plan. Implementation is optional, with a separate quote, and only if you decide I do it. What the audit does include is verification: once your team applies the fixes, I re-check every finding and update the compliance document, at no cost, within the following 6 months."
         },
         {
           "question": "Do I need anything ready before starting?",
@@ -577,7 +582,7 @@
         },
         {
           "question": "Can I apply the corrections myself?",
-          "answer": "Yes. The report is designed so your technical team can act on it directly. If you have an in-house developer or agency, you hand them the document and they apply it."
+          "answer": "Yes. The report is designed so your technical team can act on it directly: every finding comes with its fix and the test it was verified with. And when your team is done, verification is included in the audit: I re-test every finding in the report with the same test on the same pages, run a regression pass and update your compliance document with a date, within 3 business days. One round, up to 6 months after the report is delivered. You do not need to buy anything else to close the loop."
         },
         {
           "question": "Does this fulfill the legal requirement of Law 11/2023?",

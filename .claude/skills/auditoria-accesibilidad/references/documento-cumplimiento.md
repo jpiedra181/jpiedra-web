@@ -61,9 +61,12 @@ Sección 1, contenido obligatorio (art. 4.1 de la Decisión), en este orden:
      por criterio, redactado desde el impacto.
    - b) *carga desproporcionada*: solo con la evaluación documentada del art.
      7 del RD 1112/2018; la falta de prioridad, tiempo o conocimientos no vale.
-   - c) *contenido no incluido en el ámbito*: según art. 3.2 del RD 1112/2018
-     (ofimática anterior a 2018-09-20, multimedia pregrabado anterior a
-     2020-09-23, mapas, contenido de terceros, archivos, etc.).
+   - c) *contenido no incluido en el ámbito*: solo lo del art. 3.4 del RD
+     1112/2018, citando la letra (a) ofimática anterior al 20-09-2018 no
+     necesaria para tareas administrativas activas; b) multimedia pregrabado
+     anterior al 20-09-2018; c) multimedia en directo; d) mapas y cartografía;
+     e) contenido de terceros no financiado ni controlado; f) reproducciones de
+     patrimonio; g) extranet e intranet anteriores al 23-09-2019; h) archivos).
    - Alternativas accesibles, si las hay.
 4. **Preparación de la presente declaración de accesibilidad.** «La presente
    declaración fue preparada el [fecha].» + método (art. 3.1 de la Decisión):

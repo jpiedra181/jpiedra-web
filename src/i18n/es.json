@@ -55,7 +55,8 @@
             "Catálogo de hallazgos por criterio WCAG",
             "Plan de remediación priorizado",
             "Documento de cumplimiento listo para publicar",
-            "Reunión de presentación de 1 hora"
+            "Reunión de presentación de 1 hora",
+            "Verificación de las correcciones cuando tu equipo las aplique, con el documento actualizado"
           ],
           "note": "Auditar «todas» las páginas no es como se hace: WCAG-EM 2.0 evalúa el sitio completo a partir de una muestra representativa, y el informe lista una a una las URLs evaluadas. El tamaño lo verifico yo en tu sitemap.",
           "ctaLabel": "Ver la auditoría en detalle",
@@ -103,7 +104,7 @@
               "description": "Todos los hallazgos del informe hasta alcanzar WCAG 2.1 AA en el alcance auditado."
             }
           ],
-          "note": "El tramo se cierra al terminar la auditoría, cuando ya sabemos el volumen real. Precio fijo antes de tocar una línea de código.",
+          "note": "El tramo se cierra al terminar la auditoría, cuando ya sabemos el volumen real. Precio fijo antes de tocar una línea de código. Si prefieres que corrija tu propio equipo, la verificación de sus correcciones ya va incluida en la auditoría.",
           "ctaLabel": "Hablar de la remediación"
         },
         {
@@ -440,6 +441,10 @@
         {
           "title": "Reunión de presentación de resultados",
           "description": "Una hora por videollamada para revisar el informe contigo y con tu equipo, resolver dudas y priorizar acciones. No te mando un PDF y desaparezco."
+        },
+        {
+          "title": "Verificación de las correcciones",
+          "description": "Cuando tu equipo o tu agencia aplique las correcciones, compruebo cada hallazgo del informe con la misma prueba, paso una revisión de regresión y te actualizo el documento de cumplimiento con fecha. Una ronda, dentro de los 6 meses siguientes, en 3 días laborables. Va incluida: el ciclo se cierra sin contratar nada más."
         }
       ]
     },
@@ -556,7 +561,7 @@
         },
         {
           "question": "¿Vas a auditar todas las páginas de mi web?",
-          "answer": "No, y no debería. La metodología de referencia del W3C, WCAG-EM 2.0, evalúa la conformidad de un sitio completo a partir de una muestra representativa: las vistas comunes, un ejemplar de cada plantilla, cada tecnología que usas y un 10 % adicional elegido al azar para detectar lo que la selección dirigida no vería. Los procesos —comprar, reservar, registrarse— sí se auditan enteros, de principio a fin, con sus estados de error. El informe lista una a una todas las URLs evaluadas, para que la muestra sea verificable y reproducible."
+          "answer": "No, y no debería. La metodología de referencia del W3C, WCAG-EM, evalúa la conformidad de un sitio completo a partir de una muestra representativa: las vistas comunes, un ejemplar de cada plantilla, cada tecnología que usas y un 10 % adicional elegido al azar para detectar lo que la selección dirigida no vería. Los procesos —comprar, reservar, registrarse— sí se auditan enteros, de principio a fin, con sus estados de error. El informe lista una a una todas las URLs evaluadas, para que la muestra sea verificable y reproducible."
         },
         {
           "question": "¿Cómo sé qué tramo me toca?",
@@ -568,7 +573,7 @@
         },
         {
           "question": "¿La auditoría incluye la implementación de las correcciones?",
-          "answer": "No. La auditoría es solo el diagnóstico: te entrego el informe completo con todos los hallazgos y el plan de remediación. La implementación es opcional, con presupuesto aparte, y solo si decides que la haga yo."
+          "answer": "No. La auditoría es el diagnóstico: te entrego el informe completo con todos los hallazgos y el plan de remediación. La implementación es opcional, con presupuesto aparte, y solo si decides que la haga yo. Lo que sí incluye la auditoría es la verificación: cuando tu equipo aplique las correcciones, compruebo cada hallazgo y actualizo el documento de cumplimiento, sin coste, dentro de los 6 meses siguientes."
         },
         {
           "question": "¿Necesito tener algo preparado antes de empezar?",
@@ -576,7 +581,7 @@
         },
         {
           "question": "¿Puedo aplicar yo mismo las correcciones del informe?",
-          "answer": "Sí. El informe está pensado para que cualquier perfil técnico pueda actuar sobre él directamente. Si tienes desarrollador interno, agencia o freelance habitual, le entregas el documento y lo aplica."
+          "answer": "Sí. El informe está pensado para que cualquier perfil técnico pueda actuar sobre él directamente: cada hallazgo lleva su corrección y la prueba con la que se verificó. Y cuando tu equipo termine, la verificación va incluida en la auditoría: repaso cada hallazgo del informe con la misma prueba sobre las mismas páginas, paso una revisión de regresión y te actualizo el documento de cumplimiento con fecha, en 3 días laborables. Una ronda, dentro de los 6 meses siguientes a la entrega del informe. No tienes que contratar nada más para cerrar el ciclo."
         },
         {
           "question": "¿Sirve para cumplir el requisito legal de la Ley 11/2023?",

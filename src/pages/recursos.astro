@@ -1,0 +1,88 @@
+---
+import Layout from "../components/layout/BaseLayout.astro"
+
+const lastUpdated = "5 de septiembre de 2026"
+
+const recursos = [
+    {
+        titulo: "Plantilla de información de accesibilidad (art. 13.2 de la Ley 11/2023)",
+        descripcion:
+            "El documento que la ley pide a toda tienda online y servicio cubierto desde el 28 de junio de 2025, y que casi nadie tiene: qué debe llevar, dónde va, los cuatro errores habituales y una plantilla para rellenar en una tarde.",
+        href: "/recursos/plantilla-informacion-accesibilidad-art-13-2.pdf",
+        meta: "PDF · 3 páginas · septiembre de 2026",
+    },
+    {
+        titulo: "Checklist de accesibilidad web: autodiagnóstico en 18 puntos",
+        descripcion:
+            "La primera pasada que hago a cualquier web antes de auditarla a fondo, convertida en lista: cada punto con cómo comprobarlo en 30 segundos y el criterio WCAG que incumple si falla.",
+        href: "/recursos/checklist-accesibilidad-web.pdf",
+        meta: "PDF · 5 páginas · septiembre de 2026",
+    },
+]
+---
+
+<Layout
+    lang="es"
+    title="Recursos gratuitos de accesibilidad web — Javier Piedra"
+    description="Plantillas y checklists de accesibilidad web para empresas españolas: la información del art. 13.2 de la Ley 11/2023 y el autodiagnóstico en 18 puntos. PDF accesibles, sin registro."
+>
+    <article class="max-w-3xl mx-auto px-6 lg:px-8 py-32 lg:py-40">
+        <header class="mb-16">
+            <p
+                class="text-xs font-body font-medium tracking-[0.3em] text-accent uppercase mb-6"
+            >
+                Recursos gratuitos
+            </p>
+            <h1
+                class="font-heading text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.1] text-text-primary mb-6"
+            >
+                Lo que reparto por privado en LinkedIn, aquí sin pedirlo
+            </h1>
+            <p class="text-lg text-text-secondary font-body leading-relaxed mb-4">
+                Son los recursos que envío a quien los pide en mis posts. Cortos,
+                para resolver una cosa concreta esta semana. PDF con estructura,
+                que se leen con lector de pantalla. Sin registro ni correo.
+            </p>
+            <p class="text-sm text-text-muted font-body">
+                Última actualización: {lastUpdated}
+            </p>
+        </header>
+
+        <ul class="flex flex-col gap-px bg-border" aria-label="Recursos descargables">
+            {
+                recursos.map((r) => (
+                    <li class="bg-bg-primary">
+                        <a
+                            href={r.href}
+                            class="group block p-8 md:p-10 transition-colors hover:bg-bg-surface focus-visible:bg-bg-surface focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]"
+                        >
+                            <h2 class="font-heading text-xl md:text-2xl text-text-primary leading-tight mb-3 group-hover:text-accent transition-colors">
+                                {r.titulo}
+                                <span class="text-accent inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">
+                                    {" "}→
+                                </span>
+                            </h2>
+                            <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">
+                                {r.descripcion}
+                            </p>
+                            <p class="text-xs font-body tracking-wide text-text-muted uppercase">
+                                {r.meta}
+                            </p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <p class="mt-16 text-text-secondary font-body leading-relaxed">
+            Ninguno de estos documentos certifica nada ni sustituye a una
+            evaluación: te dicen qué mirar y cómo. Si quieres saber dónde está
+            tu web hoy, con los 50 criterios uno a uno,
+            <a
+                href="/auditoria-accesibilidad/"
+                class="text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 rounded-sm"
+                >eso es la auditoría</a
+            >.
+        </p>
+    </article>
+</Layout>

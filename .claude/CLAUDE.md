@@ -20,6 +20,8 @@ Captar tráfico orgánico cualificado (PYMEs y responsables técnicos que buscan
 
 ## Workflow al crear un post
 
+> El protocolo completo (intención de búsqueda, top 3, cluster, estructura aprobada, borrador, verificación, comprobación técnica y modo actualización) está en la skill `redactor-blog`. Lo de abajo es el resumen que sigue vigente.
+
 Antes de escribir, Claude debe **siempre**:
 
 1. Leer `voice.md`, `humor.md`, `stats.md` y `stories.md` y aplicarlos.

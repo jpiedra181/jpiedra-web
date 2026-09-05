@@ -112,3 +112,9 @@ Ejemplo:
 - Cualquier cosa contada con suficiente detalle como para que alguien del sector pudiera adivinar a quién corresponde.
 
 Cuando aparezcan anécdotas reales nuevas, añadirlas aquí en formato genérico antes de usarlas.
+
+### La clínica de la vista (usada en LinkedIn el 11-09-2026: `post-clinica-de-la-vista`)
+
+Cadena de clínicas oftalmológicas (caso real de práctica sobre web pública, anonimizado: sin nombre, ciudad ni número de centros). El botón «Cita online» funciona con ratón. En el paso «motivo de la consulta» hay cuatro opciones: tres son radios ocultos con una instrucción que además los saca del orden de tabulación, la cuarta es un `div` con `onclick` sin rol ni `tabindex`. Con Tab desde el inicio, seis paradas (los cinco rótulos del proceso y un enlace) y vuelta a empezar; las opciones nunca reciben el foco. Sin error, sin aviso, sin teléfono en esa pantalla. Su cliente, por definición, ve mal o acaba de operarse.
+
+**Uso**: el negocio que exige a su cliente justo lo que el cliente no tiene. Criterio 2.1.1 (A). Se cuenta sin cifra y sin identificar.

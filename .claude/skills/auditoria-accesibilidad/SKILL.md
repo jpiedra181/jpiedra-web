@@ -190,6 +190,48 @@ recuerda a Javier anotar en el Sheet de vencimientos el fin de la garantía
 (entrega + 60 días); si se contrata conformidad continua, `muestra.md` y la
 ficha son la línea base.
 
+## Modo verificación (incluido en la auditoría)
+
+La auditoría incluye **una ronda de verificación de correcciones**: cuando el
+cliente (su equipo o su agencia) avisa de que ha corregido, dentro de los **6
+meses** siguientes a la entrega y sin rediseño, se comprueba y se entrega en
+**3 días laborables**. Si remedia Javier, cada corrección se verifica al
+aplicarla y esta ronda no se consume. Se ejecuta con esta misma skill:
+
+1. Abre `auditorias/AAAA-MM-DD/verificacion/AAAA-MM-DD/` (fecha de la
+   verificación) con `evidencias/` y `datos/`. Mismo entorno y línea base de
+   soporte que la auditoría.
+2. **Hallazgo a hallazgo.** Para cada `H##` de `datos/confirmacion-hallazgos.md`,
+   repite **literalmente** los pasos de su columna «Cómo lo he comprobado» sobre
+   las mismas páginas y procesos. Resultado: **Corregido** (la prueba ya no
+   reproduce el fallo en ninguna instancia), **Parcial** (en algunas sí), **Sin
+   corregir**, o **No evaluable** (la página o el proceso no está disponible).
+   Evidencia nueva por hallazgo, `verificacion/evidencias/H##-….png`. Nada se da
+   por corregido porque lo diga el cliente.
+3. **Regresión.** Pasada automática sobre la muestra comparada con la del día de
+   la auditoría: `cd ../jpiedra-clientes/_monitor && node init.js <slug>
+   ../<slug>/auditorias/AAAA-MM-DD` (una vez; crea la config desde
+   `datos/muestra.json` y la pasada base desde `datos/axe/`), luego `node scan.js
+   <slug>` y `node compare.js <slug>`. Los «NUEVOS» del diff son candidatos:
+   se confirman a mano antes de reportarlos. Más un recorrido de teclado del
+   proceso crítico, porque corregir rompe cosas que axe no ve.
+4. **Tabla y veredicto.** Actualiza `datos/matriz-cobertura.md`: un criterio
+   pasa a Conforme solo si todos sus `H##` están Corregidos y no ha aparecido
+   nada nuevo en él. Recalcula la tabla de los 50 y el veredicto con la regla
+   del protocolo §7.
+5. **Documento de cumplimiento** (o declaración) actualizado con el nuevo estado
+   y nueva fecha de revisión, si algo ha cambiado.
+6. **Informe corto** desde `_plantillas/verificacion-base.md` →
+   `verificacion.md`. **PARADA**: visto bueno de Javier sobre la tabla
+   hallazgo a hallazgo antes de `md2pdf.py`. Entrega `verificacion.pdf`
+   (confidencial) y el documento actualizado (sin confidencial).
+
+Lo que no cubre: buscar hallazgos nuevos fuera de la muestra, ni segundas
+rondas. Si quedan hallazgos abiertos y el cliente los corrige, la vía es la
+conformidad continua (la config de `_monitor` ya queda creada aquí), no otra
+ronda suelta. Y en el Sheet de vencimientos se anota la fecha límite de la
+ronda (entrega + 6 meses).
+
 ## Mapeo WCAG ↔ EN 301 549 ↔ detección
 
 Los 50 criterios A+AA, con su cláusula EN (`9.` + nº de criterio), el

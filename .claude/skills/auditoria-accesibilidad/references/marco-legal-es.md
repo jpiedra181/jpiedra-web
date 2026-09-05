@@ -386,7 +386,7 @@ declaración se derivan **mecánicamente** de la tabla de los 50 criterios
 | `decision-2018-1523.html` | Nota interna con la adaptación española verificada (AEAT 2025) | 2026-06-25 |
 | `en_301549v030201p.pdf` | EN 301 549 V3.2.1 | 2026-06-25 |
 | `wcag21.html` | WCAG 2.1 Recommendation (W3C) | 2026-09-02 |
-| `wcag-em.html` | WCAG-EM 1.0, metodología de evaluación | 2026-09-02 |
+| `wcag-em.html` | WCAG-EM 2.0, metodología de evaluación (W3C Group Note, 23-07-2026; sustituye a la 1.0 de 2014) | 2026-09-02 |
 | `wcag21-understanding-4.1.1-parsing.html` | Understanding 4.1.1 con la nota «always satisfied» | 2026-09-02 |
 | `Metodologia_OAW_*.pdf`, `Guia_Validacion_*.pdf` | Metodologías del Observatorio (skill `revision-oaw`) | 2026-05-16 |
 
