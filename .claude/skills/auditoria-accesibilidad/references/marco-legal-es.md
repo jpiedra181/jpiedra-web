@@ -274,7 +274,25 @@ servicios cubiertos por la Ley 11/2023 manda esta (desde 28-06-2025); el RD
 calendario. La microexención del art. 3.3 de la Ley 11/2023 **no** se traslada
 al RD 193/2023.
 
-`[Fuente: texto consolidado BOE-A-2023-7417 arts. 3, 5, 14, 15 y DF 6ª; Ley 56/2007 art. 2.2 · VERIFICADO 2026-09-02]`
+**Precisión 2029 vs 2030 (para defenderlo):** no son una fecha y su prórroga,
+son dos regímenes. **2029** = condiciones básicas completas, «obligatorias y
+exigibles», para el servicio privado **nuevo** (DF 6ª b). **2030** = fecha
+límite para hacer **ajustes razonables** en el servicio privado **existente**
+(DF 6ª c); «ajuste razonable» según RDL 1/2013 art. 2.m) (sin carga
+desproporcionada) y con el test de proporcionalidad del RD 193/2023 art. 2.e)
+(coste, efecto discriminatorio, características y carga de la entidad, ayudas),
+cuya última frase obliga a **documentar y argumentar fehacientemente** la no
+proporcionalidad si la autoridad lo requiere. «Nuevo» y «existente» no están
+definidos en la norma: lectura defendible, existente = ofrecido al público
+antes de la entrada en vigor (23-03-2023) y en todo caso antes del 01-01-2029;
+zona gris entre ambas fechas. Es el **servicio** el que es nuevo o existente,
+no la web (art. 14.2 ata la fecha de la web «a los bienes y servicios que se
+ofrezcan en sus sitios web»); rehacer la web no convierte al servicio en nuevo.
+Escribir «webs nuevas / existentes» es un atajo aceptable en divulgación,
+pero en un dictamen se dice «servicio». Detalle ampliado con réplicas típicas
+en `_linkedin/post-tenemos-hasta-2030.md` («Defensa»).
+
+`[Fuente: texto consolidado BOE-A-2023-7417 arts. 2, 3, 4, 5, 14, 15 y DF 6ª; RDL 1/2013 art. 2.m; Ley 56/2007 art. 2.2 · VERIFICADO 2026-09-02, ampliado 2026-09-05]`
 
 ## 6. Disposición transitoria única de la Ley 11/2023 — el «mito de 2030»
 

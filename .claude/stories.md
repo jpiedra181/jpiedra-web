@@ -113,8 +113,8 @@ Ejemplo:
 
 Cuando aparezcan anécdotas reales nuevas, añadirlas aquí en formato genérico antes de usarlas.
 
-### La clínica de la vista (COMPOSICIÓN, no caso real; usada en LinkedIn el 11-09-2026: `post-clinica-de-la-vista`)
+### Antonio intenta reservar (COMPOSICIÓN; usada en LinkedIn el 11-09-2026: `post-antonio-reserva`)
 
-Ejemplo montado: junta «El botón que no es un botón» y los radios ocultos con `display:none` en el negocio donde más duelen. Se cuenta siempre como ejemplo, nunca como caso vivido. Si aparece un caso real equivalente, se sustituye aquí anonimizado. El botón «Cita online» funciona con ratón. En el paso «motivo de la consulta» hay cuatro opciones: tres son radios ocultos con una instrucción que además los saca del orden de tabulación, la cuarta es un `div` con `onclick` sin rol ni `tabindex`. Con Tab desde el inicio, seis paradas (los cinco rótulos del proceso y un enlace) y vuelta a empezar; las opciones nunca reciben el foco. Sin error, sin aviso, sin teléfono en esa pantalla. Su cliente, por definición, ve mal o acaba de operarse.
+Hombre de 66 años, móvil, diez y media de la noche, quiere reservar mesa para el cumpleaños de su mujer. Cinco piedras corrientes, contadas desde él y sin vocabulario técnico: el aviso de cookies que ocupa media pantalla y abre una lista al tocar; el calendario con números pequeños que salta de mes; la lista de horas que desaparece al bajar el dedo; «Revisa los datos» sin decir cuáles; el teléfono en gris que no se puede tocar para llamar, y el horario de atención cerrado. Al día siguiente reserva en otro sitio en dos minutos. El primer restaurante nunca sabe que existió.
 
-**Uso**: el negocio que exige a su cliente justo lo que el cliente no tiene. Criterio 2.1.1 (A). Se cuenta sin cifra y sin identificar.
+**Uso**: historia sin solución ni venta. Regla de Javier para este tipo de post: sencillo, real, desde el cliente; nunca «el botón no se ve» ni lenguaje de desarrollador; no dramático; sin CTA.
