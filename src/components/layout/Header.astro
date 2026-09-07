@@ -93,8 +93,14 @@ const navItems = [
 </button>
 
 <!-- Mobile Menu -->
+<!--
+    Arranca con `inert`: cerrado, el panel solo se oculta con opacity, así que
+    sin esto sus enlaces siguen en el orden de tabulación y en el árbol de
+    accesibilidad. toggleMenu() lo quita al abrir y lo vuelve a poner al cerrar.
+-->
 <div
     id="mobile-menu"
+    inert
     class="fixed inset-0 z-[55] bg-bg-primary/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
 >
     {
@@ -142,6 +148,7 @@ const navItems = [
         mobileBtn.setAttribute("aria-expanded", String(menuOpen))
 
         if (menuOpen) {
+            mobileMenu.removeAttribute("inert")
             mobileMenu.classList.remove("opacity-0", "pointer-events-none")
             mobileMenu.classList.add("opacity-100", "pointer-events-auto")
             lines[0].classList.add("!top-1/2", "-translate-y-1/2", "rotate-45")
@@ -157,6 +164,7 @@ const navItems = [
             document.body.style.overflow = "hidden"
             setBackgroundInert(true)
         } else {
+            mobileMenu.setAttribute("inert", "")
             mobileMenu.classList.add("opacity-0", "pointer-events-none")
             mobileMenu.classList.remove("opacity-100", "pointer-events-auto")
             lines[0].classList.remove(

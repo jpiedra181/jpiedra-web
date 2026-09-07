@@ -48,6 +48,17 @@ const legalItems = [
         label: t.footer.legal.cookies,
     },
 ]
+
+// La página de accesibilidad solo existe en español porque la evaluación cubre
+// solo la versión en español. En cuanto se audite /en/ se añade su equivalente;
+// enlazar aquí a un documento cuyo alcance no incluye la página desde la que se
+// enlaza sería justo lo que este sitio critica.
+if (lang === "es") {
+    legalItems.push({
+        href: "/accesibilidad",
+        label: t.footer.legal.accessibility,
+    })
+}
 ---
 
 <footer class="border-t border-border py-12">

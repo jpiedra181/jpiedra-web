@@ -1,0 +1,256 @@
+---
+import Layout from "../components/layout/BaseLayout.astro"
+
+// Estas tres fechas salen del expediente de la auditoría
+// (jpiedra-clientes/jpiedra/auditorias/). Se actualizan cuando se repita la
+// evaluación, no antes: publicar una fecha de revisión que no corresponde a una
+// comprobación real vacía el documento de sentido.
+const fechaEvaluacion = "7 de septiembre de 2026"
+const fechaRevision = "7 de septiembre de 2026"
+const proximaRevision = "septiembre de 2027"
+---
+
+<Layout
+    lang="es"
+    title="Accesibilidad de jpiedra.com — grado de conformidad WCAG 2.1 AA"
+    description="Grado de accesibilidad de jpiedra.com: resultado de la evaluación según UNE-EN 301 549 y WCAG 2.1 AA, alcance, método y canal para comunicar barreras."
+>
+    <article class="max-w-3xl mx-auto px-6 lg:px-8 py-32 lg:py-40">
+        <header class="mb-16">
+            <p
+                class="text-xs font-body font-medium tracking-[0.3em] text-accent uppercase mb-6"
+            >
+                Accesibilidad
+            </p>
+            <h1
+                class="font-heading text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.1] text-text-primary mb-6"
+            >
+                Accesibilidad de jpiedra.com
+            </h1>
+            <p class="text-lg text-text-secondary font-body leading-relaxed">
+                Esta página dice en qué estado de accesibilidad está esta web,
+                cómo se ha comprobado y qué hacer si encuentras una barrera.
+            </p>
+            <p class="text-sm text-text-muted font-body mt-6">
+                Última revisión: {fechaRevision}
+            </p>
+        </header>
+
+        <div
+            class="legal-content flex flex-col gap-10 text-text-primary font-body leading-relaxed"
+        >
+            <section
+                class="border border-border-hover bg-bg-surface rounded-xl p-6 md:p-8"
+            >
+                <h2 class="font-heading text-2xl mb-4">Grado de conformidad</h2>
+                <p class="text-lg">
+                    <strong
+                        >jpiedra.com es plenamente conforme con la norma UNE-EN
+                        301 549 V3.2.1 (WCAG 2.1, nivel AA)</strong
+                    > en el alcance evaluado que se describe más abajo.
+                </p>
+                <p class="mt-4">
+                    De los 50 criterios de conformidad de nivel A y AA, 38
+                    resultaron aplicables a este sitio. Los 38 se cumplen. Los
+                    12 restantes no aplican porque esta web no tiene el
+                    contenido que evalúan: no hay vídeo ni audio, no hay
+                    procesos con límite de tiempo, no hay gestos táctiles
+                    complejos y no hay transacciones con consecuencias legales o
+                    económicas.
+                </p>
+                <p class="mt-4 text-text-secondary">
+                    «Plenamente conforme» significa que en las páginas y
+                    procesos evaluados no se encontró ningún incumplimiento.
+                    <strong>No significa que la web sea perfecta</strong>: se ha
+                    evaluado una muestra, no las 32 páginas, y ninguna
+                    evaluación sustituye a lo que te encuentres tú usándola. Si
+                    das con una barrera, cuéntamela: está más abajo cómo.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">Alcance evaluado</h2>
+                <p>
+                    La evaluación cubre la <strong
+                        >versión en español de jpiedra.com</strong
+                    >: 8 páginas seleccionadas y los 2 procesos completos del
+                    sitio.
+                </p>
+                <ul class="mt-4 space-y-2 list-disc pl-5">
+                    <li>
+                        <strong>Páginas:</strong> la portada, servicios, la página
+                        de la auditoría, el autoevaluador de la Ley 11/2023, el índice
+                        del blog, una entrada del blog, el caso de auditoría y el
+                        aviso legal.
+                    </li>
+                    <li>
+                        <strong>Procesos completos:</strong> el formulario de solicitud
+                        de auditoría y el autoevaluador, incluidos sus mensajes de
+                        error.
+                    </li>
+                    <li>
+                        <strong>Además:</strong> un barrido automático sobre las 32
+                        páginas en español del sitio.
+                    </li>
+                </ul>
+                <p class="mt-4">
+                    <strong>Qué queda fuera:</strong> la versión en inglés de este
+                    sitio, que se evaluará por separado, y el contenido concreto
+                    de las entradas del blog que no entraron en la muestra, más allá
+                    del barrido automático.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">
+                    Cómo se ha comprobado
+                </h2>
+                <p>
+                    <strong>Método: autoevaluación.</strong> La revisión la he hecho
+                    yo mismo, que soy el titular del sitio y me dedico a auditar
+                    accesibilidad web.
+                    <strong
+                        >No es una evaluación de un tercero independiente</strong
+                    >, y conviene leerla sabiéndolo.
+                </p>
+                <p class="mt-4">
+                    Se siguió la metodología <span lang="en">WCAG-EM</span> 2.0 para
+                    elegir la muestra, y se combinó análisis automático con verificación
+                    manual:
+                </p>
+                <ul class="mt-4 space-y-2 list-disc pl-5">
+                    <li>
+                        Análisis automático con <span lang="en">axe-core</span> 4.11.4,
+                        en escritorio y en móvil.
+                    </li>
+                    <li>
+                        Recorrido de teclado parada a parada en cada página, y
+                        los dos procesos completos hechos solo con teclado.
+                    </li>
+                    <li>
+                        Comprobación de los 50 criterios uno a uno, cada uno con
+                        su procedimiento y su resultado anotado.
+                    </li>
+                    <li>
+                        Lector de pantalla <strong>NVDA</strong> real sobre los dos
+                        procesos, y lector virtual sobre el resto de la muestra.
+                    </li>
+                </ul>
+                <p class="mt-4">
+                    <strong>Fecha de la evaluación:</strong> {fechaEvaluacion}. La
+                    evaluación encontró tres incumplimientos —dos de contraste y
+                    uno en el menú de navegación en pantallas pequeñas— que se corrigieron
+                    y se volvieron a comprobar antes de publicar esta página.
+                </p>
+                <p class="mt-4">
+                    Navegadores y tecnologías con los que se ha comprobado:
+                    Chromium en escritorio (1280 px) y en móvil (375 px), y NVDA
+                    sobre Windows. No se ha comprobado con <span lang="en"
+                        >VoiceOver</span
+                    >, <span lang="en">JAWS</span>, <span lang="en">TalkBack</span
+                    >, Safari ni Firefox, así que no se afirma nada sobre ellos.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">
+                    Si encuentras una barrera
+                </h2>
+                <p>
+                    Si algo de esta web no puedes usarlo —con teclado, con
+                    lector de pantalla, con zoom, con el contraste que sea—
+                    escríbeme y lo miro:
+                </p>
+                <p class="mt-4 text-lg">
+                    <a
+                        href="mailto:contacto@jpiedra.com?subject=Accesibilidad%20de%20jpiedra.com"
+                        class="text-accent underline underline-offset-4 hover:text-accent-hover rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                        >contacto@jpiedra.com</a
+                    >
+                </p>
+                <p class="mt-4">
+                    <strong>Te respondo en 5 días hábiles</strong> diciéndote qué
+                    he comprobado, si se va a corregir y en qué plazo. Si necesitas
+                    cualquier contenido de esta web en otro formato, pídemelo por
+                    ese mismo correo indicando cuál te sirve.
+                </p>
+                <p class="mt-4 text-text-secondary">
+                    Como cualquier persona consumidora, además puedes dirigirte
+                    a las autoridades de vigilancia del mercado designadas por tu
+                    comunidad autónoma y a los servicios de consumo, con
+                    independencia de este canal.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">
+                    Por qué publico esto si no estoy obligado
+                </h2>
+                <p>
+                    Conviene decirlo claro: <strong
+                        >hoy no me es exigible</strong
+                    > publicar esta información. jpiedra.com es la web de un profesional
+                    autónomo que presta servicios de consultoría y auditoría, así
+                    que no le aplica ni el Real Decreto 1112/2018 (que rige para el
+                    sector público) ni la Ley 11/2023.
+                </p>
+                <p class="mt-4">
+                    Sí le alcanza el <strong
+                        >Real Decreto 193/2023, artículo 14.2</strong
+                    >, que obliga a las webs privadas cuyo contenido se refiera a
+                    bienes y servicios a disposición del público a incorporar los
+                    criterios de accesibilidad del Real Decreto 1112/2018 —hoy, por
+                    remisión de su artículo 6, la norma UNE-EN 301 549—. Su calendario
+                    (disposición final sexta) sitúa esa obligación en el <strong
+                        >1 de enero de 2029</strong
+                    > para los servicios privados nuevos y en el <strong
+                        >1 de enero de 2030</strong
+                    > para los ya existentes. Tampoco entro en el artículo 14.3, que
+                    obliga a consignar el grado de accesibilidad a las empresas de
+                    «especial trascendencia económica»: no llego a sus umbrales.
+                </p>
+                <p class="mt-4">
+                    Publico esto por transparencia, por llegar con antelación a
+                    ese calendario, y porque quien vende auditorías de
+                    accesibilidad debería poder enseñar el estado de su propia
+                    web sin que se lo pidan.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">Fechas y revisión</h2>
+                <ul class="space-y-2 list-disc pl-5">
+                    <li>
+                        <strong>Evaluación realizada el:</strong>
+                        {fechaEvaluacion}
+                    </li>
+                    <li>
+                        <strong>Método:</strong> autoevaluación del titular del sitio
+                    </li>
+                    <li>
+                        <strong>Última revisión de esta página:</strong>
+                        {fechaRevision}
+                    </li>
+                    <li>
+                        <strong>Próxima revisión prevista:</strong>
+                        {proximaRevision}, o antes si hay un rediseño o un componente
+                        interactivo nuevo
+                    </li>
+                </ul>
+            </section>
+
+            <section class="border-t border-border pt-8">
+                <p class="text-sm text-text-muted">
+                    Esta es información de transparencia sobre el estado de
+                    accesibilidad del sitio. <strong
+                        >No es un certificado ni una acreditación de conformidad
+                        legal</strong
+                    >, y ningún organismo la ha validado. Está redactada por un
+                    especialista en accesibilidad, no por un abogado: la
+                    aplicación de la normativa a un caso concreto puede tener
+                    matices que requieran asesoramiento jurídico.
+                </p>
+            </section>
+        </div>
+    </article>
+</Layout>
