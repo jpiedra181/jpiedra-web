@@ -1,0 +1,34 @@
+# Javier Piedra
+
+> Diseño y desarrollo web de lo que una plantilla no resuelve: experiencias web 3D que van fluidas en cualquier móvil y se usan con teclado y lector de pantalla, accesibilidad web (WCAG 2.1 AA, Ley 11/2023 y European Accessibility Act) y webs preparadas para que los agentes de IA puedan usarlas. Profesional independiente en España. Trabaja en castellano y en inglés.
+
+Contacto: contacto@jpiedra.com. Precios de accesibilidad (sin IVA): diagnóstico exprés 290 €, auditoría completa desde 1.200 €, remediación desde 1.800 €, conformidad continua 149 € o 349 € al mes.
+
+## Especialidades
+
+- [Experiencias web 3D](https://jpiedra.com/experiencias-3d/): catálogos, visores de producto y salas inmersivas en el navegador, accesibles desde el primer día.
+- [Accesibilidad web](https://jpiedra.com/accesibilidad-web/): auditoría y corrección según WCAG 2.1 AA y la Ley 11/2023, con precios y preguntas frecuentes.
+- [Webs para agentes de IA](https://jpiedra.com/agentes-ia/): revisión y preparación de una web para que los asistentes de IA puedan usarla; es el mismo trabajo que la accesibilidad.
+
+## Pruebas
+
+- [Caso real de auditoría de accesibilidad](https://jpiedra.com/caso-auditoria-accesibilidad/): una gran web turística auditada a fondo, anonimizada.
+- [VETA](https://vetaatlas.com/): catálogo cerámico en WebGL 2, accesible con teclado y lector de pantalla.
+- [Inside the Frame](https://artgallery360.art/): sala inmersiva con descripción textual de la escena.
+
+## Herramientas y contenido
+
+- [¿Te aplica la Ley 11/2023?](https://jpiedra.com/te-aplica-ley-11-2023/): autoevaluador de 7 preguntas sobre la obligación legal de accesibilidad en España.
+- [Blog](https://jpiedra.com/blog/): artículos sobre accesibilidad web y la Ley 11/2023.
+
+## English
+
+- [3D web experiences](https://jpiedra.com/en/3d-experiences/): accessible 3D catalogues, product viewers and immersive rooms.
+- [Web accessibility](https://jpiedra.com/en/web-accessibility/): audits and fixes to WCAG 2.1 AA and the European Accessibility Act.
+- [Websites for AI agents](https://jpiedra.com/en/ai-agents/): making a website usable by AI assistants.
+- [Accessibility audit case](https://jpiedra.com/en/accessibility-audit-case/): a real, anonymised in-depth audit.
+
+## Optional
+
+- [Versión clásica](https://jpiedra.com/clasica/) / [Classic version](https://jpiedra.com/en/classic/): la misma web sin WebGL / the same site without WebGL.
+- [Declaración de accesibilidad](https://jpiedra.com/accesibilidad/): grado de conformidad de jpiedra.com.

@@ -2,7 +2,7 @@
 //@ts-nocheck
 import type { Lang } from "../../types"
 import { useTranslations } from "../../i18n/utils"
-import { siteConfig } from "../../config/site"
+import { siteConfig, routesFor } from "../../config/site"
 
 interface Props {
     lang: Lang
@@ -14,37 +14,30 @@ const year = new Date().getFullYear()
 
 const basePath = lang === "es" ? "/" : "/en/"
 
-// Servicios y contenido
+// Las tres especialidades, la herramienta gratuita y el blog. El autoevaluador
+// y el blog tratan la ley española y solo existen en español: en inglés el
+// blog se enlaza avisando del idioma.
+const routes = routesFor(lang)
 const servicesItems = [
-    {
-        href: lang === "es" ? "/servicios" : "/en/services",
-        label: t.footer.services.services,
-    },
-    {
-        href:
-            lang === "es"
-                ? "/auditoria-accesibilidad"
-                : "/en/accessibility-audit",
-        label: t.footer.services.audit,
-    },
-    {
-        href: lang === "es" ? "/blog" : "/en/blog",
-        label: t.footer.services.blog,
-    },
+    { href: routes.immersive, label: t.footer.services.immersive },
+    { href: routes.accessibility, label: t.footer.services.accessibility },
+    { href: routes.ai, label: t.footer.services.ai },
+    ...(lang === "es" ? [{ href: routes.law, label: t.footer.services.law }] : []),
+    { href: routes.blog, label: t.footer.services.blog, hreflang: lang === "en" ? "es" : undefined },
 ]
 
 // Páginas legales
 const legalItems = [
     {
-        href: lang === "es" ? "/aviso-legal" : "/en/legal-notice",
+        href: lang === "es" ? "/aviso-legal/" : "/en/legal-notice/",
         label: t.footer.legal.legalNotice,
     },
     {
-        href: lang === "es" ? "/politica-de-privacidad" : "/en/privacy-policy",
+        href: lang === "es" ? "/politica-de-privacidad/" : "/en/privacy-policy/",
         label: t.footer.legal.privacy,
     },
     {
-        href: lang === "es" ? "/politica-de-cookies" : "/en/cookie-policy",
+        href: lang === "es" ? "/politica-de-cookies/" : "/en/cookie-policy/",
         label: t.footer.legal.cookies,
     },
 ]
@@ -55,7 +48,7 @@ const legalItems = [
 // enlaza sería justo lo que este sitio critica.
 if (lang === "es") {
     legalItems.push({
-        href: "/accesibilidad",
+        href: "/accesibilidad/",
         label: t.footer.legal.accessibility,
     })
 }
@@ -72,17 +65,18 @@ if (lang === "es") {
                 aria-label={t.footer.services.label}
                 class="flex flex-col gap-3"
             >
-                <h3
+                <h2
                     class="text-xs text-text-muted uppercase tracking-wider font-medium"
                 >
                     {t.footer.services.label}
-                </h3>
+                </h2>
                 <ul class="flex flex-col gap-2">
                     {
                         servicesItems.map((item) => (
                             <li>
                                 <a
                                     href={item.href}
+                                    hreflang={item.hreflang}
                                     class="text-sm text-text-secondary hover:text-accent transition-colors duration-200"
                                 >
                                     {item.label}
@@ -95,11 +89,11 @@ if (lang === "es") {
 
             <!-- Legal (right on desktop) -->
             <nav aria-label={t.footer.legal.label} class="flex flex-col gap-3">
-                <h3
+                <h2
                     class="text-xs text-text-muted uppercase tracking-wider font-medium"
                 >
                     {t.footer.legal.label}
-                </h3>
+                </h2>
                 <ul class="flex flex-col gap-2">
                     {
                         legalItems.map((item) => (

@@ -136,7 +136,7 @@ export function PantallaCaptura({
         Uso tu email únicamente para enviarte este dictamen. Al pedirlo aceptas
         la{" "}
         <a
-          href="/politica-de-privacidad"
+          href="/politica-de-privacidad/"
           className="underline hover:text-accent transition-colors duration-200"
         >
           política de privacidad

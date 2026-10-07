@@ -1,0 +1,845 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import { routesFor } from "../../../config/site"
+import Button from "../../ui/Button.astro"
+import ContourMap from "../../ui/ContourMap.astro"
+import {
+    penalaraMassif as map,
+    laGranjaToPenalara as profile,
+    penalaraHeightGridUrl,
+} from "../../../data/contour-maps"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).home.hero
+const routes = routesFor(lang)
+// Oeste es "O" en castellano y "W" en inglés.
+const WEST = lang === "en" ? "W" : "O"
+const [mapWidth, mapHeight] = map.viewBox
+const { lat0, lat1, lon0, lon1 } = map.bounds
+
+// Cuadrícula geográfica del plano: una marca por minuto de arco, con rótulo
+// cada dos en longitud (el plano es más ancho que alto).
+const formatMinutes = (degrees: number, positive: string, negative: string) => {
+    const absolute = Math.abs(degrees)
+    let whole = Math.floor(absolute)
+    let minutes = Math.round((absolute - whole) * 60)
+    if (minutes === 60) {
+        whole += 1
+        minutes = 0
+    }
+    return `${whole}°${String(minutes).padStart(2, "0")}′ ${degrees < 0 ? negative : positive}`
+}
+
+const minuteTicks = (from: number, to: number) => {
+    const ticks: number[] = []
+    for (let minute = Math.ceil(Math.min(from, to) * 60); minute <= Math.floor(Math.max(from, to) * 60); minute++) {
+        ticks.push(minute)
+    }
+    return ticks
+}
+
+const longitudeTicks = minuteTicks(lon0, lon1).map((minute) => ({
+    position: (minute / 60 - lon0) / (lon1 - lon0),
+    label: formatMinutes(minute / 60, "E", WEST),
+    labelled: minute % 2 === 0,
+}))
+
+const latitudeTicks = minuteTicks(lat0, lat1).map((minute) => ({
+    position: (lat1 - minute / 60) / (lat1 - lat0),
+    label: formatMinutes(minute / 60, "N", "S"),
+    labelled: true,
+}))
+
+// El subrayado de «difícil» es el perfil real de la subida de La Granja a
+// Peñalara: la parte difícil es la cuesta.
+const UNDERLINE_POINTS = 56
+const UNDERLINE_WIDTH = 240
+const UNDERLINE_HEIGHT = 22
+const step = (profile.heights.length - 1) / (UNDERLINE_POINTS - 1)
+const sampled = Array.from({ length: UNDERLINE_POINTS }, (_, i) => profile.heights[Math.round(i * step)])
+const lowest = Math.min(...sampled)
+const highest = Math.max(...sampled)
+const underlinePath =
+    "M" +
+    sampled
+        .map((metres, i) => {
+            const x = (i / (UNDERLINE_POINTS - 1)) * UNDERLINE_WIDTH
+            const y = UNDERLINE_HEIGHT - 2 - ((metres - lowest) / (highest - lowest)) * (UNDERLINE_HEIGHT - 4)
+            return `${x.toFixed(1)} ${y.toFixed(1)}`
+        })
+        .join(" ")
+
+const gridSize = map.heightGrid
+
+// Altura de la maqueta: la cumbre sube estas unidades del plano sobre la base.
+const HERO_LIFT = 34
+---
+
+<section
+    id="hero"
+    aria-labelledby="hero-title"
+    class="hero-plan relative min-h-svh flex items-center overflow-hidden"
+    data-plan
+    data-plan-grid={penalaraHeightGridUrl}
+    data-plan-grid-size={`${gridSize.cols} ${gridSize.rows} ${gridSize.step}`}
+    data-plan-bounds={`${lat0} ${lat1} ${lon0} ${lon1}`}
+    data-plan-relief={`${map.minZ} ${map.maxZ}`}
+    data-plan-west={WEST}
+>
+    <div class="hero-content relative max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-[min(24rem,48svh)] lg:pt-32 lg:pb-20">
+        <div class="hero-copy flex flex-col gap-6 lg:gap-7 max-w-[40rem]">
+            <p class="hero-label text-xs font-body font-medium tracking-[0.3em] text-accent uppercase">
+                {copy.label}
+            </p>
+
+            <h1
+                id="hero-title"
+                class="hero-title font-heading text-[clamp(3.25rem,7vw,6.25rem)] leading-[0.98] text-text-primary"
+            >
+                <span class="hero-line"><span class="hero-line-inner">{copy.titleStart}</span></span>
+                <span class="hero-line">
+                    <span class="hero-line-inner">
+                        <em class="hero-highlight italic text-accent">
+                            {copy.titleHighlight}
+                            <svg
+                                class="hero-underline"
+                                viewBox={`0 0 ${UNDERLINE_WIDTH} ${UNDERLINE_HEIGHT}`}
+                                preserveAspectRatio="none"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d={underlinePath} pathLength="1"></path>
+                            </svg>
+                        </em>
+                    </span>
+                </span>
+                <span class="hero-line"><span class="hero-line-inner">{copy.titleEnd}</span></span>
+            </h1>
+
+            <p class="hero-subtitle text-lg lg:text-xl text-text-secondary leading-relaxed max-w-xl">
+                {copy.subtitle}
+            </p>
+
+            <div class="hero-cta flex flex-wrap gap-4">
+                <Button href="#proyectos" variant="primary">
+                    {copy.ctaPrimary}
+                    <span aria-hidden="true">→</span>
+                </Button>
+                <Button href="#contact" variant="outline">
+                    {copy.ctaSecondary}
+                </Button>
+            </div>
+
+            <p class="hero-hint" aria-hidden="true">{copy.sheet.hint}</p>
+            <p class="hero-sources-mobile">
+                {copy.sheet.sources}
+                <a href={routes.home} class="hero-version-link">
+                    {copy.sheet.view3d}
+                    <span aria-hidden="true">→</span>
+                </a>
+            </p>
+        </div>
+    </div>
+    <!-- El plano va después del texto en el HTML aunque se vea detrás: así el
+         titular se pinta sin esperar a los ~110 KB del SVG y el orden de
+         tabulación sigue el de lectura (la cartela es lo último del hero). -->
+    <div
+        class="hero-sheet"
+        style={`--map-aspect:${(mapWidth / mapHeight).toFixed(4)};--km:${(map.kmPx / mapWidth).toFixed(5)}`}
+    >
+        <!-- Tres capas con un solo trabajo cada una: hero-map coloca el plano,
+             hero-map-tilt lo inclina (ratón y scroll, contour-plan.ts) y
+             hero-map-intro lo levanta al cargar (CSS). Son transformaciones de
+             capa: la GPU mueve el plano sin volver a pintarlo. -->
+        <div class="hero-map" aria-hidden="true">
+            <div class="hero-map-tilt">
+                <div class="hero-map-intro">
+                    <ContourMap map={map} id="hero-map" lift={HERO_LIFT} />
+                    <svg
+                        class="hero-map-highlight"
+                        viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+                        preserveAspectRatio="xMidYMid slice"
+                        focusable="false"
+                    >
+                        <path></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="hero-lamp" aria-hidden="true"></div>
+        <div class="hero-scrim" aria-hidden="true"></div>
+
+        <div class="hero-frame" aria-hidden="true">
+            <div class="hero-ticks hero-ticks-lon">
+                {
+                    longitudeTicks.map((tick) => (
+                        <span class="hero-tick" style={`--pos:${tick.position.toFixed(4)}`}>
+                            {tick.labelled && <span class="hero-tick-label">{tick.label}</span>}
+                        </span>
+                    ))
+                }
+            </div>
+            <div class="hero-ticks hero-ticks-lat">
+                {
+                    latitudeTicks.map((tick) => (
+                        <span class="hero-tick" style={`--pos:${tick.position.toFixed(4)}`}>
+                            <span class="hero-tick-label">{tick.label}</span>
+                        </span>
+                    ))
+                }
+            </div>
+        </div>
+
+        <div class="hero-reticle" aria-hidden="true">
+            <span class="hero-reticle-line hero-reticle-h"></span>
+            <span class="hero-reticle-line hero-reticle-v"></span>
+            <span class="hero-reticle-mark">
+                <span class="hero-reticle-ring"></span>
+                <span class="hero-readout">
+                    <span class="hero-readout-z"></span>
+                    <span class="hero-readout-geo"></span>
+                </span>
+            </span>
+        </div>
+
+        <div class="hero-cartouche">
+            <p class="hero-cartouche-title">{copy.sheet.title}</p>
+            <p class="hero-cartouche-region">{copy.sheet.region} · {copy.sheet.equidistance}</p>
+            <div class="hero-scale" aria-hidden="true">
+                <span class="hero-scale-bar"></span>
+                <span class="hero-scale-label">{copy.sheet.scale}</span>
+                <svg class="hero-north" viewBox="0 0 16 24">
+                    <path d="M8 1 L13 20 L8 16 L3 20 Z"></path>
+                    <text x="8" y="23.5">N</text>
+                </svg>
+            </div>
+            <p class="hero-cartouche-sources">{copy.sheet.sources}</p>
+            <a href={routes.home} class="hero-cartouche-link">
+                {copy.sheet.view3d}
+                <span aria-hidden="true">→</span>
+            </a>
+        </div>
+    </div>
+
+</section>
+
+<script>
+    import { initContourPlan } from "../../../scripts/contour-plan"
+
+    const hero = document.querySelector<HTMLElement>("[data-plan]")
+    if (hero) {
+        const destroy = initContourPlan(hero)
+        document.addEventListener("astro:before-swap", destroy, { once: true })
+    }
+</script>
+
+<style>
+    .hero-plan {
+        isolation: isolate;
+    }
+
+    /* El plano ocupa toda la sección. Es un contenedor de tamaño para poder
+       colocar la cuadrícula y la escala gráfica con las mismas cuentas que el
+       mapa (unidades cqw/cqh), sin JavaScript. */
+    .hero-sheet {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        container-type: size;
+        pointer-events: none;
+        /* El mapa no se deforma y lleva la cumbre (focus) al punto de la
+           pantalla que se pida (summit). En móvil el texto ocupa casi toda la
+           pantalla: la cumbre va en la franja libre de debajo de los botones y
+           el plano puede no llegar arriba del todo, donde el velo es opaco. */
+        --focus-x: 0.62;
+        --focus-y: 0.5;
+        --summit-x: 42cqw;
+        --summit-y: calc(100cqh - min(13rem, 26svh));
+        --map-h: max(95cqh, 100cqw / var(--map-aspect));
+        --map-w: calc(var(--map-h) * var(--map-aspect));
+        --map-left: clamp(100cqw - var(--map-w), var(--summit-x) - var(--focus-x) * var(--map-w), 0px);
+        --map-top: max(100cqh - var(--map-h), var(--summit-y) - var(--focus-y) * var(--map-h));
+        --frame-inset: 12px;
+        --frame-top: 5.5rem;
+    }
+
+    .hero-map {
+        position: absolute;
+        left: var(--map-left);
+        top: var(--map-top);
+        width: var(--map-w);
+        height: var(--map-h);
+        /* En móvil el plano empieza a media sección: su borde superior se
+           funde con el fondo en vez de cortar en seco. */
+        mask-image: linear-gradient(180deg, transparent, #000 22%);
+    }
+
+    .hero-map-tilt,
+    .hero-map-intro {
+        position: absolute;
+        inset: 0;
+    }
+
+    /* Inclinación en reposo. contour-plan.ts lee estas variables y la mueve
+       con el ratón y el scroll. En móvil el plano no se inclina: una capa con
+       perspectiva se rasteriza entera y, a la densidad de píxeles de un
+       teléfono, no compensa la memoria. */
+    .hero-map-tilt {
+        --plan-3d: 0;
+        --plan-perspective: 1800px;
+        --plan-tilt: 0deg;
+        --plan-scale: 1;
+        transform-origin: calc(var(--focus-x) * 100%) calc(var(--focus-y) * 100%);
+        will-change: transform;
+    }
+
+    /* La cota bajo el cursor va en una capa propia: así encenderla solo
+       repinta esa curva y no el plano entero que tiene debajo. */
+    .hero-map-highlight {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        will-change: transform;
+    }
+
+    .hero-map-highlight path {
+        fill: none;
+        stroke: var(--color-accent-hover);
+        stroke-width: 2.4;
+        stroke-linejoin: round;
+        filter: drop-shadow(0 0 6px rgb(232 200 114 / 0.55));
+    }
+
+    .hero-lamp {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 34rem;
+        height: 34rem;
+        margin: -17rem 0 0 -17rem;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, rgb(232 200 114 / 0.11), rgb(232 200 114 / 0.04) 55%, transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        will-change: transform;
+    }
+
+    .hero-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            rgb(11 15 20 / 0.9) 0%,
+            rgb(11 15 20 / 0.86) calc(100% - min(24rem, 48svh) - 2rem),
+            rgb(11 15 20 / 0.25) calc(100% - min(14rem, 30svh)),
+            rgb(11 15 20 / 0.1) 100%
+        );
+    }
+
+    .hero-frame {
+        position: absolute;
+        inset: var(--frame-top) var(--frame-inset) var(--frame-inset);
+        border: 1px solid var(--color-accent-line);
+    }
+
+    .hero-ticks {
+        position: absolute;
+    }
+
+    /* Las marcas siguen al mapa (mismo origen y tamaño), pegadas al marco. */
+    .hero-ticks-lon {
+        left: calc(var(--map-left) - var(--frame-inset));
+        width: var(--map-w);
+        bottom: 0;
+        height: 0;
+    }
+
+    .hero-ticks-lat {
+        top: calc(var(--map-top) - var(--frame-top));
+        height: var(--map-h);
+        right: 0;
+        width: 0;
+    }
+
+    .hero-tick {
+        position: absolute;
+        background: var(--color-border-hover);
+    }
+
+    .hero-ticks-lon .hero-tick {
+        left: calc(var(--pos) * 100%);
+        bottom: 0;
+        width: 1px;
+        height: 8px;
+    }
+
+    .hero-ticks-lat .hero-tick {
+        top: calc(var(--pos) * 100%);
+        right: 0;
+        width: 8px;
+        height: 1px;
+    }
+
+    .hero-tick-label {
+        display: none;
+        position: absolute;
+        font-size: 0.6875rem;
+        letter-spacing: 0.08em;
+        font-variant-numeric: tabular-nums;
+        color: var(--color-text-muted);
+        white-space: nowrap;
+    }
+
+    .hero-ticks-lon .hero-tick-label {
+        bottom: 12px;
+        left: 0;
+        transform: translateX(-50%);
+    }
+
+    .hero-ticks-lat .hero-tick-label {
+        right: 14px;
+        top: 0;
+        transform: translateY(-50%);
+    }
+
+    .hero-reticle {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+    }
+
+    .hero-plan.is-surveying .hero-reticle,
+    .hero-plan.is-surveying .hero-lamp {
+        opacity: 1;
+    }
+
+    .hero-reticle-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        will-change: transform;
+    }
+
+    .hero-reticle-h {
+        width: 100%;
+        height: 1px;
+        background: repeating-linear-gradient(90deg, rgb(232 200 114 / 0.35) 0 6px, transparent 6px 12px);
+    }
+
+    .hero-reticle-v {
+        width: 1px;
+        height: 100%;
+        background: repeating-linear-gradient(180deg, rgb(232 200 114 / 0.35) 0 6px, transparent 6px 12px);
+    }
+
+    .hero-reticle-mark {
+        position: absolute;
+        left: 0;
+        top: 0;
+        will-change: transform;
+    }
+
+    .hero-reticle-ring {
+        position: absolute;
+        left: -14px;
+        top: -14px;
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--color-accent);
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px rgb(11 15 20 / 0.6);
+    }
+
+    .hero-readout {
+        position: absolute;
+        left: 22px;
+        top: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 0.375rem;
+        background: rgb(11 15 20 / 0.88);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .hero-readout.is-flipped {
+        left: auto;
+        right: 22px;
+    }
+
+    .hero-readout-z {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        line-height: 1;
+        color: var(--color-accent);
+    }
+
+    .hero-readout-z:empty {
+        display: none;
+    }
+
+    .hero-readout-geo {
+        font-size: 0.6875rem;
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+    }
+
+    .hero-cartouche {
+        display: none;
+    }
+
+    /* El bloque de texto deja pasar el ratón al plano (y a la cartela, que
+       queda por debajo); solo el texto y los botones lo capturan. */
+    .hero-content {
+        pointer-events: none;
+    }
+
+    .hero-copy {
+        pointer-events: auto;
+    }
+
+    .hero-highlight {
+        position: relative;
+        display: inline-block;
+        padding-right: 0.08em;
+    }
+
+    .hero-underline {
+        position: absolute;
+        left: 0.02em;
+        right: 0;
+        bottom: -0.02em;
+        width: 100%;
+        height: 0.2em;
+        overflow: visible;
+    }
+
+    .hero-underline path {
+        fill: none;
+        stroke: var(--color-accent);
+        stroke-width: 2.2;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        opacity: 0.85;
+    }
+
+    .hero-line {
+        display: block;
+        /* Margen interior para que la cursiva y el subrayado no se corten. */
+        padding: 0 0.1em 0.12em 0;
+        margin-bottom: -0.12em;
+        overflow: hidden;
+    }
+
+    .hero-line-inner {
+        display: block;
+    }
+
+    .hero-hint {
+        display: none;
+        font-size: 0.8125rem;
+        color: var(--color-text-secondary);
+    }
+
+    .hero-sources-mobile {
+        font-size: 0.75rem;
+        line-height: 1.5;
+        color: var(--color-text-secondary);
+    }
+
+    /* En móvil la cartela no cabe: el enlace a la versión 3D va con las fuentes. */
+    .hero-version-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        min-height: 24px;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-accent);
+        border-radius: 2px;
+    }
+
+    .hero-version-link:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 4px;
+    }
+
+    @media (min-width: 64rem) {
+        .hero-sheet {
+            --frame-inset: 24px;
+            --frame-top: 6rem;
+            /* En escritorio el plano cubre siempre toda la sección. */
+            --summit-y: 50cqh;
+            --map-w: max(100cqw, 100cqh * var(--map-aspect));
+            --map-h: max(100cqh, 100cqw / var(--map-aspect));
+            --map-top: clamp(100cqh - var(--map-h), var(--summit-y) - var(--focus-y) * var(--map-h), 0px);
+            --summit-x: 50cqw;
+        }
+
+        .hero-map {
+            mask-image: none;
+        }
+
+        .hero-map-tilt {
+            --plan-3d: 1;
+            --plan-tilt: 20deg;
+            --plan-scale: 1.14;
+            transform: perspective(var(--plan-perspective)) rotateX(var(--plan-tilt)) scale(var(--plan-scale));
+            transform-style: preserve-3d;
+        }
+
+        /* El velo cubre hasta donde acaba la columna de texto (contenedor de
+           80rem centrado, margen de 2rem, texto de hasta 38rem) y se abre
+           después: el plano se ve entero sin bajar el contraste del texto. */
+        .hero-scrim {
+            --copy-end: calc(max(0px, (100% - 80rem) / 2) + 40rem);
+            background:
+                linear-gradient(90deg, rgb(11 15 20 / 0.94) 0%, rgb(11 15 20 / 0.88) var(--copy-end), rgb(11 15 20 / 0.3) calc(var(--copy-end) + 12rem), transparent calc(var(--copy-end) + 22rem)),
+                linear-gradient(180deg, rgb(11 15 20 / 0.6) 0%, transparent 22%, transparent 80%, rgb(11 15 20 / 0.6) 100%);
+        }
+
+        .hero-tick-label {
+            display: block;
+        }
+
+        .hero-cartouche {
+            position: absolute;
+            right: calc(var(--frame-inset) + 6rem);
+            bottom: calc(var(--frame-inset) + 2.25rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+            width: 19rem;
+            padding: 1rem 1.25rem 1.125rem;
+            border: 1px solid var(--color-border-hover);
+            border-radius: 0.5rem;
+            background: rgb(11 15 20 / 0.9);
+            pointer-events: auto;
+        }
+
+        .hero-cartouche-title {
+            font-family: var(--font-heading);
+            font-size: 1.375rem;
+            line-height: 1.1;
+            color: var(--color-text-primary);
+        }
+
+        .hero-cartouche-region,
+        .hero-cartouche-sources {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+        }
+
+        .hero-scale {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            margin: 0.375rem 0 0.25rem;
+            font-size: 0.6875rem;
+            letter-spacing: 0.08em;
+            color: var(--color-text-secondary);
+        }
+
+        /* Escala gráfica de verdad: 1 km del plano a su tamaño en pantalla. */
+        .hero-scale-bar {
+            width: calc(var(--map-w) * var(--km));
+            height: 6px;
+            border: 1px solid var(--color-accent);
+            background: linear-gradient(90deg, var(--color-accent) 0 50%, transparent 50%);
+        }
+
+        .hero-north {
+            width: 12px;
+            height: 18px;
+            margin-left: auto;
+        }
+
+        .hero-north path {
+            fill: var(--color-accent);
+        }
+
+        .hero-north text {
+            fill: var(--color-text-secondary);
+            font-size: 7px;
+            text-anchor: middle;
+        }
+
+        .hero-cartouche-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            align-self: flex-start;
+            margin-top: 0.375rem;
+            min-height: 24px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        .hero-cartouche-link:hover {
+            color: var(--color-accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .hero-cartouche-link:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 4px;
+        }
+
+        .hero-sources-mobile {
+            display: none;
+        }
+    }
+
+    @media (hover: hover) and (pointer: fine) and (min-width: 64rem) {
+        .hero-hint {
+            display: block;
+        }
+    }
+
+    /* Entrada al cargar, con CSS para que no espere al JavaScript: el titular
+       sube línea a línea mientras el plano se dibuja detrás. */
+    @media (prefers-reduced-motion: no-preference) {
+        /* El plano entra plano (vista cenital) y se inclina hasta quedar como
+           una maqueta vista desde el sur. En móvil solo sube y aparece. */
+        .hero-map-intro {
+            animation: hero-plan-appear 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+        }
+
+        .hero-label {
+            animation: hero-wipe 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
+        }
+
+        .hero-line-inner {
+            animation: hero-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .hero-line:nth-child(1) .hero-line-inner {
+            animation-delay: 0.3s;
+        }
+
+        .hero-line:nth-child(2) .hero-line-inner {
+            animation-delay: 0.42s;
+        }
+
+        .hero-line:nth-child(3) .hero-line-inner {
+            animation-delay: 0.54s;
+        }
+
+        .hero-underline path {
+            stroke-dasharray: 1 1;
+            animation: hero-draw 1.6s cubic-bezier(0.45, 0, 0.2, 1) 1.1s both;
+        }
+
+        .hero-subtitle,
+        .hero-cta,
+        .hero-hint,
+        .hero-sources-mobile {
+            animation: hero-fade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .hero-subtitle {
+            animation-delay: 0.7s;
+        }
+
+        .hero-cta {
+            animation-delay: 0.85s;
+        }
+
+        .hero-hint,
+        .hero-sources-mobile {
+            animation-delay: 1.4s;
+        }
+
+        .hero-frame,
+        .hero-cartouche {
+            animation: hero-fade 1s ease-out 1.8s both;
+        }
+    }
+
+    @keyframes hero-plan-appear {
+        from {
+            opacity: 0;
+            transform: translateY(3%) scale(1.04);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes hero-plan-rise {
+        from {
+            opacity: 0;
+            transform: rotateX(-20deg) scale(0.9);
+        }
+        35% {
+            opacity: 1;
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @media (prefers-reduced-motion: no-preference) and (min-width: 64rem) {
+        .hero-map-intro {
+            animation: hero-plan-rise 2.8s cubic-bezier(0.45, 0, 0.15, 1) 0.15s both;
+        }
+    }
+
+    @keyframes hero-wipe {
+        from {
+            clip-path: inset(0 100% 0 0);
+        }
+        to {
+            clip-path: inset(0 0 0 0);
+        }
+    }
+
+    @keyframes hero-rise {
+        from {
+            transform: translateY(105%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes hero-draw {
+        from {
+            stroke-dashoffset: 1;
+        }
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @keyframes hero-fade {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

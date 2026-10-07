@@ -1,0 +1,38 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import { laGranjaToPenalara } from "../../../data/contour-maps"
+import SectionLabel from "../../ui/SectionLabel.astro"
+import RouteSteps from "../../ui/RouteSteps.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).immersive.process
+---
+
+<section
+    id="como-trabajo"
+    aria-labelledby="como-trabajo-title"
+    class="relative py-24 md:py-32 lg:py-40 bg-bg-surface border-t border-b border-border overflow-hidden"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div data-wipe>
+            <SectionLabel text={copy.label} />
+        </div>
+        <h2
+            id="como-trabajo-title"
+            data-split
+            class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary max-w-[22ch]"
+        >
+            {copy.title}
+        </h2>
+
+        <div class="mt-16 md:mt-24">
+            <RouteSteps profile={laGranjaToPenalara} steps={copy.steps} label={copy.label} />
+        </div>
+    </div>
+</section>

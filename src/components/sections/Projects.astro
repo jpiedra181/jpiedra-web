@@ -1,45 +1,120 @@
 ---
-import type { Lang } from '../../types';
-import { useTranslations } from '../../i18n/utils';
-import SectionLabel from '../ui/SectionLabel.astro';
-import ProjectCard from '../ui/ProjectCard.astro';
+//@ts-nocheck
+import type { Lang } from "../../types"
+import { useTranslations } from "../../i18n/utils"
+import { projects, projectHref, type ProjectSlug } from "../../data/projects"
+import SectionLabel from "../ui/SectionLabel.astro"
+import ProjectCard from "../ui/ProjectCard.astro"
 
 interface Props {
-  lang: Lang;
+    lang: Lang
+    label: string
+    title: string
+    intro?: string
+    slugs: ProjectSlug[]
 }
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
-
-const projectImages = [
-  'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80',
-  'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80',
-  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
-  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80',
-];
+const { lang, label, title, intro, slugs } = Astro.props
+const t = useTranslations(lang)
 ---
 
-<section id="projects" class="py-32 relative">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="mb-20">
-      <SectionLabel text={t.projects.label} />
-      <h2 class="projects-title font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.15] text-text-primary">
-        {t.projects.title}
-      </h2>
-    </div>
+<section
+    id="proyectos"
+    aria-labelledby="proyectos-title"
+    class="relative py-24 md:py-32 lg:py-40"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="mb-16 md:mb-24 max-w-3xl">
+            <div data-wipe>
+                <SectionLabel text={label} />
+            </div>
+            <h2
+                id="proyectos-title"
+                data-split
+                class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary"
+            >
+                {title}
+            </h2>
+            {
+                intro && (
+                    <p
+                        data-reveal
+                        class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[45rem]"
+                    >
+                        {intro}
+                    </p>
+                )
+            }
+        </div>
 
-    <div class="flex flex-col gap-24">
-      {t.projects.items.map((project, index) => (
-        <ProjectCard
-          category={project.category}
-          title={project.title}
-          description={project.description}
-          tags={project.tags}
-          image={projectImages[index]}
-          cta={t.projects.cta}
-          reverse={index % 2 !== 0}
-        />
-      ))}
+        <div class="project-list relative flex flex-col gap-24 lg:gap-32">
+            <!-- Ruta que une los proyectos, como un sendero en el plano. GSAP la
+                 va descubriendo con el scroll (initSurveySheets). -->
+            <svg
+                class="project-trail"
+                viewBox="0 0 40 1000"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                focusable="false"
+            >
+                <path
+                    d="M20 0 C 30 80, 10 160, 20 250 S 30 420, 20 500 S 10 670, 20 750 S 30 920, 20 1000"
+                    vector-effect="non-scaling-stroke"
+                ></path>
+            </svg>
+            {
+                slugs.map((slug, index) => {
+                    const project = projects[slug]
+                    const copy = t.portfolio.items[slug]
+                    return (
+                        <ProjectCard
+                            category={copy.category}
+                            title={copy.title}
+                            description={copy.description}
+                            tags={copy.tags}
+                            image={project.image}
+                            imageAlt={copy.imageAlt}
+                            imageFit={project.imageFit}
+                            href={projectHref(project, lang)}
+                            sheetLabel={t.projectSheet.sheet}
+                            ofLabel={t.projectSheet.of}
+                            cta={copy.cta}
+                            reverse={index % 2 !== 0}
+                            index={index}
+                            total={slugs.length}
+                        />
+                    )
+                })
+            }
+        </div>
     </div>
-  </div>
 </section>
+
+<style>
+    .project-trail {
+        display: none;
+    }
+
+    @media (min-width: 64rem) {
+        .project-trail {
+            display: block;
+            position: absolute;
+            left: calc(50% - 20px);
+            top: 10%;
+            bottom: 10%;
+            width: 40px;
+            height: 80%;
+            overflow: visible;
+            pointer-events: none;
+        }
+
+        .project-trail path {
+            fill: none;
+            stroke: var(--color-accent);
+            stroke-opacity: 0.45;
+            stroke-width: 1.25;
+            stroke-dasharray: 2 6;
+            stroke-linecap: round;
+        }
+    }
+</style>

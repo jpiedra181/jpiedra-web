@@ -1,0 +1,197 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import { bolaDelMundoSummit } from "../../../data/contour-maps"
+import Button from "../../ui/Button.astro"
+import ContourMap from "../../ui/ContourMap.astro"
+import VertexBadge from "../../ui/VertexBadge.astro"
+import AgentDemo from "../../ui/AgentDemo.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).aiLanding
+---
+
+<section id="hero" aria-labelledby="hero-title" class="ai-hero relative min-h-svh flex items-center overflow-hidden">
+    <!-- La Bola del Mundo: la cumbre de esta especialidad en la home 3D. -->
+    <div class="ai-hero-map" aria-hidden="true">
+        <ContourMap map={bolaDelMundoSummit} id="ai-hero-map" lift={20} showPeaks={false} />
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20 lg:pt-32 lg:pb-24">
+        <div class="grid lg:grid-cols-[1fr_1fr] gap-14 lg:gap-16 items-center">
+            <div class="flex flex-col gap-6 sm:gap-8">
+                <div class="ai-hero-badge">
+                    <VertexBadge vertex="ai" />
+                </div>
+                <p class="ai-hero-label text-xs font-body font-medium tracking-[0.3em] text-accent uppercase">
+                    {copy.hero.label}
+                </p>
+
+                <h1 id="hero-title" class="font-heading text-[clamp(2.75rem,5.6vw,5.5rem)] leading-[1.02] text-text-primary">
+                    {copy.hero.titleLines.map((line) => <span class="ai-line"><span>{line}</span></span>)}
+                    <span class="ai-line"><span><em class="italic text-accent">{copy.hero.titleHighlight}</em></span></span>
+                </h1>
+
+                <p class="ai-hero-subtitle text-lg lg:text-xl text-text-secondary leading-relaxed max-w-xl">
+                    {copy.hero.subtitle}
+                </p>
+
+                <div class="ai-hero-cta flex flex-wrap gap-4">
+                    <Button href="#contact" variant="primary">
+                        {copy.hero.ctaPrimary}
+                        <span aria-hidden="true">→</span>
+                    </Button>
+                    <Button href="#que-reviso" variant="outline">
+                        {copy.hero.ctaSecondary}
+                    </Button>
+                </div>
+            </div>
+
+            <div class="ai-hero-demo">
+                <AgentDemo copy={copy.demo} />
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { initAgentDemo } from "../../../scripts/agent-demo"
+
+    const demo = document.querySelector<HTMLElement>("[data-agent]")
+    if (demo) {
+        const destroy = initAgentDemo(demo)
+        document.addEventListener("astro:before-swap", destroy, { once: true })
+    }
+</script>
+
+<style>
+    .ai-hero {
+        isolation: isolate;
+    }
+
+    .ai-hero-map {
+        position: absolute;
+        z-index: -1;
+        right: -14%;
+        top: 50%;
+        width: min(68rem, 95vw);
+        aspect-ratio: 1;
+        transform: translateY(-50%);
+        opacity: 0.4;
+        mask-image: radial-gradient(closest-side, #000 35%, transparent);
+        pointer-events: none;
+    }
+
+    .ai-line {
+        display: block;
+        padding: 0 0.1em 0.1em 0;
+        margin-bottom: -0.1em;
+        overflow: hidden;
+    }
+
+    .ai-line > span {
+        display: block;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .ai-hero-badge,
+        .ai-hero-subtitle,
+        .ai-hero-cta {
+            animation: ai-fade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .ai-hero-badge {
+            animation-delay: 0.1s;
+        }
+
+        .ai-hero-label {
+            animation: ai-wipe 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+        }
+
+        .ai-line > span {
+            animation: ai-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .ai-line:nth-child(1) > span {
+            animation-delay: 0.3s;
+        }
+
+        .ai-line:nth-child(2) > span {
+            animation-delay: 0.42s;
+        }
+
+        .ai-line:nth-child(3) > span {
+            animation-delay: 0.54s;
+        }
+
+        .ai-hero-subtitle {
+            animation-delay: 0.7s;
+        }
+
+        .ai-hero-cta {
+            animation-delay: 0.85s;
+        }
+
+        .ai-hero-demo {
+            animation: ai-place 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+        }
+
+        .ai-hero-map {
+            animation: ai-map 2.4s ease-out both;
+        }
+    }
+
+    @keyframes ai-fade {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes ai-wipe {
+        from {
+            clip-path: inset(0 100% 0 0);
+        }
+        to {
+            clip-path: inset(0 0 0 0);
+        }
+    }
+
+    @keyframes ai-rise {
+        from {
+            transform: translateY(105%);
+        }
+        to {
+            transform: none;
+        }
+    }
+
+    @keyframes ai-place {
+        from {
+            opacity: 0;
+            transform: perspective(1200px) rotateY(-14deg) translateX(40px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes ai-map {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 0.4;
+        }
+    }
+</style>

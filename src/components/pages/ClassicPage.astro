@@ -1,0 +1,72 @@
+---
+import type { Lang } from "../../types"
+import BaseLayout from "../layout/BaseLayout.astro"
+import Hero from "../sections/home/Hero.astro"
+import Disciplines from "../sections/home/Disciplines.astro"
+import Projects from "../sections/Projects.astro"
+import About from "../sections/home/About.astro"
+import Contact from "../sections/Contact.astro"
+import Altimeter from "../ui/Altimeter.astro"
+import { laGranjaToPenalara } from "../../data/contour-maps"
+import { useTranslations } from "../../i18n/utils"
+import { ogImageFor } from "../../lib/seo-schema"
+
+// Versión clásica de la home (la home es el levantamiento en 3D): el mismo
+// levantamiento de la sierra, pero como plano impreso que se recorre bajando.
+// Sin WebGL, y con los proyectos, "Sobre mí" y el contacto que enlaza la 3D.
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<BaseLayout
+    lang={lang}
+    title={t.home.meta.title}
+    description={t.home.meta.description}
+    ogImage={ogImageFor("clasica", lang)}
+>
+    <Hero lang={lang} />
+    <Disciplines lang={lang} />
+    <Projects
+        lang={lang}
+        label={t.home.work.label}
+        title={t.home.work.title}
+        intro={t.home.work.intro}
+        slugs={["veta", "insideTheFrame", "auditCase"]}
+    />
+    <About lang={lang} />
+    <Contact lang={lang} summit="penalara" />
+    <Altimeter
+        profile={laGranjaToPenalara}
+        startLabel={t.home.altimeter.start}
+        endLabel={t.home.altimeter.end}
+    />
+</BaseLayout>
+
+<script>
+    import {
+        initScrollAnimations,
+        initRevealAnimations,
+        initElevationProfile,
+        initAltimeter,
+        destroyAnimations,
+    } from "../../scripts/gsap-animations"
+
+    // El hero se anima solo con CSS (no espera a este script); GSAP se
+    // encarga de lo que entra con el scroll.
+    initScrollAnimations()
+    initRevealAnimations()
+    initElevationProfile()
+    initAltimeter()
+
+    document.addEventListener(
+        "astro:before-swap",
+        () => {
+            destroyAnimations()
+        },
+        { once: true },
+    )
+</script>

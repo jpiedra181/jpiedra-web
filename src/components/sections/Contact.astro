@@ -2,16 +2,37 @@
 //@ts-nocheck
 import type { Lang } from "../../types"
 import { useTranslations } from "../../i18n/utils"
+import { penalaraSummit, sietePicosSummit, bolaDelMundoSummit } from "../../data/contour-maps"
+import { surveyVertices } from "../../data/survey-vertices"
+import ContourMap from "../ui/ContourMap.astro"
+import { formatElevation } from "../../lib/format"
 
 interface Props {
     lang: Lang
+    title?: string
+    subtitle?: string
+    // El contacto es la cumbre del recorrido: el plano de la cumbre de la
+    // página (Peñalara en la clásica y en 3D, Siete Picos en accesibilidad)
+    // al lado del formulario.
+    summit?: "penalara" | "sietePicos" | "bolaDelMundo"
 }
 
 const { lang } = Astro.props
 const t = useTranslations(lang)
+const title = Astro.props.title ?? t.contact.title
+const subtitle = Astro.props.subtitle ?? t.contact.subtitle
+// Solo las cotas altas de cada cumbre, como una isla en relieve.
+const SUMMITS = {
+    penalara: { map: penalaraSummit, vertex: "immersive", fromElevation: 2080 },
+    sietePicos: { map: sietePicosSummit, vertex: "accessibility", fromElevation: 1920 },
+    bolaDelMundo: { map: bolaDelMundoSummit, vertex: "ai", fromElevation: 2040 },
+}
+const summit = Astro.props.summit ? SUMMITS[Astro.props.summit] : undefined
+const summitVertex = summit && surveyVertices.find((vertex) => vertex.id === summit.vertex)
+const SUMMIT_LIFT = 60
 
 const privacyHref =
-    lang === "en" ? "/en/privacy-policy" : "/politica-de-privacidad"
+    lang === "en" ? "/en/privacy-policy/" : "/politica-de-privacidad/"
 ---
 
 <section
@@ -19,6 +40,22 @@ const privacyHref =
     aria-labelledby="contact-title"
     class="relative py-24 md:py-32 lg:py-40"
 >
+    {
+        summit && (
+            <div class="contact-summit" aria-hidden="true" data-summit-rise>
+                <ContourMap
+                    map={summit.map}
+                    id="contact-summit"
+                    lift={SUMMIT_LIFT}
+                    reveal="scroll"
+                    fromElevation={summit.fromElevation}
+                />
+                <p class="contact-summit-label">
+                    {t.home.summit.label} · <span>{summitVertex.peak} {formatElevation(summitVertex.elevation, lang)}</span>
+                </p>
+            </div>
+        )
+    }
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <!-- Eyebrow -->
         <div class="contact-eyebrow max-w-[60ch] overflow-hidden">
@@ -34,14 +71,14 @@ const privacyHref =
             id="contact-title"
             class="contact-title font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mt-6 md:mt-8 max-w-[20ch]"
         >
-            {t.contact.title}
+            {title}
         </h2>
 
         <!-- Subtitle -->
         <p
             class="contact-subtitle font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-primary mt-6 md:mt-8 max-w-[45rem]"
         >
-            {t.contact.subtitle}
+            {subtitle}
         </p>
 
         <!-- Form -->
@@ -174,7 +211,7 @@ const privacyHref =
                 aria-hidden="true"
                 class="absolute -left-[9999px] w-px h-px overflow-hidden"
             >
-                <label for="contact-company">Empresa</label>
+                <label for="contact-company">{lang === "en" ? "Company" : "Empresa"}</label>
                 <input
                     type="text"
                     id="contact-company"
@@ -199,7 +236,7 @@ const privacyHref =
                             required
                             aria-required="true"
                             aria-describedby="contact-privacy-error"
-                            class="w-4 h-4 accent-accent cursor-pointer flex-shrink-0"
+                            class="w-6 h-6 -mt-0.5 accent-accent cursor-pointer flex-shrink-0"
                         />
                         <span class="text-text-primary">
                             {t.contact.privacyConsent}<a
@@ -258,6 +295,49 @@ const privacyHref =
     </div>
 </section>
 
+<style>
+    .contact-summit {
+        display: none;
+    }
+
+    @media (min-width: 64rem) {
+        .contact-summit {
+            position: absolute;
+            right: max(1.5rem, calc((100vw - 80rem) / 2));
+            top: 12rem;
+            display: block;
+            width: min(40vw, 34rem);
+            aspect-ratio: 1;
+            pointer-events: none;
+        }
+
+        .contact-summit :global(.contour-map) {
+            --area-low: var(--color-bg-primary);
+        }
+
+        /* Bordes difuminados: la cumbre aparece en el plano, no en un recuadro. */
+        .contact-summit :global(svg) {
+            mask-image: radial-gradient(closest-side, #000 62%, transparent);
+        }
+
+        .contact-summit-label {
+            position: absolute;
+            left: 50%;
+            bottom: 0.5rem;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: var(--color-text-secondary);
+        }
+
+        .contact-summit-label span {
+            color: var(--color-accent);
+        }
+    }
+</style>
+
 <script>
     type FieldId =
         | "contact-name"
@@ -266,6 +346,21 @@ const privacyHref =
         | "contact-message"
 
     const form = document.getElementById("contact-form") as HTMLFormElement
+
+    // Los botones de cada oferta (data-contact-topic) dejan escrito en el
+    // mensaje qué servicio interesa, para no tener que contarlo otra vez. Solo
+    // si el mensaje está vacío o lo escribió otro de estos botones.
+    let lastTopic = ""
+    document.addEventListener("click", (event) => {
+        const link = (event.target as Element).closest<HTMLElement>("[data-contact-topic]")
+        const message = document.getElementById("contact-message") as HTMLTextAreaElement | null
+        if (!link || !message) return
+        const topic = link.dataset.contactTopic ?? ""
+        const current = message.value.trim()
+        if (current && current !== lastTopic) return
+        message.value = topic
+        lastTopic = topic
+    })
     const submitBtn = document.getElementById(
         "contact-submit",
     ) as HTMLButtonElement

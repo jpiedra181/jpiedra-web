@@ -3,6 +3,7 @@
 import type { Lang } from "../../types"
 import { useTranslations } from "../../i18n/utils"
 import LanguageSwitcher from "../ui/LanguageSwitcher.astro"
+import { routesFor } from "../../config/site"
 
 interface Props {
     lang: Lang
@@ -11,20 +12,18 @@ interface Props {
 const { lang } = Astro.props
 const t = useTranslations(lang)
 
-const basePath = lang === "es" ? "/" : "/en/"
-
-const auditHref =
-    lang === "es" ? "/auditoria-accesibilidad" : "/en/accessibility-audit"
-const blogHref = lang === "es" ? "/blog" : "/en/blog"
-const servicesHref = lang === "es" ? "/servicios" : "/en/services"
-const contactHref = "/te-aplica-ley-11-2023"
-
-// El autoevaluador solo existe en español: en inglés no se ofrece el enlace.
+// Las tres especialidades y el blog. El blog solo existe en español (trata
+// la ley española): en inglés no va en el menú, sino en el pie.
+const routes = routesFor(lang)
 const navItems = [
-    { href: servicesHref, label: t.nav.services },
-    ...(lang === "es" ? [{ href: contactHref, label: t.nav.law }] : []),
-    { href: blogHref, label: t.nav.blog },
+    { href: routes.immersive, label: t.nav.immersive },
+    { href: routes.accessibility, label: t.nav.accessibility },
+    { href: routes.ai, label: t.nav.ai },
+    ...(lang === "es" ? [{ href: routes.blog, label: t.nav.blog }] : []),
 ]
+
+const cta = { href: routes.contact, label: t.nav.contact }
+const homeLabel = lang === "es" ? "Javier Piedra, inicio" : "Javier Piedra, home"
 ---
 
 <header
@@ -35,12 +34,14 @@ const navItems = [
         class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-20"
     >
         <!-- Logo -->
-        <a href={lang === "es" ? "/" : "/en/"} class="relative z-10 group">
+        <a href={routes.home} class="relative z-10 group rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
             <span
+                aria-hidden="true"
                 class="font-heading text-3xl text-text-primary tracking-tight"
             >
                 J<span class="text-accent">.</span>P
             </span>
+            <span class="sr-only">{homeLabel}</span>
         </a>
 
         <!-- Desktop Nav -->
@@ -60,12 +61,12 @@ const navItems = [
                     </a>
                 ))
             }
-            <!-- <LanguageSwitcher lang={lang} /> -->
+            <LanguageSwitcher lang={lang} />
             <a
-                href={auditHref}
+                href={cta.href}
                 class="inline-flex items-center font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-5 py-2.5 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-                {t.nav.audit}
+                {cta.label}
             </a>
         </nav>
     </div>
@@ -114,14 +115,14 @@ const navItems = [
         ))
     }
     <a
-        href={auditHref}
+        href={cta.href}
         class="mobile-nav-link inline-flex items-center font-body font-medium text-base tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3 mt-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
     >
-        {t.nav.audit}
+        {cta.label}
     </a>
-    <!-- <div class="mt-4">
+    <div class="mt-4">
         <LanguageSwitcher lang={lang} />
-    </div> -->
+    </div>
 </div>
 
 <script>

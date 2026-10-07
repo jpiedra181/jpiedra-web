@@ -1,0 +1,185 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).immersive.useCases
+
+// Muestras decorativas de cada caso: piedras para superficies y cuadros para
+// cultura. Solo CSS; los textos de la tarjeta dicen lo mismo.
+const STONES = [
+    "radial-gradient(120% 90% at 30% 20%, #e4ddd1, #b8ad9c)",
+    "radial-gradient(120% 90% at 70% 30%, #3a3632, #1d1b19)",
+    "radial-gradient(120% 90% at 30% 70%, #c9a27a, #8c6845)",
+    "radial-gradient(120% 90% at 50% 20%, #9aa39f, #5f6866)",
+    "radial-gradient(120% 90% at 20% 40%, #d8cfc2, #a49481)",
+]
+const FRAMES = [
+    "linear-gradient(160deg, #23405c 10%, #e9e3d1 45%, #2c5679 70%)",
+    "linear-gradient(180deg, #e2b469 0 30%, #4b6b7e 30% 100%)",
+    "linear-gradient(150deg, #8fae8d, #d7c9a0 50%, #7d9db0)",
+    "radial-gradient(70% 60% at 50% 40%, #f4d9a0, #b77a3c 60%, #4a3324)",
+]
+---
+
+<section
+    id="para-quien"
+    aria-labelledby="para-quien-title"
+    class="relative py-24 md:py-32 lg:py-40 bg-bg-surface border-t border-b border-border"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div data-wipe>
+            <SectionLabel text={copy.label} />
+        </div>
+        <h2
+            id="para-quien-title"
+            data-split
+            class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary max-w-[20ch]"
+        >
+            {copy.title}
+        </h2>
+
+        <ul role="list" data-reveal-stagger class="grid md:grid-cols-2 gap-6 lg:gap-8 mt-16 md:mt-20">
+            {
+                copy.items.map((item, index) => (
+                    <li class="usecase" data-spotlight>
+                        <div class="usecase-samples" aria-hidden="true">
+                            {(index === 0 ? STONES : FRAMES).map((background) => (
+                                <span
+                                    class={index === 0 ? "usecase-stone" : "usecase-frame"}
+                                    style={`--sample:${background}`}
+                                />
+                            ))}
+                        </div>
+                        <p class="usecase-number" aria-hidden="true">
+                            {String(index + 1).padStart(2, "0")}
+                        </p>
+                        <h3 class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.15] text-text-primary">
+                            {item.title}
+                        </h3>
+                        <p class="text-sm font-medium text-accent mt-3">{item.audience}</p>
+                        <p class="text-base lg:text-lg text-text-secondary leading-relaxed mt-6">{item.description}</p>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>
+
+<style>
+    .usecase {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-bg-primary);
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    /* El cursor es una luz: alumbra la tarjeta y enciende su borde. */
+    .usecase::before,
+    .usecase::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .usecase::before {
+        z-index: -1;
+        background: radial-gradient(
+            28rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+            rgb(232 200 114 / 0.09),
+            transparent 65%
+        );
+    }
+
+    .usecase::after {
+        padding: 1px;
+        background: radial-gradient(
+            22rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+            rgb(232 200 114 / 0.6),
+            transparent 60%
+        );
+        mask:
+            linear-gradient(#000 0 0) content-box exclude,
+            linear-gradient(#000 0 0);
+    }
+
+    .usecase:hover::before,
+    .usecase:hover::after {
+        opacity: 1;
+    }
+
+    .usecase-samples {
+        display: flex;
+        gap: 0.625rem;
+        height: 5.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .usecase-stone {
+        flex: 1;
+        border-radius: 6px;
+        background: var(--sample);
+        box-shadow: 0 14px 24px -14px rgb(0 0 0 / 0.8);
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .usecase-frame {
+        flex: 1;
+        border: 5px solid #2a2622;
+        outline: 1px solid rgb(232 200 114 / 0.35);
+        background: var(--sample);
+        box-shadow: 0 14px 24px -14px rgb(0 0 0 / 0.8);
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .usecase-number {
+        position: absolute;
+        right: 1.75rem;
+        bottom: 1rem;
+        font-family: var(--font-heading);
+        font-size: 4.5rem;
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgb(232 200 114 / 0.25);
+        z-index: -1;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .usecase:hover .usecase-stone:nth-child(odd),
+        .usecase:hover .usecase-frame:nth-child(odd) {
+            transform: translateY(-6px);
+        }
+
+        .usecase:hover .usecase-stone:nth-child(even),
+        .usecase:hover .usecase-frame:nth-child(even) {
+            transform: translateY(4px);
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .usecase {
+            padding: 3rem;
+        }
+
+        .usecase-number {
+            font-size: 6rem;
+            right: 2.5rem;
+            bottom: 1.5rem;
+        }
+    }
+</style>

@@ -1,0 +1,215 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import { penalaraSummit } from "../../../data/contour-maps"
+import Button from "../../ui/Button.astro"
+import ContourMap from "../../ui/ContourMap.astro"
+import MaterialSwatches from "../../ui/MaterialSwatches.astro"
+import VertexBadge from "../../ui/VertexBadge.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).immersive.hero
+---
+
+<section
+    id="hero"
+    aria-labelledby="hero-title"
+    class="immersive-hero relative min-h-svh flex items-center overflow-hidden"
+    data-immersive-hero
+>
+    <!-- El plano de Peñalara, la cumbre de esta especialidad en la home 3D. -->
+    <div class="immersive-hero-map" aria-hidden="true">
+        <ContourMap map={penalaraSummit} id="immersive-hero-map" lift={22} showPeaks={false} />
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20 lg:pt-32 lg:pb-24">
+        <div class="grid lg:grid-cols-[1fr_0.95fr] gap-14 lg:gap-16 items-center">
+            <div class="flex flex-col gap-6 sm:gap-8">
+                <div class="immersive-hero-badge">
+                    <VertexBadge vertex="immersive" />
+                </div>
+                <p class="immersive-hero-label text-xs font-body font-medium tracking-[0.3em] text-accent uppercase">
+                    {copy.label}
+                </p>
+
+                <h1
+                    id="hero-title"
+                    class="font-heading text-[clamp(3rem,6.4vw,6rem)] leading-[0.98] text-text-primary"
+                >
+                    <span class="immersive-line"><span>{copy.titleStart}</span></span>
+                    <span class="immersive-line"><span><em class="italic text-accent">{copy.titleHighlight}</em></span></span>
+                    <span class="immersive-line"><span>{copy.titleEnd}</span></span>
+                </h1>
+
+                <p class="immersive-hero-subtitle text-lg lg:text-xl text-text-secondary leading-relaxed max-w-xl">
+                    {copy.subtitle}
+                </p>
+
+                <div class="immersive-hero-cta flex flex-wrap gap-4">
+                    <Button href="#contact" variant="primary">
+                        {copy.ctaPrimary}
+                        <span aria-hidden="true">→</span>
+                    </Button>
+                    <Button href="#proyectos" variant="outline">
+                        {copy.ctaSecondary}
+                    </Button>
+                </div>
+            </div>
+
+            <div class="immersive-hero-swatches">
+                <MaterialSwatches copy={copy.swatches} />
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { initMaterialSwatches } from "../../../scripts/material-swatches"
+
+    const hero = document.querySelector<HTMLElement>("[data-immersive-hero]")
+    const figure = hero?.querySelector<HTMLElement>("[data-swatches]")
+    if (hero && figure) {
+        const destroy = initMaterialSwatches({
+            area: hero,
+            stage: figure.querySelector(".swatches-stage")!,
+            canvas: figure.querySelector("canvas")!,
+            slots: [...figure.querySelectorAll<HTMLElement>(".swatches-slot")],
+            slider: figure.querySelector("input")!,
+            glow: figure.querySelector<HTMLElement>(".swatches-glow") ?? undefined,
+        })
+        document.addEventListener("astro:before-swap", destroy, { once: true })
+    }
+</script>
+
+<style>
+    .immersive-hero {
+        isolation: isolate;
+    }
+
+    .immersive-hero-map {
+        position: absolute;
+        z-index: -1;
+        right: -12%;
+        top: 50%;
+        width: min(70rem, 95vw);
+        aspect-ratio: 1;
+        transform: translateY(-50%);
+        opacity: 0.4;
+        mask-image: radial-gradient(closest-side, #000 35%, transparent);
+        pointer-events: none;
+    }
+
+    .immersive-line {
+        display: block;
+        padding: 0 0.1em 0.1em 0;
+        margin-bottom: -0.1em;
+        overflow: hidden;
+    }
+
+    .immersive-line > span {
+        display: block;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .immersive-hero-badge,
+        .immersive-hero-subtitle,
+        .immersive-hero-cta {
+            animation: immersive-fade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .immersive-hero-badge {
+            animation-delay: 0.1s;
+        }
+
+        .immersive-hero-label {
+            animation: immersive-wipe 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+        }
+
+        .immersive-line > span {
+            animation: immersive-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .immersive-line:nth-child(1) > span {
+            animation-delay: 0.3s;
+        }
+
+        .immersive-line:nth-child(2) > span {
+            animation-delay: 0.42s;
+        }
+
+        .immersive-line:nth-child(3) > span {
+            animation-delay: 0.54s;
+        }
+
+        .immersive-hero-subtitle {
+            animation-delay: 0.7s;
+        }
+
+        .immersive-hero-cta {
+            animation-delay: 0.85s;
+        }
+
+        /* Las piezas suben como una muestra que se coloca en la mesa. */
+        .immersive-hero-swatches {
+            animation: immersive-place 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+        }
+
+        .immersive-hero-map {
+            animation: immersive-map 2.4s ease-out both;
+        }
+    }
+
+    @keyframes immersive-fade {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes immersive-wipe {
+        from {
+            clip-path: inset(0 100% 0 0);
+        }
+        to {
+            clip-path: inset(0 0 0 0);
+        }
+    }
+
+    @keyframes immersive-rise {
+        from {
+            transform: translateY(105%);
+        }
+        to {
+            transform: none;
+        }
+    }
+
+    @keyframes immersive-place {
+        from {
+            opacity: 0;
+            transform: perspective(1200px) rotateX(24deg) translateY(60px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes immersive-map {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 0.4;
+        }
+    }
+</style>

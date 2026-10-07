@@ -1,0 +1,55 @@
+# Caché de recursos estáticos. Los de /_astro llevan hash en el nombre: si
+# cambian, cambia la URL, así que pueden guardarse un año sin revalidar.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Datos del terreno de la home (MDT, agua, pueblos): cambian muy rara vez.
+[[headers]]
+  for = "/levantamiento/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# La home 3D estuvo en pruebas en /prototipo/levantamiento: si alguien guardó
+# el enlace, llega a la home.
+[[redirects]]
+  from = "/prototipo/levantamiento"
+  to = "/"
+  status = 301
+
+# Limpieza de accesibilidad (oct-2026): todo lo comercial vive ahora en
+# /accesibilidad-web. Las páginas fusionadas redirigen a su oferta.
+[[redirects]]
+  from = "/servicios"
+  to = "/accesibilidad-web#precios"
+  status = 301
+
+[[redirects]]
+  from = "/auditoria-accesibilidad"
+  to = "/accesibilidad-web#auditoria-completa"
+  status = 301
+
+# /recursos tenía un solo PDF. El PDF sigue en su URL; la página lleva al
+# artículo donde se ofrece.
+[[redirects]]
+  from = "/recursos"
+  to = "/blog/declaracion-accesibilidad-obligatoria"
+  status = 301
+
+# Versión inglesa (oct-2026): las páginas antiguas solo de accesibilidad se
+# fusionan en /en/web-accessibility; el blog solo existe en castellano.
+[[redirects]]
+  from = "/en/services"
+  to = "/en/web-accessibility#pricing"
+  status = 301
+
+[[redirects]]
+  from = "/en/accessibility-audit"
+  to = "/en/web-accessibility#full-audit"
+  status = 301
+
+[[redirects]]
+  from = "/en/blog"
+  to = "/blog"
+  status = 301

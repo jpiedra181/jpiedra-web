@@ -1,0 +1,220 @@
+---
+//@ts-nocheck
+// "Ver lo que no se ve" aplicado a una tienda: una ficha de producto corriente
+// y, debajo, lo que anuncia un lector de pantalla. La lupa (xray-lens.ts)
+// deja ver la segunda donde está el cursor; el botón la enseña entera, para
+// quien usa teclado o pantalla táctil. La ficha es una ilustración (oculta a
+// los lectores de pantalla); el pie cuenta lo mismo en texto.
+import XRayCard from "./XRayCard.astro"
+
+interface Props {
+    copy: {
+        toggle: string
+        hint: string
+        hintTouch: string
+        caption: string
+        product: Record<string, string>
+        reader: Record<string, string>
+    }
+}
+
+const { copy } = Astro.props
+---
+
+<figure class="xray" data-xray>
+    <div class="xray-stage" aria-hidden="true">
+        <div class="xray-layer xray-layer-visual">
+            <XRayCard mode="visual" product={copy.product} reader={copy.reader} />
+        </div>
+        <div class="xray-layer xray-layer-reader">
+            <XRayCard mode="reader" product={copy.product} reader={copy.reader} />
+        </div>
+        <div class="xray-ring"></div>
+    </div>
+
+    <div class="xray-controls">
+        <button type="button" class="xray-toggle" aria-pressed="false">
+            <span class="xray-toggle-icon" aria-hidden="true"></span>
+            {copy.toggle}
+        </button>
+        <p class="xray-hint" aria-hidden="true">
+            <span class="hint-pointer">{copy.hint}</span>
+            <span class="hint-touch">{copy.hintTouch}</span>
+        </p>
+    </div>
+
+    <figcaption class="xray-caption">{copy.caption}</figcaption>
+</figure>
+
+<style>
+    /* Radio de la lupa, animable (la posición no: sigue al cursor al momento). */
+    @property --lens-r {
+        syntax: "<length>";
+        inherits: true;
+        initial-value: 0px;
+    }
+
+    .xray {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .xray-stage {
+        position: relative;
+        aspect-ratio: 16 / 10.5;
+        --lens-x: 50%;
+        --lens-y: 50%;
+        --lens-r: 0px;
+        transition: --lens-r 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+        touch-action: pan-y;
+        cursor: crosshair;
+    }
+
+    .xray-stage.is-lens {
+        --lens-r: 7.5rem;
+    }
+
+    .xray-stage.is-full {
+        --lens-r: 160%;
+        cursor: auto;
+    }
+
+    .xray-layer {
+        position: absolute;
+        inset: 0;
+    }
+
+    .xray-layer-reader {
+        clip-path: circle(var(--lens-r) at var(--lens-x) var(--lens-y));
+    }
+
+    .xray-ring {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 15rem;
+        height: 15rem;
+        margin: -7.5rem 0 0 -7.5rem;
+        border: 1.5px solid var(--color-accent);
+        border-radius: 50%;
+        box-shadow:
+            0 0 0 1px rgb(11 15 20 / 0.6),
+            0 0 30px rgb(232 200 114 / 0.35),
+            inset 0 0 24px rgb(232 200 114 / 0.2);
+        opacity: 0;
+        scale: 0.6;
+        transition:
+            opacity 0.3s ease,
+            scale 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+        pointer-events: none;
+        will-change: transform;
+    }
+
+    .xray-stage.is-lens:not(.is-full) .xray-ring {
+        opacity: 1;
+        scale: 1;
+    }
+
+    .xray-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem 1.25rem;
+    }
+
+    .xray-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        min-height: 44px;
+        padding: 0.625rem 1.125rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 999px;
+        background: var(--color-bg-surface);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease;
+    }
+
+    .xray-toggle:hover {
+        border-color: var(--color-accent);
+    }
+
+    .xray-toggle:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+    }
+
+    .xray-toggle[aria-pressed="true"] {
+        background: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-bg-primary);
+    }
+
+    .xray-toggle-icon {
+        width: 1rem;
+        height: 1rem;
+        border: 1.5px solid currentColor;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 3px transparent;
+        position: relative;
+    }
+
+    .xray-toggle[aria-pressed="true"] .xray-toggle-icon {
+        background: currentColor;
+        box-shadow: inset 0 0 0 2.5px var(--color-accent);
+    }
+
+    .xray-hint {
+        font-size: 0.8125rem;
+        color: var(--color-text-secondary);
+    }
+
+    .hint-touch {
+        display: none;
+    }
+
+    @media (hover: none) {
+        .hint-pointer {
+            display: none;
+        }
+
+        .hint-touch {
+            display: inline;
+        }
+
+        .xray-stage {
+            cursor: auto;
+        }
+    }
+
+    .xray-caption {
+        max-width: 38rem;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+    }
+
+    @media (max-width: 30rem) {
+        .xray-stage {
+            aspect-ratio: auto;
+            height: 31rem;
+        }
+
+        .xray-stage.is-lens {
+            --lens-r: 5.5rem;
+        }
+
+        .xray-ring {
+            width: 11rem;
+            height: 11rem;
+            margin: -5.5rem 0 0 -5.5rem;
+        }
+    }
+</style>

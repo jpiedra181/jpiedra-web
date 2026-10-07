@@ -1,5 +1,49 @@
 @import "@fontsource-variable/dm-sans";
 @import "@fontsource/instrument-serif";
+@import "@fontsource/instrument-serif/400-italic.css";
+
+/* Fuentes de reserva con las medidas de las de verdad (size-adjust y
+   overrides calculados con fontTools sobre el texto del sitio): mientras
+   cargan Instrument Serif y DM Sans, Times y Arial ocupan lo mismo, y el
+   cambio no mueve ni una línea (CLS). */
+@font-face {
+  font-family: 'Instrument Serif Fallback';
+  src: local('Times New Roman');
+  size-adjust: 82.99%;
+  ascent-override: 119.29%;
+  descent-override: 37.35%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Instrument Serif Fallback';
+  font-style: italic;
+  src: local('Times New Roman Italic');
+  size-adjust: 87.23%;
+  ascent-override: 113.5%;
+  descent-override: 35.54%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'DM Sans Fallback';
+  font-weight: 100 550;
+  src: local('Arial');
+  size-adjust: 103.95%;
+  ascent-override: 95.43%;
+  descent-override: 29.82%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'DM Sans Fallback';
+  font-weight: 551 1000;
+  src: local('Arial Bold');
+  size-adjust: 102.13%;
+  ascent-override: 97.13%;
+  descent-override: 30.35%;
+  line-gap-override: 0%;
+}
 
 @import "tailwindcss";
 
@@ -17,12 +61,15 @@
   --color-border: rgba(232, 200, 114, 0.08);
   --color-border-hover: rgba(232, 200, 114, 0.25);
 
-  --font-heading: 'Instrument Serif', serif;
-  --font-body: 'DM Sans Variable', 'DM Sans', sans-serif;
+  --font-heading: 'Instrument Serif', 'Instrument Serif Fallback', serif;
+  --font-body: 'DM Sans Variable', 'DM Sans Fallback', sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  /* La cabecera es fija (h-20): sin esto, los anclas (#proyectos, #contact)
+     dejan el título de la sección escondido debajo de ella. */
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -33,6 +80,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Una columna de rejilla puede estrecharse por debajo del ancho mínimo de su
+   contenido: sin esto, una palabra larga o un marcador ancho ensanchan la
+   página en móviles de 320 px. Especificidad cero: cualquier clase la pisa. */
+:where(.grid) > * {
+  min-width: 0;
+}
+
+/* Líneas de titular equilibradas: sin una palabra suelta al final (en inglés
+   y en castellano cortan en sitios distintos). */
 h1,
 h2,
 h3,
@@ -40,9 +96,45 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  text-wrap: balance;
 }
 
 ::selection {
   background-color: rgba(232, 200, 114, 0.3);
   color: var(--color-text-primary);
+}
+/* Transiciones entre páginas (View Transitions entre documentos): al navegar,
+   el contenido sale y entra con un fundido corto y la cabecera se queda
+   quieta. Sin JavaScript ni router: lo hace el navegador, y el que no lo
+   soporta navega como siempre. Con movimiento reducido no se activan. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: page-leave 0.24s cubic-bezier(0.4, 0, 1, 1) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: page-enter 0.42s cubic-bezier(0, 0, 0.2, 1) both;
+  }
+}
+
+#site-header {
+  view-transition-name: site-header;
+}
+
+@keyframes page-leave {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
 }

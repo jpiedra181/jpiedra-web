@@ -1,0 +1,88 @@
+---
+import type { Lang } from "../../types"
+import BaseLayout from "../layout/BaseLayout.astro"
+import Hero from "../sections/accessibility/Hero.astro"
+import Autoevaluador from "../sections/accessibility/Autoevaluador.astro"
+import Context from "../sections/accessibility/Context.astro"
+import Approach from "../sections/accessibility/Approach.astro"
+import CaseStudy from "../sections/accessibility/CaseStudy.astro"
+import Faq from "../sections/accessibility/Faq.astro"
+import Contact from "../sections/Contact.astro"
+import { siteConfig, routesFor } from "../../config/site"
+import { breadcrumbSchema, ogImageFor } from "../../lib/seo-schema"
+import { useTranslations } from "../../i18n/utils"
+import { buildServicesSchema } from "../../lib/services-schema"
+
+// Única página comercial de accesibilidad: cuelga de Siete Picos (V·02) en la
+// home 3D y reúne lo que antes estaba repartido en /servicios y
+// /auditoria-accesibilidad (que redirigen aquí). Orden: el problema, por qué
+// cuesta dinero, qué hago y cuánto cuesta, la prueba, si te aplica la ley, las
+// dudas y el contacto. La versión inglesa sigue con las secciones antiguas.
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const copy = t.accessibilityLanding
+
+const routes = routesFor(lang)
+const structuredData = [
+    buildServicesSchema({
+        lang,
+        pageUrl: `${siteConfig.url}${routes.accessibility}`,
+        items: t.services.ladder.items,
+    }),
+    breadcrumbSchema([
+        { name: "Javier Piedra", path: routes.home },
+        { name: copy.hero.label.split(" · ")[0], path: routes.accessibility },
+    ]),
+]
+---
+
+<BaseLayout
+    lang={lang}
+    title={copy.meta.title}
+    description={copy.meta.description}
+    ogImage={ogImageFor("accesibilidad-web", lang)}
+    ogImageAlt={copy.meta.ogAlt}
+    structuredData={structuredData}
+>
+    <Hero lang={lang} />
+    <Context lang={lang} />
+    <Approach lang={lang} />
+    <CaseStudy lang={lang} />
+    {lang === "es" && <Autoevaluador lang={lang} />}
+    <Faq lang={lang} />
+    <Contact
+        lang={lang}
+        title={copy.contact.title}
+        subtitle={copy.contact.subtitle}
+        summit="sietePicos"
+    />
+</BaseLayout>
+
+<script>
+    import {
+        initScrollAnimations,
+        initRevealAnimations,
+        initDataVisuals,
+        destroyAnimations,
+    } from "../../scripts/gsap-animations"
+    import { initSpotlights } from "../../scripts/spotlight"
+
+    // El hero se anima con CSS (no espera a este script).
+    initScrollAnimations()
+    initRevealAnimations()
+    initDataVisuals()
+    const destroySpotlights = initSpotlights()
+
+    document.addEventListener(
+        "astro:before-swap",
+        () => {
+            destroyAnimations()
+            destroySpotlights()
+        },
+        { once: true },
+    )
+</script>

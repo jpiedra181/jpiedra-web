@@ -21,12 +21,18 @@ const { Content } = await render(post)
 const lang = "es" as const
 
 // URL canónica del post
-const canonicalURL = new URL(`/blog/${post.id}`, Astro.site).toString()
+const canonicalURL = new URL(`/blog/${post.id}/`, Astro.site).toString()
+// Los títulos de los artículos ya son largos: la marca solo se añade si cabe
+// en lo que enseña Google (unos 65 caracteres).
+const BRAND_SUFFIX = " — Javier Piedra"
+const SEO_TITLE_MAX = 65
+const seoTitle =
+    post.data.title.length + BRAND_SUFFIX.length <= SEO_TITLE_MAX ? `${post.data.title}${BRAND_SUFFIX}` : post.data.title
 ---
 
 <BaseLayout
     lang={lang}
-    title={`${post.data.title} — Javier Piedra`}
+    title={seoTitle}
     description={post.data.description}
 >
     <ArticleSchema
@@ -44,8 +50,8 @@ const canonicalURL = new URL(`/blog/${post.id}`, Astro.site).toString()
         <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <header class="max-w-3xl mb-16 md:mb-20">
                 <a
-                    href="/blog"
-                    class="inline-block text-sm text-text-muted hover:text-accent transition-colors mb-8"
+                    href="/blog/"
+                    class="inline-flex items-center min-h-[24px] text-sm text-text-secondary hover:text-accent transition-colors mb-8 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
                     ← Volver al blog
                 </a>

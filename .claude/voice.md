@@ -73,9 +73,9 @@ Patrones que funcionan:
 
 > Si tu web está en el 96% que incumple, sabes a quién escribir.
 
-> Si necesitas saber dónde está exactamente tu web hoy, [hago auditorías](/auditoria-accesibilidad).
+> Si necesitas saber dónde está exactamente tu web hoy, [hago auditorías](/accesibilidad-web#precios).
 
-> Te ahorras la búsqueda si ya tienes este informe: [pídeme una auditoría](/auditoria-accesibilidad).
+> Te ahorras la búsqueda si ya tienes este informe: [pídeme una auditoría](/accesibilidad-web#precios).
 
 Patrones PROHIBIDOS en cierres:
 

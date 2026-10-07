@@ -2,9 +2,12 @@
   "nav": {
     "audit": "Audit",
     "blog": "Blog",
-    "contact": "Contact",
+    "contact": "Let’s talk",
     "law": "Does Law 11/2023 apply to you?",
-    "services": "Services"
+    "services": "Services",
+    "immersive": "3D experiences",
+    "accessibility": "Accessibility",
+    "ai": "AI agents"
   },
   "services": {
     "meta": {
@@ -21,8 +24,8 @@
     "ladder": {
       "eyebrow": "THE CATALOGUE",
       "srTitle": "Service and pricing catalogue",
-      "forWhoLabel": "Who it's for",
-      "includesLabel": "What's included",
+      "forWhoLabel": "Who it’s for",
+      "includesLabel": "What’s included",
       "items": [
         {
           "step": "01",
@@ -31,8 +34,8 @@
           "price": "€290",
           "priceAriaLabel": "two hundred and ninety euros",
           "deadline": "48 working hours",
-          "tagline": "I review your homepage and the three journeys where money actually leaks: the one that buys, the one that books and the one that fills in the form. In 48 hours you know what's broken and who you're locking out.",
-          "forWho": "For anyone who suspects there's a problem and wants it confirmed before investing properly.",
+          "tagline": "I review your homepage and the three journeys where money actually leaks: the one that buys, the one that books and the one that fills in the form. In 48 hours you know what’s broken and who you’re locking out.",
+          "forWho": "For anyone who suspects there’s a problem and wants it confirmed before investing properly.",
           "includes": [
             "Homepage and up to 3 critical journeys, quick pass along the main path",
             "The 10 highest-impact findings, prioritised — if I find more, I tell you how many",
@@ -50,7 +53,7 @@
           "priceAriaLabel": "from one thousand two hundred euros",
           "deadline": "5-7 working days",
           "tagline": "The complete diagnosis of your site against WCAG 2.1 AA and Law 11/2023, with a prioritised remediation plan and the compliance document ready to publish.",
-          "forWho": "For anyone who already knows they're covered by the law and needs the full diagnosis, not a sample.",
+          "forWho": "For anyone who already knows they’re covered by the law and needs the full diagnosis, not a sample.",
           "includes": [
             "Executive report that management can read",
             "Catalogue of findings by WCAG criterion",
@@ -59,7 +62,7 @@
             "1-hour presentation meeting",
             "Verification of the fixes once your team applies them, with the document updated"
           ],
-          "note": "Auditing “every” page isn't how it's done: WCAG-EM 2.0 evaluates the whole site from a representative sample, and the report lists every URL evaluated one by one. I verify the size in your sitemap myself.",
+          "note": "Auditing “every” page isn’t how it’s done: WCAG-EM 2.0 evaluates the whole site from a representative sample, and the report lists every URL evaluated one by one. I verify the size in your sitemap myself.",
           "ctaLabel": "See the audit in detail",
           "tiers": [
             {
@@ -116,7 +119,7 @@
           "priceAriaLabel": "one hundred and forty-nine or three hundred and forty-nine euros per month",
           "deadline": "Monthly, no lock-in",
           "tagline": "Websites change. Plugins update, marketing uploads content, deploys break things. I review yours every month so what you fixed stays fixed.",
-          "forWho": "For anyone who has already invested in becoming compliant and doesn't want to start over in a year.",
+          "forWho": "For anyone who has already invested in becoming compliant and doesn’t want to start over in a year.",
           "tiers": [
             {
               "name": "Review",
@@ -129,19 +132,19 @@
               "description": "The above, plus 4 monthly hours of fixes applied by me. What breaks gets fixed, with no separate quote."
             }
           ],
-          "note": "Requires a prior audit: without a diagnosis there's no way to know what to review each month or how to prioritise it.",
+          "note": "Requires a prior audit: without a diagnosis there’s no way to know what to review each month or how to prioritise it.",
           "ctaLabel": "Talk about ongoing compliance"
         }
       ]
     },
     "notDoing": {
-      "eyebrow": "WHAT I DON'T SELL",
-      "title": "Four things you won't find here.",
+      "eyebrow": "WHAT I DON’T SELL",
+      "title": "Four things you won’t find here.",
       "subtitle": "Worth saying before you ask, because the industry is full of all four.",
       "items": [
         {
           "title": "Accessibility overlays and widgets",
-          "description": "That floating button promising to fix everything with one line of script. It doesn't touch the code, it hides the problem, and in the United States there are lawsuits against sites that had one installed. If you have one, I'll tell you to remove it."
+          "description": "That floating button promising to fix everything with one line of script. It doesn’t touch the code, it hides the problem, and in the United States there are lawsuits against sites that had one installed. If you have one, I’ll tell you to remove it."
         },
         {
           "title": "Conformance seals and certificates",
@@ -171,15 +174,15 @@
         },
         {
           "question": "Can I book remediation without the audit?",
-          "answer": "If you bring me a recent and sufficiently detailed accessibility report, yes. If you don't have one, the audit is the prior step: you can't seriously fix what hasn't been diagnosed."
+          "answer": "If you bring me a recent and sufficiently detailed accessibility report, yes. If you don’t have one, the audit is the prior step: you can’t seriously fix what hasn’t been diagnosed."
         },
         {
           "question": "How do I know which tier my site falls into?",
-          "answer": "By what people can do on it. If it only informs and receives enquiries, Essential. If people can buy, book or request an appointment, Commercial. If there are several of those processes or a private area with login, a fixed quote within 24 hours. I verify the size in your sitemap — you don't have to count pages."
+          "answer": "By what people can do on it. If it only informs and receives enquiries, Essential. If people can buy, book or request an appointment, Commercial. If there are several of those processes or a private area with login, a fixed quote within 24 hours. I verify the size in your sitemap — you don’t have to count pages."
         },
         {
           "question": "Do you work with my in-house team or my agency?",
-          "answer": "Yes, and that's the most common setup. The report is written so any technical profile can act on it directly. If you'd rather they apply it, that's fine: I audit, and then I review the result."
+          "answer": "Yes, and that’s the most common setup. The report is written so any technical profile can act on it directly. If you’d rather they apply it, that’s fine: I audit, and then I review the result."
         },
         {
           "question": "What if you miss a finding?",
@@ -196,9 +199,9 @@
   },
   "hero": {
     "label": "WEB DEVELOPER • WEB ACCESSIBILITY SPECIALIST",
-    "title": "There are people trying to buy from you",
-    "title_1": "and your website won't let them.",
-    "subtitle": "A button the screen reader announces as “empty link”. A form nobody can complete by keyboard. Text that never quite gets read. These aren't technical details: they're orders walking away without you ever hearing about it. I audit and fix websites against WCAG 2.1 AA and Spain's Law 11/2023.",
+    "title": "People want to buy from you",
+    "title_1": "and your website won’t let them.",
+    "subtitle": "A button the screen reader announces as “empty link”. A form nobody can complete by keyboard. Text that never quite gets read. These aren’t technical details: they’re orders walking away without you ever hearing about it. I audit and fix websites against WCAG 2.1 AA and the European Accessibility Act.",
     "cta": "See services and pricing",
     "tags": [
       "Automation",
@@ -211,8 +214,8 @@
   },
   "context": {
     "eyebrow": "WHY IT MATTERS",
-    "title": "Before it's a legal problem, it's a revenue problem.",
-    "subtitle": "When someone can't complete a purchase on your site, they almost never write to tell you. They leave and buy somewhere else. You pay for it either way; what you don't get is an invoice showing it.",
+    "title": "Before it’s a legal problem, it’s a revenue problem.",
+    "subtitle": "When someone can’t complete a purchase on your site, they almost never write to tell you. They leave and buy somewhere else. You pay for it either way; what you don’t get is an invoice showing it.",
     "stats": [
       {
         "value": "8%",
@@ -227,100 +230,44 @@
       {
         "value": "95.9%",
         "ariaLabel": "95.9 percent",
-        "description": "of the world's most visited websites fail automated accessibility checks. Yours very probably does too."
+        "description": "of the world’s most visited websites fail automated accessibility checks. Yours very probably does too."
       }
     ],
-    "closing": "And yes, it's also mandatory: Spain's Law 11/2023 has required it since 28 June 2025. But the cost of not doing it started running long before the first fine.",
+    "closing": "And yes, it’s also mandatory: the European Accessibility Act has applied since 28 June 2025 (in Spain, through Law 11/2023). But the cost of not doing it started running long before the first fine.",
     "sources": "Sources: Click-Away Pound 2019 (United Kingdom), INE (EDAD 2020 and Population Projections 2026-2076) and WebAIM Million 2026. There is no equivalent of the Click-Away Pound study for the Spanish market."
   },
   "about": {
     "label": "ABOUT ME",
     "title": "I was solving problems before I knew how to code",
-    "text_1": "In the factory, I was already doing the same thing I do now: looking at a process, finding what doesn't work and imagining how to make it better. The difference is that before I thought about it and now I build it.",
+    "text_1": "In the factory, I was already doing the same thing I do now: looking at a process, finding what doesn’t work and imagining how to make it better. The difference is that before I thought about it and now I build it.",
     "text_2": "I studied Engineering in Topography — a career of measuring, calculating and being precise. I worked as a laborer in factories — where you see how things really work, not just the theory. And one day I discovered that web development allowed me to combine both things: technical precision and practical problem-solving.",
-    "text_3": "Today my focus is on web accessibility. Laws have changed, websites haven't. There are thousands of companies required to comply with regulations that almost no one understands, with serious fines and real deadlines. And that's exactly the type of problem I've been solving my whole life: seeing how something should work and making it work.",
-    "cta": "If your website is on that list, let's talk."
+    "text_3": "Today I work on the part of the web that doesn’t come out of a template. 3D experiences that run smoothly on any phone and also work with a keyboard and a screen reader. Websites that genuinely comply with accessibility law, not with a patch. It’s the same kind of problem I’ve been solving all my life: seeing how something should work and making it work.",
+    "cta": "If you’ve got something like that on your hands, let’s talk."
   },
   "approach": {
-    "label": "APPROACH",
+    "label": "HOW I WORK",
     "title": "Three steps. No surprises, no locked-in subscriptions, no smoke.",
-    "subtitle": "Every project follows the same process. You know it before we start and you know exactly where we are at any moment.",
+    "subtitle": "Every project follows the same process. You know it before we start and you know where we are at every moment.",
     "steps": [
       {
         "title": "Audit",
-        "description": "I review your site against WCAG 2.1 AA and Spain's Law 11/2023. I combine technical tools (axe, Lighthouse, screen readers) with manual evaluation. It's not a 200-page PDF full of jargon: I deliver a report anyone on your team can understand, with each issue, its impact, and how much it costs to fix."
+        "description": "I review your website against WCAG 2.1 AA and the European Accessibility Act. I combine technical tools (axe, Lighthouse, screen readers) with manual evaluation. It’s not a 200-page PDF full of jargon: you get a report anyone on your team can understand — every problem, its impact and where to start — and the compliance document for your case, ready to publish."
       },
       {
-        "title": "Fix",
-        "description": "I take the report and apply it. Me — not an outsourced team on the other side of the world. Every fix is tested with a keyboard, with a screen reader, and with real users when needed. When we're done, I hand you an accessibility statement ready to publish."
+        "title": "Fix (optional)",
+        "description": "I take the report and apply it. Me, not an outsourced team on the other side of the world. Every fix is tested with a keyboard, with a screen reader and with real users when needed. And I update the compliance document so it reflects the new state."
       },
       {
         "title": "Maintain (optional)",
-        "description": "Websites change. Plugins get updated, the marketing team uploads content, developers ship deploys. If you want to sleep at night, I review your site every month and keep accessibility up to date. No annual contract — leave whenever you want."
-      }
-    ]
-  },
-  "projects": {
-    "label": "PROJECTS",
-    "title": "What I've built",
-    "cta": "View case",
-    "items": [
-      {
-        "category": "RAG + Conversational AI",
-        "title": "Smart tax assistant",
-        "description": "A chat where you ask your tax questions and get answers based on real tax authority documentation. Like having a tax advisor available around the clock.",
-        "tags": [
-          "Astro",
-          "n8n",
-          "Claude AI",
-          "Pinecone"
-        ]
-      },
-      {
-        "category": "Automation + AI",
-        "title": "Design Systems Generator",
-        "description": "You describe your brand — colors, style, personality — and it generates a complete visual guide with every element your website needs. Ready to use.",
-        "tags": [
-          "n8n",
-          "email",
-          "Stripe",
-          "Landing Pages",
-          "Design Systems"
-        ]
-      },
-      {
-        "category": "Web Scraping + Analysis",
-        "title": "Automated web audit",
-        "description": "You enter a website address and it tells you what's working well, what's running slow, and what needs fixing. All explained in plain language, not cryptic metrics.",
-        "tags": [
-          "Claude Skills",
-          "PageSpeed API",
-          "Lighthouse",
-          "SEO",
-          "Accessibility",
-          "Audit",
-          "PDF Report"
-        ]
-      },
-      {
-        "category": "EdTech + AI",
-        "title": "AI study platform - In Testing",
-        "description": "A study assistant that helps you prepare for public exams. It quizzes you, explains what you don't understand, and adapts to your level so you study smarter, not harder.",
-        "tags": [
-          "Next.js",
-          "Supabase",
-          "OpenAI",
-          "Stripe",
-          "TailwindCSS"
-        ]
+        "description": "An accessible website doesn’t stay that way on its own: every change can break something again. If you want, I stay with you month by month so the investment isn’t lost. No annual contract: leave whenever you want."
       }
     ]
   },
   "contact": {
     "label": "CONTACT",
-    "title": "Does your website comply with Law 11/2023?",
-    "subtitle": "If you're not sure, it probably doesn't. Tell me what you have and I'll tell you where you stand. No strings attached, no PowerPoints, no smoke.",
-    "cta": "Let's talk",
+    "title": "Got something hard on your hands?",
+    "subtitle": "Tell me what you want to build or what isn’t working. I’ll tell you whether I can help and how. No strings attached, no PowerPoints, no smoke.",
+    "cta": "Let’s talk",
     "available": "Available for new projects",
     "note": "I get back to you in under 24 hours. Business days.",
     "privacyIntro": "By submitting this message you accept the ",
@@ -330,7 +277,7 @@
     "privacyConsentLink": "privacy policy",
     "privacyConsentEnd": ".",
     "form": {
-      "name": "What's your name",
+      "name": "What’s your name",
       "namePlaceholder": "Your name",
       "email": "Where I reply",
       "emailPlaceholder": "you@email.com",
@@ -339,7 +286,7 @@
       "websiteHint": "(optional)",
       "message": "In a few lines: what you have and what you need",
       "messagePlaceholder": "What you have, what you need, what worries you…",
-      "submit": "Let's talk",
+      "submit": "Let’s talk",
       "sending": "Sending message…",
       "success": "Message sent.",
       "error": "Something went wrong. Try again.",
@@ -353,22 +300,23 @@
   },
   "notFound": {
     "eyebrow": "ERROR 404",
-    "title": "This page doesn't exist",
-    "subtitle": "But at least I'm telling you straight, no excuses. Maybe the address is wrong, or maybe it's a page that's no longer here.",
+    "title": "This page doesn’t exist",
+    "subtitle": "But at least I’m telling you straight, no excuses. Maybe the address is wrong, or maybe it’s a page that’s no longer here.",
     "ctaHomeLabel": "Back to home",
     "ctaAuditLabel": "Audit my website",
-    "ctaContactLabel": "Let's talk",
+    "ctaContactLabel": "Let’s talk",
     "metaTitle": "Page not found — Javier Piedra",
-    "metaDescription": "The page you're looking for doesn't exist. Head back home or tell me what you needed."
+    "metaDescription": "The page you’re looking for doesn’t exist. Head back home or tell me what you needed."
   },
   "footer": {
     "available": "Available for projects",
     "rights": "All rights reserved.",
     "services": {
       "label": "Services",
-      "audit": "Accessibility audit",
-      "blog": "Blog",
-      "services": "Services and pricing"
+      "immersive": "3D web experiences",
+      "accessibility": "Web accessibility",
+      "ai": "Websites for AI agents",
+      "blog": "Blog (in Spanish)"
     },
     "legal": {
       "label": "Legal",
@@ -378,374 +326,839 @@
       "accessibility": "Accessibility"
     }
   },
-  "audit": {
+  "survey3d": {
+    "meta": {
+      "title": "Javier Piedra · 3D web experiences, accessibility and AI",
+      "description": "The Guadarrama mountains in live 3D, with their real weather: the map to everything I do. 3D web experiences, web accessibility and websites ready for AI agents."
+    },
+    "eyebrow": "Javier Piedra · 3D, accessibility and AI",
+    "titleStart": "The",
+    "titleHighlight": "hard part",
+    "titleEnd": "of the web.",
+    "subtitle": "I studied surveying. I still measure the ground before I build anything.",
+    "hint": "Each summit is a section. Pick one.",
+    "sceneDescription": "Relief map of the Sierra de Guadarrama, seen from Segovia (Spain) and drawn with golden contour lines on a black background. Four summits carry a survey pillar: Peñalara, Siete Picos, La Mujer Muerta and Bola del Mundo. Each one is a section of the site. The sky, the light and the weather are the mountains’ right now, and at night the villages light up.",
+    "captionLandscape": "Sierra de Guadarrama, seen from Segovia",
+    "captionPortrait": "Sierra de Guadarrama, seen from the west",
+    "dataLabel": "Data",
+    "weatherLabel": "Weather",
+    "sources": "MDT25 © Instituto Geográfico Nacional · Peaks, water and buildings © OpenStreetMap contributors",
+    "lens": "See what you can’t see",
+    "lensHint": "How a screen reader reads this page",
+    "classic": "Classic version",
+    "pause": "Pause motion",
+    "sound": "Sound",
+    "nav": {
+      "label": "Main",
+      "blog": "Blog",
+      "contact": "Let’s talk"
+    },
+    "homeLabel": "Javier Piedra, home",
+    "verticesLabel": "Sections",
+    "hud": {
+      "live": "Live survey",
+      "sky": "Sky",
+      "weather": "Weather"
+    },
+    "moment": "Change the moment",
+    "hour": "Time",
+    "month": "Month",
+    "weather": "Weather",
+    "backToNow": "Back to now",
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weatherOptions": [
+      {
+        "value": "live",
+        "label": "Live"
+      },
+      {
+        "value": "clear",
+        "label": "Clear"
+      },
+      {
+        "value": "rain",
+        "label": "Rain"
+      },
+      {
+        "value": "snow",
+        "label": "Snow"
+      },
+      {
+        "value": "fog",
+        "label": "Fog"
+      },
+      {
+        "value": "wind",
+        "label": "Strong wind"
+      }
+    ]
+  },
+  "home": {
+    "meta": {
+      "title": "Javier Piedra · Web design and development: 3D, accessibility, AI",
+      "description": "The classic version of my site: 3D web experiences, web accessibility to WCAG 2.1 AA and websites ready for AI agents. Projects, process and contact."
+    },
     "hero": {
-      "eyebrow": "WEB ACCESSIBILITY AUDIT",
-      "titlePrefix": "Complete audit of your website to comply with",
-      "titleHighlight1": "Spain's Law 11/2023",
-      "titleConnector": "and",
-      "titleHighlight2": "WCAG 2.1 AA",
-      "titleSuffix": ".",
-      "subtitle": "In 5–7 business days you get a report your whole team can understand, with every issue, its legal impact, and how much it costs to fix. No jargon, no 200-page PDFs, no smoke.",
-      "price": "From €1,200",
-      "priceAriaLabel": "from one thousand two hundred euros",
-      "priceNote": "For websites that inform and receive enquiries, with no online purchase or booking.",
-      "priceSubnote": "If people can buy, book or log in on your site, the tier goes up. Fixed quote within 24 hours.",
-      "cta": "Request audit"
+      "label": "Javier Piedra · Web design and development",
+      "titleStart": "The",
+      "titleHighlight": "hard part",
+      "titleEnd": "of the web.",
+      "subtitle": "A template can put together an ordinary website in an afternoon. What nobody puts together is what comes next: a 3D catalogue that runs smoothly on any phone, an immersive experience that also works with a keyboard and a screen reader, a website that genuinely complies with accessibility law. That’s what I take care of.",
+      "ctaPrimary": "See projects",
+      "ctaSecondary": "Let’s talk",
+      "sheet": {
+        "title": "Peñalara massif",
+        "region": "Sierra de Guadarrama",
+        "equidistance": "Contours every 40 m",
+        "scale": "1 km",
+        "sources": "Relief: MDT25 © Instituto Geográfico Nacional. Water: © OpenStreetMap contributors.",
+        "view3d": "See the 3D version",
+        "hint": "Move the cursor over the map: it gives you the elevation of every point."
+      }
     },
-    "problem": {
-      "eyebrow": "THE PROBLEM",
-      "title": "First you lose customers. The fine comes later.",
-      "subtitle": "Since 28 June 2025, Spain's Law 11/2023 has required thousands of companies to have an accessible website, and the vast majority don't. But the problem didn't start there: every barrier on your site is someone who doesn't finish buying.",
-      "risks": [
-        {
-          "value": "8%",
-          "ariaLabel": "8 percent",
-          "title": "Customers who leave without telling you",
-          "description": "Only 8 in 100 shoppers with access needs contact the site owner when something doesn't work for them (Click-Away Pound, United Kingdom, 2019). The other 92 leave and buy from a competitor. In your analytics that just looks like another bounce."
-        },
-        {
-          "value": "€1,000,000",
-          "ariaLabel": "one million euros",
-          "title": "Real fines",
-          "description": "The penalty regime of RDL 1/2013, which Law 11/2023 refers to, is already in force. Failing accessibility requirements is a serious infringement (up to €90,000); three serious infringements within a year escalate to very serious (art. 95.4.h RDL 1/2013)."
-        },
-        {
-          "value": "June 2025",
-          "ariaLabel": "June 2025",
-          "title": "Public procurement",
-          "description": "Spanish public procurement already requires accessibility criteria in technical specifications. If you work with the public sector, or want to, a conformant website stops being a nice-to-have and becomes a written requirement."
-        }
-      ],
-      "closing": "Auditing your site isn't a compliance whim. It's about no longer losing customers who had already chosen you — and clearing the legal risk while you're at it."
-    },
-    "deliverables": {
-      "eyebrow": "WHAT THE AUDIT DELIVERS",
-      "title": "A clear report. A closed roadmap. Zero jargon.",
-      "subtitle": "This is what you receive when the audit is done, in 5–7 business days, in a single document anyone on your team can read.",
+    "disciplines": {
+      "label": "What I do",
+      "title": "Three specialities. One craft.",
+      "subtitle": "Building with precision what a template can’t solve, and making sure anyone can use it: a person with a keyboard or a screen reader, or an AI agent buying on their behalf. That’s where the three meet.",
       "items": [
         {
-          "title": "Executive summary",
-          "description": "A 2-page summary with your site's real compliance level, the specific legal risk you carry today, and the priorities to resolve it. Designed for management to understand without being technical."
+          "key": "immersive",
+          "title": "3D web experiences",
+          "description": "Catalogues, product viewers and immersive rooms in the browser. For anyone selling something a photo can’t convey: the feel of a stone, the finish of a material, the scale of a work of art.",
+          "cta": "See 3D experiences"
         },
         {
-          "title": "Catalog of findings by WCAG criterion",
-          "description": "Every issue documented with screenshot, violated WCAG criterion, severity level, and affected page or component. No gratuitous jargon, enough detail for your tech team to act."
+          "key": "accessibility",
+          "title": "Web accessibility",
+          "description": "Audit and remediation to WCAG 2.1 AA and the European Accessibility Act. For companies required by law, and for anyone who doesn’t want to lose customers over a form that can’t be filled in.",
+          "cta": "See web accessibility"
         },
         {
-          "title": "Prioritized remediation plan",
-          "description": "Every finding with its concrete solution, estimated effort in hours, and the optimal order to resolve it. You know what to fix first, how long it takes, and how much it costs."
-        },
-        {
-          "title": "Accessibility statement ready to publish",
-          "description": "Legal document written under Spain's RD 1112/2018 with your real compliance level. You publish it on your site and start meeting the formal requirement from day one."
-        },
-        {
-          "title": "Results presentation meeting",
-          "description": "A one-hour video call to review the report with you and your team, answer questions and prioritize actions. I don't send a PDF and disappear."
-        },
-        {
-          "title": "Verification of the fixes",
-          "description": "Once your team or agency applies the fixes, I re-check every finding in the report with the same test, run a regression pass and update your compliance document with a date. One round, within the following 6 months, in 3 business days. It is included: the loop closes without buying anything else."
+          "key": "ai",
+          "title": "Websites for AI agents",
+          "description": "AI assistants already search, compare and fill in forms for people, and they read your website from the inside. I review and prepare yours so they can use it: it’s the same work as accessibility.",
+          "cta": "See AI agents"
         }
       ]
     },
-    "whoMustComply": {
-      "eyebrow": "WHO MUST COMPLY",
-      "title": "Does this apply to you?",
-      "subtitle": "Not all websites are obligated equally. Spain's Law 11/2023 and RD 193/2023 define three groups with different deadlines. These are.",
-      "groups": [
+    "work": {
+      "label": "Projects",
+      "title": "Don’t take my word for it. Try it.",
+      "intro": "Two self-initiated concepts that are live and a real accessibility case. Open them, explore them with the keyboard, turn on your screen reader if you like."
+    },
+    "about": {
+      "profileTitle": "From La Granja to Peñalara",
+      "profileCaption": "The real terrain profile, from Spain’s MDT25 elevation model: 6.7 km and 1,238 m of ascent. My own path has been uphill too.",
+      "start": "La Granja",
+      "end": "Peñalara",
+      "milestonesLabel": "Career path",
+      "milestones": [
         {
-          "tag": "IMMEDIATE OBLIGATION — LAW 11/2023",
-          "headline": "If you sell online or run digital services for consumers, you are already obligated.",
-          "body": "Ecommerce of any size. Online banking. Hotels with online booking. Airlines, rail, sea carriers. Telecom operators. Streaming platforms. Electricity, gas and water utilities. Academies and platforms selling courses online to consumers. Online travel agencies and tour operators.",
-          "note": "Exception: micro-enterprises (under 10 employees AND under €2M revenue) that only provide services without product sales."
+          "title": "Surveying",
+          "text": "Surveying engineering: measuring, calculating and being precise."
         },
         {
-          "tag": "DEADLINE JANUARY 2029 — RD 193/2023",
-          "headline": "If your website offers goods or services to the public, you have a date: new sites from January 2029, existing ones with adjustments before 2030.",
-          "body": "Clinics and healthcare services with online booking. Restaurants with online orders or bookings. Academies and training. Cultural, sports companies and museums with online sales. Real estate. Insurers and non-bank financial services. Any company website describing what it sells, with no size exemption (RD 193/2023, art. 14.2).",
-          "note": "Getting ahead now is a competitive advantage: most of your sector will only comply at the last minute."
+          "title": "Factory",
+          "text": "Factory labourer: seeing how things really work."
         },
         {
-          "tag": "IMMEDIATE OBLIGATION — PUBLIC FUNDING",
-          "headline": "If you receive public funds, the obligation is now, with no grace period.",
-          "body": "Spain's Kit Digital, EU funds, regional grants, contracts with the public sector. The condition travels with the grant (1st Additional Provision of RD 1112/2018): the funded website must meet WCAG 2.1 AA now. Without compliance, risk of having to refund the grant.",
-          "note": null
+          "title": "Web development",
+          "text": "Bringing technical precision together with solving practical problems."
+        },
+        {
+          "title": "Today",
+          "text": "3D experiences and accessibility: the hard part of the web."
+        }
+      ]
+    },
+    "summit": {
+      "label": "Summit"
+    },
+    "altimeter": {
+      "start": "La Granja",
+      "end": "Peñalara"
+    }
+  },
+  "portfolio": {
+    "items": {
+      "veta": {
+        "category": "3D experience · Self-initiated concept",
+        "title": "VETA, an atlas of surfaces",
+        "description": "A ceramic catalogue you browse by tone and touch, not by product codes. 48 surfaces arranged from light to dark and from cool to warm, with a light that follows the cursor so you can tell whether a finish is polished, matt or textured. It works with a keyboard and a screen reader and respects reduced motion.",
+        "tags": [
+          "WebGL 2",
+          "Product catalogue",
+          "Keyboard and screen reader"
+        ],
+        "imageAlt": "The VETA grid with marble, terrazzo, granite and wood samples arranged by tone.",
+        "cta": "Open VETA"
+      },
+      "insideTheFrame": {
+        "category": "Immersive experience · Self-initiated concept",
+        "title": "Inside the Frame",
+        "description": "Four paintings about water turned into places you can stand in: Hokusai, Hiroshige, Monet and Turner in a flooded gallery. You explore it by dragging, with your finger or with the arrow keys; you can go in with or without sound, and the scene has a text description for anyone who can’t see it.",
+        "tags": [
+          "Immersive 3D",
+          "Optional sound",
+          "Text description"
+        ],
+        "imageAlt": "The dark room of Inside the Frame with Hokusai’s Great Wave under a spotlight, reflected in the water on the floor.",
+        "cta": "Open Inside the Frame"
+      },
+      "auditCase": {
+        "category": "Accessibility · Real case",
+        "title": "Auditing a large tourism website",
+        "description": "A public website with online booking, audited in depth: all 50 WCAG 2.1 AA criteria one by one, by hand and with a real screen reader. I show you the method and what the client receives at the end, without names.",
+        "tags": [
+          "WCAG 2.1 AA",
+          "EN 301 549",
+          "Screen reader"
+        ],
+        "imageAlt": "Cover of the accessibility report with Javier Piedra’s branding.",
+        "cta": "See the case"
+      }
+    }
+  },
+  "projectSheet": {
+    "sheet": "Sheet",
+    "of": "of"
+  },
+  "immersive": {
+    "meta": {
+      "title": "Accessible 3D web experiences · Javier Piedra",
+      "description": "3D catalogues, product viewers and immersive rooms in the browser. Smooth on any phone and usable with a keyboard and a screen reader from day one."
+    },
+    "hero": {
+      "label": "3D web experiences",
+      "titleStart": "What a photo",
+      "titleHighlight": "can’t",
+      "titleEnd": "show.",
+      "subtitle": "Catalogues you explore by touch, product viewers and immersive rooms, in the browser and with nothing to install. Built to run smoothly on any phone, and so that people who browse with a keyboard or a screen reader can use them too.",
+      "ctaPrimary": "Tell me about your project",
+      "ctaSecondary": "See the projects",
+      "swatches": {
+        "caption": "The same stone in three finishes. Move the light and see how each one responds: that’s what a photo can’t show.",
+        "lightLabel": "Light position",
+        "hint": "Move the cursor over it or use the slider.",
+        "hintTouch": "Drag across the samples or use the slider.",
+        "items": [
+          {
+            "name": "Polished",
+            "note": "Reflects the light: the shine moves with it."
+          },
+          {
+            "name": "Matt",
+            "note": "Absorbs it: it barely changes."
+          },
+          {
+            "name": "Textured",
+            "note": "Breaks it up: every ridge casts its own shadow."
+          }
+        ]
+      }
+    },
+    "useCases": {
+      "label": "Who it’s for",
+      "title": "For products people choose by looking.",
+      "items": [
+        {
+          "title": "Surfaces, materials and products",
+          "audience": "Manufacturers and distributors of ceramics, stone, wood or furniture",
+          "description": "Your customers choose by tone, texture and finish, and on a product page with a photo everything looks the same. A 3D catalogue lets them compare, move the light and see whether a finish is polished or matt before they ask you for samples."
+        },
+        {
+          "title": "Culture, heritage and tourism",
+          "audience": "Museums, foundations, galleries, councils and tourist offices",
+          "description": "A virtual room takes the collection to people who can’t visit and keeps it open after the museum closes. If you’re a public body, it also has to be accessible by law (the EU Web Accessibility Directive; in Spain, Royal Decree 1112/2018). Mine are built to comply from day one, not patched at the end."
+        }
+      ]
+    },
+    "difference": {
+      "label": "What you don’t see",
+      "title": "Making it pretty is the easy part.",
+      "subtitle": "A 3D experience impresses for the first ten seconds. The hard part is making it load on a mid-range phone, not make anyone dizzy and work without a mouse. That’s where you can tell who built it.",
+      "items": [
+        {
+          "title": "Smooth on any device",
+          "description": "Geometry and textures sized just right, and the screen is only redrawn when something changes. In VETA, all 48 surfaces are drawn in a single call to the graphics card."
+        },
+        {
+          "title": "Works with a keyboard",
+          "description": "Arrows, Enter and Escape do what you expect. The mouse is an option, not a requirement."
+        },
+        {
+          "title": "Works with a screen reader",
+          "description": "Every scene has a text equivalent: an index, a description, a list. Anyone who can’t see the 3D gets the same information."
+        },
+        {
+          "title": "Respects reduced motion",
+          "description": "If your system asks for less motion, the experience stays still. Nobody should feel dizzy looking at a catalogue."
         }
       ],
-      "closing": "If you don't fit any of the three groups, you probably don't need this audit right now. If you fit at least one, you do."
+      "proofs": {
+        "fps": {
+          "lead": "This page is running at",
+          "unit": "fps",
+          "note": "measured on your screen as you read this",
+          "waiting": "…"
+        },
+        "keys": {
+          "hint": "Try it: press an arrow, Enter or Escape.",
+          "labels": {
+            "ArrowLeft": "Left arrow",
+            "ArrowUp": "Up arrow",
+            "ArrowDown": "Down arrow",
+            "ArrowRight": "Right arrow",
+            "Enter": "Enter",
+            "Escape": "Esc"
+          }
+        },
+        "reader": {
+          "label": "Example of what someone using a screen reader hears",
+          "lines": [
+            "Flooded gallery. Four paintings over the water.",
+            "Painting 2 of 4: The Great Wave off Kanagawa, by Hokusai.",
+            "Use the arrows to move and Enter to get closer."
+          ]
+        },
+        "motion": {
+          "lead": "Right now your system asks for",
+          "normal": "normal motion",
+          "reduced": "less motion",
+          "note": "If you change the setting, this page adapts instantly."
+        }
+      }
     },
     "process": {
-      "eyebrow": "HOW I DO IT",
-      "title": "5 phases. 7 days. Zero improvisation.",
-      "subtitle": "From the moment you confirm the audit to the moment you get the report in your inbox, this is the process. You know at every step where we are and what I need from you.",
+      "label": "How I work",
+      "title": "First something you can touch. Then everything else.",
       "steps": [
         {
-          "duration": "DAY 0 · 30 MIN",
-          "title": "Briefing and access",
-          "description": "A short call to understand your site: type of business, unique templates, integrations, private areas if any, accesses I'll need. If there's something specific you're worried about, we mark it as a priority focus.",
-          "clientInput": "What I need from you: 30 minutes on a video call and access credentials if applicable."
+          "title": "I understand what it needs to show",
+          "description": "Before modelling anything, we talk about what visitors need to understand: a finish, a scale, a journey. The 3D serves that, not the other way round."
         },
         {
-          "duration": "DAYS 1-2",
-          "title": "Automated analysis and mapping",
-          "description": "I run tools (axe, Lighthouse, Pa11y) on the selected templates. I map the site's structure, identify critical components and flows to evaluate. I generate the first inventory of automated findings.",
-          "clientInput": "What I need from you: nothing. I work, you keep on with your stuff."
+          "title": "A prototype in the browser",
+          "description": "I show you a first version that works, not a render or a slide deck. You decide on something you can try on your own phone."
         },
         {
-          "duration": "DAYS 3-5",
-          "title": "Manual and technical evaluation",
-          "description": "70% of the real work. Keyboard navigation, checks with a real screen reader (NVDA on Windows), color contrast validation, focus visibility, forms, ARIA, error messages. Every finding documented with screenshot, WCAG criterion and impact level.",
-          "clientInput": "What I need from you: nothing. If something critical comes up, I'll let you know right away."
-        },
-        {
-          "duration": "DAY 6",
-          "title": "Report writing and remediation plan",
-          "description": "I structure all findings in the final document: executive summary, catalog by criterion, prioritized plan with estimated hours, accessibility statement. I review twice before delivering.",
-          "clientInput": "What I need from you: nothing. What I need from myself: rigor."
-        },
-        {
-          "duration": "DAY 7 · 1 H",
-          "title": "Delivery and presentation meeting",
-          "description": "I send you the full report. We schedule a 1-hour video call to review it with you and your team, prioritize actions and resolve doubts. From here, you decide: you apply it yourself, we apply it together, or we continue with the remediation plan.",
-          "clientInput": "What I need from you: 1 hour on a video call and the team involved."
+          "title": "I build it and test it",
+          "description": "I finish it and test it on mobile, with a keyboard and with a screen reader. I deliver it integrated into your website or as a page of its own."
         }
       ]
     },
-    "afterAudit": {
-      "eyebrow": "WHAT COMES NEXT",
-      "title": "The audit is the beginning, not the end.",
-      "subtitle": "Once you have the report, you decide. These are the two ways I can keep working with you if you need it.",
-      "options": [
-        {
-          "title": "Apply the corrections",
-          "optionalTag": "(optional)",
-          "description": "If you want me to implement the solutions from the report, we can do that. I work package by package by priority: critical first, accessory later. Each package with a closed scope, estimated hours and fixed price before starting.",
-          "priceNote": "Three fixed tiers: €1,800, €3,400 or €5,900. Yours is decided once the audit is done and we know the real volume."
-        },
-        {
-          "title": "Keep it from breaking again",
-          "optionalTag": "(optional)",
-          "description": "Websites change. Plugins update, marketing uploads content, devs ship deploys. If you want to sleep at night, I review your site every month and keep compliance up to date. The accessibility statement gets updated, new findings get fixed.",
-          "priceNote": "€149 or €349 per month, depending on whether you want review only or the fixes applied too. No lock-in."
-        }
-      ],
-      "closing": "Neither of the two is mandatory. The audit gives you the full diagnosis and the compliance document ready to publish; fixing what needs fixing is your call.",
-      "ctaLabel": "See services and pricing"
+    "work": {
+      "label": "Projects",
+      "title": "Two self-initiated concepts. Both live.",
+      "intro": "Open them and explore. Try the keyboard too: it’s half of what I do."
     },
-    "whyMe": {
-      "eyebrow": "WHY ME",
-      "title": "No team. Just me. That's why it works.",
-      "subtitle": "I don't sell you a corporate process. I sell you the work of one professional who takes responsibility for what they deliver.",
-      "reasons": [
+    "contact": {
+      "title": "What do you want to show?",
+      "subtitle": "Tell me what you sell or what you want to show, and to whom. I’ll tell you whether 3D makes sense for you or whether you don’t need it. No strings attached, no PowerPoints, no smoke."
+    }
+  },
+  "accessibilityLanding": {
+    "meta": {
+      "ogAlt": "Web accessibility under the European Accessibility Act and WCAG 2.1 AA",
+      "title": "Web accessibility audit and remediation · Javier Piedra",
+      "description": "Every barrier on your website is a customer who doesn’t finish buying. I audit and fix websites to WCAG 2.1 AA and the European Accessibility Act. From €290."
+    },
+    "hero": {
+      "label": "Web accessibility · WCAG 2.1 AA and the EAA",
+      "ctaSecondary": "Let’s talk",
+      "xray": {
+        "toggle": "Hear what a screen reader says",
+        "hint": "Move the cursor over the product card.",
+        "hintTouch": "Drag across the card or use the button.",
+        "caption": "An ordinary product page. The lens shows what a screen reader announces: the photo is “IMG_4032.jpg”, the colours and the basket are a “button” with no name, the heart is an empty “link” and the quantity field doesn’t say what it is.",
+        "product": {
+          "name": "Alba vase",
+          "detail": "Glazed stoneware · 24 cm",
+          "price": "€64.00",
+          "colors": "Colour",
+          "quantity": "Quantity",
+          "reviews": "(38 reviews)"
+        },
+        "reader": {
+          "image": "image, IMG_4032.jpg",
+          "heading": "heading, Alba vase",
+          "price": "€64.00",
+          "color": "button",
+          "quantity": "edit, 1",
+          "minus": "button",
+          "plus": "button",
+          "cart": "button",
+          "favorite": "link",
+          "rating": "image"
+        },
+        "legend": {
+          "problem": "Barrier",
+          "ok": "Fine"
+        }
+      }
+    },
+    "caseStudy": {
+      "eyebrow": "Real proof",
+      "title": "I started with my own website. It had 12 problems.",
+      "text": "Before auditing anyone else’s website, I audited mine. It scored 100 out of 100 in automated tools. Even so, I found 12 real accessibility problems that no tool detects — the same ones your website probably has right now without you knowing.",
+      "cta": "What I found and how I fixed it (in Spanish)",
+      "caseLead": "And on a really big website?",
+      "caseLink": "See a complete real case, step by step",
+      "automatedLabel": "Automated tools",
+      "automatedScore": "100",
+      "automatedOf": "out of 100",
+      "manualLabel": "Manual review, with keyboard and screen reader",
+      "manualCount": "12",
+      "manualUnit": "real problems"
+    },
+    "contact": {
+      "title": "How’s yours doing?",
+      "subtitle": "Tell me what website you have and what worries you. I’ll tell you where I’d start and whether the express diagnosis is enough or you need a full audit. No strings attached, no PowerPoints, no smoke."
+    },
+    "pricing": {
+      "startLabel": "Two ways to start",
+      "steps": [
         {
-          "title": "I audit, I fix, I answer",
-          "description": "There's no junior taking the data, account manager presenting it and external developer implementing it. You talk to me at every stage. The person signing the report is the same one writing it and the same one picking up the phone if something doesn't fit."
+          "offers": [
+            {
+              "id": "express-diagnosis",
+              "name": "Express diagnosis",
+              "price": "€290",
+              "priceAriaLabel": "two hundred and ninety euros",
+              "deadline": "48 working hours",
+              "summary": "I review your homepage and the three journeys where money actually leaks: the one that buys, the one that books and the one that fills in the form. In 48 hours you know what’s broken and who you’re locking out.",
+              "cta": "Book the diagnosis",
+              "topic": "I’m interested in the express diagnosis (€290)."
+            },
+            {
+              "id": "full-audit",
+              "name": "Full audit",
+              "price": "From €1,200",
+              "priceAriaLabel": "from one thousand two hundred euros",
+              "deadline": "5-7 working days",
+              "summary": "The complete diagnosis of your site against WCAG 2.1 AA and Law 11/2023, with a prioritised remediation plan and the compliance document ready to publish.",
+              "tiers": [
+                {
+                  "name": "Essential",
+                  "price": "€1,200",
+                  "description": "Your site informs and people contact you. No buying, no booking, no login."
+                },
+                {
+                  "name": "Commercial",
+                  "price": "€2,200",
+                  "description": "People can buy, book or request an appointment. That process is audited in full, start to finish."
+                },
+                {
+                  "name": "Complex",
+                  "price": "Quote within 24 h",
+                  "description": "Several of those processes, a private area with login, or an unusually large site."
+                }
+              ],
+              "cta": "Book the audit",
+              "topic": "I’m interested in the full audit."
+            }
+          ]
         },
         {
-          "title": "I know the law, not just the tech",
-          "description": "Any developer with a script can find problems. Few know what exactly Spain's RD 193/2023 requires, what exceptions Law 11/2023 applies or how the accessibility statement is drafted. I spend weeks studying the legal framework before applying it to your site."
+          "offers": [
+            {
+              "id": "remediation",
+              "name": "Remediation",
+              "price": "From €1,800",
+              "priceAriaLabel": "from one thousand eight hundred euros",
+              "deadline": "Depends on tier",
+              "summary": "I fix what the audit found. Three fixed tiers, and you pick the one you want: nobody forces you to go all the way.",
+              "tiers": [
+                {
+                  "name": "Essential",
+                  "price": "€1,800",
+                  "description": "The blocking findings: whatever stops someone completing a purchase, submitting a form or navigating by keyboard today."
+                },
+                {
+                  "name": "Complete",
+                  "price": "€3,400",
+                  "description": "Blocking and serious findings. Your main journeys stop pushing people out along the way."
+                },
+                {
+                  "name": "AA conformance",
+                  "price": "€5,900",
+                  "description": "Every finding in the report until the audited scope reaches WCAG 2.1 AA."
+                }
+              ],
+              "cta": "Talk about remediation",
+              "topic": "I’m interested in remediation."
+            }
+          ]
         },
         {
-          "title": "Closed price, closed scope, closed deadline",
-          "description": "No 'estimate subject to scope'. No 'depends on scope'. No surprise invoices. What you see on this page is what you pay, no more, no less. If I discover your case needs more, I tell you before, never after."
+          "offers": [
+            {
+              "id": "ongoing-compliance",
+              "name": "Ongoing compliance",
+              "price": "€149 / €349 per month",
+              "priceAriaLabel": "one hundred and forty-nine or three hundred and forty-nine euros per month",
+              "deadline": "Monthly, no lock-in",
+              "summary": "Websites change. Plugins update, marketing uploads content, deploys break things. I review yours every month so what you fixed stays fixed.",
+              "tiers": [
+                {
+                  "name": "Review",
+                  "price": "€149/month",
+                  "description": "Monthly review, a heads-up on what broke, and your compliance document always up to date."
+                },
+                {
+                  "name": "Review and fixes",
+                  "price": "€349/month",
+                  "description": "The above, plus 4 monthly hours of fixes applied by me. What breaks gets fixed, with no separate quote."
+                }
+              ],
+              "cta": "Talk about ongoing compliance",
+              "topic": "I’m interested in ongoing compliance.",
+              "note": "Requires a prior audit."
+            }
+          ]
         }
       ]
     },
     "faq": {
-      "eyebrow": "FREQUENTLY ASKED QUESTIONS",
-      "title": "What people usually ask before hiring.",
+      "label": "BEFORE YOU BOOK",
+      "title": "What everyone asks.",
       "items": [
-        {
-          "question": "How long does the audit take exactly?",
-          "answer": "5-7 business days from the initial briefing. Most audits I deliver in 5. Larger sites can require up to 7."
-        },
-        {
-          "question": "Are you going to audit every page on my website?",
-          "answer": "No, and I shouldn't. The W3C reference methodology, WCAG-EM 2.0, evaluates the conformance of a whole site from a representative sample: common views, one instance of each template, every technology you rely on, and an additional 10% picked at random to catch what a targeted selection would miss. Processes — buying, booking, signing up — are audited in full, start to finish, including their error states. The report lists every single URL evaluated, so the sample is verifiable and reproducible."
-        },
-        {
-          "question": "How do I know which tier I fall into?",
-          "answer": "By what people can do on your site, not by its size. If your site informs and people contact you, that's the Essential tier: €1,200. If people can buy, book or request an appointment, that's Commercial: €2,200. If there are several of those processes or a private area with login, you get a fixed quote within 24 hours. I check the page count in your sitemap myself — you don't have to count anything."
-        },
         {
           "question": "What is the difference between the express diagnosis and the audit?",
           "answer": "Depth, and what you take away. The diagnosis walks your homepage and up to three journeys along their main path and gives you the 10 findings costing you most: it answers \"do I have a problem, and how big?\". The audit evaluates the 50 WCAG 2.1 AA criteria over a documented sample, audits every complete process including its error states, and delivers the remediation plan and the compliance document the law requires: it answers \"what am I missing, and how do I close it?\". That is why one costs €290 and the other from €1,200."
         },
         {
-          "question": "Does the audit include implementing the corrections?",
-          "answer": "No. The audit is the diagnosis: I deliver the full report with every finding and the remediation plan. Implementation is optional, with a separate quote, and only if you decide I do it. What the audit does include is verification: once your team applies the fixes, I re-check every finding and update the compliance document, at no cost, within the following 6 months."
+          "question": "How do I know which tier I fall into?",
+          "answer": "By what people can do on your site, not by its size. If your site informs and people contact you, that’s the Essential tier: €1,200. If people can buy, book or request an appointment, that’s Commercial: €2,200. If there are several of those processes or a private area with login, you get a fixed quote within 24 hours. I check the page count in your sitemap myself — you don’t have to count anything."
         },
         {
-          "question": "Do I need anything ready before starting?",
-          "answer": "Just access to your site (if it has private areas or staging). If you don't have any of that, even better: the audit is faster."
+          "question": "Does it cover the European Accessibility Act?",
+          "answer": "Yes. For websites, the technical reference is the European standard EN 301 549, which incorporates WCAG 2.1 AA: that’s exactly what I audit. The audit includes the compliance document ready to publish, written for your regime — in Spain, the information required by article 13.2 of Law 11/2023, or the formal accessibility statement of Royal Decree 1112/2018 for the public sector."
         },
         {
-          "question": "Can I apply the corrections myself?",
-          "answer": "Yes. The report is designed so your technical team can act on it directly: every finding comes with its fix and the test it was verified with. And when your team is done, verification is included in the audit: I re-test every finding in the report with the same test on the same pages, run a regression pass and update your compliance document with a date, within 3 business days. One round, up to 6 months after the report is delivered. You do not need to buy anything else to close the loop."
+          "question": "What if you miss a finding?",
+          "answer": "It depends on the service. In the audit: if a finding within the audited scope slips past me, I document it and correct the report at no cost within 60 days of delivery. In remediation: if a fix fails the test it was verified with, I redo it at no cost within that same period. The express diagnosis does not carry this guarantee: by design it is a top 10, not a complete evaluation; what I do guarantee is that every finding is confirmed and reproducible."
         },
         {
-          "question": "Does this fulfill the legal requirement of Law 11/2023?",
-          "answer": "Yes. The audit includes the accessibility statement drafted under RD 1112/2018, ready to publish on your site. It meets the formal evaluation requirement of the regulation."
+          "question": "How does billing work?",
+          "answer": "50% on confirmation and 50% on delivery. Formal invoice with VAT, valid for deduction. Ongoing compliance is billed monthly in arrears. The express diagnosis is the exception: it is paid in full up front, in a single payment."
+        }
+      ]
+    }
+  },
+  "aiLanding": {
+    "meta": {
+      "title": "Make your website ready for AI agents · Javier Piedra",
+      "description": "AI assistants already browse websites and fill in forms for people. I review and prepare yours so they can use it: the same work as web accessibility."
+    },
+    "hero": {
+      "label": "Websites for AI agents",
+      "titleLines": [
+        "If an AI can’t use",
+        "your website,"
+      ],
+      "titleHighlight": "it won’t buy.",
+      "subtitle": "AI assistants already search, compare and fill in forms on people’s behalf. To do it, they read your website from the inside: what every button, every field and every price is. If that’s badly built, your shop is in the dark for them. I review it and fix it.",
+      "ctaPrimary": "Let’s talk",
+      "ctaSecondary": "What I review"
+    },
+    "demo": {
+      "window": "AI agent · browsing",
+      "taskLabel": "Task",
+      "task": "“Buy the Alba vase in blue, two of them.”",
+      "versionsLabel": "Product page version",
+      "broken": "As it is",
+      "fixed": "Fixed",
+      "readsLabel": "What it reads",
+      "doesLabel": "What it does",
+      "replay": "Replay",
+      "caption": "A simulation of how an AI agent goes through a product page using its accessibility tree. The design is the same in both versions; the code is what changes.",
+      "snapshot": {
+        "broken": [
+          {
+            "line": "- img \"IMG_4032.jpg\"",
+            "problem": true,
+            "note": "the file name"
+          },
+          {
+            "line": "- heading \"Alba vase\""
+          },
+          {
+            "line": "- text \"€64.00\""
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "no name"
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "no name"
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "no name"
+          },
+          {
+            "line": "- spinbutton \"1\"",
+            "problem": true,
+            "note": "no label"
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "no name"
+          },
+          {
+            "line": "- link",
+            "problem": true,
+            "note": "empty"
+          }
+        ],
+        "fixed": [
+          {
+            "line": "- img \"Alba vase in blue stoneware, 24 cm\""
+          },
+          {
+            "line": "- heading \"Alba vase\""
+          },
+          {
+            "line": "- text \"€64.00\""
+          },
+          {
+            "line": "- radiogroup \"Colour\""
+          },
+          {
+            "line": "  - radio \"Blue\" [checked]"
+          },
+          {
+            "line": "  - radio \"Terracotta\""
+          },
+          {
+            "line": "- spinbutton \"Quantity\": \"1\""
+          },
+          {
+            "line": "- button \"Add to basket\""
+          },
+          {
+            "line": "- button \"Save to favourites\""
+          }
+        ]
+      },
+      "log": {
+        "broken": [
+          "Looking for blue: there are three buttons with no name.",
+          "I press the first one. I don’t know if it’s blue.",
+          "There’s a field with a 1 in it. I don’t know what it is.",
+          "I can’t find how to add it to the basket."
+        ],
+        "fixed": [
+          "Colour: I choose “Blue”.",
+          "Quantity: I type 2.",
+          "I press “Add to basket”.",
+          "Checking the basket: 2 blue vases."
+        ]
+      },
+      "result": {
+        "broken": "Task abandoned",
+        "fixed": "Order ready to confirm"
+      }
+    },
+    "why": {
+      "label": "Why now",
+      "title": "People aren’t your only visitors anymore.",
+      "items": [
+        {
+          "title": "Assistants already act",
+          "text": "The main AI assistants can open websites, compare products and fill in forms on behalf of whoever asks them. It isn’t a promise: they already do it."
         },
         {
-          "question": "How is it invoiced?",
-          "answer": "50% at confirmation of the audit start, 50% at report delivery. Formal invoice with VAT, valid for deduction."
+          "title": "They read the web from the inside",
+          "text": "Many don’t look at the screen the way you do: they read the accessibility tree, the same structure a screen reader uses. A button with no name is as invisible to them as it is to a blind person."
         },
         {
-          "question": "What if your audit misses something and I get reported later?",
-          "answer": "I work with WCAG 2.1 AA + EN 301549 methodology. It's the legal standard in Spain. If a finding within the audited scope slips past me and shows up later, I document it and correct the report at no additional cost within 60 days after delivery."
+          "title": "Google already measures it",
+          "text": "Lighthouse, Google’s tool for measuring websites, now includes an agentic browsing category. The first thing it scores is a well-formed accessibility tree. Google still labels it as under development."
+        }
+      ],
+      "proofLabel": "This page in Lighthouse 13.5",
+      "proofOf": "out of 100",
+      "proofCategory": "Agentic Browsing"
+    },
+    "checks": {
+      "label": "What I review",
+      "title": "One fix, two customers.",
+      "subtitle": "Everything that makes your website usable for an agent also makes it usable for a person with a disability. And the other way round. That’s why I review both at once.",
+      "personLabel": "For a person",
+      "agentLabel": "For an agent",
+      "items": [
+        {
+          "title": "Buttons and links with names",
+          "person": "Someone using a screen reader knows what each one does.",
+          "agent": "It knows what to press."
+        },
+        {
+          "title": "Labelled forms",
+          "person": "Every field says what it asks for and what went wrong.",
+          "agent": "It fills in the right field first time."
+        },
+        {
+          "title": "A clear structure",
+          "person": "They jump to what they need without reading everything.",
+          "agent": "It understands where everything is."
+        },
+        {
+          "title": "States that are announced",
+          "person": "They know whether their choice worked: selected, sold out, error.",
+          "agent": "It checks what it did before carrying on."
+        },
+        {
+          "title": "A page that doesn’t jump",
+          "person": "They don’t press the wrong thing because something moved.",
+          "agent": "It doesn’t miss a click because the layout shifted."
+        },
+        {
+          "title": "Prices and stock as text",
+          "person": "They can be read with zoom and with any technology.",
+          "agent": "It compares them without guessing."
+        }
+      ],
+      "extra": "And the newest part: if your website has key forms (order, booking, quote), I can prepare them for WebMCP, Chrome’s proposal for a website to tell an agent which actions it offers. I also review your llms.txt."
+    },
+    "process": {
+      "label": "How I work",
+      "title": "I test it with a real agent.",
+      "steps": [
+        {
+          "title": "I give it a real task",
+          "description": "Buying, booking or asking for a quote on your website, the way your customer would. I do it with an agent and with a screen reader, and I note where each one gets lost."
+        },
+        {
+          "title": "I explain what blocks it",
+          "description": "Every blocker with its cause and its fix, ordered by impact. The same report works for the European Accessibility Act if it applies to you."
+        },
+        {
+          "title": "I fix it and test again",
+          "description": "I fix the code myself, or make it clear for your team, and repeat the same task until the agent completes it."
         }
       ]
     },
-    "priceAndDeadline": {
-      "eyebrow": "PRICE AND DEADLINE",
-      "srTitle": "Audit price and deadline",
-      "pillars": [
+    "contact": {
+      "title": "Can an AI buy on your website?",
+      "subtitle": "Send me your website and the most important task people do on it. I’ll tell you what an agent would run into and where I’d start. No strings attached, no PowerPoints, no smoke."
+    }
+  },
+  "caso": {
+    "meta": {
+      "title": "Real case: an in-depth accessibility audit | Javier Piedra",
+      "description": "A real public website audited in depth: all 50 criteria one by one, by hand and with a real screen reader. This is what I find and what you receive."
+    },
+    "hero": {
+      "eyebrow": "Real case",
+      "titleStart": "A real public website, audited",
+      "titleHighlight": "in depth",
+      "titleEnd": ". This is what I find.",
+      "subtitle": "A real, anonymised case. I show you how I really audit — all 50 criteria one by one, by hand and with a screen reader — and what the client receives at the end. No names and no finger-pointing: the value is in the method.",
+      "cta": "I want my website audited"
+    },
+    "contexto": {
+      "eyebrow": "The context",
+      "title": "A large tourism website with online booking",
+      "body1": "The case is a large public website in the tourism sector, with online booking. By its nature, two frameworks apply at once: the public-sector one and, for the booking service sold to consumers, Spain’s Law 11/2023 (the transposition of the European Accessibility Act). The technical bar is the same in both: the EN 301 549 standard, which is equivalent to WCAG 2.1 AA.",
+      "body2": "It’s the kind of website a scanner can’t cover: lots of pages, repeated templates and a booking process where the money is at stake. Exactly where a serious audit makes the difference."
+    },
+    "metodo": {
+      "eyebrow": "How I really audit",
+      "title": "It isn’t running a tool. It’s this.",
+      "intro": "An automated test detects around 30% of the real problems. The rest can only be seen by hand. This is how I work on every audit:",
+      "steps": [
         {
-          "value": "From €1,200",
-          "label": "Three tiers based on what people can do on your site"
+          "title": "A representative sample",
+          "text": "You don’t audit the whole website (it isn’t feasible), but a sample that covers the home page, the booking process, forms, login and common templates. If a template fails, it fails on every page that uses it."
         },
         {
-          "value": "5-7 days",
-          "label": "From the briefing to the delivered report"
+          "title": "All 50 criteria, one by one",
+          "text": "I evaluate the 50 level A and AA criteria of WCAG 2.1 on the sample, not just the ones a machine detects. Each with its status: passes, fails or not applicable."
         },
         {
-          "value": "No surprises",
-          "label": "Closed price, closed scope, closed deadline"
+          "title": "By hand and with a real screen reader",
+          "text": "Keyboard navigation, contrast, focus and reading with NVDA, the screen reader real people use. Automated tools can’t tell whether a field is announced properly; the screen reader can."
+        },
+        {
+          "title": "Deliverables that prove the work",
+          "text": "A technical report, a conformance table for the 50 criteria, an accessibility statement ready to publish and, where relevant, a score in the style of Spain’s Web Accessibility Observatory."
+        }
+      ]
+    },
+    "hallazgos": {
+      "eyebrow": "What I found",
+      "title": "Real failures, in plain language",
+      "intro": "Some of the findings in this case, explained without jargon. None of them is rare: they come up in almost every website I audit.",
+      "items": [
+        {
+          "title": "A booking form without labels",
+          "text": "Fields that are obvious to the eye, but that a screen reader announces as just a text box. Someone who can’t see doesn’t know what is being asked. In a booking, that’s a purchase that never gets completed."
+        },
+        {
+          "title": "The invisible focus",
+          "text": "Navigating with the keyboard, you couldn’t see where you were: like moving around your house in the dark. It’s fixed with one line of CSS, but it affects the whole website."
+        },
+        {
+          "title": "The calendar the keyboard can’t reach",
+          "text": "The date picker only responded to the mouse. Without a mouse, there was no way to book."
+        },
+        {
+          "title": "What the machine passed and the screen reader didn’t",
+          "text": "A field the tool considered fine — it had a label — but that the real screen reader announced without a name, because that label was hidden with CSS. In theory, yes; for the user, no."
+        }
+      ]
+    },
+    "entregables": {
+      "eyebrow": "What the client receives",
+      "title": "A report people can understand, that proves what was done",
+      "intro": "Neither a 200-page PDF nor a tool dump. Clear, branded documents, written so management can understand them and your technical team can act on them.",
+      "items": [
+        {
+          "title": "Technical report",
+          "text": "A verdict, findings by severity, the impact on people and a concrete fix, with code where it applies."
+        },
+        {
+          "title": "Conformance table for the 50 criteria",
+          "text": "The status of every level A and AA criterion. Proof that everything has been reviewed, not just what jumps out."
+        },
+        {
+          "title": "Accessibility statement",
+          "text": "Written for the regime that applies to you, ready to publish and meet the documentation requirement."
+        },
+        {
+          "title": "Results meeting",
+          "text": "An hour to go through it with you and your team and set priorities. I don’t send you a PDF and disappear."
         }
       ],
-      "closing": "If it fits, we talk. If it doesn't fit, I tell you that too."
+      "imgTablaAlt": "A report page with the conformance table for the 50 WCAG criteria, each with its level and status.",
+      "imgTablaCaption": "A real (anonymised) extract of the conformance table, in Spanish: all 50 criteria, one by one.",
+      "imgPortadaAlt": "Cover of the accessibility report with Javier Piedra’s branding."
     },
-    "requestForm": {
-      "eyebrow": "REQUEST AUDIT",
-      "title": "Tell me about your site and I'll answer in 24 hours.",
-      "subtitle": "Once you have the scope clear, I send you a fixed proposal by email. No mandatory meetings, no pressure. If you decide to go ahead, we set a start date.",
-      "fields": {
-        "name": {
-          "label": "Your name",
-          "placeholder": "Your name"
-        },
-        "email": {
-          "label": "Where I reply",
-          "placeholder": "you@email.com"
-        },
-        "company": {
-          "label": "Your company",
-          "placeholder": "Company name"
-        },
-        "url": {
-          "label": "Your website URL",
-          "placeholder": "https://"
-        },
-        "sector": {
-          "label": "Sector",
-          "placeholder": "Select a sector",
-          "options": [
-            {
-              "value": "ecommerce",
-              "label": "Ecommerce"
-            },
-            {
-              "value": "hosteleria",
-              "label": "Hospitality and tourism"
-            },
-            {
-              "value": "sanitario",
-              "label": "Healthcare"
-            },
-            {
-              "value": "educativo",
-              "label": "Education / training"
-            },
-            {
-              "value": "banca",
-              "label": "Banking / fintech"
-            },
-            {
-              "value": "transporte",
-              "label": "Transport"
-            },
-            {
-              "value": "servicios",
-              "label": "Professional services"
-            },
-            {
-              "value": "otros",
-              "label": "Other"
-            }
-          ]
-        },
-        "size": {
-          "label": "Approximate site size",
-          "placeholder": "Select a size",
-          "options": [
-            {
-              "value": "small",
-              "label": "Up to 8 pages"
-            },
-            {
-              "value": "medium",
-              "label": "9 to 20 pages"
-            },
-            {
-              "value": "large",
-              "label": "21 to 100 pages"
-            },
-            {
-              "value": "xl",
-              "label": "More than 100 pages"
-            }
-          ]
-        },
-        "timing": {
-          "label": "When do you need the audit",
-          "placeholder": "Select urgency",
-          "options": [
-            {
-              "value": "urgent",
-              "label": "As soon as possible"
-            },
-            {
-              "value": "1-3m",
-              "label": "In 1-3 months"
-            },
-            {
-              "value": "3-6m",
-              "label": "In 3-6 months"
-            },
-            {
-              "value": "no-urgency",
-              "label": "No urgency, exploring"
-            }
-          ]
-        },
-        "comments": {
-          "label": "Comments",
-          "optional": "(optional)",
-          "placeholder": "Anything you want to add..."
-        }
-      },
-      "cta": "Request audit",
-      "sending": "Sending request…",
-      "success": "Request sent.",
-      "error": "Something went wrong. Try again.",
-      "responseTime": "I reply within 24 hours. Business days.",
-      "privacy": {
-        "prefix": "By submitting this message you accept the",
-        "linkText": "privacy policy"
-      },
-      "privacyConsent": "I have read and accept the ",
-      "privacyConsentLink": "privacy policy",
-      "privacyConsentEnd": ".",
-      "errors": {
-        "required": "This field is required.",
-        "email": "Enter a valid email.",
-        "url": "Enter a valid URL (with http:// or https://).",
-        "select": "Select an option.",
-        "privacy": "You must accept the privacy policy to continue"
-      }
+    "cierre": {
+      "title": "Want to know what state your website is in today?",
+      "text": "That’s exactly what I do: an in-depth audit, with a report and a compliance document tailored to your case. No smoke and no surprises.",
+      "cta": "Ask me for an audit",
+      "note": "A real, anonymised case. The audited organisation is neither named nor identifiable: the aim is to show the method, not to point at anyone."
     }
   }
 }

@@ -1,0 +1,204 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import { sietePicosSummit } from "../../../data/contour-maps"
+import { pricingId } from "../../../config/site"
+import Button from "../../ui/Button.astro"
+import ContourMap from "../../ui/ContourMap.astro"
+import VertexBadge from "../../ui/VertexBadge.astro"
+import XRayProduct from "../../ui/XRayProduct.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const copy = t.accessibilityLanding.hero
+---
+
+<section
+    id="hero"
+    aria-labelledby="hero-title"
+    class="a11y-hero relative min-h-svh flex items-center overflow-hidden"
+>
+    <!-- Siete Picos: la cumbre de esta especialidad en la home 3D. -->
+    <div class="a11y-hero-map" aria-hidden="true">
+        <ContourMap map={sietePicosSummit} id="a11y-hero-map" lift={20} showPeaks={false} />
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20 lg:pt-32 lg:pb-24">
+        <div class="grid lg:grid-cols-[1fr_1fr] gap-14 lg:gap-16 items-center">
+            <div class="flex flex-col gap-6 sm:gap-8">
+                <div class="a11y-hero-badge">
+                    <VertexBadge vertex="accessibility" />
+                </div>
+                <p class="a11y-hero-label text-xs font-body font-medium tracking-[0.3em] text-accent uppercase">
+                    {copy.label}
+                </p>
+
+                <h1
+                    id="hero-title"
+                    class="font-heading text-[clamp(2.75rem,5.4vw,5.25rem)] leading-[1.02] text-text-primary"
+                >
+                    <span class="a11y-line"><span class="text-accent">{t.hero.title}</span></span>
+                    <span class="a11y-line"><span>{t.hero.title_1}</span></span>
+                </h1>
+
+                <p class="a11y-hero-subtitle text-lg lg:text-xl text-text-secondary leading-relaxed max-w-xl">
+                    {t.hero.subtitle}
+                </p>
+
+                <div class="a11y-hero-cta flex flex-wrap gap-4">
+                    <Button href={`#${pricingId(lang)}`} variant="primary">
+                        {t.hero.cta}
+                        <span aria-hidden="true">→</span>
+                    </Button>
+                    <Button href="#contact" variant="outline">
+                        {copy.ctaSecondary}
+                    </Button>
+                </div>
+            </div>
+
+            <div class="a11y-hero-xray">
+                <XRayProduct copy={copy.xray} />
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { initXRayLens } from "../../../scripts/xray-lens"
+
+    const figure = document.querySelector<HTMLElement>("[data-xray]")
+    if (figure) {
+        const destroy = initXRayLens(figure)
+        document.addEventListener("astro:before-swap", destroy, { once: true })
+    }
+</script>
+
+<style>
+    .a11y-hero {
+        isolation: isolate;
+    }
+
+    .a11y-hero-map {
+        position: absolute;
+        z-index: -1;
+        right: -14%;
+        top: 50%;
+        width: min(68rem, 95vw);
+        aspect-ratio: 1;
+        transform: translateY(-50%);
+        opacity: 0.4;
+        mask-image: radial-gradient(closest-side, #000 35%, transparent);
+        pointer-events: none;
+    }
+
+    .a11y-line {
+        display: block;
+        padding: 0 0.1em 0.1em 0;
+        margin-bottom: -0.1em;
+        overflow: hidden;
+    }
+
+    .a11y-line > span {
+        display: block;
+        text-wrap: balance;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .a11y-hero-badge,
+        .a11y-hero-subtitle,
+        .a11y-hero-cta {
+            animation: a11y-fade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .a11y-hero-badge {
+            animation-delay: 0.1s;
+        }
+
+        .a11y-hero-label {
+            animation: a11y-wipe 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+        }
+
+        .a11y-line > span {
+            animation: a11y-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .a11y-line:nth-child(1) > span {
+            animation-delay: 0.3s;
+        }
+
+        .a11y-line:nth-child(2) > span {
+            animation-delay: 0.44s;
+        }
+
+        .a11y-hero-subtitle {
+            animation-delay: 0.65s;
+        }
+
+        .a11y-hero-cta {
+            animation-delay: 0.8s;
+        }
+
+        /* La ficha entra como una pantalla que se enciende. */
+        .a11y-hero-xray {
+            animation: a11y-place 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+        }
+
+        .a11y-hero-map {
+            animation: a11y-map 2.4s ease-out both;
+        }
+    }
+
+    @keyframes a11y-fade {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes a11y-wipe {
+        from {
+            clip-path: inset(0 100% 0 0);
+        }
+        to {
+            clip-path: inset(0 0 0 0);
+        }
+    }
+
+    @keyframes a11y-rise {
+        from {
+            transform: translateY(105%);
+        }
+        to {
+            transform: none;
+        }
+    }
+
+    @keyframes a11y-place {
+        from {
+            opacity: 0;
+            transform: perspective(1200px) rotateY(-14deg) translateX(40px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes a11y-map {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 0.4;
+        }
+    }
+</style>

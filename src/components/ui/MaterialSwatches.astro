@@ -1,0 +1,194 @@
+---
+//@ts-nocheck
+// Muestrario de acabados con luz en tiempo real (material-swatches.ts). Sin
+// WebGL o sin JavaScript se ven las tres piezas con un degradado fijo: la
+// leyenda sigue contando la diferencia.
+interface Props {
+    copy: {
+        caption: string
+        lightLabel: string
+        hint: string
+        hintTouch: string
+        items: { name: string; note: string }[]
+    }
+}
+
+const { copy } = Astro.props
+---
+
+<figure class="swatches" data-swatches>
+    <div class="swatches-stage">
+        <div class="swatches-glow" aria-hidden="true"></div>
+        {copy.items.map(() => <div class="swatches-slot" aria-hidden="true" />)}
+        <canvas class="swatches-canvas" aria-hidden="true"></canvas>
+    </div>
+
+    <ul role="list" class="swatches-legend">
+        {
+            copy.items.map((item) => (
+                <li>
+                    <strong>{item.name}</strong>
+                    <span>{item.note}</span>
+                </li>
+            ))
+        }
+    </ul>
+
+    <div class="swatches-control">
+        <label for="swatches-light">{copy.lightLabel}</label>
+        <input id="swatches-light" type="range" min="0" max="100" value="30" />
+        <p class="swatches-hint" aria-hidden="true">
+            <span class="hint-pointer">{copy.hint}</span>
+            <span class="hint-touch">{copy.hintTouch}</span>
+        </p>
+    </div>
+
+    <figcaption class="sr-only">{copy.caption}</figcaption>
+</figure>
+
+<style>
+    .swatches {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .swatches-stage {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5%;
+        aspect-ratio: 1 / 1.02;
+        max-height: 56svh;
+        /* Con dedo: el arrastre horizontal mueve la luz y el vertical hace
+           scroll como siempre. */
+        touch-action: pan-y;
+    }
+
+    .swatches-slot {
+        position: relative;
+        border-radius: 10px;
+        box-shadow:
+            0 30px 60px -20px rgb(0 0 0 / 0.75),
+            0 10px 18px -8px rgb(0 0 0 / 0.6);
+    }
+
+    /* Hasta que la luz está viva (o si no hay WebGL), un degradado fijo. */
+    .swatches-stage:not(.is-live) .swatches-slot,
+    .swatches-stage.is-fallback .swatches-slot {
+        background:
+            linear-gradient(115deg, transparent 40%, rgb(120 98 72 / 0.35) 46%, transparent 52%),
+            radial-gradient(120% 90% at 30% 20%, #ddd6ca, #b9ae9d 70%, #a19582);
+    }
+
+    .swatches-stage.is-fallback .swatches-canvas {
+        display: none;
+    }
+
+    .swatches-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    /* Lo que la luz alumbra alrededor de las piezas. */
+    .swatches-glow {
+        position: absolute;
+        left: -50%;
+        top: -50%;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, rgb(255 228 180 / 0.16), rgb(232 200 114 / 0.05) 55%, transparent);
+        transform: translate3d(30%, 28%, 0);
+        pointer-events: none;
+        will-change: transform;
+    }
+
+    .swatches-legend {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5%;
+    }
+
+    .swatches-legend li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .swatches-legend strong {
+        font-family: var(--font-heading);
+        font-size: clamp(1.125rem, 1.6vw, 1.5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        color: var(--color-text-primary);
+    }
+
+    .swatches-legend span {
+        font-size: 0.8125rem;
+        line-height: 1.45;
+        color: var(--color-text-secondary);
+    }
+
+    .swatches-control {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 0.5rem 1rem;
+        padding-top: 0.25rem;
+    }
+
+    .swatches-control label {
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+    }
+
+    .swatches-control input {
+        width: 100%;
+        min-height: 24px;
+        accent-color: var(--color-accent);
+        cursor: pointer;
+    }
+
+    .swatches-control input:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 4px;
+        border-radius: 2px;
+    }
+
+    .swatches-hint {
+        grid-column: 1 / -1;
+        font-size: 0.8125rem;
+        color: var(--color-text-secondary);
+    }
+
+    .hint-touch {
+        display: none;
+    }
+
+    @media (hover: none) {
+        .hint-pointer {
+            display: none;
+        }
+
+        .hint-touch {
+            display: inline;
+        }
+    }
+
+    @media (max-width: 40rem) {
+        .swatches-stage {
+            aspect-ratio: 1 / 0.95;
+        }
+
+        .swatches-legend span {
+            font-size: 0.75rem;
+        }
+    }
+</style>

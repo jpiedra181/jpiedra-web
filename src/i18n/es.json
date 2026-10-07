@@ -3,7 +3,11 @@
     "audit": "Auditoría",
     "blog": "Blog",
     "law": "¿Te aplica la Ley 11/2023?",
-    "services": "Servicios"
+    "services": "Servicios",
+    "immersive": "Experiencias 3D",
+    "accessibility": "Accesibilidad",
+    "contact": "Hablemos",
+    "ai": "Agentes de IA"
   },
   "services": {
     "meta": {
@@ -237,8 +241,8 @@
     "title": "Resolvía problemas antes de saber programar",
     "text_1": "En la fábrica ya hacía lo mismo que hago ahora: mirar un proceso, encontrar lo que no funciona e imaginar cómo mejorarlo. La diferencia es que antes lo pensaba y ahora lo construyo.",
     "text_2": "Estudié Ingeniería en Topografía — una carrera de medir, calcular y ser preciso. Trabajé de peón en fábricas — donde ves cómo funcionan las cosas de verdad, no en la teoría. Y un día descubrí que el desarrollo web me permitía juntar las dos cosas: la precisión técnica y la resolución práctica de problemas.",
-    "text_3": "Hoy mi foco está en accesibilidad web. Las leyes han cambiado, las webs no. Hay miles de empresas obligadas a cumplir una normativa que casi nadie entiende, con multas serias y plazos reales. Y eso es exactamente el tipo de problema que llevo toda la vida resolviendo: ver cómo algo tendría que funcionar y conseguir que funcione.",
-    "cta": "Si tu web está en esa lista, hablamos."
+    "text_3": "Hoy trabajo en la parte de la web que no sale de una plantilla. Experiencias 3D que van fluidas en cualquier móvil y que también se usan con teclado y lector de pantalla. Webs que cumplen la ley de accesibilidad de verdad, no con un parche. Es el mismo tipo de problema que llevo toda la vida resolviendo: ver cómo tendría que funcionar algo y conseguir que funcione.",
+    "cta": "Si tienes algo así entre manos, hablamos."
   },
   "approach": {
     "label": "CÓMO TRABAJO",
@@ -255,70 +259,14 @@
       },
       {
         "title": "Mantengo (opcional)",
-        "description": "Las webs cambian. Los plugins se actualizan, el equipo de marketing sube contenido, los desarrolladores hacen deploys. Si quieres dormir tranquilo, reviso tu web cada mes y mantengo la accesibilidad al día. Sin contrato anual, te vas cuando quieras."
-      }
-    ]
-  },
-  "projects": {
-    "label": "PROYECTOS",
-    "title": "Lo que he construido",
-    "cta": "Ver caso",
-    "items": [
-      {
-        "category": "RAG + IA Conversacional",
-        "title": "Asistente fiscal inteligente",
-        "description": "Un chat donde le preguntas tus dudas sobre la declaración de la renta y te responde con información real de Hacienda. Como tener un asesor fiscal disponible a cualquier hora.",
-        "tags": [
-          "Astro",
-          "n8n",
-          "Claude AI",
-          "Pinecone"
-        ]
-      },
-      {
-        "category": "Automatización + IA",
-        "title": "Generador de Design Systems",
-        "description": "Le describes tu marca — colores, estilo, personalidad — y te genera una guía visual completa con todos los elementos que necesita tu web. Lista para usar.",
-        "tags": [
-          "n8n",
-          "email",
-          "Stripe",
-          "Landing Pages",
-          "Design Systems"
-        ]
-      },
-      {
-        "category": "Web Scraping + Análisis",
-        "title": "Auditoría web automatizada",
-        "description": "Metes la dirección de una web y te dice qué funciona bien, qué va lento y qué tiene que mejorar. Todo explicado en lenguaje normal, no en métricas crípticas.",
-        "tags": [
-          "Claude Skills",
-          "PageSpeed API",
-          "Lighthouse",
-          "SEO",
-          "Accessibilidad",
-          "Auditoría",
-          "Informe PDF"
-        ]
-      },
-      {
-        "category": "EdTech + IA",
-        "title": "Plataforma de estudio con IA - En Prueba",
-        "description": "Un asistente que te ayuda a preparar oposiciones. Te hace exámenes, te explica lo que no entiendas y se adapta a tu nivel para que estudies mejor, no más.",
-        "tags": [
-          "Next.js",
-          "Supabase",
-          "OpenAI",
-          "Stripe",
-          "TailwindCSS"
-        ]
+        "description": "Una web accesible no se queda así sola: cada cambio puede volver a romper algo. Si quieres, sigo contigo mes a mes para que la inversión no se pierda. Sin contrato anual: te vas cuando quieras."
       }
     ]
   },
   "contact": {
     "label": "CONTACTO",
-    "title": "¿Tu web cumple la Ley 11/2023?",
-    "subtitle": "Si no estás seguro, es muy probable que no. Cuéntame qué tienes y te digo en qué situación estás. Sin compromiso, sin PowerPoints, sin humo.",
+    "title": "¿Tienes algo difícil entre manos?",
+    "subtitle": "Cuéntame qué quieres construir o qué no te está funcionando. Te digo si puedo ayudarte y cómo. Sin compromiso, sin PowerPoints, sin humo.",
     "cta": "Hablemos",
     "available": "Disponible para nuevos proyectos",
     "note": "Te respondo en menos de 24 horas. Días laborables.",
@@ -365,9 +313,11 @@
     "rights": "Todos los derechos reservados.",
     "services": {
       "label": "Servicios",
-      "audit": "Auditoría de accesibilidad",
       "blog": "Blog",
-      "services": "Servicios y precios"
+      "immersive": "Experiencias web 3D",
+      "accessibility": "Accesibilidad web",
+      "law": "¿Te aplica la Ley 11/2023?",
+      "ai": "Webs para agentes de IA"
     },
     "legal": {
       "label": "Legal",
@@ -375,384 +325,6 @@
       "privacy": "Política de Privacidad",
       "cookies": "Política de Cookies",
       "accessibility": "Accesibilidad"
-    }
-  },
-  "audit": {
-    "hero": {
-      "eyebrow": "AUDITORÍA DE ACCESIBILIDAD WEB",
-      "titlePrefix": "Auditoría completa de tu web según la",
-      "titleHighlight1": "Ley 11/2023",
-      "titleConnector": "y",
-      "titleHighlight2": "WCAG 2.1 AA",
-      "titleSuffix": ".",
-      "subtitle": "En 5-7 días laborables tienes un informe que entiende todo tu equipo, con cada problema, su impacto legal y por dónde empezar. Sin jerga, sin PDFs de 200 páginas, sin humo.",
-      "price": "Desde 1.200 €",
-      "priceAriaLabel": "desde mil doscientos euros",
-      "priceNote": "Para webs que informan y reciben contactos, sin compra ni reserva online.",
-      "priceSubnote": "Si en tu web se compra, se reserva o hay que iniciar sesión, el tramo sube. Presupuesto cerrado en 24 h.",
-      "cta": "Solicitar auditoría"
-    },
-    "problem": {
-      "eyebrow": "EL PROBLEMA",
-      "title": "Primero pierdes clientes. Después llega la multa.",
-      "subtitle": "Desde el 28 de junio de 2025 la Ley 11/2023 obliga a miles de empresas españolas a tener su web accesible, y la inmensa mayoría no lo está. Pero el problema no empezó ahí: cada barrera de tu web es alguien que no termina de comprar.",
-      "risks": [
-        {
-          "value": "8 %",
-          "ariaLabel": "8 por ciento",
-          "title": "Clientes que se van sin decírtelo",
-          "description": "Solo 8 de cada 100 compradores con necesidades de acceso avisan al dueño de la web cuando algo no les funciona (Click-Away Pound, Reino Unido, 2019). Los otros 92 abandonan y compran en la competencia. En tu analítica eso se ve como un rebote más."
-        },
-        {
-          "value": "1.000.000 €",
-          "ariaLabel": "un millón de euros",
-          "title": "Multas reales",
-          "description": "El régimen sancionador del RDL 1/2013, al que remite la Ley 11/2023, ya está vigente. El incumplimiento de las exigencias de accesibilidad es infracción grave (hasta 90.000 €); tres graves en un año escalan a muy grave (art. 95.4.h RDL 1/2013)."
-        },
-        {
-          "value": "Junio 2025",
-          "ariaLabel": "Junio de 2025",
-          "title": "Contratación pública",
-          "description": "La contratación pública española ya exige incorporar criterios de accesibilidad en las prescripciones técnicas. Si trabajas o quieres trabajar con la Administración, tener la web conforme deja de ser un extra y pasa a ser un requisito que te piden por escrito."
-        }
-      ],
-      "closing": "Auditar tu web no es un capricho de cumplimiento. Es dejar de perder clientes que ya te habían elegido y, de paso, quitarte el riesgo legal de encima."
-    },
-    "deliverables": {
-      "eyebrow": "QUÉ ENTREGA LA AUDITORÍA",
-      "title": "Un informe claro. Una hoja de ruta cerrada. Cero jerga.",
-      "subtitle": "Esto es lo que recibes al terminar la auditoría, en 5-7 días laborables, pensado para que lo entienda cualquiera de tu equipo.",
-      "items": [
-        {
-          "title": "Informe ejecutivo",
-          "description": "Resumen con el nivel real de cumplimiento de tu web, el riesgo legal específico que asumes hoy y las prioridades para resolverlo. Diseñado para que lo entienda dirección sin necesidad de ser técnico."
-        },
-        {
-          "title": "Catálogo de hallazgos por criterio WCAG",
-          "description": "Cada problema con su criterio WCAG vulnerado, el nivel de impacto, la página o componente afectado y, donde ilustra, una captura. Sin tecnicismo gratuito, con suficiente detalle para que tu equipo técnico pueda actuar."
-        },
-        {
-          "title": "Plan de remediación priorizado",
-          "description": "Cada hallazgo con su solución concreta y el orden óptimo para resolverlo. Sabes qué arreglar primero y en qué orden."
-        },
-        {
-          "title": "Documento de cumplimiento listo para publicar",
-          "description": "Lo redacto según el régimen que te aplica: declaración formal del RD 1112/2018 si eres sector público o asimilado, información del art. 13.2 Ley 11/2023 si eres empresa privada. Lo publicas en tu web y empiezas a cumplir el requisito documental desde el día siguiente."
-        },
-        {
-          "title": "Reunión de presentación de resultados",
-          "description": "Una hora por videollamada para revisar el informe contigo y con tu equipo, resolver dudas y priorizar acciones. No te mando un PDF y desaparezco."
-        },
-        {
-          "title": "Verificación de las correcciones",
-          "description": "Cuando tu equipo o tu agencia aplique las correcciones, compruebo cada hallazgo del informe con la misma prueba, paso una revisión de regresión y te actualizo el documento de cumplimiento con fecha. Una ronda, dentro de los 6 meses siguientes, en 3 días laborables. Va incluida: el ciclo se cierra sin contratar nada más."
-        }
-      ]
-    },
-    "whoMustComply": {
-      "eyebrow": "QUIÉN ESTÁ OBLIGADO",
-      "title": "¿Esto te aplica a ti?",
-      "subtitle": "No todas las webs están obligadas igual. La Ley 11/2023 y el RD 193/2023 marcan tres grupos con plazos distintos. Estos son.",
-      "groups": [
-        {
-          "tag": "OBLIGACIÓN INMEDIATA — LEY 11/2023",
-          "headline": "Si vendes online o gestionas servicios digitales al consumidor, ya estás obligado.",
-          "body": "Ecommerce de cualquier tamaño. Banca online. Hoteles con reservas online. Aerolíneas, ferroviarias, navieras. Operadores de telecomunicaciones. Plataformas de streaming. Compañías de luz, gas, agua. Academias y plataformas que venden cursos online a particulares. Agencias de viajes y turoperadores online.",
-          "note": "Excepción: microempresas (menos de 10 empleados Y menos de 2 M€ de facturación) que solo prestan servicios sin venta de productos."
-        },
-        {
-          "tag": "PLAZO ENERO 2029 — RD 193/2023",
-          "headline": "Si tu web ofrece bienes o servicios al público, te toca con fecha: webs nuevas desde enero de 2029, las existentes con ajustes antes de 2030.",
-          "body": "Clínicas y servicios sanitarios con reservas online. Restaurantes con pedidos o reservas. Academias y formación. Empresas culturales, deportivas, museos con venta online. Inmobiliarias. Aseguradoras y servicios financieros no bancarios. Cualquier web de empresa que informe de lo que vende, sin exención por tamaño (RD 193/2023, art. 14.2).",
-          "note": "Anticiparte ahora es ventaja competitiva: la mayoría de tu sector no cumplirá hasta el último minuto."
-        },
-        {
-          "tag": "OBLIGACIÓN INMEDIATA — FINANCIACIÓN PÚBLICA",
-          "headline": "Si recibes fondos públicos, la obligación es ya, sin plazo de gracia.",
-          "body": "Kit Digital, fondos europeos, subvenciones autonómicas, contratos con la Administración. La condición viaja con la ayuda (DA 1ª del RD 1112/2018): la web financiada debe cumplir WCAG 2.1 AA ya. Sin cumplimiento, riesgo de reintegro.",
-          "note": null
-        }
-      ],
-      "closing": "Si no encajas en ninguno de los tres grupos, probablemente no necesitas esta auditoría ahora mismo. Si encajas en al menos uno, sí."
-    },
-    "process": {
-      "eyebrow": "CÓMO LO HAGO",
-      "title": "5 fases. 7 días. Cero improvisación.",
-      "subtitle": "Desde que confirmas la auditoría hasta que tienes el informe en tu correo, este es el proceso. Sabes en cada momento dónde estamos y qué necesito de ti.",
-      "steps": [
-        {
-          "duration": "DÍA 0 · 30 MIN",
-          "title": "Briefing y acceso",
-          "description": "Llamada corta para entender tu web: tipo de negocio, plantillas únicas, integraciones, áreas privadas si las hay, accesos que necesito. Si tienes algo específico que te preocupa, lo apuntamos como foco prioritario.",
-          "clientInput": "Lo que necesito de ti: 30 minutos en videollamada y datos de acceso si aplica."
-        },
-        {
-          "duration": "DÍAS 1-2",
-          "title": "Análisis automatizado y mapeo",
-          "description": "Paso herramientas (axe, Lighthouse, Pa11y) sobre las plantillas seleccionadas. Mapeo de la estructura del sitio, identificación de componentes críticos y flujos a evaluar. Genero el primer inventario de hallazgos automáticos.",
-          "clientInput": "Lo que necesito de ti: nada. Yo trabajo, tú sigues con lo tuyo."
-        },
-        {
-          "duration": "DÍAS 3-5",
-          "title": "Evaluación manual y técnica",
-          "description": "El 70% del trabajo real. Navegación por teclado, lectura con lector de pantalla real (NVDA en Windows), validación de contraste, foco visible, formularios, ARIA, mensajes de error. Cada hallazgo documentado con su criterio WCAG, su nivel de impacto y, donde ilustra, una captura.",
-          "clientInput": "Lo que necesito de ti: nada. Si surgiera algo crítico, te aviso al momento."
-        },
-        {
-          "duration": "DÍA 6",
-          "title": "Redacción del informe y plan de remediación",
-          "description": "Estructuro todos los hallazgos en el documento final: resumen ejecutivo, catálogo por criterio, plan priorizado (qué resolver primero y en qué orden) y documento de cumplimiento adaptado a tu régimen. Reviso dos veces antes de entregar.",
-          "clientInput": "Lo que necesito de ti: nada. Lo que necesito de mí: rigor."
-        },
-        {
-          "duration": "DÍA 7 · 1 H",
-          "title": "Entrega y reunión de presentación",
-          "description": "Te envío el informe completo. Programamos videollamada de 1 hora para revisarlo contigo y con tu equipo, priorizar acciones y resolver dudas. A partir de aquí, decides: lo aplicas tú, lo aplicamos juntos, o seguimos con el plan de remediación.",
-          "clientInput": "Lo que necesito de ti: 1 hora en videollamada y el equipo que toque."
-        }
-      ]
-    },
-    "afterAudit": {
-      "eyebrow": "QUÉ VIENE DESPUÉS",
-      "title": "La auditoría es el principio, no el final.",
-      "subtitle": "Una vez tengas el informe, decides. Estas son las dos formas en las que puedo seguir contigo si lo necesitas.",
-      "options": [
-        {
-          "title": "Aplicar las correcciones",
-          "optionalTag": "(opcional)",
-          "description": "Si quieres que sea yo quien implemente las soluciones del informe, podemos hacerlo. Trabajo paquete a paquete según prioridad: lo crítico primero, lo accesorio después. Cada paquete con alcance cerrado, horas estimadas y precio fijo antes de empezar.",
-          "priceNote": "Tres tramos cerrados: 1.800 €, 3.400 € o 5.900 €. El tuyo se decide al terminar la auditoría, cuando ya sabemos el volumen real."
-        },
-        {
-          "title": "Que no se vuelva a romper",
-          "optionalTag": "(opcional)",
-          "description": "Las webs cambian. Plugins que se actualizan, contenido que sube el equipo de marketing, deploys del equipo técnico. Si quieres dormir tranquilo, reviso tu web cada mes y mantengo el cumplimiento al día. La declaración de accesibilidad se actualiza, los nuevos hallazgos se arreglan.",
-          "priceNote": "149 € o 349 € al mes, según si quieres solo revisión o también las correcciones aplicadas. Sin permanencia."
-        }
-      ],
-      "closing": "Ninguno de los dos es imprescindible. Con la auditoría tienes el diagnóstico completo y el documento de cumplimiento listo para publicar; arreglar lo que haga falta lo decides tú.",
-      "ctaLabel": "Ver servicios y precios"
-    },
-    "whyMe": {
-      "eyebrow": "POR QUÉ YO",
-      "title": "No hay equipo. Solo yo. Por eso funciona.",
-      "subtitle": "No te vendo un proceso corporativo. Te vendo trabajo de un solo profesional que se responsabiliza de lo que entrega.",
-      "reasons": [
-        {
-          "title": "Yo audito, yo arreglo, yo respondo",
-          "description": "No hay junior que tome los datos, account manager que los presente y desarrollador externo que los implemente. Hablas conmigo en cada fase. El que firma el informe es el mismo que lo escribe y el mismo que coge el teléfono si algo no encaja."
-        },
-        {
-          "title": "Conozco la ley, no solo la técnica",
-          "description": "Cualquier desarrollador con un script encuentra problemas. Pocos saben qué exige exactamente el RD 193/2023, qué excepciones aplica la Ley 11/2023 o cómo se redacta la declaración de accesibilidad. Yo paso semanas estudiando el marco legal antes de aplicarlo a tu web."
-        },
-        {
-          "title": "Precio cerrado, alcance cerrado, plazo cerrado",
-          "description": "Sin 'presupuesto sujeto a alcance'. Sin 'depende del scope'. Sin facturas sorpresa. Lo que ves en esta página es lo que pagas, ni más ni menos. Si descubro que tu caso necesita más, te lo digo antes, nunca después."
-        }
-      ]
-    },
-    "faq": {
-      "eyebrow": "PREGUNTAS FRECUENTES",
-      "title": "Lo que la gente suele preguntar antes de contratar.",
-      "items": [
-        {
-          "question": "¿Cuánto tarda exactamente la auditoría?",
-          "answer": "5-7 días laborables desde el briefing inicial. La mayoría de auditorías las entrego en 5. Las webs grandes pueden requerir hasta 7."
-        },
-        {
-          "question": "¿Vas a auditar todas las páginas de mi web?",
-          "answer": "No, y no debería. La metodología de referencia del W3C, WCAG-EM, evalúa la conformidad de un sitio completo a partir de una muestra representativa: las vistas comunes, un ejemplar de cada plantilla, cada tecnología que usas y un 10 % adicional elegido al azar para detectar lo que la selección dirigida no vería. Los procesos —comprar, reservar, registrarse— sí se auditan enteros, de principio a fin, con sus estados de error. El informe lista una a una todas las URLs evaluadas, para que la muestra sea verificable y reproducible."
-        },
-        {
-          "question": "¿Cómo sé qué tramo me toca?",
-          "answer": "Por lo que se puede hacer en tu web, no por su tamaño. Si tu web informa y te contactan, es el tramo Esencial: 1.200 €. Si se puede comprar, reservar o pedir cita, es Comercial: 2.200 €. Si hay varios de esos procesos o un área privada con login, te paso presupuesto cerrado en 24 horas. El número de páginas lo compruebo yo en tu sitemap: no tienes que contarlas."
-        },
-        {
-          "question": "¿Qué diferencia hay entre el diagnóstico exprés y la auditoría?",
-          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 50 criterios WCAG 2.1 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
-        },
-        {
-          "question": "¿La auditoría incluye la implementación de las correcciones?",
-          "answer": "No. La auditoría es el diagnóstico: te entrego el informe completo con todos los hallazgos y el plan de remediación. La implementación es opcional, con presupuesto aparte, y solo si decides que la haga yo. Lo que sí incluye la auditoría es la verificación: cuando tu equipo aplique las correcciones, compruebo cada hallazgo y actualizo el documento de cumplimiento, sin coste, dentro de los 6 meses siguientes."
-        },
-        {
-          "question": "¿Necesito tener algo preparado antes de empezar?",
-          "answer": "Solo acceso a tu web (si tiene áreas privadas o staging). Si no tienes nada de eso, mejor todavía: la auditoría es más rápida."
-        },
-        {
-          "question": "¿Puedo aplicar yo mismo las correcciones del informe?",
-          "answer": "Sí. El informe está pensado para que cualquier perfil técnico pueda actuar sobre él directamente: cada hallazgo lleva su corrección y la prueba con la que se verificó. Y cuando tu equipo termine, la verificación va incluida en la auditoría: repaso cada hallazgo del informe con la misma prueba sobre las mismas páginas, paso una revisión de regresión y te actualizo el documento de cumplimiento con fecha, en 3 días laborables. Una ronda, dentro de los 6 meses siguientes a la entrega del informe. No tienes que contratar nada más para cerrar el ciclo."
-        },
-        {
-          "question": "¿Sirve para cumplir el requisito legal de la Ley 11/2023?",
-          "answer": "Sí. La auditoría incluye el documento de cumplimiento listo para publicar, redactado según el régimen que te aplica: declaración formal del RD 1112/2018 si eres sector público, información del art. 13.2 Ley 11/2023 si eres empresa privada. En ambos casos cumples el requisito documental que exige la normativa desde el día que lo publicas."
-        },
-        {
-          "question": "¿Cómo se factura?",
-          "answer": "50% al confirmar el inicio de la auditoría, 50% al entregar el informe. Factura formal con IVA, válida para deducción."
-        },
-        {
-          "question": "¿Qué pasa si tu auditoría no detecta algún problema y luego me denuncian?",
-          "answer": "Trabajo con metodología WCAG 2.1 AA + EN 301549. Es el estándar legal en España. Si dentro del alcance auditado se me escapa un hallazgo y aparece después, lo documento y corrijo el informe sin coste adicional dentro de los 60 días posteriores a la entrega."
-        },
-        {
-          "question": "¿Puedo contratar solo el mantenimiento mensual sin hacer la auditoría completa?",
-          "answer": "No. El mantenimiento es un servicio complementario que solo tiene sentido después de la auditoría. Sin el diagnóstico inicial, no hay forma de saber qué revisar cada mes ni cómo priorizar."
-        },
-        {
-          "question": "¿Y la WCAG 2.2? ¿Me afecta lo de 2026?",
-          "answer": "Hoy la ley te pide WCAG 2.1 AA, y es lo que audito por defecto. La 2.2 entra como nuevo estándar europeo hacia octubre de 2026 y añade seis criterios más. Aún no es obligatoria: no la necesitas para cumplir hoy. Pero si quieres adelantarte y no repetir auditoría el año que viene, te la reviso también como extra — lo hablamos y lo incluyo en la propuesta. Lo que cumplas ahora en 2.1 sigue valiendo: la 2.2 se construye encima, no lo sustituye."
-        }
-      ]
-    },
-    "priceAndDeadline": {
-      "eyebrow": "PRECIO Y PLAZO",
-      "srTitle": "Precio y plazo de la auditoría",
-      "pillars": [
-        {
-          "value": "Desde 1.200 €",
-          "label": "Tres tramos según lo que se pueda hacer en tu web"
-        },
-        {
-          "value": "5-7 días",
-          "label": "Desde el briefing hasta el informe entregado"
-        },
-        {
-          "value": "Sin sorpresas",
-          "label": "Precio cerrado, alcance cerrado, plazo cerrado"
-        }
-      ],
-      "closing": "Si encaja, hablamos. Si no encaja, también te lo digo."
-    },
-    "requestForm": {
-      "eyebrow": "SOLICITAR AUDITORÍA",
-      "title": "Cuéntame de tu web y te respondo en 24 horas.",
-      "subtitle": "Una vez tengas claro el alcance, te paso propuesta cerrada por email. Sin reuniones obligatorias, sin presión. Si decides seguir adelante, fijamos día de inicio.",
-      "fields": {
-        "name": {
-          "label": "Cómo te llamas",
-          "placeholder": "Tu nombre"
-        },
-        "email": {
-          "label": "Donde te contesto",
-          "placeholder": "tu@email.com"
-        },
-        "company": {
-          "label": "Tu empresa",
-          "placeholder": "Nombre de la empresa"
-        },
-        "url": {
-          "label": "URL de tu web",
-          "placeholder": "https://"
-        },
-        "sector": {
-          "label": "Sector",
-          "placeholder": "Selecciona un sector",
-          "options": [
-            {
-              "value": "ecommerce",
-              "label": "Ecommerce"
-            },
-            {
-              "value": "hosteleria",
-              "label": "Hostelería y turismo"
-            },
-            {
-              "value": "sanitario",
-              "label": "Sanitario"
-            },
-            {
-              "value": "educativo",
-              "label": "Educativo / formación"
-            },
-            {
-              "value": "banca",
-              "label": "Banca / fintech"
-            },
-            {
-              "value": "transporte",
-              "label": "Transporte"
-            },
-            {
-              "value": "servicios",
-              "label": "Servicios profesionales"
-            },
-            {
-              "value": "otros",
-              "label": "Otros"
-            }
-          ]
-        },
-        "size": {
-          "label": "Tamaño aproximado de la web",
-          "placeholder": "Selecciona un tamaño",
-          "options": [
-            {
-              "value": "small",
-              "label": "Hasta 8 páginas"
-            },
-            {
-              "value": "medium",
-              "label": "9 a 20 páginas"
-            },
-            {
-              "value": "large",
-              "label": "21 a 100 páginas"
-            },
-            {
-              "value": "xl",
-              "label": "Más de 100 páginas"
-            }
-          ]
-        },
-        "timing": {
-          "label": "Cuándo necesitas la auditoría",
-          "placeholder": "Selecciona una urgencia",
-          "options": [
-            {
-              "value": "urgent",
-              "label": "Cuanto antes"
-            },
-            {
-              "value": "1-3m",
-              "label": "En 1-3 meses"
-            },
-            {
-              "value": "3-6m",
-              "label": "En 3-6 meses"
-            },
-            {
-              "value": "no-urgency",
-              "label": "Sin urgencia, explorando"
-            }
-          ]
-        },
-        "comments": {
-          "label": "Comentarios",
-          "optional": "(opcional)",
-          "placeholder": "Lo que quieras añadir..."
-        }
-      },
-      "cta": "Solicitar auditoría",
-      "sending": "Enviando solicitud…",
-      "success": "Solicitud enviada correctamente.",
-      "error": "Hubo un problema al enviar. Inténtalo de nuevo.",
-      "responseTime": "Te respondo en menos de 24 horas. Días laborables.",
-      "privacy": {
-        "prefix": "Al enviar este mensaje aceptas la",
-        "linkText": "política de privacidad"
-      },
-      "privacyConsent": "He leído y acepto la ",
-      "privacyConsentLink": "política de privacidad",
-      "privacyConsentEnd": ".",
-      "errors": {
-        "required": "Este campo es obligatorio.",
-        "email": "Introduce un email válido.",
-        "url": "Introduce una URL válida (con http:// o https://).",
-        "select": "Selecciona una opción.",
-        "privacy": "Debes aceptar la política de privacidad para continuar"
-      }
     }
   },
   "caso": {
@@ -852,5 +424,751 @@
       "cta": "Pídeme una auditoría",
       "note": "Caso real anonimizado. No se nombra ni se identifica a la organización auditada: el objetivo es enseñar el método, no señalar a nadie."
     }
+  },
+  "home": {
+    "meta": {
+      "title": "Javier Piedra · Diseño y desarrollo web: 3D, accesibilidad e IA",
+      "description": "La versión clásica de mi web: experiencias web 3D, accesibilidad web según WCAG 2.1 AA y webs preparadas para agentes de IA. Proyectos, método y contacto."
+    },
+    "hero": {
+      "label": "Javier Piedra · Diseño y desarrollo web",
+      "titleStart": "La parte",
+      "titleHighlight": "difícil",
+      "titleEnd": "de la web.",
+      "subtitle": "Una web corriente te la monta una plantilla en una tarde. Lo que no te monta nadie es lo que viene después: un catálogo 3D que va fluido en cualquier móvil, una experiencia inmersiva que también se usa con teclado y lector de pantalla, una web que cumple la ley de accesibilidad de verdad. De eso me encargo yo.",
+      "ctaPrimary": "Ver proyectos",
+      "ctaSecondary": "Hablemos",
+      "sheet": {
+        "title": "Macizo de Peñalara",
+        "region": "Sierra de Guadarrama",
+        "equidistance": "Curvas cada 40 m",
+        "scale": "1 km",
+        "sources": "Relieve: MDT25 © Instituto Geográfico Nacional. Agua: © colaboradores de OpenStreetMap.",
+        "view3d": "Ver la versión 3D",
+        "hint": "Pasa el cursor por el plano: te da la cota de cada punto."
+      }
+    },
+    "disciplines": {
+      "label": "Qué hago",
+      "title": "Tres especialidades. Un mismo oficio.",
+      "subtitle": "Construir con precisión lo que una plantilla no resuelve, y que lo pueda usar cualquiera: una persona con teclado o lector de pantalla, o un agente de IA que compra en su nombre. Ahí es donde las tres se juntan.",
+      "items": [
+        {
+          "key": "immersive",
+          "title": "Experiencias web 3D",
+          "description": "Catálogos, visores de producto y salas inmersivas en el navegador. Para quien vende algo que una foto no transmite: el tacto de una piedra, el acabado de un material, la escala de una obra.",
+          "cta": "Ver experiencias 3D"
+        },
+        {
+          "key": "accessibility",
+          "title": "Accesibilidad web",
+          "description": "Auditoría y corrección según WCAG 2.1 AA y la Ley 11/2023. Para empresas obligadas por ley y para cualquiera que no quiera perder clientes por un formulario que no se puede rellenar.",
+          "cta": "Ver accesibilidad web"
+        },
+        {
+          "key": "ai",
+          "title": "Webs para agentes de IA",
+          "description": "Los asistentes de IA ya buscan, comparan y rellenan formularios por la gente, y leen tu web por dentro. Reviso y preparo la tuya para que puedan usarla: es el mismo trabajo que la accesibilidad.",
+          "cta": "Ver agentes de IA"
+        }
+      ]
+    },
+    "work": {
+      "label": "Proyectos",
+      "title": "No te lo cuento. Pruébalo.",
+      "intro": "Dos conceptos propios que están en vivo y un caso real de accesibilidad. Ábrelos, recórrelos con el teclado, activa el lector de pantalla si quieres."
+    },
+    "about": {
+      "profileTitle": "De La Granja a Peñalara",
+      "profileCaption": "Perfil real del terreno, con el MDT25 del IGN: 6,7 km y 1238 m de desnivel. Mi trayectoria también ha sido cuesta arriba.",
+      "start": "La Granja",
+      "end": "Peñalara",
+      "milestonesLabel": "Trayectoria",
+      "milestones": [
+        {
+          "title": "Topografía",
+          "text": "Ingeniería en Topografía: medir, calcular y ser preciso."
+        },
+        {
+          "title": "Fábrica",
+          "text": "Peón en fábricas: ver cómo funcionan las cosas de verdad."
+        },
+        {
+          "title": "Desarrollo web",
+          "text": "Juntar la precisión técnica con resolver problemas prácticos."
+        },
+        {
+          "title": "Hoy",
+          "text": "Experiencias 3D y accesibilidad: la parte difícil de la web."
+        }
+      ]
+    },
+    "summit": {
+      "label": "Cumbre"
+    },
+    "altimeter": {
+      "start": "La Granja",
+      "end": "Peñalara"
+    }
+  },
+  "immersive": {
+    "meta": {
+      "title": "Experiencias web 3D accesibles · Javier Piedra",
+      "description": "Catálogos 3D, visores de producto y salas inmersivas en el navegador. Fluidos en cualquier móvil y usables con teclado y lector de pantalla desde el primer día."
+    },
+    "hero": {
+      "label": "Experiencias web 3D",
+      "titleStart": "Lo que una foto",
+      "titleHighlight": "no puede",
+      "titleEnd": "enseñar.",
+      "subtitle": "Catálogos que se recorren por tacto, visores de producto y salas inmersivas, en el navegador y sin instalar nada. Hechos para ir fluidos en cualquier móvil y para que también los use quien navega con teclado o con lector de pantalla.",
+      "ctaPrimary": "Cuéntame tu proyecto",
+      "ctaSecondary": "Ver los proyectos",
+      "swatches": {
+        "caption": "La misma piedra con tres acabados. Mueve la luz y mira cómo responde cada uno: eso es lo que una foto no puede enseñar.",
+        "lightLabel": "Posición de la luz",
+        "hint": "Pasa el cursor por encima o usa el control.",
+        "hintTouch": "Arrastra sobre las piezas o usa el control.",
+        "items": [
+          {
+            "name": "Pulido",
+            "note": "Refleja la luz: el brillo se mueve con ella."
+          },
+          {
+            "name": "Mate",
+            "note": "La absorbe: casi no cambia."
+          },
+          {
+            "name": "Estructurado",
+            "note": "La rompe: cada relieve hace su sombra."
+          }
+        ]
+      }
+    },
+    "useCases": {
+      "label": "Para quién",
+      "title": "Para productos que se eligen mirando.",
+      "items": [
+        {
+          "title": "Superficies, materiales y producto",
+          "audience": "Fabricantes y distribuidores de cerámica, piedra, madera o mobiliario",
+          "description": "Tu cliente elige por tono, textura y acabado, y en una ficha con foto todo se parece. Un catálogo 3D le deja comparar, mover la luz y ver si un acabado es pulido o mate antes de pedirte muestras."
+        },
+        {
+          "title": "Cultura, patrimonio y turismo",
+          "audience": "Museos, fundaciones, galerías, ayuntamientos y oficinas de turismo",
+          "description": "Una sala virtual lleva la colección a quien no puede ir y la deja abierta cuando el museo cierra. Si eres un organismo público, además tiene que ser accesible por ley (RD 1112/2018). Las mías se construyen para cumplirlo desde el primer día, no con un parche al final."
+        }
+      ]
+    },
+    "difference": {
+      "label": "Lo que no se ve",
+      "title": "Que sea bonito es lo fácil.",
+      "subtitle": "Una experiencia 3D impresiona los primeros diez segundos. Lo difícil es que cargue en un móvil de gama media, que no maree a nadie y que se pueda usar sin ratón. Ahí se nota quién la ha hecho.",
+      "items": [
+        {
+          "title": "Fluido en cualquier dispositivo",
+          "description": "Geometría y texturas a la medida justa, y la pantalla solo se vuelve a pintar cuando algo cambia. En VETA, las 48 superficies se dibujan en una sola llamada a la tarjeta gráfica."
+        },
+        {
+          "title": "Se usa con teclado",
+          "description": "Flechas, Intro y Escape hacen lo que esperas. El ratón es una opción, no un requisito."
+        },
+        {
+          "title": "Funciona con lector de pantalla",
+          "description": "Cada escena tiene su equivalente en texto: un índice, una descripción, una lista. Quien no ve el 3D recibe la misma información."
+        },
+        {
+          "title": "Respeta el movimiento reducido",
+          "description": "Si tu sistema pide menos movimiento, la experiencia se queda quieta. Nadie debería marearse viendo un catálogo."
+        }
+      ],
+      "proofs": {
+        "fps": {
+          "lead": "Esta página va ahora a",
+          "unit": "fps",
+          "note": "medidos en tu pantalla mientras lees esto",
+          "waiting": "…"
+        },
+        "keys": {
+          "hint": "Prueba: pulsa una flecha, Intro o Escape.",
+          "labels": {
+            "ArrowLeft": "Flecha izquierda",
+            "ArrowUp": "Flecha arriba",
+            "ArrowDown": "Flecha abajo",
+            "ArrowRight": "Flecha derecha",
+            "Enter": "Intro",
+            "Escape": "Esc"
+          }
+        },
+        "reader": {
+          "label": "Ejemplo de lo que oye quien usa lector de pantalla",
+          "lines": [
+            "Galería inundada. Cuatro cuadros sobre el agua.",
+            "Cuadro 2 de 4: La gran ola de Kanagawa, de Hokusai.",
+            "Usa las flechas para moverte e Intro para acercarte."
+          ]
+        },
+        "motion": {
+          "lead": "Tu sistema pide ahora",
+          "normal": "movimiento normal",
+          "reduced": "menos movimiento",
+          "note": "Si cambias el ajuste, esta página se adapta al momento."
+        }
+      }
+    },
+    "process": {
+      "label": "Cómo trabajo",
+      "title": "Primero algo que puedas tocar. Luego, lo demás.",
+      "steps": [
+        {
+          "title": "Entiendo qué tiene que enseñar",
+          "description": "Antes de modelar nada, hablamos de qué tiene que entender quien entra: un acabado, una escala, un recorrido. El 3D va al servicio de eso, no al revés."
+        },
+        {
+          "title": "Prototipo en el navegador",
+          "description": "Te enseño una primera versión que funciona, no un render ni una presentación. Decides sobre algo que puedes probar en tu móvil."
+        },
+        {
+          "title": "Lo construyo y lo pruebo",
+          "description": "Lo termino y lo pruebo en móvil, con teclado y con lector de pantalla. Te lo entrego integrado en tu web o como página propia."
+        }
+      ]
+    },
+    "work": {
+      "label": "Proyectos",
+      "title": "Dos conceptos propios. Están en vivo.",
+      "intro": "Ábrelos y recórrelos. Prueba también con el teclado: es la mitad de lo que hago."
+    },
+    "contact": {
+      "title": "¿Qué quieres enseñar?",
+      "subtitle": "Cuéntame qué vendes o qué quieres mostrar, y a quién. Te digo si el 3D tiene sentido para ti o si te sobra. Sin compromiso, sin PowerPoints, sin humo."
+    }
+  },
+  "portfolio": {
+    "items": {
+      "veta": {
+        "category": "Experiencia 3D · Concepto propio",
+        "title": "VETA, atlas de superficies",
+        "description": "Un catálogo cerámico que se recorre por tono y por tacto, no por referencias. 48 superficies ordenadas de claro a oscuro y de frío a cálido, con una luz que sigue al cursor para que distingas si un acabado es pulido, mate o estructurado. Funciona con teclado y lector de pantalla y respeta el movimiento reducido.",
+        "tags": [
+          "WebGL 2",
+          "Catálogo de producto",
+          "Teclado y lector de pantalla"
+        ],
+        "imageAlt": "Cuadrícula de VETA con muestras de mármol, terrazo, granito y madera ordenadas por tono.",
+        "cta": "Abrir VETA"
+      },
+      "insideTheFrame": {
+        "category": "Experiencia inmersiva · Concepto propio",
+        "title": "Inside the Frame",
+        "description": "Cuatro cuadros sobre el agua convertidos en lugares donde puedes estar: Hokusai, Hiroshige, Monet y Turner en una galería inundada. Se recorre arrastrando, con el dedo o con las flechas, se entra con o sin sonido, y la escena tiene una descripción en texto para quien no la ve.",
+        "tags": [
+          "3D inmersivo",
+          "Sonido opcional",
+          "Descripción en texto"
+        ],
+        "imageAlt": "Sala oscura de Inside the Frame con La gran ola de Hokusai bajo un foco, reflejada en el agua del suelo.",
+        "cta": "Abrir Inside the Frame"
+      },
+      "auditCase": {
+        "category": "Accesibilidad · Caso real",
+        "title": "Auditoría de una gran web turística",
+        "description": "Una web pública con reserva online, auditada a fondo: los 50 criterios de WCAG 2.1 AA uno a uno, a mano y con lector de pantalla real. Te enseño el método y lo que recibe el cliente al terminar, sin nombres.",
+        "tags": [
+          "WCAG 2.1 AA",
+          "UNE-EN 301 549",
+          "Lector de pantalla"
+        ],
+        "imageAlt": "Portada del informe de accesibilidad con la marca de Javier Piedra.",
+        "cta": "Ver el caso"
+      }
+    }
+  },
+  "accessibilityLanding": {
+    "meta": {
+      "ogAlt": "Accesibilidad web según la Ley 11/2023 y WCAG 2.1 AA",
+      "title": "Accesibilidad web y Ley 11/2023: auditoría · Javier Piedra",
+      "description": "Cada barrera de tu web es un cliente que no termina de comprar. Audito y arreglo webs según WCAG 2.1 AA y la Ley 11/2023. Diagnóstico exprés desde 290 €."
+    },
+    "hero": {
+      "label": "Accesibilidad web · WCAG 2.1 AA y Ley 11/2023",
+      "ctaSecondary": "Hablemos",
+      "xray": {
+        "toggle": "Ver lo que oye un lector de pantalla",
+        "hint": "Pasa el cursor por la ficha.",
+        "hintTouch": "Arrastra sobre la ficha o usa el botón.",
+        "caption": "Una ficha de producto corriente. Con la lupa se ve lo que anuncia un lector de pantalla: la foto es «IMG_4032.jpg», los colores y la cesta son «botón» sin nombre, el corazón es un «enlace» vacío y el campo de cantidad no dice qué es.",
+        "product": {
+          "name": "Jarrón Alba",
+          "detail": "Gres esmaltado · 24 cm",
+          "price": "64,00 €",
+          "colors": "Color",
+          "quantity": "Cantidad",
+          "reviews": "(38 opiniones)"
+        },
+        "reader": {
+          "image": "imagen, IMG_4032.jpg",
+          "heading": "encabezado, Jarrón Alba",
+          "price": "64,00 €",
+          "color": "botón",
+          "quantity": "edición, 1",
+          "minus": "botón",
+          "plus": "botón",
+          "cart": "botón",
+          "favorite": "enlace",
+          "rating": "imagen"
+        },
+        "legend": {
+          "problem": "Barrera",
+          "ok": "Bien"
+        }
+      }
+    },
+    "autoevaluador": {
+      "eyebrow": "¿La Ley 11/2023 te afecta?",
+      "title": "Lo descubres en 2 minutos",
+      "text": "He montado un autoevaluador con las 7 preguntas exactas que determinan tu situación legal según la normativa verificada contra el BOE. Sin registro previo. En 2 minutos tienes dictamen claro y, si quieres, un PDF con el plan de acción detallado.",
+      "cta": "Hacer el autoevaluador",
+      "microcopy": "7 preguntas. Sin registro previo. El email solo te lo pido al final si quieres el PDF.",
+      "dialLabel": "7 preguntas",
+      "dialTime": "2 min"
+    },
+    "caseStudy": {
+      "eyebrow": "Prueba real",
+      "title": "Empecé por mi propia web. Tenía 12 problemas.",
+      "text": "Antes de auditar la web de nadie, audité la mía. Sacaba 100 sobre 100 en las herramientas automáticas. Aun así encontré 12 problemas reales de accesibilidad que ninguna herramienta detecta — los mismos que probablemente tiene la tuya ahora mismo sin que lo sepas.",
+      "cta": "Ver qué encontré y cómo lo arreglé",
+      "caseLead": "¿Y en una web grande de verdad?",
+      "caseLink": "Mira un caso real completo, paso a paso",
+      "automatedLabel": "Herramientas automáticas",
+      "automatedScore": "100",
+      "automatedOf": "sobre 100",
+      "manualLabel": "Revisión a mano, con teclado y lector de pantalla",
+      "manualCount": "12",
+      "manualUnit": "problemas reales"
+    },
+    "contact": {
+      "title": "¿Cómo está la tuya?",
+      "subtitle": "Cuéntame qué web tienes y qué te preocupa. Te digo por dónde empezaría y si te basta el diagnóstico exprés o necesitas una auditoría completa. Sin compromiso, sin PowerPoints, sin humo."
+    },
+    "pricing": {
+      "startLabel": "Dos formas de empezar",
+      "steps": [
+        {
+          "offers": [
+            {
+              "id": "diagnostico-expres",
+              "name": "Diagnóstico exprés",
+              "price": "290 €",
+              "priceAriaLabel": "doscientos noventa euros",
+              "deadline": "48 horas laborables",
+              "summary": "Reviso tu home y los tres recorridos donde de verdad se pierde dinero: el que compra, el que reserva y el que rellena el formulario. En 48 horas sabes qué está roto y a quién estás dejando fuera.",
+              "cta": "Pedir el diagnóstico",
+              "topic": "Me interesa el diagnóstico exprés (290 €)."
+            },
+            {
+              "id": "auditoria-completa",
+              "name": "Auditoría completa",
+              "price": "Desde 1.200 €",
+              "priceAriaLabel": "desde mil doscientos euros",
+              "deadline": "5-7 días laborables",
+              "summary": "El diagnóstico entero de tu web según WCAG 2.1 AA y la Ley 11/2023, con el plan de remediación priorizado y el documento de cumplimiento listo para publicar.",
+              "tiers": [
+                {
+                  "name": "Esencial",
+                  "price": "1.200 €",
+                  "description": "Tu web informa y te contactan. No se compra, no se reserva, no hay que iniciar sesión."
+                },
+                {
+                  "name": "Comercial",
+                  "price": "2.200 €",
+                  "description": "En tu web se puede comprar, reservar o pedir cita. Ese proceso se audita entero, de principio a fin."
+                },
+                {
+                  "name": "Compleja",
+                  "price": "Presupuesto en 24 h",
+                  "description": "Varios de esos procesos, área privada con login, o un sitio especialmente extenso."
+                }
+              ],
+              "cta": "Pedir la auditoría",
+              "topic": "Me interesa la auditoría completa."
+            }
+          ]
+        },
+        {
+          "offers": [
+            {
+              "id": "remediacion",
+              "name": "Remediación",
+              "price": "Desde 1.800 €",
+              "priceAriaLabel": "desde mil ochocientos euros",
+              "deadline": "Según tramo",
+              "summary": "Arreglo yo lo que encontró la auditoría. Tres tramos cerrados y eliges el que quieras: nadie te obliga a ir al completo.",
+              "tiers": [
+                {
+                  "name": "Esencial",
+                  "price": "1.800 €",
+                  "description": "Los hallazgos bloqueantes: lo que hoy impide terminar una compra, enviar un formulario o navegar con teclado."
+                },
+                {
+                  "name": "Completo",
+                  "price": "3.400 €",
+                  "description": "Bloqueantes y serios. Tus recorridos principales dejan de expulsar gente por el camino."
+                },
+                {
+                  "name": "Conformidad AA",
+                  "price": "5.900 €",
+                  "description": "Todos los hallazgos del informe hasta alcanzar WCAG 2.1 AA en el alcance auditado."
+                }
+              ],
+              "cta": "Hablar de la remediación",
+              "topic": "Me interesa la remediación."
+            }
+          ]
+        },
+        {
+          "offers": [
+            {
+              "id": "conformidad-continua",
+              "name": "Conformidad continua",
+              "price": "149 € / 349 € al mes",
+              "priceAriaLabel": "ciento cuarenta y nueve o trescientos cuarenta y nueve euros al mes",
+              "deadline": "Mensual, sin permanencia",
+              "summary": "Las webs cambian. Plugins que se actualizan, contenido que sube marketing, deploys que rompen cosas. Reviso la tuya cada mes para que lo que arreglaste siga arreglado.",
+              "tiers": [
+                {
+                  "name": "Revisión",
+                  "price": "149 €/mes",
+                  "description": "Revisión mensual, aviso de lo que se ha roto y tu documento de cumplimiento siempre al día."
+                },
+                {
+                  "name": "Revisión y corrección",
+                  "price": "349 €/mes",
+                  "description": "Lo anterior, más 4 horas mensuales de corrección aplicadas por mí. Lo que se rompe se arregla, sin presupuesto aparte."
+                }
+              ],
+              "cta": "Hablar de la conformidad continua",
+              "topic": "Me interesa la conformidad continua.",
+              "note": "Requiere auditoría previa."
+            }
+          ]
+        }
+      ]
+    },
+    "faq": {
+      "label": "ANTES DE CONTRATAR",
+      "title": "Lo que se pregunta todo el mundo.",
+      "items": [
+        {
+          "question": "¿Qué diferencia hay entre el diagnóstico exprés y la auditoría?",
+          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 50 criterios WCAG 2.1 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
+        },
+        {
+          "question": "¿Cómo sé qué tramo me toca?",
+          "answer": "Por lo que se puede hacer en tu web, no por su tamaño. Si tu web informa y te contactan, es el tramo Esencial: 1.200 €. Si se puede comprar, reservar o pedir cita, es Comercial: 2.200 €. Si hay varios de esos procesos o un área privada con login, te paso presupuesto cerrado en 24 horas. El número de páginas lo compruebo yo en tu sitemap: no tienes que contarlas."
+        },
+        {
+          "question": "¿Sirve para cumplir el requisito legal de la Ley 11/2023?",
+          "answer": "Sí. La auditoría incluye el documento de cumplimiento listo para publicar, redactado según el régimen que te aplica: declaración formal del RD 1112/2018 si eres sector público, información del art. 13.2 Ley 11/2023 si eres empresa privada. En ambos casos cumples el requisito documental que exige la normativa desde el día que lo publicas."
+        },
+        {
+          "question": "¿Qué pasa si se te escapa un hallazgo?",
+          "answer": "Depende del servicio. En la auditoría: si dentro del alcance auditado se me escapa un hallazgo, lo documento y corrijo el informe sin coste en los 60 días siguientes a la entrega. En la remediación: si una corrección no supera la prueba con la que se verificó, la rehago sin coste en ese mismo plazo. El diagnóstico exprés no lleva esta garantía: por diseño es un top 10, no una evaluación completa; lo que sí te aseguro es que cada hallazgo está confirmado y es reproducible."
+        },
+        {
+          "question": "¿Cómo se factura?",
+          "answer": "50 % al confirmar el inicio y 50 % a la entrega. Factura formal con IVA, válida para deducción. La conformidad continua se factura por meses vencidos. El diagnóstico exprés es la excepción: se abona íntegro al contratar, en un solo pago."
+        }
+      ]
+    }
+  },
+  "aiLanding": {
+    "meta": {
+      "title": "Tu web, lista para los agentes de IA · Javier Piedra",
+      "description": "Los asistentes de IA ya navegan y rellenan formularios por la gente. Reviso y preparo tu web para que puedan usarla: el mismo trabajo que la accesibilidad."
+    },
+    "hero": {
+      "label": "Webs para agentes de IA",
+      "titleLines": [
+        "Si una IA no puede",
+        "usar tu web,"
+      ],
+      "titleHighlight": "no te compra.",
+      "subtitle": "Los asistentes de IA ya buscan, comparan y rellenan formularios en nombre de la gente. Para hacerlo leen tu web por dentro: qué es cada botón, cada campo y cada precio. Si eso está mal hecho, tu tienda está a oscuras para ellos. Lo reviso y lo arreglo.",
+      "ctaPrimary": "Hablemos",
+      "ctaSecondary": "Qué reviso"
+    },
+    "demo": {
+      "window": "Agente de IA · navegando",
+      "taskLabel": "Tarea",
+      "task": "«Compra el jarrón Alba en azul, dos unidades.»",
+      "versionsLabel": "Versión de la ficha",
+      "broken": "Tal como está",
+      "fixed": "Arreglada",
+      "readsLabel": "Lo que lee",
+      "doesLabel": "Lo que hace",
+      "replay": "Repetir",
+      "caption": "Simulación de cómo un agente de IA recorre una ficha de producto a partir de su árbol de accesibilidad. El diseño es el mismo en las dos versiones; cambia el código.",
+      "snapshot": {
+        "broken": [
+          {
+            "line": "- img \"IMG_4032.jpg\"",
+            "problem": true,
+            "note": "el nombre del archivo"
+          },
+          {
+            "line": "- heading \"Jarrón Alba\""
+          },
+          {
+            "line": "- text \"64,00 €\""
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "sin nombre"
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "sin nombre"
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "sin nombre"
+          },
+          {
+            "line": "- spinbutton \"1\"",
+            "problem": true,
+            "note": "sin etiqueta"
+          },
+          {
+            "line": "- button",
+            "problem": true,
+            "note": "sin nombre"
+          },
+          {
+            "line": "- link",
+            "problem": true,
+            "note": "vacío"
+          }
+        ],
+        "fixed": [
+          {
+            "line": "- img \"Jarrón Alba de gres azul, 24 cm\""
+          },
+          {
+            "line": "- heading \"Jarrón Alba\""
+          },
+          {
+            "line": "- text \"64,00 €\""
+          },
+          {
+            "line": "- radiogroup \"Color\""
+          },
+          {
+            "line": "  - radio \"Azul\" [checked]"
+          },
+          {
+            "line": "  - radio \"Terracota\""
+          },
+          {
+            "line": "- spinbutton \"Cantidad\": \"1\""
+          },
+          {
+            "line": "- button \"Añadir a la cesta\""
+          },
+          {
+            "line": "- button \"Guardar en favoritos\""
+          }
+        ]
+      },
+      "log": {
+        "broken": [
+          "Busco el color azul: hay tres botones sin nombre.",
+          "Pulso el primero. No sé si es el azul.",
+          "Hay un campo con un 1. No sé qué es.",
+          "No encuentro cómo añadir a la cesta."
+        ],
+        "fixed": [
+          "Color: elijo «Azul».",
+          "Cantidad: escribo 2.",
+          "Pulso «Añadir a la cesta».",
+          "Compruebo la cesta: 2 jarrones azules."
+        ]
+      },
+      "result": {
+        "broken": "Tarea abandonada",
+        "fixed": "Pedido listo para confirmar"
+      }
+    },
+    "why": {
+      "label": "Por qué ahora",
+      "title": "Ya no solo te visitan personas.",
+      "items": [
+        {
+          "title": "Los asistentes ya actúan",
+          "text": "Los principales asistentes de IA pueden abrir webs, comparar productos y rellenar formularios en nombre de quien se lo pide. No es una promesa: ya lo hacen."
+        },
+        {
+          "title": "Leen la web por dentro",
+          "text": "Muchos no miran la pantalla como tú: leen el árbol de accesibilidad, la misma estructura que usa un lector de pantalla. Un botón sin nombre es tan invisible para ellos como para una persona ciega."
+        },
+        {
+          "title": "Google ya lo mide",
+          "text": "Lighthouse, la herramienta de Google para medir webs, incluye en su versión actual una categoría de navegación por agentes. Lo primero que puntúa es que el árbol de accesibilidad esté bien formado. Google la marca aún como en desarrollo."
+        }
+      ],
+      "proofLabel": "Esta página en Lighthouse 13.5",
+      "proofOf": "sobre 100",
+      "proofCategory": "Agentic Browsing"
+    },
+    "checks": {
+      "label": "Lo que reviso",
+      "title": "Un mismo arreglo, dos clientes.",
+      "subtitle": "Todo lo que hace tu web usable para un agente la hace usable también para una persona con discapacidad. Y al revés. Por eso lo reviso a la vez.",
+      "personLabel": "Para una persona",
+      "agentLabel": "Para un agente",
+      "items": [
+        {
+          "title": "Botones y enlaces con nombre",
+          "person": "Quien usa lector de pantalla sabe qué hace cada uno.",
+          "agent": "Sabe qué pulsar."
+        },
+        {
+          "title": "Formularios con etiqueta",
+          "person": "Cada campo dice qué pide y qué ha fallado.",
+          "agent": "Rellena el campo correcto a la primera."
+        },
+        {
+          "title": "Estructura clara",
+          "person": "Salta a lo que busca sin leerlo todo.",
+          "agent": "Entiende dónde está cada cosa."
+        },
+        {
+          "title": "Estados que se anuncian",
+          "person": "Sabe si su elección ha funcionado: seleccionado, agotado, error.",
+          "agent": "Comprueba lo que ha hecho antes de seguir."
+        },
+        {
+          "title": "Una página que no salta",
+          "person": "No pulsa lo que no quería porque algo se movió.",
+          "agent": "No falla el clic por un salto de la maquetación."
+        },
+        {
+          "title": "Precios y stock en texto",
+          "person": "Se leen con zoom y con cualquier tecnología.",
+          "agent": "Los compara sin adivinar."
+        }
+      ],
+      "extra": "Y lo más nuevo: si tu web tiene formularios clave (pedido, reserva, presupuesto), te propongo prepararlos para WebMCP, la propuesta de Chrome para que una web le diga a un agente qué acciones ofrece. También reviso tu llms.txt."
+    },
+    "process": {
+      "label": "Cómo trabajo",
+      "title": "Lo pruebo con un agente de verdad.",
+      "steps": [
+        {
+          "title": "Le doy una tarea real",
+          "description": "Comprar, reservar o pedir presupuesto en tu web, como lo haría tu cliente. Lo hago con un agente y con lector de pantalla, y anoto dónde se pierde cada uno."
+        },
+        {
+          "title": "Te explico qué lo bloquea",
+          "description": "Cada bloqueo con su causa y su arreglo, ordenados por impacto. El mismo informe sirve para la Ley 11/2023 si te aplica."
+        },
+        {
+          "title": "Lo arreglo y repito la prueba",
+          "description": "Corrijo el código yo, o se lo dejo claro a tu equipo, y repito la misma tarea hasta que el agente la termina."
+        }
+      ]
+    },
+    "contact": {
+      "title": "¿Puede una IA comprar en tu web?",
+      "subtitle": "Mándame tu web y la tarea más importante que se hace en ella. Te digo qué se encontraría un agente y por dónde empezaría. Sin compromiso, sin PowerPoints, sin humo."
+    }
+  },
+  "survey3d": {
+    "meta": {
+      "title": "Javier Piedra · Experiencias web 3D, accesibilidad e IA",
+      "description": "La Sierra de Guadarrama en 3D, en vivo y con su tiempo real: el mapa para recorrer lo que hago. Experiencias web 3D, accesibilidad web y webs para agentes de IA."
+    },
+    "eyebrow": "Javier Piedra · 3D, accesibilidad e IA",
+    "titleStart": "La parte",
+    "titleHighlight": "difícil",
+    "titleEnd": "de la web.",
+    "subtitle": "Estudié Topografía. Sigo midiendo el terreno antes de construir nada.",
+    "hint": "Cada cumbre es un apartado. Elige una.",
+    "sceneDescription": "Mapa en relieve de la Sierra de Guadarrama, visto desde Segovia y dibujado con curvas de nivel doradas sobre fondo negro. Cuatro cumbres llevan un vértice geodésico: Peñalara, Siete Picos, La Mujer Muerta y la Bola del Mundo. Cada una es un apartado de la web. El cielo, la luz y el tiempo son los de la sierra en este momento, y de noche se encienden las luces de los pueblos.",
+    "captionLandscape": "Sierra de Guadarrama, vista desde Segovia",
+    "captionPortrait": "Sierra de Guadarrama, vista desde el oeste",
+    "dataLabel": "Datos",
+    "weatherLabel": "Tiempo",
+    "sources": "MDT25 © Instituto Geográfico Nacional · Cumbres, agua y edificios © colaboradores de OpenStreetMap",
+    "lens": "Ver lo que no se ve",
+    "lensHint": "Así lee esta página un lector de pantalla",
+    "classic": "Versión clásica",
+    "pause": "Pausar movimiento",
+    "sound": "Sonido",
+    "nav": {
+      "label": "Principal",
+      "blog": "Blog",
+      "contact": "Hablemos"
+    },
+    "homeLabel": "Javier Piedra, inicio",
+    "verticesLabel": "Apartados",
+    "hud": {
+      "live": "Levantamiento en vivo",
+      "sky": "Cielo",
+      "weather": "Tiempo"
+    },
+    "moment": "Cambiar el momento",
+    "hour": "Hora",
+    "month": "Mes",
+    "weather": "Tiempo",
+    "backToNow": "Volver al ahora",
+    "months": [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre"
+    ],
+    "weatherOptions": [
+      {
+        "value": "live",
+        "label": "En directo"
+      },
+      {
+        "value": "clear",
+        "label": "Despejado"
+      },
+      {
+        "value": "rain",
+        "label": "Lluvia"
+      },
+      {
+        "value": "snow",
+        "label": "Nieve"
+      },
+      {
+        "value": "fog",
+        "label": "Niebla"
+      },
+      {
+        "value": "wind",
+        "label": "Viento fuerte"
+      }
+    ]
+  },
+  "projectSheet": {
+    "sheet": "Hoja",
+    "of": "de"
   }
 }

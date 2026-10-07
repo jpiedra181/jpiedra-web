@@ -1,0 +1,1563 @@
+---
+//@ts-nocheck
+// La home: el levantamiento de la Sierra de Guadarrama en 3D. Es un documento
+// propio (sin BaseLayout) y sirve a los dos idiomas: src/pages/index.astro y
+// src/pages/en/index.astro. La versión clásica (el plano impreso, sin WebGL)
+// tiene su propia ruta y se enlaza desde la cabecera.
+import "../../styles/global.css"
+import type { Lang } from "../../types"
+import { surveyVerticesFor } from "../../data/survey-vertices"
+import { routesFor, siteConfig } from "../../config/site"
+import { useTranslations } from "../../i18n/utils"
+import SeoHead from "../layout/SeoHead.astro"
+import { formatElevation } from "../../lib/format"
+import LanguageSwitcher from "../ui/LanguageSwitcher.astro"
+import serifFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url"
+import serifItalicFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url"
+import sansFont from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).survey3d
+const routes = routesFor(lang)
+const vertices = surveyVerticesFor(lang)
+
+// En producción el tiempo llega de AEMET (función de Netlify); en desarrollo,
+// de Open-Meteo. La atribución tiene que nombrar la fuente que se usa.
+const weatherSource = import.meta.env.PROD ? "© AEMET" : "Open-Meteo"
+// Versión corta para pantallas pequeñas: nombra igualmente las tres fuentes
+// (las guías de atribución de OpenStreetMap la admiten si falta espacio).
+const captionShort = `${copy.dataLabel}: IGN · OpenStreetMap · ${weatherSource.replace("© ", "")}`
+const captionSources = `${copy.sources} · ${copy.weatherLabel}: ${weatherSource}`
+
+
+// Datos estructurados de la marca: la persona y el sitio web.
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": `${siteConfig.url}/#javier-piedra`,
+            name: "Javier Piedra",
+            url: siteConfig.url,
+            email: siteConfig.email,
+            jobTitle: lang === "es" ? "Diseñador y desarrollador web" : "Web designer and developer",
+            knowsAbout: lang === "es"
+                ? ["Experiencias web 3D", "WebGL", "Accesibilidad web", "WCAG 2.1", "Ley 11/2023", "Agentes de IA"]
+                : ["3D web experiences", "WebGL", "Web accessibility", "WCAG 2.1", "European Accessibility Act", "AI agents"],
+            sameAs: [siteConfig.socials.linkedin, siteConfig.socials.github],
+        },
+        {
+            "@type": "WebSite",
+            "@id": `${siteConfig.url}/#website`,
+            name: "Javier Piedra",
+            url: siteConfig.url,
+            inLanguage: ["es", "en"],
+            publisher: { "@id": `${siteConfig.url}/#javier-piedra` },
+        },
+    ],
+}
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <SeoHead
+            lang={lang}
+            title={copy.meta.title}
+            description={copy.meta.description}
+            structuredData={structuredData}
+        />
+        <!-- Las tres fuentes del titular: precargadas, el texto aparece sin esperar. -->
+        <link rel="preload" href={serifFont} as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href={serifItalicFont} as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href={sansFont} as="font" type="font/woff2" crossorigin />
+        <!-- Con JavaScript, la lista de vértices espera a la escena para no
+             pintarse un instante fuera de sitio (salto de maquetación). -->
+        <script is:inline>document.documentElement.classList.add("js")</script>
+        <!-- Los datos del terreno no se precargan: competirían por el ancho de
+             banda con las fuentes del titular, y la escena ya espera a que el
+             titular esté pintado para cargarlos. -->
+    </head>
+    <body class="survey">
+        <canvas id="survey-canvas" class="survey-canvas" aria-hidden="true"
+        ></canvas>
+
+        <header class="survey-header">
+            <a href={routes.home} class="survey-logo" data-annotate>
+                <span aria-hidden="true">J<span class="text-accent">.</span>P</span>
+                <span class="sr-only">{copy.homeLabel}</span>
+            </a>
+            <nav class="survey-nav" aria-label={copy.nav.label}>
+                {lang === "es" && <a href={routes.blog} data-annotate>{copy.nav.blog}</a>}
+                <a href={routes.contact} data-annotate>{copy.nav.contact}</a>
+                <a href={routes.classic} data-annotate>{copy.classic}</a>
+                <LanguageSwitcher lang={lang} class="survey-language" />
+            </nav>
+            <dl class="survey-hud">
+                <!-- Las coordenadas cambian con cada movimiento del ratón: para un
+                     lector de pantalla serían ruido. El cielo y el tiempo, no. -->
+                <div aria-hidden="true">
+                    <dt>{copy.hud.live}</dt>
+                    <dd>
+                        <span data-readout="latitude">40°49′00″ N</span>
+                        <span data-readout="longitude">4°02′00″ {lang === "en" ? "W" : "O"}</span>
+                    </dd>
+                </div>
+                <div class="survey-hud-sky">
+                    <dt class="sr-only">{copy.hud.sky}</dt>
+                    <dd data-readout="sky"></dd>
+                </div>
+                <div class="survey-hud-weather">
+                    <dt class="sr-only">{copy.hud.weather}</dt>
+                    <dd data-readout="weather"></dd>
+                </div>
+            </dl>
+        </header>
+
+        <main class="survey-main">
+            <div class="survey-intro">
+                <p class="survey-eyebrow" data-annotate>{copy.eyebrow}</p>
+                <h1 class="survey-title" data-annotate>
+                    {copy.titleStart}
+                    <em>{copy.titleHighlight}</em>
+                    <span class="block">{copy.titleEnd}</span>
+                </h1>
+                <p class="survey-subtitle" data-annotate>{copy.subtitle}</p>
+                <p class="survey-hint">{copy.hint}</p>
+                <p class="survey-status">
+                    <span data-readout="sky"></span>
+                    <span data-readout="weather"></span>
+                </p>
+                <p class="survey-caption">
+                    <span class="caption-full">
+                        <span class="caption-landscape">{copy.captionLandscape}</span>
+                        <span class="caption-portrait">{copy.captionPortrait}</span>
+                        · {captionSources}
+                    </span>
+                    <span class="caption-short">{captionShort}</span>
+                </p>
+                <p class="sr-only">{copy.sceneDescription}</p>
+            </div>
+
+            <nav class="survey-vertices" aria-label={copy.verticesLabel}>
+                <ul role="list">
+                    {
+                        vertices.map((vertex) => {
+                            const meta = `${vertex.code} · ${vertex.peak} · ${formatElevation(vertex.elevation, lang)}`
+                            return (
+                                <li>
+                                    {vertex.href ? (
+                                        <a
+                                            href={vertex.href}
+                                            class="vertex"
+                                            data-vertex
+                                            data-annotate
+                                            data-lat={vertex.lat}
+                                            data-lon={vertex.lon}
+                                            aria-label={`${vertex.label} (${vertex.peak}, ${formatElevation(vertex.elevation, lang)})`}
+                                        >
+                                            <svg class="vertex-pin" viewBox="0 0 16 14" aria-hidden="true">
+                                                <path d="M8 1 L15 13 L1 13 Z" />
+                                                <circle cx="8" cy="9" r="1.6" />
+                                            </svg>
+                                            <span class="vertex-stem" aria-hidden="true" />
+                                            <span class="vertex-card">
+                                                <span class="vertex-meta">{meta}</span>
+                                                <span class="vertex-label">{vertex.label}</span>
+                                            </span>
+                                        </a>
+                                    ) : (
+                                        <div
+                                            class="vertex vertex--pending"
+                                            role="note"
+                                            data-vertex
+                                            data-annotate
+                                            data-lat={vertex.lat}
+                                            data-lon={vertex.lon}
+                                            aria-label={`${vertex.label}: ${vertex.status?.toLowerCase()} (${vertex.peak}, ${formatElevation(vertex.elevation, lang)})`}
+                                        >
+                                            <svg class="vertex-pin" viewBox="0 0 16 14" aria-hidden="true">
+                                                <path d="M8 1 L15 13 L1 13 Z" />
+                                                <circle cx="8" cy="9" r="1.6" />
+                                            </svg>
+                                            <span class="vertex-stem" aria-hidden="true" />
+                                            <span class="vertex-card">
+                                                <span class="vertex-meta">{meta}</span>
+                                                <span class="vertex-label">
+                                                    {vertex.label}
+                                                    <span class="vertex-status">{vertex.status}</span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    )}
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </nav>
+
+            <div class="survey-controls">
+                <p class="survey-lens-hint" aria-hidden="true">{copy.lensHint}</p>
+                <button
+                    type="button"
+                    class="survey-button survey-button--ghost"
+                    data-pause
+                    data-annotate
+                    aria-pressed="false"
+                >
+                    <span class="survey-pause-icon" aria-hidden="true"></span>
+                    {copy.pause}
+                </button>
+                <button
+                    type="button"
+                    class="survey-button survey-button--ghost"
+                    data-sound
+                    data-annotate
+                    aria-pressed="false"
+                >
+                    <svg class="survey-sound-icon" viewBox="0 0 20 16" aria-hidden="true">
+                        <path class="speaker" d="M2 5.5h3.5L10 2v12L5.5 10.5H2z" />
+                        <path class="waves" d="M13 5a4 4 0 0 1 0 6M15.5 3a7 7 0 0 1 0 10" />
+                        <path class="mute" d="M13 5.5l5 5M18 5.5l-5 5" />
+                    </svg>
+                    {copy.sound}
+                </button>
+                <div class="survey-moment">
+                    <button
+                        type="button"
+                        class="survey-button survey-button--ghost"
+                        data-moment-toggle
+                        data-annotate
+                        aria-expanded="false"
+                        aria-controls="survey-moment-panel"
+                    >
+                        {copy.moment}
+                    </button>
+                    <div
+                        id="survey-moment-panel"
+                        class="survey-moment-panel"
+                        role="group"
+                        aria-labelledby="survey-moment-title"
+                        hidden
+                    >
+                        <p id="survey-moment-title" class="survey-moment-title">
+                            {copy.moment}
+                        </p>
+                        <label class="survey-field">
+                            <span class="survey-field-label">
+                                {copy.hour} <output data-hour-output>12:00</output>
+                            </span>
+                            <input
+                                type="range"
+                                min="0"
+                                max="1425"
+                                step="15"
+                                value="720"
+                                data-hour
+                            />
+                        </label>
+                        <label class="survey-field">
+                            <span class="survey-field-label">{copy.month}</span>
+                            <select data-month>
+                                {
+                                    copy.months.map((month, index) => (
+                                        <option value={index}>{month}</option>
+                                    ))
+                                }
+                            </select>
+                        </label>
+                        <fieldset class="survey-field">
+                            <legend class="survey-field-label">{copy.weather}</legend>
+                            <div class="survey-chips">
+                                {
+                                    copy.weatherOptions.map((option) => (
+                                        <label class="survey-chip">
+                                            <input
+                                                type="radio"
+                                                name="survey-weather"
+                                                value={option.value}
+                                                checked={option.value === "live"}
+                                            />
+                                            <span>{option.label}</span>
+                                        </label>
+                                    ))
+                                }
+                            </div>
+                        </fieldset>
+                        <button type="button" class="survey-reset" data-moment-reset>
+                            {copy.backToNow}
+                        </button>
+                    </div>
+                </div>
+                <button
+                    type="button"
+                    class="survey-button"
+                    data-lens-toggle
+                    data-annotate
+                    aria-pressed="false"
+                >
+                    <span class="survey-button-icon" aria-hidden="true"></span>
+                    {copy.lens}
+                </button>
+            </div>
+
+        </main>
+
+        <div class="survey-reticle" data-reticle aria-hidden="true">
+            <span class="reticle-ring"></span>
+            <span class="reticle-cross"></span>
+            <span class="reticle-elevation" data-readout="elevation">— m</span>
+            <span class="reticle-place" data-readout="place"></span>
+        </div>
+        <div class="lens-layer" data-lens-layer aria-hidden="true" hidden></div>
+        <div class="lens-caption" data-lens-caption aria-hidden="true" hidden></div>
+        <div class="survey-fade" data-fade aria-hidden="true"></div>
+
+        <script>
+            import type { WeatherKind } from "../../scripts/survey/weather"
+            import { wireSurveyControls } from "../../scripts/survey/controls"
+            import terrainMeta from "../../data/terrain/guadarrama-mdt25.json"
+            import waterNames from "../../data/terrain/guadarrama-agua.json"
+            import villageNames from "../../data/terrain/guadarrama-pueblos.json"
+
+            const query = <T extends Element>(selector: string) =>
+                document.querySelector<T>(selector)!
+
+            const vertexElements = Array.from(
+                document.querySelectorAll<HTMLElement>("[data-vertex]"),
+            )
+
+            // ?momento=2026-12-21T18:30 (hora local) y ?tiempo=nieve permiten
+            // enlazar directamente a un momento concreto de la sierra.
+            const WEATHER_PARAMS: Record<string, WeatherKind> = {
+                directo: "live", despejado: "clear", lluvia: "rain", nieve: "snow", niebla: "fog", viento: "wind",
+                live: "live", clear: "clear", rain: "rain", snow: "snow", fog: "fog", wind: "wind",
+            }
+            const params = new URLSearchParams(location.search)
+            const momentParam = params.get("momento") ?? params.get("moment")
+            const requestedMoment = momentParam ? new Date(momentParam) : null
+            const initialMoment =
+                requestedMoment && !Number.isNaN(requestedMoment.valueOf()) ? requestedMoment : null
+            const initialWeather = WEATHER_PARAMS[params.get("tiempo") ?? params.get("weather") ?? "live"] ?? "live"
+
+            // La escena (three.js y el relieve: unos 420 KB) se pide cuando el
+            // titular ya está pintado con sus fuentes. Un solo fotograma de
+            // espera no basta: a veces el import salía antes de pintar y, en
+            // una red móvil lenta, competía con el titular (LCP) por la red.
+            const SCENE_IDLE_TIMEOUT_MS = 600
+            // Una pestaña abierta en segundo plano no notifica el LCP: sin
+            // este plazo, la escena no llegaría a cargarse.
+            const SCENE_FALLBACK_MS = 2000
+            const afterHeadlinePaint = () =>
+                new Promise<void>((resolve) => {
+                    const whenIdle = () =>
+                        "requestIdleCallback" in window
+                            ? requestIdleCallback(() => resolve(), { timeout: SCENE_IDLE_TIMEOUT_MS })
+                            : setTimeout(resolve, 0)
+                    if (!PerformanceObserver.supportedEntryTypes?.includes("largest-contentful-paint")) {
+                        requestAnimationFrame(() => requestAnimationFrame(whenIdle))
+                        return
+                    }
+                    const fallback = setTimeout(whenIdle, SCENE_FALLBACK_MS)
+                    const observer = new PerformanceObserver(() => {
+                        observer.disconnect()
+                        clearTimeout(fallback)
+                        whenIdle()
+                    })
+                    observer.observe({ type: "largest-contentful-paint", buffered: true })
+                })
+
+            const loadScene = async () => {
+                await document.fonts?.ready
+                await afterHeadlinePaint()
+                const { initSurveyScene } = await import("../../scripts/survey-scene")
+                return initSurveyScene({
+                lang: document.documentElement.lang === "en" ? "en" : "es",
+                canvas: query<HTMLCanvasElement>("#survey-canvas"),
+                heightsUrl: "/levantamiento/guadarrama-mdt25.bin",
+                waterMaskUrl: "/levantamiento/guadarrama-agua.png",
+                waterNames,
+                villagesUrl: "/levantamiento/guadarrama-pueblos.png",
+                villageNames,
+                initialMoment,
+                initialWeather,
+                meta: terrainMeta,
+                vertices: vertexElements.map((element) => ({
+                    element,
+                    lat: Number(element.dataset.lat),
+                    lon: Number(element.dataset.lon),
+                    href: element.getAttribute("href") ?? undefined,
+                })),
+                readout: {
+                    latitude: query<HTMLElement>('[data-readout="latitude"]'),
+                    longitude: query<HTMLElement>('[data-readout="longitude"]'),
+                    elevation: query<HTMLElement>('[data-readout="elevation"]'),
+                    sky: Array.from(document.querySelectorAll<HTMLElement>('[data-readout="sky"]')),
+                    weather: Array.from(document.querySelectorAll<HTMLElement>('[data-readout="weather"]')),
+                    place: query<HTMLElement>('[data-readout="place"]'),
+                },
+                reticle: query<HTMLElement>("[data-reticle]"),
+                lensToggle: query<HTMLButtonElement>("[data-lens-toggle]"),
+                lensLayer: query<HTMLElement>("[data-lens-layer]"),
+                lensCaption: query<HTMLElement>("[data-lens-caption]"),
+                fade: query<HTMLElement>("[data-fade]"),
+                layout: {
+                    header: [query<HTMLElement>(".survey-logo"), query<HTMLElement>(".survey-nav")],
+                    intro: query<HTMLElement>(".survey-intro"),
+                    controls: query<HTMLElement>(".survey-controls"),
+                    obstacles: [
+                        query<HTMLElement>(".survey-logo"),
+                        query<HTMLElement>(".survey-nav"),
+                        query<HTMLElement>(".survey-hud"),
+                        query<HTMLElement>(".survey-intro"),
+                        query<HTMLElement>(".survey-controls"),
+                        query<HTMLElement>("#survey-moment-panel"),
+                    ],
+                },
+            })
+            }
+
+            loadScene()
+                .then((scene) => {
+                    wireSurveyControls(scene, { moment: initialMoment, weather: initialWeather })
+                    document.addEventListener(
+                        "astro:before-swap",
+                        () => scene.destroy(),
+                        { once: true },
+                    )
+                })
+                .catch((error) => {
+                    // Sin WebGL o sin datos: los apartados se quedan como una
+                    // lista normal y la página sigue siendo usable.
+                    console.error(error)
+                    document.documentElement.classList.add("survey-failed")
+                })
+        </script>
+
+        <style is:global>
+            /* Sin "tirar para recargar" ni rebote: al arrastrar el dedo por la
+               sierra (la lupa lo sigue) el navegador recargaba la página. */
+            html:has(.survey) {
+                overscroll-behavior: none;
+            }
+
+            .survey {
+                --mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+                min-height: 100vh;
+                min-height: 100dvh;
+                overscroll-behavior: none;
+                overflow: hidden;
+                background: var(--color-bg-primary);
+                color: var(--color-text-primary);
+                cursor: crosshair;
+            }
+
+            .survey a,
+            .survey button {
+                cursor: pointer;
+            }
+
+            /* dvh descuenta las barras del navegador en móvil: con vh el lienzo
+               quedaba estirado al aparecer o esconderse la barra de Safari. */
+            .survey-canvas {
+                position: fixed;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                height: 100dvh;
+                display: block;
+            }
+
+            /* --- Cabecera y lectura de coordenadas --- */
+            .survey-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 20;
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                align-items: start;
+                gap: 1rem;
+                padding: 1.75rem clamp(1.25rem, 4vw, 3rem);
+                pointer-events: none;
+            }
+
+            .survey-logo {
+                pointer-events: auto;
+                font-family: var(--font-heading);
+                font-size: 1.875rem;
+                line-height: 1;
+                color: var(--color-text-primary);
+                border-radius: 4px;
+            }
+
+            /* Cápsula casi opaca: la navegación puede quedar sobre curvas doradas
+               o nevadas y su contraste no puede depender de lo que haya debajo. */
+            .survey-nav {
+                justify-self: center;
+                display: flex;
+                gap: 0.25rem;
+                padding: 0.15rem;
+                border-radius: 999px;
+                background: rgba(11, 15, 20, 0.86);
+                border: 1px solid rgba(232, 200, 114, 0.12);
+                pointer-events: auto;
+            }
+
+            .survey-status {
+                display: none;
+            }
+
+            .caption-short {
+                display: none;
+            }
+
+            .survey-nav a {
+                display: inline-flex;
+                align-items: center;
+                min-height: 36px;
+                padding: 0 0.6rem;
+                border-radius: 999px;
+                font-size: 0.75rem;
+                font-weight: 500;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--color-text-primary);
+                transition: color 0.2s;
+            }
+
+            .survey-nav a:hover {
+                color: var(--color-accent);
+            }
+
+            .survey-hud {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                letter-spacing: 0.08em;
+                text-align: right;
+                color: var(--color-text-secondary);
+                font-variant-numeric: tabular-nums;
+            }
+
+            .survey-hud dt {
+                color: var(--color-accent);
+                text-transform: uppercase;
+                letter-spacing: 0.24em;
+                margin-bottom: 0.4rem;
+            }
+
+            .survey-hud-sky {
+                margin-top: 0.55rem;
+                color: var(--color-accent);
+            }
+
+            .survey-hud-weather {
+                margin-top: 0.3rem;
+                color: #b9d3e6;
+            }
+
+            /* --- Sonido --- */
+            .survey-sound-icon {
+                width: 1.15rem;
+                height: 0.95rem;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 1.5;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            .survey-sound-icon .speaker {
+                fill: currentColor;
+                stroke: none;
+            }
+
+            [data-sound][aria-pressed="false"] .waves,
+            [data-sound][aria-pressed="true"] .mute {
+                display: none;
+            }
+
+            [data-sound][aria-pressed="true"] {
+                border-color: var(--color-accent);
+                color: var(--color-accent);
+            }
+
+            /* --- Pausa y panel de momento --- */
+            .survey-pause-icon {
+                width: 0.7rem;
+                height: 0.75rem;
+                border-left: 2.5px solid currentColor;
+                border-right: 2.5px solid currentColor;
+            }
+
+            [data-pause][aria-pressed="true"] .survey-pause-icon {
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-color: transparent transparent transparent currentColor;
+                border-width: 0.4rem 0 0.4rem 0.7rem;
+            }
+
+            .survey-moment {
+                position: relative;
+            }
+
+            .survey-moment-panel {
+                position: absolute;
+                right: 0;
+                bottom: calc(100% + 0.75rem);
+                width: min(22rem, calc(100vw - 2.5rem));
+                display: flex;
+                flex-direction: column;
+                gap: 1.1rem;
+                padding: 1.25rem;
+                border-radius: 12px;
+                border: 1px solid rgba(232, 200, 114, 0.25);
+                background: rgba(11, 15, 20, 0.88);
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+                cursor: auto;
+            }
+
+            .survey-moment-panel[hidden] {
+                display: none;
+            }
+
+            .survey-moment-title {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                letter-spacing: 0.24em;
+                text-transform: uppercase;
+                color: var(--color-accent);
+            }
+
+            .survey-field {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                border: 0;
+                padding: 0;
+                margin: 0;
+            }
+
+            .survey-field-label {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.8rem;
+                color: var(--color-text-secondary);
+            }
+
+            .survey-field-label output {
+                font-family: var(--mono);
+                color: var(--color-text-primary);
+                font-variant-numeric: tabular-nums;
+            }
+
+            .survey-field input[type="range"] {
+                accent-color: var(--color-accent);
+                min-height: 24px;
+            }
+
+            .survey-field select {
+                min-height: 40px;
+                padding: 0 0.6rem;
+                border-radius: 8px;
+                border: 1px solid rgba(232, 200, 114, 0.25);
+                background: var(--color-bg-surface);
+                color: var(--color-text-primary);
+            }
+
+            .survey-chips {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+            }
+
+            .survey-chip {
+                position: relative;
+                display: inline-flex;
+            }
+
+            /* El radio sigue siendo el control real (foco y lector de
+               pantalla); solo se tapa con la pastilla visible. */
+            .survey-chip input {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                margin: 0;
+                cursor: pointer;
+            }
+
+            .survey-chip span {
+                display: inline-flex;
+                align-items: center;
+                min-height: 32px;
+                padding: 0 0.75rem;
+                border-radius: 999px;
+                border: 1px solid rgba(232, 200, 114, 0.25);
+                font-size: 0.8rem;
+                color: var(--color-text-secondary);
+            }
+
+            .survey-chip input:checked + span {
+                background: var(--color-accent);
+                border-color: var(--color-accent);
+                color: var(--color-bg-primary);
+            }
+
+            .survey-chip input:focus-visible + span {
+                outline: 2px solid #fff;
+                outline-offset: 3px;
+            }
+
+            .survey-reset {
+                align-self: flex-start;
+                min-height: 32px;
+                font-size: 0.85rem;
+                color: var(--color-accent);
+                text-decoration: underline;
+                text-underline-offset: 4px;
+            }
+
+            .survey-hud dd span + span::before {
+                content: "  ·  ";
+                white-space: pre;
+                color: var(--color-text-muted);
+            }
+
+            /* --- Titular --- */
+            .survey-main {
+                position: relative;
+                z-index: 10;
+                min-height: 100vh;
+                pointer-events: none;
+            }
+
+            .survey-intro {
+                position: fixed;
+                left: clamp(1.25rem, 4vw, 3rem);
+                bottom: clamp(5.5rem, 12vh, 7.5rem);
+                max-width: min(44rem, 92vw);
+                pointer-events: none;
+            }
+
+            /* Sombra que separa el titular de las curvas sin taparlas. */
+            .survey-intro::before {
+                content: "";
+                position: absolute;
+                inset: -30% -35% -40% -30%;
+                z-index: -1;
+                background: radial-gradient(
+                    ellipse at 35% 60%,
+                    rgba(11, 15, 20, 0.85) 0%,
+                    rgba(11, 15, 20, 0.55) 40%,
+                    transparent 72%
+                );
+            }
+
+            .survey-eyebrow {
+                font-size: 0.72rem;
+                font-weight: 500;
+                letter-spacing: 0.3em;
+                text-transform: uppercase;
+                color: var(--color-accent);
+                margin-bottom: 1.25rem;
+            }
+
+            .survey-title {
+                font-family: var(--font-heading);
+                font-weight: 400;
+                font-size: clamp(2.6rem, min(8.2vw, 12vh), 8.5rem);
+                line-height: 0.95;
+                letter-spacing: -0.01em;
+                text-shadow: 0 2px 40px rgba(11, 15, 20, 0.9);
+            }
+
+            .survey-title em {
+                font-style: italic;
+                color: var(--color-accent);
+            }
+
+            .survey-subtitle {
+                margin-top: 1.5rem;
+                font-size: clamp(1rem, 1.3vw, 1.2rem);
+                color: var(--color-text-secondary);
+                max-width: 32rem;
+                text-shadow: 0 1px 16px rgba(11, 15, 20, 0.95);
+            }
+
+            .survey-hint {
+                margin-top: 0.75rem;
+                font-family: var(--mono);
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--color-text-secondary);
+            }
+
+            /* Bajo el titular, en pequeño: arriba se cruzaba con las tarjetas de
+               los vértices y abajo a la izquierda tapaba el Pontón Alto. */
+            .survey-caption {
+                margin-top: 0.6rem;
+                max-width: 30rem;
+                font-family: var(--mono);
+                font-size: 0.62rem;
+                line-height: 1.5;
+                letter-spacing: 0.06em;
+                color: var(--color-text-secondary);
+            }
+
+            /* --- Controles --- */
+            .survey-controls {
+                position: fixed;
+                right: clamp(1.25rem, 4vw, 3rem);
+                bottom: 1.5rem;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 0.75rem;
+                pointer-events: auto;
+            }
+
+            .survey-button {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.6rem;
+                min-height: 44px;
+                padding: 0.7rem 1.25rem;
+                border-radius: 999px;
+                font-size: 0.875rem;
+                font-weight: 500;
+                background: var(--color-accent);
+                color: var(--color-bg-primary);
+                border: 1px solid var(--color-accent);
+                transition: background-color 0.2s, color 0.2s;
+            }
+
+            [data-pause][aria-pressed="true"] {
+                border-color: var(--color-accent);
+                color: var(--color-accent);
+            }
+
+            .survey-button[aria-pressed="true"] {
+                background: transparent;
+                color: var(--color-accent);
+            }
+
+            .survey-button--ghost {
+                background: rgba(11, 15, 20, 0.85);
+                color: var(--color-text-primary);
+                border-color: rgba(232, 200, 114, 0.25);
+                -webkit-backdrop-filter: blur(8px);
+                backdrop-filter: blur(8px);
+            }
+
+            .survey-button:hover {
+                background: var(--color-accent-hover);
+                color: var(--color-bg-primary);
+            }
+
+            .survey-button-icon {
+                width: 0.8rem;
+                height: 0.8rem;
+                border-radius: 50%;
+                border: 1.5px solid currentColor;
+                box-shadow: inset 0 0 0 2px transparent;
+            }
+
+            /* Fuera del flujo: oculto seguía ocupando sitio en la fila de
+               controles y la partía en dos líneas en tablets. */
+            .survey-lens-hint {
+                position: absolute;
+                right: 0;
+                bottom: calc(100% + 0.6rem);
+                white-space: nowrap;
+                pointer-events: none;
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                letter-spacing: 0.08em;
+                color: var(--color-accent);
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .lens-on .survey-lens-hint {
+                opacity: 1;
+            }
+
+            .survey a:focus-visible,
+            .survey button:focus-visible {
+                outline: 2px solid #fff;
+                outline-offset: 4px;
+            }
+
+            /* --- Vértices geodésicos --- */
+            .survey-vertices ul {
+                position: fixed;
+                top: 6rem;
+                right: clamp(1.25rem, 4vw, 3rem);
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                pointer-events: auto;
+            }
+
+            .survey-ready .survey-vertices ul {
+                position: static;
+            }
+
+            .survey-ready .vertex {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 0;
+                will-change: transform;
+                animation: vertex-in 0.9s 2.3s both;
+            }
+
+            .vertex {
+                display: block;
+                color: var(--color-text-primary);
+            }
+
+            .vertex-pin {
+                position: absolute;
+                left: -8px;
+                top: -10px;
+                width: 16px;
+                height: 14px;
+                overflow: visible;
+            }
+
+            .vertex-pin path {
+                fill: rgba(11, 15, 20, 0.85);
+                stroke: var(--color-accent);
+                stroke-width: 1.4;
+            }
+
+            .vertex-pin circle {
+                fill: var(--color-accent);
+            }
+
+            .vertex-stem {
+                position: absolute;
+                left: 0;
+                bottom: 12px;
+                width: 1px;
+                height: 52px;
+                background: rgba(232, 200, 114, 0.7);
+            }
+
+            /* Con la escena activa, la posición de la tarjeta y el largo del
+               tallo los calcula survey/layout.ts para que nada se pise. */
+            .survey-ready .vertex-stem {
+                top: var(--stem-top, -64px);
+                bottom: auto;
+                height: var(--stem-height, 52px);
+            }
+
+            .vertex-card {
+                position: absolute;
+                left: -0.75rem;
+                bottom: 66px;
+                display: flex;
+                flex-direction: column;
+                gap: 0.3rem;
+                padding: 0.6rem 0.8rem;
+                white-space: nowrap;
+                border-radius: 6px;
+                background: rgba(11, 15, 20, 0.55);
+                border: 1px solid rgba(232, 200, 114, 0.12);
+                -webkit-backdrop-filter: blur(6px);
+                backdrop-filter: blur(6px);
+                transition: border-color 0.25s, background-color 0.25s, transform 0.25s;
+            }
+
+            .survey-ready .vertex-card {
+                left: var(--card-x, -0.75rem);
+                top: var(--card-y, -130px);
+                bottom: auto;
+            }
+
+            .js:not(.survey-ready):not(.survey-failed) .survey-vertices {
+                visibility: hidden;
+            }
+
+            html:not(.survey-ready) .vertex-pin,
+            html:not(.survey-ready) .vertex-stem {
+                display: none;
+            }
+
+            html:not(.survey-ready) .vertex-card {
+                position: static;
+            }
+
+            .vertex-meta {
+                font-family: var(--mono);
+                font-size: 0.62rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--color-text-secondary);
+            }
+
+            .vertex-label {
+                font-family: var(--font-heading);
+                font-size: 1.6rem;
+                line-height: 1;
+                color: var(--color-text-primary);
+            }
+
+            .vertex:hover .vertex-card,
+            .vertex:focus-visible .vertex-card {
+                border-color: var(--color-accent);
+                background: rgba(11, 15, 20, 0.8);
+                transform: translateY(-4px);
+            }
+
+            .vertex:hover .vertex-label,
+            .vertex:focus-visible .vertex-label {
+                color: var(--color-accent);
+            }
+
+            .survey .vertex:focus-visible {
+                outline: none;
+            }
+
+            .survey .vertex:focus-visible .vertex-card {
+                outline: 2px solid #fff;
+                outline-offset: 4px;
+            }
+
+            .vertex--pending .vertex-label {
+                color: var(--color-text-secondary);
+            }
+
+            .vertex--pending .vertex-stem {
+                background: repeating-linear-gradient(
+                    to top,
+                    var(--color-text-muted) 0 3px,
+                    transparent 3px 6px
+                );
+            }
+
+            .vertex--pending .vertex-pin path {
+                stroke: var(--color-text-muted);
+            }
+
+            .vertex--pending .vertex-pin circle {
+                fill: var(--color-text-muted);
+            }
+
+            .vertex-status {
+                margin-left: 0.5rem;
+                font-family: var(--mono);
+                font-size: 0.66rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                vertical-align: middle;
+                color: var(--color-accent);
+                border: 1px dashed rgba(232, 200, 114, 0.4);
+                border-radius: 4px;
+                padding: 0.15rem 0.35rem;
+            }
+
+            /* --- Retícula de taquímetro --- */
+            .survey-reticle {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 30;
+                pointer-events: none;
+                will-change: transform;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .pointer-active .survey-reticle {
+                opacity: 1;
+            }
+
+            .reticle-ring {
+                position: absolute;
+                left: -22px;
+                top: -22px;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                border: 1px solid rgba(232, 200, 114, 0.55);
+                transition: opacity 0.3s;
+            }
+
+            .reticle-cross {
+                position: absolute;
+                left: -34px;
+                top: -34px;
+                width: 68px;
+                height: 68px;
+                background:
+                    linear-gradient(var(--color-accent), var(--color-accent)) center top / 1px 14px no-repeat,
+                    linear-gradient(var(--color-accent), var(--color-accent)) center bottom / 1px 14px no-repeat,
+                    linear-gradient(var(--color-accent), var(--color-accent)) left center / 14px 1px no-repeat,
+                    linear-gradient(var(--color-accent), var(--color-accent)) right center / 14px 1px no-repeat;
+                opacity: 0.7;
+                transition: opacity 0.3s;
+            }
+
+            .reticle-elevation {
+                position: absolute;
+                left: 30px;
+                top: 18px;
+                font-family: var(--mono);
+                font-size: 0.68rem;
+                letter-spacing: 0.08em;
+                color: var(--color-accent);
+                white-space: nowrap;
+                font-variant-numeric: tabular-nums;
+            }
+
+            .reticle-elevation::before {
+                content: "COTA ";
+                color: var(--color-text-muted);
+            }
+
+            .reticle-place {
+                position: absolute;
+                left: 30px;
+                top: 34px;
+                font-family: var(--font-heading);
+                font-size: 1.05rem;
+                font-style: italic;
+                color: #b9d3e6;
+                white-space: nowrap;
+                text-shadow: 0 1px 10px rgba(11, 15, 20, 0.95);
+            }
+
+            .reticle-place:empty {
+                display: none;
+            }
+
+            .lens-on .reticle-ring,
+            .lens-on .reticle-cross {
+                opacity: 0;
+            }
+
+            @media (pointer: coarse) {
+                .survey-reticle {
+                    display: none;
+                }
+            }
+
+            /* --- Lente: capa de accesibilidad --- */
+            .lens-layer {
+                position: fixed;
+                inset: 0;
+                z-index: 25;
+                pointer-events: none;
+                -webkit-mask-image: radial-gradient(
+                    circle var(--lens-r, 170px) at var(--lens-x, 50%) var(--lens-y, 50%),
+                    #000 calc(var(--lens-r, 170px) - 1px),
+                    transparent var(--lens-r, 170px)
+                );
+                mask-image: radial-gradient(
+                    circle var(--lens-r, 170px) at var(--lens-x, 50%) var(--lens-y, 50%),
+                    #000 calc(var(--lens-r, 170px) - 1px),
+                    transparent var(--lens-r, 170px)
+                );
+            }
+
+            .annotation {
+                position: absolute;
+                top: 0;
+                left: 0;
+                border: 1px dashed rgba(219, 228, 238, 0.8);
+                border-radius: 4px;
+                background: rgba(219, 228, 238, 0.04);
+            }
+
+            .lens-caption {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 26;
+                max-width: min(30rem, 90vw);
+                padding: 0.45rem 0.7rem;
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                line-height: 1.6;
+                white-space: pre-line;
+                color: var(--color-bg-primary);
+                background: #dbe4ee;
+                border-radius: 4px;
+                pointer-events: none;
+            }
+
+            .lens-caption[hidden] {
+                display: none;
+            }
+
+            .survey-fade {
+                position: fixed;
+                inset: 0;
+                z-index: 40;
+                background: var(--color-bg-primary);
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            /* --- Entrada --- */
+            @media (prefers-reduced-motion: no-preference) {
+                .survey-eyebrow,
+                .survey-subtitle,
+                .survey-hint {
+                    animation: rise-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+                }
+                /* El titular es el elemento más grande de la primera pantalla
+                   (LCP): entra visible desde el primer instante, solo se desliza. */
+                .survey-title {
+                    animation: slide-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+                }
+                .survey-eyebrow { animation-delay: 0.2s; }
+                .survey-subtitle { animation-delay: 1.4s; }
+                .survey-hint { animation-delay: 2.6s; }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .survey-ready .vertex {
+                    animation: none;
+                }
+            }
+
+            @keyframes slide-in {
+                from { transform: translateY(18px); }
+                to { transform: none; }
+            }
+
+            @keyframes rise-in {
+                from { opacity: 0; transform: translateY(24px); }
+                to { opacity: 1; transform: none; }
+            }
+
+            @keyframes vertex-in {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            /* --- Orientación: la cámara cambia y la leyenda también --- */
+            @media (orientation: portrait) {
+                .caption-landscape {
+                    display: none;
+                }
+            }
+
+            @media (orientation: landscape) {
+                .caption-portrait {
+                    display: none;
+                }
+            }
+
+            /* --- Móvil --- */
+            @media (max-width: 767px) {
+                /* Arriba solo el cielo y el tiempo: las coordenadas siguen al
+                   dedo y en táctil no hay cursor que seguir. */
+                .survey-header {
+                    grid-template-columns: auto 1fr;
+                    padding: 1.1rem 1rem;
+                }
+                .survey-nav {
+                    justify-self: end;
+                    gap: 0;
+                }
+                .survey-nav a {
+                    min-height: 32px;
+                    padding: 0 0.45rem;
+                    font-size: 0.62rem;
+                    letter-spacing: 0.08em;
+                }
+                /* Arriba no cabe sin tapar las tarjetas: el cielo y el tiempo
+                   pasan a una línea bajo el titular. */
+                .survey-hud {
+                    display: none;
+                }
+                /* Cielo y tiempo, cada uno en su línea y con la altura
+                   reservada: el texto llega con el script y, si la línea
+                   creciera entonces, empujaría hacia arriba todo el titular. */
+                .survey-status {
+                    display: block;
+                    margin-top: 0.6rem;
+                    font-family: var(--mono);
+                    font-size: 0.6rem;
+                    line-height: 1.5;
+                    color: #b9d3e6;
+                }
+                .survey-status span {
+                    display: block;
+                    min-height: 1.5em;
+                }
+                .survey-eyebrow {
+                    font-size: 0.6rem;
+                    letter-spacing: 0.18em;
+                    margin-bottom: 0.75rem;
+                }
+                .survey-intro {
+                    bottom: 7.75rem;
+                }
+                .survey-intro::before {
+                    inset: -2.5rem -1.5rem -9rem -1.5rem;
+                    background: linear-gradient(
+                        to top,
+                        rgba(11, 15, 20, 0.94) 0%,
+                        rgba(11, 15, 20, 0.9) 82%,
+                        rgba(11, 15, 20, 0) 100%
+                    );
+                }
+                .survey-title {
+                    font-size: clamp(2.6rem, 13vw, 3.4rem);
+                }
+                .survey-subtitle {
+                    margin-top: 0.9rem;
+                    font-size: 0.95rem;
+                }
+                .survey-hint {
+                    display: none;
+                }
+                .survey-caption {
+                    font-size: 0.55rem;
+                }
+                .survey-controls {
+                    left: 1rem;
+                    right: 1rem;
+                    bottom: 1rem;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.5rem;
+                }
+                .survey-controls > *,
+                .survey-moment > .survey-button {
+                    width: 100%;
+                    justify-content: center;
+                }
+                .survey-button {
+                    padding: 0.6rem 0.75rem;
+                    font-size: 0.8rem;
+                }
+                .survey-lens-hint {
+                    display: none;
+                }
+                .survey-moment-panel {
+                    position: fixed;
+                    left: 1rem;
+                    right: 1rem;
+                    bottom: 7.5rem;
+                    width: auto;
+                }
+                .vertex-label {
+                    font-size: 1.05rem;
+                }
+                .vertex-stem {
+                    height: 26px;
+                }
+                .vertex-card {
+                    bottom: 40px;
+                    gap: 0.15rem;
+                    padding: 0.35rem 0.5rem;
+                }
+                .vertex-meta {
+                    font-size: 0.5rem;
+                }
+            }
+
+            /* --- Móvil en horizontal y pantallas bajas: titular a la izquierda,
+                   controles en una fila y la sierra a la derecha --- */
+            @media (orientation: landscape) and (max-height: 560px) {
+                .survey-header {
+                    grid-template-columns: auto 1fr;
+                    padding: 0.75rem 1rem;
+                }
+                .survey-nav {
+                    justify-self: end;
+                }
+                .survey-nav a {
+                    min-height: 30px;
+                    font-size: 0.62rem;
+                }
+                .survey-hud {
+                    display: none;
+                }
+                .survey-status {
+                    display: block;
+                    margin-top: 0.4rem;
+                    font-family: var(--mono);
+                    font-size: 0.55rem;
+                    line-height: 1.5;
+                    color: #b9d3e6;
+                }
+                .survey-status span {
+                    display: block;
+                    min-height: 1.5em;
+                }
+                .survey-intro {
+                    left: 1rem;
+                    bottom: 3.6rem;
+                    max-width: 42vw;
+                }
+                .survey-eyebrow {
+                    font-size: 0.66rem;
+                    letter-spacing: 0.12em;
+                    margin-bottom: 0.4rem;
+                }
+                .survey-title {
+                    font-size: clamp(1.7rem, 8vh, 2.4rem);
+                }
+                .survey-subtitle {
+                    margin-top: 0.5rem;
+                    font-size: 0.78rem;
+                }
+                .survey-hint {
+                    display: none;
+                }
+                .survey-caption {
+                    margin-top: 0.35rem;
+                    font-size: 0.5rem;
+                }
+                .survey-controls {
+                    left: 1rem;
+                    right: 1rem;
+                    bottom: 0.6rem;
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 0.4rem;
+                }
+                .survey-controls > *,
+                .survey-moment > .survey-button {
+                    width: auto;
+                }
+                .survey-button {
+                    min-height: 36px;
+                    padding: 0.35rem 0.75rem;
+                    font-size: 0.72rem;
+                }
+                .survey-lens-hint {
+                    display: none;
+                }
+                /* En pantallas bajas el panel no cabía en una columna y lo último
+                   ("Volver al ahora") quedaba bajo los botones: va en dos. */
+                .survey-moment-panel {
+                    position: fixed;
+                    left: auto;
+                    right: 1rem;
+                    bottom: 3.6rem;
+                    width: min(36rem, calc(100vw - 2rem));
+                    max-height: calc(100dvh - 4.6rem);
+                    overflow: auto;
+                    display: grid;
+                    grid-template-columns: 1fr 1.3fr;
+                    gap: 0.7rem 1.25rem;
+                    padding: 0.9rem 1rem;
+                }
+                .survey-moment-panel[hidden] {
+                    display: none;
+                }
+                .survey-moment-title {
+                    grid-column: 1 / -1;
+                }
+                .survey-moment-panel fieldset {
+                    grid-column: 2;
+                    grid-row: 2 / span 2;
+                }
+                .survey-reset {
+                    grid-column: 1 / -1;
+                }
+                .vertex-label {
+                    font-size: 1rem;
+                }
+                .vertex-meta {
+                    font-size: 0.5rem;
+                }
+                .vertex-card {
+                    padding: 0.3rem 0.5rem;
+                }
+            }
+
+            /* --- Móviles muy pequeños: se compacta el bloque del titular para
+                   dejar sitio a la sierra --- */
+            @media (max-width: 400px) and (max-height: 700px) {
+                .survey-eyebrow {
+                    display: none;
+                }
+                .survey-title {
+                    font-size: 2.2rem;
+                }
+                .survey-subtitle {
+                    margin-top: 0.5rem;
+                    font-size: 0.85rem;
+                }
+                .survey-caption {
+                    font-size: 0.5rem;
+                }
+                .survey-intro {
+                    bottom: 6.75rem;
+                }
+                .survey-button {
+                    min-height: 40px;
+                    padding: 0.45rem 0.6rem;
+                    font-size: 0.75rem;
+                }
+                .vertex-meta {
+                    display: none;
+                }
+            }
+
+            /* En los móviles más estrechos los iconos no caben junto al texto
+               y partían los botones en dos líneas: queda solo el texto. */
+            @media (max-width: 360px) {
+                .survey-pause-icon,
+                .survey-sound-icon,
+                .survey-button-icon {
+                    display: none;
+                }
+                .survey-intro {
+                    bottom: 7rem;
+                }
+            }
+
+            /* --- Legibilidad en pantallas pequeñas: nada por debajo de ~11 px y
+                   la leyenda de fuentes en su versión corta --- */
+            @media (max-width: 767px), (orientation: landscape) and (max-height: 560px) {
+                .caption-full {
+                    display: none;
+                }
+                .caption-short {
+                    display: inline;
+                }
+                .survey .survey-caption {
+                    font-size: 0.68rem;
+                }
+                .survey .survey-status {
+                    font-size: 0.7rem;
+                }
+                .survey .survey-nav a {
+                    font-size: 0.7rem;
+                    letter-spacing: 0.06em;
+                }
+                .survey .vertex-meta {
+                    font-size: 0.62rem;
+                }
+            }
+
+            @media (max-width: 360px) {
+                .survey .survey-nav a {
+                    padding: 0 0.35rem;
+                    letter-spacing: 0.02em;
+                }
+            }
+        </style>
+    </body>
+</html>

@@ -12,7 +12,7 @@ const en = useTranslations("en")
 const t = es.notFound
 ---
 
-<BaseLayout lang={lang} title={t.metaTitle} description={t.metaDescription}>
+<BaseLayout lang={lang} title={t.metaTitle} description={t.metaDescription} noindex>
     <section
         id="not-found"
         aria-labelledby="not-found-title"
@@ -92,7 +92,7 @@ const t = es.notFound
 
                     <a
                         data-cta="audit"
-                        href="/auditoria-accesibilidad"
+                        href="/accesibilidad-web/#precios"
                         class="inline-flex items-center justify-center font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full border border-accent-line text-accent hover:bg-accent-subtle hover:border-border-hover px-7 py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     >
                         <span data-i18n="ctaAuditLabel">{t.ctaAuditLabel}</span>
@@ -100,7 +100,7 @@ const t = es.notFound
 
                     <a
                         data-cta="contact"
-                        href="/#contact"
+                        href="/clasica/#contact"
                         class="inline-flex items-center justify-center font-body font-medium text-sm tracking-wide transition-colors duration-300 text-text-secondary hover:text-accent underline underline-offset-[6px] decoration-1 px-2 py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm"
                     >
                         <span data-i18n="ctaContactLabel"
@@ -141,8 +141,8 @@ const t = es.notFound
 
         var ctaMap = {
             home: "/en/",
-            audit: "/en/accessibility-audit",
-            contact: "/en/#contact",
+            audit: "/en/web-accessibility/#pricing",
+            contact: "/en/classic/#contact",
         }
         document.querySelectorAll("[data-cta]").forEach(function (el) {
             var key = el.getAttribute("data-cta")

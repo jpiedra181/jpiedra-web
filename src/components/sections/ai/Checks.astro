@@ -1,0 +1,170 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).aiLanding.checks
+---
+
+<section id="que-reviso" aria-labelledby="que-reviso-title" class="relative py-24 md:py-32 lg:py-40">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+            <div data-wipe>
+                <SectionLabel text={copy.label} />
+            </div>
+            <h2
+                id="que-reviso-title"
+                data-split
+                class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-text-primary"
+            >
+                {copy.title}
+            </h2>
+            <p data-reveal class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[42rem]">
+                {copy.subtitle}
+            </p>
+        </div>
+
+        <ul role="list" class="checks mt-16 md:mt-20" data-reveal-stagger>
+            {
+                copy.items.map((item) => (
+                    <li class="check" data-spotlight>
+                        <h3 class="check-title">{item.title}</h3>
+                        <dl class="check-pair">
+                            <div>
+                                <dt>
+                                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                                        <circle cx="10" cy="6" r="3.2" />
+                                        <path d="M3.5 17.5c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5" />
+                                    </svg>
+                                    {copy.personLabel}
+                                </dt>
+                                <dd>{item.person}</dd>
+                            </div>
+                            <div>
+                                <dt>
+                                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                                        <rect x="4" y="5" width="12" height="10" rx="2.5" />
+                                        <path d="M10 2.5V5M7.5 9.5h.01M12.5 9.5h.01M7.5 12.5h5" />
+                                    </svg>
+                                    {copy.agentLabel}
+                                </dt>
+                                <dd>{item.agent}</dd>
+                            </div>
+                        </dl>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <p data-reveal class="checks-extra">{copy.extra}</p>
+    </div>
+</section>
+
+<style>
+    .checks {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    .check {
+        position: relative;
+        display: grid;
+        gap: 1.25rem;
+        padding: 1.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-bg-surface);
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    .check::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: radial-gradient(
+            22rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+            rgb(232 200 114 / 0.09),
+            transparent 65%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .check:hover::before {
+        opacity: 1;
+    }
+
+    .check-title {
+        font-family: var(--font-heading);
+        font-size: clamp(1.375rem, 2vw, 1.75rem);
+        line-height: 1.2;
+        color: var(--color-text-primary);
+    }
+
+    .check-pair {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .check-pair dt {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+    }
+
+    .check-pair svg {
+        width: 1rem;
+        height: 1rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .check-pair dd {
+        margin-top: 0.375rem;
+        font-size: 0.9375rem;
+        line-height: 1.55;
+        color: var(--color-text-primary);
+    }
+
+    .checks-extra {
+        margin-top: 3rem;
+        max-width: 48rem;
+        padding: 1.5rem 1.75rem;
+        border-left: 2px solid var(--color-accent);
+        background: rgb(232 200 114 / 0.05);
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--color-text-primary);
+    }
+
+    @media (min-width: 48rem) {
+        .checks {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .checks {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .check {
+            padding: 2rem;
+        }
+    }
+</style>

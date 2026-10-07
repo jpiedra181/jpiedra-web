@@ -1,0 +1,198 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).context
+
+// Cifras para la animación de cuenta (las mismas que el texto). El valor que
+// se ve está oculto a los lectores de pantalla: leen ariaLabel, que no cambia.
+// En castellano el % va separado («8 %»); en inglés, pegado («8%»).
+const PERCENT = lang === "en" ? "%" : " %"
+const LOCALE = lang === "en" ? "en-GB" : "es-ES"
+const COUNTS = [
+    { to: 8, decimals: 0, suffix: PERCENT },
+    { to: 4.32, decimals: 2, suffix: " M" },
+    { to: 95.9, decimals: 1, suffix: PERCENT },
+]
+const formatNumber = (value: number, decimals: number) =>
+    value.toLocaleString(LOCALE, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+const SENIORS = `${formatNumber(21.1, 1)}${PERCENT} · 65+`
+const FAILING = `${formatNumber(95.9, 1)}${PERCENT}`
+
+// 100 personas; 8 avisan. Repartidas para que no salgan en bloque.
+const TELLERS = new Set([7, 18, 33, 41, 56, 64, 79, 92])
+const people = Array.from({ length: 100 }, (_, index) => TELLERS.has(index))
+---
+
+<section id="contexto" aria-labelledby="contexto-title" class="relative py-24 md:py-32 lg:py-40">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div data-wipe>
+            <SectionLabel text={copy.eyebrow} />
+        </div>
+        <h2
+            id="contexto-title"
+            data-split
+            class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-text-primary max-w-[20ch]"
+        >
+            {copy.title}
+        </h2>
+        <p data-reveal class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[45rem]">
+            {copy.subtitle}
+        </p>
+
+        <ul role="list" class="stats grid md:grid-cols-3 gap-6 lg:gap-8 mt-16 md:mt-20 lg:mt-24">
+            {
+                copy.stats.map((stat, index) => (
+                    <li class="stat" data-reveal>
+                        <div class="stat-visual" aria-hidden="true">
+                            {index === 0 && (
+                                <div class="stat-people" data-people>
+                                    {people.map((tells) => (
+                                        <span class:list={["stat-person", { "is-teller": tells }]} />
+                                    ))}
+                                </div>
+                            )}
+                            {index === 1 && (
+                                <div class="stat-bars">
+                                    <span class="stat-bar" data-bar style="--fill:0.211">
+                                        <span />
+                                    </span>
+                                    <span class="stat-bar-caption">{SENIORS}</span>
+                                </div>
+                            )}
+                            {index === 2 && (
+                                <div class="stat-bars">
+                                    <span class="stat-bar" data-bar style="--fill:0.959">
+                                        <span />
+                                    </span>
+                                    <span class="stat-bar-caption">{FAILING}</span>
+                                </div>
+                            )}
+                        </div>
+                        <strong class="stat-value">
+                            <span
+                                aria-hidden="true"
+                                data-count={COUNTS[index].to}
+                                data-count-decimals={COUNTS[index].decimals}
+                                data-count-suffix={COUNTS[index].suffix}
+                                data-count-locale={LOCALE}
+                            >
+                                {stat.value}
+                            </span>
+                            <span class="sr-only">{stat.ariaLabel}</span>
+                        </strong>
+                        <span class="stat-description">{stat.description}</span>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <p data-reveal class="font-body text-[clamp(1.125rem,1.6vw,1.5rem)] leading-relaxed text-text-primary mt-14 md:mt-16 lg:mt-20 max-w-[45rem]">
+            {copy.closing}
+        </p>
+        <p data-reveal class="font-body text-xs lg:text-sm text-text-secondary mt-4 md:mt-6 max-w-[45rem]">
+            {copy.sources}
+        </p>
+    </div>
+</section>
+
+<style>
+    .stat {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-bg-surface);
+    }
+
+    .stat-visual {
+        display: flex;
+        align-items: flex-end;
+        height: 5.5rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .stat-people {
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
+        gap: 0.4rem;
+        width: 100%;
+    }
+
+    /* Estado final por defecto (sin JS o con movimiento reducido): 92
+       personas se han ido en silencio; 8 avisan. */
+    .stat-person {
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: var(--color-text-primary);
+        opacity: 0.14;
+    }
+
+    .stat-person.is-teller {
+        background: var(--color-accent);
+        opacity: 1;
+        box-shadow: 0 0 10px rgb(232 200 114 / 0.6);
+    }
+
+    .stat-bars {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .stat-bar {
+        position: relative;
+        display: block;
+        height: 0.75rem;
+        border-radius: 999px;
+        background: var(--color-bg-elevated);
+        overflow: hidden;
+    }
+
+    .stat-bar > span {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, rgb(232 200 114 / 0.5), var(--color-accent));
+        transform: scaleX(var(--fill));
+        transform-origin: left;
+    }
+
+    .stat-bar-caption {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        color: var(--color-text-secondary);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .stat-value {
+        font-family: var(--font-heading);
+        font-weight: 400;
+        font-size: clamp(3.25rem, 6vw, 5.5rem);
+        line-height: 1;
+        color: var(--color-accent);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .stat-description {
+        margin-top: 1.25rem;
+        font-size: 1rem;
+        line-height: 1.55;
+        color: var(--color-text-primary);
+    }
+
+    @media (min-width: 64rem) {
+        .stat {
+            padding: 2.5rem;
+        }
+    }
+</style>

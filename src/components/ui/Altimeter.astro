@@ -1,0 +1,163 @@
+---
+// Altímetro lateral: leer la página es subir de La Granja a Peñalara por el
+// perfil real del terreno. Es decorativo (aria-hidden) y solo aparece en
+// pantallas anchas, donde cabe en el margen sin tapar el contenido, y si no se
+// ha pedido movimiento reducido. Lo mueve initAltimeter (gsap-animations.ts).
+import type { ElevationProfileData } from "../../types"
+import { formatElevation } from "../../lib/format"
+import { getLangFromUrl } from "../../i18n/utils"
+
+interface Props {
+    profile: ElevationProfileData
+    startLabel: string
+    endLabel: string
+}
+
+const { profile, startLabel, endLabel } = Astro.props
+
+const SAMPLES = 160
+const SCALE_LOW = 1100
+const SCALE_HIGH = 2500
+const step = (profile.heights.length - 1) / (SAMPLES - 1)
+const heights = Array.from({ length: SAMPLES }, (_, i) => Math.round(profile.heights[Math.round(i * step)]))
+heights[heights.length - 1] = profile.to.elevation
+
+const ticks: { metres: number; labelled: boolean; position: number }[] = []
+for (let metres = SCALE_LOW; metres <= SCALE_HIGH; metres += 100) {
+    ticks.push({
+        metres,
+        labelled: metres % 500 === 0,
+        position: (SCALE_HIGH - metres) / (SCALE_HIGH - SCALE_LOW),
+    })
+}
+---
+
+<div
+    class="altimeter"
+    aria-hidden="true"
+    data-altimeter
+    data-heights={heights.join(" ")}
+    data-scale={`${SCALE_LOW} ${SCALE_HIGH}`}
+    data-distance={profile.distanceKm}
+>
+    <span class="altimeter-end altimeter-end-top">{endLabel}</span>
+    <div class="altimeter-scale">
+        {
+            ticks.map((tick) => (
+                <span class:list={["altimeter-tick", { "is-labelled": tick.labelled }]} style={`--pos:${tick.position}`}>
+                    {tick.labelled && <span class="altimeter-tick-label">{tick.metres}</span>}
+                </span>
+            ))
+        }
+        <span class="altimeter-needle">
+            <span class="altimeter-reading">
+                <span class="altimeter-elevation">{formatElevation(heights[0], getLangFromUrl(Astro.url))}</span>
+                <span class="altimeter-distance">km 0,0</span>
+            </span>
+        </span>
+    </div>
+    <span class="altimeter-end altimeter-end-bottom">{startLabel}</span>
+</div>
+
+<style>
+    .altimeter {
+        display: none;
+    }
+
+    @media (min-width: 95rem) and (prefers-reduced-motion: no-preference) {
+        .altimeter {
+            position: fixed;
+            right: 1.75rem;
+            top: 50%;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.75rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        :global(.altimeter-ready) .altimeter {
+            opacity: 1;
+        }
+    }
+
+    .altimeter-end {
+        font-size: 0.625rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+
+    .altimeter-scale {
+        position: relative;
+        width: 18px;
+        height: min(52vh, 26rem);
+        border-right: 1px solid var(--color-accent-line);
+    }
+
+    .altimeter-tick {
+        position: absolute;
+        right: 0;
+        top: calc(var(--pos) * 100%);
+        width: 6px;
+        height: 1px;
+        background: var(--color-border-hover);
+    }
+
+    .altimeter-tick.is-labelled {
+        width: 12px;
+        background: var(--color-accent-line);
+    }
+
+    .altimeter-tick-label {
+        position: absolute;
+        right: 18px;
+        top: -0.45rem;
+        font-size: 0.625rem;
+        letter-spacing: 0.06em;
+        font-variant-numeric: tabular-nums;
+        color: var(--color-text-muted);
+    }
+
+    .altimeter-needle {
+        position: absolute;
+        right: -4px;
+        top: 0;
+        width: 26px;
+        height: 2px;
+        background: var(--color-accent);
+        box-shadow: 0 0 10px rgb(232 200 114 / 0.6);
+        will-change: transform;
+    }
+
+    .altimeter-reading {
+        position: absolute;
+        right: 34px;
+        top: -0.85rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        background: rgb(11 15 20 / 0.9);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .altimeter-elevation {
+        font-family: var(--font-heading);
+        font-size: 1.125rem;
+        line-height: 1.1;
+        color: var(--color-accent);
+    }
+
+    .altimeter-distance {
+        font-size: 0.625rem;
+        letter-spacing: 0.08em;
+        color: var(--color-text-secondary);
+    }
+</style>

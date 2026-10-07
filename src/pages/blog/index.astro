@@ -10,9 +10,9 @@ const posts = (await getCollection("blog"))
     .filter((post) => (import.meta.env.PROD ? !post.data.draft : true))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
-const title = "Blog — Javier Piedra"
+const title = "Blog de accesibilidad web y Ley 11/2023 · Javier Piedra"
 const description =
-    "Artículos sobre accesibilidad web, Ley 11/2023, WCAG y cumplimiento legal en España."
+    "Artículos sobre accesibilidad web en España: la Ley 11/2023, WCAG, auditorías y casos reales. Qué te obliga, qué falla de verdad y cómo se arregla."
 ---
 
 <BaseLayout lang={lang} title={title} description={description}>
@@ -54,7 +54,7 @@ const description =
                                 }
                             >
                                 <a
-                                    href={`/blog/${post.id}`}
+                                    href={`/blog/${post.id}/`}
                                     class="group block max-w-3xl"
                                 >
                                     <time

@@ -1,0 +1,183 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).aiLanding.why
+// Resultado medido de esta página (Lighthouse 13.5, categoría Agentic
+// Browsing). Si cambia la página o la herramienta, se vuelve a medir.
+const PROOF_SCORE = 100
+const RING_RADIUS = 52
+const RING_LENGTH = 2 * Math.PI * RING_RADIUS
+---
+
+<section id="por-que-ahora" aria-labelledby="por-que-ahora-title" class="relative py-24 md:py-32 lg:py-40 bg-bg-surface border-t border-b border-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div data-wipe>
+            <SectionLabel text={copy.label} />
+        </div>
+        <h2
+            id="por-que-ahora-title"
+            data-split
+            class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-text-primary max-w-[18ch]"
+        >
+            {copy.title}
+        </h2>
+
+        <div class="why-grid mt-16 md:mt-20">
+            <ol role="list" class="why-items" data-reveal-stagger>
+                {
+                    copy.items.map((item, index) => (
+                        <li class="why-item">
+                            <span class="why-number" aria-hidden="true">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <h3 class="why-title">{item.title}</h3>
+                            <p class="why-text">{item.text}</p>
+                        </li>
+                    ))
+                }
+            </ol>
+
+            <div class="why-proof" data-scores data-reveal>
+                <svg viewBox="0 0 120 120" class="why-ring" aria-hidden="true">
+                    <circle cx="60" cy="60" r={RING_RADIUS} class="why-ring-track"></circle>
+                    <circle
+                        cx="60"
+                        cy="60"
+                        r={RING_RADIUS}
+                        class="why-ring-fill"
+                        style={`stroke-dasharray:${RING_LENGTH.toFixed(2)};--ring:${RING_LENGTH.toFixed(2)}`}
+                        data-ring
+                    ></circle>
+                </svg>
+                <p class="why-proof-score">
+                    <span aria-hidden="true" data-count={PROOF_SCORE} data-count-decimals="0">{PROOF_SCORE}</span>
+                    <span class="sr-only">{PROOF_SCORE} {copy.proofOf}</span>
+                </p>
+                <p class="why-proof-category">{copy.proofCategory}</p>
+                <p class="why-proof-label">{copy.proofLabel}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .why-grid {
+        display: grid;
+        gap: 2.5rem;
+    }
+
+    .why-items {
+        display: grid;
+        gap: 2.5rem;
+    }
+
+    .why-item {
+        display: grid;
+        gap: 0.75rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--color-accent-line);
+    }
+
+    .why-number {
+        font-family: var(--font-heading);
+        font-size: 2.5rem;
+        line-height: 1;
+        color: var(--color-accent);
+    }
+
+    .why-title {
+        font-family: var(--font-heading);
+        font-size: clamp(1.5rem, 2.4vw, 2rem);
+        line-height: 1.2;
+        color: var(--color-text-primary);
+    }
+
+    .why-text {
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--color-text-secondary);
+    }
+
+    .why-proof {
+        position: relative;
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        gap: 0.5rem;
+        padding: 2.5rem 2rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 1.25rem;
+        background:
+            radial-gradient(24rem 18rem at 50% 0%, rgb(127 209 139 / 0.08), transparent 70%),
+            var(--color-bg-primary);
+        text-align: center;
+    }
+
+    .why-ring {
+        width: 9rem;
+        height: 9rem;
+        transform: rotate(-90deg);
+    }
+
+    .why-ring-track {
+        fill: none;
+        stroke: var(--color-bg-elevated);
+        stroke-width: 7;
+    }
+
+    .why-ring-fill {
+        fill: none;
+        stroke: #7fd18b;
+        stroke-width: 7;
+        stroke-linecap: round;
+    }
+
+    .why-proof-score {
+        position: absolute;
+        top: 2.5rem;
+        left: 0;
+        right: 0;
+        display: grid;
+        place-items: center;
+        height: 9rem;
+        font-family: var(--font-heading);
+        font-size: 3.25rem;
+        line-height: 1;
+        color: var(--color-text-primary);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .why-proof-category {
+        margin-top: 0.75rem;
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        color: var(--color-text-primary);
+    }
+
+    .why-proof-label {
+        font-size: 0.8125rem;
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+    }
+
+    @media (min-width: 64rem) {
+        .why-grid {
+            grid-template-columns: 1fr 20rem;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .why-items {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+    }
+</style>

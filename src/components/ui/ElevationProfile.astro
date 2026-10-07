@@ -1,0 +1,411 @@
+---
+// Perfil topográfico real (MDT25 del IGN) con hitos encima. La gráfica es
+// decorativa; los hitos son una lista ordenada normal, así que un lector de
+// pantalla los lee como texto. GSAP la va dibujando con el scroll
+// (initElevationProfile); sin JavaScript o con movimiento reducido se ve
+// entera.
+import type { ElevationProfileData } from "../../types"
+import { getLangFromUrl } from "../../i18n/utils"
+import { formatElevation } from "../../lib/format"
+
+interface Milestone {
+    title: string
+    text: string
+    // Fracción del recorrido (0 = salida, 1 = cumbre).
+    at: number
+}
+
+interface Props {
+    profile: ElevationProfileData
+    milestones: Milestone[]
+    milestonesLabel: string
+    caption: string
+    startLabel: string
+    endLabel: string
+}
+
+const { profile, milestones, milestonesLabel, caption, startLabel, endLabel } = Astro.props
+
+const VIEW_WIDTH = 1000
+const VIEW_HEIGHT = 400
+const SAMPLES = 200
+// Escala de altitudes del eje (redonda para que las líneas caigan en cientos).
+const AXIS_LOW = 1100
+const AXIS_HIGH = 2500
+const AXIS_STEP = 200
+// Franja vertical que ocupa el perfil; arriba queda sitio para los hitos.
+const PLOT_TOP = 0.34
+const PLOT_BOTTOM = 0.92
+
+const step = (profile.heights.length - 1) / (SAMPLES - 1)
+const heights = Array.from({ length: SAMPLES }, (_, i) => profile.heights[Math.round(i * step)])
+// La última muestra es la cumbre: se usa la cota oficial del vértice.
+heights[heights.length - 1] = profile.to.elevation
+
+const yFraction = (metres: number) =>
+    PLOT_TOP + (1 - (metres - AXIS_LOW) / (AXIS_HIGH - AXIS_LOW)) * (PLOT_BOTTOM - PLOT_TOP)
+const heightAt = (fraction: number) => heights[Math.round(fraction * (SAMPLES - 1))]
+
+const points = heights.map((metres, i) => [
+    ((i / (SAMPLES - 1)) * VIEW_WIDTH).toFixed(1),
+    (yFraction(metres) * VIEW_HEIGHT).toFixed(1),
+])
+const linePath = "M" + points.map(([x, y]) => `${x} ${y}`).join(" L")
+const areaPath = `${linePath} L${VIEW_WIDTH} ${VIEW_HEIGHT} L0 ${VIEW_HEIGHT} Z`
+
+const gridlines: number[] = []
+for (let metres = AXIS_LOW + 100; metres < AXIS_HIGH; metres += AXIS_STEP) gridlines.push(metres)
+
+const lang = getLangFromUrl(Astro.url)
+const startElevation = formatElevation(heights[0], lang)
+---
+
+<figure
+    class="elevation-profile"
+    data-profile
+    data-heights={heights.map((metres) => Math.round(metres)).join(" ")}
+    data-axis={`${AXIS_LOW} ${AXIS_HIGH} ${PLOT_TOP} ${PLOT_BOTTOM}`}
+>
+    <div class="profile-plot">
+        <div class="profile-canvas">
+            <svg
+                class="profile-grid"
+                viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                focusable="false"
+            >
+                {
+                    gridlines.map((metres) => (
+                        <line
+                            x1="0"
+                            x2={VIEW_WIDTH}
+                            y1={yFraction(metres) * VIEW_HEIGHT}
+                            y2={yFraction(metres) * VIEW_HEIGHT}
+                            vector-effect="non-scaling-stroke"
+                        />
+                    ))
+                }
+            </svg>
+            <div class="profile-axis" aria-hidden="true">
+                {
+                    gridlines.map((metres) => (
+                        <span style={`--y:${yFraction(metres).toFixed(4)}`}>{formatElevation(metres, lang)}</span>
+                    ))
+                }
+            </div>
+
+            <svg
+                class="profile-terrain"
+                viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                focusable="false"
+            >
+                <defs>
+                    <linearGradient id="profile-fill" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0" stop-color="#E8C872" stop-opacity="0.22"></stop>
+                        <stop offset="1" stop-color="#E8C872" stop-opacity="0"></stop>
+                    </linearGradient>
+                </defs>
+                <path class="profile-area" d={areaPath} fill="url(#profile-fill)"></path>
+                <path class="profile-line" d={linePath} vector-effect="non-scaling-stroke"></path>
+            </svg>
+
+            <span class="profile-walker" aria-hidden="true" style={`--x:1;--y:${yFraction(heights.at(-1)).toFixed(4)}`}>
+                <span class="profile-walker-readout">{formatElevation(heights.at(-1), lang)}</span>
+            </span>
+
+            <span class="profile-start" aria-hidden="true">
+                {startLabel} · {startElevation}
+            </span>
+
+            {
+                milestones.map((milestone, index) => (
+                    <span
+                        class="profile-marker"
+                        aria-hidden="true"
+                        data-at={milestone.at}
+                        style={`--x:${milestone.at};--y:${yFraction(heightAt(milestone.at)).toFixed(4)}`}
+                    >
+                        {index + 1}
+                    </span>
+                ))
+            }
+        </div>
+
+        <ol class="profile-milestones" aria-label={milestonesLabel}>
+            {
+                milestones.map((milestone, index) => (
+                    <li
+                        class:list={["profile-milestone", { "is-end": milestone.at > 0.75 }]}
+                        style={`--x:${milestone.at};--y:${yFraction(heightAt(milestone.at)).toFixed(4)}`}
+                        data-at={milestone.at}
+                    >
+                        <span class="profile-milestone-number" aria-hidden="true">
+                            {index + 1}
+                        </span>
+                        <span class="profile-milestone-body">
+                            <strong class="profile-milestone-title">
+                                {milestone.title}
+                                {milestone.at === 1 && <span class="profile-milestone-peak"> · {endLabel}</span>}
+                            </strong>
+                            <span class="profile-milestone-text">{milestone.text}</span>
+                        </span>
+                    </li>
+                ))
+            }
+        </ol>
+    </div>
+    <figcaption class="profile-caption">{caption}</figcaption>
+</figure>
+
+<style>
+    .profile-plot {
+        position: relative;
+    }
+
+    .profile-canvas {
+        position: relative;
+        height: 15rem;
+    }
+
+    .profile-grid,
+    .profile-terrain {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+
+    .profile-grid line {
+        stroke: var(--color-text-primary);
+        stroke-opacity: 0.08;
+        stroke-width: 1;
+        stroke-dasharray: 2 6;
+    }
+
+    .profile-axis span {
+        position: absolute;
+        left: 0;
+        top: calc(var(--y) * 100%);
+        transform: translateY(-120%);
+        font-size: 0.6875rem;
+        letter-spacing: 0.06em;
+        font-variant-numeric: tabular-nums;
+        color: var(--color-text-muted);
+    }
+
+    .profile-line {
+        fill: none;
+        stroke: var(--color-accent);
+        stroke-width: 2;
+        stroke-linejoin: round;
+    }
+
+    /* Por encima de las fichas de los hitos: al cruzarlas, la cota sigue a la vista. */
+    .profile-walker {
+        position: absolute;
+        z-index: 2;
+        left: calc(var(--x) * 100%);
+        top: calc(var(--y) * 100%);
+        width: 0;
+        height: 0;
+    }
+
+    .profile-walker::before {
+        content: "";
+        position: absolute;
+        left: -6px;
+        top: -6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        box-shadow:
+            0 0 0 4px rgb(232 200 114 / 0.2),
+            0 0 18px rgb(232 200 114 / 0.5);
+    }
+
+    .profile-walker-readout {
+        position: absolute;
+        right: 10px;
+        bottom: 8px;
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.25rem;
+        background: rgb(11 15 20 / 0.85);
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+        line-height: 1;
+        white-space: nowrap;
+        color: var(--color-accent);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .profile-start {
+        position: absolute;
+        left: 0;
+        bottom: -1.75rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+    }
+
+    .profile-marker {
+        position: absolute;
+        left: calc(var(--x) * 100%);
+        top: calc(var(--y) * 100%);
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        margin: -11px 0 0 -11px;
+        border: 1px solid var(--color-accent);
+        border-radius: 50%;
+        background: var(--color-bg-primary);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: var(--color-accent);
+    }
+
+    .profile-marker {
+        transition:
+            opacity 0.4s ease,
+            scale 0.4s ease;
+    }
+
+    .profile-marker:global(.is-pending) {
+        opacity: 0;
+        scale: 0.4;
+    }
+
+    .profile-milestones {
+        display: grid;
+        gap: 1.25rem;
+        margin-top: 3.5rem;
+    }
+
+    .profile-milestone {
+        display: flex;
+        gap: 0.875rem;
+    }
+
+    .profile-milestone-number {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        margin-top: 0.125rem;
+        border: 1px solid var(--color-accent);
+        border-radius: 50%;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: var(--color-accent);
+    }
+
+    .profile-milestone-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .profile-milestone-title {
+        font-family: var(--font-heading);
+        font-size: 1.375rem;
+        font-weight: 400;
+        line-height: 1.15;
+        color: var(--color-text-primary);
+    }
+
+    .profile-milestone-peak {
+        font-family: var(--font-body);
+        font-size: 0.8125rem;
+        letter-spacing: 0.04em;
+        color: var(--color-accent);
+    }
+
+    .profile-milestone-text {
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        color: var(--color-text-secondary);
+    }
+
+    .profile-caption {
+        margin-top: 3.5rem;
+        max-width: 40rem;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+    }
+
+    /* En escritorio cada hito va encima de su punto del perfil, con un tallo. */
+    @media (min-width: 64rem) {
+        .profile-canvas {
+            height: 26rem;
+        }
+
+        .profile-marker {
+            display: none;
+        }
+
+        .profile-milestones {
+            display: block;
+            margin: 0;
+        }
+
+        .profile-milestone {
+            position: absolute;
+            left: calc(var(--x) * 100%);
+            top: calc(var(--y) * 100%);
+            width: 14rem;
+            transform: translate(-1.5rem, calc(-100% - 2.75rem));
+        }
+
+        .profile-milestone {
+            transition:
+                opacity 0.5s ease,
+                translate 0.5s ease;
+        }
+
+        .profile-milestone:global(.is-pending) {
+            opacity: 0;
+            translate: 0 12px;
+        }
+
+        .profile-milestone.is-end {
+            transform: translate(calc(-100% + 1.5rem), calc(-100% - 2.75rem));
+        }
+
+        .profile-milestone::after {
+            content: "";
+            position: absolute;
+            left: 1.5rem;
+            top: 100%;
+            height: 2.75rem;
+            border-left: 1px dashed var(--color-accent);
+            opacity: 0.6;
+        }
+
+        .profile-milestone.is-end::after {
+            left: auto;
+            right: 1.5rem;
+        }
+
+        .profile-milestone-number {
+            display: none;
+        }
+
+        .profile-milestone-body {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--color-border-hover);
+            border-radius: 0.5rem;
+            background: rgb(11 15 20 / 0.92);
+        }
+
+        .profile-start {
+            bottom: -2rem;
+        }
+    }
+</style>

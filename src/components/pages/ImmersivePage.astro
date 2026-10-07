@@ -1,0 +1,86 @@
+---
+import type { Lang } from "../../types"
+import BaseLayout from "../layout/BaseLayout.astro"
+import Hero from "../sections/immersive/Hero.astro"
+import UseCases from "../sections/immersive/UseCases.astro"
+import Projects from "../sections/Projects.astro"
+import Difference from "../sections/immersive/Difference.astro"
+import Process from "../sections/immersive/Process.astro"
+import Contact from "../sections/Contact.astro"
+import { useTranslations } from "../../i18n/utils"
+import { routesFor } from "../../config/site"
+import { breadcrumbSchema, ogImageFor, serviceSchema } from "../../lib/seo-schema"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const copy = t.immersive
+const routes = routesFor(lang)
+const structuredData = [
+    serviceSchema({
+        lang,
+        path: routes.immersive,
+        name: copy.hero.label,
+        description: copy.meta.description,
+        serviceType: lang === "es" ? "Desarrollo de experiencias web 3D" : "3D web experience development",
+    }),
+    breadcrumbSchema([
+        { name: "Javier Piedra", path: routes.home },
+        { name: copy.hero.label, path: routes.immersive },
+    ]),
+]
+---
+
+<BaseLayout
+    lang={lang}
+    title={copy.meta.title}
+    description={copy.meta.description}
+    ogImage={ogImageFor("experiencias-3d", lang)}
+    structuredData={structuredData}
+>
+    <Hero lang={lang} />
+    <UseCases lang={lang} />
+    <Projects
+        lang={lang}
+        label={copy.work.label}
+        title={copy.work.title}
+        intro={copy.work.intro}
+        slugs={["veta", "insideTheFrame"]}
+    />
+    <Difference lang={lang} />
+    <Process lang={lang} />
+    <Contact
+        lang={lang}
+        title={copy.contact.title}
+        subtitle={copy.contact.subtitle}
+        summit="penalara"
+    />
+</BaseLayout>
+
+<script>
+    import {
+        initScrollAnimations,
+        initRevealAnimations,
+        initRouteSteps,
+        destroyAnimations,
+    } from "../../scripts/gsap-animations"
+    import { initSpotlights } from "../../scripts/spotlight"
+
+    // El hero se anima con CSS (no espera a este script).
+    initScrollAnimations()
+    initRevealAnimations()
+    initRouteSteps()
+    const destroySpotlights = initSpotlights()
+
+    document.addEventListener(
+        "astro:before-swap",
+        () => {
+            destroyAnimations()
+            destroySpotlights()
+        },
+        { once: true },
+    )
+</script>

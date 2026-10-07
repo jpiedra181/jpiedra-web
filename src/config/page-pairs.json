@@ -1,0 +1,38 @@
+[
+  {
+    "es": "/",
+    "en": "/en/"
+  },
+  {
+    "es": "/clasica/",
+    "en": "/en/classic/"
+  },
+  {
+    "es": "/experiencias-3d/",
+    "en": "/en/3d-experiences/"
+  },
+  {
+    "es": "/accesibilidad-web/",
+    "en": "/en/web-accessibility/"
+  },
+  {
+    "es": "/agentes-ia/",
+    "en": "/en/ai-agents/"
+  },
+  {
+    "es": "/caso-auditoria-accesibilidad/",
+    "en": "/en/accessibility-audit-case/"
+  },
+  {
+    "es": "/aviso-legal/",
+    "en": "/en/legal-notice/"
+  },
+  {
+    "es": "/politica-de-privacidad/",
+    "en": "/en/privacy-policy/"
+  },
+  {
+    "es": "/politica-de-cookies/",
+    "en": "/en/cookie-policy/"
+  }
+]

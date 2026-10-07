@@ -1,0 +1,237 @@
+[
+  {
+    "name": "Embalse de Navalmedio",
+    "lat": 40.74996,
+    "lon": -4.03763
+  },
+  {
+    "name": "Embalse del Espinar o Vado de las Cabras",
+    "lat": 40.79045,
+    "lon": -4.09849
+  },
+  {
+    "name": "El Mar",
+    "lat": 40.8921,
+    "lon": -3.99583
+  },
+  {
+    "name": "Embalse Maliciosa",
+    "lat": 40.74541,
+    "lon": -3.97749
+  },
+  {
+    "name": "Embalse del Pueblo de Navacerrada",
+    "lat": 40.75341,
+    "lon": -3.99319
+  },
+  {
+    "name": "Embalse del Ejército del Aire",
+    "lat": 40.75489,
+    "lon": -3.99371
+  },
+  {
+    "name": "Embalse Arroyo de la Venta o de Las Berceas",
+    "lat": 40.76727,
+    "lon": -4.06644
+  },
+  {
+    "name": "Embalse del Salto del Olvido",
+    "lat": 40.87871,
+    "lon": -4.02079
+  },
+  {
+    "name": "Laguna de los Pájaros",
+    "lat": 40.86066,
+    "lon": -3.94731
+  },
+  {
+    "name": "Embalse de la Puente Alta",
+    "lat": 40.8602,
+    "lon": -4.09088
+  },
+  {
+    "name": "Laguna Grande de Peñalara",
+    "lat": 40.83992,
+    "lon": -3.95747
+  },
+  {
+    "name": "La Charca Verde",
+    "lat": 40.76414,
+    "lon": -3.90525
+  },
+  {
+    "name": "La Ría",
+    "lat": 40.89687,
+    "lon": -4.00169
+  },
+  {
+    "name": "Fuente de la Cascada Nueva",
+    "lat": 40.89679,
+    "lon": -4.00322
+  },
+  {
+    "name": "La Carrera de Caballos",
+    "lat": 40.89707,
+    "lon": -4.00267
+  },
+  {
+    "name": "Estanque del Cuadrado",
+    "lat": 40.89404,
+    "lon": -4.00168
+  },
+  {
+    "name": "Embalse del Chiquillo",
+    "lat": 40.74319,
+    "lon": -4.00969
+  },
+  {
+    "name": "Laguna Chica de Peñalara",
+    "lat": 40.83491,
+    "lon": -3.95178
+  },
+  {
+    "name": "Embalse de la Presa del Pradillo",
+    "lat": 40.84845,
+    "lon": -3.88503
+  },
+  {
+    "name": "Quebrantaherraduras",
+    "lat": 40.79867,
+    "lon": -4.06183
+  },
+  {
+    "name": "Embalse del Peces",
+    "lat": 40.84636,
+    "lon": -4.11366
+  },
+  {
+    "name": "Embalse de los Almorchones",
+    "lat": 40.73633,
+    "lon": -3.99685
+  },
+  {
+    "name": "Estanque de las Ranas",
+    "lat": 40.89161,
+    "lon": -4.00104
+  },
+  {
+    "name": "Estanque del Chato",
+    "lat": 40.89114,
+    "lon": -4.00368
+  },
+  {
+    "name": "Charca de los plumeros",
+    "lat": 40.83908,
+    "lon": -3.93282
+  },
+  {
+    "name": "Laguna Operante",
+    "lat": 40.86587,
+    "lon": -3.93465
+  },
+  {
+    "name": "Laguna de los Claveles",
+    "lat": 40.85161,
+    "lon": -3.94636
+  },
+  {
+    "name": "Poza de Joselu",
+    "lat": 40.82003,
+    "lon": -3.93955
+  },
+  {
+    "name": "Poza de Sócrates",
+    "lat": 40.81374,
+    "lon": -3.95854
+  },
+  {
+    "name": "Laguna Raso del Baile",
+    "lat": 40.82688,
+    "lon": -3.90755
+  },
+  {
+    "name": "Lago Alonso",
+    "lat": 40.93185,
+    "lon": -4.10424
+  },
+  {
+    "name": "Embalse del Arroyo del Santo",
+    "lat": 40.76099,
+    "lon": -4.18188
+  },
+  {
+    "name": "Estanque de la Faisanera",
+    "lat": 40.8968,
+    "lon": -4.00969
+  },
+  {
+    "name": "Estanque del Colmenar",
+    "lat": 40.8992,
+    "lon": -4.00091
+  },
+  {
+    "name": "Baños de Venus",
+    "lat": 40.78879,
+    "lon": -3.8938
+  },
+  {
+    "name": "Laguna de la Cantera de Hontoria",
+    "lat": 40.91455,
+    "lon": -4.11465
+  },
+  {
+    "name": "Charca de las Ranas",
+    "lat": 40.74118,
+    "lon": -4.14172
+  },
+  {
+    "name": "Charcón de Navalonguilla",
+    "lat": 40.8672,
+    "lon": -4.00634
+  },
+  {
+    "name": "Estanque de las Llagas",
+    "lat": 40.89466,
+    "lon": -3.99813
+  },
+  {
+    "name": "Poza de La Tomasa",
+    "lat": 40.86077,
+    "lon": -4.12693
+  },
+  {
+    "name": "Charca Kindelan",
+    "lat": 40.75729,
+    "lon": -3.88969
+  },
+  {
+    "name": "Antiguos lavaderos",
+    "lat": 40.86605,
+    "lon": -4.13457
+  },
+  {
+    "name": "Poza de Los Baños de Venus",
+    "lat": 40.82565,
+    "lon": -4.02412
+  },
+  {
+    "name": "Estanque del Arroyo Retamar",
+    "lat": 40.82284,
+    "lon": -4.08025
+  },
+  {
+    "name": "Estanque del arroyo de Valdeclemente",
+    "lat": 40.84289,
+    "lon": -4.00238
+  },
+  {
+    "name": "Estanque Común",
+    "lat": 40.89467,
+    "lon": -4.00185
+  },
+  {
+    "name": "Embalse del Pontón Alto",
+    "lat": 40.9089,
+    "lon": -4.02859
+  }
+]

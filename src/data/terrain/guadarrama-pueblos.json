@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Mataelpino",
+    "kind": "village",
+    "lat": 40.73583,
+    "lon": -3.94561
+  },
+  {
+    "name": "La Granja",
+    "kind": "village",
+    "lat": 40.89813,
+    "lon": -4.0054
+  },
+  {
+    "name": "Las Dehesas",
+    "kind": "hamlet",
+    "lat": 40.75671,
+    "lon": -4.07225
+  },
+  {
+    "name": "Cercedilla",
+    "kind": "village",
+    "lat": 40.74129,
+    "lon": -4.0558
+  },
+  {
+    "name": "Rascafría",
+    "kind": "village",
+    "lat": 40.90389,
+    "lon": -3.88029
+  },
+  {
+    "name": "Los Ángeles de San Rafael",
+    "kind": "village",
+    "lat": 40.77795,
+    "lon": -4.21541
+  },
+  {
+    "name": "Estación de El Espinar",
+    "kind": "hamlet",
+    "lat": 40.73758,
+    "lon": -4.18549
+  },
+  {
+    "name": "Perogordo",
+    "kind": "hamlet",
+    "lat": 40.92892,
+    "lon": -4.14893
+  },
+  {
+    "name": "Parque Robledo",
+    "kind": "hamlet",
+    "lat": 40.90813,
+    "lon": -4.05389
+  },
+  {
+    "name": "Peñas del Erizo",
+    "kind": "hamlet",
+    "lat": 40.9146,
+    "lon": -4.06826
+  },
+  {
+    "name": "Valsaín",
+    "kind": "hamlet",
+    "lat": 40.87832,
+    "lon": -4.02589
+  },
+  {
+    "name": "Madrona",
+    "kind": "hamlet",
+    "lat": 40.89763,
+    "lon": -4.17129
+  },
+  {
+    "name": "Torredondo",
+    "kind": "hamlet",
+    "lat": 40.93134,
+    "lon": -4.17726
+  },
+  {
+    "name": "Navas de Riofrío",
+    "kind": "village",
+    "lat": 40.86854,
+    "lon": -4.13633
+  },
+  {
+    "name": "Otero de Herreros",
+    "kind": "village",
+    "lat": 40.8173,
+    "lon": -4.20752
+  },
+  {
+    "name": "La Estación",
+    "kind": "hamlet",
+    "lat": 40.80131,
+    "lon": -4.2039
+  },
+  {
+    "name": "Ortigosa del Monte",
+    "kind": "village",
+    "lat": 40.8387,
+    "lon": -4.17329
+  },
+  {
+    "name": "Hontoria",
+    "kind": "hamlet",
+    "lat": 40.90786,
+    "lon": -4.12481
+  },
+  {
+    "name": "Palazuelos de Eresma",
+    "kind": "village",
+    "lat": 40.93034,
+    "lon": -4.05777
+  },
+  {
+    "name": "Revenga",
+    "kind": "hamlet",
+    "lat": 40.87219,
+    "lon": -4.10221
+  },
+  {
+    "name": "Quitapesares",
+    "kind": "hamlet",
+    "lat": 40.91536,
+    "lon": -4.05548
+  },
+  {
+    "name": "Tabanera del Monte",
+    "kind": "village",
+    "lat": 40.93871,
+    "lon": -4.06642
+  },
+  {
+    "name": "La Losa",
+    "kind": "village",
+    "lat": 40.85347,
+    "lon": -4.16314
+  },
+  {
+    "name": "Carrascalejo",
+    "kind": "hamlet",
+    "lat": 40.92213,
+    "lon": -4.0721
+  },
+  {
+    "name": "Prados",
+    "kind": "hamlet",
+    "lat": 40.75434,
+    "lon": -4.20914
+  },
+  {
+    "name": "Camorritos",
+    "kind": "hamlet",
+    "lat": 40.75539,
+    "lon": -4.04853
+  },
+  {
+    "name": "El Baillo y las Hojarascas",
+    "kind": "hamlet",
+    "lat": 40.74321,
+    "lon": -4.04123
+  },
+  {
+    "name": "El Paular",
+    "kind": "hamlet",
+    "lat": 40.88769,
+    "lon": -3.88722
+  },
+  {
+    "name": "Puerto de Navacerrada",
+    "kind": "hamlet",
+    "lat": 40.78888,
+    "lon": -4.0036
+  },
+  {
+    "name": "Urbanización Valle de Fuenfría",
+    "kind": "hamlet",
+    "lat": 40.74449,
+    "lon": -4.06717
+  }
+]

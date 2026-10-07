@@ -1,0 +1,292 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+import { pricingId } from "../../../config/site"
+
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const copy = t.approach
+const pricing = t.accessibilityLanding.pricing
+---
+
+<!-- Cómo trabajo y cuánto cuesta, en una sola sección: cada paso lleva su
+     oferta. Sustituye a las antiguas /servicios y /auditoria-accesibilidad. -->
+<section id={pricingId(lang)} aria-labelledby="precios-title" class="relative py-24 md:py-32 lg:py-40 bg-bg-surface border-t border-b border-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+            <div data-wipe>
+                <SectionLabel text={copy.label} />
+            </div>
+            <h2
+                id="precios-title"
+                data-split
+                class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-text-primary max-w-[20ch]"
+            >
+                {copy.title}
+            </h2>
+            <p data-reveal class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[45rem]">
+                {copy.subtitle}
+            </p>
+        </div>
+
+        <ol role="list" class="plan mt-16 md:mt-20 lg:mt-24">
+            {
+                copy.steps.map((step, index) => {
+                    const offers = pricing.steps[index]?.offers ?? []
+                    return (
+                        <li class="plan-step">
+                            <div class="plan-head">
+                                <span class="plan-number" aria-hidden="true">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <h3 class="plan-title">{step.title}</h3>
+                                <p class="plan-text">{step.description}</p>
+                            </div>
+
+                            <div class="plan-offers-wrap">
+                                {offers.length > 1 && <p class="plan-offers-label">{pricing.startLabel}</p>}
+                                <ul role="list" class:list={["plan-offers", { "is-pair": offers.length > 1 }]} data-reveal-stagger>
+                                    {offers.map((offer) => (
+                                        <li class="offer" id={offer.id} data-spotlight>
+                                            <h4 class="offer-name">{offer.name}</h4>
+                                            <p class="offer-price">
+                                                <span aria-hidden="true">{offer.price}</span>
+                                                <span class="sr-only">{offer.priceAriaLabel}</span>
+                                            </p>
+                                            <p class="offer-deadline">{offer.deadline}</p>
+                                            <p class="offer-summary">{offer.summary}</p>
+                                            {offer.tiers && (
+                                                <ul role="list" class="offer-tiers">
+                                                    {offer.tiers.map((tier) => (
+                                                        <li>
+                                                            <span class="offer-tier-name">{tier.name}</span>
+                                                            <span class="offer-tier-price">{tier.price}</span>
+                                                            <span class="offer-tier-text">{tier.description}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                            {offer.note && <p class="offer-note">{offer.note}</p>}
+                                            <a href="#contact" class="offer-cta" data-contact-topic={offer.topic}>
+                                                {offer.cta}
+                                                <span aria-hidden="true">→</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </li>
+                    )
+                })
+            }
+        </ol>
+    </div>
+</section>
+
+<style>
+    .plan {
+        display: grid;
+        gap: 4rem;
+    }
+
+    .plan-step {
+        display: grid;
+        gap: 2rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--color-accent-line);
+    }
+
+    .plan-number {
+        display: block;
+        font-family: var(--font-heading);
+        font-size: clamp(4rem, 8vw, 7rem);
+        line-height: 0.85;
+        color: transparent;
+        -webkit-text-stroke: 1px rgb(232 200 114 / 0.55);
+    }
+
+    .plan-title {
+        margin-top: 1.25rem;
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 3.6vw, 3rem);
+        line-height: 1.1;
+        color: var(--color-accent);
+    }
+
+    .plan-text {
+        margin-top: 1rem;
+        max-width: 34rem;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--color-text-primary);
+    }
+
+    .plan-offers-label {
+        margin-bottom: 1rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+    }
+
+    .plan-offers {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    .offer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 2rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 1rem;
+        background: var(--color-bg-primary);
+        overflow: hidden;
+        isolation: isolate;
+        scroll-margin-top: 7rem;
+    }
+
+    .offer::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: radial-gradient(
+            24rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+            rgb(232 200 114 / 0.08),
+            transparent 65%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .offer:hover::before {
+        opacity: 1;
+    }
+
+    .offer-name {
+        font-family: var(--font-heading);
+        font-size: 1.75rem;
+        line-height: 1.15;
+        color: var(--color-text-primary);
+    }
+
+    .offer-price {
+        font-family: var(--font-heading);
+        font-size: clamp(2.25rem, 4vw, 3rem);
+        line-height: 1;
+        color: var(--color-accent);
+    }
+
+    .offer-deadline {
+        align-self: flex-start;
+        padding: 0.25rem 0.75rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+    }
+
+    .offer-summary {
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        color: var(--color-text-primary);
+    }
+
+    .offer-tiers {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 0.25rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .offer-tiers li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.125rem 1rem;
+    }
+
+    .offer-tier-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
+
+    .offer-tier-price {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .offer-tier-text {
+        grid-column: 1 / -1;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--color-text-secondary);
+    }
+
+    .offer-note {
+        font-size: 0.8125rem;
+        color: var(--color-text-secondary);
+    }
+
+    .offer-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        align-self: flex-start;
+        min-height: 44px;
+        margin-top: auto;
+        padding: 0.75rem 1.5rem;
+        border-radius: 999px;
+        background: var(--color-accent);
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--color-bg-primary);
+        transition:
+            background-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .offer-cta:hover {
+        background: var(--color-accent-hover);
+        box-shadow: 0 10px 24px -10px rgb(232 200 114 / 0.45);
+    }
+
+    .offer-cta:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+    }
+
+    @media (min-width: 48rem) {
+        .plan-offers.is-pair {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .plan-step {
+            grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* El paso se queda a la vista mientras pasan sus opciones. */
+        .plan-head {
+            position: sticky;
+            top: 7rem;
+        }
+    }
+</style>

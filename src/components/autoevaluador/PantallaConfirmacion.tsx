@@ -60,7 +60,7 @@ export function PantallaConfirmacion({ email, dictamen }: Props) {
             Precio cerrado antes de empezar.
           </p>
           <a
-            href="/auditoria-accesibilidad"
+            href="/accesibilidad-web/#precios"
             className="inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
           >
             Ver la auditoría en detalle
@@ -79,7 +79,7 @@ export function PantallaConfirmacion({ email, dictamen }: Props) {
             algún día quieres la auditoría completa.
           </p>
           <a
-            href="/servicios#diagnostico-expres"
+            href="/accesibilidad-web/#diagnostico-expres"
             className="inline-flex items-center gap-2 bg-accent text-bg-primary px-7 py-3.5 rounded-full text-base font-medium hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px]"
           >
             Ver el diagnóstico exprés
@@ -95,7 +95,7 @@ export function PantallaConfirmacion({ email, dictamen }: Props) {
         <ul className="space-y-3">
           <li>
             <a
-              href="/blog/ley-11-2023-empresas-espanolas"
+              href="/blog/ley-11-2023-empresas-espanolas/"
               className="inline-flex items-center gap-2 text-text-secondary hover:text-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm"
             >
               <span className="text-accent" aria-hidden="true">
@@ -106,7 +106,7 @@ export function PantallaConfirmacion({ email, dictamen }: Props) {
           </li>
           <li>
             <a
-              href="/blog/sanciones-ley-11-2023"
+              href="/blog/sanciones-ley-11-2023/"
               className="inline-flex items-center gap-2 text-text-secondary hover:text-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm"
             >
               <span className="text-accent" aria-hidden="true">

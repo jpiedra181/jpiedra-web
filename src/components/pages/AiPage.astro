@@ -1,0 +1,78 @@
+---
+import type { Lang } from "../../types"
+import BaseLayout from "../layout/BaseLayout.astro"
+import Hero from "../sections/ai/Hero.astro"
+import Why from "../sections/ai/Why.astro"
+import Checks from "../sections/ai/Checks.astro"
+import Process from "../sections/ai/Process.astro"
+import Contact from "../sections/Contact.astro"
+import { useTranslations } from "../../i18n/utils"
+import { routesFor } from "../../config/site"
+import { breadcrumbSchema, ogImageFor, serviceSchema } from "../../lib/seo-schema"
+
+// Landing de webs para agentes de IA: cuelga de la Bola del Mundo (V·04) en
+// la home 3D. Es el trabajo de accesibilidad contado para quien hoy se
+// pregunta por la IA: lo que necesita un agente es lo que necesita una persona
+// que usa lector de pantalla.
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).aiLanding
+const routes = routesFor(lang)
+const structuredData = [
+    serviceSchema({
+        lang,
+        path: routes.ai,
+        name: copy.hero.label,
+        description: copy.meta.description,
+        serviceType: lang === "es" ? "Accesibilidad web para agentes de IA" : "Web accessibility for AI agents",
+    }),
+    breadcrumbSchema([
+        { name: "Javier Piedra", path: routes.home },
+        { name: copy.hero.label, path: routes.ai },
+    ]),
+]
+---
+
+<BaseLayout
+    lang={lang}
+    title={copy.meta.title}
+    description={copy.meta.description}
+    ogImage={ogImageFor("agentes-ia", lang)}
+    structuredData={structuredData}
+>
+    <Hero lang={lang} />
+    <Why lang={lang} />
+    <Checks lang={lang} />
+    <Process lang={lang} />
+    <Contact lang={lang} title={copy.contact.title} subtitle={copy.contact.subtitle} summit="bolaDelMundo" />
+</BaseLayout>
+
+<script>
+    import {
+        initScrollAnimations,
+        initRevealAnimations,
+        initDataVisuals,
+        initRouteSteps,
+        destroyAnimations,
+    } from "../../scripts/gsap-animations"
+    import { initSpotlights } from "../../scripts/spotlight"
+
+    // El hero se anima con CSS (no espera a este script).
+    initScrollAnimations()
+    initRevealAnimations()
+    initDataVisuals()
+    initRouteSteps()
+    const destroySpotlights = initSpotlights()
+
+    document.addEventListener(
+        "astro:before-swap",
+        () => {
+            destroyAnimations()
+            destroySpotlights()
+        },
+        { once: true },
+    )
+</script>

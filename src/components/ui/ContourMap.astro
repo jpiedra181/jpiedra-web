@@ -1,0 +1,207 @@
+---
+// Plano de curvas de nivel en SVG a partir del MDT25 del IGN (datos generados
+// en src/data/terrain/clasica). Cada cota es una capa: un relleno con el
+// terreno que queda por encima y sus curvas, desplazada hacia arriba según su
+// altitud (lift) para que el plano se vea como una maqueta de cartón.
+//
+// El relieve va fijado en el HTML y nada se mueve dentro del SVG: cambiar una
+// sola capa obliga al navegador a rasterizar de nuevo todo el plano, y en
+// cada fotograma eso no lo aguanta ni una GPU de escritorio (medido). Las
+// animaciones mueven el SVG entero, que la tarjeta gráfica desplaza o inclina
+// sin volver a pintarlo.
+//
+// Es decorativo: va oculto a los lectores de pantalla y el texto que lo
+// acompaña cuenta lo mismo.
+import type { ContourMapData } from "../../types"
+import { getLangFromUrl } from "../../i18n/utils"
+import { formatElevation } from "../../lib/format"
+
+interface Props {
+    map: ContourMapData
+    id: string
+    // Desplazamiento de la cota más alta, en unidades del plano. Las demás
+    // suben en proporción a su altitud.
+    lift?: number
+    // Solo las cotas desde esta altitud: para enseñar únicamente una cumbre.
+    fromElevation?: number
+    showPeaks?: boolean
+    // "scroll": GSAP lo hace aparecer al entrar en pantalla.
+    reveal?: "scroll" | "none"
+    class?: string
+}
+
+const {
+    map,
+    id,
+    lift = 0,
+    fromElevation = -Infinity,
+    showPeaks = true,
+    reveal = "none",
+    class: className = "",
+} = Astro.props
+const [width, height] = map.viewBox
+const levels = map.levels.filter((level) => level.z >= fromElevation)
+const lowestZ = levels[0]?.z ?? map.minZ
+
+// Altura relativa en el plano completo (para el color) y en lo que se ve
+// (para el relieve: así una cumbre suelta también se separa en escalones).
+const tint = (z: number) => ((z - map.minZ) / (map.maxZ - map.minZ)).toFixed(3)
+const offset = (z: number) => Math.max(0, ((z - lowestZ) / (map.maxZ - lowestZ)) * lift)
+const raise = (z: number) => (lift ? `translate(0 ${(-offset(z)).toFixed(1)})` : undefined)
+
+// Cada lámina de agua va en la capa de su cota para subir con su terreno.
+const waterByLevel = new Map<number, string[]>()
+for (const water of map.water) {
+    const owner = [...levels].reverse().find((level) => level.z <= water.z)
+    if (!owner) continue
+    waterByLevel.set(owner.z, [...(waterByLevel.get(owner.z) ?? []), water.d])
+}
+
+const lang = getLangFromUrl(Astro.url)
+---
+
+<svg
+    class={`contour-map ${className}`}
+    viewBox={`0 0 ${width} ${height}`}
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+    focusable="false"
+    data-contour-map={reveal}
+    data-interval={map.interval}
+    data-lift={lift}
+    data-relief={`${lowestZ} ${map.maxZ}`}
+>
+    <defs>
+        <pattern
+            id={`${id}-water`}
+            width="5"
+            height="5"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(-12)"
+        >
+            <line x1="0" y1="2.5" x2="5" y2="2.5" class="contour-water-hatch"></line>
+        </pattern>
+    </defs>
+
+    {
+        levels.map((level) => (
+            <g
+                class:list={["contour-level", { "is-major": level.major }]}
+                data-z={level.z}
+                transform={raise(level.z)}
+                style={`--h:${tint(level.z)}`}
+            >
+                <path class="contour-area" d={level.area} fill-rule="evenodd" />
+                {waterByLevel.get(level.z)?.map((d) => (
+                    <path class="contour-water" d={d} fill={`url(#${id}-water)`} />
+                ))}
+                {level.d.map((d) => (
+                    <path class="contour-line" d={d} />
+                ))}
+            </g>
+        ))
+    }
+
+    {
+        showPeaks && (
+            <g class="contour-peaks">
+                {map.peaks
+                    .filter((peak) => peak.elevation >= fromElevation)
+                    .map((peak) => (
+                        <g
+                            class="contour-peak"
+                            transform={`translate(${peak.x} ${(peak.y - offset(peak.elevation)).toFixed(1)})`}
+                        >
+                            <path d="M0 -8 L7 4.5 L-7 4.5 Z" class="contour-peak-mark" />
+                            <circle r="1.6" class="contour-peak-dot" />
+                            <text x="13" y="-4" class="contour-peak-name">
+                                {peak.name}
+                            </text>
+                            <text x="13" y="11" class="contour-peak-elevation">
+                                {formatElevation(peak.elevation, lang)}
+                            </text>
+                        </g>
+                    ))}
+            </g>
+        )
+    }
+</svg>
+
+<style>
+    .contour-map {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        --area-low: var(--color-bg-primary);
+        --area-high: #2e3a4d;
+    }
+
+    /* Tinta hipsométrica: cuanto más alto, más claro el cartón. El borde
+       oscuro es la sombra de cada capa sobre la de abajo y separa los
+       escalones de la maqueta. */
+    .contour-area {
+        fill: color-mix(in oklab, var(--area-low), var(--area-high) calc(var(--h) * 100%));
+        stroke: rgb(5 7 10 / 0.55);
+        stroke-width: 3;
+        stroke-linejoin: round;
+    }
+
+    .contour-line {
+        fill: none;
+        stroke: var(--color-text-primary);
+        stroke-opacity: calc(0.12 + var(--h) * 0.26);
+        stroke-width: 1;
+        stroke-linejoin: round;
+    }
+
+    .is-major .contour-line {
+        stroke: var(--color-accent);
+        stroke-opacity: calc(0.35 + var(--h) * 0.45);
+        stroke-width: 1.4;
+    }
+
+    .contour-water {
+        stroke: rgb(150 190 220 / 0.7);
+        stroke-width: 1;
+    }
+
+    .contour-water-hatch {
+        stroke: rgb(150 190 220 / 0.55);
+        stroke-width: 1;
+    }
+
+    .contour-peak-mark {
+        fill: var(--color-bg-primary);
+        stroke: var(--color-accent);
+        stroke-width: 1.4;
+    }
+
+    .contour-peak-dot {
+        fill: var(--color-accent);
+    }
+
+    .contour-peak-name {
+        fill: var(--color-text-primary);
+        font-family: var(--font-body);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        paint-order: stroke;
+        stroke: var(--color-bg-primary);
+        stroke-width: 3px;
+        stroke-linejoin: round;
+    }
+
+    .contour-peak-elevation {
+        fill: var(--color-accent);
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.04em;
+        paint-order: stroke;
+        stroke: var(--color-bg-primary);
+        stroke-width: 3px;
+        stroke-linejoin: round;
+    }
+</style>
