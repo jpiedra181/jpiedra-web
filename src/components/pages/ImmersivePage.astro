@@ -2,10 +2,11 @@
 import type { Lang } from "../../types"
 import BaseLayout from "../layout/BaseLayout.astro"
 import Hero from "../sections/immersive/Hero.astro"
-import UseCases from "../sections/immersive/UseCases.astro"
+import Problem from "../sections/immersive/Problem.astro"
 import Projects from "../sections/Projects.astro"
-import Difference from "../sections/immersive/Difference.astro"
+import Doubts from "../sections/immersive/Doubts.astro"
 import Process from "../sections/immersive/Process.astro"
+import Faq from "../sections/Faq.astro"
 import Contact from "../sections/Contact.astro"
 import { useTranslations } from "../../i18n/utils"
 import { routesFor } from "../../config/site"
@@ -41,17 +42,24 @@ const structuredData = [
     ogImage={ogImageFor("experiencias-3d", lang)}
     structuredData={structuredData}
 >
+    <!-- Carta de ventas: el problema, las pruebas, las dudas con su prueba y lo
+         práctico antes de pedir presupuesto. -->
     <Hero lang={lang} />
-    <UseCases lang={lang} />
+    <Problem lang={lang} />
     <Projects
         lang={lang}
-        label={copy.work.label}
-        title={copy.work.title}
-        intro={copy.work.intro}
+        id="pruebas"
+        label={copy.proof.label}
+        title={copy.proof.title}
+        intro={copy.proof.intro}
         slugs={["veta", "insideTheFrame"]}
+        cases={copy.proof.cases}
+        problemLabel={copy.proof.problemLabel}
+        note={copy.proof.note}
     />
-    <Difference lang={lang} />
+    <Doubts lang={lang} />
     <Process lang={lang} />
+    <Faq id="lo-practico" copy={copy.faq} />
     <Contact
         lang={lang}
         title={copy.contact.title}

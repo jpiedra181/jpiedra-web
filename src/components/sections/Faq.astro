@@ -1,15 +1,21 @@
 ---
 //@ts-nocheck
-import type { Lang } from "../../../types"
-import { useTranslations } from "../../../i18n/utils"
-import SectionLabel from "../../ui/SectionLabel.astro"
+import SectionLabel from "../ui/SectionLabel.astro"
 
-interface Props {
-    lang: Lang
+interface FaqItem {
+    question: string
+    answer: string
+    // Enlace opcional al final de la respuesta (una herramienta, otra página).
+    linkText?: string
+    linkHref?: string
 }
 
-const { lang } = Astro.props
-const copy = useTranslations(lang).accessibilityLanding.faq
+interface Props {
+    id: string
+    copy: { label: string; title: string; items: FaqItem[] }
+}
+
+const { id, copy } = Astro.props
 
 // Las preguntas también como FAQPage para buscadores y agentes.
 const schema = {
@@ -23,14 +29,14 @@ const schema = {
 }
 ---
 
-<section id="preguntas" aria-labelledby="preguntas-title" class="relative py-24 md:py-32">
+<section id={id} aria-labelledby={`${id}-title`} class="relative py-24 md:py-32">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-20 items-start">
         <div class="faq-intro">
             <div data-wipe>
                 <SectionLabel text={copy.label} />
             </div>
             <h2
-                id="preguntas-title"
+                id={`${id}-title`}
                 data-split
                 class="font-heading text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[1.05] text-text-primary"
             >
@@ -47,7 +53,15 @@ const schema = {
                             <span>{item.question}</span>
                             <span class="faq-icon" aria-hidden="true" />
                         </summary>
-                        <p>{item.answer}</p>
+                        <p>
+                            {item.answer}
+                            {item.linkHref && (
+                                <>
+                                    {" "}
+                                    <a href={item.linkHref}>{item.linkText} →</a>
+                                </>
+                            )}
+                        </p>
                     </details>
                 ))
             }
@@ -135,5 +149,21 @@ const schema = {
         font-size: 1rem;
         line-height: 1.7;
         color: var(--color-text-secondary);
+    }
+
+    .faq-item a {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        border-radius: 2px;
+    }
+
+    .faq-item a:hover {
+        color: var(--color-accent-hover);
+    }
+
+    .faq-item a:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
     }
 </style>

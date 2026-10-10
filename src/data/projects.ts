@@ -15,6 +15,8 @@ export interface ProjectEntry {
     // "contain" para imágenes que no son una pantalla (la portada vertical de un
     // informe): recortarla a 16:10 dejaría solo el margen en blanco.
     imageFit: "cover" | "contain"
+    // Ficha de accesibilidad publicada en la web (solo en castellano).
+    accessibilitySheet?: string
 }
 
 export const projects: Record<ProjectSlug, ProjectEntry> = {
@@ -23,12 +25,14 @@ export const projects: Record<ProjectSlug, ProjectEntry> = {
         href: "https://vetaatlas.com/",
         image: vetaImage,
         imageFit: "cover",
+        accessibilitySheet: "/fichas-accesibilidad/veta/",
     },
     insideTheFrame: {
         slug: "insideTheFrame",
         href: "https://artgallery360.art/",
         image: insideTheFrameImage,
         imageFit: "cover",
+        accessibilitySheet: "/fichas-accesibilidad/inside-the-frame/",
     },
     auditCase: {
         slug: "auditCase",

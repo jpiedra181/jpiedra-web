@@ -486,11 +486,11 @@
       "veta": {
         "category": "3D experience · Self-initiated concept",
         "title": "VETA, an atlas of surfaces",
-        "description": "For anyone selling surfaces who hears “it looked like a different colour in the photo”. 48 finishes compared by tone and texture, with a moving light to tell polished, matt and textured apart. You choose before ordering samples, and you can browse it with the keyboard too.",
+        "description": "For anyone selling surfaces who hears “it looked like a different colour in the photo”. 48 finishes compared by tone and texture, with a moving light to tell polished, matt and textured apart. You choose before ordering samples. And it meets WCAG 2.2 AA: it works with a keyboard and a screen reader.",
         "tags": [
           "WebGL 2",
           "Product catalogue",
-          "Text index"
+          "WCAG 2.2 AA"
         ],
         "imageAlt": "The VETA grid with marble, terrazzo, granite and wood samples arranged by tone.",
         "cta": "Open VETA"
@@ -498,11 +498,11 @@
       "insideTheFrame": {
         "category": "Immersive experience · Self-initiated concept",
         "title": "Inside the Frame",
-        "description": "For museums and collections that want to reach people who can’t visit. Four paintings by Hokusai, Hiroshige, Monet and Turner turned into places you can stand in, with optional sound and a written description of every scene for anyone who can’t see it.",
+        "description": "For museums and collections that want to reach people who can’t visit. Four paintings by Hokusai, Hiroshige, Monet and Turner turned into places you can stand in, with optional sound and a written description of every scene for anyone who can’t see it. It meets WCAG 2.2 AA.",
         "tags": [
           "Immersive 3D",
-          "Optional sound",
-          "Text description"
+          "Text description",
+          "WCAG 2.2 AA"
         ],
         "imageAlt": "The dark room of Inside the Frame with Hokusai’s Great Wave under a spotlight, reflected in the water on the floor.",
         "cta": "Open Inside the Frame"
@@ -524,21 +524,22 @@
   "projectSheet": {
     "sheet": "Sheet",
     "of": "of",
-    "newWindow": "opens in a new tab"
+    "newWindow": "opens in a new tab",
+    "accessibilitySheet": "Read its accessibility report (in Spanish)"
   },
   "immersive": {
     "meta": {
-      "title": "Accessible 3D web experiences · Javier Piedra",
-      "description": "3D catalogues, product viewers and immersive rooms that load fast on mobile, that Google understands and that anyone can use. A fixed quote before we start."
+      "title": "Fast, accessible 3D web experiences · Javier Piedra",
+      "description": "3D catalogues and immersive rooms that load fast on a phone, that Google can find and that meet WCAG 2.2 AA. With two live, audited projects as proof."
     },
     "hero": {
       "label": "3D web experiences",
       "titleStart": "What a photo",
       "titleHighlight": "can’t",
       "titleEnd": "show.",
-      "subtitle": "For when a photo isn’t enough. Catalogues you explore by touch, product viewers and immersive rooms, in the browser with nothing to install. Fast on your customer’s phone, readable by Google and usable with keyboard or screen reader.",
+      "subtitle": "Your customer won't decide from a photo: they ask, order samples or leave it for another day. In 3D they see it as if it were in front of them, in the browser, with nothing to install. And without the usual problems: fast on a phone, visible on Google and easy for anyone to use.",
       "ctaPrimary": "Tell me about your project",
-      "ctaSecondary": "See the projects",
+      "ctaSecondary": "See the proof",
       "swatches": {
         "caption": "The same stone in three finishes. Move the light and see how each one responds: that’s what a photo can’t show.",
         "lightLabel": "Light position",
@@ -563,84 +564,164 @@
         ]
       }
     },
-    "useCases": {
-      "label": "Who it’s for",
-      "title": "For products people choose by looking.",
+    "problem": {
+      "label": "The problem",
+      "title": "A photo flattens exactly what makes someone buy.",
       "items": [
         {
-          "title": "Surfaces, materials and products",
-          "audience": "Manufacturers and distributors of ceramics, stone, wood or furniture",
-          "description": "Your customers choose by tone, texture and finish, and on a product page with a photo everything looks the same. A 3D catalogue lets them compare, move the light and see whether a finish is polished or matt before they ask you for samples."
+          "title": "If you sell surfaces, materials or products",
+          "audience": "Ceramics, stone, wood, furniture",
+          "description": "On a product page with a photo, everything looks alike. Polished and matt come out the same, the tone shifts from screen to screen and nobody can picture the size. Your customer orders samples to be sure, or goes to look elsewhere."
         },
         {
-          "title": "Culture, heritage and tourism",
-          "audience": "Museums, foundations, galleries, councils and tourist offices",
-          "description": "A virtual room takes the collection to people who can’t visit and keeps it open after the museum closes. If you’re a public body, it also has to be accessible by law (the EU Web Accessibility Directive; in Spain, Royal Decree 1112/2018). Mine are built to comply from day one, not patched at the end."
+          "title": "If you look after a collection, a heritage site or a destination",
+          "audience": "Museums, foundations, galleries, councils and tourist boards",
+          "description": "The collection is only seen by those who can visit, during opening hours. A photo gallery doesn't convey what it feels like to stand in the room. And if you're a public body in the EU, your website has to be accessible by law (Directive (EU) 2016/2102)."
         }
-      ]
+      ],
+      "outro": "3D has a bad reputation, and often rightly so: sites that take ages to load, that Google can't read and that you can't use without a mouse. It doesn't have to be like that. The proof is just below."
     },
-    "difference": {
+    "proof": {
+      "label": "The proof",
+      "title": "Two live projects. Open them on your phone.",
+      "intro": "They aren't client commissions: I built them to show that 3D can be fast, findable and easy for anyone to use. They're live, measured and audited.",
+      "note": "Performance measured with Lighthouse in mobile mode on 10 October 2026.",
+      "problemLabel": "The problem",
+      "cases": {
+        "veta": {
+          "category": "Surfaces · 3D catalogue",
+          "problem": "“It looked like a different colour in the photo.”",
+          "description": "48 finishes on a map you explore like a plan. A light that follows the cursor tells polished from matt and textured, and every surface can be seen at real scale and placed in a 3D room. You choose before ordering samples.",
+          "facts": [
+            {
+              "value": "45 KB",
+              "label": "of code to start. Textures arrive afterwards, sized for each screen."
+            },
+            {
+              "value": "0",
+              "label": "frames drawn while you're not touching anything."
+            },
+            {
+              "value": "48",
+              "label": "surfaces also in a text index, which is what you see without 3D."
+            },
+            {
+              "value": "WCAG 2.2 AA",
+              "label": "17 issues in the audit and 2 more afterwards, all fixed and checked with NVDA."
+            }
+          ]
+        },
+        "insideTheFrame": {
+          "category": "Culture · 360° immersive room",
+          "problem": "The collection is only seen by those who can visit.",
+          "description": "Four paintings by Hokusai, Hiroshige, Monet and Turner turned into places you can stand in, with optional sound. Every scene is described in writing, and you turn the view by dragging, with the keyboard or with buttons.",
+          "facts": [
+            {
+              "value": "99–100",
+              "label": "for performance in Lighthouse on mobile, on all five pages."
+            },
+            {
+              "value": "< 25 KB",
+              "label": "of code to start. The panorama is downloaded at the size each screen needs."
+            },
+            {
+              "value": "5",
+              "label": "pages, the entrance hall and one per room, each with its own title and description for Google."
+            },
+            {
+              "value": "WCAG 2.2 AA",
+              "label": "9 issues in the audit and 1 more afterwards, all fixed and checked with NVDA."
+            }
+          ]
+        }
+      }
+    },
+    "doubts": {
       "label": "Your questions",
       "title": "Making it pretty is the easy part.",
-      "subtitle": "A 3D experience impresses for the first ten seconds. Whether it sells depends on the rest: that it loads on a mid-range phone, that Google finds it, that it works without a mouse and that it doesn’t make anyone dizzy. Every answer comes with a live proof.",
+      "subtitle": "What decides whether it sells is everything else. These are the questions I get before anyone commissions something in 3D, with the proof behind each answer.",
       "items": [
         {
-          "title": "Won’t it be slow on mobile?",
-          "description": "Not if it’s built for mobile from the start: geometry and textures at just the right size, and the screen only repaints when something changes. In VETA, all 48 surfaces are drawn in a single call to the graphics card."
+          "id": "speed",
+          "title": "Won't it be slow on a phone?",
+          "description": "It doesn't have to be. It's built for phones from the start: textures sized for each screen, 3D loaded when it's needed, and nothing redrawn unless it moves."
         },
         {
+          "id": "seo",
           "title": "Will Google find it?",
-          "description": "Google doesn’t look inside a 3D scene: it reads text. So everything that matters (names, descriptions, product sheets) also lives in HTML, with its own title and description for search engines. The 3D sits on top of the text, not in place of it."
+          "description": "Google doesn't look inside a 3D scene: it reads text. So everything that matters is also in HTML, with its own address for each room or product. The 3D sits on top of the text, not instead of it."
         },
         {
-          "title": "What about people who don’t use a mouse?",
-          "description": "Arrows, Enter and Escape do what you expect. The mouse is an option, not a requirement."
+          "id": "reader",
+          "title": "Can anyone use it?",
+          "description": "Yes: with a mouse, a finger, a keyboard or a screen reader. And without dragging, because there are buttons to turn and zoom. Both projects meet WCAG 2.2 AA, the European accessibility standard, and their audits are published."
         },
         {
-          "title": "And people who can’t see the screen?",
-          "description": "Every scene has a text equivalent: an index, a description, a list. Anyone who can’t see the 3D gets the same information."
+          "id": "fallback",
+          "title": "What if the phone or browser can't handle 3D?",
+          "description": "Nobody is left out. If the device can't cope, the site shows the same content without 3D: VETA, the index of all 48 surfaces with their photos; Inside the Frame, every work with its description."
         },
         {
-          "title": "Won’t it make people dizzy?",
-          "description": "If your system asks for less motion, the experience stays still. Nobody should get dizzy looking at a catalogue."
+          "id": "motion",
+          "title": "Won't it make people dizzy?",
+          "description": "If your system asks for less motion, the experience stays still. And anything that moves on its own can be paused."
         }
       ],
       "proofs": {
-        "fps": {
-          "lead": "This page runs at",
-          "unit": "fps",
-          "note": "measured on your screen over 3 seconds",
-          "waiting": "…",
-          "again": "Measure again"
+        "speed": {
+          "label": "Inside the Frame on a phone, according to Lighthouse",
+          "stats": [
+            {
+              "value": "99–100",
+              "label": "performance"
+            },
+            {
+              "value": "< 2.5 s",
+              "label": "until the main content shows, what Google rates as good"
+            },
+            {
+              "value": "< 25 KB",
+              "label": "of code to start"
+            }
+          ],
+          "note": "Measured on 10 October 2026 on all five pages: the entrance hall and the four rooms."
         },
-        "keys": {
-          "hint": "Try it: press an arrow, Enter or Escape.",
-          "labels": {
-            "ArrowLeft": "Left arrow",
-            "ArrowUp": "Up arrow",
-            "ArrowDown": "Down arrow",
-            "ArrowRight": "Right arrow",
-            "Enter": "Enter",
-            "Escape": "Esc"
-          }
+        "seo": {
+          "label": "How a room from Inside the Frame shows up on Google",
+          "url": "artgallery360.art › wave",
+          "title": "Wave: Under the Wave off Kanagawa — Inside the Frame",
+          "description": "Katsushika Hokusai, c. 1830–32. A wall of Prussian blue rears over three fishing boats, and Mount Fuji — the subject of the whole series — is the smallest thing in the picture.",
+          "note": "The page's real title and description. All five pages, the entrance hall and the four rooms, have their own."
         },
         "reader": {
-          "label": "Example of what someone using a screen reader hears",
+          "label": "What NVDA, a screen reader, said while going through Inside the Frame with the keyboard",
           "lines": [
-            "Flooded gallery. Four paintings over the water.",
-            "Painting 2 of 4: The Great Wave off Kanagawa, by Hokusai.",
-            "Use the arrows to move and Enter to get closer."
-          ]
+            {
+              "text": "Room III, Stillness: 360 degrees view inside Water Lily Pond, 360 degrees view",
+              "lang": ""
+            },
+            {
+              "text": "Things to look for, lista, con 3 elementos, Weeping willows, botón, expandido",
+              "lang": "es"
+            },
+            {
+              "text": "Rooms, botón, abre diálogo",
+              "lang": "es"
+            }
+          ],
+          "note": "The site is in English; NVDA was set to Spanish. Recorded on 9 October 2026.",
+          "sheetsLabel": "Both audits, published (in Spanish):"
+        },
+        "fallback": {
+          "label": "Both sites in a browser without 3D",
+          "veta": "VETA without 3D: the surface index, with the photo, name and finish of each one.",
+          "insideTheFrame": "Inside the Frame without 3D: the Wave room as text, with the painting, its artist and its points of interest."
         },
         "motion": {
           "lead": "Right now your system asks for",
           "normal": "normal motion",
           "reduced": "less motion",
           "note": "If you change the setting, this page adapts instantly."
-        },
-        "seo": {
-          "label": "What this page tells Google",
-          "note": "This page’s real title and description, as a search engine reads them."
         }
       }
     },
@@ -649,8 +730,8 @@
       "title": "First something you can touch. Then everything else.",
       "steps": [
         {
-          "title": "I understand what it needs to show",
-          "description": "Before modelling anything, we talk about what visitors need to understand: a finish, a scale, a journey. The 3D serves that, not the other way round. Once that’s clear, I send you a fixed quote."
+          "title": "I work out what it has to show",
+          "description": "Before modelling anything, we talk about what visitors need to understand (a finish, a scale, a route) and what material you have. With that clear, I send you a fixed quote with price and timeline."
         },
         {
           "title": "A prototype in the browser",
@@ -658,14 +739,45 @@
         },
         {
           "title": "I build it and test it",
-          "description": "I finish it and test it on mobile, with a keyboard and with a screen reader. I deliver it integrated into your website or as a page of its own."
+          "description": "I finish it and test it on phones, with a keyboard and with a screen reader, as in the VETA and Inside the Frame reports. You get it integrated into your site or as a page of its own."
         }
       ]
     },
-    "work": {
-      "label": "Projects",
-      "title": "Two self-initiated concepts. Both live.",
-      "intro": "Open them on your phone and try the keyboard too."
+    "faq": {
+      "label": "The practical side",
+      "title": "Before you ask for a quote.",
+      "items": [
+        {
+          "question": "How much does it cost?",
+          "answer": "It depends on what has to be shown: a viewer for one product isn't the same as a catalogue of two hundred finishes or a room with sound. That's why there's no price list: after a call I send you a fixed quote, with price and timeline."
+        },
+        {
+          "question": "How long does it take?",
+          "answer": "It depends a lot on the kind of project. The timeline goes in the quote, next to the price, so you know before you decide."
+        },
+        {
+          "question": "What do I need to give you?",
+          "answer": "Whatever you have. If you already have photos, scans or 3D models of your product, great: we start from there. If not, I make them. And if there's something I can't do, I tell you before we start."
+        },
+        {
+          "question": "Will it fit into my website?",
+          "answer": "Yes. You get it integrated into your site or as a page of its own."
+        },
+        {
+          "question": "Can I add products or change things later?",
+          "answer": "Yes, in one of two ways: with a content management system (CMS), so you update it yourself, or with a maintenance plan where I take care of it. We decide when we put the quote together."
+        },
+        {
+          "question": "Does the law require it to be accessible?",
+          "answer": "If you're a public body in the EU, yes. If you're a business, it depends on what you sell and your size: the European Accessibility Act covers many products and services sold to consumers. Either way, what I deliver meets WCAG 2.2 AA.",
+          "linkText": "More on accessibility and the law",
+          "linkHref": "/en/web-accessibility/"
+        },
+        {
+          "question": "What if 3D doesn't add anything for me?",
+          "answer": "I'll tell you on the first call. If your product comes across just as well in a good photo, you don't need 3D, and I won't sell it to you."
+        }
+      ]
     },
     "contact": {
       "title": "What do you want to show?",

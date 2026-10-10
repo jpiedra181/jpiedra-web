@@ -55,6 +55,35 @@ function rehypeCanonicalLinks() {
   return (/** @type {any} */ tree) => visit(tree);
 }
 
+/** @param {any} node @returns {string} */
+const textOf = (node) => (node.type === 'text' ? node.value : (node.children ?? []).map(textOf).join(''));
+
+// Las tablas de las fichas de accesibilidad (hasta seis columnas) no caben en
+// un móvil. Cada una va en una región desplazable que recibe el foco, para que
+// también se pueda desplazar con el teclado, y que se llama como el encabezado
+// bajo el que está. Solo en las fichas: el blog tiene sus propias tablas.
+function rehypeScrollableTables() {
+  return (/** @type {any} */ tree, /** @type {any} */ file) => {
+    const path = String(file.path ?? file.history?.[0] ?? '').replace(/\\/g, '/');
+    if (!path.includes('/src/content/fichas/')) return;
+    let heading = '';
+    const tablesPerHeading = new Map();
+    tree.children = tree.children.map((/** @type {any} */ node) => {
+      if (node.type === 'element' && /^h[2-4]$/.test(node.tagName)) heading = textOf(node).trim();
+      if (node.type !== 'element' || node.tagName !== 'table') return node;
+      const count = (tablesPerHeading.get(heading) ?? 0) + 1;
+      tablesPerHeading.set(heading, count);
+      const name = heading ? `Tabla: ${heading}${count > 1 ? ` (${count})` : ''}` : 'Tabla';
+      return {
+        type: 'element',
+        tagName: 'div',
+        properties: { className: ['table-scroll'], role: 'region', tabIndex: 0, ariaLabel: name },
+        children: [node],
+      };
+    });
+  };
+}
+
 export default defineConfig({
   site: 'https://jpiedra.com',
   // Al pasar el ratón (o el foco) por un enlace interno, la página se descarga
@@ -71,7 +100,7 @@ export default defineConfig({
     },
   },
   markdown: {
-    rehypePlugins: [rehypeCanonicalLinks],
+    rehypePlugins: [rehypeCanonicalLinks, rehypeScrollableTables],
     shikiConfig: {
       theme: githubDarkAccesible,
     },

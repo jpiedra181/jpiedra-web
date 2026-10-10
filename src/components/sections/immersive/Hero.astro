@@ -55,7 +55,7 @@ const copy = useTranslations(lang).immersive.hero
                         {copy.ctaPrimary}
                         <span aria-hidden="true">→</span>
                     </Button>
-                    <Button href="#proyectos" variant="outline">
+                    <Button href="#pruebas" variant="outline">
                         {copy.ctaSecondary}
                     </Button>
                 </div>
@@ -106,9 +106,6 @@ const copy = useTranslations(lang).immersive.hero
 
     .immersive-line {
         display: block;
-        padding: 0 0.1em 0.1em 0;
-        margin-bottom: -0.1em;
-        overflow: hidden;
     }
 
     .immersive-line > span {
@@ -117,9 +114,17 @@ const copy = useTranslations(lang).immersive.hero
 
     @media (prefers-reduced-motion: no-preference) {
         .immersive-hero-badge,
-        .immersive-hero-subtitle,
         .immersive-hero-cta {
             animation: immersive-fade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        /* El titular y el subtítulo son el contenido principal de la página
+           (LCP): se pintan desde el primer fotograma y solo se asientan. Si
+           empezaran transparentes o recortados, el navegador no los daría por
+           vistos hasta acabar la animación. */
+        .immersive-line > span,
+        .immersive-hero-subtitle {
+            animation: immersive-settle 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
         }
 
         .immersive-hero-badge {
@@ -130,28 +135,20 @@ const copy = useTranslations(lang).immersive.hero
             animation: immersive-wipe 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
         }
 
-        .immersive-line > span {
-            animation: immersive-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-        }
-
-        .immersive-line:nth-child(1) > span {
-            animation-delay: 0.3s;
-        }
-
         .immersive-line:nth-child(2) > span {
-            animation-delay: 0.42s;
+            animation-delay: 0.06s;
         }
 
         .immersive-line:nth-child(3) > span {
-            animation-delay: 0.54s;
+            animation-delay: 0.12s;
         }
 
         .immersive-hero-subtitle {
-            animation-delay: 0.7s;
+            animation-delay: 0.18s;
         }
 
         .immersive-hero-cta {
-            animation-delay: 0.85s;
+            animation-delay: 0.3s;
         }
 
         /* Las piezas suben como una muestra que se coloca en la mesa. */
@@ -184,9 +181,9 @@ const copy = useTranslations(lang).immersive.hero
         }
     }
 
-    @keyframes immersive-rise {
+    @keyframes immersive-settle {
         from {
-            transform: translateY(105%);
+            transform: translateY(14px);
         }
         to {
             transform: none;

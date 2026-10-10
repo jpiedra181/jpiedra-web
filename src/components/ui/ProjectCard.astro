@@ -19,6 +19,15 @@ interface Props {
     sheetLabel?: string
     ofLabel?: string
     newWindowLabel: string
+    // Enlace secundario a la ficha de accesibilidad del proyecto, en esta web.
+    sheetHref?: string
+    sheetCta?: string
+    // Idioma de la ficha cuando no coincide con el de la página.
+    sheetHreflang?: string
+    // Como caso de estudio: el problema que resuelve y sus datos medidos.
+    problem?: string
+    problemLabel?: string
+    facts?: { value: string; label: string }[]
 }
 
 const {
@@ -37,6 +46,12 @@ const {
     sheetLabel = "Hoja",
     ofLabel = "de",
     newWindowLabel,
+    sheetHref,
+    sheetCta,
+    sheetHreflang,
+    problem,
+    problemLabel,
+    facts = [],
 } = Astro.props
 
 // La imagen en "cover" es más alta que su marco para que el parallax de GSAP
@@ -99,18 +114,40 @@ const sheetNumber = index === undefined ? undefined : pad(index + 1)
         <h3 class="project-title font-heading text-[clamp(1.75rem,3vw,2.5rem)] text-text-primary mb-4 leading-tight">
             {title}
         </h3>
+        {
+            problem && (
+                <p class="project-problem font-heading text-[clamp(1.25rem,2vw,1.5rem)] leading-snug text-text-primary mb-4">
+                    {problemLabel && <span class="block font-body text-xs font-medium tracking-[0.15em] uppercase text-text-secondary mb-2">{problemLabel}</span>}
+                    {problem}
+                </p>
+            )
+        }
         <p class="project-description text-text-secondary leading-relaxed mb-6">
             {description}
         </p>
-        <ul role="list" class="flex flex-wrap gap-2 mb-8">
-            {
-                tags.map((tag) => (
-                    <li class="project-tag text-xs text-text-secondary bg-bg-elevated border border-border rounded-full px-3 py-1">
-                        {tag}
-                    </li>
-                ))
-            }
-        </ul>
+        {
+            facts.length > 0 && (
+                <dl class="project-facts grid sm:grid-cols-2 gap-x-6 gap-y-5 mb-8">
+                    {facts.map((fact) => (
+                        <div class="project-fact">
+                            <dt class="font-heading text-2xl text-accent leading-none">{fact.value}</dt>
+                            <dd class="mt-2 text-sm text-text-secondary leading-snug">{fact.label}</dd>
+                        </div>
+                    ))}
+                </dl>
+            )
+        }
+        {
+            tags.length > 0 && (
+                <ul role="list" class="flex flex-wrap gap-2 mb-8">
+                    {tags.map((tag) => (
+                        <li class="project-tag text-xs text-text-secondary bg-bg-elevated border border-border rounded-full px-3 py-1">
+                            {tag}
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
         <!-- Los proyectos se abren siempre en otra pestaña (decisión de Javier):
              se avisa en texto para quien no ve la flecha (WCAG G201). -->
         <a
@@ -127,6 +164,18 @@ const sheetNumber = index === undefined ? undefined : pad(index + 1)
                 >↗</span
             >
         </a>
+        {
+            sheetHref && sheetCta && (
+                <a
+                    href={sheetHref}
+                    hreflang={sheetHreflang}
+                    class="project-sheet-link mt-4 flex w-fit items-center gap-2 text-sm text-text-secondary hover:text-accent underline underline-offset-4 decoration-accent-line hover:decoration-accent transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                    {sheetCta}
+                    <span aria-hidden="true">→</span>
+                </a>
+            )
+        }
     </div>
 </article>
 
@@ -137,6 +186,11 @@ const sheetNumber = index === undefined ? undefined : pad(index + 1)
 
     .project-copy {
         isolation: isolate;
+    }
+
+    .project-fact {
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-border-hover);
     }
 
     /* Marcas de corte en las esquinas, como en una hoja de plano impresa. */

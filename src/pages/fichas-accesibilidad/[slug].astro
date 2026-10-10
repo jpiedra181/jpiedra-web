@@ -1,0 +1,182 @@
+---
+//@ts-nocheck
+import { getCollection, render, type CollectionEntry } from "astro:content"
+import BaseLayout from "../../components/layout/BaseLayout.astro"
+import ArticleSchema from "../../components/layout/ArticleSchema.astro"
+import SectionLabel from "../../components/ui/SectionLabel.astro"
+import Button from "../../components/ui/Button.astro"
+import { routesFor } from "../../config/site"
+import { breadcrumbSchema, ogImageFor } from "../../lib/seo-schema"
+import "../../styles/article-prose.css"
+
+export async function getStaticPaths() {
+    const fichas = await getCollection("fichas")
+    return fichas.map((ficha) => ({
+        params: { slug: ficha.id },
+        props: { ficha },
+    }))
+}
+
+interface Props {
+    ficha: CollectionEntry<"fichas">
+}
+
+const { ficha } = Astro.props
+const { data } = ficha
+const { Content } = await render(ficha)
+// Las fichas solo existen en castellano; la web de cada proyecto puede no estarlo.
+const lang = "es" as const
+const routes = routesFor(lang)
+const path = `/fichas-accesibilidad/${ficha.id}/`
+const canonicalURL = new URL(path, Astro.site).toString()
+const ogImage = ogImageFor(data.ogImage, lang)
+const formatDate = (date: Date) =>
+    date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })
+
+const structuredData = breadcrumbSchema([
+    { name: "Javier Piedra", path: routes.home },
+    { name: "Experiencias web 3D", path: routes.immersive },
+    { name: `Ficha de accesibilidad: ${data.projectName}`, path },
+])
+---
+
+<BaseLayout
+    lang={lang}
+    title={data.seoTitle}
+    description={data.description}
+    ogImage={ogImage}
+    structuredData={structuredData}
+>
+    <ArticleSchema
+        title={`Ficha de accesibilidad: ${data.title}`}
+        description={data.description}
+        pubDate={data.auditDate}
+        updatedDate={data.verifiedDate}
+        heroImage={ogImage}
+        heroImageAlt={`Ficha de accesibilidad de ${data.projectName}`}
+        url={canonicalURL}
+        category="casos"
+        tags={["accesibilidad web", "WCAG 2.2", "experiencias 3D", "WebGL"]}
+    />
+    <article class="relative py-24 md:py-32 lg:py-40">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <header class="max-w-3xl mb-16 md:mb-20">
+                <a
+                    href={routes.immersive}
+                    class="inline-flex items-center min-h-[24px] text-sm text-text-secondary hover:text-accent transition-colors mb-8 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                    ← Experiencias web 3D
+                </a>
+
+                <SectionLabel text="Ficha de accesibilidad" />
+
+                <h1
+                    class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.1] text-text-primary mb-6"
+                    style="text-wrap: balance;"
+                >
+                    {data.title}
+                </h1>
+
+                <p class="text-lg md:text-xl text-text-secondary leading-relaxed">
+                    {data.lead}
+                </p>
+
+                <ul role="list" class="ficha-verdicts mt-10 grid gap-4 sm:grid-cols-2">
+                    {
+                        data.verdicts.map((verdict) => (
+                            <li class="rounded-xl border border-accent-line bg-bg-surface p-5">
+                                <span class="block font-mono text-xs tracking-wide text-text-secondary">
+                                    {verdict.norm}
+                                </span>
+                                <strong class="mt-2 block font-heading text-2xl font-normal text-accent">
+                                    {verdict.result}
+                                </strong>
+                                <span class="mt-1 block text-sm text-text-secondary">{verdict.detail}</span>
+                            </li>
+                        ))
+                    }
+                </ul>
+
+                <dl class="ficha-facts mt-10 border-t border-border">
+                    {
+                        data.facts.map((fact) => (
+                            <div class="grid gap-1 border-b border-border py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+                                <dt class="text-sm font-medium text-text-primary">{fact.label}</dt>
+                                <dd class="text-sm leading-relaxed text-text-secondary">{fact.value}</dd>
+                            </div>
+                        ))
+                    }
+                </dl>
+
+                <p class="mt-8 text-sm text-text-secondary">
+                    Última comprobación sobre la web publicada:
+                    <time datetime={data.verifiedDate.toISOString().slice(0, 10)}>{formatDate(data.verifiedDate)}</time>.
+                </p>
+
+                <a
+                    href={data.site}
+                    hreflang={data.siteLang}
+                    target="_blank"
+                    rel="noopener"
+                    class="mt-6 inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover underline-offset-4 hover:underline transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                    Abrir {data.projectName}
+                    {data.siteLang === "en" && <span>(en inglés)</span>}
+                    <span class="sr-only">(se abre en una pestaña nueva)</span>
+                    <span aria-hidden="true">↗</span>
+                </a>
+            </header>
+
+            <div class="article-prose ficha-prose max-w-3xl">
+                <Content />
+            </div>
+
+            <aside
+                class="max-w-3xl mt-20 md:mt-28 rounded-2xl border border-accent-line bg-bg-surface p-8 md:p-10"
+                aria-labelledby="ficha-cta-title"
+            >
+                <h2 id="ficha-cta-title" class="font-heading text-[clamp(1.5rem,3vw,2.25rem)] leading-tight text-text-primary">
+                    ¿Quieres algo así para tu producto o tu colección?
+                </h2>
+                <p class="mt-4 text-text-secondary leading-relaxed">
+                    Cada experiencia 3D que hago se construye para que la pueda usar cualquiera desde el primer día, y se comprueba así antes de entregarla.
+                </p>
+                <Button href={`${routes.immersive}#contact`} class="mt-8">Cuéntame tu proyecto →</Button>
+            </aside>
+        </div>
+    </article>
+</BaseLayout>
+
+<style is:global>
+    /* Tablas anchas: la región desplazable la pone rehypeScrollableTables
+       (astro.config.mjs). Dentro, la tabla vuelve a ser tabla y no se aplasta. */
+    .ficha-prose .table-scroll {
+        overflow-x: auto;
+        margin-top: 2em;
+        margin-bottom: 2em;
+        border-radius: 8px;
+    }
+
+    .ficha-prose .table-scroll:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 4px;
+    }
+
+    .ficha-prose .table-scroll table {
+        display: table;
+        min-width: 36rem;
+        margin: 0;
+    }
+
+    .ficha-prose th {
+        text-transform: none;
+        letter-spacing: 0;
+    }
+
+    /* Hay capturas de móvil en vertical: sin tope, ocuparían varias pantallas. */
+    .ficha-prose img {
+        width: auto;
+        max-height: 40rem;
+        border: 1px solid var(--color-border);
+    }
+</style>

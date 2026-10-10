@@ -16,8 +16,8 @@ Contacto: contacto@jpiedra.com. Precios de accesibilidad (sin IVA): diagnóstico
 ## Pruebas
 
 - [Caso real de auditoría de accesibilidad](https://jpiedra.com/caso-auditoria-accesibilidad/): una gran web turística auditada a fondo, anonimizada.
-- [VETA](https://vetaatlas.com/): catálogo cerámico en WebGL 2 que se recorre también con teclado y tiene un índice en texto.
-- [Inside the Frame](https://artgallery360.art/): sala inmersiva con descripción textual de la escena.
+- [VETA](https://vetaatlas.com/): catálogo cerámico en WebGL 2 con estancia 3D. Cumple WCAG 2.2 AA; [ficha de accesibilidad](https://jpiedra.com/fichas-accesibilidad/veta/) con los 17 fallos que tenía, su arreglo y la comprobación.
+- [Inside the Frame](https://artgallery360.art/): galería 360° con descripción textual de cada escena. Cumple WCAG 2.2 AA; [ficha de accesibilidad](https://jpiedra.com/fichas-accesibilidad/inside-the-frame/).
 
 ## Herramientas y contenido
 

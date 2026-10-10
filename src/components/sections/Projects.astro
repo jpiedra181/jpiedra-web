@@ -6,21 +6,35 @@ import { projects, projectHref, type ProjectSlug } from "../../data/projects"
 import SectionLabel from "../ui/SectionLabel.astro"
 import ProjectCard from "../ui/ProjectCard.astro"
 
+interface ProjectCase {
+    category: string
+    problem: string
+    description: string
+    facts: { value: string; label: string }[]
+}
+
 interface Props {
     lang: Lang
     label: string
     title: string
     intro?: string
     slugs: ProjectSlug[]
+    id?: string
+    // Contados como caso de estudio (/experiencias-3d): el problema y los datos
+    // medidos sustituyen a la categoría, la descripción y las etiquetas.
+    cases?: Partial<Record<ProjectSlug, ProjectCase>>
+    problemLabel?: string
+    // Cómo y cuándo se midieron los datos.
+    note?: string
 }
 
-const { lang, label, title, intro, slugs } = Astro.props
+const { lang, label, title, intro, slugs, id = "proyectos", cases = {}, problemLabel, note } = Astro.props
 const t = useTranslations(lang)
 ---
 
 <section
-    id="proyectos"
-    aria-labelledby="proyectos-title"
+    id={id}
+    aria-labelledby={`${id}-title`}
     class="relative py-24 md:py-32 lg:py-40"
 >
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -29,7 +43,7 @@ const t = useTranslations(lang)
                 <SectionLabel text={label} />
             </div>
             <h2
-                id="proyectos-title"
+                id={`${id}-title`}
                 data-split
                 class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary"
             >
@@ -66,12 +80,16 @@ const t = useTranslations(lang)
                 slugs.map((slug, index) => {
                     const project = projects[slug]
                     const copy = t.portfolio.items[slug]
+                    const study = cases[slug]
                     return (
                         <ProjectCard
-                            category={copy.category}
+                            category={study?.category ?? copy.category}
                             title={copy.title}
-                            description={copy.description}
-                            tags={copy.tags}
+                            description={study?.description ?? copy.description}
+                            tags={study ? [] : copy.tags}
+                            problem={study?.problem}
+                            problemLabel={problemLabel}
+                            facts={study?.facts}
                             image={project.image}
                             imageAlt={copy.imageAlt}
                             imageFit={project.imageFit}
@@ -80,6 +98,9 @@ const t = useTranslations(lang)
                             ofLabel={t.projectSheet.of}
                             newWindowLabel={t.projectSheet.newWindow}
                             cta={copy.cta}
+                            sheetHref={project.accessibilitySheet}
+                            sheetCta={t.projectSheet.accessibilitySheet}
+                            sheetHreflang={lang === "es" ? undefined : "es"}
                             reverse={index % 2 !== 0}
                             index={index}
                             total={slugs.length}
@@ -88,6 +109,7 @@ const t = useTranslations(lang)
                 })
             }
         </div>
+        {note && <p class="mt-16 lg:mt-24 text-sm text-text-secondary">{note}</p>}
     </div>
 </section>
 

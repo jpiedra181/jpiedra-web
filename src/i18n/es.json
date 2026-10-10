@@ -555,17 +555,17 @@
   },
   "immersive": {
     "meta": {
-      "title": "Experiencias web 3D accesibles · Javier Piedra",
-      "description": "Catálogos 3D, visores de producto y salas inmersivas que cargan rápido en el móvil, que Google entiende y que puede usar cualquiera. Presupuesto cerrado antes de empezar."
+      "title": "Experiencias web 3D rápidas y accesibles · Javier Piedra",
+      "description": "Catálogos 3D y salas inmersivas que cargan rápido en el móvil, que Google encuentra y que cumplen WCAG 2.2 AA. Con dos proyectos en línea como prueba."
     },
     "hero": {
       "label": "Experiencias web 3D",
       "titleStart": "Lo que una foto",
       "titleHighlight": "no puede",
       "titleEnd": "enseñar.",
-      "subtitle": "Para cuando una foto no basta. Catálogos que se recorren por tacto, visores de producto y salas inmersivas, en el navegador y sin instalar nada. Rápidos en el móvil de tu cliente, legibles para Google y usables con teclado o lector de pantalla.",
+      "subtitle": "Tu cliente no se decide con una foto: pregunta, pide muestras o lo deja para otro día. En 3D lo ve como si lo tuviera delante, en el navegador y sin instalar nada. Y sin los problemas de siempre: rápido en el móvil, visible en Google y fácil de usar para cualquiera.",
       "ctaPrimary": "Cuéntame tu proyecto",
-      "ctaSecondary": "Ver los proyectos",
+      "ctaSecondary": "Ver las pruebas",
       "swatches": {
         "caption": "La misma piedra con tres acabados. Mueve la luz y mira cómo responde cada uno: eso es lo que una foto no puede enseñar.",
         "lightLabel": "Posición de la luz",
@@ -590,84 +590,164 @@
         ]
       }
     },
-    "useCases": {
-      "label": "Para quién",
-      "title": "Para productos que se eligen mirando.",
+    "problem": {
+      "label": "El problema",
+      "title": "Una foto aplana justo lo que hace que alguien compre.",
       "items": [
         {
-          "title": "Superficies, materiales y producto",
-          "audience": "Fabricantes y distribuidores de cerámica, piedra, madera o mobiliario",
-          "description": "Tu cliente elige por tono, textura y acabado, y en una ficha con foto todo se parece. Un catálogo 3D le deja comparar, mover la luz y ver si un acabado es pulido o mate antes de pedirte muestras."
+          "title": "Si vendes superficies, materiales o producto",
+          "audience": "Cerámica, piedra, madera, mobiliario",
+          "description": "En una ficha con foto todo se parece. El pulido y el mate salen iguales, el tono cambia con cada pantalla y nadie se hace una idea del tamaño. Tu cliente pide muestras para salir de dudas, o se va a mirar a otra parte."
         },
         {
-          "title": "Cultura, patrimonio y turismo",
+          "title": "Si cuidas una colección, un patrimonio o un destino",
           "audience": "Museos, fundaciones, galerías, ayuntamientos y oficinas de turismo",
-          "description": "Una sala virtual lleva la colección a quien no puede ir y la deja abierta cuando el museo cierra. Si eres un organismo público, además tiene que ser accesible por ley (RD 1112/2018). Las mías se construyen para cumplirlo desde el primer día, no con un parche al final."
+          "description": "La colección solo la ve quien puede ir, y en horario. Una galería de fotos no transmite lo que se siente dentro de una sala. Y si eres un organismo público, tu web tiene que ser accesible por ley (RD 1112/2018)."
         }
-      ]
+      ],
+      "outro": "El 3D tiene mala fama, y a menudo con razón: webs que tardan en cargar, que Google no entiende y que sin ratón no hay forma de usar. No tiene por qué ser así. Aquí abajo tienes la prueba."
     },
-    "difference": {
+    "proof": {
+      "label": "Las pruebas",
+      "title": "Dos proyectos en línea. Ábrelos en tu móvil.",
+      "intro": "No son encargos de clientes: los hice para demostrar que el 3D puede ser rápido, encontrable y fácil de usar para cualquiera. Están publicados, medidos y auditados.",
+      "note": "Rendimiento medido con Lighthouse en modo móvil el 10 de octubre de 2026.",
+      "problemLabel": "El problema",
+      "cases": {
+        "veta": {
+          "category": "Superficies · Catálogo 3D",
+          "problem": "«En la foto parecía otro color.»",
+          "description": "48 acabados en un mapa que se recorre como un plano. Una luz que sigue al cursor distingue el pulido del mate y del estructurado, y cada superficie se ve a escala real y colocada en una estancia 3D. Se elige antes de pedir muestras.",
+          "facts": [
+            {
+              "value": "45 KB",
+              "label": "de código para arrancar. Las texturas llegan después, a la medida de cada pantalla."
+            },
+            {
+              "value": "0",
+              "label": "fotogramas pintados mientras no tocas nada."
+            },
+            {
+              "value": "48",
+              "label": "superficies también en un índice de texto, que es lo que ve quien no tiene 3D."
+            },
+            {
+              "value": "WCAG 2.2 AA",
+              "label": "17 fallos en la auditoría y 2 más después, todos corregidos y comprobados con NVDA."
+            }
+          ]
+        },
+        "insideTheFrame": {
+          "category": "Cultura · Sala inmersiva 360°",
+          "problem": "La colección solo la ve quien puede ir.",
+          "description": "Cuatro cuadros de Hokusai, Hiroshige, Monet y Turner convertidos en lugares donde estar, con sonido opcional. Cada escena se describe por escrito y la vista se gira arrastrando, con el teclado o con botones.",
+          "facts": [
+            {
+              "value": "99–100",
+              "label": "en rendimiento de Lighthouse en el móvil, en sus cinco páginas."
+            },
+            {
+              "value": "< 25 KB",
+              "label": "de código para arrancar. El panorama se descarga a la medida de cada pantalla."
+            },
+            {
+              "value": "5",
+              "label": "páginas, el vestíbulo y una por sala, cada una con su título y su descripción para Google."
+            },
+            {
+              "value": "WCAG 2.2 AA",
+              "label": "9 fallos en la auditoría y 1 más después, todos corregidos y comprobados con NVDA."
+            }
+          ]
+        }
+      }
+    },
+    "doubts": {
       "label": "Tus dudas",
       "title": "Que sea bonito es lo fácil.",
-      "subtitle": "Una experiencia 3D impresiona los primeros diez segundos. Lo que decide si vende es lo demás: que cargue en un móvil de gama media, que Google la encuentre, que se pueda usar sin ratón y que no maree. Cada respuesta, con su prueba en vivo.",
+      "subtitle": "Lo que decide si vende es todo lo demás. Estas son las dudas que me plantean antes de encargar algo en 3D, con la prueba de cada respuesta.",
       "items": [
         {
-          "title": "¿No irá lenta en el móvil?",
-          "description": "No, si se construye para el móvil desde el principio: geometría y texturas a la medida justa, y la pantalla solo se vuelve a pintar cuando algo cambia. En VETA, las 48 superficies se dibujan en una sola llamada a la tarjeta gráfica."
+          "id": "speed",
+          "title": "¿Irá lenta en el móvil?",
+          "description": "No tiene por qué. Se construye para el móvil desde el principio: texturas a la medida de cada pantalla, el 3D se carga cuando hace falta y nada se vuelve a pintar si no se mueve."
         },
         {
-          "title": "¿Google lo va a encontrar?",
-          "description": "Google no mira dentro de una escena 3D: lee texto. Por eso todo lo que importa (nombres, descripciones, fichas) está también en HTML, con su título y su descripción para el buscador. El 3D va encima del texto, no en su lugar."
+          "id": "seo",
+          "title": "¿Me encontrará Google?",
+          "description": "Google no mira dentro de una escena 3D: lee texto. Así que todo lo que importa está también en HTML, con una dirección propia para cada sala o producto. El 3D va encima del texto, no en su lugar."
         },
         {
-          "title": "¿Y quien no usa ratón?",
-          "description": "Flechas, Intro y Escape hacen lo que esperas. El ratón es una opción, no un requisito."
+          "id": "reader",
+          "title": "¿La podrá usar cualquiera?",
+          "description": "Sí: con ratón, con el dedo, con teclado y con lector de pantalla. Y sin tener que arrastrar, porque hay botones para girar y acercar. Los dos proyectos cumplen WCAG 2.2 AA, la norma europea de accesibilidad, y su auditoría está publicada."
         },
         {
-          "title": "¿Y quien no ve la pantalla?",
-          "description": "Cada escena tiene su equivalente en texto: un índice, una descripción, una lista. Quien no ve el 3D recibe la misma información."
+          "id": "fallback",
+          "title": "¿Y si el móvil o el navegador no pueden con el 3D?",
+          "description": "Nadie se queda fuera. Si el dispositivo no puede, la web enseña lo mismo sin 3D: VETA, el índice de las 48 superficies con sus fotos; Inside the Frame, cada obra con su descripción."
         },
         {
+          "id": "motion",
           "title": "¿No mareará?",
-          "description": "Si tu sistema pide menos movimiento, la experiencia se queda quieta. Nadie debería marearse viendo un catálogo."
+          "description": "Si tu sistema pide menos movimiento, la experiencia se queda quieta. Y lo que se mueve solo se puede pausar."
         }
       ],
       "proofs": {
-        "fps": {
-          "lead": "Esta página va a",
-          "unit": "fps",
-          "note": "medidos en tu pantalla durante 3 segundos",
-          "waiting": "…",
-          "again": "Medir otra vez"
+        "speed": {
+          "label": "Inside the Frame en un móvil, según Lighthouse",
+          "stats": [
+            {
+              "value": "99–100",
+              "label": "de rendimiento"
+            },
+            {
+              "value": "< 2,5 s",
+              "label": "hasta ver el contenido principal, lo que Google considera bueno"
+            },
+            {
+              "value": "< 25 KB",
+              "label": "de código para arrancar"
+            }
+          ],
+          "note": "Medido el 10 de octubre de 2026 en sus cinco páginas: el vestíbulo y las cuatro salas."
         },
-        "keys": {
-          "hint": "Prueba: pulsa una flecha, Intro o Escape.",
-          "labels": {
-            "ArrowLeft": "Flecha izquierda",
-            "ArrowUp": "Flecha arriba",
-            "ArrowDown": "Flecha abajo",
-            "ArrowRight": "Flecha derecha",
-            "Enter": "Intro",
-            "Escape": "Esc"
-          }
+        "seo": {
+          "label": "Así sale una sala de Inside the Frame en Google",
+          "url": "artgallery360.art › wave",
+          "title": "Wave: Under the Wave off Kanagawa — Inside the Frame",
+          "description": "Katsushika Hokusai, c. 1830–32. A wall of Prussian blue rears over three fishing boats, and Mount Fuji — the subject of the whole series — is the smallest thing in the picture.",
+          "note": "Título y descripción reales de la página. Las cinco páginas, el vestíbulo y las cuatro salas, tienen los suyos."
         },
         "reader": {
-          "label": "Ejemplo de lo que oye quien usa lector de pantalla",
+          "label": "Lo que dijo NVDA, un lector de pantalla, al recorrer Inside the Frame con el teclado",
           "lines": [
-            "Galería inundada. Cuatro cuadros sobre el agua.",
-            "Cuadro 2 de 4: La gran ola de Kanagawa, de Hokusai.",
-            "Usa las flechas para moverte e Intro para acercarte."
-          ]
+            {
+              "text": "Room III, Stillness: 360 degrees view inside Water Lily Pond, 360 degrees view",
+              "lang": "en"
+            },
+            {
+              "text": "Things to look for, lista, con 3 elementos, Weeping willows, botón, expandido",
+              "lang": ""
+            },
+            {
+              "text": "Rooms, botón, abre diálogo",
+              "lang": ""
+            }
+          ],
+          "note": "La web está en inglés y NVDA, en español. Grabado el 9 de octubre de 2026.",
+          "sheetsLabel": "Las dos auditorías, publicadas:"
+        },
+        "fallback": {
+          "label": "Las dos webs en un navegador sin 3D",
+          "veta": "VETA sin 3D: el índice de superficies, con la foto, el nombre y el acabado de cada una.",
+          "insideTheFrame": "Inside the Frame sin 3D: la sala Wave como texto, con la obra, su autor y sus puntos de interés."
         },
         "motion": {
           "lead": "Tu sistema pide ahora",
           "normal": "movimiento normal",
           "reduced": "menos movimiento",
           "note": "Si cambias el ajuste, esta página se adapta al momento."
-        },
-        "seo": {
-          "label": "Lo que esta página le dice a Google",
-          "note": "Título y descripción reales de esta página, tal como los lee un buscador."
         }
       }
     },
@@ -677,7 +757,7 @@
       "steps": [
         {
           "title": "Entiendo qué tiene que enseñar",
-          "description": "Antes de modelar nada, hablamos de qué tiene que entender quien entra: un acabado, una escala, un recorrido. El 3D va al servicio de eso, no al revés. Con eso claro, te paso un presupuesto cerrado."
+          "description": "Antes de modelar nada, hablamos de qué tiene que entender quien entra (un acabado, una escala, un recorrido) y de qué material tienes. Con eso claro, te paso un presupuesto cerrado, con precio y plazo."
         },
         {
           "title": "Prototipo en el navegador",
@@ -685,14 +765,45 @@
         },
         {
           "title": "Lo construyo y lo pruebo",
-          "description": "Lo termino y lo pruebo en móvil, con teclado y con lector de pantalla. Te lo entrego integrado en tu web o como página propia."
+          "description": "Lo termino y lo pruebo en móvil, con teclado y con lector de pantalla, como en las fichas de VETA e Inside the Frame. Te lo entrego integrado en tu web o como página propia."
         }
       ]
     },
-    "work": {
-      "label": "Proyectos",
-      "title": "Dos conceptos propios. Están en vivo.",
-      "intro": "Ábrelos en el móvil y prueba también con el teclado."
+    "faq": {
+      "label": "Lo práctico",
+      "title": "Antes de pedir presupuesto.",
+      "items": [
+        {
+          "question": "¿Cuánto cuesta?",
+          "answer": "Depende de lo que haya que enseñar: no es lo mismo un visor para un producto que un catálogo de doscientos acabados o una sala con sonido. Por eso no hay tarifa: después de una llamada te paso un presupuesto cerrado, con precio y plazo."
+        },
+        {
+          "question": "¿Cuánto tarda?",
+          "answer": "Depende mucho del tipo de proyecto. El plazo va en el presupuesto, junto al precio, así que lo sabes antes de decidir."
+        },
+        {
+          "question": "¿Qué necesito darte?",
+          "answer": "Lo que tengas. Si ya tienes fotos, escaneos o modelos 3D de tu producto, perfecto: partimos de ahí. Si no, lo hago yo. Y si hay algo que no puedo hacer, te lo digo antes de empezar."
+        },
+        {
+          "question": "¿Se integra en mi web?",
+          "answer": "Sí. Te lo entrego integrado en tu web o como una página propia."
+        },
+        {
+          "question": "¿Podré añadir productos o cambiar cosas después?",
+          "answer": "Sí, de una de dos maneras: con un gestor de contenidos (CMS), para que lo actualices tú, o con un mantenimiento en el que me encargo yo. Lo decidimos al hacer el presupuesto."
+        },
+        {
+          "question": "¿Me obliga la ley a que sea accesible?",
+          "answer": "Si eres un organismo público, sí: lo exige el RD 1112/2018. Si eres una empresa, depende de lo que vendas y de tu tamaño. Lo que yo te entrego cumple WCAG 2.2 AA en cualquier caso.",
+          "linkText": "Compruébalo en siete preguntas",
+          "linkHref": "/te-aplica-ley-11-2023/"
+        },
+        {
+          "question": "¿Y si el 3D no me aporta nada?",
+          "answer": "Te lo digo en la primera llamada. Si tu producto se entiende igual de bien con una buena foto, no necesitas 3D, y no te lo voy a vender."
+        }
+      ]
     },
     "contact": {
       "title": "¿Qué quieres enseñar?",
@@ -704,11 +815,11 @@
       "veta": {
         "category": "Experiencia 3D · Concepto propio",
         "title": "VETA, atlas de superficies",
-        "description": "Para quien vende superficies y oye «en la foto parecía otro color». 48 acabados que se comparan por tono y textura, con una luz que se mueve para distinguir pulido, mate y estructurado. Se elige antes de pedir muestras, y también se recorre con el teclado.",
+        "description": "Para quien vende superficies y oye «en la foto parecía otro color». 48 acabados que se comparan por tono y textura, con una luz que se mueve para distinguir pulido, mate y estructurado. Se elige antes de pedir muestras. Y cumple WCAG 2.2 AA: se recorre con teclado y con lector de pantalla.",
         "tags": [
           "WebGL 2",
           "Catálogo de producto",
-          "Índice en texto"
+          "WCAG 2.2 AA"
         ],
         "imageAlt": "Cuadrícula de VETA con muestras de mármol, terrazo, granito y madera ordenadas por tono.",
         "cta": "Abrir VETA"
@@ -716,11 +827,11 @@
       "insideTheFrame": {
         "category": "Experiencia inmersiva · Concepto propio",
         "title": "Inside the Frame",
-        "description": "Para museos y colecciones que quieren llegar a quien no puede ir. Cuatro cuadros de Hokusai, Hiroshige, Monet y Turner convertidos en lugares donde estar, con sonido opcional y una descripción escrita de cada escena para quien no la ve.",
+        "description": "Para museos y colecciones que quieren llegar a quien no puede ir. Cuatro cuadros de Hokusai, Hiroshige, Monet y Turner convertidos en lugares donde estar, con sonido opcional y una descripción escrita de cada escena para quien no la ve. Cumple WCAG 2.2 AA.",
         "tags": [
           "3D inmersivo",
-          "Sonido opcional",
-          "Descripción en texto"
+          "Descripción en texto",
+          "WCAG 2.2 AA"
         ],
         "imageAlt": "Sala oscura de Inside the Frame con La gran ola de Hokusai bajo un foco, reflejada en el agua del suelo.",
         "cta": "Abrir Inside the Frame"
@@ -1084,6 +1195,7 @@
   "projectSheet": {
     "sheet": "Hoja",
     "of": "de",
-    "newWindow": "se abre en una pestaña nueva"
+    "newWindow": "se abre en una pestaña nueva",
+    "accessibilitySheet": "Leer su ficha de accesibilidad"
   }
 }
