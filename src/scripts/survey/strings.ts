@@ -1,12 +1,11 @@
-// Textos que genera la escena de la home 3D (cielo, tiempo, coordenadas y la
-// lupa "lo que no se ve"), en los dos idiomas de la web. La página elige el
+// Textos que genera la escena de la home 3D (cielo y tiempo: ya no se
+// escriben en pantalla, pero describen el estado de la sierra), en los dos idiomas de la web. La página elige el
 // idioma al crear la escena (setSceneLanguage) y los módulos leen de aquí.
 import type { Lang } from '../../types';
 
 export interface SceneStrings {
   locale: string;
   compass: string[];
-  west: string;
   moon: { new: string; full: string; phase: (waxing: boolean, percent: number) => string };
   sky: {
     night: (moon: string, moonUp: boolean) => string;
@@ -19,17 +18,6 @@ export interface SceneStrings {
   variable: string;
   calm: string;
   wind: (direction: string, speed: number) => string;
-  simulation: string;
-  noLiveData: string;
-  reader: {
-    text: string;
-    heading: (level: string) => string;
-    link: string;
-    toggle: string;
-    togglePressed: string;
-    note: string;
-    quote: (name: string) => string;
-  };
 }
 
 // Códigos WMO del tiempo agrupados (weather.ts los traduce a estas claves).
@@ -37,7 +25,6 @@ const STRINGS: Record<Lang, SceneStrings> = {
   es: {
     locale: 'es-ES',
     compass: ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'],
-    west: 'O',
     moon: {
       new: 'luna nueva',
       full: 'luna llena',
@@ -66,22 +53,10 @@ const STRINGS: Record<Lang, SceneStrings> = {
     variable: 'tiempo variable',
     calm: 'en calma',
     wind: (direction, speed) => `viento del ${direction} a ${speed} km/h`,
-    simulation: 'Simulación',
-    noLiveData: 'Sin datos del tiempo en directo',
-    reader: {
-      text: 'texto',
-      heading: (level) => `encabezado, nivel ${level}`,
-      link: 'enlace',
-      toggle: 'botón de alternar',
-      togglePressed: 'botón de alternar, pulsado',
-      note: 'nota',
-      quote: (name) => `«${name}»`,
-    },
   },
   en: {
     locale: 'en-GB',
     compass: ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'],
-    west: 'W',
     moon: {
       new: 'new moon',
       full: 'full moon',
@@ -110,17 +85,6 @@ const STRINGS: Record<Lang, SceneStrings> = {
     variable: 'changeable',
     calm: 'calm',
     wind: (direction, speed) => `${direction} wind at ${speed} km/h`,
-    simulation: 'Simulation',
-    noLiveData: 'No live weather data',
-    reader: {
-      text: 'text',
-      heading: (level) => `heading, level ${level}`,
-      link: 'link',
-      toggle: 'toggle button',
-      togglePressed: 'toggle button, pressed',
-      note: 'note',
-      quote: (name) => `“${name}”`,
-    },
   },
 };
 

@@ -53,3 +53,16 @@
   from = "/en/blog"
   to = "/blog"
   status = 301
+
+# Agentes de IA deja de ser una especialidad (oct-2026): era la misma
+# accesibilidad con otra etiqueta. La demo del agente vive ahora como una
+# sección de la página de accesibilidad.
+[[redirects]]
+  from = "/agentes-ia"
+  to = "/accesibilidad-web/#agentes-ia"
+  status = 301
+
+[[redirects]]
+  from = "/en/ai-agents"
+  to = "/en/web-accessibility/#ai-agents"
+  status = 301

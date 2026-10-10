@@ -47,9 +47,11 @@ const { copy } = Astro.props
 </figure>
 
 <style>
-    /* Radio de la lupa, animable (la posición no: sigue al cursor al momento). */
+    /* Radio de la lupa, animable (la posición no: sigue al cursor al momento).
+       Admite porcentaje: con "<length>" a secas, el 160% del botón era inválido,
+       caía a 0px y el botón apagaba la lupa en vez de enseñar la capa entera. */
     @property --lens-r {
-        syntax: "<length>";
+        syntax: "<length-percentage>";
         inherits: true;
         initial-value: 0px;
     }

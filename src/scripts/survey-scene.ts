@@ -12,11 +12,13 @@ import {
   Vector3,
   WebGLRenderer,
 } from 'three';
-import { sceneStrings, setSceneLanguage } from './survey/strings';
+import { setSceneLanguage } from './survey/strings';
 import { computeAtmosphere, type Atmosphere } from './survey/atmosphere';
 import { createSky } from './survey/sky';
 import { createPrecipitation } from './survey/precipitation';
 import { createSoundscape } from './survey/soundscape';
+import { createMeteor } from './survey/meteor';
+import { markArrival } from './page-transition';
 import { ease, tween, type Tween, type TweenOptions } from './survey/tween';
 import {
   computeStage,
@@ -31,7 +33,6 @@ import {
   fetchLiveWeather,
   simulatedWeather,
   weatherVisuals,
-  WEATHER_STATION,
   type Weather,
   type WeatherKind,
   type WeatherVisuals,
@@ -45,14 +46,11 @@ const MINOR_CONTOUR_M = 20;
 const MAJOR_CONTOUR_M = 100;
 
 const BACKGROUND = new Color(0x0b0f14);
-const WIRE = new Color(0xdbe4ee);
 
 // El sol avanza un cuarto de grado por minuto: refrescar la luz cada minuto
 // basta para que el atardecer se vea pasar sin recalcular en cada fotograma.
 const ATMOSPHERE_REFRESH_MS = 60_000;
 const HORIZON_STEP_KM = 0.25;
-const WATER_PICK_THRESHOLD = 0.4;
-const WATER_NAME_RADIUS_KM = 1.5;
 
 const WEATHER_REFRESH_MS = 15 * 60_000;
 const NO_SNOW_LINE = 99_999;
@@ -63,7 +61,7 @@ const RAIN_SLANT_FACTOR = 0.45;
 const MAX_FRAME_SECONDS = 0.1;
 
 // Rendimiento. Con el movimiento en pausa solo se pinta mientras algo cambia
-// (cursor, lupa, vuelo, cambio de momento); en reposo la GPU no trabaja.
+// (cursor, vuelo, fin del mundo); en reposo la GPU no trabaja.
 const INITIAL_RENDER_MS = 4500;
 const INTERACTION_RENDER_MS = 1200;
 // Resolución adaptativa: si los fotogramas superan ~24 ms (menos de 40 fps)
@@ -84,7 +82,6 @@ const NIGHT_FULL_DEGREES = -8;
 const LIGHTS_BY_HOUR: Array<[number, number]> = [
   [0, 0.6], [1.5, 0.35], [5.5, 0.35], [7, 0.8], [18, 1], [23, 1], [24, 0.6],
 ];
-const VILLAGE_NAME_RADIUS_KM = 1;
 // La textura de pueblos tiene 4 texels por celda del MDT (ver build_villages).
 const VILLAGE_TEXTURE_SCALE = 4;
 const VILLAGE_HALO_LOD_BIAS = 3.5;
@@ -107,8 +104,30 @@ const RISE_SECONDS = 2.2;
 const REVEAL_SECONDS = 2.8;
 const FLIGHT_SECONDS = 1.6;
 
-const LENS_RADIUS_PX = 170;
-const LENS_RADIUS_COARSE_RATIO = 0.34;
+// Fin del mundo (menos de 4 s en total; lo pide la persona con un botón).
+// El meteorito entra por arriba a la derecha, cae acelerando, y la onda del
+// impacto barre la sierra mientras el terreno se desmorona detrás de ella.
+const METEOR_APPROACH_SECONDS = 1.4;
+const SHOCK_SECONDS = 2.1;
+const SHOCK_RADIUS_KM = 24;
+const SHOCK_LIFT_KM = 0.9;
+const CRATER_DEPTH_KM = 1.3;
+const COLLAPSE_DELAY_SECONDS = 0.45;
+const COLLAPSE_SECONDS = 1.6;
+const DOOM_FADE_DELAY_SECONDS = 1.55;
+const DOOM_FADE_SECONDS = 0.8;
+const METEOR_TRAIL_KM = 5;
+// Dónde cae: el punto del terreno bajo esta posición de la pantalla (NDC),
+// algo por encima del centro para que el cráter quede entre las cumbres.
+const IMPACT_SCREEN = new Vector2(0.08, 0.12);
+// De dónde viene, respecto al impacto: derecha de la cámara, arriba y fondo.
+const METEOR_FROM_RIGHT_KM = 8;
+const METEOR_FROM_UP_KM = 10;
+const METEOR_FROM_BACK_KM = 7;
+const SHAKE_APPROACH_KM = 0.05;
+const SHAKE_IMPACT_KM = 0.42;
+const SHAKE_DECAY_SECONDS = 1.6;
+
 const POINTER_GLOW_KM = 1.8;
 const FOCUS_GLOW_KM = 2.2;
 const PICK_STEP_KM = 0.05;
@@ -177,34 +196,26 @@ export interface SurveyVertexTarget {
 
 export interface SurveySceneOptions {
   canvas: HTMLCanvasElement;
-  // Idioma de los textos que genera la escena (cielo, tiempo, lupa).
+  // Idioma de los textos que genera la escena (nombres bajo el cursor).
   lang?: 'es' | 'en';
   heightsUrl: string;
   waterMaskUrl: string;
   meta: TerrainMeta;
   vertices: SurveyVertexTarget[];
-  readout: {
-    latitude: HTMLElement;
-    longitude: HTMLElement;
-    elevation: HTMLElement;
-    // El cielo y el tiempo se muestran en más de un sitio (panel de escritorio
-    // y línea de estado en móvil).
-    sky: HTMLElement[];
-    weather: HTMLElement[];
-    place: HTMLElement;
-  };
-  waterNames: Array<{ name: string; lat: number; lon: number }>;
   villagesUrl: string;
-  villageNames: Array<{ name: string; lat: number; lon: number }>;
-  // Momento fijo (viaje en el tiempo) o null para la hora real.
+  // Momento fijo (?momento=…) o null para la hora real.
   initialMoment: Date | null;
   initialWeather: WeatherKind;
   reticle: HTMLElement;
-  lensToggle: HTMLButtonElement;
-  lensLayer: HTMLElement;
-  lensCaption: HTMLElement;
   fade: HTMLElement;
   layout: LayoutElements;
+}
+
+// Avisos del fin del mundo para lo que no es WebGL (fogonazo, cielo rojo y
+// los textos de la página que salen volando).
+export interface DoomHooks {
+  onLaunch?(approachSeconds: number): void;
+  onImpact?(): void;
 }
 
 export interface SurveyScene {
@@ -214,6 +225,8 @@ export interface SurveyScene {
   isPaused(): boolean;
   setSound(enabled: boolean): Promise<void>;
   isSoundOn(): boolean;
+  // Lanza el meteorito; se resuelve con la pantalla ya a oscuras.
+  destroyWorld(hooks?: DoomHooks): Promise<void>;
   destroy(): void;
 }
 
@@ -224,17 +237,16 @@ interface VertexState {
   placement: number;
 }
 
-interface Annotation {
-  source: HTMLElement;
-  box: HTMLElement;
-  description: string;
-}
-
 const vertexShader = /* glsl */ `
   attribute float aHeight;
   uniform float uRise;
   uniform float uMinHeight;
   uniform float uExaggeration;
+  uniform vec3 uImpact;
+  uniform float uShock;
+  uniform float uShockLift;
+  uniform float uCrater;
+  uniform float uCollapse;
   varying float vHeight;
   varying vec3 vWorld;
   varying vec2 vUv;
@@ -244,6 +256,19 @@ const vertexShader = /* glsl */ `
     vUv = uv;
     vec3 displaced = position;
     displaced.y = (aHeight - uMinHeight) / 1000.0 * uExaggeration * uRise;
+
+    // Fin del mundo: la onda levanta el terreno a su paso, el impacto abre un
+    // cráter y, detrás de la onda, el suelo se parte en bloques de ~0,7 km que
+    // se hunden cada uno a su ritmo (un hash por bloque).
+    if (uShockLift > 0.0 || uCrater > 0.0 || uCollapse > 0.0) {
+      float impactDistance = distance(position.xz, uImpact.xz);
+      float wave = exp(-pow((impactDistance - uShock) / 0.8, 2.0)) * uShockLift;
+      float crater = (1.0 - smoothstep(0.0, 2.8, impactDistance)) * uCrater;
+      float shard = fract(sin(dot(floor(position.xz / 0.7), vec2(12.9898, 78.233))) * 43758.5453);
+      float collapsed = 1.0 - smoothstep(uCollapse - 3.0, uCollapse, impactDistance);
+      displaced.y += wave - crater - collapsed * (0.5 + shard * 1.4);
+    }
+
     vec4 world = modelMatrix * vec4(displaced, 1.0);
     vWorld = world.xyz;
     gl_Position = projectionMatrix * viewMatrix * world;
@@ -273,7 +298,6 @@ const fragmentShader = /* glsl */ `
   uniform vec2 uVillageSize;
   uniform float uNight;
   uniform float uLightsOn;
-  uniform vec3 uWire;
   uniform float uMinHeight;
   uniform float uMaxHeight;
   uniform float uReveal;
@@ -282,10 +306,11 @@ const fragmentShader = /* glsl */ `
   uniform float uPointerAmount;
   uniform vec3 uFocus;
   uniform float uFocusAmount;
-  uniform vec2 uLensCenter;
-  uniform float uLensRadius;
-  uniform float uLensAmount;
-  uniform vec2 uGrid;
+  uniform vec3 uImpact;
+  uniform float uShock;
+  uniform float uShockGlow;
+  uniform float uHeat;
+  uniform float uDoom;
   uniform float uFogNear;
   uniform float uFogFar;
   varying float vHeight;
@@ -298,11 +323,6 @@ const fragmentShader = /* glsl */ `
     float scaled = value / interval;
     float distancePx = abs(fract(scaled - 0.5) - 0.5) / max(fwidth(scaled), 1e-4);
     return 1.0 - smoothstep(thickness - 0.5, thickness + 0.5, distancePx);
-  }
-
-  float gridline(float value) {
-    float distancePx = abs(fract(value - 0.5) - 0.5) / max(fwidth(value), 1e-4);
-    return 1.0 - smoothstep(0.4, 1.2, distancePx);
   }
 
   float hash(vec2 p) {
@@ -450,22 +470,25 @@ const fragmentShader = /* glsl */ `
       color = mix(color, uFogTint, clamp(fogBank, 0.0, 0.92) * revealed);
     }
 
+    // Fin del mundo: por donde ha pasado la onda, las curvas arden en brasa
+    // (con su parpadeo), el cráter queda al rojo blanco y el frente de la onda
+    // es un anillo de luz. Al final todo se apaga hacia el fondo.
+    if (uHeat > 0.0 || uShockGlow > 0.0 || uDoom > 0.0) {
+      float impactDistance = distance(vWorld.xz, uImpact.xz);
+      float scorched = (1.0 - smoothstep(uShock - 0.6, uShock + 0.15, impactDistance)) * uHeat;
+      float flicker = 0.75 + 0.25 * sin(uTime * 23.0 + vWorld.x * 31.0 + vWorld.z * 17.0);
+      vec3 ember = vec3(1.0, 0.36, 0.07);
+      vec3 burnt = uGround * 0.4 + ember * (0.06 + clamp(lines, 0.0, 1.0) * 1.7 * flicker);
+      color = mix(color, burnt, scorched);
+      color += vec3(1.0, 0.62, 0.26) * (1.0 - smoothstep(0.0, 2.2, impactDistance)) * uHeat * 1.4;
+      float shockRing = exp(-pow((impactDistance - uShock) / 0.22, 2.0)) * uShockGlow;
+      color += vec3(1.0, 0.82, 0.55) * shockRing * 1.6;
+      color = mix(color, uGround, uDoom);
+    }
+
     float fog = smoothstep(uFogNear, uFogFar, distance(cameraPosition, vWorld));
     float edge = smoothstep(0.0, 0.07, min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y)));
     color = mix(uFog, color, (1.0 - fog) * edge);
-
-    // La lente enseña lo que hay debajo de las curvas: la malla del terreno.
-    float lensDistance = distance(gl_FragCoord.xy, uLensCenter);
-    float insideLens = (1.0 - smoothstep(uLensRadius - 1.5, uLensRadius + 1.5, lensDistance)) * uLensAmount;
-    if (insideLens > 0.0) {
-      vec2 cell = vUv * uGrid / 3.0;
-      float wire = max(max(gridline(cell.x), gridline(cell.y)), gridline(cell.x + cell.y) * 0.6);
-      vec3 lensColor = uGround * 1.35 + uWire * wire * 0.5 * edge * (1.0 - fog * 0.7);
-      lensColor = mix(lensColor, uLine, major * 0.35 * revealed);
-      color = mix(color, lensColor, insideLens);
-    }
-    float ring = (1.0 - smoothstep(0.0, 1.6, abs(lensDistance - uLensRadius))) * uLensAmount;
-    color = mix(color, uLine, ring * 0.85);
 
     gl_FragColor = vec4(color, 1.0);
   }
@@ -474,11 +497,6 @@ const fragmentShader = /* glsl */ `
 // Cede el hilo principal entre pasos pesados del arranque: así el navegador
 // puede pintar y atender al usuario en vez de bloquearse en una tarea larga.
 const yieldToBrowser = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
-
-// Trabajo que no corre prisa (solo sirve para el nombre bajo el cursor): se
-// hace cuando el navegador está ocioso.
-const whenIdle = (work: () => void) =>
-  'requestIdleCallback' in window ? window.requestIdleCallback(work, { timeout: 3000 }) : window.setTimeout(work, 1500);
 
 async function loadHeights(url: string): Promise<Float32Array> {
   const response = await fetch(url);
@@ -530,34 +548,10 @@ function createTerrainGeometry(heights: Float32Array, meta: TerrainMeta, step: n
   return geometry;
 }
 
-function formatDms(value: number, positive: string, negative: string): string {
-  const hemisphere = value >= 0 ? positive : negative;
-  const absolute = Math.abs(value);
-  const degrees = Math.floor(absolute);
-  const minutesFull = (absolute - degrees) * 60;
-  const minutes = Math.floor(minutesFull);
-  const seconds = Math.floor((minutesFull - minutes) * 60);
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${degrees}°${pad(minutes)}′${pad(seconds)}″ ${hemisphere}`;
-}
-
-function describeForScreenReader(element: HTMLElement): string {
-  const tag = element.tagName.toLowerCase();
-  const name = (element.getAttribute('aria-label') ?? element.textContent ?? '').replace(/\s+/g, ' ').trim();
-  const { reader } = sceneStrings();
-  let role = reader.text;
-  if (/^h[1-6]$/.test(tag)) role = reader.heading(tag[1]);
-  else if (tag === 'a') role = reader.link;
-  else if (tag === 'button') role = element.getAttribute('aria-pressed') === 'true' ? reader.togglePressed : reader.toggle;
-  else if (element.getAttribute('role') === 'note') role = reader.note;
-  return `${role} · ${reader.quote(name)}`;
-}
-
 export async function initSurveyScene(options: SurveySceneOptions): Promise<SurveyScene> {
   const { canvas, meta } = options;
   setSceneLanguage(options.lang ?? 'es');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const finePointer = window.matchMedia('(pointer: fine)').matches;
   const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
 
   const heights = await loadHeights(options.heightsUrl);
@@ -585,28 +579,9 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
   await yieldToBrowser();
   const geometry = createTerrainGeometry(heights, meta, isMobile ? MOBILE_MESH_STEP : 1);
   await yieldToBrowser();
-  const meshCols = Math.floor((meta.cols - 1) / (isMobile ? MOBILE_MESH_STEP : 1)) + 1;
-  const meshRows = Math.floor((meta.rows - 1) / (isMobile ? MOBILE_MESH_STEP : 1)) + 1;
 
-  // La máscara se muestrea con las mismas UV del terreno, fila 0 = norte. Una
-  // copia en memoria permite saber si el cursor está sobre agua.
-  let waterPixels: Uint8ClampedArray | null = null;
-  let waterWidth = 0;
-  let waterHeight = 0;
-  const waterMask = new TextureLoader().load(options.waterMaskUrl, (texture) =>
-    whenIdle(() => {
-      const image = texture.image as HTMLImageElement;
-      const reader = document.createElement('canvas');
-      reader.width = image.width;
-      reader.height = image.height;
-      const context = reader.getContext('2d', { willReadFrequently: true });
-      if (!context) return;
-      context.drawImage(image, 0, 0);
-      waterPixels = context.getImageData(0, 0, image.width, image.height).data;
-      waterWidth = image.width;
-      waterHeight = image.height;
-    }),
-  );
+  // La máscara se muestrea con las mismas UV del terreno, fila 0 = norte.
+  const waterMask = new TextureLoader().load(options.waterMaskUrl);
   waterMask.flipY = false;
 
   const villageLights = new TextureLoader().load(options.villagesUrl);
@@ -635,7 +610,6 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     uVillageSize: { value: new Vector2(meta.cols * VILLAGE_TEXTURE_SCALE, meta.rows * VILLAGE_TEXTURE_SCALE) },
     uNight: { value: 0 },
     uLightsOn: { value: 0 },
-    uWire: { value: WIRE },
     uRise: { value: reduceMotion ? 1 : 0 },
     uMinHeight: { value: meta.minHeight },
     uMaxHeight: { value: meta.maxHeight },
@@ -646,20 +620,26 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     uPointerAmount: { value: 0 },
     uFocus: { value: new Vector3() },
     uFocusAmount: { value: 0 },
-    uLensCenter: { value: new Vector2() },
-    uLensRadius: { value: 0 },
-    uLensAmount: { value: 0 },
-    uGrid: { value: new Vector2(meshCols - 1, meshRows - 1) },
+    uImpact: { value: new Vector3() },
+    uShock: { value: 0 },
+    uShockLift: { value: 0 },
+    uShockGlow: { value: 0 },
+    uCrater: { value: 0 },
+    uCollapse: { value: 0 },
+    uHeat: { value: 0 },
+    uDoom: { value: 0 },
     uFogNear: { value: 22 },
     uFogFar: { value: 46 },
   };
 
   const state = {
     flying: false,
+    destroying: false,
+    // Temblor de cámara del fin del mundo, en km.
+    shake: 0,
     pointer: new Vector2(window.innerWidth / 2, window.innerHeight / 2),
     pointerInside: false,
     parallax: new Vector2(),
-    lensActive: false,
     // Con movimiento reducido la escena arranca en pausa: el tiempo se ve,
     // pero no se mueve hasta que la persona lo pida.
     paused: reduceMotion,
@@ -667,8 +647,6 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     weatherKind: options.initialWeather,
     liveWeather: null as Weather | null,
     animationTime: 0,
-    // En táctil la lupa se queda donde se levantó el dedo (null: al centro).
-    lensAnchor: null as Vector2 | null,
     renderUntil: performance.now() + INITIAL_RENDER_MS,
   };
 
@@ -702,13 +680,8 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     return state.liveWeather ?? simulatedWeather('clear', now());
   };
 
-  const describeWeatherSource = (weather: Weather) => {
-    const strings = sceneStrings();
-    if (state.weatherKind !== 'live') return `${strings.simulation} · ${visuals.label}`;
-    if (weather.source === 'simulado') return strings.noLiveData;
-    return `${WEATHER_STATION.name} · ${visuals.label}`;
-  };
-
+  // El tiempo y la luz ya no se escriben en pantalla (la home se aligeró de
+  // datos): se ven en la propia sierra.
   const applyConditions = () => {
     const date = now();
     const weather = currentWeather();
@@ -747,10 +720,6 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     const night = smoothstep(NIGHT_START_DEGREES, NIGHT_FULL_DEGREES, sunDegrees);
     uniforms.uNight.value = night;
     uniforms.uLightsOn.value = night * lightsActivity(date);
-
-    const weatherText = describeWeatherSource(weather);
-    options.readout.sky.forEach((element) => (element.textContent = atmosphere.label));
-    options.readout.weather.forEach((element) => (element.textContent = weatherText));
 
     soundscape.update({
       wind: visuals.wind,
@@ -802,45 +771,6 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     const x = ((lon - meta.lonMin) / (meta.lonMax - meta.lonMin) - 0.5) * meta.widthKm;
     const z = ((meta.latMax - lat) / (meta.latMax - meta.latMin) - 0.5) * meta.depthKm;
     return new Vector3(x, 0, z);
-  };
-
-  const worldToLonLat = (x: number, z: number) => ({
-    lon: meta.lonMin + (x / meta.widthKm + 0.5) * (meta.lonMax - meta.lonMin),
-    lat: meta.latMax - (z / meta.depthKm + 0.5) * (meta.latMax - meta.latMin),
-  });
-
-  const waterAt = (x: number, z: number): number => {
-    if (!waterPixels) return 0;
-    const u = x / meta.widthKm + 0.5;
-    const v = z / meta.depthKm + 0.5;
-    if (u < 0 || u > 1 || v < 0 || v > 1) return 0;
-    const px = Math.min(waterWidth - 1, Math.floor(u * waterWidth));
-    const py = Math.min(waterHeight - 1, Math.floor(v * waterHeight));
-    return waterPixels[(py * waterWidth + px) * 4] / 255;
-  };
-
-  const toNamedPlaces = (entries: Array<{ name: string; lat: number; lon: number }>) =>
-    entries.map((entry) => ({ name: entry.name, world: lonLatToWorld(entry.lon, entry.lat) }));
-  const namedWater = toNamedPlaces(options.waterNames);
-  const namedVillages = toNamedPlaces(options.villageNames);
-
-  const nearestName = (places: ReturnType<typeof toNamedPlaces>, x: number, z: number, radius: number): string => {
-    let best = '';
-    let bestDistance = radius;
-    for (const place of places) {
-      const distance = Math.hypot(place.world.x - x, place.world.z - z);
-      if (distance < bestDistance) {
-        bestDistance = distance;
-        best = place.name;
-      }
-    }
-    return best;
-  };
-
-  // Sobre el agua manda el nombre de la lámina; si no, el del pueblo cercano.
-  const placeNameAt = (x: number, z: number): string => {
-    if (waterAt(x, z) > WATER_PICK_THRESHOLD) return nearestName(namedWater, x, z, WATER_NAME_RADIUS_KM);
-    return nearestName(namedVillages, x, z, VILLAGE_NAME_RADIUS_KM);
   };
 
   // Ray marching sobre la rejilla de alturas: mucho más barato que lanzar un
@@ -934,15 +864,21 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
 
   // Todas las transiciones activas, para poder cancelarlas al desmontar.
   const activeTweens = new Set<Tween>();
+  // Con duración 0 (movimiento reducido) la transición termina dentro de la
+  // propia llamada a tween(), antes de que exista su handle: por eso se mira
+  // si ya acabó en vez de usar el handle dentro de onComplete.
   const animate = <T extends object>(target: T, to: Partial<Record<keyof T, number>>, options: TweenOptions) => {
-    const handle = tween(target, to, {
+    let finished = false;
+    let handle: Tween | undefined;
+    handle = tween(target, to, {
       ...options,
       onComplete: () => {
-        activeTweens.delete(handle);
+        finished = true;
+        if (handle) activeTweens.delete(handle);
         options.onComplete?.();
       },
     });
-    activeTweens.add(handle);
+    if (!finished) activeTweens.add(handle);
     return handle;
   };
 
@@ -1014,7 +950,12 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
       listen(element, 'click', (event: MouseEvent) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
         event.preventDefault();
-        flyTo(vertex, () => window.location.assign(href));
+        // El vuelo tapa la página con su propio fundido; la siguiente llega
+        // destapándose con la transición de siempre (page-transition.ts).
+        flyTo(vertex, () => {
+          markArrival();
+          window.location.assign(href);
+        });
       });
     }
   }
@@ -1023,6 +964,11 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
   // la dejamos: en la cumbre y con el fundido a negro.
   listen(window, 'pageshow', (event: PageTransitionEvent) => {
     if (!event.persisted) return;
+    // Tras el fin del mundo no queda sierra que restaurar: se carga de nuevo.
+    if (state.destroying) {
+      window.location.reload();
+      return;
+    }
     state.flying = false;
     camera.position.copy(basePosition);
     lookTarget.copy(homeTarget);
@@ -1031,21 +977,33 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     keepRendering();
   });
 
-  // --- Puntero, retícula y lectura de coordenadas --------------------------
+  // --- Puntero y retícula ----------------------------------------------------
+  // La retícula es solo el cursor del mapa: no da datos (lo que solo da el
+  // ratón tendría que darlo también el teclado, WCAG 2.1.1). Se esconde sobre
+  // textos y controles para no tapar lo que se lee, y con Escape hasta el
+  // siguiente movimiento (WCAG 1.4.13).
+
+  const interfaceBlocks = [...options.layout.obstacles, ...vertexStates.flatMap((vertex) => (vertex.card ? [vertex.card] : []))];
+  const overInterface = (x: number, y: number) =>
+    interfaceBlocks.some((block) => {
+      const r = block.getBoundingClientRect();
+      return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    });
 
   listen(window, 'pointermove', (event: PointerEvent) => {
     keepRendering();
-    if (event.pointerType === 'touch') {
-      state.lensAnchor = (state.lensAnchor ?? new Vector2()).set(event.clientX, event.clientY);
-    }
     state.pointer.set(event.clientX, event.clientY);
     state.pointerInside = true;
     document.documentElement.classList.add('pointer-active');
+    document.documentElement.classList.toggle('reticle-off', overInterface(event.clientX, event.clientY));
     state.parallax.set(
       (event.clientX / window.innerWidth) * 2 - 1,
       (event.clientY / window.innerHeight) * 2 - 1,
     );
     options.reticle.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+  });
+  listen(window, 'keydown', (event: KeyboardEvent) => {
+    if (event.key === 'Escape') document.documentElement.classList.add('reticle-off');
   });
   listen(document.documentElement, 'pointerleave', () => {
     state.pointerInside = false;
@@ -1065,91 +1023,24 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     const hit = pickTerrain(ray);
     const target = hit ? 1 : 0;
     uniforms.uPointerAmount.value += (target - uniforms.uPointerAmount.value) * 0.12;
-    const place = hit ? placeNameAt(hit.point.x, hit.point.z) : '';
-    if (options.readout.place.textContent !== place) options.readout.place.textContent = place;
-    if (!hit) return;
-    uniforms.uPointer.value.copy(hit.point);
-    const { lon, lat } = worldToLonLat(hit.point.x, hit.point.z);
-    options.readout.latitude.textContent = formatDms(lat, 'N', 'S');
-    options.readout.longitude.textContent = formatDms(lon, 'E', sceneStrings().west);
-    options.readout.elevation.textContent = `${Math.round(hit.metres).toLocaleString(sceneStrings().locale)} m`;
+    if (hit) uniforms.uPointer.value.copy(hit.point);
   };
-
-  // --- Lente "Ver lo que no se ve" -----------------------------------------
-
-  const annotations: Annotation[] = Array.from(document.querySelectorAll<HTMLElement>('[data-annotate]')).map(
-    (source) => {
-      const box = document.createElement('div');
-      box.className = 'annotation';
-      options.lensLayer.append(box);
-      return { source, box, description: '' };
-    },
-  );
-
-  const refreshAnnotationText = () => {
-    for (const annotation of annotations) annotation.description = describeForScreenReader(annotation.source);
-  };
-
-  const lensRadiusPx = () =>
-    finePointer ? LENS_RADIUS_PX : Math.min(window.innerWidth, window.innerHeight) * LENS_RADIUS_COARSE_RATIO;
-
-  const lensCenter = new Vector2();
-
-  // Los recuadros van dentro de la capa enmascarada (solo se ven dentro de la
-  // lente); lo que dice el lector de pantalla va en una leyenda bajo la lente,
-  // para que no la recorte la máscara.
-  const updateAnnotations = () => {
-    const radius = lensRadiusPx();
-    const inside: string[] = [];
-    for (const annotation of annotations) {
-      const rect = annotation.source.getBoundingClientRect();
-      annotation.box.style.transform = `translate3d(${rect.left - 6}px, ${rect.top - 6}px, 0)`;
-      annotation.box.style.width = `${rect.width + 12}px`;
-      annotation.box.style.height = `${rect.height + 12}px`;
-      const nearestX = Math.max(rect.left, Math.min(lensCenter.x, rect.right));
-      const nearestY = Math.max(rect.top, Math.min(lensCenter.y, rect.bottom));
-      if (Math.hypot(nearestX - lensCenter.x, nearestY - lensCenter.y) < radius) inside.push(annotation.description);
-    }
-    const caption = inside.join('\n');
-    if (options.lensCaption.textContent !== caption) options.lensCaption.textContent = caption;
-    options.lensCaption.hidden = inside.length === 0;
-    const below = lensCenter.y + radius + 14;
-    const fitsBelow = below + 80 < window.innerHeight;
-    options.lensCaption.style.transform = fitsBelow
-      ? `translate3d(${lensCenter.x}px, ${below}px, 0) translateX(-50%)`
-      : `translate3d(${lensCenter.x}px, ${lensCenter.y - radius - 14}px, 0) translate(-50%, -100%)`;
-  };
-
-  const updateLens = () => {
-    const pixelRatio = renderer.getPixelRatio();
-    if (finePointer && state.pointerInside) lensCenter.copy(state.pointer);
-    else if (!finePointer && state.lensAnchor) lensCenter.copy(state.lensAnchor);
-    else lensCenter.set(window.innerWidth / 2, window.innerHeight / 2);
-    uniforms.uLensCenter.value.set(lensCenter.x * pixelRatio, (window.innerHeight - lensCenter.y) * pixelRatio);
-    uniforms.uLensRadius.value = lensRadiusPx() * pixelRatio;
-    options.lensLayer.style.setProperty('--lens-x', `${lensCenter.x}px`);
-    options.lensLayer.style.setProperty('--lens-y', `${lensCenter.y}px`);
-    options.lensLayer.style.setProperty('--lens-r', `${lensRadiusPx()}px`);
-  };
-
-  const setLens = (active: boolean) => {
-    keepRendering();
-    state.lensActive = active;
-    options.lensToggle.setAttribute('aria-pressed', String(active));
-    document.documentElement.classList.toggle('lens-on', active);
-    options.lensLayer.hidden = !active;
-    if (!active) options.lensCaption.hidden = true;
-    refreshAnnotationText();
-    animate(uniforms.uLensAmount, { value: active ? 1 : 0 }, { duration: reduceMotion ? 0 : 0.35, ease: ease.power2Out });
-  };
-  listen(options.lensToggle, 'click', () => setLens(!state.lensActive));
 
   // --- Bucle ---------------------------------------------------------------
 
   const desiredPosition = new Vector3();
   const right = new Vector3();
 
+  // El temblor del fin del mundo va encima de la posición suavizada y se
+  // retira antes de calcular la siguiente: así no se acumula fotograma a
+  // fotograma ni descoloca la cámara cuando termina.
+  const shakeOffset = new Vector3();
+  const shakenTarget = new Vector3();
+  const jitter = () => Math.random() * 2 - 1;
+
   const updateCamera = () => {
+    camera.position.sub(shakeOffset);
+    shakeOffset.set(0, 0, 0);
     if (state.flying) {
       camera.lookAt(lookTarget);
       return;
@@ -1162,7 +1053,13 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     desiredPosition.copy(basePosition).addScaledVector(right, drift + parallaxX);
     desiredPosition.y += parallaxY;
     camera.position.lerp(desiredPosition, reduceMotion ? 1 : CAMERA_EASING);
-    camera.lookAt(lookTarget);
+    if (state.shake <= 0) {
+      camera.lookAt(lookTarget);
+      return;
+    }
+    shakeOffset.set(jitter(), jitter() * 0.6, jitter()).multiplyScalar(state.shake);
+    camera.position.add(shakeOffset);
+    camera.lookAt(shakenTarget.copy(lookTarget).addScaledVector(shakeOffset, 0.5));
   };
 
   // El cielo se apoya en la silueta del terreno en la dirección de la mirada:
@@ -1228,10 +1125,6 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     updateSky(state.animationTime);
     updatePointerProbe();
     updateVertexPositions();
-    if (state.lensActive) {
-      updateLens();
-      updateAnnotations();
-    }
     renderer.render(scene, camera);
   };
 
@@ -1247,6 +1140,106 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     refit();
   };
   listen(window, 'resize', resize);
+
+  // --- Fin del mundo ---------------------------------------------------------
+
+  const impactPoint = (): Vector3 => {
+    ray.origin.copy(camera.position);
+    ray.direction.set(IMPACT_SCREEN.x, IMPACT_SCREEN.y, 0.5).unproject(camera).sub(camera.position).normalize();
+    const hit = pickTerrain(ray);
+    if (hit) return hit.point;
+    const metres = heightAt(homeTarget.x, homeTarget.z) ?? meta.minHeight;
+    return new Vector3(homeTarget.x, groundY(metres), homeTarget.z);
+  };
+
+  let doom: Promise<void> | null = null;
+  const destroyWorld = (hooks: DoomHooks = {}): Promise<void> => {
+    if (doom) return doom;
+    state.destroying = true;
+    setFocus(null);
+    doom = new Promise<void>((resolve) => {
+      // Con movimiento reducido no hay meteorito: la sierra se apaga y ya.
+      if (reduceMotion) {
+        animate(fadeState, { opacity: 1 }, { duration: 0.35, onUpdate: applyFade, onComplete: resolve });
+        return;
+      }
+      keepRendering((METEOR_APPROACH_SECONDS + DOOM_FADE_DELAY_SECONDS + DOOM_FADE_SECONDS) * 1000 + 500);
+
+      const impact = impactPoint();
+      uniforms.uImpact.value.copy(impact);
+      const forward = new Vector3().subVectors(lookTarget, camera.position).setY(0).normalize();
+      const rightward = new Vector3().crossVectors(forward, camera.up).normalize();
+      const start = impact
+        .clone()
+        .addScaledVector(rightward, METEOR_FROM_RIGHT_KM)
+        .addScaledVector(forward, METEOR_FROM_BACK_KM);
+      start.y += METEOR_FROM_UP_KM;
+      const direction = new Vector3().subVectors(impact, start).normalize();
+
+      const meteor = createMeteor(scene, impact, isMobile);
+      cleanups.push(() => meteor.dispose());
+      meteor.setPixelRatio(renderer.getPixelRatio());
+      const flight = { progress: 0 };
+      const head = new Vector3();
+      const placeMeteor = () => {
+        head.lerpVectors(start, impact, flight.progress);
+        // La estela crece al arrancar: así no aparece entera de golpe.
+        meteor.setFlight(head, direction, METEOR_TRAIL_KM * Math.min(1, 0.2 + flight.progress * 3), camera);
+      };
+
+      const strike = () => {
+        meteor.setVisible(false);
+        hooks.onImpact?.();
+        soundscape.impact();
+        state.shake = SHAKE_IMPACT_KM;
+        animate(state, { shake: 0 }, { duration: SHAKE_DECAY_SECONDS, ease: ease.power2Out });
+
+        const debrisClock = { seconds: 0 };
+        animate(debrisClock, { seconds: 3 }, {
+          duration: 3,
+          ease: ease.linear,
+          onUpdate: () => meteor.setDebrisTime(debrisClock.seconds),
+        });
+
+        uniforms.uHeat.value = 1;
+        uniforms.uShockGlow.value = 1;
+        uniforms.uShockLift.value = SHOCK_LIFT_KM;
+        animate(uniforms.uShock, { value: SHOCK_RADIUS_KM }, { duration: SHOCK_SECONDS, ease: ease.power2Out });
+        animate(uniforms.uShockLift, { value: 0 }, { duration: SHOCK_SECONDS, ease: ease.power1In });
+        animate(uniforms.uShockGlow, { value: 0 }, { duration: SHOCK_SECONDS, ease: ease.power1In });
+        animate(uniforms.uCrater, { value: CRATER_DEPTH_KM }, { duration: 0.5, ease: ease.power3Out });
+        animate(uniforms.uCollapse, { value: SHOCK_RADIUS_KM }, {
+          duration: COLLAPSE_SECONDS,
+          delay: COLLAPSE_DELAY_SECONDS,
+          ease: ease.power2InOut,
+        });
+        animate(uniforms.uDoom, { value: 1 }, {
+          duration: DOOM_FADE_SECONDS,
+          delay: DOOM_FADE_DELAY_SECONDS - 0.3,
+          ease: ease.power1In,
+        });
+        animate(fadeState, { opacity: 1 }, {
+          duration: DOOM_FADE_SECONDS,
+          delay: DOOM_FADE_DELAY_SECONDS,
+          ease: ease.power1In,
+          onUpdate: applyFade,
+          onComplete: resolve,
+        });
+      };
+
+      placeMeteor();
+      hooks.onLaunch?.(METEOR_APPROACH_SECONDS);
+      soundscape.meteor(METEOR_APPROACH_SECONDS);
+      animate(state, { shake: SHAKE_APPROACH_KM }, { duration: METEOR_APPROACH_SECONDS, ease: ease.power1In });
+      animate(flight, { progress: 1 }, {
+        duration: METEOR_APPROACH_SECONDS,
+        ease: ease.power1In,
+        onUpdate: placeMeteor,
+        onComplete: strike,
+      });
+    });
+    return doom;
+  };
 
   // --- Entrada: el mapa se levanta mientras se dibujan las curvas ----------
 
@@ -1289,6 +1282,7 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     isSoundOn() {
       return soundscape.isEnabled();
     },
+    destroyWorld,
     destroy() {
       cancelAnimationFrame(frame);
       window.clearInterval(atmosphereTimer);
@@ -1297,7 +1291,6 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
       soundscape.dispose();
       cleanups.forEach((cleanup) => cleanup());
       activeTweens.forEach((handle) => handle.cancel());
-      annotations.forEach(({ box }) => box.remove());
       geometry.dispose();
       material.dispose();
       waterMask.dispose();

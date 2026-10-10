@@ -12,13 +12,12 @@ interface Props {
 const { lang } = Astro.props
 const t = useTranslations(lang)
 
-// Las tres especialidades y el blog. El blog solo existe en español (trata
+// Las dos especialidades y el blog. El blog solo existe en español (trata
 // la ley española): en inglés no va en el menú, sino en el pie.
 const routes = routesFor(lang)
 const navItems = [
     { href: routes.immersive, label: t.nav.immersive },
     { href: routes.accessibility, label: t.nav.accessibility },
-    { href: routes.ai, label: t.nav.ai },
     ...(lang === "es" ? [{ href: routes.blog, label: t.nav.blog }] : []),
 ]
 

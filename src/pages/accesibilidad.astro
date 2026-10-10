@@ -5,15 +5,15 @@ import Layout from "../components/layout/BaseLayout.astro"
 // (jpiedra-clientes/jpiedra/auditorias/). Se actualizan cuando se repita la
 // evaluación, no antes: publicar una fecha de revisión que no corresponde a una
 // comprobación real vacía el documento de sentido.
-const fechaEvaluacion = "7 de septiembre de 2026"
-const fechaRevision = "7 de septiembre de 2026"
-const proximaRevision = "septiembre de 2027"
+const fechaEvaluacion = "8 de octubre de 2026"
+const fechaRevision = "8 de octubre de 2026"
+const proximaRevision = "octubre de 2027"
 ---
 
 <Layout
     lang="es"
-    title="Accesibilidad de jpiedra.com — grado de conformidad WCAG 2.1 AA"
-    description="Grado de accesibilidad de jpiedra.com: resultado de la evaluación según UNE-EN 301 549 y WCAG 2.1 AA, alcance, método y canal para comunicar barreras."
+    title="Accesibilidad de jpiedra.com — grado de conformidad WCAG 2.2 AA"
+    description="Grado de accesibilidad de jpiedra.com: resultado de la evaluación según WCAG 2.2 AA y UNE-EN 301 549, alcance, método y canal para comunicar barreras."
 >
     <article class="max-w-3xl mx-auto px-6 lg:px-8 py-32 lg:py-40">
         <header class="mb-16">
@@ -45,24 +45,33 @@ const proximaRevision = "septiembre de 2027"
                 <h2 class="font-heading text-2xl mb-4">Grado de conformidad</h2>
                 <p class="text-lg">
                     <strong
-                        >jpiedra.com es plenamente conforme con la norma UNE-EN
-                        301 549 V3.2.1 (WCAG 2.1, nivel AA)</strong
-                    > en el alcance evaluado que se describe más abajo.
+                        >jpiedra.com es plenamente conforme con WCAG 2.2, nivel
+                        AA</strong
+                    >, la versión que recoge la norma europea EN 301 549 V4.1.1,
+                    en el alcance evaluado que se describe más abajo.
                 </p>
                 <p class="mt-4">
-                    De los 50 criterios de conformidad de nivel A y AA, 38
-                    resultaron aplicables a este sitio. Los 38 se cumplen. Los
-                    12 restantes no aplican porque esta web no tiene el
-                    contenido que evalúan: no hay vídeo ni audio, no hay
-                    procesos con límite de tiempo, no hay gestos táctiles
-                    complejos y no hay transacciones con consecuencias legales o
-                    económicas.
+                    De los 55 criterios de nivel A y AA de WCAG 2.2, 48 se
+                    aplican a esta web y los 48 se cumplen. Los 7 restantes no
+                    aplican porque aquí no hay lo que evalúan: no hay vídeo ni
+                    audio grabado, no hay emisiones en directo, no hay
+                    transacciones con efectos legales o económicos y no hay
+                    inicio de sesión. También se cumple el requisito 9.7 de la
+                    EN 301 549 V4.1.1: la web respeta los colores forzados y el
+                    tamaño de texto que elijas.
+                </p>
+                <p class="mt-4">
+                    La referencia legal en España sigue siendo, por ahora, la
+                    UNE-EN 301 549 V3.2.1, que equivale a WCAG 2.1 AA. Con esa
+                    norma el resultado es el mismo: <strong
+                        >plenamente conforme</strong
+                    >, con 44 criterios aplicables de 50 y los 44 cumplidos.
                 </p>
                 <p class="mt-4 text-text-secondary">
                     «Plenamente conforme» significa que en las páginas y
-                    procesos evaluados no se encontró ningún incumplimiento.
+                    procesos evaluados no queda ningún incumplimiento.
                     <strong>No significa que la web sea perfecta</strong>: se ha
-                    evaluado una muestra, no las 32 páginas, y ninguna
+                    evaluado una muestra, no las 33 páginas en español, y ninguna
                     evaluación sustituye a lo que te encuentres tú usándola. Si
                     das con una barrera, cuéntamela: está más abajo cómo.
                 </p>
@@ -78,18 +87,19 @@ const proximaRevision = "septiembre de 2027"
                 </p>
                 <ul class="mt-4 space-y-2 list-disc pl-5">
                     <li>
-                        <strong>Páginas:</strong> la portada, servicios, la página
-                        de la auditoría, el autoevaluador de la Ley 11/2023, el índice
-                        del blog, una entrada del blog, el caso de auditoría y el
-                        aviso legal.
+                        <strong>Páginas:</strong> la portada en 3D, la versión
+                        clásica, la página de accesibilidad web, la de
+                        experiencias 3D, el autoevaluador de la Ley 11/2023, una
+                        entrada del blog, la política de cookies y el caso de
+                        auditoría.
                     </li>
                     <li>
-                        <strong>Procesos completos:</strong> el formulario de solicitud
-                        de auditoría y el autoevaluador, incluidos sus mensajes de
+                        <strong>Procesos completos:</strong> el formulario de
+                        contacto y el autoevaluador, incluidos sus mensajes de
                         error.
                     </li>
                     <li>
-                        <strong>Además:</strong> un barrido automático sobre las 32
+                        <strong>Además:</strong> un barrido automático sobre las 33
                         páginas en español del sitio.
                     </li>
                 </ul>
@@ -108,7 +118,8 @@ const proximaRevision = "septiembre de 2027"
                 <p>
                     <strong>Método: autoevaluación.</strong> La revisión la he hecho
                     yo mismo, que soy el titular del sitio y me dedico a auditar
-                    accesibilidad web.
+                    accesibilidad web, con el mismo protocolo que aplico a cualquier
+                    cliente.
                     <strong
                         >No es una evaluación de un tercero independiente</strong
                     >, y conviene leerla sabiéndolo.
@@ -128,19 +139,30 @@ const proximaRevision = "septiembre de 2027"
                         los dos procesos completos hechos solo con teclado.
                     </li>
                     <li>
-                        Comprobación de los 50 criterios uno a uno, cada uno con
-                        su procedimiento y su resultado anotado.
+                        Comprobación de los 55 criterios de WCAG 2.2 uno a uno, cada
+                        uno con su procedimiento y su resultado anotado.
+                    </li>
+                    <li>
+                        Contraste medido sobre el fondo real allí donde no hay un
+                        color liso, como el relieve en 3D de la portada, de día, de
+                        noche y con nieve.
                     </li>
                     <li>
                         Lector de pantalla <strong>NVDA</strong> real sobre los dos
-                        procesos, y lector virtual sobre el resto de la muestra.
+                        procesos y la portada, y lector virtual sobre el resto de la
+                        muestra.
                     </li>
                 </ul>
                 <p class="mt-4">
-                    <strong>Fecha de la evaluación:</strong> {fechaEvaluacion}. La
-                    evaluación encontró tres incumplimientos —dos de contraste y
-                    uno en el menú de navegación en pantallas pequeñas— que se corrigieron
-                    y se volvieron a comprobar antes de publicar esta página.
+                    <strong>Fecha de la evaluación:</strong> {fechaEvaluacion}. Se
+                    hizo sobre la versión rediseñada de la web, antes de publicarla.
+                    Encontró nueve incumplimientos: el más serio, que la portada en
+                    3D no dejaba desplazarse con el zoom alto; el resto, de
+                    contraste, de orden de la navegación, de foco y de animaciones
+                    que no se paraban. Los nueve se corrigieron y se volvieron a
+                    comprobar repitiendo la prueba que los detectó. Al corregirlos
+                    apareció un problema nuevo de contraste en móvil, que también se
+                    corrigió y se comprobó antes de publicar.
                 </p>
                 <p class="mt-4">
                     Navegadores y tecnologías con los que se ha comprobado:
@@ -190,9 +212,9 @@ const proximaRevision = "septiembre de 2027"
                     Conviene decirlo claro: <strong
                         >hoy no me es exigible</strong
                     > publicar esta información. jpiedra.com es la web de un profesional
-                    autónomo que presta servicios de consultoría y auditoría, así
-                    que no le aplica ni el Real Decreto 1112/2018 (que rige para el
-                    sector público) ni la Ley 11/2023.
+                    autónomo que presta servicios de diseño, desarrollo y auditoría
+                    web, así que no le aplica ni el Real Decreto 1112/2018 (que rige
+                    para el sector público) ni la Ley 11/2023.
                 </p>
                 <p class="mt-4">
                     Sí le alcanza el <strong
@@ -208,6 +230,13 @@ const proximaRevision = "septiembre de 2027"
                     > para los ya existentes. Tampoco entro en el artículo 14.3, que
                     obliga a consignar el grado de accesibilidad a las empresas de
                     «especial trascendencia económica»: no llego a sus umbrales.
+                </p>
+                <p class="mt-4">
+                    Evalúo con WCAG 2.2 aunque la referencia legal siga siendo la
+                    2.1 porque la versión nueva de la norma europea, la EN 301 549
+                    V4.1.1, ya está publicada desde septiembre de 2026 y pasará a ser
+                    la referencia cuando se cite en el Diario Oficial de la Unión
+                    Europea. Prefiero llegar antes.
                 </p>
                 <p class="mt-4">
                     Publico esto por transparencia, por llegar con antelación a

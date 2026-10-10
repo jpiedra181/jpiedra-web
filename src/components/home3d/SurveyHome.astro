@@ -3,18 +3,18 @@
 // La home: el levantamiento de la Sierra de Guadarrama en 3D. Es un documento
 // propio (sin BaseLayout) y sirve a los dos idiomas: src/pages/index.astro y
 // src/pages/en/index.astro. La versión clásica (el plano impreso, sin WebGL)
-// tiene su propia ruta y se enlaza desde la cabecera.
+// tiene su propia ruta y se enlaza desde la cabecera y desde el botón
+// «Fin del mundo», que antes de llevar allí arrasa la sierra con un meteorito.
 import "../../styles/global.css"
 import type { Lang } from "../../types"
 import { surveyVerticesFor } from "../../data/survey-vertices"
 import { routesFor, siteConfig } from "../../config/site"
 import { useTranslations } from "../../i18n/utils"
 import SeoHead from "../layout/SeoHead.astro"
-import { formatElevation } from "../../lib/format"
 import LanguageSwitcher from "../ui/LanguageSwitcher.astro"
-import serifFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url"
-import serifItalicFont from "@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url"
-import sansFont from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url"
+import serifFont from "../../assets/fonts/newsreader-latin-opsz-400-normal.woff2?url"
+import serifItalicFont from "../../assets/fonts/newsreader-latin-opsz-400-italic.woff2?url"
+import sansFont from "@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2?url"
 
 interface Props {
     lang: Lang
@@ -26,13 +26,11 @@ const routes = routesFor(lang)
 const vertices = surveyVerticesFor(lang)
 
 // En producción el tiempo llega de AEMET (función de Netlify); en desarrollo,
-// de Open-Meteo. La atribución tiene que nombrar la fuente que se usa.
+// de Open-Meteo. La atribución tiene que nombrar la fuente que se usa. Una
+// sola línea corta con las tres fuentes, como admiten las guías de atribución
+// de OpenStreetMap cuando falta espacio.
 const weatherSource = import.meta.env.PROD ? "© AEMET" : "Open-Meteo"
-// Versión corta para pantallas pequeñas: nombra igualmente las tres fuentes
-// (las guías de atribución de OpenStreetMap la admiten si falta espacio).
-const captionShort = `${copy.dataLabel}: IGN · OpenStreetMap · ${weatherSource.replace("© ", "")}`
-const captionSources = `${copy.sources} · ${copy.weatherLabel}: ${weatherSource}`
-
+const caption = `${copy.caption} · ${copy.dataLabel}: © IGN · © OpenStreetMap · ${weatherSource}`
 
 // Datos estructurados de la marca: la persona y el sitio web.
 const structuredData = {
@@ -46,8 +44,8 @@ const structuredData = {
             email: siteConfig.email,
             jobTitle: lang === "es" ? "Diseñador y desarrollador web" : "Web designer and developer",
             knowsAbout: lang === "es"
-                ? ["Experiencias web 3D", "WebGL", "Accesibilidad web", "WCAG 2.1", "Ley 11/2023", "Agentes de IA"]
-                : ["3D web experiences", "WebGL", "Web accessibility", "WCAG 2.1", "European Accessibility Act", "AI agents"],
+                ? ["Experiencias web 3D", "WebGL", "Accesibilidad web", "WCAG 2.2", "Ley 11/2023"]
+                : ["3D web experiences", "WebGL", "Web accessibility", "WCAG 2.2", "European Accessibility Act"],
             sameAs: [siteConfig.socials.linkedin, siteConfig.socials.github],
         },
         {
@@ -87,127 +85,70 @@ const structuredData = {
         ></canvas>
 
         <header class="survey-header">
-            <a href={routes.home} class="survey-logo" data-annotate>
+            <a href={routes.home} class="survey-logo">
                 <span aria-hidden="true">J<span class="text-accent">.</span>P</span>
                 <span class="sr-only">{copy.homeLabel}</span>
             </a>
+            <!-- Mismo orden relativo que la cabecera del resto de páginas
+                 (Blog, EN, Hablemos): WCAG 3.2.3. -->
             <nav class="survey-nav" aria-label={copy.nav.label}>
-                {lang === "es" && <a href={routes.blog} data-annotate>{copy.nav.blog}</a>}
-                <a href={routes.contact} data-annotate>{copy.nav.contact}</a>
-                <a href={routes.classic} data-annotate>{copy.classic}</a>
+                {lang === "es" && <a href={routes.blog}>{copy.nav.blog}</a>}
+                <a href={routes.classic}>{copy.classic}</a>
                 <LanguageSwitcher lang={lang} class="survey-language" />
+                <a href={routes.contact}>{copy.nav.contact}</a>
             </nav>
-            <dl class="survey-hud">
-                <!-- Las coordenadas cambian con cada movimiento del ratón: para un
-                     lector de pantalla serían ruido. El cielo y el tiempo, no. -->
-                <div aria-hidden="true">
-                    <dt>{copy.hud.live}</dt>
-                    <dd>
-                        <span data-readout="latitude">40°49′00″ N</span>
-                        <span data-readout="longitude">4°02′00″ {lang === "en" ? "W" : "O"}</span>
-                    </dd>
-                </div>
-                <div class="survey-hud-sky">
-                    <dt class="sr-only">{copy.hud.sky}</dt>
-                    <dd data-readout="sky"></dd>
-                </div>
-                <div class="survey-hud-weather">
-                    <dt class="sr-only">{copy.hud.weather}</dt>
-                    <dd data-readout="weather"></dd>
-                </div>
-            </dl>
         </header>
 
         <main class="survey-main">
             <div class="survey-intro">
-                <p class="survey-eyebrow" data-annotate>{copy.eyebrow}</p>
-                <h1 class="survey-title" data-annotate>
+                <p class="survey-eyebrow">{copy.eyebrow}</p>
+                <h1 class="survey-title">
                     {copy.titleStart}
                     <em>{copy.titleHighlight}</em>
                     <span class="block">{copy.titleEnd}</span>
                 </h1>
-                <p class="survey-subtitle" data-annotate>{copy.subtitle}</p>
+                <p class="survey-subtitle">{copy.subtitle}</p>
                 <p class="survey-hint">{copy.hint}</p>
-                <p class="survey-status">
-                    <span data-readout="sky"></span>
-                    <span data-readout="weather"></span>
-                </p>
-                <p class="survey-caption">
-                    <span class="caption-full">
-                        <span class="caption-landscape">{copy.captionLandscape}</span>
-                        <span class="caption-portrait">{copy.captionPortrait}</span>
-                        · {captionSources}
-                    </span>
-                    <span class="caption-short">{captionShort}</span>
-                </p>
+                <p class="survey-caption">{caption}</p>
                 <p class="sr-only">{copy.sceneDescription}</p>
             </div>
 
             <nav class="survey-vertices" aria-label={copy.verticesLabel}>
                 <ul role="list">
                     {
-                        vertices.map((vertex) => {
-                            const meta = `${vertex.code} · ${vertex.peak} · ${formatElevation(vertex.elevation, lang)}`
-                            return (
-                                <li>
-                                    {vertex.href ? (
-                                        <a
-                                            href={vertex.href}
-                                            class="vertex"
-                                            data-vertex
-                                            data-annotate
-                                            data-lat={vertex.lat}
-                                            data-lon={vertex.lon}
-                                            aria-label={`${vertex.label} (${vertex.peak}, ${formatElevation(vertex.elevation, lang)})`}
-                                        >
-                                            <svg class="vertex-pin" viewBox="0 0 16 14" aria-hidden="true">
-                                                <path d="M8 1 L15 13 L1 13 Z" />
-                                                <circle cx="8" cy="9" r="1.6" />
-                                            </svg>
-                                            <span class="vertex-stem" aria-hidden="true" />
-                                            <span class="vertex-card">
-                                                <span class="vertex-meta">{meta}</span>
-                                                <span class="vertex-label">{vertex.label}</span>
-                                            </span>
-                                        </a>
-                                    ) : (
-                                        <div
-                                            class="vertex vertex--pending"
-                                            role="note"
-                                            data-vertex
-                                            data-annotate
-                                            data-lat={vertex.lat}
-                                            data-lon={vertex.lon}
-                                            aria-label={`${vertex.label}: ${vertex.status?.toLowerCase()} (${vertex.peak}, ${formatElevation(vertex.elevation, lang)})`}
-                                        >
-                                            <svg class="vertex-pin" viewBox="0 0 16 14" aria-hidden="true">
-                                                <path d="M8 1 L15 13 L1 13 Z" />
-                                                <circle cx="8" cy="9" r="1.6" />
-                                            </svg>
-                                            <span class="vertex-stem" aria-hidden="true" />
-                                            <span class="vertex-card">
-                                                <span class="vertex-meta">{meta}</span>
-                                                <span class="vertex-label">
-                                                    {vertex.label}
-                                                    <span class="vertex-status">{vertex.status}</span>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    )}
-                                </li>
-                            )
-                        })
+                        vertices.map((vertex) => (
+                            <li>
+                                <a
+                                    href={vertex.href}
+                                    class="vertex"
+                                    data-vertex
+                                    data-lat={vertex.lat}
+                                    data-lon={vertex.lon}
+                                >
+                                    <svg class="vertex-pin" viewBox="0 0 16 14" aria-hidden="true">
+                                        <path d="M8 1 L15 13 L1 13 Z" />
+                                        <circle cx="8" cy="9" r="1.6" />
+                                    </svg>
+                                    <span class="vertex-stem" aria-hidden="true" />
+                                    <span class="vertex-card">
+                                        <span class="vertex-label">{vertex.label}</span>
+                                        <!-- Sin esto, el nombre del enlace junta etiqueta y resumen
+                                             («Sobre míQuién soy») y NVDA lo lee de corrido. -->
+                                        <span class="sr-only">. </span>
+                                        <span class="vertex-summary">{vertex.summary}</span>
+                                    </span>
+                                </a>
+                            </li>
+                        ))
                     }
                 </ul>
             </nav>
 
             <div class="survey-controls">
-                <p class="survey-lens-hint" aria-hidden="true">{copy.lensHint}</p>
                 <button
                     type="button"
                     class="survey-button survey-button--ghost"
                     data-pause
-                    data-annotate
                     aria-pressed="false"
                 >
                     <span class="survey-pause-icon" aria-hidden="true"></span>
@@ -217,7 +158,6 @@ const structuredData = {
                     type="button"
                     class="survey-button survey-button--ghost"
                     data-sound
-                    data-annotate
                     aria-pressed="false"
                 >
                     <svg class="survey-sound-icon" viewBox="0 0 20 16" aria-hidden="true">
@@ -227,103 +167,49 @@ const structuredData = {
                     </svg>
                     {copy.sound}
                 </button>
-                <div class="survey-moment">
-                    <button
-                        type="button"
-                        class="survey-button survey-button--ghost"
-                        data-moment-toggle
-                        data-annotate
-                        aria-expanded="false"
-                        aria-controls="survey-moment-panel"
-                    >
-                        {copy.moment}
-                    </button>
-                    <div
-                        id="survey-moment-panel"
-                        class="survey-moment-panel"
-                        role="group"
-                        aria-labelledby="survey-moment-title"
-                        hidden
-                    >
-                        <p id="survey-moment-title" class="survey-moment-title">
-                            {copy.moment}
-                        </p>
-                        <label class="survey-field">
-                            <span class="survey-field-label">
-                                {copy.hour} <output data-hour-output>12:00</output>
-                            </span>
-                            <input
-                                type="range"
-                                min="0"
-                                max="1425"
-                                step="15"
-                                value="720"
-                                data-hour
-                            />
-                        </label>
-                        <label class="survey-field">
-                            <span class="survey-field-label">{copy.month}</span>
-                            <select data-month>
-                                {
-                                    copy.months.map((month, index) => (
-                                        <option value={index}>{month}</option>
-                                    ))
-                                }
-                            </select>
-                        </label>
-                        <fieldset class="survey-field">
-                            <legend class="survey-field-label">{copy.weather}</legend>
-                            <div class="survey-chips">
-                                {
-                                    copy.weatherOptions.map((option) => (
-                                        <label class="survey-chip">
-                                            <input
-                                                type="radio"
-                                                name="survey-weather"
-                                                value={option.value}
-                                                checked={option.value === "live"}
-                                            />
-                                            <span>{option.label}</span>
-                                        </label>
-                                    ))
-                                }
-                            </div>
-                        </fieldset>
-                        <button type="button" class="survey-reset" data-moment-reset>
-                            {copy.backToNow}
-                        </button>
-                    </div>
-                </div>
-                <button
-                    type="button"
-                    class="survey-button"
-                    data-lens-toggle
-                    data-annotate
-                    aria-pressed="false"
+                <!-- Es un enlace a la versión clásica: sin JavaScript (o antes de
+                     que cargue la escena) lleva allí sin más. Con la escena,
+                     primero cae el meteorito. -->
+                <a
+                    href={routes.classic}
+                    class="survey-button survey-button--doom"
+                    data-destroy
+                    aria-describedby="survey-destroy-description"
                 >
-                    <span class="survey-button-icon" aria-hidden="true"></span>
-                    {copy.lens}
-                </button>
+                    <svg class="survey-doom-icon" viewBox="0 0 20 20" aria-hidden="true">
+                        <circle cx="6" cy="14" r="3.6" />
+                        <path d="M9 10.5 16.5 3M10.5 13 18 6.5M7.5 8.5 12.5 3.5" />
+                    </svg>
+                    {copy.destroy}
+                </a>
+                <p id="survey-destroy-description" class="sr-only">{copy.destroyDescription}</p>
             </div>
-
         </main>
 
         <div class="survey-reticle" data-reticle aria-hidden="true">
             <span class="reticle-ring"></span>
             <span class="reticle-cross"></span>
-            <span class="reticle-elevation" data-readout="elevation">— m</span>
-            <span class="reticle-place" data-readout="place"></span>
         </div>
-        <div class="lens-layer" data-lens-layer aria-hidden="true" hidden></div>
-        <div class="lens-caption" data-lens-caption aria-hidden="true" hidden></div>
+        <div class="survey-doom-sky" data-doom-sky aria-hidden="true"></div>
         <div class="survey-fade" data-fade aria-hidden="true"></div>
+        <div class="survey-flash" data-flash aria-hidden="true"></div>
 
         <script>
             import type { WeatherKind } from "../../scripts/survey/weather"
             import { wireSurveyControls } from "../../scripts/survey/controls"
+            import { initPageTransitions } from "../../scripts/page-transition"
             import terrainMeta from "../../data/terrain/guadarrama-mdt25.json"
-            import waterNames from "../../data/terrain/guadarrama-agua.json"
-            import villageNames from "../../data/terrain/guadarrama-pueblos.json"
+
+            initPageTransitions()
+
+            // El bloque de texto se coloca encima de los controles con su altura
+            // real (--survey-controls-h): en móviles estrechos los botones pasan
+            // a dos líneas y, con una altura fija, tapaban los créditos.
+            const controls = document.querySelector<HTMLElement>(".survey-controls")!
+            const setControlsHeight = () =>
+                document.documentElement.style.setProperty("--survey-controls-h", `${controls.offsetHeight}px`)
+            new ResizeObserver(setControlsHeight).observe(controls)
+            setControlsHeight()
 
             const query = <T extends Element>(selector: string) =>
                 document.querySelector<T>(selector)!
@@ -377,60 +263,38 @@ const structuredData = {
                 await afterHeadlinePaint()
                 const { initSurveyScene } = await import("../../scripts/survey-scene")
                 return initSurveyScene({
-                lang: document.documentElement.lang === "en" ? "en" : "es",
-                canvas: query<HTMLCanvasElement>("#survey-canvas"),
-                heightsUrl: "/levantamiento/guadarrama-mdt25.bin",
-                waterMaskUrl: "/levantamiento/guadarrama-agua.png",
-                waterNames,
-                villagesUrl: "/levantamiento/guadarrama-pueblos.png",
-                villageNames,
-                initialMoment,
-                initialWeather,
-                meta: terrainMeta,
-                vertices: vertexElements.map((element) => ({
-                    element,
-                    lat: Number(element.dataset.lat),
-                    lon: Number(element.dataset.lon),
-                    href: element.getAttribute("href") ?? undefined,
-                })),
-                readout: {
-                    latitude: query<HTMLElement>('[data-readout="latitude"]'),
-                    longitude: query<HTMLElement>('[data-readout="longitude"]'),
-                    elevation: query<HTMLElement>('[data-readout="elevation"]'),
-                    sky: Array.from(document.querySelectorAll<HTMLElement>('[data-readout="sky"]')),
-                    weather: Array.from(document.querySelectorAll<HTMLElement>('[data-readout="weather"]')),
-                    place: query<HTMLElement>('[data-readout="place"]'),
-                },
-                reticle: query<HTMLElement>("[data-reticle]"),
-                lensToggle: query<HTMLButtonElement>("[data-lens-toggle]"),
-                lensLayer: query<HTMLElement>("[data-lens-layer]"),
-                lensCaption: query<HTMLElement>("[data-lens-caption]"),
-                fade: query<HTMLElement>("[data-fade]"),
-                layout: {
-                    header: [query<HTMLElement>(".survey-logo"), query<HTMLElement>(".survey-nav")],
-                    intro: query<HTMLElement>(".survey-intro"),
-                    controls: query<HTMLElement>(".survey-controls"),
-                    obstacles: [
-                        query<HTMLElement>(".survey-logo"),
-                        query<HTMLElement>(".survey-nav"),
-                        query<HTMLElement>(".survey-hud"),
-                        query<HTMLElement>(".survey-intro"),
-                        query<HTMLElement>(".survey-controls"),
-                        query<HTMLElement>("#survey-moment-panel"),
-                    ],
-                },
-            })
+                    lang: document.documentElement.lang === "en" ? "en" : "es",
+                    canvas: query<HTMLCanvasElement>("#survey-canvas"),
+                    heightsUrl: "/levantamiento/guadarrama-mdt25.bin",
+                    waterMaskUrl: "/levantamiento/guadarrama-agua.png",
+                    villagesUrl: "/levantamiento/guadarrama-pueblos.png",
+                    initialMoment,
+                    initialWeather,
+                    meta: terrainMeta,
+                    vertices: vertexElements.map((element) => ({
+                        element,
+                        lat: Number(element.dataset.lat),
+                        lon: Number(element.dataset.lon),
+                        href: element.getAttribute("href") ?? undefined,
+                    })),
+                    reticle: query<HTMLElement>("[data-reticle]"),
+                    fade: query<HTMLElement>("[data-fade]"),
+                    layout: {
+                        header: [query<HTMLElement>(".survey-logo"), query<HTMLElement>(".survey-nav")],
+                        intro: query<HTMLElement>(".survey-intro"),
+                        controls: query<HTMLElement>(".survey-controls"),
+                        obstacles: [
+                            query<HTMLElement>(".survey-logo"),
+                            query<HTMLElement>(".survey-nav"),
+                            query<HTMLElement>(".survey-intro"),
+                            query<HTMLElement>(".survey-controls"),
+                        ],
+                    },
+                })
             }
 
             loadScene()
-                .then((scene) => {
-                    wireSurveyControls(scene, { moment: initialMoment, weather: initialWeather })
-                    document.addEventListener(
-                        "astro:before-swap",
-                        () => scene.destroy(),
-                        { once: true },
-                    )
-                })
+                .then((scene) => wireSurveyControls(scene))
                 .catch((error) => {
                     // Sin WebGL o sin datos: los apartados se quedan como una
                     // lista normal y la página sigue siendo usable.
@@ -447,7 +311,7 @@ const structuredData = {
             }
 
             .survey {
-                --mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+                --mono: var(--font-mono);
                 min-height: 100vh;
                 min-height: 100dvh;
                 overscroll-behavior: none;
@@ -510,14 +374,6 @@ const structuredData = {
                 pointer-events: auto;
             }
 
-            .survey-status {
-                display: none;
-            }
-
-            .caption-short {
-                display: none;
-            }
-
             .survey-nav a {
                 display: inline-flex;
                 align-items: center;
@@ -534,32 +390,6 @@ const structuredData = {
 
             .survey-nav a:hover {
                 color: var(--color-accent);
-            }
-
-            .survey-hud {
-                font-family: var(--mono);
-                font-size: 0.7rem;
-                letter-spacing: 0.08em;
-                text-align: right;
-                color: var(--color-text-secondary);
-                font-variant-numeric: tabular-nums;
-            }
-
-            .survey-hud dt {
-                color: var(--color-accent);
-                text-transform: uppercase;
-                letter-spacing: 0.24em;
-                margin-bottom: 0.4rem;
-            }
-
-            .survey-hud-sky {
-                margin-top: 0.55rem;
-                color: var(--color-accent);
-            }
-
-            .survey-hud-weather {
-                margin-top: 0.3rem;
-                color: #b9d3e6;
             }
 
             /* --- Sonido --- */
@@ -588,7 +418,7 @@ const structuredData = {
                 color: var(--color-accent);
             }
 
-            /* --- Pausa y panel de momento --- */
+            /* --- Pausa --- */
             .survey-pause-icon {
                 width: 0.7rem;
                 height: 0.75rem;
@@ -602,133 +432,6 @@ const structuredData = {
                 border-style: solid;
                 border-color: transparent transparent transparent currentColor;
                 border-width: 0.4rem 0 0.4rem 0.7rem;
-            }
-
-            .survey-moment {
-                position: relative;
-            }
-
-            .survey-moment-panel {
-                position: absolute;
-                right: 0;
-                bottom: calc(100% + 0.75rem);
-                width: min(22rem, calc(100vw - 2.5rem));
-                display: flex;
-                flex-direction: column;
-                gap: 1.1rem;
-                padding: 1.25rem;
-                border-radius: 12px;
-                border: 1px solid rgba(232, 200, 114, 0.25);
-                background: rgba(11, 15, 20, 0.88);
-                -webkit-backdrop-filter: blur(10px);
-                backdrop-filter: blur(10px);
-                cursor: auto;
-            }
-
-            .survey-moment-panel[hidden] {
-                display: none;
-            }
-
-            .survey-moment-title {
-                font-family: var(--mono);
-                font-size: 0.7rem;
-                letter-spacing: 0.24em;
-                text-transform: uppercase;
-                color: var(--color-accent);
-            }
-
-            .survey-field {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                border: 0;
-                padding: 0;
-                margin: 0;
-            }
-
-            .survey-field-label {
-                display: flex;
-                justify-content: space-between;
-                font-size: 0.8rem;
-                color: var(--color-text-secondary);
-            }
-
-            .survey-field-label output {
-                font-family: var(--mono);
-                color: var(--color-text-primary);
-                font-variant-numeric: tabular-nums;
-            }
-
-            .survey-field input[type="range"] {
-                accent-color: var(--color-accent);
-                min-height: 24px;
-            }
-
-            .survey-field select {
-                min-height: 40px;
-                padding: 0 0.6rem;
-                border-radius: 8px;
-                border: 1px solid rgba(232, 200, 114, 0.25);
-                background: var(--color-bg-surface);
-                color: var(--color-text-primary);
-            }
-
-            .survey-chips {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.4rem;
-            }
-
-            .survey-chip {
-                position: relative;
-                display: inline-flex;
-            }
-
-            /* El radio sigue siendo el control real (foco y lector de
-               pantalla); solo se tapa con la pastilla visible. */
-            .survey-chip input {
-                position: absolute;
-                inset: 0;
-                opacity: 0;
-                margin: 0;
-                cursor: pointer;
-            }
-
-            .survey-chip span {
-                display: inline-flex;
-                align-items: center;
-                min-height: 32px;
-                padding: 0 0.75rem;
-                border-radius: 999px;
-                border: 1px solid rgba(232, 200, 114, 0.25);
-                font-size: 0.8rem;
-                color: var(--color-text-secondary);
-            }
-
-            .survey-chip input:checked + span {
-                background: var(--color-accent);
-                border-color: var(--color-accent);
-                color: var(--color-bg-primary);
-            }
-
-            .survey-chip input:focus-visible + span {
-                outline: 2px solid #fff;
-                outline-offset: 3px;
-            }
-
-            .survey-reset {
-                align-self: flex-start;
-                min-height: 32px;
-                font-size: 0.85rem;
-                color: var(--color-accent);
-                text-decoration: underline;
-                text-underline-offset: 4px;
-            }
-
-            .survey-hud dd span + span::before {
-                content: "  ·  ";
-                white-space: pre;
-                color: var(--color-text-muted);
             }
 
             /* --- Titular --- */
@@ -790,6 +493,19 @@ const structuredData = {
                 color: var(--color-text-secondary);
                 max-width: 32rem;
                 text-shadow: 0 1px 16px rgba(11, 15, 20, 0.95);
+            }
+
+            /* La pista y los créditos son letra pequeña sobre curvas doradas que
+               se mueven: llevan su propio fondo, como las tarjetas y los
+               botones, para no depender de lo que pase por detrás (WCAG 1.4.3). */
+            .survey-hint,
+            .survey-caption {
+                width: fit-content;
+                max-width: 100%;
+                padding: 0.15rem 0.5rem;
+                margin-left: -0.5rem;
+                border-radius: 4px;
+                background: rgb(11 15 20 / 0.9);
             }
 
             .survey-hint {
@@ -864,32 +580,34 @@ const structuredData = {
                 color: var(--color-bg-primary);
             }
 
-            .survey-button-icon {
-                width: 0.8rem;
-                height: 0.8rem;
-                border-radius: 50%;
-                border: 1.5px solid currentColor;
-                box-shadow: inset 0 0 0 2px transparent;
+            /* Fin del mundo: el botón principal, con un meteorito por icono. */
+            .survey-button--doom {
+                text-decoration: none;
             }
 
-            /* Fuera del flujo: oculto seguía ocupando sitio en la fila de
-               controles y la partía en dos líneas en tablets. */
-            .survey-lens-hint {
-                position: absolute;
-                right: 0;
-                bottom: calc(100% + 0.6rem);
-                white-space: nowrap;
-                pointer-events: none;
-                font-family: var(--mono);
-                font-size: 0.7rem;
-                letter-spacing: 0.08em;
-                color: var(--color-accent);
-                opacity: 0;
-                transition: opacity 0.3s;
+            .survey-doom-icon {
+                width: 1.05rem;
+                height: 1.05rem;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 1.6;
+                stroke-linecap: round;
             }
 
-            .lens-on .survey-lens-hint {
-                opacity: 1;
+            .survey-doom-icon circle {
+                fill: currentColor;
+                stroke: none;
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                .survey-button--doom:hover .survey-doom-icon {
+                    animation: doom-wobble 0.5s ease-in-out infinite alternate;
+                }
+            }
+
+            @keyframes doom-wobble {
+                from { translate: 0 0; }
+                to { translate: -2px 2px; }
             }
 
             .survey a:focus-visible,
@@ -974,7 +692,9 @@ const structuredData = {
                 padding: 0.6rem 0.8rem;
                 white-space: nowrap;
                 border-radius: 6px;
-                background: rgba(11, 15, 20, 0.55);
+                /* Opaco de sobra: con nieve detrás, a 0.55 la descripción bajaba
+                   de 4.5:1 (WCAG 1.4.3). El desenfoque mantiene el cristal. */
+                background: rgba(11, 15, 20, 0.85);
                 border: 1px solid rgba(232, 200, 114, 0.12);
                 -webkit-backdrop-filter: blur(6px);
                 backdrop-filter: blur(6px);
@@ -1000,14 +720,6 @@ const structuredData = {
                 position: static;
             }
 
-            .vertex-meta {
-                font-family: var(--mono);
-                font-size: 0.62rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: var(--color-text-secondary);
-            }
-
             .vertex-label {
                 font-family: var(--font-heading);
                 font-size: 1.6rem;
@@ -1015,10 +727,15 @@ const structuredData = {
                 color: var(--color-text-primary);
             }
 
+            .vertex-summary {
+                font-size: 0.75rem;
+                color: var(--color-text-secondary);
+            }
+
             .vertex:hover .vertex-card,
             .vertex:focus-visible .vertex-card {
                 border-color: var(--color-accent);
-                background: rgba(11, 15, 20, 0.8);
+                background: rgba(11, 15, 20, 0.92);
                 transform: translateY(-4px);
             }
 
@@ -1036,39 +753,6 @@ const structuredData = {
                 outline-offset: 4px;
             }
 
-            .vertex--pending .vertex-label {
-                color: var(--color-text-secondary);
-            }
-
-            .vertex--pending .vertex-stem {
-                background: repeating-linear-gradient(
-                    to top,
-                    var(--color-text-muted) 0 3px,
-                    transparent 3px 6px
-                );
-            }
-
-            .vertex--pending .vertex-pin path {
-                stroke: var(--color-text-muted);
-            }
-
-            .vertex--pending .vertex-pin circle {
-                fill: var(--color-text-muted);
-            }
-
-            .vertex-status {
-                margin-left: 0.5rem;
-                font-family: var(--mono);
-                font-size: 0.66rem;
-                letter-spacing: 0.14em;
-                text-transform: uppercase;
-                vertical-align: middle;
-                color: var(--color-accent);
-                border: 1px dashed rgba(232, 200, 114, 0.4);
-                border-radius: 4px;
-                padding: 0.15rem 0.35rem;
-            }
-
             /* --- Retícula de taquímetro --- */
             .survey-reticle {
                 position: fixed;
@@ -1083,6 +767,10 @@ const structuredData = {
 
             .pointer-active .survey-reticle {
                 opacity: 1;
+            }
+
+            .reticle-off .survey-reticle {
+                opacity: 0;
             }
 
             .reticle-ring {
@@ -1111,96 +799,10 @@ const structuredData = {
                 transition: opacity 0.3s;
             }
 
-            .reticle-elevation {
-                position: absolute;
-                left: 30px;
-                top: 18px;
-                font-family: var(--mono);
-                font-size: 0.68rem;
-                letter-spacing: 0.08em;
-                color: var(--color-accent);
-                white-space: nowrap;
-                font-variant-numeric: tabular-nums;
-            }
-
-            .reticle-elevation::before {
-                content: "COTA ";
-                color: var(--color-text-muted);
-            }
-
-            .reticle-place {
-                position: absolute;
-                left: 30px;
-                top: 34px;
-                font-family: var(--font-heading);
-                font-size: 1.05rem;
-                font-style: italic;
-                color: #b9d3e6;
-                white-space: nowrap;
-                text-shadow: 0 1px 10px rgba(11, 15, 20, 0.95);
-            }
-
-            .reticle-place:empty {
-                display: none;
-            }
-
-            .lens-on .reticle-ring,
-            .lens-on .reticle-cross {
-                opacity: 0;
-            }
-
             @media (pointer: coarse) {
                 .survey-reticle {
                     display: none;
                 }
-            }
-
-            /* --- Lente: capa de accesibilidad --- */
-            .lens-layer {
-                position: fixed;
-                inset: 0;
-                z-index: 25;
-                pointer-events: none;
-                -webkit-mask-image: radial-gradient(
-                    circle var(--lens-r, 170px) at var(--lens-x, 50%) var(--lens-y, 50%),
-                    #000 calc(var(--lens-r, 170px) - 1px),
-                    transparent var(--lens-r, 170px)
-                );
-                mask-image: radial-gradient(
-                    circle var(--lens-r, 170px) at var(--lens-x, 50%) var(--lens-y, 50%),
-                    #000 calc(var(--lens-r, 170px) - 1px),
-                    transparent var(--lens-r, 170px)
-                );
-            }
-
-            .annotation {
-                position: absolute;
-                top: 0;
-                left: 0;
-                border: 1px dashed rgba(219, 228, 238, 0.8);
-                border-radius: 4px;
-                background: rgba(219, 228, 238, 0.04);
-            }
-
-            .lens-caption {
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 26;
-                max-width: min(30rem, 90vw);
-                padding: 0.45rem 0.7rem;
-                font-family: var(--mono);
-                font-size: 0.7rem;
-                line-height: 1.6;
-                white-space: pre-line;
-                color: var(--color-bg-primary);
-                background: #dbe4ee;
-                border-radius: 4px;
-                pointer-events: none;
-            }
-
-            .lens-caption[hidden] {
-                display: none;
             }
 
             .survey-fade {
@@ -1210,6 +812,72 @@ const structuredData = {
                 background: var(--color-bg-primary);
                 opacity: 0;
                 pointer-events: none;
+            }
+
+            /* --- Fin del mundo (survey/controls.ts) ---
+               El cielo enrojece mientras cae el meteorito, un único fogonazo en
+               el impacto (nunca más de uno: WCAG 2.3.1) y la interfaz sale
+               volando. Las piezas usan translate y rotate sueltos, no
+               transform: así no chocan con la posición que la escena da a las
+               tarjetas de los vértices en cada fotograma. */
+            .survey-doom-sky {
+                position: fixed;
+                inset: 0;
+                z-index: 5;
+                pointer-events: none;
+                opacity: 0;
+                background:
+                    radial-gradient(circle at 88% -12%, rgba(255, 150, 70, 0.55), rgba(190, 60, 20, 0.22) 38%, transparent 70%),
+                    linear-gradient(to bottom, rgba(120, 30, 10, 0.35), transparent 60%);
+                mix-blend-mode: screen;
+            }
+
+            .doom-launch .survey-doom-sky {
+                opacity: 1;
+                transition: opacity var(--doom-approach, 1.4s) ease-in;
+            }
+
+            .survey-flash {
+                position: fixed;
+                inset: 0;
+                z-index: 45;
+                pointer-events: none;
+                opacity: 0;
+                background: radial-gradient(circle at 50% 45%, #fff6e0, #ffd9a0 55%, #ff9a50);
+            }
+
+            .doom-impact .survey-flash {
+                animation: doom-flash 0.9s ease-out both;
+            }
+
+            .is-doomed .survey-controls,
+            .is-doomed .survey-vertices,
+            .is-doomed .survey-header {
+                pointer-events: none;
+            }
+
+            .is-doomed .survey-reticle {
+                opacity: 0;
+            }
+
+            .debris-word {
+                display: inline-block;
+            }
+
+            .survey .is-debris {
+                animation: debris-fall 1.5s cubic-bezier(0.55, 0, 0.9, 0.45) var(--debris-delay, 0s) both !important;
+            }
+
+            @keyframes doom-flash {
+                0% { opacity: 0; }
+                7% { opacity: 0.8; }
+                100% { opacity: 0; }
+            }
+
+            @keyframes debris-fall {
+                0% { translate: 0 0; rotate: 0deg; }
+                14% { translate: calc(var(--debris-x, 0px) * 0.2) -28px; rotate: calc(var(--debris-rot, 0deg) * 0.15); }
+                100% { translate: var(--debris-x, 0px) 115vh; rotate: var(--debris-rot, 0deg); }
             }
 
             /* --- Entrada --- */
@@ -1250,23 +918,8 @@ const structuredData = {
                 to { opacity: 1; }
             }
 
-            /* --- Orientación: la cámara cambia y la leyenda también --- */
-            @media (orientation: portrait) {
-                .caption-landscape {
-                    display: none;
-                }
-            }
-
-            @media (orientation: landscape) {
-                .caption-portrait {
-                    display: none;
-                }
-            }
-
             /* --- Móvil --- */
             @media (max-width: 767px) {
-                /* Arriba solo el cielo y el tiempo: las coordenadas siguen al
-                   dedo y en táctil no hay cursor que seguir. */
                 .survey-header {
                     grid-template-columns: auto 1fr;
                     padding: 1.1rem 1rem;
@@ -1275,39 +928,25 @@ const structuredData = {
                     justify-self: end;
                     gap: 0;
                 }
+                /* Atkinson en mayúsculas es algo más ancha que la anterior: con
+                   menos espaciado «Versión clásica» cabe en una línea. */
                 .survey-nav a {
                     min-height: 32px;
                     padding: 0 0.45rem;
                     font-size: 0.62rem;
-                    letter-spacing: 0.08em;
-                }
-                /* Arriba no cabe sin tapar las tarjetas: el cielo y el tiempo
-                   pasan a una línea bajo el titular. */
-                .survey-hud {
-                    display: none;
-                }
-                /* Cielo y tiempo, cada uno en su línea y con la altura
-                   reservada: el texto llega con el script y, si la línea
-                   creciera entonces, empujaría hacia arriba todo el titular. */
-                .survey-status {
-                    display: block;
-                    margin-top: 0.6rem;
-                    font-family: var(--mono);
-                    font-size: 0.6rem;
-                    line-height: 1.5;
-                    color: #b9d3e6;
-                }
-                .survey-status span {
-                    display: block;
-                    min-height: 1.5em;
+                    letter-spacing: 0.04em;
+                    white-space: nowrap;
                 }
                 .survey-eyebrow {
                     font-size: 0.6rem;
                     letter-spacing: 0.18em;
                     margin-bottom: 0.75rem;
                 }
+                /* Encima de los controles, midiendo su altura real: en móviles
+                   estrechos los botones pasan a dos líneas y tapaban los
+                   créditos (WCAG 1.4.10). La altura la pone el script. */
                 .survey-intro {
-                    bottom: 7.75rem;
+                    bottom: calc(var(--survey-controls-h, 6rem) + 1.75rem);
                 }
                 .survey-intro::before {
                     inset: -2.5rem -1.5rem -9rem -1.5rem;
@@ -1326,11 +965,13 @@ const structuredData = {
                     font-size: 0.95rem;
                 }
                 .survey-hint {
-                    display: none;
+                    margin-top: 0.5rem;
+                    font-size: 0.6rem;
                 }
                 .survey-caption {
                     font-size: 0.55rem;
                 }
+                /* Pausa y sonido en una fila; el fin del mundo, debajo y entero. */
                 .survey-controls {
                     left: 1rem;
                     right: 1rem;
@@ -1339,24 +980,16 @@ const structuredData = {
                     grid-template-columns: 1fr 1fr;
                     gap: 0.5rem;
                 }
-                .survey-controls > *,
-                .survey-moment > .survey-button {
+                .survey-controls > * {
                     width: 100%;
                     justify-content: center;
+                }
+                .survey-button--doom {
+                    grid-column: 1 / -1;
                 }
                 .survey-button {
                     padding: 0.6rem 0.75rem;
                     font-size: 0.8rem;
-                }
-                .survey-lens-hint {
-                    display: none;
-                }
-                .survey-moment-panel {
-                    position: fixed;
-                    left: 1rem;
-                    right: 1rem;
-                    bottom: 7.5rem;
-                    width: auto;
                 }
                 .vertex-label {
                     font-size: 1.05rem;
@@ -1364,13 +997,21 @@ const structuredData = {
                 .vertex-stem {
                     height: 26px;
                 }
+                /* Ancho propio: posicionada en absoluto sobre un punto, la
+                   tarjeta se encogía hasta su palabra más larga y la pregunta
+                   salía en cuatro líneas que chocaban con la cabecera. */
                 .vertex-card {
                     bottom: 40px;
                     gap: 0.15rem;
                     padding: 0.35rem 0.5rem;
+                    width: max-content;
+                    max-width: 9.5rem;
                 }
-                .vertex-meta {
-                    font-size: 0.5rem;
+                /* La línea de cada cumbre se queda también en móvil: ocultarla
+                   era perder información a 320 px (WCAG 1.4.10). */
+                .vertex-summary {
+                    font-size: 0.68rem;
+                    white-space: normal;
                 }
             }
 
@@ -1388,24 +1029,9 @@ const structuredData = {
                     min-height: 30px;
                     font-size: 0.62rem;
                 }
-                .survey-hud {
-                    display: none;
-                }
-                .survey-status {
-                    display: block;
-                    margin-top: 0.4rem;
-                    font-family: var(--mono);
-                    font-size: 0.55rem;
-                    line-height: 1.5;
-                    color: #b9d3e6;
-                }
-                .survey-status span {
-                    display: block;
-                    min-height: 1.5em;
-                }
                 .survey-intro {
                     left: 1rem;
-                    bottom: 3.6rem;
+                    bottom: calc(var(--survey-controls-h, 2.4rem) + 1.2rem);
                     max-width: 42vw;
                 }
                 .survey-eyebrow {
@@ -1435,8 +1061,7 @@ const structuredData = {
                     justify-content: flex-end;
                     gap: 0.4rem;
                 }
-                .survey-controls > *,
-                .survey-moment > .survey-button {
+                .survey-controls > * {
                     width: auto;
                 }
                 .survey-button {
@@ -1444,42 +1069,11 @@ const structuredData = {
                     padding: 0.35rem 0.75rem;
                     font-size: 0.72rem;
                 }
-                .survey-lens-hint {
-                    display: none;
-                }
-                /* En pantallas bajas el panel no cabía en una columna y lo último
-                   ("Volver al ahora") quedaba bajo los botones: va en dos. */
-                .survey-moment-panel {
-                    position: fixed;
-                    left: auto;
-                    right: 1rem;
-                    bottom: 3.6rem;
-                    width: min(36rem, calc(100vw - 2rem));
-                    max-height: calc(100dvh - 4.6rem);
-                    overflow: auto;
-                    display: grid;
-                    grid-template-columns: 1fr 1.3fr;
-                    gap: 0.7rem 1.25rem;
-                    padding: 0.9rem 1rem;
-                }
-                .survey-moment-panel[hidden] {
-                    display: none;
-                }
-                .survey-moment-title {
-                    grid-column: 1 / -1;
-                }
-                .survey-moment-panel fieldset {
-                    grid-column: 2;
-                    grid-row: 2 / span 2;
-                }
-                .survey-reset {
-                    grid-column: 1 / -1;
-                }
                 .vertex-label {
                     font-size: 1rem;
                 }
-                .vertex-meta {
-                    font-size: 0.5rem;
+                .vertex-summary {
+                    display: none;
                 }
                 .vertex-card {
                     padding: 0.3rem 0.5rem;
@@ -1502,16 +1096,10 @@ const structuredData = {
                 .survey-caption {
                     font-size: 0.5rem;
                 }
-                .survey-intro {
-                    bottom: 6.75rem;
-                }
                 .survey-button {
                     min-height: 40px;
                     padding: 0.45rem 0.6rem;
                     font-size: 0.75rem;
-                }
-                .vertex-meta {
-                    display: none;
                 }
             }
 
@@ -1520,42 +1108,99 @@ const structuredData = {
             @media (max-width: 360px) {
                 .survey-pause-icon,
                 .survey-sound-icon,
-                .survey-button-icon {
+                .survey-doom-icon {
                     display: none;
-                }
-                .survey-intro {
-                    bottom: 7rem;
                 }
             }
 
-            /* --- Legibilidad en pantallas pequeñas: nada por debajo de ~11 px y
-                   la leyenda de fuentes en su versión corta --- */
+            /* --- Legibilidad en pantallas pequeñas: nada por debajo de ~11 px --- */
             @media (max-width: 767px), (orientation: landscape) and (max-height: 560px) {
-                .caption-full {
-                    display: none;
-                }
-                .caption-short {
-                    display: inline;
-                }
-                .survey .survey-caption {
+                .survey .survey-caption,
+                .survey .survey-hint {
                     font-size: 0.68rem;
-                }
-                .survey .survey-status {
-                    font-size: 0.7rem;
                 }
                 .survey .survey-nav a {
                     font-size: 0.7rem;
                     letter-spacing: 0.06em;
                 }
-                .survey .vertex-meta {
-                    font-size: 0.62rem;
-                }
             }
 
             @media (max-width: 360px) {
+                /* Con la letra a 11 px el menú no cabe en una fila a 320 px: mejor
+                   que «Versión clásica» pase a dos líneas que cortar «Hablemos». */
                 .survey .survey-nav a {
                     padding: 0 0.35rem;
                     letter-spacing: 0.02em;
+                    white-space: normal;
+                }
+            }
+
+            /* --- Pantallas muy bajas o móviles pequeños ---
+               Con 22rem de alto o menos (zoom al 400 %, ventanas pequeñas), o en
+               móviles de hasta 400×700, la portada no cabe entera en una
+               pantalla: pasa a desplazarse. El relieve se queda de fondo y el
+               texto, las cumbres y los controles vuelven al flujo normal, en ese
+               orden y sin ocultar nada. Antes el titular quedaba fuera, no había
+               scroll y en móvil se escondían textos (WCAG 1.4.10). */
+            @media (max-height: 22rem), (max-width: 25rem) and (max-height: 43.75rem) {
+                html:has(.survey),
+                .survey {
+                    overflow-y: auto;
+                }
+                .survey-header {
+                    position: absolute;
+                }
+                .survey-main {
+                    min-height: 0;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.25rem;
+                    padding: 4.5rem 1rem 1.5rem;
+                }
+                .survey .survey-intro {
+                    position: relative;
+                    left: auto;
+                    bottom: auto;
+                    max-width: 100%;
+                }
+                .survey .survey-hint,
+                .survey .survey-eyebrow {
+                    display: block;
+                }
+                .survey-ready .survey-vertices ul,
+                .survey-vertices ul {
+                    position: static;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.5rem;
+                }
+                /* La escena coloca cada cumbre en cada fotograma: aquí manda la lista. */
+                .survey-ready .vertex {
+                    position: static;
+                    width: auto;
+                    height: auto;
+                    transform: none !important;
+                }
+                .survey .vertex-card {
+                    position: static;
+                    white-space: normal;
+                }
+                .survey .vertex-summary {
+                    display: block;
+                }
+                .vertex-pin,
+                .vertex-stem {
+                    display: none;
+                }
+                .survey .survey-controls {
+                    position: static;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                }
+                .survey .survey-controls > * {
+                    width: auto;
                 }
             }
         </style>

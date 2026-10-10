@@ -3,16 +3,21 @@
 import type { Lang } from "../../../types"
 import { useTranslations } from "../../../i18n/utils"
 import SectionLabel from "../../ui/SectionLabel.astro"
+import { routesFor, siteConfig } from "../../../config/site"
 
 interface Props {
     lang: Lang
 }
 
 const { lang } = Astro.props
-const copy = useTranslations(lang).immersive.difference
+const t = useTranslations(lang)
+const copy = t.immersive.difference
 const proofs = copy.proofs
-// Cada punto lleva su prueba en vivo, en el mismo orden que los textos.
-const PROOF_ORDER = ["fps", "keys", "reader", "motion"]
+// Cada pregunta lleva su prueba en vivo, en el mismo orden que los textos.
+const PROOF_ORDER = ["fps", "seo", "keys", "reader", "motion"]
+// La prueba de Google enseña el título y la descripción reales de esta página.
+const serpPath = routesFor(lang).immersive.split("/").filter(Boolean)
+const serpUrl = [new URL(siteConfig.url).host, ...serpPath].join(" › ")
 const KEYS = ["ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight", "Enter", "Escape"]
 const KEY_GLYPHS = { ArrowLeft: "←", ArrowUp: "↑", ArrowDown: "↓", ArrowRight: "→", Enter: lang === "en" ? "Enter" : "Intro", Escape: "Esc" }
 ---
@@ -60,6 +65,24 @@ const KEY_GLYPHS = { ArrowLeft: "←", ArrowUp: "↑", ArrowDown: "↓", ArrowRi
                                     </span>
                                     <span class="proof-fps-note">{proofs.fps.note}</span>
                                 </p>
+                            )}
+
+                            {proof === "fps" && (
+                                <button type="button" class="proof-fps-again" data-fps-again>
+                                    {proofs.fps.again}
+                                </button>
+                            )}
+
+                            {proof === "seo" && (
+                                <figure class="proof-serp">
+                                    <figcaption>{proofs.seo.label}</figcaption>
+                                    <div class="serp-result">
+                                        <p class="serp-url">{serpUrl}</p>
+                                        <p class="serp-title">{t.immersive.meta.title}</p>
+                                        <p class="serp-description">{t.immersive.meta.description}</p>
+                                    </div>
+                                    <p class="proof-serp-note">{proofs.seo.note}</p>
+                                </figure>
                             )}
 
                             {proof === "keys" && (
@@ -186,6 +209,28 @@ const KEY_GLYPHS = { ArrowLeft: "←", ArrowUp: "↑", ArrowDown: "↓", ArrowRi
         color: var(--color-text-primary);
     }
 
+    .proof-fps-again {
+        justify-self: start;
+        min-height: 44px;
+        padding: 0.5rem 1.125rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+    }
+
+    .proof-fps-again:hover {
+        border-color: var(--color-accent);
+    }
+
+    .proof-fps-again:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+    }
+
     /* Teclado */
     .proof-keys {
         padding-top: 1.5rem;
@@ -255,7 +300,7 @@ const KEY_GLYPHS = { ArrowLeft: "←", ArrowUp: "↑", ArrowDown: "↓", ArrowRi
     .proof-reader li {
         position: relative;
         padding-left: 1.25rem;
-        font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+        font-family: var(--font-mono);
         font-size: 0.875rem;
         line-height: 1.5;
         color: var(--color-text-primary);
@@ -266,6 +311,51 @@ const KEY_GLYPHS = { ArrowLeft: "←", ArrowUp: "↑", ArrowDown: "↓", ArrowRi
         position: absolute;
         left: 0;
         color: var(--color-accent);
+    }
+
+    /* Google */
+    .proof-serp {
+        display: grid;
+        gap: 0.875rem;
+    }
+
+    .proof-serp figcaption {
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+    }
+
+    .serp-result {
+        padding: 1.25rem 1.5rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 0.75rem;
+        background: var(--color-bg-primary);
+    }
+
+    .serp-url {
+        font-size: 0.8125rem;
+        color: var(--color-text-secondary);
+    }
+
+    .serp-title {
+        margin-top: 0.375rem;
+        font-size: 1.125rem;
+        line-height: 1.35;
+        /* Sin subrayado: no es un enlace y no debe parecerlo. */
+        color: var(--color-text-primary);
+    }
+
+    .serp-description {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.55;
+        color: var(--color-text-secondary);
+    }
+
+    .proof-serp-note {
+        font-size: 0.8125rem;
+        color: var(--color-text-secondary);
     }
 
     /* Movimiento reducido */

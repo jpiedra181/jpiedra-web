@@ -1,13 +1,13 @@
 ---
 //@ts-nocheck
+import { Image } from "astro:assets"
 import type { Lang } from "../../../types"
 import { useTranslations } from "../../../i18n/utils"
 import { routesFor } from "../../../config/site"
-import { surveyVertices } from "../../../data/survey-vertices"
-import { penalaraSummit, sietePicosSummit, bolaDelMundoSummit } from "../../../data/contour-maps"
 import SectionLabel from "../../ui/SectionLabel.astro"
-import ContourMap from "../../ui/ContourMap.astro"
-import { formatElevation } from "../../../lib/format"
+import immersiveImage from "../../../assets/disciplines/immersive.jpg"
+import accessibilityImageEs from "../../../assets/disciplines/accessibility-es.jpg"
+import accessibilityImageEn from "../../../assets/disciplines/accessibility-en.jpg"
 
 interface Props {
     lang: Lang
@@ -17,15 +17,15 @@ const { lang } = Astro.props
 const copy = useTranslations(lang).home.disciplines
 const routes = routesFor(lang)
 
-// Cada especialidad cuelga de la misma cumbre que en la home 3D.
-const summitMaps = {
-    immersive: penalaraSummit,
-    accessibility: sietePicosSummit,
-    ai: bolaDelMundoSummit,
+// Cada especialidad se enseña con su propio trabajo, no con una foto de
+// banco: el muestrario de piedra de /experiencias-3d (pulido, mate y
+// estructurado bajo la misma luz) y la ficha de /accesibilidad-web vista con
+// la lupa del lector de pantalla, en el idioma de la página. Son capturas de
+// esas dos páginas; la tarjeta ya lo cuenta en texto, así que van sin alt.
+const images = {
+    immersive: immersiveImage,
+    accessibility: lang === "en" ? accessibilityImageEn : accessibilityImageEs,
 }
-const vertexFor = (key: string) => surveyVertices.find((vertex) => vertex.id === key)
-// Altura de la maqueta de cada cumbre, en unidades del plano.
-const SUMMIT_LIFT = 26
 ---
 
 <section
@@ -53,50 +53,41 @@ const SUMMIT_LIFT = 26
             </p>
         </div>
 
-        <ul role="list" data-reveal-stagger class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-16 md:mt-20">
+        <ul role="list" data-reveal-stagger class="grid md:grid-cols-2 gap-6 lg:gap-8 mt-16 md:mt-20">
             {
-                copy.items.map((item) => {
-                    const vertex = vertexFor(item.key)
-                    return (
-                        <li class="discipline-card flex flex-col bg-bg-primary border border-border rounded-2xl overflow-hidden hover:border-border-hover transition-colors duration-300">
-                            <div class="discipline-map">
-                                <ContourMap
-                                    map={summitMaps[item.key]}
-                                    id={`summit-${item.key}`}
-                                    lift={SUMMIT_LIFT}
-                                    reveal="scroll"
-                                />
-                                {vertex && (
-                                    <p class="discipline-vertex" aria-hidden="true">
-                                        <span class="discipline-vertex-code">{vertex.code}</span>
-                                        {vertex.peak}
-                                        <span class="discipline-vertex-elevation">{formatElevation(vertex.elevation, lang)}</span>
-                                    </p>
-                                )}
-                            </div>
-                            <div class="flex flex-col flex-1 p-8 lg:p-10">
-                                <h3 class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.15] text-text-primary">
-                                    {item.title}
-                                </h3>
-                                <p class="text-base lg:text-lg text-text-secondary leading-relaxed mt-4 flex-1">
-                                    {item.description}
-                                </p>
-                                <a
-                                    href={routes[item.key]}
-                                    class="discipline-link mt-10 self-start inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover underline-offset-4 hover:underline transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white group/link"
+                copy.items.map((item) => (
+                    <li class="discipline-card flex flex-col bg-bg-primary border border-border rounded-2xl overflow-hidden hover:border-border-hover transition-colors duration-300">
+                        <div class="discipline-image">
+                            <Image
+                                src={images[item.key]}
+                                alt=""
+                                widths={[480, 720, 1100]}
+                                sizes="(min-width: 1280px) 600px, (min-width: 768px) 50vw, 100vw"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="flex flex-col flex-1 p-8 lg:p-10">
+                            <h3 class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.15] text-text-primary">
+                                {item.title}
+                            </h3>
+                            <p class="text-base lg:text-lg text-text-secondary leading-relaxed mt-4 flex-1">
+                                {item.description}
+                            </p>
+                            <a
+                                href={routes[item.key]}
+                                class="discipline-link mt-10 self-start inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover underline-offset-4 hover:underline transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white group/link"
+                            >
+                                {item.cta}
+                                <span
+                                    aria-hidden="true"
+                                    class="transition-transform duration-200 group-hover/link:translate-x-1"
                                 >
-                                    {item.cta}
-                                    <span
-                                        aria-hidden="true"
-                                        class="transition-transform duration-200 group-hover/link:translate-x-1"
-                                    >
-                                        →
-                                    </span>
-                                </a>
-                            </div>
-                        </li>
-                    )
-                })
+                                    →
+                                </span>
+                            </a>
+                        </div>
+                    </li>
+                ))
             }
         </ul>
     </div>
@@ -115,58 +106,38 @@ const SUMMIT_LIFT = 26
         inset: 0;
     }
 
-    .discipline-map {
+    .discipline-image {
         position: relative;
         aspect-ratio: 16 / 10;
         overflow: hidden;
         border-bottom: 1px solid var(--color-border);
+        background: var(--color-bg-elevated);
     }
 
-    .discipline-map :global(.contour-map) {
-        --area-low: var(--color-bg-primary);
+    .discipline-image :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-    .discipline-vertex {
+    /* Un velo del color de la tarjeta por abajo: la captura se funde con el
+       texto en vez de cortarse en seco. */
+    .discipline-image::after {
+        content: "";
         position: absolute;
-        left: 1.25rem;
-        top: 1.25rem;
-        display: flex;
-        align-items: center;
-        gap: 0.625rem;
-        padding: 0.375rem 0.75rem;
-        border: 1px solid var(--color-border-hover);
-        border-radius: 999px;
-        background: rgb(11 15 20 / 0.85);
-        font-size: 0.75rem;
-        letter-spacing: 0.08em;
-        color: var(--color-text-primary);
+        inset: 0;
+        background: linear-gradient(to top, rgb(11 15 20 / 0.55), transparent 45%);
+        pointer-events: none;
     }
 
-    .discipline-vertex-code,
-    .discipline-vertex-elevation {
-        color: var(--color-accent);
-        font-variant-numeric: tabular-nums;
-    }
-
-    /* La cartela ya dice qué cumbre es; dentro del plano basta el vértice.
-       A este tamaño el rótulo del SVG quedaría diminuto en móvil. */
-    .discipline-map :global(.contour-peak text) {
-        display: none;
-    }
-
-    /* Al pasar el ratón (o al llegar con el teclado) la maqueta se inclina
-       hacia atrás, como al mirarla desde más abajo. Se mueve el plano entero:
-       la tarjeta gráfica lo gira sin volver a pintarlo. */
     @media (prefers-reduced-motion: no-preference) {
-        .discipline-map :global(.contour-map) {
-            transform: perspective(900px) rotateX(0deg) scale(1.02);
-            transform-origin: 50% 60%;
-            transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+        .discipline-image :global(img) {
+            transition: scale 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .discipline-card:hover .discipline-map :global(.contour-map),
-        .discipline-card:focus-within .discipline-map :global(.contour-map) {
-            transform: perspective(900px) rotateX(32deg) scale(1.16);
+        .discipline-card:hover .discipline-image :global(img),
+        .discipline-card:focus-within .discipline-image :global(img) {
+            scale: 1.05;
         }
     }
 </style>

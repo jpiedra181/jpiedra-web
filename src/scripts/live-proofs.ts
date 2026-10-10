@@ -3,6 +3,9 @@
 // movimiento del sistema. Solo trabajan mientras se ven.
 
 const FPS_WINDOW_MS = 1000;
+// Mide durante 3 s y se queda quieto: un número que cambia sin fin junto al
+// texto incumple WCAG 2.2.2. El botón «Medir otra vez» repite la medida.
+const FPS_MEASURE_MS = 3000;
 const KEY_GLOW_MS = 260;
 
 function watchVisibility(element: Element, onChange: (visible: boolean) => void): IntersectionObserver {
@@ -13,12 +16,16 @@ function watchVisibility(element: Element, onChange: (visible: boolean) => void)
 
 function initFps(root: HTMLElement): () => void {
   const value = root.querySelector<HTMLElement>('[data-fps-value]');
+  const again = root.querySelector<HTMLButtonElement>('[data-fps-again]');
   if (!value) return () => {};
   let frame = 0;
   let frames = 0;
   let windowStart = 0;
+  let measureStart = 0;
+  let measured = false;
 
   const tick = (time: number) => {
+    if (!measureStart) measureStart = time;
     if (!windowStart) windowStart = time;
     frames++;
     if (time - windowStart >= FPS_WINDOW_MS) {
@@ -26,19 +33,29 @@ function initFps(root: HTMLElement): () => void {
       frames = 0;
       windowStart = time;
     }
-    frame = requestAnimationFrame(tick);
+    frame = time - measureStart < FPS_MEASURE_MS ? requestAnimationFrame(tick) : 0;
   };
 
-  const observer = watchVisibility(root, (visible) => {
+  const measure = () => {
     cancelAnimationFrame(frame);
     frames = 0;
     windowStart = 0;
-    if (visible) frame = requestAnimationFrame(tick);
+    measureStart = 0;
+    frame = requestAnimationFrame(tick);
+  };
+
+  // La primera medida, al llegar a la prueba; las siguientes, a petición.
+  const observer = watchVisibility(root, (visible) => {
+    if (!visible || measured) return;
+    measured = true;
+    measure();
   });
+  again?.addEventListener('click', measure);
 
   return () => {
     cancelAnimationFrame(frame);
     observer.disconnect();
+    again?.removeEventListener('click', measure);
   };
 }
 

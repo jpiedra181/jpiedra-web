@@ -21,11 +21,11 @@ export const routes = {
   classic: '/clasica/',
   immersive: '/experiencias-3d/',
   accessibility: '/accesibilidad-web/',
-  ai: '/agentes-ia/',
   law: '/te-aplica-ley-11-2023/',
   blog: '/blog/',
   work: '/clasica/#proyectos',
   about: '/clasica/#about',
+  questions: '/clasica/#dudas',
   contact: '/clasica/#contact',
   pricing: '/accesibilidad-web/#precios',
   caseStudy: '/caso-auditoria-accesibilidad/',
@@ -40,11 +40,11 @@ export const routesEn: SiteRoutes = {
   classic: '/en/classic/',
   immersive: '/en/3d-experiences/',
   accessibility: '/en/web-accessibility/',
-  ai: '/en/ai-agents/',
   law: '/te-aplica-ley-11-2023/',
   blog: '/blog/',
   work: '/en/classic/#proyectos',
   about: '/en/classic/#about',
+  questions: '/en/classic/#questions',
   contact: '/en/classic/#contact',
   pricing: '/en/web-accessibility/#pricing',
   caseStudy: '/en/accessibility-audit-case/',
@@ -52,6 +52,9 @@ export const routesEn: SiteRoutes = {
 
 // Ancla de la sección de precios de accesibilidad en cada idioma.
 export const pricingId = (lang: Lang) => (lang === 'en' ? 'pricing' : 'precios');
+
+// Ancla de «Lo que te preocupa» en la versión clásica.
+export const questionsId = (lang: Lang) => (lang === 'en' ? 'questions' : 'dudas');
 
 export const routesFor = (lang: Lang): SiteRoutes => (lang === 'en' ? routesEn : routes);
 

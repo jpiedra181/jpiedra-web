@@ -1,47 +1,70 @@
-@import "@fontsource-variable/dm-sans";
-@import "@fontsource/instrument-serif";
-@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource-variable/atkinson-hyperlegible-next/wght.css";
+@import "@fontsource-variable/atkinson-hyperlegible-next/wght-italic.css";
+@import "@fontsource-variable/atkinson-hyperlegible-mono/wght.css";
+
+/* Newsreader para titulares, servida desde aquí: la variable de Fontsource
+   pesa 130 KB por estilo; con el grosor fijado en 400 (el único que usan los
+   titulares) y el eje de tamaño óptico intacto se queda en 56 y 62 KB.
+   Generada con fontTools (varLib.instancer) a partir de
+   @fontsource-variable/newsreader 5.3.0, subconjunto latin. */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/newsreader-latin-opsz-400-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/newsreader-latin-opsz-400-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 /* Fuentes de reserva con las medidas de las de verdad (size-adjust y
-   overrides calculados con fontTools sobre el texto del sitio): mientras
-   cargan Instrument Serif y DM Sans, Times y Arial ocupan lo mismo, y el
-   cambio no mueve ni una línea (CLS). */
+   overrides calculados con fontTools sobre el texto del sitio; Newsreader
+   medida con el tamaño óptico de 48): mientras cargan Newsreader y Atkinson,
+   Times y Arial ocupan lo mismo, y el cambio no mueve ni una línea (CLS). */
 @font-face {
-  font-family: 'Instrument Serif Fallback';
+  font-family: 'Newsreader Fallback';
   src: local('Times New Roman');
-  size-adjust: 82.99%;
-  ascent-override: 119.29%;
-  descent-override: 37.35%;
+  size-adjust: 105.46%;
+  ascent-override: 69.7%;
+  descent-override: 25.13%;
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'Instrument Serif Fallback';
+  font-family: 'Newsreader Fallback';
   font-style: italic;
   src: local('Times New Roman Italic');
-  size-adjust: 87.23%;
-  ascent-override: 113.5%;
-  descent-override: 35.54%;
+  size-adjust: 97.38%;
+  ascent-override: 75.48%;
+  descent-override: 27.21%;
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'DM Sans Fallback';
+  font-family: 'Atkinson Fallback';
   font-weight: 100 550;
   src: local('Arial');
-  size-adjust: 103.95%;
-  ascent-override: 95.43%;
-  descent-override: 29.82%;
+  size-adjust: 99.09%;
+  ascent-override: 99.31%;
+  descent-override: 31.89%;
   line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: 'DM Sans Fallback';
+  font-family: 'Atkinson Fallback';
   font-weight: 551 1000;
   src: local('Arial Bold');
-  size-adjust: 102.13%;
-  ascent-override: 97.13%;
-  descent-override: 30.35%;
+  size-adjust: 99.55%;
+  ascent-override: 98.85%;
+  descent-override: 31.74%;
   line-gap-override: 0%;
 }
 
@@ -61,8 +84,10 @@
   --color-border: rgba(232, 200, 114, 0.08);
   --color-border-hover: rgba(232, 200, 114, 0.25);
 
-  --font-heading: 'Instrument Serif', 'Instrument Serif Fallback', serif;
-  --font-body: 'DM Sans Variable', 'DM Sans Fallback', sans-serif;
+  --font-heading: 'Newsreader', 'Newsreader Fallback', serif;
+  --font-body: 'Atkinson Hyperlegible Next Variable', 'Atkinson Fallback', sans-serif;
+  /* Datos, cotas y lo que «oye» un lector de pantalla. */
+  --font-mono: 'Atkinson Hyperlegible Mono Variable', ui-monospace, Consolas, monospace;
 }
 
 html {
@@ -96,6 +121,9 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  /* Newsreader es más ancha que la serif anterior: un pelo menos de aire
+     entre letras en titulares. */
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
@@ -103,38 +131,41 @@ h6 {
   background-color: rgba(232, 200, 114, 0.3);
   color: var(--color-text-primary);
 }
-/* Transiciones entre páginas (View Transitions entre documentos): al navegar,
-   el contenido sale y entra con un fundido corto y la cabecera se queda
-   quieta. Sin JavaScript ni router: lo hace el navegador, y el que no lo
-   soporta navega como siempre. Con movimiento reducido no se activan. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-
-  ::view-transition-old(root) {
-    animation: page-leave 0.24s cubic-bezier(0.4, 0, 1, 1) both;
-  }
-
-  ::view-transition-new(root) {
-    animation: page-enter 0.42s cubic-bezier(0, 0, 0.2, 1) both;
-  }
+/* Transición entre páginas, "la marea y las islas" (scripts/page-transition.ts).
+   Al llegar desde otra página, la tapa del color de fondo cubre todo desde el
+   primer pintado hasta que el lienzo de la transición toma el relevo. Si el
+   módulo no llega a cargarse, la tapa se retira sola a los 3 s. */
+html.pt-arriving body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  background: var(--color-bg-primary);
+  pointer-events: none;
+  animation: pt-failsafe 0.01s linear 3s forwards;
 }
 
-#site-header {
-  view-transition-name: site-header;
-}
-
-@keyframes page-leave {
+@keyframes pt-failsafe {
   to {
-    opacity: 0;
-    transform: translateY(-12px);
+    visibility: hidden;
   }
 }
 
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483001;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Con colores forzados el sistema quita los fondos, y los botones que solo se
+   distinguen por su fondo dorado se quedan en texto suelto. Un borde con el
+   color del sistema les devuelve la forma. */
+@media (forced-colors: active) {
+  a.bg-accent,
+  button.bg-accent {
+    border: 1px solid ButtonText;
   }
 }

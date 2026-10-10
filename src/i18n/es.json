@@ -6,8 +6,7 @@
     "services": "Servicios",
     "immersive": "Experiencias 3D",
     "accessibility": "Accesibilidad",
-    "contact": "Hablemos",
-    "ai": "Agentes de IA"
+    "contact": "Hablemos"
   },
   "services": {
     "meta": {
@@ -42,7 +41,7 @@
             "Informe corto en PDF, sin jerga",
             "20 minutos de videollamada para repasarlo"
           ],
-          "note": "El diagnóstico localiza lo que más te está costando; no evalúa los 50 criterios WCAG ni entrega el documento de cumplimiento — para eso está la auditoría. Se abona íntegro al contratar y el plazo empieza en ese momento. Los 290 € se descuentan íntegros si la contratas en los 30 días siguientes.",
+          "note": "El diagnóstico localiza lo que más te está costando; no evalúa todos los criterios WCAG ni entrega el documento de cumplimiento — para eso está la auditoría. Se abona íntegro al contratar y el plazo empieza en ese momento. Los 290 € se descuentan íntegros si la contratas en los 30 días siguientes.",
           "ctaLabel": "Pedir el diagnóstico"
         },
         {
@@ -52,7 +51,7 @@
           "price": "Desde 1.200 €",
           "priceAriaLabel": "desde mil doscientos euros",
           "deadline": "5-7 días laborables",
-          "tagline": "El diagnóstico entero de tu web según WCAG 2.1 AA y la Ley 11/2023, con el plan de remediación priorizado y el documento de cumplimiento listo para publicar.",
+          "tagline": "El diagnóstico entero de tu web según WCAG 2.2 AA y la Ley 11/2023, con el plan de remediación priorizado y el documento de cumplimiento listo para publicar.",
           "forWho": "Para quien ya sabe que está obligado y necesita el diagnóstico completo, no una muestra.",
           "includes": [
             "Informe ejecutivo que entiende dirección",
@@ -105,7 +104,7 @@
             {
               "name": "Conformidad AA",
               "price": "5.900 €",
-              "description": "Todos los hallazgos del informe hasta alcanzar WCAG 2.1 AA en el alcance auditado."
+              "description": "Todos los hallazgos del informe hasta alcanzar WCAG 2.2 AA en el alcance auditado."
             }
           ],
           "note": "El tramo se cierra al terminar la auditoría, cuando ya sabemos el volumen real. Precio fijo antes de tocar una línea de código. Si prefieres que corrija tu propio equipo, la verificación de sus correcciones ya va incluida en la auditoría.",
@@ -170,7 +169,7 @@
         },
         {
           "question": "¿Qué diferencia hay entre el diagnóstico exprés y la auditoría?",
-          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 50 criterios WCAG 2.1 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
+          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 55 criterios de WCAG 2.2 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
         },
         {
           "question": "¿Puedo contratar la remediación sin hacer la auditoría?",
@@ -201,7 +200,7 @@
     "label": "DESARROLLADOR WEB • ESPECIALISTA EN ACCESIBILIDAD WEB",
     "title": "Hay gente que quiere comprarte",
     "title_1": "y tu web no se lo permite.",
-    "subtitle": "Un botón que el lector de pantalla anuncia como «enlace vacío». Un formulario que no se puede rellenar con teclado. Un texto que no llega a leerse. No son detalles técnicos: son pedidos que se van sin que llegues a enterarte. Audito y arreglo webs según WCAG 2.1 AA y la Ley 11/2023.",
+    "subtitle": "Un botón que el lector de pantalla anuncia como «enlace vacío». Un formulario que no se puede rellenar con teclado. Un texto que no llega a leerse. No son detalles técnicos: son pedidos que se van sin que llegues a enterarte. Audito y arreglo webs según WCAG 2.2 AA y la Ley 11/2023.",
     "cta": "Ver servicios y precios",
     "tags": [
       "Automatización",
@@ -238,10 +237,10 @@
   },
   "about": {
     "label": "SOBRE MÍ",
-    "title": "Resolvía problemas antes de saber programar",
-    "text_1": "En la fábrica ya hacía lo mismo que hago ahora: mirar un proceso, encontrar lo que no funciona e imaginar cómo mejorarlo. La diferencia es que antes lo pensaba y ahora lo construyo.",
-    "text_2": "Estudié Ingeniería en Topografía — una carrera de medir, calcular y ser preciso. Trabajé de peón en fábricas — donde ves cómo funcionan las cosas de verdad, no en la teoría. Y un día descubrí que el desarrollo web me permitía juntar las dos cosas: la precisión técnica y la resolución práctica de problemas.",
-    "text_3": "Hoy trabajo en la parte de la web que no sale de una plantilla. Experiencias 3D que van fluidas en cualquier móvil y que también se usan con teclado y lector de pantalla. Webs que cumplen la ley de accesibilidad de verdad, no con un parche. Es el mismo tipo de problema que llevo toda la vida resolviendo: ver cómo tendría que funcionar algo y conseguir que funcione.",
+    "title": "Hablas con quien lo construye.",
+    "text_1": "Sin comerciales ni intermediarios: lo diseño, lo programo y lo pruebo yo. Si algo falla, no hay nadie a quien pasarle la pelota.",
+    "text_2": "Vengo de la Ingeniería en Topografía y de trabajar en fábricas. De ahí saqué dos costumbres que se notan en tu web: medirlo todo, y no dar nada por bueno hasta verlo funcionar fuera de la pantalla del diseñador.",
+    "text_3": "Por eso pruebo en móviles de gama media y no solo en el mío, con teclado y con lector de pantalla, y te enseño los números. Y por eso, antes de auditar la web de nadie, audité la mía.",
     "cta": "Si tienes algo así entre manos, hablamos."
   },
   "approach": {
@@ -251,7 +250,7 @@
     "steps": [
       {
         "title": "Audito",
-        "description": "Reviso tu web según WCAG 2.1 AA y la Ley 11/2023. Combino herramientas técnicas (axe, Lighthouse, lectores de pantalla) con evaluación manual. No es un PDF de 200 páginas con jerga: te entrego un informe que entiende cualquiera de tu equipo —con cada problema, su impacto y por dónde empezar— y el documento de cumplimiento adaptado a tu régimen, listo para publicar."
+        "description": "Reviso tu web según WCAG 2.2 AA y la Ley 11/2023. Combino herramientas técnicas (axe, Lighthouse, lectores de pantalla) con evaluación manual. No es un PDF de 200 páginas con jerga: te entrego un informe que entiende cualquiera de tu equipo —con cada problema, su impacto y por dónde empezar— y el documento de cumplimiento adaptado a tu régimen, listo para publicar."
       },
       {
         "title": "Arreglo (opcional)",
@@ -266,7 +265,7 @@
   "contact": {
     "label": "CONTACTO",
     "title": "¿Tienes algo difícil entre manos?",
-    "subtitle": "Cuéntame qué quieres construir o qué no te está funcionando. Te digo si puedo ayudarte y cómo. Sin compromiso, sin PowerPoints, sin humo.",
+    "subtitle": "Cuéntame qué tienes y qué te preocupa: que va lenta, que no sale en Google, que te piden cumplir la ley o que tu producto no luce en fotos. Te digo si puedo ayudarte y cómo. Sin compromiso, sin PowerPoints, sin humo.",
     "cta": "Hablemos",
     "available": "Disponible para nuevos proyectos",
     "note": "Te respondo en menos de 24 horas. Días laborables.",
@@ -316,8 +315,7 @@
       "blog": "Blog",
       "immersive": "Experiencias web 3D",
       "accessibility": "Accesibilidad web",
-      "law": "¿Te aplica la Ley 11/2023?",
-      "ai": "Webs para agentes de IA"
+      "law": "¿Te aplica la Ley 11/2023?"
     },
     "legal": {
       "label": "Legal",
@@ -427,15 +425,15 @@
   },
   "home": {
     "meta": {
-      "title": "Javier Piedra · Diseño y desarrollo web: 3D, accesibilidad e IA",
-      "description": "La versión clásica de mi web: experiencias web 3D, accesibilidad web según WCAG 2.1 AA y webs preparadas para agentes de IA. Proyectos, método y contacto."
+      "title": "Javier Piedra · Diseño y desarrollo web: 3D y accesibilidad",
+      "description": "Webs y experiencias 3D que cargan rápido en el móvil, que Google entiende, que puede usar cualquiera y que cumplen WCAG 2.2 AA. Tus dudas, respondidas."
     },
     "hero": {
       "label": "Javier Piedra · Diseño y desarrollo web",
       "titleStart": "La parte",
       "titleHighlight": "difícil",
       "titleEnd": "de la web.",
-      "subtitle": "Una web corriente te la monta una plantilla en una tarde. Lo que no te monta nadie es lo que viene después: un catálogo 3D que va fluido en cualquier móvil, una experiencia inmersiva que también se usa con teclado y lector de pantalla, una web que cumple la ley de accesibilidad de verdad. De eso me encargo yo.",
+      "subtitle": "Que cargue rápido en el móvil de tus clientes. Que Google la entienda. Que la pueda usar cualquiera, también con teclado o lector de pantalla, y que cumpla la ley. Una plantilla no resuelve nada de eso. Yo sí, también cuando lo que tienes que enseñar es un producto en 3D.",
       "ctaPrimary": "Ver proyectos",
       "ctaSecondary": "Hablemos",
       "sheet": {
@@ -445,44 +443,39 @@
         "scale": "1 km",
         "sources": "Relieve: MDT25 © Instituto Geográfico Nacional. Agua: © colaboradores de OpenStreetMap.",
         "view3d": "Ver la versión 3D",
-        "hint": "Pasa el cursor por el plano: te da la cota de cada punto."
+        "hint": "Pasa el cursor por el plano, o llega con Tab y usa las flechas: te da la cota de cada punto.",
+        "explorer": "Plano del macizo de Peñalara. Usa las flechas para leer la cota de cada punto; con Mayúsculas, a pasos largos.",
+        "explorerRole": "plano"
       }
     },
     "disciplines": {
-      "label": "Qué hago",
-      "title": "Tres especialidades. Un mismo oficio.",
-      "subtitle": "Construir con precisión lo que una plantilla no resuelve, y que lo pueda usar cualquiera: una persona con teclado o lector de pantalla, o un agente de IA que compra en su nombre. Ahí es donde las tres se juntan.",
+      "label": "Cómo te ayudo",
+      "title": "Dos problemas que resuelvo de principio a fin.",
+      "subtitle": "Un producto que no luce en una foto, o una web que deja gente fuera y te expone ante la ley. A veces son el mismo proyecto: un catálogo 3D también tiene que poder usarlo cualquiera.",
       "items": [
         {
           "key": "immersive",
           "title": "Experiencias web 3D",
-          "description": "Catálogos, visores de producto y salas inmersivas en el navegador. Para quien vende algo que una foto no transmite: el tacto de una piedra, el acabado de un material, la escala de una obra.",
+          "description": "Para cuando una foto no basta: el acabado de una piedra, la escala de una obra, un espacio que hay que recorrer. Catálogos, visores y salas en el navegador, rápidos en el móvil y fáciles de encontrar en Google.",
           "cta": "Ver experiencias 3D"
         },
         {
           "key": "accessibility",
           "title": "Accesibilidad web",
-          "description": "Auditoría y corrección según WCAG 2.1 AA y la Ley 11/2023. Para empresas obligadas por ley y para cualquiera que no quiera perder clientes por un formulario que no se puede rellenar.",
+          "description": "Para cuando la ley te obliga o un formulario te está costando clientes. Audito tu web con WCAG 2.2 AA, te digo qué falla y a quién deja fuera, y lo arreglo si quieres.",
           "cta": "Ver accesibilidad web"
-        },
-        {
-          "key": "ai",
-          "title": "Webs para agentes de IA",
-          "description": "Los asistentes de IA ya buscan, comparan y rellenan formularios por la gente, y leen tu web por dentro. Reviso y preparo la tuya para que puedan usarla: es el mismo trabajo que la accesibilidad.",
-          "cta": "Ver agentes de IA"
         }
       ]
     },
     "work": {
       "label": "Proyectos",
       "title": "No te lo cuento. Pruébalo.",
-      "intro": "Dos conceptos propios que están en vivo y un caso real de accesibilidad. Ábrelos, recórrelos con el teclado, activa el lector de pantalla si quieres."
+      "intro": "Dos proyectos propios en vivo y un caso real de accesibilidad. Ábrelos en el móvil y prueba también con el teclado."
     },
     "about": {
-      "profileTitle": "De La Granja a Peñalara",
+      "profileTitle": "El camino hasta aquí",
       "profileCaption": "Perfil real del terreno, con el MDT25 del IGN: 6,7 km y 1238 m de desnivel. Mi trayectoria también ha sido cuesta arriba.",
-      "start": "La Granja",
-      "end": "Peñalara",
+      "start": "Salida",
       "milestonesLabel": "Trayectoria",
       "milestones": [
         {
@@ -507,26 +500,78 @@
       "label": "Cumbre"
     },
     "altimeter": {
-      "start": "La Granja",
-      "end": "Peñalara"
+      "start": "Salida",
+      "end": "Cumbre"
+    },
+    "restore": {
+      "title": "Fin del mundo.",
+      "text": "De la sierra solo queda el plano.",
+      "link": "Reconstruirla en 3D",
+      "close": "Cerrar aviso"
+    },
+    "concerns": {
+      "label": "Lo que te preocupa",
+      "title": "Lo que me preguntan antes de empezar.",
+      "intro": "Nadie me escribe para hablar de WebGL. Me escriben porque su web va lenta, se ve rara en el móvil, no aparece en Google o les ha llegado un aviso sobre la ley de accesibilidad. Estas son las respuestas.",
+      "items": [
+        {
+          "question": "¿Irá rápida?",
+          "answer": "En el móvil de gama media de tu cliente, que es donde se decide, no en el ordenador con el que se diseña. Cargo solo lo que hace falta en cada momento y lo mido antes de entregar.",
+          "link": {
+            "text": "Mídelo tú en tu pantalla",
+            "href": "/experiencias-3d/#lo-que-no-se-ve"
+          }
+        },
+        {
+          "question": "¿Se verá bien en el móvil?",
+          "answer": "Se diseña primero para el móvil y se prueba a 320 píxeles de ancho, en horizontal y con el texto ampliado al 400 %. Si algo no cabe, se reordena. No se esconde."
+        },
+        {
+          "question": "¿La podrá usar cualquiera? ¿Cumple la ley?",
+          "answer": "Trabajo con WCAG 2.2 AA, que cubre todo lo que hoy exige la ley y lo que pedirá la próxima versión de la norma europea. Y lo compruebo a mano: con teclado, midiendo el contraste y con un lector de pantalla real. Esta web la audité así, y el resultado está publicado.",
+          "link": {
+            "text": "Ver el resultado",
+            "href": "/accesibilidad/"
+          }
+        },
+        {
+          "question": "¿Me encontrará Google?",
+          "answer": "Google lee texto, no imágenes ni escenas 3D. Por eso todo lo importante va en HTML, con sus títulos, sus descripciones y una estructura clara, aunque haya 3D encima. No te prometo el primer puesto: nadie serio puede. Lo que sí te aseguro es que Google podrá leer y entender todo lo que ofreces."
+        },
+        {
+          "question": "¿Cuánto cuesta?",
+          "answer": "Te doy precio cerrado antes de empezar. En accesibilidad, las tarifas están publicadas. En 3D no hay dos proyectos iguales, así que primero hablamos de qué quieres enseñar y te paso un presupuesto cerrado, sin sorpresas después.",
+          "link": {
+            "text": "Ver las tarifas de accesibilidad",
+            "href": "/accesibilidad-web/#precios"
+          }
+        },
+        {
+          "question": "¿Con quién voy a hablar?",
+          "answer": "Conmigo, de principio a fin. Lo diseño, lo construyo y lo pruebo yo. No hay un comercial que te venda una cosa y un equipo que entienda otra."
+        }
+      ]
     }
   },
   "immersive": {
     "meta": {
       "title": "Experiencias web 3D accesibles · Javier Piedra",
-      "description": "Catálogos 3D, visores de producto y salas inmersivas en el navegador. Fluidos en cualquier móvil y usables con teclado y lector de pantalla desde el primer día."
+      "description": "Catálogos 3D, visores de producto y salas inmersivas que cargan rápido en el móvil, que Google entiende y que puede usar cualquiera. Presupuesto cerrado antes de empezar."
     },
     "hero": {
       "label": "Experiencias web 3D",
       "titleStart": "Lo que una foto",
       "titleHighlight": "no puede",
       "titleEnd": "enseñar.",
-      "subtitle": "Catálogos que se recorren por tacto, visores de producto y salas inmersivas, en el navegador y sin instalar nada. Hechos para ir fluidos en cualquier móvil y para que también los use quien navega con teclado o con lector de pantalla.",
+      "subtitle": "Para cuando una foto no basta. Catálogos que se recorren por tacto, visores de producto y salas inmersivas, en el navegador y sin instalar nada. Rápidos en el móvil de tu cliente, legibles para Google y usables con teclado o lector de pantalla.",
       "ctaPrimary": "Cuéntame tu proyecto",
       "ctaSecondary": "Ver los proyectos",
       "swatches": {
         "caption": "La misma piedra con tres acabados. Mueve la luz y mira cómo responde cada uno: eso es lo que una foto no puede enseñar.",
         "lightLabel": "Posición de la luz",
+        "lightLeft": "Luz a la izquierda",
+        "lightCenter": "Luz en el centro",
+        "lightRight": "Luz a la derecha",
         "hint": "Pasa el cursor por encima o usa el control.",
         "hintTouch": "Arrastra sobre las piezas o usa el control.",
         "items": [
@@ -562,33 +607,38 @@
       ]
     },
     "difference": {
-      "label": "Lo que no se ve",
+      "label": "Tus dudas",
       "title": "Que sea bonito es lo fácil.",
-      "subtitle": "Una experiencia 3D impresiona los primeros diez segundos. Lo difícil es que cargue en un móvil de gama media, que no maree a nadie y que se pueda usar sin ratón. Ahí se nota quién la ha hecho.",
+      "subtitle": "Una experiencia 3D impresiona los primeros diez segundos. Lo que decide si vende es lo demás: que cargue en un móvil de gama media, que Google la encuentre, que se pueda usar sin ratón y que no maree. Cada respuesta, con su prueba en vivo.",
       "items": [
         {
-          "title": "Fluido en cualquier dispositivo",
-          "description": "Geometría y texturas a la medida justa, y la pantalla solo se vuelve a pintar cuando algo cambia. En VETA, las 48 superficies se dibujan en una sola llamada a la tarjeta gráfica."
+          "title": "¿No irá lenta en el móvil?",
+          "description": "No, si se construye para el móvil desde el principio: geometría y texturas a la medida justa, y la pantalla solo se vuelve a pintar cuando algo cambia. En VETA, las 48 superficies se dibujan en una sola llamada a la tarjeta gráfica."
         },
         {
-          "title": "Se usa con teclado",
+          "title": "¿Google lo va a encontrar?",
+          "description": "Google no mira dentro de una escena 3D: lee texto. Por eso todo lo que importa (nombres, descripciones, fichas) está también en HTML, con su título y su descripción para el buscador. El 3D va encima del texto, no en su lugar."
+        },
+        {
+          "title": "¿Y quien no usa ratón?",
           "description": "Flechas, Intro y Escape hacen lo que esperas. El ratón es una opción, no un requisito."
         },
         {
-          "title": "Funciona con lector de pantalla",
+          "title": "¿Y quien no ve la pantalla?",
           "description": "Cada escena tiene su equivalente en texto: un índice, una descripción, una lista. Quien no ve el 3D recibe la misma información."
         },
         {
-          "title": "Respeta el movimiento reducido",
+          "title": "¿No mareará?",
           "description": "Si tu sistema pide menos movimiento, la experiencia se queda quieta. Nadie debería marearse viendo un catálogo."
         }
       ],
       "proofs": {
         "fps": {
-          "lead": "Esta página va ahora a",
+          "lead": "Esta página va a",
           "unit": "fps",
-          "note": "medidos en tu pantalla mientras lees esto",
-          "waiting": "…"
+          "note": "medidos en tu pantalla durante 3 segundos",
+          "waiting": "…",
+          "again": "Medir otra vez"
         },
         "keys": {
           "hint": "Prueba: pulsa una flecha, Intro o Escape.",
@@ -614,6 +664,10 @@
           "normal": "movimiento normal",
           "reduced": "menos movimiento",
           "note": "Si cambias el ajuste, esta página se adapta al momento."
+        },
+        "seo": {
+          "label": "Lo que esta página le dice a Google",
+          "note": "Título y descripción reales de esta página, tal como los lee un buscador."
         }
       }
     },
@@ -623,7 +677,7 @@
       "steps": [
         {
           "title": "Entiendo qué tiene que enseñar",
-          "description": "Antes de modelar nada, hablamos de qué tiene que entender quien entra: un acabado, una escala, un recorrido. El 3D va al servicio de eso, no al revés."
+          "description": "Antes de modelar nada, hablamos de qué tiene que entender quien entra: un acabado, una escala, un recorrido. El 3D va al servicio de eso, no al revés. Con eso claro, te paso un presupuesto cerrado."
         },
         {
           "title": "Prototipo en el navegador",
@@ -638,7 +692,7 @@
     "work": {
       "label": "Proyectos",
       "title": "Dos conceptos propios. Están en vivo.",
-      "intro": "Ábrelos y recórrelos. Prueba también con el teclado: es la mitad de lo que hago."
+      "intro": "Ábrelos en el móvil y prueba también con el teclado."
     },
     "contact": {
       "title": "¿Qué quieres enseñar?",
@@ -650,11 +704,11 @@
       "veta": {
         "category": "Experiencia 3D · Concepto propio",
         "title": "VETA, atlas de superficies",
-        "description": "Un catálogo cerámico que se recorre por tono y por tacto, no por referencias. 48 superficies ordenadas de claro a oscuro y de frío a cálido, con una luz que sigue al cursor para que distingas si un acabado es pulido, mate o estructurado. Funciona con teclado y lector de pantalla y respeta el movimiento reducido.",
+        "description": "Para quien vende superficies y oye «en la foto parecía otro color». 48 acabados que se comparan por tono y textura, con una luz que se mueve para distinguir pulido, mate y estructurado. Se elige antes de pedir muestras, y también se recorre con el teclado.",
         "tags": [
           "WebGL 2",
           "Catálogo de producto",
-          "Teclado y lector de pantalla"
+          "Índice en texto"
         ],
         "imageAlt": "Cuadrícula de VETA con muestras de mármol, terrazo, granito y madera ordenadas por tono.",
         "cta": "Abrir VETA"
@@ -662,7 +716,7 @@
       "insideTheFrame": {
         "category": "Experiencia inmersiva · Concepto propio",
         "title": "Inside the Frame",
-        "description": "Cuatro cuadros sobre el agua convertidos en lugares donde puedes estar: Hokusai, Hiroshige, Monet y Turner en una galería inundada. Se recorre arrastrando, con el dedo o con las flechas, se entra con o sin sonido, y la escena tiene una descripción en texto para quien no la ve.",
+        "description": "Para museos y colecciones que quieren llegar a quien no puede ir. Cuatro cuadros de Hokusai, Hiroshige, Monet y Turner convertidos en lugares donde estar, con sonido opcional y una descripción escrita de cada escena para quien no la ve.",
         "tags": [
           "3D inmersivo",
           "Sonido opcional",
@@ -674,7 +728,7 @@
       "auditCase": {
         "category": "Accesibilidad · Caso real",
         "title": "Auditoría de una gran web turística",
-        "description": "Una web pública con reserva online, auditada a fondo: los 50 criterios de WCAG 2.1 AA uno a uno, a mano y con lector de pantalla real. Te enseño el método y lo que recibe el cliente al terminar, sin nombres.",
+        "description": "Para quien necesita saber si su web cumple y qué le falta. Una gran web pública con reserva online, auditada criterio a criterio con WCAG 2.1 AA, a mano y con lector de pantalla real. El método y lo que recibe el cliente, sin nombres.",
         "tags": [
           "WCAG 2.1 AA",
           "UNE-EN 301 549",
@@ -687,12 +741,12 @@
   },
   "accessibilityLanding": {
     "meta": {
-      "ogAlt": "Accesibilidad web según la Ley 11/2023 y WCAG 2.1 AA",
+      "ogAlt": "Accesibilidad web según la Ley 11/2023 y WCAG 2.2 AA",
       "title": "Accesibilidad web y Ley 11/2023: auditoría · Javier Piedra",
-      "description": "Cada barrera de tu web es un cliente que no termina de comprar. Audito y arreglo webs según WCAG 2.1 AA y la Ley 11/2023. Diagnóstico exprés desde 290 €."
+      "description": "Cada barrera de tu web es un cliente que no termina de comprar. Audito y arreglo webs según WCAG 2.2 AA y la Ley 11/2023. Diagnóstico exprés desde 290 €."
     },
     "hero": {
-      "label": "Accesibilidad web · WCAG 2.1 AA y Ley 11/2023",
+      "label": "Accesibilidad web · WCAG 2.2 AA y Ley 11/2023",
       "ctaSecondary": "Hablemos",
       "xray": {
         "toggle": "Ver lo que oye un lector de pantalla",
@@ -773,7 +827,7 @@
               "price": "Desde 1.200 €",
               "priceAriaLabel": "desde mil doscientos euros",
               "deadline": "5-7 días laborables",
-              "summary": "El diagnóstico entero de tu web según WCAG 2.1 AA y la Ley 11/2023, con el plan de remediación priorizado y el documento de cumplimiento listo para publicar.",
+              "summary": "El diagnóstico entero de tu web según WCAG 2.2 AA y la Ley 11/2023, con el plan de remediación priorizado y el documento de cumplimiento listo para publicar.",
               "tiers": [
                 {
                   "name": "Esencial",
@@ -819,7 +873,7 @@
                 {
                   "name": "Conformidad AA",
                   "price": "5.900 €",
-                  "description": "Todos los hallazgos del informe hasta alcanzar WCAG 2.1 AA en el alcance auditado."
+                  "description": "Todos los hallazgos del informe hasta alcanzar WCAG 2.2 AA en el alcance auditado."
                 }
               ],
               "cta": "Hablar de la remediación",
@@ -862,7 +916,7 @@
       "items": [
         {
           "question": "¿Qué diferencia hay entre el diagnóstico exprés y la auditoría?",
-          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 50 criterios WCAG 2.1 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
+          "answer": "La profundidad y lo que te llevas. El diagnóstico recorre tu home y hasta tres recorridos por su camino principal y te da los 10 hallazgos que más te están costando: responde a «¿tengo un problema y cuánto?». La auditoría evalúa los 55 criterios de WCAG 2.2 AA sobre una muestra documentada, audita cada proceso completo con sus estados de error, y entrega el plan de remediación y el documento de cumplimiento que exige la ley: responde a «¿qué me falta para cumplir y cómo lo cierro?». Por eso una cuesta 290 € y la otra desde 1.200 €."
         },
         {
           "question": "¿Cómo sé qué tramo me toca?",
@@ -870,7 +924,15 @@
         },
         {
           "question": "¿Sirve para cumplir el requisito legal de la Ley 11/2023?",
-          "answer": "Sí. La auditoría incluye el documento de cumplimiento listo para publicar, redactado según el régimen que te aplica: declaración formal del RD 1112/2018 si eres sector público, información del art. 13.2 Ley 11/2023 si eres empresa privada. En ambos casos cumples el requisito documental que exige la normativa desde el día que lo publicas."
+          "answer": "Sí. La auditoría incluye el documento de cumplimiento listo para publicar, redactado según el régimen que te aplica: declaración formal del RD 1112/2018 si eres sector público, información del art. 13.2 Ley 11/2023 si eres empresa privada. En ambos casos cumples el requisito documental que exige la normativa desde el día que lo publicas. Y audito ya con WCAG 2.2 AA: la nueva versión de la norma europea de referencia, la EN 301 549 V4.1.1 de septiembre de 2026, sustituye la 2.1 por la 2.2. Cuando se cite en el Diario Oficial de la UE pasará a ser la referencia legal, y tu informe ya estará al día."
+        },
+        {
+          "question": "¿Esto mejora mi posicionamiento en Google?",
+          "answer": "No es un atajo para posicionar, y desconfía de quien te lo venda así. Pero buena parte de lo que arreglo es lo mismo que ayuda a Google a entender tu web: títulos y encabezados con sentido, imágenes con texto alternativo, enlaces que dicen adónde llevan y páginas que cargan rápido. Lo que mejora para una persona con lector de pantalla suele mejorar también para un buscador."
+        },
+        {
+          "question": "¿Va a cambiar el diseño de mi web?",
+          "answer": "Casi nunca de forma visible. La mayoría de arreglos están en el código: nombres, estructura, orden del foco. Cuando toca algo que se ve, como un color sin contraste o un botón demasiado pequeño, te lo enseño antes y buscamos la versión que respete tu marca."
         },
         {
           "question": "¿Qué pasa si se te escapa un hallazgo?",
@@ -881,231 +943,130 @@
           "answer": "50 % al confirmar el inicio y 50 % a la entrega. Factura formal con IVA, válida para deducción. La conformidad continua se factura por meses vencidos. El diagnóstico exprés es la excepción: se abona íntegro al contratar, en un solo pago."
         }
       ]
-    }
-  },
-  "aiLanding": {
-    "meta": {
-      "title": "Tu web, lista para los agentes de IA · Javier Piedra",
-      "description": "Los asistentes de IA ya navegan y rellenan formularios por la gente. Reviso y preparo tu web para que puedan usarla: el mismo trabajo que la accesibilidad."
     },
-    "hero": {
-      "label": "Webs para agentes de IA",
-      "titleLines": [
-        "Si una IA no puede",
-        "usar tu web,"
-      ],
-      "titleHighlight": "no te compra.",
-      "subtitle": "Los asistentes de IA ya buscan, comparan y rellenan formularios en nombre de la gente. Para hacerlo leen tu web por dentro: qué es cada botón, cada campo y cada precio. Si eso está mal hecho, tu tienda está a oscuras para ellos. Lo reviso y lo arreglo.",
-      "ctaPrimary": "Hablemos",
-      "ctaSecondary": "Qué reviso"
-    },
-    "demo": {
-      "window": "Agente de IA · navegando",
-      "taskLabel": "Tarea",
-      "task": "«Compra el jarrón Alba en azul, dos unidades.»",
-      "versionsLabel": "Versión de la ficha",
-      "broken": "Tal como está",
-      "fixed": "Arreglada",
-      "readsLabel": "Lo que lee",
-      "doesLabel": "Lo que hace",
-      "replay": "Repetir",
-      "caption": "Simulación de cómo un agente de IA recorre una ficha de producto a partir de su árbol de accesibilidad. El diseño es el mismo en las dos versiones; cambia el código.",
-      "snapshot": {
-        "broken": [
-          {
-            "line": "- img \"IMG_4032.jpg\"",
-            "problem": true,
-            "note": "el nombre del archivo"
-          },
-          {
-            "line": "- heading \"Jarrón Alba\""
-          },
-          {
-            "line": "- text \"64,00 €\""
-          },
-          {
-            "line": "- button",
-            "problem": true,
-            "note": "sin nombre"
-          },
-          {
-            "line": "- button",
-            "problem": true,
-            "note": "sin nombre"
-          },
-          {
-            "line": "- button",
-            "problem": true,
-            "note": "sin nombre"
-          },
-          {
-            "line": "- spinbutton \"1\"",
-            "problem": true,
-            "note": "sin etiqueta"
-          },
-          {
-            "line": "- button",
-            "problem": true,
-            "note": "sin nombre"
-          },
-          {
-            "line": "- link",
-            "problem": true,
-            "note": "vacío"
-          }
-        ],
-        "fixed": [
-          {
-            "line": "- img \"Jarrón Alba de gres azul, 24 cm\""
-          },
-          {
-            "line": "- heading \"Jarrón Alba\""
-          },
-          {
-            "line": "- text \"64,00 €\""
-          },
-          {
-            "line": "- radiogroup \"Color\""
-          },
-          {
-            "line": "  - radio \"Azul\" [checked]"
-          },
-          {
-            "line": "  - radio \"Terracota\""
-          },
-          {
-            "line": "- spinbutton \"Cantidad\": \"1\""
-          },
-          {
-            "line": "- button \"Añadir a la cesta\""
-          },
-          {
-            "line": "- button \"Guardar en favoritos\""
-          }
-        ]
-      },
-      "log": {
-        "broken": [
-          "Busco el color azul: hay tres botones sin nombre.",
-          "Pulso el primero. No sé si es el azul.",
-          "Hay un campo con un 1. No sé qué es.",
-          "No encuentro cómo añadir a la cesta."
-        ],
-        "fixed": [
-          "Color: elijo «Azul».",
-          "Cantidad: escribo 2.",
-          "Pulso «Añadir a la cesta».",
-          "Compruebo la cesta: 2 jarrones azules."
-        ]
-      },
-      "result": {
-        "broken": "Tarea abandonada",
-        "fixed": "Pedido listo para confirmar"
+    "agents": {
+      "label": "Agentes de IA",
+      "title": "La misma web, lista también para la IA.",
+      "text": "Los asistentes de IA ya buscan, comparan y rellenan formularios en nombre de la gente. Muchos no miran la pantalla: leen el árbol de accesibilidad, la misma estructura que usa un lector de pantalla. Un botón sin nombre es tan invisible para ellos como para una persona ciega. Por eso, cuando arreglo la accesibilidad de tu web, también la dejo lista para ellos.",
+      "demo": {
+        "window": "Agente de IA · navegando",
+        "taskLabel": "Tarea",
+        "task": "«Compra el jarrón Alba en azul, dos unidades.»",
+        "versionsLabel": "Versión de la ficha",
+        "broken": "Tal como está",
+        "fixed": "Arreglada",
+        "readsLabel": "Lo que lee",
+        "doesLabel": "Lo que hace",
+        "replay": "Repetir",
+        "caption": "Simulación de cómo un agente de IA recorre una ficha de producto a partir de su árbol de accesibilidad. El diseño es el mismo en las dos versiones; cambia el código.",
+        "snapshot": {
+          "broken": [
+            {
+              "line": "- img \"IMG_4032.jpg\"",
+              "problem": true,
+              "note": "el nombre del archivo"
+            },
+            {
+              "line": "- heading \"Jarrón Alba\""
+            },
+            {
+              "line": "- text \"64,00 €\""
+            },
+            {
+              "line": "- button",
+              "problem": true,
+              "note": "sin nombre"
+            },
+            {
+              "line": "- button",
+              "problem": true,
+              "note": "sin nombre"
+            },
+            {
+              "line": "- button",
+              "problem": true,
+              "note": "sin nombre"
+            },
+            {
+              "line": "- spinbutton \"1\"",
+              "problem": true,
+              "note": "sin etiqueta"
+            },
+            {
+              "line": "- button",
+              "problem": true,
+              "note": "sin nombre"
+            },
+            {
+              "line": "- link",
+              "problem": true,
+              "note": "vacío"
+            }
+          ],
+          "fixed": [
+            {
+              "line": "- img \"Jarrón Alba de gres azul, 24 cm\""
+            },
+            {
+              "line": "- heading \"Jarrón Alba\""
+            },
+            {
+              "line": "- text \"64,00 €\""
+            },
+            {
+              "line": "- radiogroup \"Color\""
+            },
+            {
+              "line": "  - radio \"Azul\" [checked]"
+            },
+            {
+              "line": "  - radio \"Terracota\""
+            },
+            {
+              "line": "- spinbutton \"Cantidad\": \"1\""
+            },
+            {
+              "line": "- button \"Añadir a la cesta\""
+            },
+            {
+              "line": "- button \"Guardar en favoritos\""
+            }
+          ]
+        },
+        "log": {
+          "broken": [
+            "Busco el color azul: hay tres botones sin nombre.",
+            "Pulso el primero. No sé si es el azul.",
+            "Hay un campo con un 1. No sé qué es.",
+            "No encuentro cómo añadir a la cesta."
+          ],
+          "fixed": [
+            "Color: elijo «Azul».",
+            "Cantidad: escribo 2.",
+            "Pulso «Añadir a la cesta».",
+            "Compruebo la cesta: 2 jarrones azules."
+          ]
+        },
+        "result": {
+          "broken": "Tarea abandonada",
+          "fixed": "Pedido listo para confirmar"
+        }
       }
-    },
-    "why": {
-      "label": "Por qué ahora",
-      "title": "Ya no solo te visitan personas.",
-      "items": [
-        {
-          "title": "Los asistentes ya actúan",
-          "text": "Los principales asistentes de IA pueden abrir webs, comparar productos y rellenar formularios en nombre de quien se lo pide. No es una promesa: ya lo hacen."
-        },
-        {
-          "title": "Leen la web por dentro",
-          "text": "Muchos no miran la pantalla como tú: leen el árbol de accesibilidad, la misma estructura que usa un lector de pantalla. Un botón sin nombre es tan invisible para ellos como para una persona ciega."
-        },
-        {
-          "title": "Google ya lo mide",
-          "text": "Lighthouse, la herramienta de Google para medir webs, incluye en su versión actual una categoría de navegación por agentes. Lo primero que puntúa es que el árbol de accesibilidad esté bien formado. Google la marca aún como en desarrollo."
-        }
-      ],
-      "proofLabel": "Esta página en Lighthouse 13.5",
-      "proofOf": "sobre 100",
-      "proofCategory": "Agentic Browsing"
-    },
-    "checks": {
-      "label": "Lo que reviso",
-      "title": "Un mismo arreglo, dos clientes.",
-      "subtitle": "Todo lo que hace tu web usable para un agente la hace usable también para una persona con discapacidad. Y al revés. Por eso lo reviso a la vez.",
-      "personLabel": "Para una persona",
-      "agentLabel": "Para un agente",
-      "items": [
-        {
-          "title": "Botones y enlaces con nombre",
-          "person": "Quien usa lector de pantalla sabe qué hace cada uno.",
-          "agent": "Sabe qué pulsar."
-        },
-        {
-          "title": "Formularios con etiqueta",
-          "person": "Cada campo dice qué pide y qué ha fallado.",
-          "agent": "Rellena el campo correcto a la primera."
-        },
-        {
-          "title": "Estructura clara",
-          "person": "Salta a lo que busca sin leerlo todo.",
-          "agent": "Entiende dónde está cada cosa."
-        },
-        {
-          "title": "Estados que se anuncian",
-          "person": "Sabe si su elección ha funcionado: seleccionado, agotado, error.",
-          "agent": "Comprueba lo que ha hecho antes de seguir."
-        },
-        {
-          "title": "Una página que no salta",
-          "person": "No pulsa lo que no quería porque algo se movió.",
-          "agent": "No falla el clic por un salto de la maquetación."
-        },
-        {
-          "title": "Precios y stock en texto",
-          "person": "Se leen con zoom y con cualquier tecnología.",
-          "agent": "Los compara sin adivinar."
-        }
-      ],
-      "extra": "Y lo más nuevo: si tu web tiene formularios clave (pedido, reserva, presupuesto), te propongo prepararlos para WebMCP, la propuesta de Chrome para que una web le diga a un agente qué acciones ofrece. También reviso tu llms.txt."
-    },
-    "process": {
-      "label": "Cómo trabajo",
-      "title": "Lo pruebo con un agente de verdad.",
-      "steps": [
-        {
-          "title": "Le doy una tarea real",
-          "description": "Comprar, reservar o pedir presupuesto en tu web, como lo haría tu cliente. Lo hago con un agente y con lector de pantalla, y anoto dónde se pierde cada uno."
-        },
-        {
-          "title": "Te explico qué lo bloquea",
-          "description": "Cada bloqueo con su causa y su arreglo, ordenados por impacto. El mismo informe sirve para la Ley 11/2023 si te aplica."
-        },
-        {
-          "title": "Lo arreglo y repito la prueba",
-          "description": "Corrijo el código yo, o se lo dejo claro a tu equipo, y repito la misma tarea hasta que el agente la termina."
-        }
-      ]
-    },
-    "contact": {
-      "title": "¿Puede una IA comprar en tu web?",
-      "subtitle": "Mándame tu web y la tarea más importante que se hace en ella. Te digo qué se encontraría un agente y por dónde empezaría. Sin compromiso, sin PowerPoints, sin humo."
     }
   },
   "survey3d": {
     "meta": {
-      "title": "Javier Piedra · Experiencias web 3D, accesibilidad e IA",
-      "description": "La Sierra de Guadarrama en 3D, en vivo y con su tiempo real: el mapa para recorrer lo que hago. Experiencias web 3D, accesibilidad web y webs para agentes de IA."
+      "title": "Javier Piedra · Experiencias web 3D y accesibilidad",
+      "description": "Webs y experiencias 3D rápidas en cualquier móvil, que Google entiende y que puede usar todo el mundo, cumpliendo la ley de accesibilidad."
     },
-    "eyebrow": "Javier Piedra · 3D, accesibilidad e IA",
+    "eyebrow": "Javier Piedra · Diseño y desarrollo web",
     "titleStart": "La parte",
     "titleHighlight": "difícil",
     "titleEnd": "de la web.",
-    "subtitle": "Estudié Topografía. Sigo midiendo el terreno antes de construir nada.",
-    "hint": "Cada cumbre es un apartado. Elige una.",
-    "sceneDescription": "Mapa en relieve de la Sierra de Guadarrama, visto desde Segovia y dibujado con curvas de nivel doradas sobre fondo negro. Cuatro cumbres llevan un vértice geodésico: Peñalara, Siete Picos, La Mujer Muerta y la Bola del Mundo. Cada una es un apartado de la web. El cielo, la luz y el tiempo son los de la sierra en este momento, y de noche se encienden las luces de los pueblos.",
-    "captionLandscape": "Sierra de Guadarrama, vista desde Segovia",
-    "captionPortrait": "Sierra de Guadarrama, vista desde el oeste",
+    "subtitle": "Webs y catálogos 3D que cargan rápido en cualquier móvil, que Google entiende y que puede usar todo el mundo. Lo que una plantilla no resuelve.",
+    "hint": "Cada cumbre responde a una pregunta. Elige la tuya.",
+    "sceneDescription": "Mapa en relieve de la Sierra de Guadarrama, dibujado con curvas de nivel doradas sobre fondo negro. Tres cumbres llevan un vértice geodésico: Peñalara, Siete Picos y La Mujer Muerta. Cada una es un apartado de la web. El cielo, la luz y el tiempo son los de la sierra en este momento, y de noche se encienden las luces de los pueblos.",
     "dataLabel": "Datos",
-    "weatherLabel": "Tiempo",
-    "sources": "MDT25 © Instituto Geográfico Nacional · Cumbres, agua y edificios © colaboradores de OpenStreetMap",
-    "lens": "Ver lo que no se ve",
-    "lensHint": "Así lee esta página un lector de pantalla",
     "classic": "Versión clásica",
     "pause": "Pausar movimiento",
     "sound": "Sonido",
@@ -1116,59 +1077,13 @@
     },
     "homeLabel": "Javier Piedra, inicio",
     "verticesLabel": "Apartados",
-    "hud": {
-      "live": "Levantamiento en vivo",
-      "sky": "Cielo",
-      "weather": "Tiempo"
-    },
-    "moment": "Cambiar el momento",
-    "hour": "Hora",
-    "month": "Mes",
-    "weather": "Tiempo",
-    "backToNow": "Volver al ahora",
-    "months": [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre"
-    ],
-    "weatherOptions": [
-      {
-        "value": "live",
-        "label": "En directo"
-      },
-      {
-        "value": "clear",
-        "label": "Despejado"
-      },
-      {
-        "value": "rain",
-        "label": "Lluvia"
-      },
-      {
-        "value": "snow",
-        "label": "Nieve"
-      },
-      {
-        "value": "fog",
-        "label": "Niebla"
-      },
-      {
-        "value": "wind",
-        "label": "Viento fuerte"
-      }
-    ]
+    "caption": "Sierra de Guadarrama",
+    "destroy": "Fin del mundo",
+    "destroyDescription": "Un meteorito arrasa la sierra y te lleva a la versión clásica."
   },
   "projectSheet": {
     "sheet": "Hoja",
-    "of": "de"
+    "of": "de",
+    "newWindow": "se abre en una pestaña nueva"
   }
 }

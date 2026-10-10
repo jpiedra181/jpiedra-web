@@ -1,8 +1,9 @@
 ---
 name: auditoria-accesibilidad
 description: >-
-  Audita la accesibilidad de un sitio web contra WCAG 2.1 AA, mapeado a
-  EN 301 549 V3.2.1 y al marco legal español (RD 1112/2018 sector público,
+  Audita la accesibilidad de un sitio web contra WCAG 2.2 AA y, a la vez,
+  contra WCAG 2.1 AA (EN 301 549 V3.2.1, la referencia legal mientras la
+  V4.1.1 no se cite en el DOUE), mapeado al marco legal español (RD 1112/2018 sector público,
   Ley 11/2023 sector privado, RD 193/2023 resto de bienes y servicios). Usa
   esta skill SIEMPRE que el usuario pida auditar, revisar o evaluar la
   accesibilidad de una web, mencione WCAG, EN 301 549, Ley 11/2023,
@@ -17,7 +18,7 @@ description: >-
 
 Convierte una URL en un veredicto de conformidad defendible ante un equipo
 técnico: hallazgos clasificados, atados a la norma y a la ley, con evidencia
-repetible, una tabla de los 50 criterios que prueba que se miró todo, y un
+repetible, una tabla de los 57 requisitos que prueba que se miró todo, y un
 documento de cumplimiento listo para publicar. NO es un escáner: combina
 detección automática con verificación manual de lo que la máquina no puede
 juzgar, que es la mayor parte.
@@ -27,7 +28,7 @@ juzgar, que es la mayor parte.
 | Archivo | Para qué |
 |---|---|
 | `references/protocolo-auditoria.md` | Expediente, línea base, muestra por tramo, pasadas, matriz de cobertura, estados, veredicto, ficha, severidad, evidencia |
-| `references/criterios-wcag.md` | Los 50 criterios con su cláusula EN, **procedimiento de verificación**, reglas axe y evidencia |
+| `references/criterios-wcag.md` | Las 57 filas de la tabla (55 de WCAG 2.2, 4.1.1 de 2.1 y 9.7 de EN 301 549 V4.1.1) con su cláusula EN, **procedimiento de verificación**, reglas axe y evidencia |
 | `references/lectores-pantalla.md` | Protocolo de lector virtual y NVDA; lo que se promete y lo que no |
 | `references/apg-patterns.md` | Patrones de componentes interactivos (para 4.1.2, 2.1.1, 2.4.3, 1.4.13) |
 | `references/marco-legal-es.md` | Régimen aplicable, artículos verificados, fechas, cómo citar |
@@ -47,8 +48,11 @@ exige exactamente esto: revisión automática **y** manual experta, con informe.
 
 ## Qué se promete (línea base)
 
-- **Norma objetivo**: WCAG 2.1 nivel AA vía EN 301 549 V3.2.1, capítulo 9: los
-  50 criterios A+AA. WCAG 2.2 solo como add-on contratado (ver más abajo).
+- **Norma objetivo**: WCAG 2.2 nivel AA (55 criterios A+AA) más 9.7 de EN 301
+  549 V4.1.1, y a la vez WCAG 2.1 AA vía EN 301 549 V3.2.1 (50 criterios),
+  que es la referencia legal mientras V4.1.1 no se cite en el DOUE. Una sola
+  pasada, una sola tabla de 57 filas y **dos veredictos** (ver «Doble
+  veredicto»). Es lo que promete la web desde el 8-10-2026: no es un add-on.
 - **Soporte**: Chromium (Playwright) en escritorio 1280×900 y en emulación
   móvil 375×812; NVDA en Windows; lector virtual. **No** se promete VoiceOver,
   JAWS, TalkBack, Safari ni Firefox; si un cliente lo exige, se presupuesta
@@ -71,14 +75,15 @@ fechas. Lo que no está en la línea base no se busca y no se afirma.
   ocho enlaces vacíos del mismo bloque son un hallazgo con 48 instancias; el
   foco invisible en la cabecera de doce páginas es un hallazgo. Id estable
   `H##` en ficha, matriz, evidencias e informe.
-- **Observación** = lo que no incumple 2.1 AA (best practice, AAA, 2.2 sin
-  add-on). Nunca cuenta como No conforme ni entra en la tabla.
+- **Observación** = lo que no incumple ninguna fila de la tabla (best
+  practice, AAA). Nunca cuenta como No conforme ni entra en la tabla.
 - **Estados de un criterio** (solo estos cuatro): **Conforme** / **No
   conforme** / **No aplica** / **No evaluable** (con causa documentada: sin
   credenciales, sin vía de prueba del pago, contenido inexistente). «No
   evaluado» y «Pendiente» no existen: una tabla con huecos es una auditoría
   sin terminar.
-- **Veredicto** (derivación mecánica, `protocolo-auditoria.md` §7):
+- **Veredicto** (derivación mecánica, `protocolo-auditoria.md` §7), uno
+  para cada norma, cada uno solo con sus filas:
   Plenamente conforme = 0 No conforme y 0 No evaluable · Parcialmente
   conforme = No conforme en menos de la mitad de los evaluables ·
   No conforme = en la mitad o más. Con algún No evaluable no puede haber
@@ -111,7 +116,7 @@ tramo, muestra aleatoria con el método de `protocolo-auditoria.md` §3.4,
 procesos y su vía de prueba. Es una parada legítima si el tramo contratado no
 cuadra con lo que ves (un «Esencial» con carrito): avisa antes de seguir.
 
-**Paso 2 — Pasada automática.** axe-core 4.11.4, reglas WCAG 2.1 A/AA, dos
+**Paso 2 — Pasada automática.** axe-core 4.11.4, reglas WCAG 2.0/2.1/2.2 A/AA (etiquetas `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa`), dos
 estados por página (con modales y sin ellos) y estado de error en procesos;
 pasada móvil en portada y primer paso de cada proceso. Volcados en
 `datos/axe/`, resumen en `datos/axe-resumen.md`. Candidatos, no veredictos;
@@ -123,8 +128,9 @@ controles, no solo tabulando; modales según patrón de diálogo APG (foco entra
 queda, Escape cierra, vuelve). Alimenta 2.1.1, 2.1.2, 2.4.3, 2.4.7, 3.2.1,
 3.2.2, 1.4.13.
 
-**Paso 4 — Pasada de criterio y lectores.** Para cada página y proceso, los
-50 criterios con el procedimiento de `criterios-wcag.md`, registrando cada
+**Paso 4 — Pasada de criterio y lectores.** Para cada página y proceso, las
+57 filas con el procedimiento de `criterios-wcag.md` (incluida la pasada con
+colores forzados de 9.7), registrando cada
 celda en `datos/matriz-cobertura.md` (C / NC:H## / NA / NE:motivo + método).
 Incluye: calidad de alternativas textuales, estructura, formularios, reflow a
 320 px, zoom 200 %, espaciado de texto, orientación, contraste en casos
@@ -164,10 +170,10 @@ anota por qué. Un modal de carga con foco no gestionado o sin Escape es
 Global (Grave como mínimo). Los componentes de terceros se puntúan igual y la
 corrección dice quién los toca.
 
-**Paso 8 — Tabla de los 50 y veredicto.** Se derivan mecánicamente de la
-matriz (§6-§7 del protocolo). Se rellenan las cuatro subtablas del informe,
-el recuento (Conforme / No conforme / No aplica / No evaluable) y el
-veredicto. Comprueba la coherencia: cada NC de la tabla apunta a un `H##`
+**Paso 8 — Tabla de las 57 filas y los dos veredictos.** Se derivan
+mecánicamente de la matriz (§6-§7 del protocolo). Se rellenan las cuatro
+subtablas del informe, el recuento (Conforme / No conforme / No aplica / No
+evaluable) **de cada norma** y los dos veredictos. Comprueba la coherencia: cada NC de la tabla apunta a un `H##`
 confirmado; cada `H##` aparece en la tabla.
 
 **Paso 9 — Redactar.** `informe.md` desde `_plantillas/informe-base.md`;
@@ -177,7 +183,7 @@ si el cliente público lo pide. Corrección recomendada con código, siguiendo
 `protocolo-auditoria.md` §11. Y `datos/descartes-y-limitaciones.md`.
 
 **Paso 10 — PARADA. Visto bueno de Javier.** Presenta la ficha de
-confirmación, la tabla de los 50 con el recuento y el veredicto, el
+confirmación, la tabla de las 57 filas con los dos recuentos y veredictos, el
 `informe.md` y el documento de cumplimiento, y **espera aprobación
 explícita**. **No ejecutes `md2pdf.py` hasta tenerla, para ningún
 entregable.** Si Javier tumba un hallazgo, se rehacen la matriz, la tabla, el
@@ -217,7 +223,7 @@ aplicarla y esta ronda no se consume. Se ejecuta con esta misma skill:
    proceso crítico, porque corregir rompe cosas que axe no ve.
 4. **Tabla y veredicto.** Actualiza `datos/matriz-cobertura.md`: un criterio
    pasa a Conforme solo si todos sus `H##` están Corregidos y no ha aparecido
-   nada nuevo en él. Recalcula la tabla de los 50 y el veredicto con la regla
+   nada nuevo en él. Recalcula la tabla y los dos veredictos con la regla
    del protocolo §7.
 5. **Documento de cumplimiento** (o declaración) actualizado con el nuevo estado
    y nueva fecha de revisión, si algo ha cambiado.
@@ -234,12 +240,13 @@ ronda (entrega + 6 meses).
 
 ## Mapeo WCAG ↔ EN 301 549 ↔ detección
 
-Los 50 criterios A+AA, con su cláusula EN (`9.` + nº de criterio), el
+Las 57 filas (los 55 criterios A+AA de WCAG 2.2, 4.1.1 de 2.1 y 9.7 de EN
+301 549 V4.1.1), con su cláusula EN (`9.` + nº de criterio), el
 procedimiento de verificación repetible, las reglas axe que aportan
 candidatos y la evidencia mínima están en `references/criterios-wcag.md`.
 Consúltalo en el Paso 4 y al redactar cada hallazgo. Nota fija sobre
-**4.1.1**: se mantiene en la tabla porque EN 301 549 V3.2.1 lo incluye, y se
-marca Conforme con la nota del W3C de que se considera siempre satisfecho en
+**4.1.1**: se mantiene en la tabla, solo para el veredicto 2.1, porque EN 301
+549 V3.2.1 lo incluye (en V4.1.1 su cláusula está vacía), y se marca Conforme con la nota del W3C de que se considera siempre satisfecho en
 HTML; los IDs duplicados con efecto real se reportan bajo 4.1.2 o 1.3.1.
 
 ## Marco legal (cómo citarlo)
@@ -254,17 +261,27 @@ obligatoria: el auditor no es abogado. Antes de cada auditoría, comprueba
 que EN 301 549 V4.1.1 sigue sin referencia en el DOUE y anota la fecha de
 comprobación.
 
-## Add-on opcional: WCAG 2.2 AA (por encima del mínimo legal)
+## Doble veredicto: WCAG 2.1 AA (legal hoy) y WCAG 2.2 AA (la norma nueva)
 
-**Por defecto NO se evalúa 2.2.** Solo si el intake indica que el cliente lo
-contrató. Si está contratado: los 6 criterios A/AA nuevos (2.4.11, 2.5.7,
-2.5.8, 3.2.6, 3.3.7, 3.3.8; procedimientos en `criterios-wcag.md`), en una
-**sección aparte** del informe titulada «Por encima del mínimo legal: WCAG 2.2
-(aún no exigible)», sin mezclarse con el catálogo 2.1 ni con la tabla, y **sin
-efecto en el veredicto**. Enmarcado como anticipación: EN 301 549 V4.1.1 se
-espera en el DOUE entre octubre y noviembre de 2026; hasta entonces es mejora
-voluntaria y retrocompatible. **Caducidad:** cuando se publique la referencia,
-estos criterios entran en el núcleo y esta sección se revisa.
+EN 301 549 V4.1.1 (2026-09) adopta WCAG 2.2 y añade 9.7; hasta que se cite en
+el DOUE, la presunción de conformidad sigue en V3.2.1 (WCAG 2.1 AA). Por eso
+cada auditoría da dos veredictos con la misma tabla:
+
+| Veredicto | Filas que cuentan | Cuántas | Para qué sirve |
+|---|---|---|---|
+| **WCAG 2.1 AA · EN 301 549 V3.2.1** | las que no llevan [2.2] ni [V4.1.1] (incluye 4.1.1) | 50 | El estado legal de hoy: es el que va al documento de cumplimiento y a la declaración |
+| **WCAG 2.2 AA · EN 301 549 V4.1.1** | las 55 de WCAG 2.2 (sin 4.1.1) + 9.7 | 56 | Lo que pedirá la norma cuando se cite en el DOUE. El cliente sabe hoy qué le faltará |
+
+- Los hallazgos de los 6 criterios [2.2] y de 9.7 son hallazgos normales
+  (`H##`, severidad, corrección), con la etiqueta «WCAG 2.2» en la ficha y en
+  el informe. Nunca se presentan como incumplimiento legal de hoy.
+- Si un criterio solo falla en [2.2] o [V4.1.1], el veredicto 2.1 puede ser
+  «plenamente conforme» y el 2.2 no: se dice así, sin mezclar.
+- Antes de cada auditoría: comprobar si V4.1.1 ya está citada en el DOUE
+  (buscar «EN 301 549 V4.1.1 Official Journal») y anotar la fecha de la
+  comprobación en el informe. **Caducidad:** el día que se cite, el veredicto
+  2.2 pasa a ser el legal, 4.1.1 sale de la tabla y esta sección se reescribe
+  (también `marco-legal-es.md` §7 y `criterios-wcag.md`).
 
 ## Escala de severidad
 
@@ -274,16 +291,16 @@ estos criterios entran en el núcleo y esta sección se revisa.
   global o de proceso.
 - **Moderado** — dificulta en un punto concreto, o molesta en algo global.
 - **Menor** — fricción puntual. Sigue siendo No conforme si el criterio es
-  A/AA; lo que no incumple 2.1 AA es observación, no hallazgo.
+  A/AA; lo que no incumple ninguna fila de la tabla es observación, no hallazgo.
 
 La asignación sale de la matriz Bloqueo × Alcance (`protocolo-auditoria.md`
 §8.2), juzgando el bloqueo para el grupo más afectado.
 
 ## Estructura del informe
 
-1. **Resumen ejecutivo** — la barrera más grave en la primera frase; veredicto
-   de conformidad; nº de hallazgos por severidad **con cualificador de
-   alcance** («en las N páginas y M procesos evaluados»); las 3 acciones de
+1. **Resumen ejecutivo** — la barrera más grave en la primera frase; los dos
+   veredictos (2.1 AA legal hoy y 2.2 AA), cada uno con su norma; nº de
+   hallazgos por severidad **con cualificador de alcance** («en las N páginas y M procesos evaluados»); las 3 acciones de
    mayor impacto.
 2. **Alcance y metodología** — línea base de soporte con versiones; número
    exacto de páginas y procesos evaluados **y** número total de URLs del
@@ -308,10 +325,12 @@ La asignación sale de la matriz Bloqueo × Alcance (`protocolo-auditoria.md`
 5. **Resumen de conformidad por principio** (Perceptible, Operable,
    Comprensible, Robusto): criterios conformes / no conformes / no aplica /
    no evaluables por principio.
-6. **Tabla de conformidad por criterio** — los 50, en cuatro subtablas, con
-   `Criterio | Nivel | Estado | Nota (H## o causa)`. Recuento y veredicto.
+6. **Tabla de conformidad por criterio** — las 57 filas, en cuatro subtablas
+   (más 9.7 al final de Robusto), con `Criterio | Nivel | Norma | Estado | Nota
+   (H## o causa)`; en Norma: «2.1 y 2.2», «solo 2.1», «2.2» o «V4.1.1».
+   Recuento y veredicto de cada norma.
    Es la prueba de cobertura y alimenta la declaración y la revisión OAW.
-7. **Observaciones fuera del mínimo legal** — best practice, 2.2 (si add-on),
+7. **Observaciones fuera de la tabla** — best practice, AAA,
    `A CONFIRMAR` declarados como no verificados. Nunca mezclados con el
    catálogo.
 8. **Próximos pasos y prioridades** — por severidad y por esfuerzo; qué entra
@@ -389,8 +408,9 @@ Playwright se dirigen directamente a `evidencias/` con el nombre
   procedimiento ejecutado y su celda en `matriz-cobertura.md`.
 - Solo cuatro estados: Conforme / No conforme / No aplica / No evaluable (con
   causa). Sin «No evaluado», sin «Pendiente», sin huecos.
-- El veredicto se deriva de la tabla con la regla del protocolo; con algún
-  No evaluable no hay plena conformidad.
+- Los dos veredictos se derivan de la tabla con la regla del protocolo, cada
+  uno solo con sus filas; con algún No evaluable no hay plena conformidad.
+  El documento de cumplimiento declara el veredicto legal vigente (hoy, 2.1).
 - La severidad sale de la matriz Bloqueo × Alcance; los ajustes manuales se
   anotan con motivo.
 - Ningún PDF se genera sin aprobación explícita de Javier (Paso 10). Aplica

@@ -21,7 +21,8 @@ interface Props {
     milestonesLabel: string
     caption: string
     startLabel: string
-    endLabel: string
+    // Junto al título del último hito; la cota ya la marca el caminante.
+    endLabel?: string
 }
 
 const { profile, milestones, milestonesLabel, caption, startLabel, endLabel } = Astro.props
@@ -148,7 +149,7 @@ const startElevation = formatElevation(heights[0], lang)
                         <span class="profile-milestone-body">
                             <strong class="profile-milestone-title">
                                 {milestone.title}
-                                {milestone.at === 1 && <span class="profile-milestone-peak"> · {endLabel}</span>}
+                                {milestone.at === 1 && endLabel && <span class="profile-milestone-peak"> · {endLabel}</span>}
                             </strong>
                             <span class="profile-milestone-text">{milestone.text}</span>
                         </span>

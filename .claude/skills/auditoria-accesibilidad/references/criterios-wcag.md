@@ -1,20 +1,37 @@
-# Criterios WCAG 2.1 A+AA — mapeo EN 301 549, procedimiento de verificación y detección
+# Criterios WCAG 2.2 A+AA (más 4.1.1 de 2.1 y 9.7 de EN 301 549) — mapeo, verificación y detección
 
 > Archivo de REFERENCIA para el agente. Se consulta al ejecutar la pasada de
 > criterio (Paso 4 de `SKILL.md`), al clasificar cada hallazgo y al rellenar la
-> matriz de cobertura y la tabla de conformidad. Es la lista completa de los 50
-> criterios A+AA de WCAG 2.1 con **cómo se verifica cada uno de forma
-> repetible**. Las pasadas, la muestra y la severidad están en
-> `protocolo-auditoria.md`.
+> matriz de cobertura y la tabla de conformidad. Es la lista completa de las
+> **57 filas** de la tabla, con **cómo se verifica cada una de forma
+> repetible**:
+>
+> - los **55 criterios A+AA de WCAG 2.2** (31 A + 24 AA); los 6 nuevos frente a
+>   2.1 llevan la marca **[2.2]**;
+> - **4.1.1 Procesamiento**, marcado **[solo 2.1]**: WCAG 2.2 lo retira y EN 301
+>   549 V4.1.1 deja su cláusula 9.4.1.1 vacía («Void»), pero V3.2.1 lo incluye y
+>   cuenta para el veredicto 2.1 mientras V3.2.1 sea la referencia legal;
+> - **9.7 Preferencias del usuario**, marcado **[V4.1.1]**: requisito nuevo de EN
+>   301 549 V4.1.1 que no es un criterio WCAG.
+>
+> Con eso salen los dos veredictos del informe (`SKILL.md`): **WCAG 2.1 AA** =
+> las 50 filas que no llevan [2.2] ni [V4.1.1]; **WCAG 2.2 AA / EN 301 549
+> V4.1.1** = las 55 de WCAG 2.2 + 9.7. Las pasadas, la muestra y la severidad
+> están en `protocolo-auditoria.md`.
 >
 > Fuentes: WCAG 2.1 (`.claude/sources/wcag21.html`), EN 301 549 V3.2.1 cap. 9
-> (`en_301549v030201p.pdf`), Understanding WCAG 2.1. Reglas axe según axe-core
-> 4.11.x. Verificado 2026-09-02.
+> (`en_301549v030201p.pdf`), EN 301 549 V4.1.1 (2026-09) cap. 9 y anexo C
+> (`en_301549v040101p.pdf`, texto en `en_301549v040101p.txt`), Understanding
+> WCAG 2.1/2.2. Reglas axe según axe-core 4.11.x. Verificado 2026-09-02;
+> V4.1.1 añadida 2026-10-08.
 
 ## Cómo usar
 
-- **Regla de mapeo EN:** la cláusula web de EN 301 549 V3.2.1 es `9.` + el nº de
-  criterio WCAG. Ej.: WCAG 2.4.7 → EN 9.2.4.7. Mecánico para los 50.
+- **Regla de mapeo EN:** la cláusula web de EN 301 549 (V3.2.1 y V4.1.1) es
+  `9.` + el nº de criterio WCAG. Ej.: WCAG 2.4.7 → EN 9.2.4.7. Mecánico para
+  los 55 de 2.2 (comprobado en V4.1.1: 9.2.4.11, 9.2.5.7, 9.2.5.8, 9.3.2.6,
+  9.3.3.7 y 9.3.3.8 existen con ese número). Las dos excepciones: 4.1.1, cuya
+  9.4.1.1 está vacía en V4.1.1, y 9.7, que no viene de WCAG.
 - **Detección:** `Auto` = axe lo detecta de forma fiable y su ausencia de
   violaciones es evidencia razonable de conformidad · `Parcial` = axe señala
   candidatos o una parte del criterio; la conformidad exige confirmación
@@ -28,7 +45,8 @@
   proceso completo.
 - El nivel (A/AA) importa para el veredicto: conformidad AA = cumplir todos
   los A **y** todos los AA en todas las páginas de la muestra y en los
-  procesos completos.
+  procesos completos. Cada veredicto se calcula solo con sus filas (ver la
+  nota del principio).
 - **Evidencia mínima**: lo que hay que guardar para que el equipo del cliente
   pueda repetir la comprobación. Se nombra en `protocolo-auditoria.md` §9.
 
@@ -80,10 +98,13 @@ Abreviaturas: **AT** = árbol de accesibilidad (snapshot de Playwright);
 | 2.4.5 Múltiples vías (AA) · 9.2.4.5 | S | Más de una forma de localizar cada página (menú + buscador, mapa del sitio, índice), salvo pasos de un proceso. | 1) ¿Hay navegación principal + buscador funcional, o mapa del sitio, o enlaces relacionados? 2) Comprueba que el buscador encuentra una página de la muestra. | — | Captura de las dos vías | Manual |
 | 2.4.6 Encabezados y etiquetas (AA) · 9.2.4.6 | P | Encabezados y etiquetas describen tema o propósito (no exige que existan, sino que los que hay sean descriptivos). | 1) Lista de encabezados: ¿vacíos, genéricos («Sección»), repetidos sin distinción? 2) Etiquetas de campos: ¿dicen qué se pide («Correo electrónico», no «Campo 1»)? | `empty-heading` es best-practice; no cuenta | Snapshot de encabezados | Parcial |
 | 2.4.7 Foco visible (AA) · 9.2.4.7 | P·Pr | Todo elemento enfocable muestra un indicador de foco visible. | 1) En el barrido, columna «Foco visible» por parada. 2) Reglas CSS `outline: none/0` sobre `:focus` sin sustituto en `:focus-visible`. 3) Especial atención a cabecera, cookies, tarjetas de producto, botones de icono y pasos del proceso. 4) El indicador debe verse en el fondo real (blanco sobre fondo claro no cuenta; eso además es 1.4.11). | — | Captura del elemento enfocado sin indicador + captura de uno del mismo sitio que sí lo muestra | Parcial (CSS es indicio) |
+| 2.4.11 Foco no oscurecido (mínimo) (AA) · 9.2.4.11 **[2.2]** | P·Pr | Cuando un elemento recibe el foco, no queda **totalmente** tapado por contenido del propio sitio (cabeceras fijas, banners de cookies, chats, barras inferiores). Tapado en parte cumple el mínimo. | 1) En el barrido de Tab, con la cabecera fija y el banner de cookies en su estado inicial: en cada parada, ¿el elemento enfocado queda entero debajo de otro? (`document.elementFromPoint` en el centro y las cuatro esquinas del rectángulo enfocado devuelve otro nodo en las cinco). 2) Repite en emulación móvil 375×812 y con zoom al 200 %. 3) Lo tapado solo en parte se anota como observación (es el AAA 2.4.12). | — | Captura del foco tapado + parada del barrido | Manual |
 | 2.5.1 Gestos del puntero (A) · 9.2.5.1 | P | Funciones con gestos multipunto o de trayectoria (pellizcar, deslizar) tienen alternativa de un solo puntero. | 1) Emulación móvil: carruseles solo por swipe sin botones, mapas solo con pellizco, sliders de arrastre. 2) Cada uno con alternativa de toque simple (botones anterior/siguiente, +/−). | — | Captura del componente + nota de la alternativa | Manual |
 | 2.5.2 Cancelación del puntero (A) · 9.2.5.2 | P | Las acciones se ejecutan al soltar (`click`/`up`), no al pulsar (`mousedown`/`touchstart`), o se pueden abortar/deshacer. | 1) Busca manejadores `mousedown`/`pointerdown`/`touchstart` que disparen acciones. 2) Prueba: pulsa sobre un botón, arrastra fuera y suelta: no debe ejecutarse. | — | Nota con el selector y el resultado | Manual |
 | 2.5.3 Etiqueta en el nombre (A) · 9.2.5.3 | P | El nombre accesible de un control contiene el texto visible de su etiqueta. | 1) Controles con texto visible y `aria-label`/`aria-labelledby` distinto: ¿el nombre accesible incluye el texto visible? («Buscar» visible con `aria-label="Enviar formulario"` falla). 2) Prioridad a botones y enlaces del proceso. | `label-content-name-mismatch` (experimental; indicio) | Tabla texto visible → nombre accesible | Parcial |
 | 2.5.4 Activación por movimiento (A) · 9.2.5.4 | P | Funciones activadas por movimiento del dispositivo (agitar, inclinar) tienen alternativa y se pueden desactivar. | 1) Busca `devicemotion`/`deviceorientation` en el JS. Si no hay, Conforme con nota. | — | Nota | Manual |
+| 2.5.7 Movimientos de arrastre (AA) · 9.2.5.7 **[2.2]** | P | Toda función que se usa arrastrando tiene alternativa con un solo puntero y sin arrastre (salvo que el arrastre sea esencial). | 1) Inventaria lo que se mueve arrastrando: sliders, listas reordenables, mapas, visores y salas 3D, carruseles de arrastre, recortadores. 2) Para cada uno, ¿hay botones, campos o un clic simple que consigan lo mismo? El teclado **no** cuenta como alternativa para este criterio: tiene que ser con puntero. 3) Pruébalo también en emulación táctil. | — | Captura del componente + la alternativa (o su ausencia) | Manual |
+| 2.5.8 Tamaño del objetivo (mínimo) (AA) · 9.2.5.8 **[2.2]** | P | Objetivos de puntero de al menos 24×24 px CSS, o con espacio para que un círculo de 24 px centrado en cada uno no toque a otro objetivo. Excepciones: enlaces dentro de texto, controles nativos sin modificar, objetivo equivalente que cumple en la misma página, esencial. | 1) axe `target-size` da candidatos. 2) Mide con `getBoundingClientRect()` botones de icono, paginación, cerrar, flechas de carrusel y enlaces apilados del pie, en escritorio y a 375 px. 3) A los menores de 24 px aplícales la prueba del círculo de 24 px. | `target-size` (tag `wcag22aa`) | Tabla objetivo → medidas + captura | Parcial |
 
 ## Principio 3 — Comprensible
 
@@ -95,45 +116,50 @@ Abreviaturas: **AT** = árbol de accesibilidad (snapshot de Playwright);
 | 3.2.2 Al introducir datos (A) · 9.3.2.2 | P·Pr | Cambiar un campo no provoca cambio de contexto salvo aviso previo. | 1) Selects que navegan al cambiar (`onchange` → `location`), casillas que envían el formulario, campos que reordenan el formulario sin aviso. 2) Con teclado: cambia el valor con flechas sin Enter; si navega, falla. | — | Captura + selector | Manual |
 | 3.2.3 Navegación consistente (AA) · 9.3.2.3 | S | La navegación repetida aparece en el mismo orden relativo en todas las páginas. | 1) Compara cabecera, menú y pie en toda la muestra: mismo orden de ítems. 2) Cambios de orden entre plantillas (blog vs tienda) sin motivo. | — | Capturas comparadas | Manual |
 | 3.2.4 Identificación consistente (AA) · 9.3.2.4 | S | Componentes con la misma función se identifican igual (mismo texto/icono/nombre accesible) en todo el sitio. | 1) Buscador, cesta, cerrar, «Enviar», «Añadir»: mismo nombre y mismo icono en todas las páginas. 2) Nombres accesibles distintos para la misma función (`aria-label="Cerrar"` vs «Cerrar ventana») se anotan. | — | Tabla componente → nombres encontrados | Manual |
+| 3.2.6 Ayuda consistente (A) · 9.3.2.6 **[2.2]** | S | Si en varias páginas se repiten mecanismos de ayuda (datos de contacto, formulario o chat de contacto, autoayuda o FAQ), aparecen en el mismo orden relativo. | 1) Lista qué mecanismos de ayuda tiene cada página de la muestra (cabecera, pie, botón flotante). 2) ¿Mismo orden relativo respecto al resto del contenido repetido? 3) Sin mecanismos de ayuda repetidos = **No aplica** con nota. | — | Capturas comparadas | Manual |
 | 3.3.1 Identificación de errores (A) · 9.3.3.1 | Pr | Cuando se detecta un error de entrada, el elemento se identifica y el error se describe en texto. | 1) En cada formulario y paso de proceso, envía vacío y con datos inválidos (email sin @, DNI mal, tarjeta rechazada en modo test). 2) ¿Aparece texto que dice qué campo y qué error? ¿Se asocia al campo (`aria-describedby`, `aria-invalid`)? ¿El SR lo anuncia (live region o foco al error)? 3) Un `alert()` de JS o un borde rojo solo, falla. | — | Captura del estado de error + snapshot del campo | Manual |
 | 3.3.2 Etiquetas o instrucciones (A) · 9.3.3.2 | P·Pr | Todo campo tiene etiqueta o instrucción visible (obligatoriedad, formato esperado). | 1) Cada campo con etiqueta visible y persistente (el `placeholder` solo no vale: desaparece al escribir). 2) Campos obligatorios indicados, formato indicado (fecha, teléfono). 3) Grupos de radios/casillas con leyenda. | `label`, `select-name`, `form-field-multiple-labels` | Captura del formulario + tabla campo → etiqueta | Parcial |
 | 3.3.3 Sugerencias ante errores (AA) · 9.3.3.3 | Pr | Si se conoce cómo corregir, se sugiere (salvo que comprometa seguridad). | 1) Con los errores provocados en 3.3.1: ¿el mensaje dice cómo corregir («el correo debe incluir @», «formato 12345678A»)? «Campo inválido» no basta. | — | Captura del mensaje | Manual |
 | 3.3.4 Prevención de errores (legales, financieros, datos) (AA) · 9.3.3.4 | Pr | Envíos con consecuencias legales/financieras o que modifican datos: reversibles, verificados o confirmables antes de enviar. | 1) En el proceso de compra/reserva: ¿hay pantalla de resumen editable antes de pagar?, ¿se puede corregir?, ¿confirmación explícita? 2) Formularios de baja o modificación de datos: confirmación. | — | Captura de la pantalla de revisión | Manual |
+| 3.3.7 Entrada redundante (A) · 9.3.3.7 **[2.2]** | Pr | En un mismo proceso no se vuelve a pedir lo que ya se introdujo: se rellena solo o se ofrece para seleccionar (salvo que sea esencial, por seguridad o porque el dato ya no sea válido). | 1) Recorre el proceso anotando qué datos se piden en cada paso. 2) Un dato repetido (email, nombre, dirección de envío y de facturación) sin rellenarse solo ni opción «igual que…» = No conforme. | — | Tabla paso → datos pedidos | Manual |
+| 3.3.8 Autenticación accesible (mínimo) (AA) · 9.3.3.8 **[2.2]** | Pr | Ningún paso de inicio de sesión exige una prueba de función cognitiva (recordar, transcribir, resolver) salvo que haya alternativa, un mecanismo de ayuda (pegar, gestor de contraseñas), reconocimiento de objetos o de contenido propio. | 1) En inicio de sesión, registro y recuperación: ¿se puede pegar en usuario, contraseña y códigos? (pegado bloqueado = No conforme). ¿Los `autocomplete` (`username`, `current-password`, `one-time-code`) dejan actuar al gestor? 2) CAPTCHA de texto o de cálculo sin alternativa = No conforme. 3) Sin inicio de sesión en el alcance = **No aplica**. | — | Captura + nota de las pruebas | Manual |
 
 ## Principio 4 — Robusto
 
 | WCAG (nivel) · EN | Ámbito | Qué exige | Cómo se verifica (procedimiento repetible) | axe | Evidencia | Detección |
 |---|---|---|---|---|---|---|
-| 4.1.1 Procesamiento (A) · 9.4.1.1 | P | Marcado con etiquetas completas, anidamiento correcto, sin atributos duplicados, IDs únicos, salvo lo que la especificación permita. **Nota vigente del W3C (errata 2023): «este criterio debe considerarse siempre satisfecho para cualquier contenido que use HTML o XML»**, porque los navegadores gestionan esos errores de forma definida. WCAG 2.2 lo retira. EN 301 549 V3.2.1 sigue incluyendo 9.4.1.1. | 1) Se marca **Conforme** con la nota del W3C, salvo que un error de marcado provoque un fallo real en la AT, que entonces se reporta bajo 4.1.2 o 1.3.1 (p. ej. IDs duplicados que rompen `aria-labelledby` o `label for`). 2) Los IDs duplicados se comprueban y se anotan igualmente como observación técnica, porque afectan a otras asociaciones. | `duplicate-id-aria` (axe lo etiqueta bajo 4.1.2) | Nota en la tabla; si hay impacto real, hallazgo en 4.1.2/1.3.1 | Auto (por convención) |
+| 4.1.1 Procesamiento (A) · 9.4.1.1 **[solo 2.1]** | P | Marcado con etiquetas completas, anidamiento correcto, sin atributos duplicados, IDs únicos, salvo lo que la especificación permita. **Nota vigente del W3C (errata 2023): «este criterio debe considerarse siempre satisfecho para cualquier contenido que use HTML o XML»**, porque los navegadores gestionan esos errores de forma definida. WCAG 2.2 lo retira y EN 301 549 V4.1.1 deja 9.4.1.1 vacía («Void»). Cuenta solo para el veredicto 2.1 (V3.2.1). | 1) Se marca **Conforme** con la nota del W3C, salvo que un error de marcado provoque un fallo real en la AT, que entonces se reporta bajo 4.1.2 o 1.3.1 (p. ej. IDs duplicados que rompen `aria-labelledby` o `label for`). 2) Los IDs duplicados se comprueban y se anotan igualmente como observación técnica, porque afectan a otras asociaciones. | `duplicate-id-aria` (axe lo etiqueta bajo 4.1.2) | Nota en la tabla; si hay impacto real, hallazgo en 4.1.2/1.3.1 | Auto (por convención) |
 | 4.1.2 Nombre, función, valor (A) · 9.4.1.2 | P·Pr | Todo componente de interfaz expone nombre, rol, estados y valores a la AT, y los cambios se notifican. | 1) AT de cada página: controles sin nombre (botones de icono, enlaces de imagen, campos), roles incorrectos (`div` clicable, enlaces que actúan como botones), estados ausentes (`aria-expanded`, `aria-selected`, `aria-checked`, `aria-current`) o que no cambian al operar. 2) Widgets personalizados contra `apg-patterns.md`. 3) Confirma con lector virtual y, en el proceso crítico, con NVDA (`lectores-pantalla.md`): lo que el AT da por bueno puede no anunciarse (labels en `display:none`). 4) `iframe` con `title`. | `button-name`, `link-name`, `input-button-name`, `select-name`, `frame-title`, `aria-allowed-attr`, `aria-required-attr`, `aria-roles`, `aria-valid-attr`, `aria-valid-attr-value`, `aria-hidden-focus`, `aria-command-name`, `aria-input-field-name`, `aria-toggle-field-name`, `aria-meter-name`, `aria-progressbar-name`, `aria-tooltip-name`, `nested-interactive`, `duplicate-id-aria` | Snapshot del AT del control + línea de `sr-*.txt` + HTML del nodo | Parcial |
-| 4.1.3 Mensajes de estado (AA) · 9.4.1.3 | P·Pr | Los mensajes de estado (resultado de una acción, progreso, errores no modales, «añadido a la cesta», «3 resultados») se anuncian a la AT sin recibir el foco. | 1) Provoca cada mensaje: añadir a cesta, filtrar resultados, enviar formulario con error no modal, «guardado». 2) El contenedor tiene `role=status`/`alert` o `aria-live` **existente antes** de insertar el texto. 3) Confirma con NVDA que se anuncia. 4) Precios o contenido normal marcado como live region (ruido) también es hallazgo. | — | Snapshot del contenedor + línea de NVDA | Manual |
+| 4.1.3 Mensajes de estado (AA) · 9.4.1.3 | P·Pr | Los mensajes de estado (resultado de una acción, progreso, errores no modales, «añadido a la cesta», «3 resultados») se anuncian a la AT sin recibir el foco. | 1) Provoca cada mensaje: añadir a cesta, filtrar resultados, enviar formulario con error no modal, «guardado». 2) El contenedor tiene `role=status`/`alert` o `aria-live` **existente antes** de insertar el texto. 3) Confirma con NVDA que se anuncia (en su registro interno a nivel IO si el mensaje llega tras una espera: guidepup no lo graba). 4) **Si el mensaje se lanza con un `<dialog>` modal abierto** (filtros, ficha, cesta), la región viva tiene que estar **dentro** del diálogo: fuera queda inerte y NVDA no la lee, aunque el árbol de Playwright muestre el texto (caso VETA, 9-10-2026). 5) Precios o contenido normal marcado como live region (ruido) también es hallazgo. | — | Snapshot del contenedor + línea de NVDA | Manual |
 
 ---
 
-## WCAG 2.2 — add-on (NO obligatorio a 2026-09-02)
+## EN 301 549 V4.1.1 — requisito web que no es de WCAG
 
-Entran con EN 301 549 V4.1.1, cuya referencia en el DOUE se espera entre
-octubre y noviembre de 2026 (`marco-legal-es.md` §7). Hasta entonces, solo si
-el intake indica que el cliente contrató el add-on. Van en sección aparte y
-no alteran el veredicto. WCAG 2.2 además **retira 4.1.1**.
+V4.1.1 añade al capítulo 9 la cláusula **9.7**, que no viene de WCAG. Va en la
+tabla y cuenta para el veredicto 2.2 / V4.1.1. Texto literal: «the web page
+shall not block the user agent's mode(s) of operation that present the web
+page according to user preference settings, or explicitly override user
+preference settings for documented platform accessibility features in these
+modes of operation, unless this is essential to the information or function
+of the web page». Procedimiento del anexo C.9.7: (1) no bloquea los modos de
+preferencias; (2) no sobrescribe preferencias de funciones de accesibilidad de
+la plataforma; (3) si sobrescribe, comprobar si cumplir la preferencia
+alteraría de forma fundamental la información o la función. Pasa si (1) y
+((2) o (3)).
 
-| WCAG (nivel) · EN V4 | Qué exige | Cómo se verifica | Detección |
-|---|---|---|---|
-| 2.4.11 Foco no oscurecido (mínimo) (AA) · 9.2.4.11 | El elemento enfocado no queda totalmente tapado por contenido fijo (cabeceras sticky, banners de cookies, chats). | En el barrido, con cabecera sticky y banner abiertos: ¿algún elemento enfocado queda completamente oculto? Captura del estado. | Manual |
-| 2.5.7 Movimientos de arrastre (AA) · 9.2.5.7 | Lo que se hace arrastrando tiene alternativa de un solo puntero sin arrastre. | Sliders de precio, reordenar, mapas: ¿hay botones o campos equivalentes? | Manual |
-| 2.5.8 Tamaño del objetivo (mínimo) (AA) · 9.2.5.8 | Objetivos de al menos 24×24 px CSS, o separación equivalente; excepciones para enlaces en línea y controles nativos. | Mide `getBoundingClientRect()` de botones de icono, paginación, cerrar, carrusel; en emulación móvil. Tabla de los que no llegan. | Parcial (`target-size` en axe, tag wcag22aa) |
-| 3.2.6 Ayuda consistente (A) · 9.3.2.6 | Los mecanismos de ayuda (contacto, chat, FAQ) aparecen en el mismo orden relativo en todas las páginas. | Compara ubicación de contacto/chat en la muestra. | Manual |
-| 3.3.7 Entrada redundante (A) · 9.3.3.7 | No se vuelve a pedir información ya facilitada en el mismo proceso (salvo esencial o seguridad); se autocompleta o se puede seleccionar. | En el proceso: dirección de envío y facturación, email repetido; ¿se rellena solo o hay «igual que…»? | Manual |
-| 3.3.8 Autenticación accesible (mínimo) (AA) · 9.3.3.8 | El login no exige prueba cognitiva (recordar, transcribir, resolver) sin alternativa: permitir pegar, gestores de contraseñas, o reconocimiento de objetos/contenido personal. | Login: ¿se puede pegar la contraseña?, ¿CAPTCHA con alternativa?, ¿código por SMS que se puede pegar? | Manual |
+| Requisito · EN | Ámbito | Qué exige | Cómo se verifica (procedimiento repetible) | axe | Evidencia | Detección |
+|---|---|---|---|---|---|---|
+| 9.7 Preferencias del usuario **[V4.1.1]** | P | La página no bloquea los modos del navegador que la presentan según las preferencias del usuario, ni sobrescribe a propósito las de las funciones de accesibilidad de la plataforma (filtros de color, contraste, tamaño del texto, tamaño del puntero, cursor de texto), salvo que sea esencial. | 1) **Colores forzados**: `page.emulateMedia({ forcedColors: 'active' })` y recorre la página: ¿se lee y se opera todo? Busca en el CSS `forced-color-adjust: none`: cada uso tiene que ser esencial (p. ej. la muestra de color de un producto). 2) **Texto y zoom**: `meta viewport` sin `user-scalable=no` ni `maximum-scale`; `text-size-adjust: none` es indicio: comprueba si impide el ajuste de texto del navegador. 3) **Puntero y cursor de texto**: `cursor: none` con un cursor dibujado por la web, o `caret-color: transparent` en campos, sobrescriben la preferencia. 4) Cada sobrescritura que encuentres: ¿cumplir la preferencia alteraría de forma fundamental la información o la función? Si no, No conforme. | — | Capturas con colores forzados + selectores CSS de cada sobrescritura | Manual |
 
 ---
 
 ## Criterios que se evalúan a nivel de sitio o de proceso (recordatorio)
 
-- **Sitio (S)**: 1.2.4, 2.1.4, 2.4.1, 2.4.5, 3.2.3, 3.2.4. Se evalúan una vez sobre
-  la muestra completa; su estado en la tabla es único.
+- **Sitio (S)**: 1.2.4, 2.1.4, 2.4.1, 2.4.5, 3.2.3, 3.2.4, 3.2.6. Se evalúan una
+  vez sobre la muestra completa; su estado en la tabla es único.
 - **Proceso (Pr)**: 1.3.5, 1.4.1, 1.4.10, 1.4.11, 2.1.1, 2.1.2, 2.2.1, 2.4.3,
-  2.4.7, 3.2.1, 3.2.2, 3.3.1-3.3.4, 4.1.2, 4.1.3. Se evalúan en **cada paso** y en
+  2.4.7, 2.4.11, 3.2.1, 3.2.2, 3.3.1-3.3.4, 3.3.7, 3.3.8, 4.1.2, 4.1.3. Se evalúan en **cada paso** y en
   sus **estados de error**. Si el proceso no pudo recorrerse entero (sin vía
   de prueba), los criterios `Pr` que dependen del tramo no recorrido quedan
   **No evaluable** con esa causa; nunca Conforme.
@@ -141,7 +167,13 @@ no alteran el veredicto. WCAG 2.2 además **retira 4.1.1**.
 ## Nota de mantenimiento
 
 Las reglas axe citadas corresponden a axe-core 4.11.x con etiquetas `wcag2a`,
-`wcag2aa`, `wcag21a`, `wcag21aa`. Al subir de versión, revisar
+`wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa`. Al subir de versión, revisar
 `https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md`
 y actualizar esta columna. Las reglas marcadas experimental o best-practice no
 sostienen un hallazgo por sí solas.
+
+## Caducidad
+
+Cuando EN 301 549 V4.1.1 se cite en el Diario Oficial de la UE, el veredicto
+2.2 / V4.1.1 pasa a ser el legal: la fila de 4.1.1 sale de la tabla, el
+veredicto 2.1 desaparece y se revisan `marco-legal-es.md` §7 y `SKILL.md`.

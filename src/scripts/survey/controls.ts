@@ -1,37 +1,73 @@
 import type { SurveyScene } from '../survey-scene';
-import type { WeatherKind } from './weather';
+import { markArrival } from '../page-transition';
 
-// Controles de la escena: pausa del movimiento y panel para cambiar el
-// momento (hora, mes y tiempo). Todo con controles nativos, que ya funcionan
-// con teclado y lector de pantalla.
+// Controles de la home 3D: pausa del movimiento, sonido y el "Fin del mundo".
+// Todo con controles nativos, que ya funcionan con teclado y lector de pantalla.
 
-const MINUTES_PER_DAY = 1440;
-const MID_MONTH_DAY = 15;
+// La clásica lo lee para avisar de que la sierra ya no está (ClassicPage.astro).
+const METEOR_FLAG = 'jp:meteor';
+// Cuánto se dispersan las piezas de la interfaz al salir volando.
+const DEBRIS_SPREAD_PX = 260;
+const DEBRIS_SPIN_DEG = 80;
+const DEBRIS_MAX_DELAY_S = 0.25;
+const DEBRIS_SELECTOR = [
+  '.survey-logo',
+  '.survey-nav',
+  '.survey-eyebrow',
+  '.survey-subtitle',
+  '.survey-hint',
+  '.survey-caption',
+  '.vertex-card',
+  '.vertex-stem',
+  '.vertex-pin',
+  '.survey-controls > *',
+].join(', ');
 
-interface InitialState {
-  moment: Date | null;
-  weather: WeatherKind;
+// Parte el titular en palabras para que cada una caiga por su lado.
+function splitIntoWords(element: HTMLElement): HTMLElement[] {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  const texts: Text[] = [];
+  while (walker.nextNode()) texts.push(walker.currentNode as Text);
+  const words: HTMLElement[] = [];
+  for (const text of texts) {
+    const fragment = document.createDocumentFragment();
+    for (const part of (text.textContent ?? '').split(/(\s+)/)) {
+      if (!part) continue;
+      if (/^\s+$/.test(part)) {
+        fragment.append(part);
+        continue;
+      }
+      const word = document.createElement('span');
+      word.className = 'debris-word';
+      word.textContent = part;
+      fragment.append(word);
+      words.push(word);
+    }
+    text.replaceWith(fragment);
+  }
+  return words;
 }
 
-const formatTime = (minutes: number) =>
-  `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`;
+function shatterInterface(): void {
+  const title = document.querySelector<HTMLElement>('.survey-title');
+  const pieces = [
+    ...Array.from(document.querySelectorAll<HTMLElement>(DEBRIS_SELECTOR)),
+    ...(title ? splitIntoWords(title) : []),
+  ];
+  for (const piece of pieces) {
+    piece.style.setProperty('--debris-x', `${((Math.random() - 0.5) * DEBRIS_SPREAD_PX).toFixed(0)}px`);
+    piece.style.setProperty('--debris-rot', `${((Math.random() - 0.5) * DEBRIS_SPIN_DEG).toFixed(0)}deg`);
+    piece.style.setProperty('--debris-delay', `${(Math.random() * DEBRIS_MAX_DELAY_S).toFixed(2)}s`);
+    piece.classList.add('is-debris');
+  }
+}
 
-const minutesOf = (date: Date) => {
-  const minutes = date.getHours() * 60 + date.getMinutes();
-  return Math.round(minutes / 15) * 15 % MINUTES_PER_DAY;
-};
-
-export function wireSurveyControls(scene: SurveyScene, initial: InitialState): void {
+export function wireSurveyControls(scene: SurveyScene): void {
   const pauseButton = document.querySelector<HTMLButtonElement>('[data-pause]');
   const soundButton = document.querySelector<HTMLButtonElement>('[data-sound]');
-  const toggle = document.querySelector<HTMLButtonElement>('[data-moment-toggle]');
-  const panel = document.getElementById('survey-moment-panel');
-  const hour = document.querySelector<HTMLInputElement>('[data-hour]');
-  const hourOutput = document.querySelector<HTMLOutputElement>('[data-hour-output]');
-  const month = document.querySelector<HTMLSelectElement>('[data-month]');
-  const reset = document.querySelector<HTMLButtonElement>('[data-moment-reset]');
-  const weatherInputs = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="survey-weather"]'));
-  if (!pauseButton || !soundButton || !toggle || !panel || !hour || !hourOutput || !month || !reset) return;
+  const destroyLink = document.querySelector<HTMLAnchorElement>('[data-destroy]');
+  const doomSky = document.querySelector<HTMLElement>('[data-doom-sky]');
+  if (!pauseButton || !soundButton || !destroyLink || !doomSky) return;
 
   // --- Sonido --------------------------------------------------------------
   // Apagado por defecto: el navegador solo deja sonar audio tras un gesto, y
@@ -51,64 +87,33 @@ export function wireSurveyControls(scene: SurveyScene, initial: InitialState): v
   });
   showPaused();
 
-  // --- Momento -------------------------------------------------------------
+  // --- Fin del mundo -------------------------------------------------------
+  // Lo pide la persona y dura menos de 4 s; con movimiento reducido la sierra
+  // solo se apaga. Al terminar lleva a la versión clásica, que avisa de que
+  // la sierra se puede reconstruir.
 
-  const showHour = () => {
-    const text = formatTime(Number(hour.value));
-    hourOutput.textContent = text;
-    hour.setAttribute('aria-valuetext', text);
-  };
-
-  const fillFrom = (date: Date) => {
-    hour.value = String(minutesOf(date));
-    month.value = String(date.getMonth());
-    showHour();
-  };
-
-  const selectWeather = (kind: WeatherKind) => {
-    for (const input of weatherInputs) input.checked = input.value === kind;
-  };
-
-  const applyChosenMoment = () => {
-    const minutes = Number(hour.value);
-    const date = new Date(new Date().getFullYear(), Number(month.value), MID_MONTH_DAY, Math.floor(minutes / 60), minutes % 60);
-    scene.setMoment(date);
-    showHour();
-  };
-
-  hour.addEventListener('input', applyChosenMoment);
-  month.addEventListener('change', applyChosenMoment);
-  for (const input of weatherInputs) {
-    input.addEventListener('change', () => {
-      if (input.checked) scene.setWeather(input.value as WeatherKind);
+  const root = document.documentElement;
+  destroyLink.addEventListener('click', async (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
+    if (root.classList.contains('is-doomed')) return;
+    root.classList.add('is-doomed');
+    await scene.destroyWorld({
+      onLaunch: (approachSeconds) => {
+        doomSky.style.setProperty('--doom-approach', `${approachSeconds}s`);
+        root.classList.add('doom-launch');
+      },
+      onImpact: () => {
+        root.classList.add('doom-impact');
+        shatterInterface();
+      },
     });
-  }
-
-  reset.addEventListener('click', () => {
-    scene.setMoment(null);
-    scene.setWeather('live');
-    fillFrom(new Date());
-    selectWeather('live');
-  });
-
-  fillFrom(initial.moment ?? new Date());
-  selectWeather(initial.weather);
-
-  // --- Panel desplegable ---------------------------------------------------
-
-  const setOpen = (open: boolean, returnFocus = false) => {
-    toggle.setAttribute('aria-expanded', String(open));
-    panel.hidden = !open;
-    if (open) hour.focus();
-    else if (returnFocus) toggle.focus();
-  };
-
-  toggle.addEventListener('click', () => setOpen(panel.hidden));
-  panel.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') setOpen(false, true);
-  });
-  document.addEventListener('pointerdown', (event) => {
-    const target = event.target as Node;
-    if (!panel.hidden && !panel.contains(target) && !toggle.contains(target)) setOpen(false);
+    try {
+      sessionStorage.setItem(METEOR_FLAG, '1');
+    } catch {
+      // Sin sessionStorage, la clásica llega sin el aviso.
+    }
+    markArrival();
+    window.location.assign(destroyLink.href);
   });
 }

@@ -113,7 +113,9 @@ Cambios respecto al modelo público:
 - **NO citar el RD 1112/2018 como norma que obliga** (salvo la remisión
   técnica del art. 14.2 del RD 193/2023 en el dictamen G, que se cita como
   «criterios de accesibilidad del RD 1112/2018 por remisión del art. 14.2 del
-  RD 193/2023»). Norma técnica: UNE-EN 301 549 (WCAG 2.1 AA).
+  RD 193/2023»). Norma técnica: UNE-EN 301 549 (WCAG 2.1 AA mientras la
+  versión V4.1.1, que adopta WCAG 2.2, no se cite en el DOUE; ver
+  `marco-legal-es.md` §7).
 - **Eliminar** Unidad responsable de accesibilidad y procedimiento de
   reclamación del art. 13 del RD 1112/2018: no existen para un privado. El
   recurso externo del consumidor son las autoridades de vigilancia de la Ley
@@ -128,7 +130,11 @@ Apartados:
 1. **Compromiso y alcance.** «[Entidad] trabaja para que [servicio/web] cumpla
    los requisitos de accesibilidad que le son exigibles conforme a [Ley
    11/2023, art. 13 / RD 193/2023, art. 14] y a la norma UNE-EN 301 549 (WCAG
-   2.1 nivel AA). Esta información se aplica a [alcance].»
+   2.1 nivel AA). Esta información se aplica a [alcance].» Frase opcional,
+   solo con el veredicto 2.2 de la auditoría delante: «Se ha evaluado también
+   con WCAG 2.2 nivel AA, que adopta la nueva versión de la norma (EN 301 549
+   V4.1.1): [plenamente / parcialmente / aún no] conforme.» El grado del
+   apartado 2 es siempre el de la norma vigente.
 2. **Grado de accesibilidad.** Estado actual con las mismas tres fórmulas del
    veredicto (plenamente / parcialmente / aún no conforme con UNE-EN 301 549),
    porque son las que el mercado y la autoridad de vigilancia entienden, pero
@@ -173,7 +179,7 @@ Apartados:
 ## 5. Checklist antes de entregar
 
 - [ ] Dictamen y base legal citados con artículo (§3 tabla).
-- [ ] Grado = veredicto de la tabla de los 50 (regla §7 del protocolo).
+- [ ] Grado = veredicto legal de la tabla (las 50 filas de WCAG 2.1; regla §7 del protocolo).
 - [ ] Ningún hallazgo `A CONFIRMAR` mencionado.
 - [ ] Ámbitos afectados con referencia de requisito, sin catálogo.
 - [ ] Canal real, plazo de respuesta, alternativas.

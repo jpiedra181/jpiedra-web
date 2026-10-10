@@ -1,0 +1,66 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import { questionsId } from "../../../config/site"
+import SectionLabel from "../../ui/SectionLabel.astro"
+
+// Las preguntas con las que llega el cliente (velocidad, móvil, accesibilidad,
+// Google, precio, con quién habla), respondidas antes de enseñarle nada mío.
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).home.concerns
+const sectionId = questionsId(lang)
+---
+
+<section
+    id={sectionId}
+    aria-labelledby={`${sectionId}-title`}
+    class="relative py-24 md:py-32 lg:py-40"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+            <div data-wipe>
+                <SectionLabel text={copy.label} />
+            </div>
+            <h2
+                id={`${sectionId}-title`}
+                data-split
+                class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary"
+            >
+                {copy.title}
+            </h2>
+            <p
+                data-reveal
+                class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[45rem]"
+            >
+                {copy.intro}
+            </p>
+        </div>
+
+        <ul role="list" data-reveal-stagger class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 md:mt-20">
+            {
+                copy.items.map((item) => (
+                    <li class="concern flex flex-col p-8 bg-bg-surface border border-border rounded-2xl">
+                        <h3 class="font-heading text-[clamp(1.5rem,2.2vw,1.875rem)] leading-[1.2] text-text-primary">
+                            {item.question}
+                        </h3>
+                        <p class="text-base text-text-secondary leading-relaxed mt-4 flex-1">{item.answer}</p>
+                        {item.link && (
+                            <a
+                                href={item.link.href}
+                                class="mt-6 self-start inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover underline underline-offset-4 decoration-accent/40 hover:decoration-accent transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                            >
+                                {item.link.text}
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        )}
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>

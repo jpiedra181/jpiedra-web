@@ -46,7 +46,7 @@ llega con dictamen probable, tamaño estimado y prioridad.
   `/contact`) y, si hay proceso (carrito, reserva, login), **su primer paso**.
   Los formularios son el mejor caladero: fallan a menudo y el fallo es binario.
 - Playwright MCP, en Chromium de escritorio, con el aviso de cookies cerrado.
-  axe-core 4.11.4 con reglas WCAG 2.1 A/AA (el snippet está en
+  axe-core 4.11.4 con reglas WCAG A/AA hasta 2.2 (el snippet está en
   `../diagnostico-expres/references/protocolo-pasada.md` §3) como **generador de
   candidatos**, más la comprobación manual de abajo. **Sin muestreo, sin
   pasadas profundas.** Es un sondeo de diez minutos, no el diagnóstico.
@@ -87,6 +87,10 @@ señales claras**. Nunca «estás obligado»: la heurística no lo sabe.
 
 Fuentes: `../auditoria-accesibilidad/references/marco-legal-es.md`. Si la letra
 no está clara, la frase legal se omite entera; el hook se sostiene solo.
+
+Un hallazgo que solo incumple un criterio nuevo de WCAG 2.2 (p. ej. `target-size`,
+2.5.8) **no lleva frase legal**: hoy no es exigible (la EN 301 549 V4.1.1 aún no
+está citada en el DOUE, marco-legal §7). Mejor elegir un gancho de 2.1.
 
 ## Salida: el email frío
 

@@ -5,7 +5,6 @@ import { useTranslations } from "../../../i18n/utils"
 import { laGranjaToPenalara } from "../../../data/contour-maps"
 import SectionLabel from "../../ui/SectionLabel.astro"
 import ElevationProfile from "../../ui/ElevationProfile.astro"
-import { formatElevation } from "../../../lib/format"
 
 interface Props {
     lang: Lang
@@ -62,7 +61,6 @@ const milestones = copy.milestones.map((milestone, index) => ({
                 milestonesLabel={copy.milestonesLabel}
                 caption={copy.profileCaption}
                 startLabel={copy.start}
-                endLabel={`${copy.end} · ${formatElevation(laGranjaToPenalara.to.elevation, lang)}`}
             />
         </div>
     </div>

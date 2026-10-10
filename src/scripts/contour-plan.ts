@@ -1,9 +1,10 @@
 // El plano del hero de la versión clásica. En escritorio se inclina con el
 // ratón como una maqueta sobre la mesa, se tumba más al hacer scroll y una
 // retícula de topógrafo da la cota y las coordenadas reales del punto bajo el
-// cursor, con la curva de esa cota encendida. En móvil solo baja con un
-// parallax. Todo es decorativo (aria-hidden): el titular y el texto cuentan lo
-// mismo sin él.
+// cursor, con la curva de esa cota encendida. La misma lectura se hace con
+// teclado desde .hero-explorer (flechas). En móvil solo baja con un parallax.
+// El plano es decorativo (aria-hidden): el titular y el texto cuentan lo mismo
+// sin él; la lectura de cotas se anuncia desde el explorador.
 //
 // Solo se mueven capas enteras (transform de .hero-map-tilt): el SVG no se
 // vuelve a pintar. Mover las cotas una a una costaba más de lo que aguanta
@@ -23,6 +24,11 @@ const SETTLE_EPSILON = 0.005;
 const RELIEF_ITERATIONS = 4;
 // Cerca del borde derecho, la lectura va a la izquierda del cursor.
 const READOUT_FLIP_PX = 240;
+// Teclado: lo que avanza la retícula con cada flecha (con Mayúsculas, más), y
+// la espera antes de anunciar la lectura, para no leer cada paso intermedio.
+const KEY_STEP_PX = 16;
+const KEY_STEP_LONG_PX = 64;
+const ANNOUNCE_DELAY_MS = 450;
 
 interface Tilt {
   rotateX: number;
@@ -91,6 +97,8 @@ export function initContourPlan(section: HTMLElement): () => void {
   const readoutElevation = section.querySelector<HTMLElement>('.hero-readout-z')!;
   const readoutPosition = section.querySelector<HTMLElement>('.hero-readout-geo')!;
   const lamp = section.querySelector<HTMLElement>('.hero-lamp')!;
+  const explorer = section.querySelector<HTMLElement>('.hero-explorer');
+  const explorerReading = section.querySelector<HTMLElement>('.hero-explorer-reading');
 
   // Reposo de la inclinación, definido en el CSS (cambia en móvil).
   let threeD = false;
@@ -291,6 +299,55 @@ export function initContourPlan(section: HTMLElement): () => void {
     schedule();
   };
 
+  // --- Teclado (WCAG 2.1.1): la misma lectura que con el ratón -------------
+
+  let announceTimer = 0;
+  const announce = () => {
+    window.clearTimeout(announceTimer);
+    announceTimer = window.setTimeout(() => {
+      if (!explorerReading) return;
+      explorerReading.textContent = [readoutElevation.textContent, readoutPosition.textContent].filter(Boolean).join(', ');
+    }, ANNOUNCE_DELAY_MS);
+  };
+
+  const clamp = (value: number, low: number, high: number) => Math.min(Math.max(value, low), high);
+
+  const onExplorerFocus = () => {
+    if (!explorer) return;
+    const area = explorer.getBoundingClientRect();
+    pointer = { x: area.left + area.width / 2, y: area.top + area.height / 2 };
+    introDone = true;
+    ensureHeights();
+    setSurveying(true);
+    schedule();
+    announce();
+  };
+
+  const onExplorerBlur = () => {
+    window.clearTimeout(announceTimer);
+    setSurveying(false);
+    schedule();
+  };
+
+  const onExplorerKey = (event: KeyboardEvent) => {
+    if (!explorer || !pointer) return;
+    const step = event.shiftKey ? KEY_STEP_LONG_PX : KEY_STEP_PX;
+    const moves: Record<string, [number, number]> = {
+      ArrowLeft: [-step, 0],
+      ArrowRight: [step, 0],
+      ArrowUp: [0, -step],
+      ArrowDown: [0, step],
+    };
+    const move = moves[event.key];
+    if (!move) return;
+    event.preventDefault();
+    const area = explorer.getBoundingClientRect();
+    pointer = { x: clamp(pointer.x + move[0], area.left, area.right), y: clamp(pointer.y + move[1], area.top, area.bottom) };
+    setSurveying(true);
+    schedule();
+    announce();
+  };
+
   const onIntroEnd = (event: AnimationEvent) => {
     if (event.target !== intro) return;
     introDone = true;
@@ -319,6 +376,9 @@ export function initContourPlan(section: HTMLElement): () => void {
   intro.addEventListener('animationend', onIntroEnd);
   section.addEventListener('pointermove', onPointerMove);
   section.addEventListener('pointerleave', onPointerLeave);
+  explorer?.addEventListener('focus', onExplorerFocus);
+  explorer?.addEventListener('blur', onExplorerBlur);
+  explorer?.addEventListener('keydown', onExplorerKey);
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
   schedule();
@@ -329,6 +389,10 @@ export function initContourPlan(section: HTMLElement): () => void {
     intro.removeEventListener('animationend', onIntroEnd);
     section.removeEventListener('pointermove', onPointerMove);
     section.removeEventListener('pointerleave', onPointerLeave);
+    explorer?.removeEventListener('focus', onExplorerFocus);
+    explorer?.removeEventListener('blur', onExplorerBlur);
+    explorer?.removeEventListener('keydown', onExplorerKey);
+    window.clearTimeout(announceTimer);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', onResize);
   };

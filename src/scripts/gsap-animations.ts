@@ -18,9 +18,11 @@ const EASE_OUT = 'power3.out';
 const EASE_IN_OUT = 'power2.inOut';
 const EASE_REVEAL = 'power4.out';
 const CONTOUR_DRAW_START = 'top 80%';
-// Perfil de "Sobre mí": se dibuja mientras su gráfica cruza la pantalla.
+// Perfil de "Sobre mí": se dibuja mientras su gráfica cruza la pantalla. Acaba
+// con la gráfica aún centrada: la ficha del último hito va encima de la cumbre
+// y, si terminara más tarde, se encendería ya escondida bajo la cabecera.
 const PROFILE_SCROLL_START = 'top 75%';
-const PROFILE_SCROLL_END = 'bottom 40%';
+const PROFILE_SCROLL_END = 'center 60%';
 const PROFILE_SCRUB = 0.6;
 // Cumbre del contacto: inclinación final de la maqueta al llegar.
 const SUMMIT_TILT_DEG = 38;

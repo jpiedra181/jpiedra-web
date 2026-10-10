@@ -16,6 +16,9 @@ const SETTLE_PX = 0.4;
 // Barrido de presentación al entrar en pantalla (menos de 5 s: WCAG 2.2.2).
 const INTRO_SECONDS = 2.6;
 const REST_POSITION = { x: 0.3, y: 0.28 };
+// Tercios del deslizador de luz para su texto: izquierda, centro, derecha.
+const LIGHT_ZONE_CENTER_START = 1 / 3;
+const LIGHT_ZONE_RIGHT_START = 2 / 3;
 
 const VERTEX_SHADER = `#version 300 es
 in vec2 aPosition;
@@ -270,6 +273,21 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
   // Posición de la luz en fracciones del escenario (0–1, y hacia abajo).
   const current = { ...REST_POSITION };
   const target = { ...REST_POSITION };
+
+  // El deslizador se anuncia con palabras: «35» a secas no dice dónde está la luz.
+  let lightDescription = '';
+  function describeLight() {
+    const { lightLeft, lightCenter, lightRight } = slider.dataset;
+    if (!lightLeft || !lightCenter || !lightRight) return;
+    const position = Number(slider.value) / 100;
+    const description =
+      position < LIGHT_ZONE_CENTER_START ? lightLeft : position < LIGHT_ZONE_RIGHT_START ? lightCenter : lightRight;
+    if (description === lightDescription) return;
+    lightDescription = description;
+    slider.setAttribute('aria-valuetext', description);
+  }
+  describeLight();
+
   let pixelRatio = 1;
   let frame = 0;
   let lastTime = 0;
@@ -334,6 +352,7 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
         target.y = REST_POSITION.y;
       }
       slider.value = String(Math.round(target.x * 100));
+      describeLight();
     }
 
     const amount = reducedMotion.matches ? 1 : 1 - Math.pow(1 - SMOOTHING, elapsed / 16.7);
@@ -361,6 +380,7 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
     target.x = Math.min(Math.max((clientX - bounds.left) / bounds.width, -0.2), 1.2);
     target.y = Math.min(Math.max((clientY - bounds.top) / bounds.height, -0.3), 1.1);
     slider.value = String(Math.round(Math.min(Math.max(target.x, 0), 1) * 100));
+    describeLight();
     introStart = 0;
     schedule();
   };
@@ -373,6 +393,7 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
   };
 
   const onSlider = () => {
+    describeLight();
     target.x = Number(slider.value) / 100;
     target.y = REST_POSITION.y;
     introStart = 0;

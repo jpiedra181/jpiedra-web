@@ -18,6 +18,7 @@ interface Props {
     total?: number
     sheetLabel?: string
     ofLabel?: string
+    newWindowLabel: string
 }
 
 const {
@@ -35,6 +36,7 @@ const {
     total,
     sheetLabel = "Hoja",
     ofLabel = "de",
+    newWindowLabel,
 } = Astro.props
 
 // La imagen en "cover" es más alta que su marco para que el parallax de GSAP
@@ -109,12 +111,21 @@ const sheetNumber = index === undefined ? undefined : pad(index + 1)
                 ))
             }
         </ul>
+        <!-- Los proyectos se abren siempre en otra pestaña (decisión de Javier):
+             se avisa en texto para quien no ve la flecha (WCAG G201). -->
         <a
             href={href}
+            target="_blank"
+            rel="noopener"
             class="project-link inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover underline-offset-4 hover:underline transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white group/link"
         >
             {cta}
-            <span aria-hidden="true" class="transition-transform duration-200 group-hover/link:translate-x-1">→</span>
+            <span class="sr-only">({newWindowLabel})</span>
+            <span
+                aria-hidden="true"
+                class="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                >↗</span
+            >
         </a>
     </div>
 </article>

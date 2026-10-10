@@ -2,6 +2,7 @@
 import type { Lang } from "../../types"
 import BaseLayout from "../layout/BaseLayout.astro"
 import Hero from "../sections/home/Hero.astro"
+import Concerns from "../sections/home/Concerns.astro"
 import Disciplines from "../sections/home/Disciplines.astro"
 import Projects from "../sections/Projects.astro"
 import About from "../sections/home/About.astro"
@@ -9,11 +10,13 @@ import Contact from "../sections/Contact.astro"
 import Altimeter from "../ui/Altimeter.astro"
 import { laGranjaToPenalara } from "../../data/contour-maps"
 import { useTranslations } from "../../i18n/utils"
+import { routesFor } from "../../config/site"
 import { ogImageFor } from "../../lib/seo-schema"
 
 // Versión clásica de la home (la home es el levantamiento en 3D): el mismo
 // levantamiento de la sierra, pero como plano impreso que se recorre bajando.
-// Sin WebGL, y con los proyectos, "Sobre mí" y el contacto que enlaza la 3D.
+// Sin WebGL, y con las dudas del cliente, los proyectos, "Sobre mí" y el
+// contacto que enlaza la 3D.
 interface Props {
     lang: Lang
 }
@@ -29,6 +32,7 @@ const t = useTranslations(lang)
     ogImage={ogImageFor("clasica", lang)}
 >
     <Hero lang={lang} />
+    <Concerns lang={lang} />
     <Disciplines lang={lang} />
     <Projects
         lang={lang}
@@ -44,7 +48,119 @@ const t = useTranslations(lang)
         startLabel={t.home.altimeter.start}
         endLabel={t.home.altimeter.end}
     />
+
+    <!-- Solo al llegar desde el "Fin del mundo" de la home 3D: la sierra se
+         puede reconstruir. Se queda hasta que se cierra (sin temporizador). -->
+    <div class="restore-notice" data-restore-notice role="status" hidden>
+        <p class="restore-text">
+            <strong>{t.home.restore.title}</strong>
+            {t.home.restore.text}
+        </p>
+        <a href={routesFor(lang).home} class="restore-link">
+            {t.home.restore.link}
+            <span aria-hidden="true">→</span>
+        </a>
+        <button type="button" class="restore-close" data-restore-close aria-label={t.home.restore.close}>
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
 </BaseLayout>
+
+<style>
+    /* Abajo y al centro: a la izquierda tapaba los botones del hero. */
+    .restore-notice {
+        position: fixed;
+        left: 50%;
+        bottom: 1.5rem;
+        transform: translateX(-50%);
+        z-index: 60;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem 1.25rem;
+        /* Con left: 50% el ancho automático se quedaría en media pantalla. */
+        width: max-content;
+        max-width: min(32rem, calc(100vw - 3rem));
+        padding: 1rem 3.25rem 1rem 1.25rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 0.875rem;
+        background: rgb(20 26 35 / 0.96);
+        box-shadow: 0 18px 50px rgb(0 0 0 / 0.45);
+    }
+
+    .restore-notice[hidden] {
+        display: none;
+    }
+
+    .restore-text {
+        font-size: 0.9375rem;
+        color: var(--color-text-secondary);
+    }
+
+    .restore-text strong {
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: var(--color-text-primary);
+    }
+
+    .restore-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 44px;
+        padding: 0 1.125rem;
+        border-radius: 999px;
+        /* Transparente: solo se ve con colores forzados, donde el fondo desaparece. */
+        border: 1px solid transparent;
+        background: var(--color-accent);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-bg-primary);
+    }
+
+    .restore-link:hover {
+        background: var(--color-accent-hover);
+    }
+
+    .restore-close {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+    }
+
+    .restore-close:hover {
+        color: var(--color-text-primary);
+    }
+
+    .restore-link:focus-visible,
+    .restore-close:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .restore-notice:not([hidden]) {
+            animation: restore-in 0.6s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+    }
+
+    @keyframes restore-in {
+        from {
+            opacity: 0;
+            translate: 0 16px;
+        }
+    }
+</style>
 
 <script>
     import {
@@ -61,6 +177,40 @@ const t = useTranslations(lang)
     initRevealAnimations()
     initElevationProfile()
     initAltimeter()
+
+    // Aviso tras el "Fin del mundo" (survey/controls.ts deja la marca).
+    const METEOR_FLAG = "jp:meteor"
+    const notice = document.querySelector<HTMLElement>("[data-restore-notice]")
+    let cameFromMeteor = false
+    try {
+        cameFromMeteor = sessionStorage.getItem(METEOR_FLAG) === "1"
+        sessionStorage.removeItem(METEOR_FLAG)
+    } catch {
+        // Sin sessionStorage no hay aviso; la página funciona igual.
+    }
+    if (notice && cameFromMeteor) {
+        notice.hidden = false
+        // Mientras el aviso está abierto, el navegador deja libre su altura al
+        // llevar el foco a la vista: así nada enfocado queda debajo (WCAG 2.4.11).
+        const root = document.documentElement
+        const reserveSpace = () => {
+            root.style.scrollPaddingBottom = `${notice.offsetHeight + 24}px`
+        }
+        reserveSpace()
+        const resizeObserver = new ResizeObserver(reserveSpace)
+        resizeObserver.observe(notice)
+        notice.querySelector("[data-restore-close]")?.addEventListener("click", () => {
+            notice.hidden = true
+            resizeObserver.disconnect()
+            root.style.scrollPaddingBottom = ""
+            // El foco vuelve al titular de la página, no al documento vacío.
+            const heading = document.querySelector<HTMLElement>("main h1")
+            if (heading) {
+                heading.tabIndex = -1
+                heading.focus({ preventScroll: true })
+            }
+        })
+    }
 
     document.addEventListener(
         "astro:before-swap",

@@ -208,6 +208,20 @@ const HERO_LIFT = 34
             </span>
         </div>
 
+        <!-- El plano también se lee con teclado (WCAG 2.1.1): con el foco aquí,
+             las flechas mueven la retícula (contour-plan.ts) y la lectura se
+             anuncia. role="application" deja pasar las flechas al lector de
+             pantalla. Solo en escritorio, donde existe la lectura con ratón. -->
+        <div
+            class="hero-explorer"
+            tabindex="0"
+            role="application"
+            aria-roledescription={copy.sheet.explorerRole}
+            aria-label={copy.sheet.explorer}
+        >
+            <p class="hero-explorer-reading sr-only" aria-live="polite"></p>
+        </div>
+
         <div class="hero-cartouche">
             <p class="hero-cartouche-title">{copy.sheet.title}</p>
             <p class="hero-cartouche-region">{copy.sheet.region} · {copy.sheet.equidistance}</p>
@@ -708,9 +722,30 @@ const HERO_LIFT = 34
         }
     }
 
-    @media (hover: hover) and (pointer: fine) and (min-width: 64rem) {
+    .hero-explorer {
+        display: none;
+    }
+
+    /* La lectura del plano existe en escritorio: con ratón o con teclado. */
+    @media (min-width: 64rem) {
         .hero-hint {
             display: block;
+        }
+
+        .hero-explorer {
+            display: block;
+            position: absolute;
+            top: 7rem;
+            bottom: 4rem;
+            left: 47%;
+            right: 2.5rem;
+            border-radius: 1rem;
+            pointer-events: none;
+        }
+
+        .hero-explorer:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 4px;
         }
     }
 

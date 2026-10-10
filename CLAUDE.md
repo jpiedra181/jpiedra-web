@@ -90,8 +90,10 @@ src/
 - **Grid de fondo tipo blueprint/plano** en el hero — refuerza la metáfora de "arquitecto"
 - **Mucho espacio en blanco** (bueno, espacio negro). Respirar.
 - **Tipografía con carácter**:
-  - Títulos: `Instrument Serif` (de Google Fonts) — elegante, con personalidad
-  - Cuerpo: `DM Sans` — limpia, profesional, muy legible
+  - Títulos: `Newsreader` (tamaño óptico, grosor 400; archivos propios en `src/assets/fonts`)
+  - Cuerpo: `Atkinson Hyperlegible Next` (diseñada para baja visión)
+  - Datos, cotas y código: `Atkinson Hyperlegible Mono`
+  - Cambiadas el 9-10-2026 (antes Instrument Serif y DM Sans); ver `src/styles/global.css`
 - **Imágenes reales**: usar imágenes de alta calidad. Placeholder con Unsplash como src temporal. Temas: tecnología, arquitectura, conexiones, código, workspaces. Estilo moody/dark que encaje con la paleta.
 
 ### Paleta completa
@@ -115,7 +117,7 @@ src/
 ## Estructura de secciones (contenido)
 
 ### 1. Header (fijo, transparente, con blur al scroll)
-- Logo: "JP" en Instrument Serif, con el punto dorado animado
+- Logo: "JP" en la fuente de titulares (Newsreader), con el punto dorado animado
 - Navegación: links a las secciones (smooth scroll)
 - Language switcher ES/EN (discreto)
 - Menú hamburguesa en mobile con animación de apertura

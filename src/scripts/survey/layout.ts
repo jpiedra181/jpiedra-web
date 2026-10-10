@@ -209,13 +209,25 @@ const overlapArea = (a: Rect, b: Rect) =>
   Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) *
   Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
 
+// Desplaza en horizontal lo justo para que la tarjeta no se salga de la pantalla.
+function clampToScreen(rect: Rect, width: number): Rect {
+  const shiftX = Math.max(SCREEN_MARGIN_PX - rect.left, Math.min(0, width - SCREEN_MARGIN_PX - rect.right));
+  return { ...rect, left: rect.left + shiftX, right: rect.right + shiftX };
+}
+
 export function placeCards(slots: CardSlot[], obstacles: Rect[], width: number, height: number, lift: number): void {
   const placed: Rect[] = [];
   // De arriba abajo en pantalla: las tarjetas de las cumbres más lejanas se
   // colocan primero y las demás se apartan de ellas.
   const ordered = [...slots].sort((a, b) => a.y - b.y);
   for (const slot of ordered) {
+    // Cada posición se evalúa ya desplazada dentro de la pantalla: en móvil,
+    // descartar las que se salían unos píxeles dejaba sin hueco a la tercera
+    // tarjeta. Solo vale si el pilar sigue quedando bajo la tarjeta.
+    const candidate = (placement: number) => clampToScreen(candidateRect(slot, placement, lift), width);
     const fits = (rect: Rect) =>
+      slot.x >= rect.left + PIN_GAP_PX / 2 &&
+      slot.x <= rect.right - PIN_GAP_PX / 2 &&
       rect.left >= SCREEN_MARGIN_PX &&
       rect.right <= width - SCREEN_MARGIN_PX &&
       rect.top >= SCREEN_MARGIN_PX &&
@@ -226,7 +238,7 @@ export function placeCards(slots: CardSlot[], obstacles: Rect[], width: number, 
     // Se mantiene la posición anterior mientras siga valiendo: así la tarjeta
     // no salta de lado con la deriva de la cámara.
     const order = [slot.placement, ...Array.from({ length: PLACEMENT_COUNT }, (_, i) => i).filter((i) => i !== slot.placement)];
-    let chosen = order.find((placement) => fits(candidateRect(slot, placement, lift)));
+    let chosen = order.find((placement) => fits(candidate(placement)));
     if (chosen === undefined) {
       const cost = (rect: Rect) =>
         obstacles.reduce((sum, obstacle) => sum + overlapArea(rect, obstacle), 0) +
@@ -234,15 +246,12 @@ export function placeCards(slots: CardSlot[], obstacles: Rect[], width: number, 
         OFFSCREEN_PENALTY *
           (Math.max(0, SCREEN_MARGIN_PX - rect.top) + Math.max(0, rect.bottom - (height - SCREEN_MARGIN_PX)));
       chosen = order.reduce((best, placement) =>
-        cost(candidateRect(slot, placement, lift)) < cost(candidateRect(slot, best, lift)) ? placement : best,
+        cost(candidate(placement)) < cost(candidate(best)) ? placement : best,
       );
     }
     slot.placement = chosen;
 
-    const rect = candidateRect(slot, chosen, lift);
-    // Si ninguna posición cabe del todo, al menos no se sale de la pantalla.
-    const shiftX = Math.max(SCREEN_MARGIN_PX - rect.left, Math.min(0, width - SCREEN_MARGIN_PX - rect.right));
-    const finalRect = { ...rect, left: rect.left + shiftX, right: rect.right + shiftX };
+    const finalRect = candidate(chosen);
     placed.push(finalRect);
 
     const above = finalRect.bottom <= slot.y;

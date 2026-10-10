@@ -28,8 +28,8 @@ const pageTitle =
 const pageDescription =
     description ||
     (lang === "es"
-        ? "Experiencias web 3D, accesibilidad web y webs preparadas para agentes de IA. Diseño y desarrollo de lo que una plantilla no resuelve."
-        : "3D web experiences, web accessibility and websites ready for AI agents. Design and development of what a template can’t solve.")
+        ? "Experiencias web 3D y accesibilidad web. Diseño y desarrollo de lo que una plantilla no resuelve."
+        : "3D web experiences and web accessibility. Design and development of what a template can’t solve.")
 
 // Canonical y hreflang con la barra final con la que el build sirve cada
 // página. Solo se declaran versiones en otro idioma que existen de verdad
@@ -54,6 +54,20 @@ const schemas = structuredData ? (Array.isArray(structuredData) ? structuredData
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#0B0F14" />
+<!-- Transición entre páginas (scripts/page-transition.ts): si se llega desde
+     otra página de la web, se tapa antes del primer pintado y el módulo la
+     destapa con la marea. Tiene que ir aquí, en línea y antes de pintar. -->
+<script is:inline>
+    try {
+        var arrival = JSON.parse(sessionStorage.getItem("jp:transition") || "null")
+        var fresh = arrival && Date.now() - arrival.at < 4000
+        if (fresh && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.documentElement.classList.add("pt-arriving")
+        } else if (arrival) {
+            sessionStorage.removeItem("jp:transition")
+        }
+    } catch (error) {}
+</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
 <link rel="shortcut icon" href="/favicon.ico" />

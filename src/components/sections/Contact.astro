@@ -2,7 +2,7 @@
 //@ts-nocheck
 import type { Lang } from "../../types"
 import { useTranslations } from "../../i18n/utils"
-import { penalaraSummit, sietePicosSummit, bolaDelMundoSummit } from "../../data/contour-maps"
+import { penalaraSummit, sietePicosSummit } from "../../data/contour-maps"
 import { surveyVertices } from "../../data/survey-vertices"
 import ContourMap from "../ui/ContourMap.astro"
 import { formatElevation } from "../../lib/format"
@@ -14,7 +14,7 @@ interface Props {
     // El contacto es la cumbre del recorrido: el plano de la cumbre de la
     // página (Peñalara en la clásica y en 3D, Siete Picos en accesibilidad)
     // al lado del formulario.
-    summit?: "penalara" | "sietePicos" | "bolaDelMundo"
+    summit?: "penalara" | "sietePicos"
 }
 
 const { lang } = Astro.props
@@ -25,7 +25,6 @@ const subtitle = Astro.props.subtitle ?? t.contact.subtitle
 const SUMMITS = {
     penalara: { map: penalaraSummit, vertex: "immersive", fromElevation: 2080 },
     sietePicos: { map: sietePicosSummit, vertex: "accessibility", fromElevation: 1920 },
-    bolaDelMundo: { map: bolaDelMundoSummit, vertex: "ai", fromElevation: 2040 },
 }
 const summit = Astro.props.summit ? SUMMITS[Astro.props.summit] : undefined
 const summitVertex = summit && surveyVertices.find((vertex) => vertex.id === summit.vertex)
@@ -113,7 +112,7 @@ const privacyHref =
                     aria-describedby="contact-name-error"
                     autocomplete="name"
                     placeholder={t.contact.form.namePlaceholder}
-                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
+                    class="w-full bg-transparent border-0 border-b-2 border-accent/55 px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
                 />
                 <p
                     id="contact-name-error"
@@ -140,7 +139,7 @@ const privacyHref =
                     aria-describedby="contact-email-error"
                     autocomplete="email"
                     placeholder={t.contact.form.emailPlaceholder}
-                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
+                    class="w-full bg-transparent border-0 border-b-2 border-accent/55 px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
                 />
                 <p
                     id="contact-email-error"
@@ -170,7 +169,7 @@ const privacyHref =
                     autocomplete="url"
                     inputmode="url"
                     placeholder={t.contact.form.websitePlaceholder}
-                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
+                    class="w-full bg-transparent border-0 border-b-2 border-accent/55 px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white focus-visible:border-accent transition-colors duration-200 aria-[invalid=true]:border-red-400"
                 />
                 <p
                     id="contact-website-error"
@@ -196,7 +195,7 @@ const privacyHref =
                     aria-describedby="contact-message-error"
                     rows={5}
                     placeholder={t.contact.form.messagePlaceholder}
-                    class="w-full bg-transparent border-0 border-b-2 border-border px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus:outline-none focus-visible:border-accent transition-colors duration-200 resize-y min-h-[140px] aria-[invalid=true]:border-red-400"
+                    class="w-full bg-transparent border-0 border-b-2 border-accent/55 px-0 py-3 text-base font-body text-text-primary placeholder:text-text-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white focus-visible:border-accent transition-colors duration-200 resize-y min-h-[140px] aria-[invalid=true]:border-red-400"
                 ></textarea>
                 <p
                     id="contact-message-error"
@@ -242,9 +241,17 @@ const privacyHref =
                             {t.contact.privacyConsent}<a
                                 href={privacyHref}
                                 target="_blank"
+                                rel="noopener"
+                                aria-describedby="contact-privacy-new-window"
                                 class="underline underline-offset-2 hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm"
                                 >{t.contact.privacyConsentLink}</a
                             >{t.contact.privacyConsentEnd}
+                            <!-- Como descripción y no dentro del enlace: el enlace va
+                                 dentro de la etiqueta de la casilla, y así el aviso no
+                                 entra en el nombre de la casilla. -->
+                            <span id="contact-privacy-new-window" hidden
+                                >{t.projectSheet.newWindow}</span
+                            >
                         </span>
                     </label>
                     <p
@@ -257,7 +264,7 @@ const privacyHref =
                 <button
                     type="submit"
                     id="contact-submit"
-                    class="cursor-pointer self-start inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px] mb-1"
+                    class="cursor-pointer self-start inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20 [&.is-sending]:opacity-50 [&.is-sending]:cursor-wait focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white min-h-[44px] mb-1"
                 >
                     <span id="contact-submit-text">{t.contact.form.submit}</span
                     >
@@ -266,22 +273,27 @@ const privacyHref =
         </form>
 
         <div class="mt-10 md:mt-12 flex flex-col gap-5 max-w-[600px]">
+            <!-- Lo que se ve y lo que se anuncia van por separado: una región
+                 viva oculta con display:none mientras está vacía no siempre se
+                 anuncia al llenarse, así que la que anuncia está siempre presente. -->
             <p
                 id="contact-feedback"
-                role="status"
-                aria-live="polite"
+                aria-hidden="true"
                 class="text-sm font-body empty:hidden"
             >
             </p>
+            <p id="contact-feedback-live" role="status" class="sr-only"></p>
 
             <p class="text-sm text-text-muted font-body">
                 {t.contact.note}
             </p>
 
             <div class="flex items-center gap-3">
+                <!-- Late tres veces y se queda quieto: un movimiento sin fin al
+                     lado del formulario incumple WCAG 2.2.2. -->
                 <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
                     <span
-                        class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                        class="motion-safe:animate-[ping_1s_cubic-bezier(0,0,0.2,1)_3] absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
                     ></span>
                     <span
                         class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
@@ -364,8 +376,13 @@ const privacyHref =
     const submitBtn = document.getElementById(
         "contact-submit",
     ) as HTMLButtonElement
-    const submitText = document.getElementById("contact-submit-text")!
     const feedback = document.getElementById("contact-feedback")!
+    const feedbackLive = document.getElementById("contact-feedback-live")!
+    // Pausa entre vaciar la región viva y escribir el mensaje: así se anuncia
+    // aunque se repita el mismo texto (dos errores seguidos).
+    const ANNOUNCE_DELAY_MS = 100
+    let announceTimer = 0
+    let sending = false
 
     const messages = {
         success: form.dataset.success!,
@@ -501,6 +518,11 @@ const privacyHref =
 
     function setFeedback(text: string, tone: "neutral" | "success" | "error") {
         feedback.textContent = text
+        window.clearTimeout(announceTimer)
+        feedbackLive.textContent = ""
+        announceTimer = window.setTimeout(() => {
+            feedbackLive.textContent = text
+        }, ANNOUNCE_DELAY_MS)
         feedback.classList.remove(
             "text-red-400",
             "text-green-400",
@@ -513,6 +535,10 @@ const privacyHref =
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault()
+        // Mientras envía no se desactiva el botón: con disabled pierde el foco,
+        // y con aria-disabled NVDA anuncia «no disponible» y se come el aviso
+        // de la línea de estado. Un indicador interno basta para no enviar dos veces.
+        if (sending) return
 
         const { valid, firstInvalid } = validate()
         if (!valid) {
@@ -530,9 +556,10 @@ const privacyHref =
             return
         }
 
-        submitBtn.disabled = true
-        submitText.textContent = messages.sending
+        sending = true
+        submitBtn.classList.add("is-sending")
         setFeedback(messages.sending, "neutral")
+        let outcome: "success" | "error" = "error"
 
         try {
             const data = {
@@ -557,15 +584,17 @@ const privacyHref =
             if (!response.ok)
                 throw new Error(`Server error: ${response.status}`)
 
-            setFeedback(messages.success, "success")
             form.reset()
             clearAllErrors()
+            outcome = "success"
         } catch (err) {
             console.error("Form error:", err)
-            setFeedback(messages.error, "error")
         } finally {
-            submitBtn.disabled = false
-            submitText.textContent = messages.submit
+            sending = false
+            submitBtn.classList.remove("is-sending")
+            // El resultado va lo último, cuando ya no cambia nada más: si el
+            // botón cambiara después, NVDA lo anunciaría a él y no el resultado.
+            setFeedback(messages[outcome], outcome)
         }
     })
 </script>

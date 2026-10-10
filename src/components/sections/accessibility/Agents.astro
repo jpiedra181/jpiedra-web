@@ -1,0 +1,56 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import SectionLabel from "../../ui/SectionLabel.astro"
+import AgentDemo from "../../ui/AgentDemo.astro"
+
+// Lo que antes era la landing /agentes-ia (que redirige aquí): no es otro
+// servicio, es un argumento más para la accesibilidad. Un agente de IA lee el
+// mismo árbol de accesibilidad que un lector de pantalla.
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const copy = useTranslations(lang).accessibilityLanding.agents
+const sectionId = lang === "en" ? "ai-agents" : "agentes-ia"
+---
+
+<section
+    id={sectionId}
+    aria-labelledby={`${sectionId}-title`}
+    class="relative pb-24 md:pb-32 lg:pb-40"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-[0.9fr_1.1fr] gap-14 lg:gap-20 items-center">
+        <div class="min-w-0">
+            <div data-wipe>
+                <SectionLabel text={copy.label} />
+            </div>
+            <h2
+                id={`${sectionId}-title`}
+                data-split
+                class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-text-primary max-w-[16ch]"
+            >
+                {copy.title}
+            </h2>
+            <p
+                data-reveal
+                class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[38rem]"
+            >
+                {copy.text}
+            </p>
+        </div>
+
+        <div data-reveal class="min-w-0">
+            <AgentDemo copy={copy.demo} />
+        </div>
+    </div>
+</section>
+
+<script>
+    import { initAgentDemo } from "../../../scripts/agent-demo"
+
+    const demo = document.querySelector<HTMLElement>("[data-agent]")
+    if (demo) initAgentDemo(demo)
+</script>

@@ -7,6 +7,9 @@ interface Props {
     copy: {
         caption: string
         lightLabel: string
+        lightLeft: string
+        lightCenter: string
+        lightRight: string
         hint: string
         hintTouch: string
         items: { name: string; note: string }[]
@@ -36,7 +39,16 @@ const { copy } = Astro.props
 
     <div class="swatches-control">
         <label for="swatches-light">{copy.lightLabel}</label>
-        <input id="swatches-light" type="range" min="0" max="100" value="30" />
+        <input
+            id="swatches-light"
+            type="range"
+            min="0"
+            max="100"
+            value="30"
+            data-light-left={copy.lightLeft}
+            data-light-center={copy.lightCenter}
+            data-light-right={copy.lightRight}
+        />
         <p class="swatches-hint" aria-hidden="true">
             <span class="hint-pointer">{copy.hint}</span>
             <span class="hint-touch">{copy.hintTouch}</span>

@@ -1,4 +1,4 @@
-// Demo del agente de /agentes-ia (AgentDemo.astro): cambia entre la ficha tal
+// Demo del agente de /accesibilidad-web (AgentDemo.astro): cambia entre la ficha tal
 // como está y la arreglada, y repite la vuelta del agente. La primera vuelta
 // arranca sola al llegar a la demo y dura unos 4 s (WCAG 2.2.2).
 

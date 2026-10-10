@@ -14,14 +14,13 @@ const year = new Date().getFullYear()
 
 const basePath = lang === "es" ? "/" : "/en/"
 
-// Las tres especialidades, la herramienta gratuita y el blog. El autoevaluador
+// Las dos especialidades, la herramienta gratuita y el blog. El autoevaluador
 // y el blog tratan la ley española y solo existen en español: en inglés el
 // blog se enlaza avisando del idioma.
 const routes = routesFor(lang)
 const servicesItems = [
     { href: routes.immersive, label: t.footer.services.immersive },
     { href: routes.accessibility, label: t.footer.services.accessibility },
-    { href: routes.ai, label: t.footer.services.ai },
     ...(lang === "es" ? [{ href: routes.law, label: t.footer.services.law }] : []),
     { href: routes.blog, label: t.footer.services.blog, hreflang: lang === "en" ? "es" : undefined },
 ]

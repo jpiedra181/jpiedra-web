@@ -20,9 +20,10 @@
 - Coletilla obligatoria en cualquier salida con contenido legal: el auditor es
   especialista en accesibilidad, **no abogado**; la aplicación a un caso
   concreto puede tener matices que requieran asesoramiento jurídico.
-- Este archivo dice **quién está obligado y a qué**. El listón técnico (qué
-  criterios se evalúan) es siempre el mismo: EN 301 549 V3.2.1, capítulo 9
-  (= WCAG 2.1 A/AA). Está en `criterios-wcag.md`.
+- Este archivo dice **quién está obligado y a qué**. El listón técnico legal
+  es EN 301 549 V3.2.1, capítulo 9 (= WCAG 2.1 A/AA) hasta que V4.1.1 se cite
+  en el DOUE; la auditoría evalúa a la vez WCAG 2.2 AA y 9.7 de V4.1.1 (ver
+  §7 y `criterios-wcag.md`).
 
 ## 1. Jerarquía normativa
 
@@ -47,10 +48,11 @@ criterio WCAG; WCAG 2.4.7 → EN 9.2.4.7).
 
 `[Fuente: RD 1112/2018 arts. 5-6; Ley 11/2023 arts. 13.3 y 17; EN 301 549 V3.2.1 · VERIFICADO]`
 
-**Estado de WCAG 2.2 / EN 301 549 V4.1.1 (a 2026-09-02):** la V4.1.1, que
-incorpora WCAG 2.2, **todavía no está referenciada en el DOUE**. La referencia
-se espera entre octubre y noviembre de 2026. Hasta que se publique, el listón
-legal es 2.1 AA. Ver §7.
+**Estado de WCAG 2.2 / EN 301 549 V4.1.1 (a 2026-10-08):** ETSI publicó la
+V4.1.1 en septiembre de 2026 (portada: «EN 301 549 V4.1.1 (2026-09)»;
+AccessibleEU lo anunció el 7-9-2026). Incorpora WCAG 2.2 y **todavía no está
+citada en el DOUE**. Hasta que se cite, el listón legal es 2.1 AA (V3.2.1).
+Ver §7.
 
 ## 2. Determinación del régimen aplicable
 
@@ -323,19 +325,27 @@ dos calendarios es el origen del mito.
 
 ## 7. Transición WCAG 2.1 → 2.2
 
-- Listón legal hoy: WCAG 2.1 AA vía EN 301 549 V3.2.1 (referencia DOUE 2021).
-- EN 301 549 V4.1.1 (mandato M/587) incorpora WCAG 2.2 AA; borrador V4.1.0 de
-  noviembre de 2025; **referencia en el DOUE prevista entre octubre y noviembre
-  de 2026, aún no publicada a 2026-09-02**. Comprobar antes de cada auditoría:
-  buscar «EN 301 549 V4.1.1 Official Journal» y anotar la fecha de comprobación
-  en el informe.
-- Publicarse ≠ obligar: hasta la referencia en el DOUE, 2.2 es mejora voluntaria.
-- WCAG 2.2 = 2.1 + 6 criterios A/AA nuevos y **retira 4.1.1**; es
-  retrocompatible. Detalle en `criterios-wcag.md`.
-- Comercial: 2.1 AA es lo que se audita y sostiene el veredicto; 2.2 AA es el
-  add-on de anticipación, en sección aparte y sin efecto en el veredicto.
+- **Listón legal hoy:** WCAG 2.1 AA vía EN 301 549 V3.2.1 (referencia DOUE 2021).
+- **EN 301 549 V4.1.1 (2026-09)**, ya publicada por ETSI (mandato M/587;
+  copia en `.claude/sources/en_301549v040101p.pdf` y texto en `.txt`):
+  - adopta WCAG 2.2 AA en el capítulo 9: 6 criterios A/AA nuevos (9.2.4.11,
+    9.2.5.7, 9.2.5.8, 9.3.2.6, 9.3.3.7, 9.3.3.8);
+  - deja **9.4.1.1 vacía («Void»)**: 4.1.1 Procesamiento desaparece;
+  - añade **9.7 Preferencias del usuario para páginas web**, que no es un
+    criterio WCAG (la web no bloquea ni sobrescribe las preferencias de
+    accesibilidad de la plataforma salvo que sea esencial; anexo C.9.7);
+  - mantiene 9.6 (requisitos de conformidad de WCAG).
+- **Publicarse ≠ obligar:** la presunción de conformidad llega cuando la
+  referencia se cite en el DOUE. **A 2026-10-08 no está citada.** Comprobar
+  antes de cada auditoría (buscar «EN 301 549 V4.1.1 Official Journal») y
+  anotar la fecha de la comprobación en el informe.
+- **Qué se hace (desde el 8-10-2026):** una sola pasada y dos veredictos
+  (`SKILL.md`, «Doble veredicto»): 2.1 AA, el legal, que va a la declaración y
+  al documento de cumplimiento; y 2.2 AA + 9.7, lo que pedirá la norma.
+- **Caducidad:** el día que se cite V4.1.1 en el DOUE, el veredicto 2.2 pasa a
+  ser el legal y esta sección se reescribe.
 
-`[Fuente: ETSI work programme, W3C · VERIFICADO web 2026-09-02]`
+`[Fuente: EN 301 549 V4.1.1 (2026-09) cl. 9.4.1.1, 9.6, 9.7 y anexo C.9.7; AccessibleEU 2026-09-07 · VERIFICADO 2026-10-08]`
 
 ## 8. Decisión de Ejecución (UE) 2018/1523 — modelo de declaración (sector público)
 
@@ -372,7 +382,7 @@ Texto oficial en `.claude/sources/decision-2018-1523-eurlex.pdf` (DOUE L 256 de
   adaptada y la aplica).
 
 Consecuencia para el veredicto de la auditoría: los tres estados de la
-declaración se derivan **mecánicamente** de la tabla de los 50 criterios
+declaración se derivan **mecánicamente** de la tabla (veredicto 2.1, las 50 filas de la norma vigente)
 (regla en `protocolo-auditoria.md` §7). El auditor no «elige» el estado.
 
 `[Fuente: DOUE L 256/103-107 · VERIFICADO 2026-09-02 sobre el PDF oficial]`
@@ -403,6 +413,7 @@ declaración se derivan **mecánicamente** de la tabla de los 50 criterios
 | `decision-2018-1523-eurlex.pdf` + `.txt` | Decisión (UE) 2018/1523, DOUE oficial | 2026-09-02 |
 | `decision-2018-1523.html` | Nota interna con la adaptación española verificada (AEAT 2025) | 2026-06-25 |
 | `en_301549v030201p.pdf` | EN 301 549 V3.2.1 | 2026-06-25 |
+| `en_301549v040101p.pdf` + `.txt` | EN 301 549 V4.1.1 (2026-09), ETSI; el `.txt` sale de `pdftotext -layout` | 2026-10-08 |
 | `wcag21.html` | WCAG 2.1 Recommendation (W3C) | 2026-09-02 |
 | `wcag-em.html` | WCAG-EM 2.0, metodología de evaluación (W3C Group Note, 23-07-2026; sustituye a la 1.0 de 2014) | 2026-09-02 |
 | `wcag21-understanding-4.1.1-parsing.html` | Understanding 4.1.1 con la nota «always satisfied» | 2026-09-02 |

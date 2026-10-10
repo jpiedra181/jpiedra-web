@@ -46,6 +46,9 @@ export interface Soundscape {
   update(conditions: SoundConditions): void;
   ping(altitudeMetres: number): void;
   whoosh(seconds: number): void;
+  // Fin del mundo: el rugido que se acerca y el golpe del impacto.
+  meteor(seconds: number): void;
+  impact(): void;
   dispose(): void;
 }
 
@@ -214,6 +217,63 @@ export function createSoundscape(): Soundscape {
       source.connect(band).connect(envelope).connect(master);
       source.start(now);
       source.stop(now + seconds + 0.1);
+    },
+    meteor(seconds) {
+      if (!context || !enabled) return;
+      const now = context.currentTime;
+      const source = context.createBufferSource();
+      source.buffer = whiteNoise;
+      source.loop = true;
+      const roar = context.createBiquadFilter();
+      roar.type = 'lowpass';
+      roar.frequency.setValueAtTime(160, now);
+      roar.frequency.exponentialRampToValueAtTime(1800, now + seconds);
+      const envelope = context.createGain();
+      envelope.gain.setValueAtTime(0.0001, now);
+      envelope.gain.exponentialRampToValueAtTime(0.32, now + seconds);
+      envelope.gain.linearRampToValueAtTime(0, now + seconds + 0.08);
+      source.connect(roar).connect(envelope).connect(master);
+      source.start(now);
+      source.stop(now + seconds + 0.1);
+      // El silbido que baja de tono, como en las películas.
+      const whistle = context.createOscillator();
+      whistle.type = 'sine';
+      whistle.frequency.setValueAtTime(1300, now);
+      whistle.frequency.exponentialRampToValueAtTime(220, now + seconds);
+      const whistleGain = context.createGain();
+      whistleGain.gain.setValueAtTime(0, now);
+      whistleGain.gain.linearRampToValueAtTime(0.035, now + seconds * 0.7);
+      whistleGain.gain.linearRampToValueAtTime(0, now + seconds);
+      whistle.connect(whistleGain).connect(master);
+      whistle.start(now);
+      whistle.stop(now + seconds + 0.05);
+    },
+    impact() {
+      if (!context || !enabled) return;
+      const now = context.currentTime;
+      const source = context.createBufferSource();
+      source.buffer = whiteNoise;
+      source.loop = true;
+      const rumble = context.createBiquadFilter();
+      rumble.type = 'lowpass';
+      rumble.frequency.setValueAtTime(1400, now);
+      rumble.frequency.exponentialRampToValueAtTime(90, now + 2.6);
+      const envelope = context.createGain();
+      envelope.gain.setValueAtTime(0.75, now);
+      envelope.gain.exponentialRampToValueAtTime(0.0001, now + 3);
+      source.connect(rumble).connect(envelope).connect(master);
+      source.start(now);
+      source.stop(now + 3.1);
+      const sub = context.createOscillator();
+      sub.type = 'sine';
+      sub.frequency.setValueAtTime(62, now);
+      sub.frequency.exponentialRampToValueAtTime(28, now + 2);
+      const subGain = context.createGain();
+      subGain.gain.setValueAtTime(0.6, now);
+      subGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
+      sub.connect(subGain).connect(master);
+      sub.start(now);
+      sub.stop(now + 2.5);
     },
     dispose() {
       window.clearInterval(cricketTimer);
