@@ -42,13 +42,15 @@ const structuredData = [
     ogImage={ogImageFor("experiencias-3d", lang)}
     structuredData={structuredData}
 >
-    <!-- Carta de ventas: el problema, las pruebas, las dudas con su prueba y lo
+    <!-- Carta de ventas que abre por el miedo al 3D (que pese, que vaya lenta,
+         que Google no lo vea) y lo desmonta con lo medido; después, los
+         proyectos de donde salen las medidas, para quién es, cómo trabajo y lo
          práctico antes de pedir presupuesto. -->
     <Hero lang={lang} />
-    <Problem lang={lang} />
+    <Doubts lang={lang} />
     <Projects
         lang={lang}
-        id="pruebas"
+        id="proyectos"
         label={copy.proof.label}
         title={copy.proof.title}
         intro={copy.proof.intro}
@@ -57,7 +59,7 @@ const structuredData = [
         problemLabel={copy.proof.problemLabel}
         note={copy.proof.note}
     />
-    <Doubts lang={lang} />
+    <Problem lang={lang} />
     <Process lang={lang} />
     <Faq id="lo-practico" copy={copy.faq} />
     <Contact

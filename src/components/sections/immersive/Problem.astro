@@ -29,16 +29,16 @@ const FRAMES = [
 ---
 
 <section
-    id="el-problema"
-    aria-labelledby="el-problema-title"
-    class="relative py-24 md:py-32 lg:py-40 bg-bg-surface border-t border-b border-border"
+    id="para-quien"
+    aria-labelledby="para-quien-title"
+    class="relative py-24 md:py-32 lg:py-40 border-t border-border"
 >
     <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <div data-wipe>
             <SectionLabel text={copy.label} />
         </div>
         <h2
-            id="el-problema-title"
+            id="para-quien-title"
             data-split
             class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary max-w-[22ch]"
         >
@@ -69,27 +69,10 @@ const FRAMES = [
                 ))
             }
         </ul>
-
-        <!-- El miedo razonable al 3D: lo que el resto de la página desmonta con pruebas. -->
-        <p data-reveal class="problem-outro">
-            {copy.outro}
-        </p>
     </div>
 </section>
 
 <style>
-    .problem-outro {
-        max-width: 46rem;
-        margin-top: 4rem;
-        padding-left: 1.5rem;
-        border-left: 2px solid var(--color-accent);
-        font-family: var(--font-heading);
-        font-size: clamp(1.375rem, 2.4vw, 1.875rem);
-        line-height: 1.35;
-        color: var(--color-text-primary);
-        text-wrap: pretty;
-    }
-
     .usecase {
         position: relative;
         display: flex;
@@ -97,7 +80,7 @@ const FRAMES = [
         padding: 2rem;
         border: 1px solid var(--color-border);
         border-radius: 1rem;
-        background: var(--color-bg-primary);
+        background: var(--color-bg-surface);
         overflow: hidden;
         isolation: isolate;
     }

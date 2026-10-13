@@ -53,7 +53,8 @@ export const routesEn: SiteRoutes = {
 // Ancla de la sección de precios de accesibilidad en cada idioma.
 export const pricingId = (lang: Lang) => (lang === 'en' ? 'pricing' : 'precios');
 
-// Ancla de «Lo que te preocupa» en la versión clásica.
+// Ancla de las dudas comunes («Tus dudas») en la versión clásica. A ella enlaza
+// la cumbre «Tus dudas» de la home 3D.
 export const questionsId = (lang: Lang) => (lang === 'en' ? 'questions' : 'dudas');
 
 export const routesFor = (lang: Lang): SiteRoutes => (lang === 'en' ? routesEn : routes);

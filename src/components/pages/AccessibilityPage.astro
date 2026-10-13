@@ -2,11 +2,12 @@
 import type { Lang } from "../../types"
 import BaseLayout from "../layout/BaseLayout.astro"
 import Hero from "../sections/accessibility/Hero.astro"
-import Autoevaluador from "../sections/accessibility/Autoevaluador.astro"
 import Context from "../sections/accessibility/Context.astro"
+import Law from "../sections/accessibility/Law.astro"
 import Agents from "../sections/accessibility/Agents.astro"
 import Approach from "../sections/accessibility/Approach.astro"
 import CaseStudy from "../sections/accessibility/CaseStudy.astro"
+import Projects from "../sections/Projects.astro"
 import Faq from "../sections/Faq.astro"
 import Contact from "../sections/Contact.astro"
 import { siteConfig, routesFor } from "../../config/site"
@@ -16,10 +17,11 @@ import { buildServicesSchema } from "../../lib/services-schema"
 
 // Única página comercial de accesibilidad: cuelga de Siete Picos (V·02) en la
 // home 3D y reúne lo que antes estaba repartido en /servicios y
-// /auditoria-accesibilidad (que redirigen aquí). Orden: el problema, por qué
-// cuesta dinero, que también sirve a los agentes de IA (antes /agentes-ia),
-// qué hago y cuánto cuesta, la prueba, si te aplica la ley, las
-// dudas y el contacto. La versión inglesa sigue con las secciones antiguas.
+// /auditoria-accesibilidad (que redirigen aquí). Tres argumentos, en este
+// orden: accesible no quiere decir aburrida (con VETA e Inside the Frame como
+// prueba), lo que cuesta dejar fuera a quien quiere comprar y, si no basta, la
+// ley. Después, mi propia web auditada, qué hago y cuánto cuesta, los agentes
+// de IA (antes /agentes-ia), las dudas y el contacto.
 interface Props {
     lang: Lang
 }
@@ -51,11 +53,21 @@ const structuredData = [
     structuredData={structuredData}
 >
     <Hero lang={lang} />
+    <Projects
+        lang={lang}
+        id={lang === "en" ? "proof" : "prueba"}
+        label={copy.showcase.label}
+        title={copy.showcase.title}
+        intro={copy.showcase.intro}
+        slugs={["veta", "insideTheFrame"]}
+        cases={copy.showcase.cases}
+        surface
+    />
     <Context lang={lang} />
-    <Agents lang={lang} />
-    <Approach lang={lang} />
+    <Law lang={lang} />
     <CaseStudy lang={lang} />
-    {lang === "es" && <Autoevaluador lang={lang} />}
+    <Approach lang={lang} />
+    <Agents lang={lang} />
     <Faq id="preguntas" copy={t.accessibilityLanding.faq} />
     <Contact
         lang={lang}

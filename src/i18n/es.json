@@ -196,25 +196,41 @@
       "secondaryLabel": "Escribirme directamente"
     }
   },
-  "hero": {
-    "label": "DESARROLLADOR WEB • ESPECIALISTA EN ACCESIBILIDAD WEB",
-    "title": "Hay gente que quiere comprarte",
-    "title_1": "y tu web no se lo permite.",
-    "subtitle": "Un botón que el lector de pantalla anuncia como «enlace vacío». Un formulario que no se puede rellenar con teclado. Un texto que no llega a leerse. No son detalles técnicos: son pedidos que se van sin que llegues a enterarte. Audito y arreglo webs según WCAG 2.2 AA y la Ley 11/2023.",
-    "cta": "Ver servicios y precios",
-    "tags": [
-      "Automatización",
-      "Web moderna",
-      "IA aplicada",
-      "Integraciones",
-      "APIs",
-      "Consultoría técnica"
-    ]
-  },
   "context": {
-    "eyebrow": "POR QUÉ IMPORTA",
-    "title": "Antes que un problema legal, es un problema de facturación.",
-    "subtitle": "Cuando alguien no consigue terminar una compra en tu web, casi nunca te escribe para contártelo. Se va y lo compra en otro sitio. El coste lo pagas igual; lo que no tienes es la factura donde verlo.",
+    "eyebrow": "Lo que cuesta",
+    "title": "Hay gente que quiere comprarte y tu web no se lo permite.",
+    "subtitle": "Un botón que el lector de pantalla anuncia como «enlace vacío». Un formulario que no se puede rellenar con teclado. Un texto que no llega a leerse. No son detalles técnicos: son compras, reservas y visitas que se van sin que llegues a enterarte.",
+    "statsIntro": "Cuando alguien no consigue terminar una compra en tu web, casi nunca te escribe para contártelo. Se va y lo compra en otro sitio. El coste lo pagas igual; lo que no tienes es la factura donde verlo.",
+    "xray": {
+      "toggle": "Ver lo que oye un lector de pantalla",
+      "hint": "Pasa el cursor por la ficha.",
+      "hintTouch": "Arrastra sobre la ficha o usa el botón.",
+      "caption": "Una ficha de producto corriente. Con la lupa se ve lo que anuncia un lector de pantalla: la foto es «IMG_4032.jpg», los colores y la cesta son «botón» sin nombre, el corazón es un «enlace» vacío y el campo de cantidad no dice qué es.",
+      "product": {
+        "name": "Jarrón Alba",
+        "detail": "Gres esmaltado · 24 cm",
+        "price": "64,00 €",
+        "colors": "Color",
+        "quantity": "Cantidad",
+        "reviews": "(38 opiniones)"
+      },
+      "reader": {
+        "image": "imagen, IMG_4032.jpg",
+        "heading": "encabezado, Jarrón Alba",
+        "price": "64,00 €",
+        "color": "botón",
+        "quantity": "edición, 1",
+        "minus": "botón",
+        "plus": "botón",
+        "cart": "botón",
+        "favorite": "enlace",
+        "rating": "imagen"
+      },
+      "legend": {
+        "problem": "Barrera",
+        "ok": "Bien"
+      }
+    },
     "stats": [
       {
         "value": "8 %",
@@ -232,7 +248,6 @@
         "description": "de las webs más visitadas del mundo falla comprobaciones automáticas de accesibilidad. La tuya, probablemente, también."
       }
     ],
-    "closing": "Y sí, además es obligatorio: desde el 28 de junio de 2025 la Ley 11/2023 lo exige. Pero el coste de no hacerlo empezó a correr mucho antes que la primera multa.",
     "sources": "Fuentes: Click-Away Pound 2019 (Reino Unido), INE (EDAD 2020 y Proyecciones de población 2026-2076) y WebAIM Million 2026. No existe un estudio equivalente al Click-Away Pound para el mercado español."
   },
   "about": {
@@ -426,21 +441,17 @@
   "home": {
     "meta": {
       "title": "Javier Piedra · Diseño y desarrollo web: 3D y accesibilidad",
-      "description": "Webs y experiencias 3D que cargan rápido en el móvil, que Google entiende, que puede usar cualquiera y que cumplen WCAG 2.2 AA. Tus dudas, respondidas."
+      "description": "¿Quieres 3D sin que tu web vaya lenta? ¿Te piden que cumpla la ley de accesibilidad? Experiencias web 3D rápidas y accesibilidad WCAG 2.2 AA, con pruebas."
     },
     "hero": {
       "label": "Javier Piedra · Diseño y desarrollo web",
       "titleStart": "La parte",
       "titleHighlight": "difícil",
       "titleEnd": "de la web.",
-      "subtitle": "Que cargue rápido en el móvil de tus clientes. Que Google la entienda. Que la pueda usar cualquiera, también con teclado o lector de pantalla, y que cumpla la ley. Una plantilla no resuelve nada de eso. Yo sí, también cuando lo que tienes que enseñar es un producto en 3D.",
-      "ctaPrimary": "Ver proyectos",
-      "ctaSecondary": "Hablemos",
+      "subtitle": "¿Quieres 3D en tu web, pero te da miedo que vaya lenta y que Google te castigue? ¿Te preguntan si cumple la ley de accesibilidad y no sabes qué contestar? Las dos cosas tienen solución, y ninguna viene en una plantilla. Empieza por la tuya:",
+      "ctaImmersive": "Experiencias 3D",
+      "ctaAccessibility": "Accesibilidad web",
       "sheet": {
-        "title": "Macizo de Peñalara",
-        "region": "Sierra de Guadarrama",
-        "equidistance": "Curvas cada 40 m",
-        "scale": "1 km",
         "sources": "Relieve: MDT25 © Instituto Geográfico Nacional. Agua: © colaboradores de OpenStreetMap.",
         "view3d": "Ver la versión 3D",
         "hint": "Pasa el cursor por el plano, o llega con Tab y usa las flechas: te da la cota de cada punto.",
@@ -449,23 +460,96 @@
       }
     },
     "disciplines": {
-      "label": "Cómo te ayudo",
-      "title": "Dos problemas que resuelvo de principio a fin.",
-      "subtitle": "Un producto que no luce en una foto, o una web que deja gente fuera y te expone ante la ley. A veces son el mismo proyecto: un catálogo 3D también tiene que poder usarlo cualquiera.",
+      "label": "Elige tu caso",
+      "title": "¿Cuál de las dos te suena?",
+      "subtitle": "Son dos problemas distintos, con soluciones distintas. Elige el tuyo: en su página tienes cómo lo resuelvo y pruebas que puedes abrir en tu móvil.",
+      "symptomsLabel": "Te suena si…",
       "items": [
         {
           "key": "immersive",
-          "title": "Experiencias web 3D",
-          "description": "Para cuando una foto no basta: el acabado de una piedra, la escala de una obra, un espacio que hay que recorrer. Catálogos, visores y salas en el navegador, rápidos en el móvil y fáciles de encontrar en Google.",
+          "audience": "Cerámica, piedra, mobiliario, museos y turismo",
+          "title": "Quieres 3D, pero temes que hunda tu web",
+          "symptoms": [
+            "Piensas que el 3D pesa tanto que tu web tardará una eternidad en cargar.",
+            "Te han dicho que Google lo penaliza y que perderás visitas.",
+            "Has visto webs 3D preciosas que en el móvil se quedan colgadas."
+          ],
+          "solution": "Se construye para el móvil desde el principio y se mide antes de entregar: Inside the Frame, una sala 3D entera, saca 99–100 de rendimiento en el móvil. Y Google lee todo lo importante, porque también va en texto.",
           "cta": "Ver experiencias 3D"
         },
         {
           "key": "accessibility",
-          "title": "Accesibilidad web",
-          "description": "Para cuando la ley te obliga o un formulario te está costando clientes. Audito tu web con WCAG 2.2 AA, te digo qué falla y a quién deja fuera, y lo arreglo si quieres.",
+          "audience": "Tiendas online, reservas, servicios y administraciones",
+          "title": "Te piden que tu web cumpla la ley",
+          "symptoms": [
+            "Te preguntan si tu web cumple la Ley 11/2023 y no sabes qué contestar.",
+            "Alguien intenta comprarte y no puede: un formulario que no va con teclado, un botón sin nombre.",
+            "Te han ofrecido un plugin que lo arregla todo con un clic. No lo arregla."
+          ],
+          "solution": "Audito tu web con WCAG 2.2 AA, te digo qué falla y a quién deja fuera, y lo arreglo si quieres. Con los precios publicados.",
           "cta": "Ver accesibilidad web"
         }
-      ]
+      ],
+      "both": {
+        "text": "¿Las dos a la vez? Pasa más de lo que parece: un catálogo 3D también tiene que poder usarlo cualquiera.",
+        "link": "Cuéntamelo"
+      },
+      "common": {
+        "label": "Tus dudas",
+        "title": "Lo que te frena, resuelto de serie.",
+        "intro": "Vengas por el 3D o por la accesibilidad, estas cuatro cosas van incluidas.",
+        "items": [
+          {
+            "key": "speed",
+            "question": "¿Irá lenta?",
+            "answer": "No tiene por qué. Se carga solo lo que hace falta y se mide en un móvil de gama media. Inside the Frame, con su sala 3D, saca 99–100 de rendimiento en el móvil.",
+            "visual": {
+              "score": "99",
+              "scoreLabel": "Lighthouse, en el móvil",
+              "source": "Inside the Frame",
+              "stats": [
+                {
+                  "value": "< 2,5 s",
+                  "label": "hasta verse"
+                },
+                {
+                  "value": "< 25 KB",
+                  "label": "para arrancar"
+                }
+              ]
+            }
+          },
+          {
+            "key": "mobile",
+            "question": "¿Se verá bien en el móvil?",
+            "answer": "Se diseña primero para el móvil y se prueba a 320 píxeles de ancho y con la letra ampliada. Si algo no cabe, se reordena. No se esconde.",
+            "visual": {
+              "width": "320 px"
+            }
+          },
+          {
+            "key": "access",
+            "question": "¿La podrá usar cualquiera?",
+            "answer": "Con ratón, con el dedo, con teclado y con lector de pantalla. Con WCAG 2.2 AA, que cubre lo que hoy exige la ley, y comprobado a mano, no solo con herramientas.",
+            "visual": {
+              "key": "Tab",
+              "button": "Rooms",
+              "reader": "NVDA",
+              "speech": "Rooms, botón, abre diálogo"
+            }
+          },
+          {
+            "key": "google",
+            "question": "¿Me hundirá en Google?",
+            "answer": "Google no mira dentro del 3D: lee texto. Así que lo importante va también en HTML, con su título y su descripción. El 3D va encima del texto, no en su lugar.",
+            "visual": {
+              "url": "artgallery360.art › wave",
+              "title": "Wave: Under the Wave off Kanagawa — Inside the Frame",
+              "description": "Katsushika Hokusai, c. 1830–32. A wall of Prussian blue rears over three fishing boats…"
+            }
+          }
+        ]
+      }
     },
     "work": {
       "label": "Proyectos",
@@ -508,49 +592,6 @@
       "text": "De la sierra solo queda el plano.",
       "link": "Reconstruirla en 3D",
       "close": "Cerrar aviso"
-    },
-    "concerns": {
-      "label": "Lo que te preocupa",
-      "title": "Lo que me preguntan antes de empezar.",
-      "intro": "Nadie me escribe para hablar de WebGL. Me escriben porque su web va lenta, se ve rara en el móvil, no aparece en Google o les ha llegado un aviso sobre la ley de accesibilidad. Estas son las respuestas.",
-      "items": [
-        {
-          "question": "¿Irá rápida?",
-          "answer": "En el móvil de gama media de tu cliente, que es donde se decide, no en el ordenador con el que se diseña. Cargo solo lo que hace falta en cada momento y lo mido antes de entregar.",
-          "link": {
-            "text": "Mídelo tú en tu pantalla",
-            "href": "/experiencias-3d/#lo-que-no-se-ve"
-          }
-        },
-        {
-          "question": "¿Se verá bien en el móvil?",
-          "answer": "Se diseña primero para el móvil y se prueba a 320 píxeles de ancho, en horizontal y con el texto ampliado al 400 %. Si algo no cabe, se reordena. No se esconde."
-        },
-        {
-          "question": "¿La podrá usar cualquiera? ¿Cumple la ley?",
-          "answer": "Trabajo con WCAG 2.2 AA, que cubre todo lo que hoy exige la ley y lo que pedirá la próxima versión de la norma europea. Y lo compruebo a mano: con teclado, midiendo el contraste y con un lector de pantalla real. Esta web la audité así, y el resultado está publicado.",
-          "link": {
-            "text": "Ver el resultado",
-            "href": "/accesibilidad/"
-          }
-        },
-        {
-          "question": "¿Me encontrará Google?",
-          "answer": "Google lee texto, no imágenes ni escenas 3D. Por eso todo lo importante va en HTML, con sus títulos, sus descripciones y una estructura clara, aunque haya 3D encima. No te prometo el primer puesto: nadie serio puede. Lo que sí te aseguro es que Google podrá leer y entender todo lo que ofreces."
-        },
-        {
-          "question": "¿Cuánto cuesta?",
-          "answer": "Te doy precio cerrado antes de empezar. En accesibilidad, las tarifas están publicadas. En 3D no hay dos proyectos iguales, así que primero hablamos de qué quieres enseñar y te paso un presupuesto cerrado, sin sorpresas después.",
-          "link": {
-            "text": "Ver las tarifas de accesibilidad",
-            "href": "/accesibilidad-web/#precios"
-          }
-        },
-        {
-          "question": "¿Con quién voy a hablar?",
-          "answer": "Conmigo, de principio a fin. Lo diseño, lo construyo y lo pruebo yo. No hay un comercial que te venda una cosa y un equipo que entienda otra."
-        }
-      ]
     }
   },
   "immersive": {
@@ -560,10 +601,10 @@
     },
     "hero": {
       "label": "Experiencias web 3D",
-      "titleStart": "Lo que una foto",
-      "titleHighlight": "no puede",
-      "titleEnd": "enseñar.",
-      "subtitle": "Tu cliente no se decide con una foto: pregunta, pide muestras o lo deja para otro día. En 3D lo ve como si lo tuviera delante, en el navegador y sin instalar nada. Y sin los problemas de siempre: rápido en el móvil, visible en Google y fácil de usar para cualquiera.",
+      "titleStart": "3D que",
+      "titleHighlight": "no pesa",
+      "titleEnd": "en tu web.",
+      "subtitle": "Que cargue rápido en el móvil de tu cliente, que Google lo encuentre y que lo pueda usar cualquiera. No es una promesa, es una medida: Inside the Frame, una sala 3D entera, saca 99–100 de rendimiento en el móvil.",
       "ctaPrimary": "Cuéntame tu proyecto",
       "ctaSecondary": "Ver las pruebas",
       "swatches": {
@@ -591,7 +632,7 @@
       }
     },
     "problem": {
-      "label": "El problema",
+      "label": "Para quién",
       "title": "Una foto aplana justo lo que hace que alguien compre.",
       "items": [
         {
@@ -604,11 +645,10 @@
           "audience": "Museos, fundaciones, galerías, ayuntamientos y oficinas de turismo",
           "description": "La colección solo la ve quien puede ir, y en horario. Una galería de fotos no transmite lo que se siente dentro de una sala. Y si eres un organismo público, tu web tiene que ser accesible por ley (RD 1112/2018)."
         }
-      ],
-      "outro": "El 3D tiene mala fama, y a menudo con razón: webs que tardan en cargar, que Google no entiende y que sin ratón no hay forma de usar. No tiene por qué ser así. Aquí abajo tienes la prueba."
+      ]
     },
     "proof": {
-      "label": "Las pruebas",
+      "label": "Los proyectos",
       "title": "Dos proyectos en línea. Ábrelos en tu móvil.",
       "intro": "No son encargos de clientes: los hice para demostrar que el 3D puede ser rápido, encontrable y fácil de usar para cualquiera. Están publicados, medidos y auditados.",
       "note": "Rendimiento medido con Lighthouse en modo móvil el 10 de octubre de 2026.",
@@ -663,9 +703,9 @@
       }
     },
     "doubts": {
-      "label": "Tus dudas",
-      "title": "Que sea bonito es lo fácil.",
-      "subtitle": "Lo que decide si vende es todo lo demás. Estas son las dudas que me plantean antes de encargar algo en 3D, con la prueba de cada respuesta.",
+      "label": "Las pruebas",
+      "title": "El 3D tiene mala fama. Casi siempre, con razón.",
+      "subtitle": "Webs que tardan una eternidad en cargar, que Google no entiende y que sin ratón no hay forma de usar. Estas son las dudas que me plantean antes de encargar algo en 3D, cada una con su prueba medida. Salen de VETA e Inside the Frame, dos proyectos míos publicados que tienes justo debajo.",
       "items": [
         {
           "id": "speed",
@@ -854,41 +894,91 @@
     "meta": {
       "ogAlt": "Accesibilidad web según la Ley 11/2023 y WCAG 2.2 AA",
       "title": "Accesibilidad web y Ley 11/2023: auditoría · Javier Piedra",
-      "description": "Cada barrera de tu web es un cliente que no termina de comprar. Audito y arreglo webs según WCAG 2.2 AA y la Ley 11/2023. Diagnóstico exprés desde 290 €."
+      "description": "Accesible no quiere decir aburrida. Audito y arreglo webs según WCAG 2.2 AA y la Ley 11/2023 sin quitarles su diseño. Diagnóstico exprés desde 290 €."
     },
     "hero": {
       "label": "Accesibilidad web · WCAG 2.2 AA y Ley 11/2023",
+      "titleAccent": "Accesible",
+      "title": "no quiere decir aburrida.",
+      "subtitle": "Se suele pensar que una web accesible tiene que ser plana, gris y sin una sola animación. No es verdad: un catálogo 3D y una sala inmersiva con sonido cumplen WCAG 2.2 AA y se usan con teclado y lector de pantalla. Tu web puede cumplir sin perder su identidad.",
+      "cta": "Ver servicios y precios",
       "ctaSecondary": "Hablemos",
-      "xray": {
-        "toggle": "Ver lo que oye un lector de pantalla",
-        "hint": "Pasa el cursor por la ficha.",
-        "hintTouch": "Arrastra sobre la ficha o usa el botón.",
-        "caption": "Una ficha de producto corriente. Con la lupa se ve lo que anuncia un lector de pantalla: la foto es «IMG_4032.jpg», los colores y la cesta son «botón» sin nombre, el corazón es un «enlace» vacío y el campo de cantidad no dice qué es.",
-        "product": {
-          "name": "Jarrón Alba",
-          "detail": "Gres esmaltado · 24 cm",
-          "price": "64,00 €",
-          "colors": "Color",
-          "quantity": "Cantidad",
-          "reviews": "(38 opiniones)"
+      "showcase": {
+        "badge": "WCAG 2.2 AA",
+        "reader": "NVDA",
+        "speech": "Rooms, botón, abre diálogo",
+        "items": [
+          {
+            "key": "insideTheFrame",
+            "name": "Inside the Frame",
+            "kind": "Sala inmersiva 360°",
+            "alt": "Sala de Inside the Frame: un Monet y un Turner en paredes oscuras, con agua en el suelo"
+          },
+          {
+            "key": "veta",
+            "name": "VETA",
+            "kind": "Catálogo de superficies en 3D",
+            "alt": "Catálogo de VETA: una cuadrícula de piedras, maderas y cerámicas"
+          }
+        ]
+      }
+    },
+    "showcase": {
+      "label": "La prueba",
+      "title": "Dos webs que no tienen nada de aburridas. Y las dos cumplen.",
+      "intro": "3D, luz que sigue al cursor, sonido y salas de 360°. Ninguna perdió nada para ser accesible: se auditaron con WCAG 2.2 AA, se corrigió cada fallo y se comprobó con un lector de pantalla real.",
+      "cases": {
+        "veta": {
+          "category": "Catálogo 3D · WCAG 2.2 AA",
+          "problem": "48 acabados en 3D, con una luz que sigue al cursor.",
+          "description": "Un catálogo que se recorre como un plano, con cada superficie a escala real en una estancia 3D. No se quitó nada para hacerlo accesible: la luz tiene su propio control, el 3D tiene su índice en texto y todo se usa con teclado y con lector de pantalla.",
+          "facts": [
+            {
+              "value": "17 + 2",
+              "label": "fallos, en la auditoría y después, todos corregidos y comprobados con NVDA."
+            },
+            {
+              "value": "48",
+              "label": "superficies también en un índice de texto, para quien no ve el 3D."
+            }
+          ]
         },
-        "reader": {
-          "image": "imagen, IMG_4032.jpg",
-          "heading": "encabezado, Jarrón Alba",
-          "price": "64,00 €",
-          "color": "botón",
-          "quantity": "edición, 1",
-          "minus": "botón",
-          "plus": "botón",
-          "cart": "botón",
-          "favorite": "enlace",
-          "rating": "imagen"
-        },
-        "legend": {
-          "problem": "Barrera",
-          "ok": "Bien"
+        "insideTheFrame": {
+          "category": "Sala inmersiva 360° · WCAG 2.2 AA",
+          "problem": "Una sala de 360° con sonido, que se gira con el teclado.",
+          "description": "Cuatro cuadros de Hokusai, Hiroshige, Monet y Turner convertidos en lugares donde estar. Cada escena tiene su descripción escrita, el sonido es opcional, lo que se mueve se puede pausar y la vista se gira arrastrando, con el teclado o con botones.",
+          "facts": [
+            {
+              "value": "9 + 1",
+              "label": "fallos, en la auditoría y después, todos corregidos y comprobados con NVDA."
+            },
+            {
+              "value": "99–100",
+              "label": "en rendimiento de Lighthouse en el móvil: accesible y rápida a la vez."
+            }
+          ]
         }
       }
+    },
+    "law": {
+      "label": "La ley",
+      "title": "Y si con eso no basta, está la ley.",
+      "intro": "No debería ser el primer motivo, pero tampoco es opcional. Esto es lo que dice, con su artículo.",
+      "facts": [
+        {
+          "value": "Desde 2025",
+          "label": "La Ley 11/2023 se aplica desde el 28 de junio de 2025 a las webs de comercio electrónico, banca, transporte y otros servicios al consumidor. Las microempresas que solo prestan servicios quedan fuera."
+        },
+        {
+          "value": "90.000 €",
+          "label": "Multa máxima por una infracción grave, que es lo que supone incumplir la accesibilidad. Si se repite tras un requerimiento, pasa a muy grave: hasta 1.000.000 €."
+        },
+        {
+          "value": "1 año",
+          "label": "Sin poder optar a ayudas y subvenciones públicas tras una infracción grave, además de la multa."
+        }
+      ],
+      "sources": "Ley 11/2023, artículo 30, que remite al Real Decreto Legislativo 1/2013 (artículos 81, 83 y 85). Texto consolidado del BOE."
     },
     "autoevaluador": {
       "eyebrow": "¿La Ley 11/2023 te afecta?",

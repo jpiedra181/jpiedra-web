@@ -1,0 +1,211 @@
+---
+//@ts-nocheck
+// Visual del hero de /accesibilidad-web: dos webs que no tienen nada de
+// planas (una sala inmersiva y un catálogo 3D) y que cumplen WCAG 2.2 AA.
+// Es la prueba del titular: accesible no quiere decir aburrida. Cada captura
+// se inclina hacia el cursor (.tilt-card en global.css, scripts/tilt-cards.ts).
+import { Image } from "astro:assets"
+import roomImage from "../../assets/disciplines/immersive-room.jpg"
+import vetaImage from "../../assets/projects/veta.jpg"
+
+interface ShowcaseItem {
+    key: "insideTheFrame" | "veta"
+    name: string
+    kind: string
+    alt: string
+}
+
+interface Props {
+    copy: {
+        badge: string
+        reader: string
+        speech: string
+        items: ShowcaseItem[]
+    }
+}
+
+const { copy } = Astro.props
+const images = { insideTheFrame: roomImage, veta: vetaImage }
+---
+
+<div class="showcase">
+    {
+        copy.items.map((item) => (
+            <figure class={`showcase-item showcase-item--${item.key} tilt-card`} data-tilt>
+                <Image
+                    src={images[item.key]}
+                    alt={item.alt}
+                    widths={[400, 640, 900]}
+                    sizes="(min-width: 1024px) 34rem, 90vw"
+                    loading="eager"
+                    class="showcase-image"
+                />
+                <figcaption class="showcase-caption">
+                    <span class="showcase-name">{item.name}</span>
+                    <span class="showcase-kind">{item.kind}</span>
+                    <span class="showcase-badge">
+                        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                            <path d="M3.5 8.5 6.5 11.5 12.5 4.5" />
+                        </svg>
+                        {copy.badge}
+                    </span>
+                </figcaption>
+                <span class="tilt-card-glare" aria-hidden="true" />
+            </figure>
+        ))
+    }
+
+    <!-- Lo que dijo NVDA al recorrer Inside the Frame con el teclado: lo mismo
+         que cita /experiencias-3d. Decorativo: el texto del hero ya lo cuenta. -->
+    <p class="showcase-speech" aria-hidden="true">
+        <span class="showcase-speech-who">{copy.reader}</span>
+        <span class="showcase-speech-text">«{copy.speech}»</span>
+    </p>
+</div>
+
+<style>
+    /* La sala detrás, arriba a la derecha; el catálogo delante, abajo a la
+       izquierda; el bocadillo del lector de pantalla, entre los dos. */
+    .showcase {
+        position: relative;
+        aspect-ratio: 5 / 4;
+        width: 100%;
+    }
+
+    .showcase-item {
+        --tilt-max-x: 7deg;
+        --tilt-max-y: 5deg;
+        position: absolute;
+        margin: 0;
+        overflow: hidden;
+        border-color: var(--color-border-hover);
+    }
+
+    /* El pie de la sala va arriba: abajo lo tapaba el catálogo. */
+    .showcase-item--insideTheFrame {
+        top: 0;
+        right: 0;
+        width: 80%;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .showcase-item--insideTheFrame .showcase-caption {
+        border-top: 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .showcase-item--veta {
+        left: 0;
+        bottom: 0;
+        width: 64%;
+    }
+
+    .showcase-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+    }
+
+    .showcase-caption {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.25rem 0.75rem;
+        padding: 0.75rem 1rem;
+        border-top: 1px solid var(--color-border);
+        background: rgb(11 15 20 / 0.92);
+    }
+
+    .showcase-name {
+        font-family: var(--font-heading);
+        font-size: 1.125rem;
+        line-height: 1.2;
+        color: var(--color-text-primary);
+    }
+
+    .showcase-kind {
+        font-size: 0.8125rem;
+        color: var(--color-text-secondary);
+    }
+
+    .showcase-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-left: auto;
+        padding: 0.15rem 0.55rem;
+        border: 1px solid rgb(232 200 114 / 0.45);
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--color-accent);
+        white-space: nowrap;
+    }
+
+    .showcase-badge svg {
+        width: 0.8rem;
+        height: 0.8rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .showcase-speech {
+        position: absolute;
+        right: 4%;
+        bottom: 9%;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        max-width: 32%;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 0.75rem 0.75rem 0.2rem 0.75rem;
+        background: rgb(11 15 20 / 0.95);
+        box-shadow: 0 16px 34px -14px rgb(0 0 0 / 0.85);
+    }
+
+    .showcase-speech-who {
+        font-size: 0.625rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        color: var(--color-accent);
+    }
+
+    .showcase-speech-text {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        line-height: 1.4;
+        color: var(--color-text-primary);
+    }
+
+    /* En móvil no cabe la composición: una captura debajo de otra y el
+       bocadillo detrás, en el flujo. */
+    @media (max-width: 39.99rem) {
+        .showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            aspect-ratio: auto;
+        }
+
+        .showcase-item {
+            position: relative;
+            inset: auto;
+            width: 100%;
+        }
+
+        .showcase-speech {
+            position: static;
+            max-width: none;
+            align-self: flex-end;
+        }
+    }
+</style>

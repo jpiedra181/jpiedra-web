@@ -13,13 +13,17 @@ const { href, variant = "primary", class: className = "" } = Astro.props
 // Tailwind 4 `outline-2` toma el estilo de --tw-outline-style, y `outline-none`
 // pone esa variable a `none`; como al tabular se cumplen :focus y :focus-visible
 // a la vez, el anillo quedaría anulado y no se vería.
+// Las dos variantes tienen la misma caja (borde de 1 px incluido): el
+// principal lo lleva transparente, que además le da forma con colores
+// forzados. El borde del secundario va al 40 %: con el 15 % de antes casi no
+// se veía y el botón parecía más pequeño que el principal.
 const baseClasses =
-    "inline-flex items-center gap-2 font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    "inline-flex items-center gap-2 border font-body font-medium text-sm tracking-wide transition-all duration-300 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 const variants = {
     primary:
-        "bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20",
+        "border-transparent bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3.5 hover:shadow-lg hover:shadow-accent/20",
     outline:
-        "border border-accent-line text-accent hover:bg-accent-subtle px-7 py-3.5",
+        "border-accent/40 text-accent hover:border-accent hover:bg-accent-subtle px-7 py-3.5",
 }
 
 const classes = `${baseClasses} ${variants[variant]} ${className}`

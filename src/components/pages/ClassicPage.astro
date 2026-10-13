@@ -2,7 +2,6 @@
 import type { Lang } from "../../types"
 import BaseLayout from "../layout/BaseLayout.astro"
 import Hero from "../sections/home/Hero.astro"
-import Concerns from "../sections/home/Concerns.astro"
 import Disciplines from "../sections/home/Disciplines.astro"
 import Projects from "../sections/Projects.astro"
 import About from "../sections/home/About.astro"
@@ -13,10 +12,10 @@ import { useTranslations } from "../../i18n/utils"
 import { routesFor } from "../../config/site"
 import { ogImageFor } from "../../lib/seo-schema"
 
-// Versión clásica de la home (la home es el levantamiento en 3D): el mismo
-// levantamiento de la sierra, pero como plano impreso que se recorre bajando.
-// Sin WebGL, y con las dudas del cliente, los proyectos, "Sobre mí" y el
-// contacto que enlaza la 3D.
+// Versión clásica de la home (la home es el levantamiento en 3D), sin WebGL.
+// Es una carta de venta que no resuelve el problema aquí: lleva a cada
+// cliente a la landing de su caso (3D o accesibilidad). Después, la prueba
+// (proyectos), quién lo hace y el contacto.
 interface Props {
     lang: Lang
 }
@@ -32,7 +31,6 @@ const t = useTranslations(lang)
     ogImage={ogImageFor("clasica", lang)}
 >
     <Hero lang={lang} />
-    <Concerns lang={lang} />
     <Disciplines lang={lang} />
     <Projects
         lang={lang}

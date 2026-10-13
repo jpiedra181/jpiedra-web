@@ -28,14 +28,17 @@ const fallbackShots = [
 ]
 ---
 
-<section id="dudas-3d" aria-labelledby="dudas-3d-title" class="relative py-24 md:py-32 lg:py-40">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-start">
-        <div class="doubts-intro">
+<!-- Justo detrás del hero: el miedo al 3D (pesa, va lenta, Google no lo ve)
+     se responde con lo medido en VETA e Inside the Frame, antes de enseñar
+     los proyectos. -->
+<section id="pruebas" aria-labelledby="pruebas-title" class="relative py-24 md:py-32 lg:py-40 bg-bg-surface border-t border-b border-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
             <div data-wipe>
                 <SectionLabel text={copy.label} />
             </div>
             <h2
-                id="dudas-3d-title"
+                id="pruebas-title"
                 data-split
                 class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-text-primary"
             >
@@ -43,102 +46,105 @@ const fallbackShots = [
             </h2>
             <p
                 data-reveal
-                class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[34rem]"
+                class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[45rem]"
             >
                 {copy.subtitle}
             </p>
         </div>
 
-        <ul role="list" class="flex flex-col gap-6">
+        <ul role="list" class="doubts-grid mt-16 md:mt-20">
             {
                 copy.items.map((item) => (
-                    <li class="doubt" data-proof={item.id} data-spotlight data-reveal>
-                        <h3 class="font-heading text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.2] text-text-primary">
-                            {item.title}
-                        </h3>
-                        <p class="text-base text-text-secondary leading-relaxed mt-3">{item.description}</p>
+                    <li class={`doubt-cell doubt-cell--${item.id}`} data-reveal>
+                        <div class="doubt tilt-card" data-proof={item.id} data-tilt>
+                            <h3 class="font-heading text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.2] text-text-primary">
+                                {item.title}
+                            </h3>
+                            <p class="text-base text-text-secondary leading-relaxed mt-3">{item.description}</p>
 
-                        {item.id === "speed" && (
-                            <figure class="doubt-proof">
-                                <figcaption class="doubt-proof-label">{proofs.speed.label}</figcaption>
-                                <ul role="list" class="doubt-stats">
-                                    {proofs.speed.stats.map((stat) => (
-                                        <li>
-                                            <strong>{stat.value}</strong>
-                                            <span>{stat.label}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <p class="doubt-proof-note">{proofs.speed.note}</p>
-                            </figure>
-                        )}
+                            {item.id === "speed" && (
+                                <figure class="doubt-proof">
+                                    <figcaption class="doubt-proof-label">{proofs.speed.label}</figcaption>
+                                    <ul role="list" class="doubt-stats">
+                                        {proofs.speed.stats.map((stat) => (
+                                            <li>
+                                                <strong>{stat.value}</strong>
+                                                <span>{stat.label}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p class="doubt-proof-note">{proofs.speed.note}</p>
+                                </figure>
+                            )}
 
-                        {item.id === "seo" && (
-                            <figure class="doubt-proof">
-                                <figcaption class="doubt-proof-label">{proofs.seo.label}</figcaption>
-                                <div class="serp-result" lang="en">
-                                    <p class="serp-url">{proofs.seo.url}</p>
-                                    <p class="serp-title">{proofs.seo.title}</p>
-                                    <p class="serp-description">{proofs.seo.description}</p>
-                                </div>
-                                <p class="doubt-proof-note">{proofs.seo.note}</p>
-                            </figure>
-                        )}
+                            {item.id === "seo" && (
+                                <figure class="doubt-proof">
+                                    <figcaption class="doubt-proof-label">{proofs.seo.label}</figcaption>
+                                    <div class="serp-result" lang="en">
+                                        <p class="serp-url">{proofs.seo.url}</p>
+                                        <p class="serp-title">{proofs.seo.title}</p>
+                                        <p class="serp-description">{proofs.seo.description}</p>
+                                    </div>
+                                    <p class="doubt-proof-note">{proofs.seo.note}</p>
+                                </figure>
+                            )}
 
-                        {item.id === "reader" && (
-                            <figure class="doubt-proof">
-                                <figcaption class="doubt-proof-label">{proofs.reader.label}</figcaption>
-                                <ol role="list" class="reader-lines">
-                                    {proofs.reader.lines.map((line) => (
-                                        <li lang={line.lang || undefined}>{line.text}</li>
-                                    ))}
-                                </ol>
-                                <p class="doubt-proof-note">{proofs.reader.note}</p>
-                                <p class="doubt-sheets">
-                                    {proofs.reader.sheetsLabel}{" "}
-                                    {sheets.map((sheet, index) => (
-                                        <>
-                                            {index > 0 && " · "}
-                                            <a href={sheet.href} hreflang={sheetHreflang}>{sheet.name}</a>
-                                        </>
-                                    ))}
+                            {item.id === "reader" && (
+                                <figure class="doubt-proof">
+                                    <figcaption class="doubt-proof-label">{proofs.reader.label}</figcaption>
+                                    <ol role="list" class="reader-lines">
+                                        {proofs.reader.lines.map((line) => (
+                                            <li lang={line.lang || undefined}>{line.text}</li>
+                                        ))}
+                                    </ol>
+                                    <p class="doubt-proof-note">{proofs.reader.note}</p>
+                                    <p class="doubt-sheets">
+                                        {proofs.reader.sheetsLabel}{" "}
+                                        {sheets.map((sheet, index) => (
+                                            <>
+                                                {index > 0 && " · "}
+                                                <a href={sheet.href} hreflang={sheetHreflang}>{sheet.name}</a>
+                                            </>
+                                        ))}
+                                    </p>
+                                </figure>
+                            )}
+
+                            {item.id === "fallback" && (
+                                <figure class="doubt-proof">
+                                    <figcaption class="doubt-proof-label">{proofs.fallback.label}</figcaption>
+                                    <ul role="list" class="fallback-shots">
+                                        {fallbackShots.map((shot) => (
+                                            <li>
+                                                <Image
+                                                    src={shot.src}
+                                                    alt=""
+                                                    widths={[360, 540, 720]}
+                                                    sizes="(min-width: 1024px) 18rem, (min-width: 640px) 45vw, 100vw"
+                                                    loading="lazy"
+                                                    class="fallback-shot"
+                                                />
+                                                <p>{shot.caption}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </figure>
+                            )}
+
+                            {item.id === "motion" && (
+                                <p class="doubt-motion">
+                                    <span class="doubt-motion-orbit" aria-hidden="true">
+                                        <span />
+                                    </span>
+                                    <span>
+                                        {proofs.motion.lead}{" "}
+                                        <strong class="when-normal">{proofs.motion.normal}</strong><strong class="when-reduced">{proofs.motion.reduced}</strong>.
+                                        <span class="doubt-motion-note">{proofs.motion.note}</span>
+                                    </span>
                                 </p>
-                            </figure>
-                        )}
-
-                        {item.id === "fallback" && (
-                            <figure class="doubt-proof">
-                                <figcaption class="doubt-proof-label">{proofs.fallback.label}</figcaption>
-                                <ul role="list" class="fallback-shots">
-                                    {fallbackShots.map((shot) => (
-                                        <li>
-                                            <Image
-                                                src={shot.src}
-                                                alt=""
-                                                widths={[360, 540, 720]}
-                                                sizes="(min-width: 1024px) 18rem, (min-width: 640px) 45vw, 100vw"
-                                                loading="lazy"
-                                                class="fallback-shot"
-                                            />
-                                            <p>{shot.caption}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </figure>
-                        )}
-
-                        {item.id === "motion" && (
-                            <p class="doubt-motion">
-                                <span class="doubt-motion-orbit" aria-hidden="true">
-                                    <span />
-                                </span>
-                                <span>
-                                    {proofs.motion.lead}{" "}
-                                    <strong class="when-normal">{proofs.motion.normal}</strong><strong class="when-reduced">{proofs.motion.reduced}</strong>.
-                                    <span class="doubt-motion-note">{proofs.motion.note}</span>
-                                </span>
-                            </p>
-                        )}
+                            )}
+                            <span class="tilt-card-glare" aria-hidden="true" />
+                        </div>
                     </li>
                 ))
             }
@@ -148,49 +154,46 @@ const fallbackShots = [
 
 <script>
     import { initLiveProofs } from "../../../scripts/live-proofs"
+    import { initTiltCards } from "../../../scripts/tilt-cards"
 
-    const section = document.getElementById("dudas-3d")
+    const section = document.getElementById("pruebas")
     if (section) {
-        const destroy = initLiveProofs(section)
-        document.addEventListener("astro:before-swap", destroy, { once: true })
+        const destroyProofs = initLiveProofs(section)
+        const destroyTilt = initTiltCards(section)
+        document.addEventListener(
+            "astro:before-swap",
+            () => {
+                destroyProofs()
+                destroyTilt()
+            },
+            { once: true },
+        )
     }
 </script>
 
 <style>
+    /* Dos columnas; la velocidad, que es el miedo principal, a todo lo ancho. */
+    .doubts-grid {
+        display: grid;
+        gap: 1.5rem;
+    }
+
     @media (min-width: 64rem) {
-        /* El título se queda mientras pasan las dudas. */
-        .doubts-intro {
-            position: sticky;
-            top: 8rem;
+        .doubts-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .doubt-cell--speed {
+            grid-column: 1 / -1;
         }
     }
 
+    /* Tarjetas grandes y con mucho texto: giran menos que las pequeñas. */
     .doubt {
-        position: relative;
+        --tilt-max-x: 3.5deg;
+        --tilt-max-y: 2.5deg;
+        height: 100%;
         padding: 2rem;
-        border: 1px solid var(--color-border);
-        border-radius: 1rem;
-        background: var(--color-bg-surface);
-        overflow: hidden;
-        isolation: isolate;
-    }
-
-    .doubt::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background: radial-gradient(
-            24rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
-            rgb(232 200 114 / 0.08),
-            transparent 65%
-        );
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-
-    .doubt:hover::before {
-        opacity: 1;
     }
 
     .doubt-proof {

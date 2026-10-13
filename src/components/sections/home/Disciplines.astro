@@ -3,9 +3,10 @@
 import { Image } from "astro:assets"
 import type { Lang } from "../../../types"
 import { useTranslations } from "../../../i18n/utils"
-import { routesFor } from "../../../config/site"
+import { questionsId, routesFor } from "../../../config/site"
 import SectionLabel from "../../ui/SectionLabel.astro"
-import immersiveImage from "../../../assets/disciplines/immersive.jpg"
+import DoubtCard from "../../ui/DoubtCard.astro"
+import immersiveImage from "../../../assets/disciplines/immersive-room.jpg"
 import accessibilityImageEs from "../../../assets/disciplines/accessibility-es.jpg"
 import accessibilityImageEn from "../../../assets/disciplines/accessibility-en.jpg"
 
@@ -16,12 +17,18 @@ interface Props {
 const { lang } = Astro.props
 const copy = useTranslations(lang).home.disciplines
 const routes = routesFor(lang)
+const commonId = questionsId(lang)
+
+// La versión clásica no resuelve aquí el problema: lleva a cada cliente a la
+// página de su caso. Cada puerta empieza por los síntomas, contados como los
+// diría él, y acaba en su landing. Debajo, las dudas que valen para las dos
+// (a ese bloque enlaza la cumbre «Tus dudas» de la home 3D).
 
 // Cada especialidad se enseña con su propio trabajo, no con una foto de
-// banco: el muestrario de piedra de /experiencias-3d (pulido, mate y
-// estructurado bajo la misma luz) y la ficha de /accesibilidad-web vista con
-// la lupa del lector de pantalla, en el idioma de la página. Son capturas de
-// esas dos páginas; la tarjeta ya lo cuenta en texto, así que van sin alt.
+// banco: una esquina de la sala de Inside the Frame (artgallery360.art), con
+// Monet y Turner en perspectiva, para que se lea como 3D a la primera, y la
+// ficha de /accesibilidad-web vista con la lupa del lector de pantalla, en el
+// idioma de la página. La tarjeta ya lo cuenta en texto, así que van sin alt.
 const images = {
     immersive: immersiveImage,
     accessibility: lang === "en" ? accessibilityImageEn : accessibilityImageEs,
@@ -70,12 +77,17 @@ const images = {
                             <h3 class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.15] text-text-primary">
                                 {item.title}
                             </h3>
-                            <p class="text-base lg:text-lg text-text-secondary leading-relaxed mt-4 flex-1">
-                                {item.description}
+                            <p class="discipline-audience mt-3">{item.audience}</p>
+                            <p class="discipline-symptoms-label mt-8">{copy.symptomsLabel}</p>
+                            <ul role="list" class="discipline-symptoms mt-3">
+                                {item.symptoms.map((symptom) => <li>{symptom}</li>)}
+                            </ul>
+                            <p class="text-base lg:text-lg text-text-primary leading-relaxed mt-8 flex-1">
+                                {item.solution}
                             </p>
                             <a
                                 href={routes[item.key]}
-                                class="discipline-link mt-10 self-start inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover underline-offset-4 hover:underline transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white group/link"
+                                class="discipline-link mt-8 self-start inline-flex items-center gap-2 text-base font-medium text-accent hover:text-accent-hover underline-offset-4 hover:underline transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white group/link"
                             >
                                 {item.cta}
                                 <span
@@ -90,12 +102,108 @@ const images = {
                 ))
             }
         </ul>
+
+        <p data-reveal class="discipline-both mt-10 text-base lg:text-lg text-text-secondary leading-relaxed">
+            {copy.both.text}
+            <a
+                href="#contact"
+                class="inline-flex items-center gap-2 font-medium text-accent hover:text-accent-hover underline underline-offset-4 decoration-accent/40 hover:decoration-accent transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+                {copy.both.link}
+                <span aria-hidden="true">→</span>
+            </a>
+        </p>
+
+        <div id={commonId} class="discipline-common mt-20 md:mt-24 pt-12 md:pt-16">
+            <p class="discipline-common-label">{copy.common.label}</p>
+            <h3
+                id={`${commonId}-title`}
+                class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.15] text-text-primary mt-3"
+            >
+                {copy.common.title}
+            </h3>
+            <p class="text-base lg:text-lg text-text-secondary leading-relaxed mt-4 max-w-[40rem]">
+                {copy.common.intro}
+            </p>
+            <!-- Sin enlaces: aquí solo se responde. Cada puerta de arriba ya
+                 lleva a su página. -->
+            <ul role="list" data-reveal-stagger class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-12">
+                {
+                    copy.common.items.map((item) => (
+                        <li>
+                            <DoubtCard item={item} />
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
     </div>
 </section>
+
+<script>
+    import { initTiltCards } from "../../../scripts/tilt-cards"
+
+    const doubts = document.querySelector<HTMLElement>(".discipline-common")
+    if (doubts) {
+        const destroy = initTiltCards(doubts)
+        document.addEventListener("astro:before-swap", destroy, { once: true })
+    }
+</script>
 
 <style>
     .discipline-card {
         position: relative;
+    }
+
+    .discipline-audience,
+    .discipline-symptoms-label,
+    .discipline-common-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    .discipline-audience {
+        color: var(--color-text-secondary);
+    }
+
+    .discipline-symptoms-label,
+    .discipline-common-label {
+        color: var(--color-accent);
+    }
+
+    /* Los síntomas, con la raya de los diálogos: son frases que el cliente
+       ha dicho o ha oído. */
+    .discipline-symptoms {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .discipline-symptoms li {
+        position: relative;
+        padding-left: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+    }
+
+    .discipline-symptoms li::before {
+        content: "—";
+        position: absolute;
+        left: 0;
+        color: var(--color-accent);
+    }
+
+    @media (min-width: 64rem) {
+        .discipline-symptoms li {
+            font-size: 1.0625rem;
+        }
+    }
+
+    .discipline-common {
+        border-top: 1px solid var(--color-border);
     }
 
     /* Toda la tarjeta lleva al enlace: la zona clicable crece sin añadir un

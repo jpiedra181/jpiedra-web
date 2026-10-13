@@ -26,16 +26,18 @@ interface Props {
     problemLabel?: string
     // Cómo y cuándo se midieron los datos.
     note?: string
+    // Fondo de superficie, para separarla de una sección vecina del mismo fondo.
+    surface?: boolean
 }
 
-const { lang, label, title, intro, slugs, id = "proyectos", cases = {}, problemLabel, note } = Astro.props
+const { lang, label, title, intro, slugs, id = "proyectos", cases = {}, problemLabel, note, surface = false } = Astro.props
 const t = useTranslations(lang)
 ---
 
 <section
     id={id}
     aria-labelledby={`${id}-title`}
-    class="relative py-24 md:py-32 lg:py-40"
+    class:list={["relative py-24 md:py-32 lg:py-40", { "bg-bg-surface border-t border-b border-border": surface }]}
 >
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="mb-16 md:mb-24 max-w-3xl">

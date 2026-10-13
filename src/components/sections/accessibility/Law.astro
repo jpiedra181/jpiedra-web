@@ -1,0 +1,239 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../../types"
+import { useTranslations } from "../../../i18n/utils"
+import { routes } from "../../../config/site"
+import SectionLabel from "../../ui/SectionLabel.astro"
+import Button from "../../ui/Button.astro"
+
+// El tercer argumento, para quien no se ha convencido con los dos primeros
+// (no es aburrida, cuesta clientes): la ley y lo que cuesta incumplirla, con
+// su artículo. Datos de .claude/stats.md, verificados contra el BOE. En
+// castellano lleva el autoevaluador, que trata la ley española.
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const copy = t.accessibilityLanding.law
+const selfCheck = lang === "es" ? t.accessibilityLanding.autoevaluador : null
+const sectionId = lang === "en" ? "law" : "ley"
+
+// Dial de 7 segmentos, uno por pregunta del autoevaluador.
+const QUESTIONS = 7
+const RADIUS = 118
+const CENTER = 140
+const GAP_DEGREES = 7
+const point = (degrees: number) => {
+    const radians = ((degrees - 90) * Math.PI) / 180
+    return `${(CENTER + RADIUS * Math.cos(radians)).toFixed(2)} ${(CENTER + RADIUS * Math.sin(radians)).toFixed(2)}`
+}
+const segments = Array.from({ length: QUESTIONS }, (_, index) => {
+    const span = 360 / QUESTIONS
+    const start = index * span + GAP_DEGREES / 2
+    const end = (index + 1) * span - GAP_DEGREES / 2
+    return `M${point(start)} A${RADIUS} ${RADIUS} 0 0 1 ${point(end)}`
+})
+---
+
+<section
+    id={sectionId}
+    aria-labelledby={`${sectionId}-title`}
+    class="relative py-24 md:py-32 lg:py-40 bg-bg-surface border-t border-b border-border overflow-hidden"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+            <div data-wipe>
+                <SectionLabel text={copy.label} />
+            </div>
+            <h2
+                id={`${sectionId}-title`}
+                data-split
+                class="font-heading text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-text-primary"
+            >
+                {copy.title}
+            </h2>
+            <p
+                data-reveal
+                class="font-body text-[clamp(1rem,1.4vw,1.25rem)] leading-relaxed text-text-secondary mt-6 md:mt-8 max-w-[45rem]"
+            >
+                {copy.intro}
+            </p>
+        </div>
+
+        <div class:list={["law-body mt-16 md:mt-20", { "has-self-check": selfCheck }]}>
+            <dl data-reveal-stagger class="law-facts">
+                {
+                    copy.facts.map((fact) => (
+                        <div class="law-fact">
+                            <dt class="law-fact-value">{fact.value}</dt>
+                            <dd class="law-fact-label">{fact.label}</dd>
+                        </div>
+                    ))
+                }
+            </dl>
+
+            {
+                selfCheck && (
+                    <div data-reveal class="law-check">
+                        <div class="dial" data-dial aria-hidden="true">
+                            <svg viewBox="0 0 280 280">
+                                <circle cx={CENTER} cy={CENTER} r={RADIUS} class="dial-track" />
+                                {segments.map((d) => (
+                                    <path d={d} class="dial-segment" />
+                                ))}
+                            </svg>
+                            <p class="dial-center">
+                                <span class="dial-time">{selfCheck.dialTime}</span>
+                                <span class="dial-label">{selfCheck.dialLabel}</span>
+                            </p>
+                        </div>
+                        <p class="law-check-eyebrow">{selfCheck.eyebrow}</p>
+                        <h3 class="font-heading text-[clamp(1.75rem,3vw,2.25rem)] leading-[1.15] text-text-primary mt-2">
+                            {selfCheck.title}
+                        </h3>
+                        <p class="text-base text-text-secondary leading-relaxed mt-4">{selfCheck.text}</p>
+                        <Button href={routes.law} variant="primary" class="mt-8 self-start">
+                            {selfCheck.cta}
+                            <span aria-hidden="true">→</span>
+                        </Button>
+                        <p class="text-sm text-text-secondary mt-4">{selfCheck.microcopy}</p>
+                    </div>
+                )
+            }
+        </div>
+
+        <p data-reveal class="font-body text-xs lg:text-sm text-text-secondary mt-12 md:mt-16 max-w-[45rem]">
+            {copy.sources}
+        </p>
+    </div>
+</section>
+
+<style>
+    .law-body {
+        display: grid;
+        gap: 2.5rem;
+    }
+
+    /* Con el autoevaluador (castellano), las cifras a la izquierda y la
+       prueba de dos minutos a la derecha; sin él, las tres cifras en fila. */
+    .law-facts {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 48rem) {
+        .law-body:not(.has-self-check) .law-facts {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .law-body.has-self-check {
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            align-items: start;
+            gap: 3rem;
+        }
+    }
+
+    .law-fact {
+        padding: 1.75rem 2rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-bg-primary);
+    }
+
+    .law-fact-value {
+        font-family: var(--font-heading);
+        font-size: clamp(2.25rem, 4vw, 3rem);
+        line-height: 1;
+        color: var(--color-accent);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .law-fact-label {
+        margin-top: 0.75rem;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+    }
+
+    .law-check {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 1.25rem;
+        background:
+            radial-gradient(120% 70% at 20% 0%, rgb(232 200 114 / 0.07), transparent 60%),
+            linear-gradient(170deg, var(--color-bg-elevated), var(--color-bg-primary) 75%);
+    }
+
+    @media (min-width: 64rem) {
+        .law-check {
+            position: sticky;
+            top: 7rem;
+            padding: 2.5rem;
+        }
+    }
+
+    .law-check-eyebrow {
+        margin-top: 1.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+    }
+
+    .dial {
+        position: relative;
+        width: min(100%, 12rem);
+        aspect-ratio: 1;
+    }
+
+    .dial svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+
+    .dial-track {
+        fill: none;
+        stroke: var(--color-accent-line);
+        stroke-width: 1;
+        stroke-dasharray: 2 6;
+    }
+
+    .dial-segment {
+        fill: none;
+        stroke: var(--color-accent);
+        stroke-width: 16;
+        stroke-linecap: butt;
+    }
+
+    .dial-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+    }
+
+    .dial-time {
+        font-family: var(--font-heading);
+        font-size: 2.75rem;
+        line-height: 1;
+        color: var(--color-text-primary);
+    }
+
+    .dial-label {
+        font-size: 0.625rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+    }
+</style>

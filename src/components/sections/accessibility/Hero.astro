@@ -7,16 +7,19 @@ import { pricingId } from "../../../config/site"
 import Button from "../../ui/Button.astro"
 import ContourMap from "../../ui/ContourMap.astro"
 import VertexBadge from "../../ui/VertexBadge.astro"
-import XRayProduct from "../../ui/XRayProduct.astro"
+import AccessibleShowcase from "../../ui/AccessibleShowcase.astro"
 
 interface Props {
     lang: Lang
 }
 
 const { lang } = Astro.props
-const t = useTranslations(lang)
-const copy = t.accessibilityLanding.hero
+const copy = useTranslations(lang).accessibilityLanding.hero
 ---
+
+<!-- El primer argumento, el prejuicio: que una web accesible tiene que ser
+     plana y aburrida. Lo desmienten las dos webs del visual. El dinero que se
+     pierde (Context.astro) y la ley (Law.astro) vienen después. -->
 
 <section
     id="hero"
@@ -42,17 +45,17 @@ const copy = t.accessibilityLanding.hero
                     id="hero-title"
                     class="font-heading text-[clamp(2.75rem,5.4vw,5.25rem)] leading-[1.02] text-text-primary"
                 >
-                    <span class="a11y-line"><span class="text-accent">{t.hero.title}</span></span>
-                    <span class="a11y-line"><span>{t.hero.title_1}</span></span>
+                    <span class="a11y-line"><span class="text-accent">{copy.titleAccent}</span></span>
+                    <span class="a11y-line"><span>{copy.title}</span></span>
                 </h1>
 
                 <p class="a11y-hero-subtitle text-lg lg:text-xl text-text-secondary leading-relaxed max-w-xl">
-                    {t.hero.subtitle}
+                    {copy.subtitle}
                 </p>
 
-                <div class="a11y-hero-cta flex flex-wrap gap-4">
+                <div class="a11y-hero-cta button-pair">
                     <Button href={`#${pricingId(lang)}`} variant="primary">
-                        {t.hero.cta}
+                        {copy.cta}
                         <span aria-hidden="true">→</span>
                     </Button>
                     <Button href="#contact" variant="outline">
@@ -61,19 +64,19 @@ const copy = t.accessibilityLanding.hero
                 </div>
             </div>
 
-            <div class="a11y-hero-xray">
-                <XRayProduct copy={copy.xray} />
+            <div class="a11y-hero-showcase">
+                <AccessibleShowcase copy={copy.showcase} />
             </div>
         </div>
     </div>
 </section>
 
 <script>
-    import { initXRayLens } from "../../../scripts/xray-lens"
+    import { initTiltCards } from "../../../scripts/tilt-cards"
 
-    const figure = document.querySelector<HTMLElement>("[data-xray]")
-    if (figure) {
-        const destroy = initXRayLens(figure)
+    const showcase = document.querySelector<HTMLElement>(".a11y-hero-showcase")
+    if (showcase) {
+        const destroy = initTiltCards(showcase)
         document.addEventListener("astro:before-swap", destroy, { once: true })
     }
 </script>
@@ -143,8 +146,8 @@ const copy = t.accessibilityLanding.hero
             animation-delay: 0.8s;
         }
 
-        /* La ficha entra como una pantalla que se enciende. */
-        .a11y-hero-xray {
+        /* Las dos webs entran como pantallas que se encienden. */
+        .a11y-hero-showcase {
             animation: a11y-place 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
         }
 

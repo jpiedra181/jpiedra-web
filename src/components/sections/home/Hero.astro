@@ -126,24 +126,24 @@ const HERO_LIFT = 34
                 {copy.subtitle}
             </p>
 
-            <div class="hero-cta flex flex-wrap gap-4">
-                <Button href="#proyectos" variant="primary">
-                    {copy.ctaPrimary}
+            <!-- Las dos puertas de la página, una por especialidad. -->
+            <div class="hero-cta button-pair">
+                <Button href={routes.immersive} variant="primary">
+                    {copy.ctaImmersive}
                     <span aria-hidden="true">→</span>
                 </Button>
-                <Button href="#contact" variant="outline">
-                    {copy.ctaSecondary}
+                <Button href={routes.accessibility} variant="outline">
+                    {copy.ctaAccessibility}
+                    <span aria-hidden="true">→</span>
                 </Button>
             </div>
 
             <p class="hero-hint" aria-hidden="true">{copy.sheet.hint}</p>
-            <p class="hero-sources-mobile">
-                {copy.sheet.sources}
-                <a href={routes.home} class="hero-version-link">
-                    {copy.sheet.view3d}
-                    <span aria-hidden="true">→</span>
-                </a>
-            </p>
+            <!-- En móvil el enlace a la 3D va aquí; en escritorio, sobre el plano. -->
+            <a href={routes.home} class="hero-version-link">
+                {copy.sheet.view3d}
+                <span aria-hidden="true">→</span>
+            </a>
         </div>
     </div>
     <!-- El plano va después del texto en el HTML aunque se vea detrás: así el
@@ -151,7 +151,7 @@ const HERO_LIFT = 34
          tabulación sigue el de lectura (la cartela es lo último del hero). -->
     <div
         class="hero-sheet"
-        style={`--map-aspect:${(mapWidth / mapHeight).toFixed(4)};--km:${(map.kmPx / mapWidth).toFixed(5)}`}
+        style={`--map-aspect:${(mapWidth / mapHeight).toFixed(4)}`}
     >
         <!-- Tres capas con un solo trabajo cada una: hero-map coloca el plano,
              hero-map-tilt lo inclina (ratón y scroll, contour-plan.ts) y
@@ -222,23 +222,13 @@ const HERO_LIFT = 34
             <p class="hero-explorer-reading sr-only" aria-live="polite"></p>
         </div>
 
-        <div class="hero-cartouche">
-            <p class="hero-cartouche-title">{copy.sheet.title}</p>
-            <p class="hero-cartouche-region">{copy.sheet.region} · {copy.sheet.equidistance}</p>
-            <div class="hero-scale" aria-hidden="true">
-                <span class="hero-scale-bar"></span>
-                <span class="hero-scale-label">{copy.sheet.scale}</span>
-                <svg class="hero-north" viewBox="0 0 16 24">
-                    <path d="M8 1 L13 20 L8 16 L3 20 Z"></path>
-                    <text x="8" y="23.5">N</text>
-                </svg>
-            </div>
-            <p class="hero-cartouche-sources">{copy.sheet.sources}</p>
-            <a href={routes.home} class="hero-cartouche-link">
-                {copy.sheet.view3d}
-                <span aria-hidden="true">→</span>
-            </a>
-        </div>
+        <!-- Del plano solo queda el paso a la versión 3D (en escritorio) y la
+             atribución que piden las licencias del IGN y de OpenStreetMap. -->
+        <Button href={routes.home} variant="outline" class="hero-sheet-version">
+            {copy.sheet.view3d}
+            <span aria-hidden="true">→</span>
+        </Button>
+        <p class="hero-credit">{copy.sheet.sources}</p>
     </div>
 
 </section>
@@ -511,12 +501,29 @@ const HERO_LIFT = 34
         color: var(--color-text-secondary);
     }
 
-    .hero-cartouche {
+    .hero-sheet :global(.hero-sheet-version) {
         display: none;
     }
 
-    /* El bloque de texto deja pasar el ratón al plano (y a la cartela, que
-       queda por debajo); solo el texto y los botones lo capturan. */
+    /* Atribución que exigen las licencias del relieve (IGN, CC BY 4.0) y del
+       agua (OpenStreetMap, ODbL). Lleva fondo propio: debajo pasan curvas. */
+    .hero-credit {
+        position: absolute;
+        left: calc(var(--frame-inset) + 0.5rem);
+        right: calc(var(--frame-inset) + 0.5rem);
+        bottom: calc(var(--frame-inset) + 0.5rem);
+        width: fit-content;
+        padding: 0.125rem 0.5rem;
+        border-radius: 0.25rem;
+        background: rgb(11 15 20 / 0.85);
+        font-size: 0.6875rem;
+        line-height: 1.5;
+        color: var(--color-text-secondary);
+    }
+
+    /* El bloque de texto deja pasar el ratón al plano (y al enlace a la
+       versión 3D, que queda por debajo); solo el texto y los botones lo
+       capturan. */
     .hero-content {
         pointer-events: none;
     }
@@ -568,19 +575,14 @@ const HERO_LIFT = 34
         color: var(--color-text-secondary);
     }
 
-    .hero-sources-mobile {
-        font-size: 0.75rem;
-        line-height: 1.5;
-        color: var(--color-text-secondary);
-    }
-
-    /* En móvil la cartela no cabe: el enlace a la versión 3D va con las fuentes. */
+    /* En móvil el enlace a la versión 3D va bajo las puertas, como texto:
+       un tercer botón competiría con ellas. */
     .hero-version-link {
         display: inline-flex;
+        align-self: flex-start;
         align-items: center;
         gap: 0.375rem;
         min-height: 24px;
-        margin-top: 0.5rem;
         font-size: 0.875rem;
         font-weight: 500;
         color: var(--color-accent);
@@ -630,94 +632,28 @@ const HERO_LIFT = 34
             display: block;
         }
 
-        .hero-cartouche {
+        /* Donde estaba la cartela del plano queda solo el paso a la 3D. */
+        .hero-sheet :global(.hero-sheet-version) {
             position: absolute;
             right: calc(var(--frame-inset) + 6rem);
             bottom: calc(var(--frame-inset) + 2.25rem);
-            display: flex;
-            flex-direction: column;
-            gap: 0.375rem;
-            width: 19rem;
-            padding: 1rem 1.25rem 1.125rem;
-            border: 1px solid var(--color-border-hover);
-            border-radius: 0.5rem;
+            display: inline-flex;
             background: rgb(11 15 20 / 0.9);
             pointer-events: auto;
         }
 
-        .hero-cartouche-title {
-            font-family: var(--font-heading);
-            font-size: 1.375rem;
-            line-height: 1.1;
-            color: var(--color-text-primary);
+        /* La atribución, fuera del marco, en la franja de abajo a la derecha:
+           dentro chocaba con los rótulos de longitud. */
+        .hero-credit {
+            left: auto;
+            right: var(--frame-inset);
+            bottom: 0.125rem;
+            padding: 0.125rem 0;
+            background: none;
+            text-align: right;
         }
 
-        .hero-cartouche-region,
-        .hero-cartouche-sources {
-            font-size: 0.75rem;
-            line-height: 1.5;
-            color: var(--color-text-secondary);
-        }
-
-        .hero-scale {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            margin: 0.375rem 0 0.25rem;
-            font-size: 0.6875rem;
-            letter-spacing: 0.08em;
-            color: var(--color-text-secondary);
-        }
-
-        /* Escala gráfica de verdad: 1 km del plano a su tamaño en pantalla. */
-        .hero-scale-bar {
-            width: calc(var(--map-w) * var(--km));
-            height: 6px;
-            border: 1px solid var(--color-accent);
-            background: linear-gradient(90deg, var(--color-accent) 0 50%, transparent 50%);
-        }
-
-        .hero-north {
-            width: 12px;
-            height: 18px;
-            margin-left: auto;
-        }
-
-        .hero-north path {
-            fill: var(--color-accent);
-        }
-
-        .hero-north text {
-            fill: var(--color-text-secondary);
-            font-size: 7px;
-            text-anchor: middle;
-        }
-
-        .hero-cartouche-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            align-self: flex-start;
-            margin-top: 0.375rem;
-            min-height: 24px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--color-accent);
-            border-radius: 2px;
-        }
-
-        .hero-cartouche-link:hover {
-            color: var(--color-accent-hover);
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .hero-cartouche-link:focus-visible {
-            outline: 2px solid #fff;
-            outline-offset: 4px;
-        }
-
-        .hero-sources-mobile {
+        .hero-version-link {
             display: none;
         }
     }
@@ -786,7 +722,7 @@ const HERO_LIFT = 34
         .hero-subtitle,
         .hero-cta,
         .hero-hint,
-        .hero-sources-mobile {
+        .hero-version-link {
             animation: hero-fade 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
         }
 
@@ -799,12 +735,13 @@ const HERO_LIFT = 34
         }
 
         .hero-hint,
-        .hero-sources-mobile {
+        .hero-version-link {
             animation-delay: 1.4s;
         }
 
         .hero-frame,
-        .hero-cartouche {
+        .hero-credit,
+        .hero-sheet :global(.hero-sheet-version) {
             animation: hero-fade 1s ease-out 1.8s both;
         }
     }

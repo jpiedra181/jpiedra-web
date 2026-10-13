@@ -131,6 +131,85 @@ h6 {
   background-color: rgba(232, 200, 114, 0.3);
   color: var(--color-text-primary);
 }
+
+/* Pareja de botones de los heros (principal y secundario): los dos con el
+   ancho del más largo, para que el secundario no parezca más pequeño. En
+   pantallas estrechas, uno debajo de otro y a todo lo ancho. */
+.button-pair {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.button-pair > * {
+  justify-content: center;
+}
+
+@media (min-width: 30rem) {
+  .button-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: max-content;
+    max-width: 100%;
+    gap: 1rem;
+  }
+}
+
+/* Tarjeta que se inclina hacia el cursor, con una sombra que se desplaza y
+   una luz que lo sigue (scripts/tilt-cards.ts escribe --tilt-x y --tilt-y,
+   de -1 a 1, y --glare-x y --glare-y). --tilt-max-x/y fijan cuánto gira: en
+   tarjetas grandes, menos, porque un giro amplio deforma el texto. Sin ratón
+   o con movimiento reducido se queda quieta, con la luz arriba a la izquierda. */
+.tilt-card {
+  --tilt-x: 0;
+  --tilt-y: 0;
+  --glare-x: 22%;
+  --glare-y: 0%;
+  --tilt-max-x: 9deg;
+  --tilt-max-y: 7deg;
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(120% 70% at 20% 0%, rgb(232 200 114 / 0.07), transparent 60%),
+    linear-gradient(170deg, var(--color-bg-elevated), var(--color-bg-primary) 75%);
+  box-shadow:
+    calc(var(--tilt-x) * -18px) calc(26px + var(--tilt-y) * -18px) 50px -18px rgb(0 0 0 / 0.75),
+    inset 0 1px 0 rgb(255 255 255 / 0.04);
+  transform: perspective(1100px) rotateX(calc(var(--tilt-y) * var(--tilt-max-y) * -1))
+    rotateY(calc(var(--tilt-x) * var(--tilt-max-x)));
+  transform-style: preserve-3d;
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s;
+}
+
+/* Con el ratón encima la sigue casi sin retraso; al salir, vuelve despacio. */
+.tilt-card.is-tilting {
+  border-color: var(--color-border-hover);
+  transition:
+    transform 0.12s linear,
+    box-shadow 0.12s linear,
+    border-color 0.3s;
+}
+
+.tilt-card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--glare-x) var(--glare-y),
+    rgb(255 236 200 / 0.18),
+    rgb(255 236 200 / 0.04) 38%,
+    transparent 62%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+
+.tilt-card.is-tilting .tilt-card-glare {
+  opacity: 1;
+}
 /* Transición entre páginas, "la marea y las islas" (scripts/page-transition.ts).
    Al llegar desde otra página, la tapa del color de fondo cubre todo desde el
    primer pintado hasta que el lienzo de la transición toma el relevo. Si el
