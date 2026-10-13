@@ -334,17 +334,25 @@
     "titleHighlight": "hard part",
     "titleEnd": "of the web.",
     "subtitle": "Websites and 3D catalogues that load fast on any phone, that Google understands and that anyone can use. What a template won’t solve.",
-    "hint": "Each peak answers a question. Pick yours.",
-    "sceneDescription": "Relief map of the Sierra de Guadarrama (Spain), drawn with golden contour lines on a black background. Three summits carry a survey pillar: Peñalara, Siete Picos and La Mujer Muerta. Each one is a section of the site. The sky, the light and the weather are the mountains’ right now, and at night the villages light up.",
+    "hint": "Drag to turn the mountains. Each peak answers a question.",
+    "more": "What I do",
+    "close": "Close",
+    "sceneDescription": "Relief map of the Sierra de Guadarrama (Spain), drawn with golden contour lines. Three summits carry a survey pillar: Peñalara, Siete Picos and La Mujer Muerta. Each one is a section of the site. The sky, the light and the weather are the mountains’ right now, and at night the villages light up.",
     "dataLabel": "Data",
     "classic": "Classic version",
     "pause": "Pause motion",
     "sound": "Sound",
+    "rotate": {
+      "label": "Turn the mountains",
+      "left": "Turn left",
+      "right": "Turn right"
+    },
     "nav": {
       "label": "Main",
       "blog": "Blog",
       "contact": "Let’s talk"
     },
+    "menu": "Menu",
     "homeLabel": "Javier Piedra, home",
     "verticesLabel": "Sections",
     "caption": "Sierra de Guadarrama",

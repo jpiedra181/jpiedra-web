@@ -28,9 +28,11 @@ const vertices = surveyVerticesFor(lang)
 // En producción el tiempo llega de AEMET (función de Netlify); en desarrollo,
 // de Open-Meteo. La atribución tiene que nombrar la fuente que se usa. Una
 // sola línea corta con las tres fuentes, como admiten las guías de atribución
-// de OpenStreetMap cuando falta espacio.
-const weatherSource = import.meta.env.PROD ? "© AEMET" : "Open-Meteo"
-const caption = `${copy.caption} · ${copy.dataLabel}: © IGN · © OpenStreetMap · ${weatherSource}`
+// de OpenStreetMap cuando falta espacio. En móvil el nombre de la sierra pasa
+// a la hoja «Qué hago» y bajo el titular quedan solo las fuentes.
+// Guion que no parte línea (U+2011): a 320 px quedaba «Open-» al final.
+const weatherSource = import.meta.env.PROD ? "© AEMET" : "Open‑Meteo"
+const credits = `${copy.dataLabel}: © IGN · © OpenStreetMap · ${weatherSource}`
 
 // Datos estructurados de la marca: la persona y el sitio web.
 const structuredData = {
@@ -89,13 +91,25 @@ const structuredData = {
                 <span aria-hidden="true">J<span class="text-accent">.</span>P</span>
                 <span class="sr-only">{copy.homeLabel}</span>
             </a>
+            <!-- Solo en pantallas pequeñas (survey/compact-ui.ts). Va antes
+                 del menú: al abrirlo, Tab sigue por sus enlaces. -->
+            <button
+                type="button"
+                class="survey-menu-button"
+                data-menu-button
+                aria-expanded="false"
+                aria-controls="survey-nav"
+            >
+                <span class="survey-menu-lines" aria-hidden="true"><span></span></span>
+                <span class="sr-only">{copy.menu}</span>
+            </button>
             <!-- Mismo orden relativo que la cabecera del resto de páginas
                  (Blog, EN, Hablemos): WCAG 3.2.3. -->
-            <nav class="survey-nav" aria-label={copy.nav.label}>
+            <nav id="survey-nav" class="survey-nav" aria-label={copy.nav.label}>
                 {lang === "es" && <a href={routes.blog}>{copy.nav.blog}</a>}
                 <a href={routes.classic}>{copy.classic}</a>
                 <LanguageSwitcher lang={lang} class="survey-language" />
-                <a href={routes.contact}>{copy.nav.contact}</a>
+                <a href={routes.contact} class="survey-nav-cta">{copy.nav.contact}</a>
             </nav>
         </header>
 
@@ -107,9 +121,25 @@ const structuredData = {
                     <em>{copy.titleHighlight}</em>
                     <span class="block">{copy.titleEnd}</span>
                 </h1>
-                <p class="survey-subtitle">{copy.subtitle}</p>
-                <p class="survey-hint">{copy.hint}</p>
-                <p class="survey-caption">{caption}</p>
+                <!-- Solo en pantallas pequeñas: el subtítulo, la pista y la
+                     pregunta de cada cumbre pasan a la hoja «Qué hago». -->
+                <button
+                    type="button"
+                    class="survey-more"
+                    data-sheet-open
+                    aria-haspopup="dialog"
+                    aria-controls="survey-sheet"
+                >
+                    <span class="survey-more-icon" aria-hidden="true"></span>
+                    {copy.more}
+                </button>
+                <div class="survey-details">
+                    <p class="survey-subtitle">{copy.subtitle}</p>
+                    <p class="survey-hint">{copy.hint}</p>
+                </div>
+                <p class="survey-caption">
+                    <span class="survey-caption-place">{copy.caption} · </span>{credits}
+                </p>
                 <p class="sr-only">{copy.sceneDescription}</p>
             </div>
 
@@ -145,6 +175,25 @@ const structuredData = {
             </nav>
 
             <div class="survey-controls">
+                <!-- La alternativa sin arrastre al giro con el ratón o el
+                     dedo (WCAG 2.5.7). Sin escena no hay nada que girar. -->
+                <div class="survey-orbit" role="group" aria-label={copy.rotate.label}>
+                    {
+                        (["left", "right"] as const).map((side) => (
+                            <button
+                                type="button"
+                                class="survey-button survey-button--ghost survey-button--icon"
+                                data-rotate={side}
+                            >
+                                <svg class={`survey-rotate-icon survey-rotate-icon--${side}`} viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 13a7 7 0 1 0 2.05-4.95" />
+                                    <path d="M7 3.6V8h4.4" />
+                                </svg>
+                                <span class="sr-only">{copy.rotate[side]}</span>
+                            </button>
+                        ))
+                    }
+                </div>
                 <button
                     type="button"
                     class="survey-button survey-button--ghost"
@@ -152,7 +201,7 @@ const structuredData = {
                     aria-pressed="false"
                 >
                     <span class="survey-pause-icon" aria-hidden="true"></span>
-                    {copy.pause}
+                    <span class="survey-button-text">{copy.pause}</span>
                 </button>
                 <button
                     type="button"
@@ -165,7 +214,7 @@ const structuredData = {
                         <path class="waves" d="M13 5a4 4 0 0 1 0 6M15.5 3a7 7 0 0 1 0 10" />
                         <path class="mute" d="M13 5.5l5 5M18 5.5l-5 5" />
                     </svg>
-                    {copy.sound}
+                    <span class="survey-button-text">{copy.sound}</span>
                 </button>
                 <!-- Es un enlace a la versión clásica: sin JavaScript (o antes de
                      que cargue la escena) lleva allí sin más. Con la escena,
@@ -186,6 +235,39 @@ const structuredData = {
             </div>
         </main>
 
+        <!-- Hoja «Qué hago» (pantallas pequeñas, survey/compact-ui.ts). En
+             móvil el titular va solo sobre la sierra; aquí está lo demás,
+             también la pregunta de cada cumbre, que en el mapa solo lleva
+             su nombre (WCAG 1.4.10). Cerrada, no existe para nadie. -->
+        <dialog id="survey-sheet" class="survey-sheet" aria-labelledby="survey-sheet-title">
+            <div class="survey-sheet-header">
+                <h2 id="survey-sheet-title" class="survey-sheet-title">{copy.more}</h2>
+                <button type="button" class="survey-sheet-close" data-sheet-close>
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M5 5l10 10M15 5 5 15" />
+                    </svg>
+                    <span class="sr-only">{copy.close}</span>
+                </button>
+            </div>
+            <p class="survey-sheet-lead">{copy.subtitle}</p>
+            <ul class="survey-sheet-list" role="list">
+                {
+                    vertices.map((vertex) => (
+                        <li>
+                            <a href={vertex.href} class="survey-sheet-link" data-sheet-link>
+                                <span class="survey-sheet-label">{vertex.label}</span>
+                                <span class="sr-only">. </span>
+                                <span class="survey-sheet-summary">{vertex.summary}</span>
+                                <span class="survey-sheet-arrow" aria-hidden="true">→</span>
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+            <p class="survey-sheet-hint">{copy.hint}</p>
+            <p class="survey-sheet-credits">{copy.caption} · {credits}</p>
+        </dialog>
+
         <div class="survey-reticle" data-reticle aria-hidden="true">
             <span class="reticle-ring"></span>
             <span class="reticle-cross"></span>
@@ -197,19 +279,30 @@ const structuredData = {
         <script>
             import type { WeatherKind } from "../../scripts/survey/weather"
             import { wireSurveyControls } from "../../scripts/survey/controls"
+            import { wireSurveyMenu, wireSurveySheet } from "../../scripts/survey/compact-ui"
             import { initPageTransitions } from "../../scripts/page-transition"
             import terrainMeta from "../../data/terrain/guadarrama-mdt25.json"
 
             initPageTransitions()
+            wireSurveyMenu()
+            wireSurveySheet()
 
             // El bloque de texto se coloca encima de los controles con su altura
             // real (--survey-controls-h): en móviles estrechos los botones pasan
-            // a dos líneas y, con una altura fija, tapaban los créditos.
+            // a dos líneas y, con una altura fija, tapaban los créditos. En
+            // móvil, la sombra que hay detrás del titular sigue su altura
+            // (--survey-intro-h), plegado o desplegado.
             const controls = document.querySelector<HTMLElement>(".survey-controls")!
-            const setControlsHeight = () =>
-                document.documentElement.style.setProperty("--survey-controls-h", `${controls.offsetHeight}px`)
-            new ResizeObserver(setControlsHeight).observe(controls)
-            setControlsHeight()
+            const intro = document.querySelector<HTMLElement>(".survey-intro")!
+            const setBlockHeights = () => {
+                const style = document.documentElement.style
+                style.setProperty("--survey-controls-h", `${controls.offsetHeight}px`)
+                style.setProperty("--survey-intro-h", `${intro.offsetHeight}px`)
+            }
+            const blockObserver = new ResizeObserver(setBlockHeights)
+            blockObserver.observe(controls)
+            blockObserver.observe(intro)
+            setBlockHeights()
 
             const query = <T extends Element>(selector: string) =>
                 document.querySelector<T>(selector)!
@@ -280,12 +373,17 @@ const structuredData = {
                     reticle: query<HTMLElement>("[data-reticle]"),
                     fade: query<HTMLElement>("[data-fade]"),
                     layout: {
-                        header: [query<HTMLElement>(".survey-logo"), query<HTMLElement>(".survey-nav")],
+                        header: [
+                            query<HTMLElement>(".survey-logo"),
+                            query<HTMLElement>(".survey-nav"),
+                            query<HTMLElement>(".survey-menu-button"),
+                        ],
                         intro: query<HTMLElement>(".survey-intro"),
                         controls: query<HTMLElement>(".survey-controls"),
                         obstacles: [
                             query<HTMLElement>(".survey-logo"),
                             query<HTMLElement>(".survey-nav"),
+                            query<HTMLElement>(".survey-menu-button"),
                             query<HTMLElement>(".survey-intro"),
                             query<HTMLElement>(".survey-controls"),
                         ],
@@ -335,6 +433,21 @@ const structuredData = {
                 height: 100vh;
                 height: 100dvh;
                 display: block;
+                /* Un dedo gira la sierra; dos siguen ampliando la página
+                   (con touch-action: none no se podía hacer zoom, WCAG 1.4.4). */
+                touch-action: pinch-zoom;
+                cursor: grab;
+            }
+
+            .is-orbiting .survey-canvas {
+                cursor: grabbing;
+            }
+
+            /* Menú hamburguesa y desplegable «Qué hago»: solo en pantallas
+               pequeñas (bloque "compacto", al final). */
+            .survey-menu-button,
+            .survey-more {
+                display: none;
             }
 
             /* --- Cabecera y lectura de coordenadas --- */
@@ -418,6 +531,44 @@ const structuredData = {
                 color: var(--color-accent);
             }
 
+            /* --- Girar --- */
+            .survey-orbit {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            /* Sin escena (sin JavaScript o sin WebGL) no hay nada que girar; mientras
+               carga, los botones guardan su sitio para no mover la fila. */
+            html:not(.js) .survey-orbit,
+            .survey-failed .survey-orbit {
+                display: none;
+            }
+
+            .js:not(.survey-ready):not(.survey-failed) .survey-orbit {
+                visibility: hidden;
+            }
+
+            .survey-button.survey-button--icon {
+                width: 44px;
+                padding: 0;
+                justify-content: center;
+            }
+
+            .survey-rotate-icon {
+                flex-shrink: 0;
+                width: 1.35rem;
+                height: 1.35rem;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 1.6;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            .survey-rotate-icon--right {
+                transform: scaleX(-1);
+            }
+
             /* --- Pausa --- */
             .survey-pause-icon {
                 width: 0.7rem;
@@ -450,7 +601,10 @@ const structuredData = {
                 pointer-events: none;
             }
 
-            /* Sombra que separa el titular de las curvas sin taparlas. */
+            /* Sombra que separa el titular de las curvas sin taparlas. De día
+               las laderas al sol son más claras y, al girar la sierra, puede
+               pasar cualquiera por detrás: es algo más densa que cuando la
+               escena era siempre oscura, para que el subtítulo no baje de 4,5:1. */
             .survey-intro::before {
                 content: "";
                 position: absolute;
@@ -458,8 +612,8 @@ const structuredData = {
                 z-index: -1;
                 background: radial-gradient(
                     ellipse at 35% 60%,
-                    rgba(11, 15, 20, 0.85) 0%,
-                    rgba(11, 15, 20, 0.55) 40%,
+                    rgba(11, 15, 20, 0.9) 0%,
+                    rgba(11, 15, 20, 0.66) 40%,
                     transparent 72%
                 );
             }
@@ -610,10 +764,13 @@ const structuredData = {
                 to { translate: -2px 2px; }
             }
 
+            /* El halo oscuro bajo el anillo blanco lo mantiene visible también
+               sobre la bruma clara del cielo de día. */
             .survey a:focus-visible,
             .survey button:focus-visible {
                 outline: 2px solid #fff;
                 outline-offset: 4px;
+                box-shadow: 0 0 0 8px rgb(11 15 20 / 0.85);
             }
 
             /* --- Vértices geodésicos --- */
@@ -746,11 +903,13 @@ const structuredData = {
 
             .survey .vertex:focus-visible {
                 outline: none;
+                box-shadow: none;
             }
 
             .survey .vertex:focus-visible .vertex-card {
                 outline: 2px solid #fff;
                 outline-offset: 4px;
+                box-shadow: 0 0 0 8px rgb(11 15 20 / 0.85);
             }
 
             /* --- Retícula de taquímetro --- */
@@ -856,8 +1015,162 @@ const structuredData = {
                 pointer-events: none;
             }
 
-            .is-doomed .survey-reticle {
+            .is-doomed .survey-reticle,
+            .survey-menu-open .survey-reticle,
+            .survey-sheet-open .survey-reticle {
                 opacity: 0;
+            }
+
+            /* --- Hoja «Qué hago» (solo se abre en pantallas pequeñas) --- */
+            .survey-sheet {
+                position: fixed;
+                inset: auto 0 0;
+                width: min(100%, 36rem);
+                max-width: 100%;
+                max-height: min(85dvh, 40rem);
+                margin: 0 auto;
+                padding: 1rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                border: 0;
+                border-top: 1px solid var(--color-border-hover);
+                border-radius: 1.25rem 1.25rem 0 0;
+                background: var(--color-bg-surface);
+                color: var(--color-text-primary);
+                cursor: auto;
+            }
+
+            .survey-sheet::backdrop {
+                background: rgb(11 15 20 / 0.6);
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                .survey-sheet[open] {
+                    animation: sheet-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+                }
+                .survey-sheet[open]::backdrop {
+                    animation: backdrop-in 0.35s ease-out;
+                }
+            }
+
+            @keyframes sheet-in {
+                from { transform: translateY(100%); }
+            }
+
+            @keyframes backdrop-in {
+                from { opacity: 0; }
+            }
+
+            .survey-sheet-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .survey-sheet-title {
+                font-size: 0.72rem;
+                font-weight: 500;
+                letter-spacing: 0.24em;
+                text-transform: uppercase;
+                color: var(--color-accent);
+            }
+
+            .survey-sheet-close {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                margin-right: -0.5rem;
+                border-radius: 999px;
+                color: var(--color-text-primary);
+                transition: color 0.2s;
+            }
+
+            .survey-sheet-close:hover {
+                color: var(--color-accent);
+            }
+
+            .survey-sheet-close svg {
+                width: 1.1rem;
+                height: 1.1rem;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 1.6;
+                stroke-linecap: round;
+            }
+
+            .survey-sheet-lead {
+                font-size: 1rem;
+                line-height: 1.55;
+                color: var(--color-text-secondary);
+            }
+
+            .survey-sheet-list {
+                margin-top: 1.25rem;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .survey-sheet-link {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                align-items: center;
+                column-gap: 1rem;
+                padding: 0.85rem 0;
+                border-top: 1px solid var(--color-border);
+                color: var(--color-text-primary);
+            }
+
+            .survey-sheet-label {
+                font-family: var(--font-heading);
+                font-size: 1.4rem;
+                line-height: 1.15;
+            }
+
+            .survey-sheet-summary {
+                grid-column: 1;
+                font-size: 0.85rem;
+                color: var(--color-text-secondary);
+            }
+
+            .survey-sheet-arrow {
+                grid-column: 2;
+                grid-row: 1 / span 2;
+                color: var(--color-accent);
+                transition: translate 0.2s;
+            }
+
+            .survey-sheet-link:hover .survey-sheet-label {
+                color: var(--color-accent);
+            }
+
+            .survey-sheet-link:hover .survey-sheet-arrow {
+                translate: 3px 0;
+            }
+
+            .survey-sheet-hint,
+            .survey-sheet-credits {
+                margin-top: 1rem;
+                font-family: var(--mono);
+                font-size: 0.68rem;
+                color: var(--color-text-secondary);
+            }
+
+            .survey-sheet-hint {
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+            }
+
+            .survey-sheet-credits {
+                margin-top: 0.5rem;
+                letter-spacing: 0.06em;
+            }
+
+            .survey .survey-sheet a:focus-visible,
+            .survey .survey-sheet button:focus-visible {
+                outline-offset: 2px;
             }
 
             .debris-word {
@@ -921,75 +1234,51 @@ const structuredData = {
             /* --- Móvil --- */
             @media (max-width: 767px) {
                 .survey-header {
-                    grid-template-columns: auto 1fr;
-                    padding: 1.1rem 1rem;
-                }
-                .survey-nav {
-                    justify-self: end;
-                    gap: 0;
-                }
-                /* Atkinson en mayúsculas es algo más ancha que la anterior: con
-                   menos espaciado «Versión clásica» cabe en una línea. */
-                .survey-nav a {
-                    min-height: 32px;
-                    padding: 0 0.45rem;
-                    font-size: 0.62rem;
-                    letter-spacing: 0.04em;
-                    white-space: nowrap;
+                    padding: 1rem;
                 }
                 .survey-eyebrow {
-                    font-size: 0.6rem;
-                    letter-spacing: 0.18em;
-                    margin-bottom: 0.75rem;
+                    font-size: 0.68rem;
+                    letter-spacing: 0.16em;
+                    margin-bottom: 0.6rem;
                 }
-                /* Encima de los controles, midiendo su altura real: en móviles
-                   estrechos los botones pasan a dos líneas y tapaban los
-                   créditos (WCAG 1.4.10). La altura la pone el script. */
                 .survey-intro {
-                    bottom: calc(var(--survey-controls-h, 6rem) + 1.75rem);
+                    right: 1rem;
+                    max-width: none;
                 }
+                /* El titular va solo, sobre una sombra que sube desde abajo a
+                   todo lo ancho y se ajusta a su altura (--survey-intro-h, la
+                   mide el script). En horizontal sigue la sombra redonda. */
                 .survey-intro::before {
-                    inset: -2.5rem -1.5rem -9rem -1.5rem;
+                    display: none;
+                }
+                .survey-main::before {
+                    content: "";
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: calc(var(--survey-intro-h, 12rem) + var(--survey-controls-h, 3rem) + 5.5rem);
                     background: linear-gradient(
                         to top,
-                        rgba(11, 15, 20, 0.94) 0%,
-                        rgba(11, 15, 20, 0.9) 82%,
-                        rgba(11, 15, 20, 0) 100%
+                        rgb(11 15 20 / 0.94) 0%,
+                        rgb(11 15 20 / 0.88) calc(100% - 4.5rem),
+                        rgb(11 15 20 / 0) 100%
                     );
+                    pointer-events: none;
+                    transition: opacity 0.6s;
+                }
+                .is-doomed .survey-main::before {
+                    opacity: 0;
                 }
                 .survey-title {
-                    font-size: clamp(2.6rem, 13vw, 3.4rem);
+                    font-size: clamp(2.3rem, 11.5vw, 3.2rem);
                 }
                 .survey-subtitle {
-                    margin-top: 0.9rem;
+                    margin-top: 0.75rem;
                     font-size: 0.95rem;
                 }
                 .survey-hint {
-                    margin-top: 0.5rem;
-                    font-size: 0.6rem;
-                }
-                .survey-caption {
-                    font-size: 0.55rem;
-                }
-                /* Pausa y sonido en una fila; el fin del mundo, debajo y entero. */
-                .survey-controls {
-                    left: 1rem;
-                    right: 1rem;
-                    bottom: 1rem;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 0.5rem;
-                }
-                .survey-controls > * {
-                    width: 100%;
-                    justify-content: center;
-                }
-                .survey-button--doom {
-                    grid-column: 1 / -1;
-                }
-                .survey-button {
-                    padding: 0.6rem 0.75rem;
-                    font-size: 0.8rem;
+                    margin-top: 0.6rem;
                 }
                 .vertex-label {
                     font-size: 1.05rem;
@@ -1003,12 +1292,10 @@ const structuredData = {
                 .vertex-card {
                     bottom: 40px;
                     gap: 0.15rem;
-                    padding: 0.35rem 0.5rem;
+                    padding: 0.35rem 0.55rem;
                     width: max-content;
                     max-width: 9.5rem;
                 }
-                /* La línea de cada cumbre se queda también en móvil: ocultarla
-                   era perder información a 320 px (WCAG 1.4.10). */
                 .vertex-summary {
                     font-size: 0.68rem;
                     white-space: normal;
@@ -1019,23 +1306,13 @@ const structuredData = {
                    controles en una fila y la sierra a la derecha --- */
             @media (orientation: landscape) and (max-height: 560px) {
                 .survey-header {
-                    grid-template-columns: auto 1fr;
                     padding: 0.75rem 1rem;
                 }
-                .survey-nav {
-                    justify-self: end;
-                }
-                .survey-nav a {
-                    min-height: 30px;
-                    font-size: 0.62rem;
-                }
                 .survey-intro {
-                    left: 1rem;
-                    bottom: calc(var(--survey-controls-h, 2.4rem) + 1.2rem);
                     max-width: 42vw;
                 }
                 .survey-eyebrow {
-                    font-size: 0.66rem;
+                    font-size: 0.68rem;
                     letter-spacing: 0.12em;
                     margin-bottom: 0.4rem;
                 }
@@ -1044,108 +1321,360 @@ const structuredData = {
                 }
                 .survey-subtitle {
                     margin-top: 0.5rem;
-                    font-size: 0.78rem;
+                    font-size: 0.85rem;
                 }
-                .survey-hint {
-                    display: none;
-                }
-                .survey-caption {
-                    margin-top: 0.35rem;
-                    font-size: 0.5rem;
-                }
-                .survey-controls {
-                    left: 1rem;
-                    right: 1rem;
-                    bottom: 0.6rem;
-                    display: flex;
-                    justify-content: flex-end;
-                    gap: 0.4rem;
-                }
-                .survey-controls > * {
-                    width: auto;
+                .js .survey .survey-more {
+                    margin-top: 0.5rem;
                 }
                 .survey-button {
-                    min-height: 36px;
-                    padding: 0.35rem 0.75rem;
-                    font-size: 0.72rem;
+                    min-height: 40px;
+                }
+                .survey .survey-button--ghost {
+                    width: 40px;
                 }
                 .vertex-label {
                     font-size: 1rem;
-                }
-                .vertex-summary {
-                    display: none;
                 }
                 .vertex-card {
                     padding: 0.3rem 0.5rem;
                 }
             }
 
-            /* --- Móviles muy pequeños: se compacta el bloque del titular para
-                   dejar sitio a la sierra --- */
-            @media (max-width: 400px) and (max-height: 700px) {
-                .survey-eyebrow {
+            /* --- Pantallas pequeñas (móvil en vertical y en horizontal) ---
+               La sierra manda: el titular va solo, abajo, y lo demás se pliega
+               (survey/compact-ui.ts). Sin JavaScript no se pliega nada y la
+               navegación se queda en su cápsula, que también cabe. */
+            @media (max-width: 767px), (orientation: landscape) and (max-height: 560px) {
+                .survey-header {
+                    grid-template-columns: auto 1fr auto;
+                    align-items: center;
+                }
+
+                /* En vertical la cámara mira en picado y arriba solo queda la
+                   bruma clara del horizonte: el logo lleva su propia cápsula,
+                   a juego con el botón de menú. */
+                .survey-logo {
+                    display: inline-flex;
+                    align-items: center;
+                    min-height: 44px;
+                    padding: 0 0.85rem;
+                    border-radius: 999px;
+                    background: rgb(11 15 20 / 0.86);
+                    border: 1px solid rgba(232, 200, 114, 0.2);
+                    font-size: 1.5rem;
+                }
+
+                /* Botón de menú: tres rayas que se cruzan en aspa al abrir. */
+                .js .survey-menu-button {
+                    grid-column: 3;
+                    position: relative;
+                    z-index: 2;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 999px;
+                    background: rgb(11 15 20 / 0.86);
+                    border: 1px solid rgba(232, 200, 114, 0.2);
+                    color: var(--color-text-primary);
+                    pointer-events: auto;
+                }
+
+                .survey-menu-lines {
+                    position: relative;
+                    display: block;
+                    width: 18px;
+                    height: 12px;
+                }
+
+                .survey-menu-lines::before,
+                .survey-menu-lines::after,
+                .survey-menu-lines > span {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    display: block;
+                    height: 1.5px;
+                    border-radius: 1px;
+                    background: currentColor;
+                    transition: top 0.25s, transform 0.25s, opacity 0.2s;
+                }
+
+                .survey-menu-lines::before {
+                    top: 0;
+                }
+
+                .survey-menu-lines > span {
+                    top: calc(50% - 0.75px);
+                }
+
+                .survey-menu-lines::after {
+                    top: calc(100% - 1.5px);
+                }
+
+                .survey-menu-open .survey-menu-lines::before,
+                .survey-menu-open .survey-menu-lines::after {
+                    top: calc(50% - 0.75px);
+                }
+
+                .survey-menu-open .survey-menu-lines::before {
+                    transform: rotate(45deg);
+                }
+
+                .survey-menu-open .survey-menu-lines::after {
+                    transform: rotate(-45deg);
+                }
+
+                .survey-menu-open .survey-menu-lines > span {
+                    opacity: 0;
+                }
+
+                /* Panel del menú a pantalla completa, como el del resto de la
+                   web (Header.astro). visibility lo saca del orden de tabulación
+                   y del árbol de accesibilidad mientras está cerrado. */
+                .js .survey-nav {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 1;
+                    /* Hijo de un grid: sin esto, justify-self: center lo
+                       encogía a su contenido aun estando fijo a pantalla. */
+                    justify-self: stretch;
+                    align-self: stretch;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1.25rem;
+                    padding: 5rem 1.5rem 2rem;
+                    overflow-y: auto;
+                    border: 0;
+                    border-radius: 0;
+                    background: rgb(11 15 20 / 0.97);
+                    -webkit-backdrop-filter: blur(12px);
+                    backdrop-filter: blur(12px);
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.25s, visibility 0s linear 0.25s;
+                }
+
+                .survey-menu-open .survey-nav {
+                    opacity: 1;
+                    visibility: visible;
+                    transition: opacity 0.25s;
+                }
+
+                .js .survey-nav a {
+                    min-height: 44px;
+                    padding: 0 1rem;
+                    font-family: var(--font-heading);
+                    font-size: 1.9rem;
+                    font-weight: 400;
+                    letter-spacing: 0;
+                    text-transform: none;
+                }
+
+                .js .survey-nav .survey-language {
+                    font-family: var(--font-body);
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    letter-spacing: 0.12em;
+                }
+
+                .js .survey-nav .survey-nav-cta {
+                    margin-top: 0.5rem;
+                    min-height: 48px;
+                    padding: 0 1.75rem;
+                    font-family: var(--font-body);
+                    font-size: 1rem;
+                    font-weight: 500;
+                    background: var(--color-accent);
+                    color: var(--color-bg-primary);
+                }
+
+                .js .survey-nav .survey-nav-cta:hover {
+                    background: var(--color-accent-hover);
+                    color: var(--color-bg-primary);
+                }
+
+                /* Sin JavaScript: la cápsula de siempre, a la derecha y apretada. */
+                html:not(.js) .survey-nav {
+                    grid-column: 2 / -1;
+                    justify-self: end;
+                    gap: 0;
+                }
+
+                html:not(.js) .survey-nav a {
+                    min-height: 32px;
+                    padding: 0 0.45rem;
+                    font-size: 0.7rem;
+                    letter-spacing: 0.06em;
+                    white-space: nowrap;
+                }
+
+                .survey-intro {
+                    left: 1rem;
+                    bottom: calc(var(--survey-controls-h, 3rem) + 1.5rem);
+                }
+
+                /* «Qué hago»: abre la hoja con el subtítulo, la pista y la
+                   pregunta de cada cumbre. */
+                .js .survey-more {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.6rem;
+                    margin-top: 0.85rem;
+                    min-height: 40px;
+                    padding: 0 1rem 0 0.9rem;
+                    border-radius: 999px;
+                    border: 1px solid rgba(232, 200, 114, 0.3);
+                    background: rgb(11 15 20 / 0.6);
+                    color: var(--color-text-primary);
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    pointer-events: auto;
+                    transition: border-color 0.2s, color 0.2s;
+                }
+
+                .js .survey-more:hover {
+                    border-color: var(--color-accent);
+                    color: var(--color-accent);
+                }
+
+                /* Chevrón hacia arriba: la hoja sube desde abajo. */
+                .survey-more-icon {
+                    width: 0.45rem;
+                    height: 0.45rem;
+                    border-left: 1.5px solid currentColor;
+                    border-top: 1.5px solid currentColor;
+                    transform: translateY(2px) rotate(45deg);
+                }
+
+                .js .survey-details {
                     display: none;
                 }
-                .survey-title {
-                    font-size: 2.2rem;
+
+                /* En el mapa, la pregunta de cada cumbre sale de la vista (está
+                   en la hoja) pero sigue en el nombre del enlace para el
+                   lector de pantalla. */
+                .js .vertex-summary {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip-path: inset(50%);
+                    white-space: nowrap;
+                    border: 0;
                 }
-                .survey-subtitle {
-                    margin-top: 0.5rem;
-                    font-size: 0.85rem;
-                }
+
+                /* Letra pequeña, pero nunca por debajo de ~11 px. */
+                .survey-hint,
                 .survey-caption {
-                    font-size: 0.5rem;
+                    font-size: 0.68rem;
                 }
-                .survey-button {
-                    min-height: 40px;
-                    padding: 0.45rem 0.6rem;
-                    font-size: 0.75rem;
+
+                /* Las fuentes, en una sola línea desde 360 px. */
+                .survey-caption {
+                    margin-top: 0.75rem;
+                    letter-spacing: 0.02em;
+                }
+
+                .js .survey-caption-place {
+                    display: none;
+                }
+
+                /* Controles en una fila: girar, pausa y sonido como iconos (su
+                   nombre sigue ahí para el lector de pantalla) y el fin del
+                   mundo, con su texto, a la derecha. */
+                .survey-controls {
+                    left: 1rem;
+                    right: 1rem;
+                    bottom: 1rem;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    gap: 0.4rem;
+                }
+
+                .survey-orbit {
+                    gap: 0.4rem;
+                }
+
+                .survey-button--ghost {
+                    width: 44px;
+                    padding: 0;
+                    justify-content: center;
+                }
+
+                .survey-button-text {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip-path: inset(50%);
+                    white-space: nowrap;
+                    border: 0;
+                }
+
+                .survey-button--doom {
+                    margin-left: auto;
+                    padding: 0.6rem 1rem;
+                    font-size: 0.85rem;
                 }
             }
 
-            /* En los móviles más estrechos los iconos no caben junto al texto
-               y partían los botones en dos líneas: queda solo el texto. */
-            @media (max-width: 360px) {
-                .survey-pause-icon,
-                .survey-sound-icon,
+            /* Móviles estrechos: el fin del mundo se queda sin icono y los
+               controles se aprietan para no partir la fila, que robaba alto a
+               la sierra. */
+            @media (max-width: 374px) {
                 .survey-doom-icon {
                     display: none;
                 }
-            }
-
-            /* --- Legibilidad en pantallas pequeñas: nada por debajo de ~11 px --- */
-            @media (max-width: 767px), (orientation: landscape) and (max-height: 560px) {
-                .survey .survey-caption,
-                .survey .survey-hint {
-                    font-size: 0.68rem;
+                .survey .survey-controls,
+                .survey .survey-orbit {
+                    gap: 0.3rem;
                 }
-                .survey .survey-nav a {
-                    font-size: 0.7rem;
-                    letter-spacing: 0.06em;
+                .survey .survey-button--ghost {
+                    width: 38px;
+                    min-height: 38px;
                 }
-            }
-
-            @media (max-width: 360px) {
-                /* Con la letra a 11 px el menú no cabe en una fila a 320 px: mejor
-                   que «Versión clásica» pase a dos líneas que cortar «Hablemos». */
-                .survey .survey-nav a {
+                .survey .survey-button--doom {
+                    min-height: 38px;
+                    padding: 0 0.75rem;
+                    font-size: 0.8rem;
+                }
+                .survey-eyebrow {
+                    letter-spacing: 0.08em;
+                }
+                /* Sin JavaScript, mejor que «Versión clásica» pase a dos líneas
+                   que cortar «Hablemos». */
+                html:not(.js) .survey .survey-nav a {
                     padding: 0 0.35rem;
                     letter-spacing: 0.02em;
                     white-space: normal;
                 }
             }
 
-            /* --- Pantallas muy bajas o móviles pequeños ---
-               Con 22rem de alto o menos (zoom al 400 %, ventanas pequeñas), o en
-               móviles de hasta 400×700, la portada no cabe entera en una
-               pantalla: pasa a desplazarse. El relieve se queda de fondo y el
-               texto, las cumbres y los controles vuelven al flujo normal, en ese
-               orden y sin ocultar nada. Antes el titular quedaba fuera, no había
-               scroll y en móvil se escondían textos (WCAG 1.4.10). */
-            @media (max-height: 22rem), (max-width: 25rem) and (max-height: 43.75rem) {
+            /* --- Pantallas muy bajas ---
+               Con 22rem de alto o menos (zoom al 400 %, ventanas pequeñas), o
+               estrechas y de menos de 28rem (zoom al 200 %), la portada no cabe
+               entera: pasa a desplazarse. El relieve se queda de fondo y el
+               texto, las cumbres y los controles vuelven al flujo normal, en
+               ese orden y sin ocultar nada (WCAG 1.4.10). Antes saltaba también
+               en móviles normales (hasta 400×700) y tapaba la sierra. */
+            @media (max-height: 22rem), (max-width: 767px) and (max-height: 28rem) {
                 html:has(.survey),
                 .survey {
                     overflow-y: auto;
+                }
+                /* Arrastrar en vertical vuelve a desplazar la página; en
+                   horizontal, gira la sierra. */
+                .survey-canvas {
+                    touch-action: pan-y pinch-zoom;
                 }
                 .survey-header {
                     position: absolute;
@@ -1157,15 +1686,23 @@ const structuredData = {
                     gap: 1.25rem;
                     padding: 4.5rem 1rem 1.5rem;
                 }
+                .survey-main::before {
+                    display: none;
+                }
                 .survey .survey-intro {
                     position: relative;
                     left: auto;
+                    right: auto;
                     bottom: auto;
                     max-width: 100%;
+                    max-height: none;
+                    overflow: visible;
                 }
-                .survey .survey-hint,
-                .survey .survey-eyebrow {
+                .survey .survey-intro::before {
                     display: block;
+                    inset: -0.75rem;
+                    border-radius: 0.75rem;
+                    background: rgb(11 15 20 / 0.88);
                 }
                 .survey-ready .survey-vertices ul,
                 .survey-vertices ul {
@@ -1186,21 +1723,12 @@ const structuredData = {
                     position: static;
                     white-space: normal;
                 }
-                .survey .vertex-summary {
-                    display: block;
-                }
                 .vertex-pin,
                 .vertex-stem {
                     display: none;
                 }
                 .survey .survey-controls {
                     position: static;
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: flex-start;
-                }
-                .survey .survey-controls > * {
-                    width: auto;
                 }
             }
         </style>

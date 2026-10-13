@@ -1175,17 +1175,25 @@
     "titleHighlight": "difícil",
     "titleEnd": "de la web.",
     "subtitle": "Webs y catálogos 3D que cargan rápido en cualquier móvil, que Google entiende y que puede usar todo el mundo. Lo que una plantilla no resuelve.",
-    "hint": "Cada cumbre responde a una pregunta. Elige la tuya.",
-    "sceneDescription": "Mapa en relieve de la Sierra de Guadarrama, dibujado con curvas de nivel doradas sobre fondo negro. Tres cumbres llevan un vértice geodésico: Peñalara, Siete Picos y La Mujer Muerta. Cada una es un apartado de la web. El cielo, la luz y el tiempo son los de la sierra en este momento, y de noche se encienden las luces de los pueblos.",
+    "hint": "Arrastra para girar la sierra. Cada cumbre responde a una pregunta.",
+    "more": "Qué hago",
+    "close": "Cerrar",
+    "sceneDescription": "Mapa en relieve de la Sierra de Guadarrama, dibujado con curvas de nivel doradas. Tres cumbres llevan un vértice geodésico: Peñalara, Siete Picos y La Mujer Muerta. Cada una es un apartado de la web. El cielo, la luz y el tiempo son los de la sierra en este momento, y de noche se encienden las luces de los pueblos.",
     "dataLabel": "Datos",
     "classic": "Versión clásica",
     "pause": "Pausar movimiento",
     "sound": "Sonido",
+    "rotate": {
+      "label": "Girar la sierra",
+      "left": "Girar a la izquierda",
+      "right": "Girar a la derecha"
+    },
     "nav": {
       "label": "Principal",
       "blog": "Blog",
       "contact": "Hablemos"
     },
+    "menu": "Menú",
     "homeLabel": "Javier Piedra, inicio",
     "verticesLabel": "Apartados",
     "caption": "Sierra de Guadarrama",

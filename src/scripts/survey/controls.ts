@@ -1,8 +1,9 @@
 import type { SurveyScene } from '../survey-scene';
 import { markArrival } from '../page-transition';
 
-// Controles de la home 3D: pausa del movimiento, sonido y el "Fin del mundo".
-// Todo con controles nativos, que ya funcionan con teclado y lector de pantalla.
+// Controles de la home 3D: girar la sierra, pausa del movimiento, sonido y el
+// "Fin del mundo". Todo con controles nativos, que ya funcionan con teclado y
+// lector de pantalla.
 
 // La clásica lo lee para avisar de que la sierra ya no está (ClassicPage.astro).
 const METEOR_FLAG = 'jp:meteor';
@@ -13,6 +14,8 @@ const DEBRIS_MAX_DELAY_S = 0.25;
 const DEBRIS_SELECTOR = [
   '.survey-logo',
   '.survey-nav',
+  '.survey-menu-button',
+  '.survey-more',
   '.survey-eyebrow',
   '.survey-subtitle',
   '.survey-hint',
@@ -68,6 +71,14 @@ export function wireSurveyControls(scene: SurveyScene): void {
   const destroyLink = document.querySelector<HTMLAnchorElement>('[data-destroy]');
   const doomSky = document.querySelector<HTMLElement>('[data-doom-sky]');
   if (!pauseButton || !soundButton || !destroyLink || !doomSky) return;
+
+  // --- Girar ---------------------------------------------------------------
+  // La alternativa sin arrastre al giro con el ratón o el dedo (WCAG 2.5.7).
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-rotate]')) {
+    const direction = button.dataset.rotate === 'left' ? -1 : 1;
+    button.addEventListener('click', () => scene.rotate(direction));
+  }
 
   // --- Sonido --------------------------------------------------------------
   // Apagado por defecto: el navegador solo deja sonar audio tras un gesto, y

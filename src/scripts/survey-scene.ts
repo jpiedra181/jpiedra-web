@@ -7,6 +7,7 @@ import {
   Ray,
   Scene,
   ShaderMaterial,
+  Spherical,
   TextureLoader,
   Vector2,
   Vector3,
@@ -54,7 +55,12 @@ const HORIZON_STEP_KM = 0.25;
 
 const WEATHER_REFRESH_MS = 15 * 60_000;
 const NO_SNOW_LINE = 99_999;
-const OVERCAST = new Color(0x3a4250);
+// El cielo cubierto es gris oscuro de noche y gris claro de día.
+const OVERCAST_NIGHT = new Color(0x3a4250);
+const OVERCAST_DAY = new Color(0x97a1ac);
+// Luz blanca cálida del sol sobre las laderas, y cuánto aclara la solana.
+const SUNLIGHT_GLSL = 'vec3(1.0, 0.96, 0.88)';
+const DAYLIGHT_RELIEF_GAIN = 0.12;
 // Cuánto apagan las nubes la luz del sol o de la luna con el cielo cubierto.
 const CLOUD_DIMMING = 0.35;
 const RAIN_SLANT_FACTOR = 0.45;
@@ -174,6 +180,17 @@ const PARALLAX_KM = 0.8;
 const CAMERA_EASING = 0.035;
 const VERTEX_LIFT_KM = 0.06;
 
+// Giro de la sierra arrastrando (ratón o dedo) o con los botones de girar,
+// que son la alternativa sin arrastre (WCAG 2.5.7). Se gira alrededor del
+// centro del encuadre; la inclinación tiene topes para no meterse bajo el
+// terreno ni acabar mirando en vertical.
+const ORBIT_YAW_PER_PX = 0.006;
+const ORBIT_PITCH_PER_PX = 0.004;
+const ORBIT_STEP_RADIANS = Math.PI / 6;
+const ORBIT_MIN_POLAR = (14 * Math.PI) / 180;
+const ORBIT_MAX_POLAR = (76 * Math.PI) / 180;
+const ORBIT_EASING = 0.16;
+
 export interface TerrainMeta {
   cols: number;
   rows: number;
@@ -225,6 +242,8 @@ export interface SurveyScene {
   isPaused(): boolean;
   setSound(enabled: boolean): Promise<void>;
   isSoundOn(): boolean;
+  // Gira la sierra un paso: -1 hacia la izquierda, 1 hacia la derecha.
+  rotate(direction: -1 | 1): void;
   // Lanza el meteorito; se resuelve con la pantalla ya a oscuras.
   destroyWorld(hooks?: DoomHooks): Promise<void>;
   destroy(): void;
@@ -352,6 +371,7 @@ const fragmentShader = /* glsl */ `
     if (normal.y < 0.0) normal = -normal;
     vec3 lightDir = normalize(uLightDir);
     float facing = clamp(dot(normal, lightDir), 0.0, 1.0);
+    float daylight = 1.0 - uNight;
     // Luz real: las laderas que dan la cara al sol (o a la luna) avivan sus
     // curvas y las que quedan en sombra se apagan.
     float lightGain = mix(1.0, mix(0.45, 1.4, facing), uLightStrength);
@@ -378,7 +398,6 @@ const fragmentShader = /* glsl */ `
     float waterBody = smoothstep(0.35, 0.65, water);
 
     // De día el mapa gana claridad: curvas más vivas y laderas al sol más claras.
-    float daylight = 1.0 - uNight;
     float lines = (minor * 0.16 + major * 0.5) * altitudeWeight * lightGain * mix(1.0, 1.3, daylight) + (minor * 0.85 + major * 0.6) * glow;
     lines *= revealed * (1.0 - waterBody);
 
@@ -387,7 +406,13 @@ const fragmentShader = /* glsl */ `
     float snowy = smoothstep(uSnowLine - 40.0, uSnowLine + 90.0, vHeight) * smoothstep(0.35, 0.75, normal.y) * uSnowCover;
     vec3 lineColor = mix(uLine, vec3(0.93, 0.95, 0.98), snowy * 0.85);
 
-    vec3 color = uGround + uLine * facing * mix(0.04, 0.13, daylight) * uLightStrength * revealed;
+    // Sombreado de relieve: de día, la umbría se oscurece y la solana recibe
+    // luz blanca del sol, no solo el tono dorado de las curvas. Es lo que hace
+    // que la sierra se lea a pleno sol y no como un mapa nocturno.
+    float sunlit = daylight * uLightStrength;
+    vec3 color = uGround * mix(1.0, mix(0.6, 1.3, facing), sunlit);
+    color += uLine * facing * mix(0.04, 0.13, daylight) * uLightStrength * revealed;
+    color += ${SUNLIGHT_GLSL} * facing * ${DAYLIGHT_RELIEF_GAIN.toFixed(2)} * sunlit * revealed;
     color += vec3(0.75, 0.8, 0.88) * snowy * (0.05 + 0.1 * facing) * revealed;
     color = mix(color, lineColor, clamp(lines, 0.0, 1.0));
     color += uLine * drawingFront * 0.9;
@@ -640,6 +665,9 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     pointer: new Vector2(window.innerWidth / 2, window.innerHeight / 2),
     pointerInside: false,
     parallax: new Vector2(),
+    // Giro pedido (target) y giro aplicado, que lo persigue suavizado.
+    orbit: { yaw: 0, pitch: 0, targetYaw: 0, targetPitch: 0 },
+    dragging: null as { pointerId: number; x: number; y: number } | null,
     // Con movimiento reducido la escena arranca en pausa: el tiempo se ve,
     // pero no se mueve hasta que la persona lo pida.
     paused: reduceMotion,
@@ -688,12 +716,16 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     atmosphere = computeAtmosphere(date, centerLat, centerLon);
     visuals = weatherVisuals(weather, date, state.moment !== null);
 
+    const sunDegrees = (atmosphere.sun.altitude * 180) / Math.PI;
+    const night = smoothstep(NIGHT_START_DEGREES, NIGHT_FULL_DEGREES, sunDegrees);
+
     // Las nubes apagan la luz, agrisan el cielo y tapan sol, luna y estrellas.
     const overcast = visuals.cloudCover;
+    const overcastColor = OVERCAST_DAY.clone().lerp(OVERCAST_NIGHT, night);
     atmosphere = {
       ...atmosphere,
-      zenith: atmosphere.zenith.clone().lerp(OVERCAST, overcast * 0.3),
-      horizon: atmosphere.horizon.clone().lerp(OVERCAST, overcast * 0.35),
+      zenith: atmosphere.zenith.clone().lerp(overcastColor, overcast * 0.3),
+      horizon: atmosphere.horizon.clone().lerp(overcastColor, overcast * 0.35),
       glowAmount: atmosphere.glowAmount * (1 - 0.6 * overcast),
       stars: atmosphere.stars * (1 - overcast),
       veil: overcast,
@@ -716,8 +748,6 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     uniforms.uWind.value = visuals.wind;
     uniforms.uRain.value = visuals.rain;
 
-    const sunDegrees = (atmosphere.sun.altitude * 180) / Math.PI;
-    const night = smoothstep(NIGHT_START_DEGREES, NIGHT_FULL_DEGREES, sunDegrees);
     uniforms.uNight.value = night;
     uniforms.uLightsOn.value = night * lightsActivity(date);
 
@@ -860,7 +890,11 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
   };
   refit();
   // Las fuentes cambian la altura del titular: al cargar, se vuelve a encuadrar.
+  // Y cada vez que el titular cambie de alto por otro motivo (una línea que se
+  // parte, la letra ampliada), para que no crezca encima de una cumbre.
   document.fonts?.ready.then(refit);
+  const introObserver = new ResizeObserver(() => refit());
+  introObserver.observe(options.layout.intro);
 
   // Todas las transiciones activas, para poder cancelarlas al desmontar.
   const activeTweens = new Set<Tween>();
@@ -996,12 +1030,53 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     state.pointerInside = true;
     document.documentElement.classList.add('pointer-active');
     document.documentElement.classList.toggle('reticle-off', overInterface(event.clientX, event.clientY));
-    state.parallax.set(
-      (event.clientX / window.innerWidth) * 2 - 1,
-      (event.clientY / window.innerHeight) * 2 - 1,
-    );
+    // Mientras se arrastra, el paralaje se queda quieto: si no, la cámara se
+    // movería dos veces con el mismo gesto.
+    if (!state.dragging) {
+      state.parallax.set(
+        (event.clientX / window.innerWidth) * 2 - 1,
+        (event.clientY / window.innerHeight) * 2 - 1,
+      );
+    }
     options.reticle.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
   });
+
+  // --- Giro arrastrando -----------------------------------------------------
+  // Solo sobre el lienzo: las tarjetas, el titular y los controles quedan
+  // encima y siguen recibiendo sus clics y toques como siempre.
+
+  const spherical = new Spherical();
+  const orbitOffset = new Vector3();
+  const clampPitch = (pitch: number) => {
+    spherical.setFromVector3(orbitOffset.subVectors(basePosition, homeTarget));
+    return Math.min(Math.max(pitch, spherical.phi - ORBIT_MAX_POLAR), spherical.phi - ORBIT_MIN_POLAR);
+  };
+
+  const endDrag = (event: PointerEvent) => {
+    if (state.dragging?.pointerId !== event.pointerId) return;
+    state.dragging = null;
+    document.documentElement.classList.remove('is-orbiting');
+    keepRendering();
+  };
+
+  listen(canvas, 'pointerdown', (event: PointerEvent) => {
+    if (state.flying || state.destroying || !event.isPrimary || event.button !== 0) return;
+    state.dragging = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+    canvas.setPointerCapture(event.pointerId);
+    document.documentElement.classList.add('is-orbiting');
+  });
+  listen(canvas, 'pointermove', (event: PointerEvent) => {
+    const drag = state.dragging;
+    if (drag?.pointerId !== event.pointerId) return;
+    state.orbit.targetYaw -= (event.clientX - drag.x) * ORBIT_YAW_PER_PX;
+    state.orbit.targetPitch = clampPitch(state.orbit.targetPitch + (event.clientY - drag.y) * ORBIT_PITCH_PER_PX);
+    drag.x = event.clientX;
+    drag.y = event.clientY;
+    keepRendering();
+  });
+  listen(canvas, 'pointerup', endDrag);
+  listen(canvas, 'pointercancel', endDrag);
+  listen(canvas, 'lostpointercapture', endDrag);
   listen(window, 'keydown', (event: KeyboardEvent) => {
     if (event.key === 'Escape') document.documentElement.classList.add('reticle-off');
   });
@@ -1028,7 +1103,9 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
 
   // --- Bucle ---------------------------------------------------------------
 
-  const desiredPosition = new Vector3();
+  const orbitPosition = new Vector3();
+  const sway = new Vector3();
+  const desiredSway = new Vector3();
   const right = new Vector3();
 
   // El temblor del fin del mundo va encima de la posición suavizada y se
@@ -1045,14 +1122,27 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
       camera.lookAt(lookTarget);
       return;
     }
+    // El giro sigue al dedo con poco retraso; la deriva y el paralaje van
+    // aparte y mucho más suaves, para que el arrastre no se note pesado.
+    const { orbit } = state;
+    const orbitEasing = reduceMotion ? 1 : ORBIT_EASING;
+    orbit.yaw += (orbit.targetYaw - orbit.yaw) * orbitEasing;
+    orbit.pitch += (orbit.targetPitch - orbit.pitch) * orbitEasing;
+    if (Math.abs(orbit.targetYaw - orbit.yaw) + Math.abs(orbit.targetPitch - orbit.pitch) > 1e-4) keepRendering();
+    spherical.setFromVector3(orbitOffset.subVectors(basePosition, homeTarget));
+    spherical.theta += orbit.yaw;
+    spherical.phi = Math.min(Math.max(spherical.phi - orbit.pitch, ORBIT_MIN_POLAR), ORBIT_MAX_POLAR);
+    orbitPosition.setFromSpherical(spherical).add(homeTarget);
+
     // La deriva va con el reloj de animación: al pausar, la cámara se queda.
     const drift = reduceMotion ? 0 : Math.sin(state.animationTime * DRIFT_SPEED) * DRIFT_KM;
     const parallaxX = reduceMotion ? 0 : state.parallax.x * PARALLAX_KM;
     const parallaxY = reduceMotion ? 0 : state.parallax.y * PARALLAX_KM * 0.4;
-    right.subVectors(lookTarget, basePosition).cross(camera.up).normalize();
-    desiredPosition.copy(basePosition).addScaledVector(right, drift + parallaxX);
-    desiredPosition.y += parallaxY;
-    camera.position.lerp(desiredPosition, reduceMotion ? 1 : CAMERA_EASING);
+    right.subVectors(lookTarget, orbitPosition).cross(camera.up).normalize();
+    desiredSway.copy(right).multiplyScalar(drift + parallaxX);
+    desiredSway.y += parallaxY;
+    sway.lerp(desiredSway, reduceMotion ? 1 : CAMERA_EASING);
+    camera.position.copy(orbitPosition).add(sway);
     if (state.shake <= 0) {
       camera.lookAt(lookTarget);
       return;
@@ -1282,9 +1372,15 @@ export async function initSurveyScene(options: SurveySceneOptions): Promise<Surv
     isSoundOn() {
       return soundscape.isEnabled();
     },
+    rotate(direction) {
+      if (state.flying || state.destroying) return;
+      state.orbit.targetYaw -= direction * ORBIT_STEP_RADIANS;
+      keepRendering();
+    },
     destroyWorld,
     destroy() {
       cancelAnimationFrame(frame);
+      introObserver.disconnect();
       window.clearInterval(atmosphereTimer);
       window.clearInterval(weatherTimer);
       precipitation.dispose();

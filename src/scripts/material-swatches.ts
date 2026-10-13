@@ -4,10 +4,13 @@
 //
 // Un solo shader de WebGL 2 sobre un rectángulo que ocupa el lienzo; la piedra
 // es procedural (ruido), así que no se descarga ninguna textura. Solo se dibuja
-// cuando la luz cambia: quieto, no gasta nada.
+// cuando la luz cambia: quieto, no gasta nada. Hasta el primer gesto de la
+// persona en la página, se ve la foto de las piezas en reposo.
 
 const MAX_PIXEL_RATIO = 2;
 const MAX_PIXEL_RATIO_COARSE = 1.5;
+// Sin GPU, cada fotograma lo pinta la CPU: resolución 1× y sin barrido.
+const SOFTWARE_PIXEL_RATIO = 1;
 // La luz se queda a esta altura sobre la piedra, en fracciones del alto.
 const LIGHT_HEIGHT = 0.42;
 // Fracción del camino que recorre la luz en cada fotograma a 60 fps.
@@ -199,7 +202,7 @@ const whenIdle = (callback: () => void) => {
 export function initMaterialSwatches(options: SwatchesOptions): () => void {
   let destroyed = false;
   let teardown = () => {};
-  // Primero se pinta el titular; el muestrario arranca cuando el navegador
+  // Primero se pinta el titular; el muestrario se prepara cuando el navegador
   // tiene un hueco (mientras, se ven las piezas con su degradado fijo).
   whenIdle(() => {
     if (!destroyed) teardown = startSwatches(options);
@@ -210,14 +213,40 @@ export function initMaterialSwatches(options: SwatchesOptions): () => void {
   };
 }
 
+const CONTEXT_OPTIONS: WebGLContextAttributes = { alpha: true, premultipliedAlpha: true, antialias: false };
+// Gestos con los que la persona empieza a usar la página.
+const WAKE_EVENTS = ['pointermove', 'pointerdown', 'keydown', 'wheel', 'touchstart'] as const;
+
+// WebGL no se pide hasta el primer gesto: incluso rechazado, pedir un contexto
+// arranca la GPU o, sin ella, su emulación por software, que ocupa la CPU más
+// de medio segundo mientras la página aún carga. Hasta entonces se ve la foto
+// de las piezas en reposo, que es lo mismo que pinta WebGL con la luz quieta.
 function startSwatches(options: SwatchesOptions): () => void {
   const { stage, canvas } = options;
-  const gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: false });
-  if (!gl) {
-    stage.classList.add('is-fallback');
-    return () => {};
+  stage.classList.add('is-standby');
+  let teardown = () => {};
+  const unlisten = () => WAKE_EVENTS.forEach((type) => window.removeEventListener(type, wake));
+  function wake() {
+    unlisten();
+    // Primero un contexto que solo existe con GPU; si no lo hay, el de software.
+    const hardware = canvas.getContext('webgl2', { ...CONTEXT_OPTIONS, failIfMajorPerformanceCaveat: true });
+    const gl = hardware ?? canvas.getContext('webgl2', CONTEXT_OPTIONS);
+    if (!gl) {
+      stage.classList.remove('is-standby');
+      stage.classList.add('is-fallback');
+      return;
+    }
+    teardown = compileAndRun(gl, options, !hardware);
   }
+  WAKE_EVENTS.forEach((type) => window.addEventListener(type, wake, { passive: true }));
+  return () => {
+    unlisten();
+    teardown();
+  };
+}
 
+function compileAndRun(gl: WebGL2RenderingContext, options: SwatchesOptions, software: boolean): () => void {
+  const { stage } = options;
   const parallel = gl.getExtension('KHR_parallel_shader_compile');
   const program = gl.createProgram()!;
   gl.attachShader(program, compile(gl, gl.VERTEX_SHADER, VERTEX_SHADER));
@@ -238,7 +267,7 @@ function startSwatches(options: SwatchesOptions): () => void {
       stage.classList.add('is-fallback');
       return;
     }
-    teardown = runSwatches(gl, program, options);
+    teardown = runSwatches(gl, program, options, software);
   };
   poll();
 
@@ -249,7 +278,7 @@ function startSwatches(options: SwatchesOptions): () => void {
   };
 }
 
-function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options: SwatchesOptions): () => void {
+function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options: SwatchesOptions, software: boolean): () => void {
   const { stage, canvas, slots, slider, area, glow } = options;
   gl.useProgram(program);
   const buffer = gl.createBuffer();
@@ -273,6 +302,8 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
   // Posición de la luz en fracciones del escenario (0–1, y hacia abajo).
   const current = { ...REST_POSITION };
   const target = { ...REST_POSITION };
+  // La luz se enciende con el primer gesto: si fue el deslizador, se parte de ahí.
+  target.x = Number(slider.value) / 100;
 
   // El deslizador se anuncia con palabras: «35» a secas no dice dónde está la luz.
   let lightDescription = '';
@@ -296,7 +327,8 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
   let visible = false;
 
   const resize = () => {
-    pixelRatio = Math.min(window.devicePixelRatio || 1, coarse.matches ? MAX_PIXEL_RATIO_COARSE : MAX_PIXEL_RATIO);
+    const maxRatio = software ? SOFTWARE_PIXEL_RATIO : coarse.matches ? MAX_PIXEL_RATIO_COARSE : MAX_PIXEL_RATIO;
+    pixelRatio = Math.min(window.devicePixelRatio || 1, maxRatio);
     const bounds = stage.getBoundingClientRect();
     canvas.width = Math.max(1, Math.round(bounds.width * pixelRatio));
     canvas.height = Math.max(1, Math.round(bounds.height * pixelRatio));
@@ -403,7 +435,8 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
   const observer = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
     if (!visible) return;
-    if (!introPlayed && !reducedMotion.matches) {
+    // Sin GPU, el barrido serían segundos de CPU ocupada: la luz espera al cursor.
+    if (!introPlayed && !reducedMotion.matches && !software) {
       introPlayed = true;
       introStart = performance.now();
     }
@@ -423,6 +456,7 @@ function runSwatches(gl: WebGL2RenderingContext, program: WebGLProgram, options:
   slider.addEventListener('input', onSlider);
   canvas.addEventListener('webglcontextlost', onContextLost);
   stage.classList.add('is-live');
+  stage.classList.remove('is-standby');
 
   return () => {
     cancelAnimationFrame(frame);

@@ -1,8 +1,14 @@
 ---
 //@ts-nocheck
 // Muestrario de acabados con luz en tiempo real (material-swatches.ts). Sin
-// WebGL o sin JavaScript se ven las tres piezas con un degradado fijo: la
-// leyenda sigue contando la diferencia.
+// JavaScript se ven las tres piezas con un degradado fijo; hasta el primer gesto
+// de la persona (o sin WebGL), con la foto de cada pieza en reposo. La leyenda
+// sigue contando la diferencia.
+import { getImage } from "astro:assets"
+import polishedAtRest from "../../assets/swatches/pulido-reposo.webp"
+import mattAtRest from "../../assets/swatches/mate-reposo.webp"
+import texturedAtRest from "../../assets/swatches/estructurado-reposo.webp"
+
 interface Props {
     copy: {
         caption: string
@@ -17,12 +23,19 @@ interface Props {
 }
 
 const { copy } = Astro.props
+// Pintadas por el propio WebGL con la luz en reposo (escritorio, densidad 2).
+const REST_IMAGE_WIDTH = 340
+const restImages = await Promise.all(
+    [polishedAtRest, mattAtRest, texturedAtRest].map((src) => getImage({ src, width: REST_IMAGE_WIDTH, format: "webp" })),
+)
 ---
 
 <figure class="swatches" data-swatches>
     <div class="swatches-stage">
         <div class="swatches-glow" aria-hidden="true"></div>
-        {copy.items.map(() => <div class="swatches-slot" aria-hidden="true" />)}
+        {copy.items.map((_, index) => (
+            <div class="swatches-slot" aria-hidden="true" style={`--rest-image: url(${restImages[index].src})`} />
+        ))}
         <canvas class="swatches-canvas" aria-hidden="true"></canvas>
     </div>
 
@@ -86,14 +99,21 @@ const { copy } = Astro.props
             0 10px 18px -8px rgb(0 0 0 / 0.6);
     }
 
-    /* Hasta que la luz está viva (o si no hay WebGL), un degradado fijo. */
-    .swatches-stage:not(.is-live) .swatches-slot,
-    .swatches-stage.is-fallback .swatches-slot {
+    /* Hasta que la luz está viva, un degradado fijo. */
+    .swatches-stage:not(.is-live) .swatches-slot {
         background:
             linear-gradient(115deg, transparent 40%, rgb(120 98 72 / 0.35) 46%, transparent 52%),
             radial-gradient(120% 90% at 30% 20%, #ddd6ca, #b9ae9d 70%, #a19582);
     }
 
+    /* Hasta el primer gesto, o sin WebGL: la pieza en reposo, como la pinta
+       WebGL con la luz quieta. */
+    .swatches-stage.is-standby .swatches-slot,
+    .swatches-stage.is-fallback .swatches-slot {
+        background: var(--rest-image) center / cover;
+    }
+
+    .swatches-stage.is-standby .swatches-canvas,
     .swatches-stage.is-fallback .swatches-canvas {
         display: none;
     }

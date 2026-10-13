@@ -21,9 +21,14 @@ const PALETTE_STOPS: PaletteStop[] = [
   { altitude: -14, zenith: '#03050a', horizon: '#0b1322', glow: '#1a2440', line: '#d6cdb0', ground: '#06080c', water: '#26405a', stars: 1, glowAmount: 0, light: 0 },
   { altitude: -7, zenith: '#050914', horizon: '#1b2843', glow: '#54406a', line: '#dfc78f', ground: '#080b11', water: '#3a4a78', stars: 0.7, glowAmount: 0.55, light: 0.12 },
   { altitude: -1, zenith: '#0a1222', horizon: '#3b2f45', glow: '#e57c44', line: '#f2b865', ground: '#0a0d13', water: '#8a5a6e', stars: 0.15, glowAmount: 1, light: 0.75 },
-  { altitude: 6, zenith: '#16243a', horizon: '#3b3d4a', glow: '#dc9d5f', line: '#efc376', ground: '#0f141c', water: '#76788f', stars: 0, glowAmount: 0.7, light: 0.95 },
-  { altitude: 18, zenith: '#1a2f4a', horizon: '#3e5571', glow: '#5f7189', line: '#f0d07e', ground: '#111923', water: '#5d8db0', stars: 0, glowAmount: 0.3, light: 1 },
-  { altitude: 40, zenith: '#21395a', horizon: '#4a6585', glow: '#6c7f98', line: '#f3d486', ground: '#141d29', water: '#6898bb', stars: 0, glowAmount: 0.25, light: 1 },
+  // De día el cielo tiene que leerse como día: azul claro arriba y bruma
+  // pálida en el horizonte, hacia la que se funde la sierra lejana. Antes el
+  // mediodía era azul marino y la home parecía de noche a todas horas.
+  // Los shaders no pasan el color a sRGB: en pantalla cada tono sale bastante
+  // más oscuro que su hex (#88b4db se ve como #3f74b5). Se eligen a ojo.
+  { altitude: 6, zenith: '#7497bc', horizon: '#ddc6af', glow: '#f2ab6a', line: '#efc376', ground: '#1c222c', water: '#8a90a8', stars: 0, glowAmount: 0.75, light: 0.95 },
+  { altitude: 18, zenith: '#83add4', horizon: '#c8d9e7', glow: '#f2dfb6', line: '#f0d07e', ground: '#252e3a', water: '#6595bb', stars: 0, glowAmount: 0.35, light: 1 },
+  { altitude: 40, zenith: '#88b4db', horizon: '#cedeec', glow: '#f6ebd2', line: '#f3d486', ground: '#29333f', water: '#70a5cc', stars: 0, glowAmount: 0.3, light: 1 },
 ];
 
 const TWILIGHT_DEGREES = 6;
