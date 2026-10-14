@@ -24,10 +24,15 @@ const subtitle = Astro.props.subtitle ?? t.contact.subtitle
 // Solo las cotas altas de cada cumbre, como una isla en relieve.
 const SUMMITS = {
     penalara: { map: penalaraSummit, vertex: "immersive", fromElevation: 2080 },
-    sietePicos: { map: sietePicosSummit, vertex: "accessibility", fromElevation: 1920 },
+    sietePicos: {
+        map: sietePicosSummit,
+        vertex: "accessibility",
+        fromElevation: 1920,
+    },
 }
 const summit = Astro.props.summit ? SUMMITS[Astro.props.summit] : undefined
-const summitVertex = summit && surveyVertices.find((vertex) => vertex.id === summit.vertex)
+const summitVertex =
+    summit && surveyVertices.find((vertex) => vertex.id === summit.vertex)
 const SUMMIT_LIFT = 60
 
 const privacyHref =
@@ -50,7 +55,11 @@ const privacyHref =
                     fromElevation={summit.fromElevation}
                 />
                 <p class="contact-summit-label">
-                    {t.home.summit.label} · <span>{summitVertex.peak} {formatElevation(summitVertex.elevation, lang)}</span>
+                    {t.home.summit.label} ·{" "}
+                    <span>
+                        {summitVertex.peak}{" "}
+                        {formatElevation(summitVertex.elevation, lang)}
+                    </span>
                 </p>
             </div>
         )
@@ -210,7 +219,9 @@ const privacyHref =
                 aria-hidden="true"
                 class="absolute -left-[9999px] w-px h-px overflow-hidden"
             >
-                <label for="contact-company">{lang === "en" ? "Company" : "Empresa"}</label>
+                <label for="contact-company"
+                    >{lang === "en" ? "Company" : "Empresa"}</label
+                >
                 <input
                     type="text"
                     id="contact-company"
@@ -352,10 +363,7 @@ const privacyHref =
 
 <script>
     type FieldId =
-        | "contact-name"
-        | "contact-email"
-        | "contact-website"
-        | "contact-message"
+        "contact-name" | "contact-email" | "contact-website" | "contact-message"
 
     const form = document.getElementById("contact-form") as HTMLFormElement
 
@@ -364,8 +372,12 @@ const privacyHref =
     // si el mensaje está vacío o lo escribió otro de estos botones.
     let lastTopic = ""
     document.addEventListener("click", (event) => {
-        const link = (event.target as Element).closest<HTMLElement>("[data-contact-topic]")
-        const message = document.getElementById("contact-message") as HTMLTextAreaElement | null
+        const link = (event.target as Element).closest<HTMLElement>(
+            "[data-contact-topic]",
+        )
+        const message = document.getElementById(
+            "contact-message",
+        ) as HTMLTextAreaElement | null
         if (!link || !message) return
         const topic = link.dataset.contactTopic ?? ""
         const current = message.value.trim()
@@ -397,8 +409,7 @@ const privacyHref =
 
     function getField(id: FieldId) {
         return document.getElementById(id) as
-            | HTMLInputElement
-            | HTMLTextAreaElement
+            HTMLInputElement | HTMLTextAreaElement
     }
 
     function getError(id: FieldId) {
@@ -568,12 +579,13 @@ const privacyHref =
                 website: getField("contact-website").value.trim(),
                 message: getField("contact-message").value.trim(),
                 lang: form.dataset.lang,
+                page: window.location.pathname,
                 privacy_accepted: true,
                 privacy_accepted_at: new Date().toISOString(),
             }
 
             const response = await fetch(
-                "https://n8n.zerosugar.studio/webhook/jpiedra",
+                "https://n8n.zerosugar.studio/webhook-test/jpiedra",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
