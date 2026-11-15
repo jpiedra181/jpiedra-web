@@ -29,6 +29,7 @@ export const routes = {
   contact: '/clasica/#contact',
   pricing: '/accesibilidad-web/#precios',
   caseStudy: '/caso-auditoria-accesibilidad/',
+  configuratorCase: '/caso-configurador-cocina-3d/',
 };
 
 export type SiteRoutes = typeof routes;
@@ -48,6 +49,7 @@ export const routesEn: SiteRoutes = {
   contact: '/en/classic/#contact',
   pricing: '/en/web-accessibility/#pricing',
   caseStudy: '/en/accessibility-audit-case/',
+  configuratorCase: '/en/3d-kitchen-configurator-case/',
 };
 
 // Ancla de la sección de precios de accesibilidad en cada idioma.

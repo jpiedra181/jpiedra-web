@@ -3,9 +3,12 @@ interface Props {
     href?: string
     variant?: "primary" | "outline"
     class?: string
+    // Para enlaces que se abren en otra pestaña.
+    target?: "_blank"
+    rel?: string
 }
 
-const { href, variant = "primary", class: className = "" } = Astro.props
+const { href, variant = "primary", class: className = "", target, rel } = Astro.props
 
 // Anillo de foco blanco con separación (outline-offset): contrasta con el fondo
 // oscuro y con el dorado de los botones (WCAG 1.4.11 / 2.4.7).
@@ -30,6 +33,6 @@ const classes = `${baseClasses} ${variants[variant]} ${className}`
 const Tag = href ? "a" : "button"
 ---
 
-<Tag href={href} class={classes}>
+<Tag href={href} class={classes} target={target} rel={rel}>
     <slot />
 </Tag>

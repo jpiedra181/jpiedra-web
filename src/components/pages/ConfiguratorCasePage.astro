@@ -1,0 +1,439 @@
+---
+//@ts-nocheck
+import type { Lang } from "../../types"
+import { Image, getImage } from "astro:assets"
+import BaseLayout from "../layout/BaseLayout.astro"
+import Contact from "../sections/Contact.astro"
+import SectionLabel from "../ui/SectionLabel.astro"
+import Button from "../ui/Button.astro"
+import VertexBadge from "../ui/VertexBadge.astro"
+import { useTranslations } from "../../i18n/utils"
+import { routesFor, siteConfig } from "../../config/site"
+import { breadcrumbSchema, ogImageFor } from "../../lib/seo-schema"
+import { projects, projectHref } from "../../data/projects"
+import {
+    configuratorCaseMedia,
+    lighthouseReport,
+    whiteLabelDemoHref,
+    VIDEO_DURATION_ISO,
+    VIDEO_UPLOAD_DATE,
+} from "../../data/configurator-case"
+
+// Caso del configurador de cocina: el problema, el vídeo, lo que puede hacer el
+// cliente final, la marca blanca, cómo está hecho y lo medido. Cierra con el
+// formulario de contacto, como la landing de 3D de la que cuelga.
+interface Props {
+    lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const c = t.configuratorCase
+const routes = routesFor(lang)
+const media = configuratorCaseMedia[lang]
+const configuratorHref = projectHref(projects.kitchenConfigurator, lang)
+
+// El cartel del vídeo en WebP para la página y en JPEG para los buscadores.
+const POSTER_WIDTH = 1280
+const poster = await getImage({ src: media.poster, width: POSTER_WIDTH, format: "webp" })
+const posterForSearch = await getImage({ src: media.poster, width: POSTER_WIDTH, format: "jpg" })
+
+const FEATURE_IMAGE_WIDTHS = [480, 720, 960, 1280]
+const FEATURE_IMAGE_SIZES = "(min-width: 80rem) 37rem, (min-width: 48rem) calc(50vw - 4rem), calc(100vw - 3rem)"
+
+const structuredData = [
+    breadcrumbSchema([
+        { name: "Javier Piedra", path: routes.home },
+        { name: t.immersive.hero.label, path: routes.immersive },
+        { name: c.breadcrumb, path: routes.configuratorCase },
+    ]),
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        name: c.video.videoLabel,
+        description: c.meta.description,
+        thumbnailUrl: [`${siteConfig.url}${posterForSearch.src}`],
+        uploadDate: VIDEO_UPLOAD_DATE,
+        duration: VIDEO_DURATION_ISO,
+        contentUrl: `${siteConfig.url}${media.video}`,
+        inLanguage: lang,
+    },
+]
+---
+
+<BaseLayout
+    lang={lang}
+    title={c.meta.title}
+    description={c.meta.description}
+    ogImage={ogImageFor("caso-configurador-cocina-3d", lang)}
+    structuredData={structuredData}
+>
+    <section aria-labelledby="case-hero-title" class="case-hero relative pt-32 pb-16 md:pt-40 md:pb-20 lg:pt-44">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="max-w-4xl flex flex-col gap-6 sm:gap-8">
+                <VertexBadge vertex="immersive" class="self-start" />
+                <p class="text-xs font-body font-medium tracking-[0.3em] text-accent uppercase">
+                    {c.hero.eyebrow}
+                </p>
+                <h1
+                    id="case-hero-title"
+                    class="font-heading text-[clamp(2.5rem,5.6vw,5rem)] leading-[1.02] text-text-primary"
+                    style="text-wrap: balance;"
+                >
+                    {c.hero.titleStart}
+                    <em class="italic text-accent">{c.hero.titleHighlight}</em>
+                    {c.hero.titleEnd}
+                </h1>
+                <p class="text-lg lg:text-xl text-text-secondary leading-relaxed max-w-2xl">
+                    {c.hero.subtitle}
+                </p>
+                <div class="button-pair">
+                    <!-- Se abre en otra pestaña, como los proyectos: se avisa en texto
+                         para quien no ve la flecha (WCAG G201). -->
+                    <Button href={configuratorHref} variant="primary" target="_blank" rel="noopener">
+                        {c.hero.ctaPrimary}
+                        <span class="sr-only">({t.projectSheet.newWindow})</span>
+                        <span aria-hidden="true">↗</span>
+                    </Button>
+                    <Button href="#contact" variant="outline">
+                        {c.hero.ctaSecondary}
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recorrido" aria-labelledby="case-video-title" class="relative pb-24 md:pb-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div data-wipe>
+                <SectionLabel text={c.video.label} />
+            </div>
+            <h2 id="case-video-title" class="font-heading text-[clamp(1.75rem,3.5vw,3rem)] leading-tight text-text-primary mb-10">
+                {c.video.title}
+            </h2>
+            <figure class="m-0">
+                <!-- Sin reproducción automática: el vídeo pesa 7 MB y no se
+                     descarga hasta que se pide. No tiene sonido; la lista de
+                     abajo cuenta lo mismo en texto (WCAG 1.2.1). -->
+                <div class="case-video-frame">
+                    <video
+                        controls
+                        preload="none"
+                        playsinline
+                        width="1280"
+                        height="720"
+                        poster={poster.src}
+                        aria-label={c.video.videoLabel}
+                        aria-describedby="case-video-caption"
+                    >
+                        <source src={media.video} type="video/mp4" />
+                        <p>
+                            {c.video.fallback}
+                            <a href={media.video} download>{c.video.download}</a>
+                        </p>
+                    </video>
+                </div>
+                <figcaption id="case-video-caption" class="text-sm text-text-secondary mt-4">
+                    {c.video.caption}
+                </figcaption>
+            </figure>
+            <details class="case-transcript mt-8 max-w-3xl">
+                <summary>{c.video.transcriptTitle}</summary>
+                <ol class="case-transcript-list">
+                    {c.video.steps.map((step) => <li>{step}</li>)}
+                </ol>
+            </details>
+        </div>
+    </section>
+
+    <section aria-labelledby="case-problem-title" class="relative py-24 md:py-32 border-t border-border">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <div data-wipe>
+                    <SectionLabel text={c.problem.label} />
+                </div>
+                <h2
+                    id="case-problem-title"
+                    data-split
+                    class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary mb-10"
+                >
+                    {c.problem.title}
+                </h2>
+                <div data-reveal class="flex flex-col gap-5">
+                    {
+                        c.problem.paragraphs.map((paragraph) => (
+                            <p class="text-base md:text-lg text-text-secondary leading-relaxed">{paragraph}</p>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="case-features-title" class="relative py-24 md:py-32 bg-bg-surface border-t border-b border-border">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div data-wipe>
+                <SectionLabel text={c.features.label} />
+            </div>
+            <h2
+                id="case-features-title"
+                data-split
+                class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary max-w-[22ch]"
+            >
+                {c.features.title}
+            </h2>
+            <ul role="list" class="grid md:grid-cols-2 gap-x-8 gap-y-14 lg:gap-x-12 lg:gap-y-20 mt-16 md:mt-20">
+                {
+                    c.features.items.map((item) => (
+                        <li class="case-feature" data-reveal>
+                            <h3 class="font-heading text-2xl lg:text-[1.75rem] leading-tight text-text-primary">
+                                {item.title}
+                            </h3>
+                            <p class="text-text-secondary leading-relaxed mt-3">{item.text}</p>
+                            <div class="case-feature-image">
+                                <Image
+                                    src={media.features[item.id]}
+                                    alt={item.alt}
+                                    widths={FEATURE_IMAGE_WIDTHS}
+                                    sizes={FEATURE_IMAGE_SIZES}
+                                    loading="lazy"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                        </li>
+                    ))
+                }
+            </ul>
+            <p class="text-sm text-text-secondary mt-14">{c.features.pricesNote}</p>
+        </div>
+    </section>
+
+    <section aria-labelledby="case-brand-title" class="relative py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-16 items-center">
+                <div>
+                    <div data-wipe>
+                        <SectionLabel text={c.brand.label} />
+                    </div>
+                    <h2
+                        id="case-brand-title"
+                        data-split
+                        class="font-heading text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-text-primary mb-8"
+                    >
+                        {c.brand.title}
+                    </h2>
+                    <div data-reveal class="flex flex-col gap-5">
+                        {
+                            c.brand.paragraphs.map((paragraph) => (
+                                <p class="text-base md:text-lg text-text-secondary leading-relaxed">{paragraph}</p>
+                            ))
+                        }
+                        <div>
+                            <Button href={whiteLabelDemoHref(lang)} variant="outline" target="_blank" rel="noopener">
+                                {c.brand.link}
+                                <span class="sr-only">({t.projectSheet.newWindow})</span>
+                                <span aria-hidden="true">↗</span>
+                            </Button>
+                        </div>
+                        <p class="text-base md:text-lg text-text-primary leading-relaxed">{c.brand.closing}</p>
+                    </div>
+                </div>
+                <div class="case-shot" data-reveal>
+                    <Image
+                        src={media.whiteLabel}
+                        alt={c.brand.imageAlt}
+                        widths={[640, 960, 1280]}
+                        sizes="(min-width: 80rem) 42rem, (min-width: 64rem) 55vw, calc(100vw - 3rem)"
+                        loading="lazy"
+                        class="w-full h-auto"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="case-process-title" class="relative py-24 md:py-32 border-t border-border">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <div data-wipe>
+                    <SectionLabel text={c.process.label} />
+                </div>
+                <h2
+                    id="case-process-title"
+                    data-split
+                    class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary"
+                >
+                    {c.process.title}
+                </h2>
+                <p data-reveal class="text-base md:text-lg text-text-secondary leading-relaxed mt-8">
+                    {c.process.intro}
+                </p>
+            </div>
+            <ol role="list" data-reveal-stagger class="grid md:grid-cols-3 gap-6 lg:gap-8 mt-14 md:mt-16">
+                {
+                    c.process.steps.map((step, index) => (
+                        <li class="case-step">
+                            <span class="case-step-number" aria-hidden="true">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <h3 class="font-heading text-xl lg:text-2xl text-text-primary mb-3">{step.title}</h3>
+                            <p class="text-text-secondary leading-relaxed">{step.text}</p>
+                        </li>
+                    ))
+                }
+            </ol>
+        </div>
+    </section>
+
+    <section aria-labelledby="case-data-title" class="relative py-24 md:py-32 border-t border-border">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div data-wipe>
+                <SectionLabel text={c.data.label} />
+            </div>
+            <h2
+                id="case-data-title"
+                data-split
+                class="font-heading text-[clamp(2rem,4.5vw,4rem)] leading-[1.1] text-text-primary max-w-[20ch]"
+            >
+                {c.data.title}
+            </h2>
+            <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-start mt-14 md:mt-16">
+                <dl data-reveal-stagger class="grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-6">
+                    {
+                        c.data.facts.map((fact) => (
+                            <div class="case-fact">
+                                <dt class="font-heading text-3xl text-accent leading-none">{fact.value}</dt>
+                                <dd class="mt-2 text-sm text-text-secondary leading-snug">{fact.label}</dd>
+                            </div>
+                        ))
+                    }
+                </dl>
+                <figure class="m-0" data-reveal>
+                    <div class="case-shot">
+                        <Image
+                            src={lighthouseReport}
+                            alt={c.data.imageAlt}
+                            widths={[640, 960, 1280, 1600]}
+                            sizes="(min-width: 80rem) 44rem, (min-width: 64rem) 55vw, calc(100vw - 3rem)"
+                            loading="lazy"
+                            class="w-full h-auto"
+                        />
+                    </div>
+                    <figcaption class="text-sm text-text-secondary mt-4">{c.data.imageCaption}</figcaption>
+                </figure>
+            </div>
+            <p class="text-sm text-text-secondary mt-14 max-w-3xl">{c.data.note}</p>
+            <p class="text-sm text-text-muted mt-4 max-w-3xl">{c.credits}</p>
+        </div>
+    </section>
+
+    <Contact lang={lang} title={c.contact.title} subtitle={c.contact.subtitle} summit="penalara" />
+</BaseLayout>
+
+<style>
+    .case-video-frame {
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 0.875rem;
+        background: var(--color-bg-surface);
+        box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.7);
+    }
+
+    .case-video-frame video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .case-transcript {
+        border-top: 1px solid var(--color-border-hover);
+        padding-top: 1rem;
+    }
+
+    .case-transcript summary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 44px;
+        color: var(--color-accent);
+        cursor: pointer;
+    }
+
+    .case-transcript summary:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 4px;
+        border-radius: 2px;
+    }
+
+    .case-transcript-list {
+        list-style: decimal;
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+        display: grid;
+        gap: 0.75rem;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+    }
+
+    .case-transcript-list li::marker {
+        color: var(--color-accent);
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* La imagen va después del texto en el código, para que quien navega por
+       encabezados oiga primero qué es, pero se ve arriba. */
+    .case-feature {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .case-feature-image {
+        order: -1;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        margin-bottom: 1.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
+        background: var(--color-bg-elevated);
+    }
+
+    .case-shot {
+        overflow: hidden;
+        border: 1px solid var(--color-border-hover);
+        border-radius: 0.75rem;
+        box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.7);
+    }
+
+    .case-step {
+        position: relative;
+        padding: 2rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-bg-surface);
+    }
+
+    .case-step-number {
+        display: block;
+        margin-bottom: 1.25rem;
+        font-family: var(--font-heading);
+        font-size: 2.5rem;
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgb(232 200 114 / 0.5);
+    }
+
+    .case-fact {
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-border-hover);
+    }
+</style>
+
+<script>
+    import { initRevealAnimations, destroyAnimations } from "../../scripts/gsap-animations"
+
+    initRevealAnimations()
+
+    document.addEventListener("astro:before-swap", destroyAnimations, { once: true })
+</script>

@@ -15,6 +15,7 @@ Contacto: contacto@jpiedra.com. Precios de accesibilidad (sin IVA): diagnóstico
 
 ## Pruebas
 
+- [Configurador de cocina en 3D](https://jpiedra.com/caso-configurador-cocina-3d/): una cocina abierta al comedor y al salón que se recorre en el navegador, con 74 acabados con precio, estilos, comparador a pantalla partida, día y noche, casa vacía y presupuesto en vivo. Vídeo, cómo está hecho (luz calculada en Blender, por capas) y rendimiento medido en el móvil. [Demo en vivo](https://3d.jpiedra.com/).
 - [Caso real de auditoría de accesibilidad](https://jpiedra.com/caso-auditoria-accesibilidad/): una gran web turística auditada a fondo, anonimizada.
 - [VETA](https://vetaatlas.com/): catálogo cerámico en WebGL 2 con estancia 3D. Cumple WCAG 2.2 AA; [ficha de accesibilidad](https://jpiedra.com/fichas-accesibilidad/veta/) con los 17 fallos que tenía, su arreglo y la comprobación.
 - [Inside the Frame](https://artgallery360.art/): galería 360° con descripción textual de cada escena. Cumple WCAG 2.2 AA; [ficha de accesibilidad](https://jpiedra.com/fichas-accesibilidad/inside-the-frame/).
@@ -29,6 +30,7 @@ Contacto: contacto@jpiedra.com. Precios de accesibilidad (sin IVA): diagnóstico
 - [3D web experiences](https://jpiedra.com/en/3d-experiences/): accessible 3D catalogues, product viewers and immersive rooms.
 - [Web accessibility](https://jpiedra.com/en/web-accessibility/): audits and fixes to WCAG 2.2 AA and the European Accessibility Act.
 - [Accessibility audit case](https://jpiedra.com/en/accessibility-audit-case/): a real, anonymised in-depth audit.
+- [3D kitchen configurator case](https://jpiedra.com/en/3d-kitchen-configurator-case/): a kitchen open to the living room that you walk through in the browser, with priced finishes, a split-screen comparison and a live budget. Video, how it’s built and measured mobile performance.
 
 ## Optional
 

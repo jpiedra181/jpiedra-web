@@ -490,7 +490,7 @@
     "work": {
       "label": "Projects",
       "title": "Don’t take my word for it. Try it.",
-      "intro": "Two live projects of my own and a real accessibility case. Open them on your phone and try the keyboard too."
+      "intro": "Three live projects of my own and a real accessibility case. Open them on your phone and try the keyboard too."
     },
     "about": {
       "profileTitle": "The road so far",
@@ -532,6 +532,18 @@
   },
   "portfolio": {
     "items": {
+      "kitchenConfigurator": {
+        "category": "3D configurator · Self-initiated concept",
+        "title": "Ardela, a kitchen configurator",
+        "description": "For anyone selling a kitchen or a home that doesn’t exist yet and hearing “I just can’t picture it”. You walk through it and change everything, from the worktop to the sofa, with the budget kept up to date. By day or by night, furnished or empty, and two versions side by side on a split screen to help decide.",
+        "tags": [
+          "Three.js",
+          "Lighting baked in Blender",
+          "Live budget"
+        ],
+        "imageAlt": "The configurator on a split screen: the same kitchen in two styles, Walnut & marble and Light Nordic, each with its budget.",
+        "cta": "Open the configurator"
+      },
       "veta": {
         "category": "3D experience · Self-initiated concept",
         "title": "VETA, an atlas of surfaces",
@@ -574,12 +586,13 @@
     "sheet": "Sheet",
     "of": "of",
     "newWindow": "opens in a new tab",
-    "accessibilitySheet": "Read its accessibility report (in Spanish)"
+    "accessibilitySheet": "Read its accessibility report (in Spanish)",
+    "casePage": "See how it’s built, with video"
   },
   "immersive": {
     "meta": {
       "title": "Fast, accessible 3D web experiences · Javier Piedra",
-      "description": "3D catalogues and immersive rooms that load fast on a phone, that Google can find and that meet WCAG 2.2 AA. With two live, audited projects as proof."
+      "description": "3D catalogues and immersive rooms that load fast on a phone, that Google can find and that meet WCAG 2.2 AA. With live, audited projects as proof."
     },
     "hero": {
       "label": "3D web experiences",
@@ -618,11 +631,19 @@
       "title": "A photo flattens exactly what makes someone buy.",
       "items": [
         {
+          "id": "homes",
+          "title": "If you sell a home or a kitchen that doesn’t exist yet",
+          "audience": "Developers, estate agents, kitchen studios and interior designers",
+          "description": "A floor plan is hard to read and a render shows a single version: every change means another render and another wait. Your client hesitates between two finishes, doesn’t know how much each one adds to the budget and can’t picture the result."
+        },
+        {
+          "id": "materials",
           "title": "If you sell surfaces, materials or products",
           "audience": "Ceramics, stone, wood, furniture",
           "description": "On a product page with a photo, everything looks alike. Polished and matt come out the same, the tone shifts from screen to screen and nobody can picture the size. Your customer orders samples to be sure, or goes to look elsewhere."
         },
         {
+          "id": "heritage",
           "title": "If you look after a collection, a heritage site or a destination",
           "audience": "Museums, foundations, galleries, councils and tourist boards",
           "description": "The collection is only seen by those who can visit, during opening hours. A photo gallery doesn't convey what it feels like to stand in the room. And if you're a public body in the EU, your website has to be accessible by law (Directive (EU) 2016/2102)."
@@ -631,11 +652,34 @@
     },
     "proof": {
       "label": "The projects",
-      "title": "Two live projects. Open them on your phone.",
-      "intro": "They aren't client commissions: I built them to show that 3D can be fast, findable and easy for anyone to use. They're live, measured and audited.",
-      "note": "Performance measured with Lighthouse in mobile mode on 10 October 2026.",
+      "title": "Three live projects. Open them on your phone.",
+      "intro": "They aren’t client commissions: I built them to show what 3D can do for a business. All three are live and measured on a phone, and VETA and Inside the Frame are also audited for accessibility.",
+      "note": "Performance measured with Lighthouse in mobile mode: VETA and Inside the Frame on 10 October 2026, the configurator on 15 November 2026.",
       "problemLabel": "The problem",
       "cases": {
+        "kitchenConfigurator": {
+          "category": "Interiors · 3D configurator",
+          "problem": "“I just can’t picture it.”",
+          "description": "A kitchen open to the dining and living room: 101 m² you walk through as if you were inside. Pick a piece of furniture, change its finish and the budget updates on the spot. Built for developers, estate agents, kitchen studios and interior designers: the client decides by seeing it, not by imagining it.",
+          "facts": [
+            {
+              "value": "88–95",
+              "label": "for performance in Lighthouse on mobile, with the whole home and its lighting baked in Blender. On desktop, 94–97."
+            },
+            {
+              "value": "74",
+              "label": "finishes across 15 surfaces, from the worktop to the sofa fabric. Each with its price."
+            },
+            {
+              "value": "A | B",
+              "label": "two versions on a split screen with the same view. Furnished against empty, too."
+            },
+            {
+              "value": "1 link",
+              "label": "with the whole configuration, to share it. And a sheet with the view, the finishes and the budget, to print."
+            }
+          ]
+        },
         "veta": {
           "category": "Surfaces · 3D catalogue",
           "problem": "“It looked like a different colour in the photo.”",
@@ -687,12 +731,12 @@
     "doubts": {
       "label": "The proof",
       "title": "3D has a bad reputation. Usually deserved.",
-      "subtitle": "Sites that take forever to load, that Google can’t read and that you can’t use without a mouse. These are the questions people ask me before commissioning anything in 3D, each with its measured proof. They come from VETA and Inside the Frame, two of my published projects, right below.",
+      "subtitle": "Sites that take forever to load, that Google can’t read and that you can’t use without a mouse. These are the questions people ask me before commissioning anything in 3D, each with its measured proof. They come from my published projects, right below.",
       "items": [
         {
           "id": "speed",
           "title": "Won't it be slow on a phone?",
-          "description": "It doesn't have to be. It's built for phones from the start: textures sized for each screen, 3D loaded when it's needed, and nothing redrawn unless it moves."
+          "description": "It doesn't have to be. It's built for phones from the start: textures sized for each screen, 3D loaded when it's needed, and nothing redrawn unless it moves. It holds for a heavy scene too: the kitchen configurator, a whole home with its lighting, scores 88–95 on mobile."
         },
         {
           "id": "seo",
@@ -702,7 +746,7 @@
         {
           "id": "reader",
           "title": "Can anyone use it?",
-          "description": "Yes: with a mouse, a finger, a keyboard or a screen reader. And without dragging, because there are buttons to turn and zoom. Both projects meet WCAG 2.2 AA, the European accessibility standard, and their audits are published."
+          "description": "Yes: with a mouse, a finger, a keyboard or a screen reader. And without dragging, because there are buttons to turn and zoom. VETA and Inside the Frame meet WCAG 2.2 AA, the European accessibility standard, and their audits are published."
         },
         {
           "id": "fallback",
@@ -1284,6 +1328,167 @@
       "text": "That’s exactly what I do: an in-depth audit, with a report and a compliance document tailored to your case. No smoke and no surprises.",
       "cta": "Ask me for an audit",
       "note": "A real, anonymised case. The audited organisation is neither named nor identifiable: the aim is to show the method, not to point at anyone."
+    }
+  },
+  "configuratorCase": {
+    "meta": {
+      "title": "A 3D kitchen configurator: video and how it’s built | Javier Piedra",
+      "description": "A kitchen open to the living room that your client walks through in the browser, with every finish and its price. Video, how it’s built and mobile speed."
+    },
+    "breadcrumb": "Case: 3D kitchen configurator",
+    "hero": {
+      "eyebrow": "Case · 3D configurator",
+      "titleStart": "Let your client decide",
+      "titleHighlight": "by seeing it,",
+      "titleEnd": "not imagining it.",
+      "subtitle": "Ardela is a 3D kitchen configurator: a kitchen open to the dining and living room, 101 m² you walk through in the browser. Pick a piece of furniture, change its finish and the budget updates on the spot. It isn’t a commission: I built it as a demonstration, and it’s live.",
+      "ctaPrimary": "Open the configurator",
+      "ctaSecondary": "Tell me about your project"
+    },
+    "video": {
+      "label": "The walkthrough",
+      "title": "How it’s used",
+      "videoLabel": "Video of the kitchen configurator in use",
+      "caption": "1 min 11 s, no sound.",
+      "fallback": "Your browser can’t play the video.",
+      "download": "Download it (MP4, 7 MB)",
+      "transcriptTitle": "What the video shows, step by step",
+      "steps": [
+        "The welcome explains how to move: drag to look around, tap the floor to go there and tap a piece of furniture to change it. “Start” is pressed.",
+        "The four styles are tried one after another: Light Nordic, Sage green, Graphite & stone, and back to Walnut & marble. Each one changes the floor, the units, the worktop, the upholstery and the lamps at once.",
+        "From “Explore”, the camera goes to the kitchen.",
+        "The worktop is tapped and its panel opens. Calacatta Viola marble, black granite and white marble are tried, and the budget changes with each one.",
+        "In “Ambience” it switches to night, with the lamps and the fireplace on. Then the general lighting is turned on and it goes back to day.",
+        "The home is emptied of furniture and furnished again.",
+        "With “Compare”, the screen splits: Walnut & marble on one side and Light Nordic on the other. The line is dragged from side to side and Light Nordic is chosen.",
+        "With “Dimensions”, measurements appear on the scene: the island, the worktop height and the work aisle.",
+        "The living room is tapped on the floor plan and the camera goes there.",
+        "The summary opens: every item with its price, the total and the buttons to copy the link, print or save as PDF and request that configuration."
+      ]
+    },
+    "problem": {
+      "label": "The problem",
+      "title": "“I just can’t picture it.”",
+      "paragraphs": [
+        "Anyone buying a home off-plan or ordering a kitchen is deciding on something that doesn’t exist yet. A floor plan is hard to read, and a render shows a single version: every change means another render and another wait.",
+        "Meanwhile, the choice between two finishes drags on, and nobody knows how much each one adds to the budget until someone works it out by hand.",
+        "The configurator answers all of that on screen, on the spot, without you having to be there."
+      ]
+    },
+    "features": {
+      "label": "What it does",
+      "title": "What your client can do without waiting for anyone",
+      "items": [
+        {
+          "id": "acabados",
+          "title": "Change any finish and see its price",
+          "text": "74 finishes across 15 surfaces, from the worktop to the sofa fabric. Taps, lamps and stools can be swapped for other models or removed. Everything has its price, and the total is always up to date.",
+          "alt": "The worktop panel open next to the Calacatta Viola marble island, with the materials to choose from and the budget below."
+        },
+        {
+          "id": "estilos",
+          "title": "Try a complete style in one click",
+          "text": "Four styles, from the floor to the lamps, for anyone who doesn’t want to choose piece by piece. Anything can be fine-tuned afterwards.",
+          "alt": "The dining area and the lounge in the Sage green style."
+        },
+        {
+          "id": "comparador",
+          "title": "Compare two versions on a split screen",
+          "text": "The same view, with a style on each side and the budget for each. One click keeps the one they prefer.",
+          "alt": "The kitchen on a split screen: Walnut & marble on the left and Light Nordic on the right, each with its budget."
+        },
+        {
+          "id": "noche",
+          "title": "See it by day and by night",
+          "text": "With sunlight, or with the lamps, the fireplace and the spotlights, each group with its own switch. It’s the lighting calculated in Blender, not an approximation.",
+          "alt": "The kitchen at night, with the lamps on and the lighting, furniture and views panel open."
+        },
+        {
+          "id": "vacia",
+          "title": "See it furnished or empty",
+          "text": "For anyone buying off-plan who wants to see the space as it is. The furniture’s shadows go with it.",
+          "alt": "The dining and living room on a split screen: furnished on one side and empty on the other."
+        },
+        {
+          "id": "medidas",
+          "title": "Know how big everything is",
+          "text": "A floor plan to find your way and jump to any area, and dimensions on the scene: the length of the island, the worktop height, the space between units.",
+          "alt": "The kitchen island with its dimensions on the scene and the floor plan in the corner."
+        },
+        {
+          "id": "resumen",
+          "title": "Take the result away",
+          "text": "A summary with every item and the total, a link with the whole configuration to share it and a sheet with the view, the finishes and the budget, to print or save as PDF. And a button to request it.",
+          "alt": "The “Your configuration” summary, with every item, its price and the total, and the buttons to copy the link, print and request it."
+        },
+        {
+          "id": "movil",
+          "title": "And all of it on a phone",
+          "text": "You walk by tapping the floor, the panel slides up from the bottom and the summary fits on the screen.",
+          "alt": "Three phone screens: the kitchen view, the units panel with its finishes and the summary with the budget."
+        }
+      ],
+      "pricesNote": "Prices in the demonstration are examples. In yours, they’d be yours."
+    },
+    "brand": {
+      "label": "With your brand",
+      "title": "Your home, your catalogue and your brand",
+      "paragraphs": [
+        "Everything comes from a configuration file: finishes, prices, styles, logo, colours and copy. The interface is generated from it, in Spanish or in English. Changing the catalogue or the prices doesn’t mean rebuilding the configurator.",
+        "This is the same kitchen with the brand of a made-up developer, with its own copy and a button to send the configuration to its sales advisor:"
+      ],
+      "link": "Open it as Residencial Valdeolmo",
+      "closing": "And instead of this kitchen, yours: from your floor plans, or from your 3D models if you have them.",
+      "imageAlt": "The summary of the same configuration under the Residencial Valdeolmo brand: “Estimated amount” and the “Send to my sales advisor” button."
+    },
+    "process": {
+      "label": "How it’s built",
+      "title": "Why it looks like a render and loads like a website",
+      "intro": "A render takes minutes per image; a phone has to draw dozens per second. The difference is what gets calculated in advance and what gets calculated on the spot.",
+      "steps": [
+        {
+          "title": "Lighting, calculated in Blender",
+          "text": "How the light from the sun, the lamps and the fireplace falls, with its soft shadows, is calculated in Blender and stored separately from the colour. That’s why, when a finish changes, the shadows stay in place and the new material looks just as real."
+        },
+        {
+          "title": "In layers, to switch on and off",
+          "text": "Each group of lights is calculated separately: daylight, the lamps and the spotlights. The browser adds them up, so day, night and the switches work without recalculating anything. The empty home has its own layers, without the furniture’s shadows."
+        },
+        {
+          "title": "Light from the start",
+          "text": "Compressed models, WebP textures and a version of each texture sized for phones. What you don’t see when you arrive, like the garden from a phone held upright or the night lighting, arrives when it’s needed."
+        }
+      ]
+    },
+    "data": {
+      "label": "Measured",
+      "title": "A whole home, fast on a phone",
+      "facts": [
+        {
+          "value": "88–95",
+          "label": "for performance in Lighthouse on mobile, across six runs. On desktop, 94–97."
+        },
+        {
+          "value": "< 1 s",
+          "label": "to see the welcome on a phone over 4G. The home downloads while you read it."
+        },
+        {
+          "value": "6 MB",
+          "label": "to start walking through it on a phone, with textures sized for it. About 6 seconds over 4G."
+        },
+        {
+          "value": "195 KB",
+          "label": "of JavaScript to start."
+        }
+      ],
+      "imageAlt": "Lighthouse report for the configurator. On mobile, 89 for performance and 100 for accessibility, best practices and SEO. On desktop, 97 for performance and 100 for the other three.",
+      "imageCaption": "One of the runs. Lighthouse’s accessibility score is an automated check, not an audit: the configurator’s audit is still to come.",
+      "note": "Measured on 15 November 2026 on the live site, with Lighthouse 13.5: six runs in mobile mode and two on desktop. Times over 4G use a mid-range phone profile."
+    },
+    "credits": "Some furniture and lamps are third-party models under a CC BY licence. The credits are in the configurator itself, under “Demo by Javier Piedra”.",
+    "contact": {
+      "title": "Your clients can’t picture it either?",
+      "subtitle": "Tell me what you sell and how you show it now. I’ll tell you whether a configurator makes sense for you and what it would take, with a fixed quote. No commitment, no PowerPoints, no fluff."
     }
   }
 }

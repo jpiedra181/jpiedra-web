@@ -19,11 +19,12 @@ interface Props {
     sheetLabel?: string
     ofLabel?: string
     newWindowLabel: string
-    // Enlace secundario a la ficha de accesibilidad del proyecto, en esta web.
-    sheetHref?: string
-    sheetCta?: string
-    // Idioma de la ficha cuando no coincide con el de la página.
-    sheetHreflang?: string
+    // Enlace secundario dentro de esta web: la ficha de accesibilidad del
+    // proyecto o la página de su caso.
+    secondaryHref?: string
+    secondaryCta?: string
+    // Idioma del destino cuando no coincide con el de la página.
+    secondaryHreflang?: string
     // Como caso de estudio: el problema que resuelve y sus datos medidos.
     problem?: string
     problemLabel?: string
@@ -46,9 +47,9 @@ const {
     sheetLabel = "Hoja",
     ofLabel = "de",
     newWindowLabel,
-    sheetHref,
-    sheetCta,
-    sheetHreflang,
+    secondaryHref,
+    secondaryCta,
+    secondaryHreflang,
     problem,
     problemLabel,
     facts = [],
@@ -165,13 +166,13 @@ const sheetNumber = index === undefined ? undefined : pad(index + 1)
             >
         </a>
         {
-            sheetHref && sheetCta && (
+            secondaryHref && secondaryCta && (
                 <a
-                    href={sheetHref}
-                    hreflang={sheetHreflang}
+                    href={secondaryHref}
+                    hreflang={secondaryHreflang}
                     class="project-sheet-link mt-4 flex w-fit items-center gap-2 text-sm text-text-secondary hover:text-accent underline underline-offset-4 decoration-accent-line hover:decoration-accent transition-colors duration-200 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
-                    {sheetCta}
+                    {secondaryCta}
                     <span aria-hidden="true">→</span>
                 </a>
             )

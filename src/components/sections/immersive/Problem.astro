@@ -11,8 +11,17 @@ interface Props {
 const { lang } = Astro.props
 const copy = useTranslations(lang).immersive.problem
 
-// Muestras decorativas de cada caso: piedras para superficies y cuadros para
-// cultura. Solo CSS; los textos de la tarjeta dicen lo mismo.
+// Muestras decorativas de cada caso: frentes de cocina para vivienda, piedras
+// para superficies y cuadros para cultura. Solo CSS; los textos de la tarjeta
+// dicen lo mismo.
+// Los cuatro estilos del configurador: nogal, nórdico, salvia y grafito.
+const FRONTS = [
+    "linear-gradient(90deg, #6b4630, #8a5c3d 40%, #6f4a33)",
+    "linear-gradient(90deg, #e9e2d6, #f4efe6 50%, #e3dacb)",
+    "linear-gradient(90deg, #8d9d86, #a3b29b 50%, #87977f)",
+    "linear-gradient(90deg, #34373b, #45494e 50%, #2f3236)",
+    "radial-gradient(120% 90% at 30% 20%, #f1ede6, #cfc7ba)",
+]
 const STONES = [
     "radial-gradient(120% 90% at 30% 20%, #e4ddd1, #b8ad9c)",
     "radial-gradient(120% 90% at 70% 30%, #3a3632, #1d1b19)",
@@ -26,6 +35,11 @@ const FRAMES = [
     "linear-gradient(150deg, #8fae8d, #d7c9a0 50%, #7d9db0)",
     "radial-gradient(70% 60% at 50% 40%, #f4d9a0, #b77a3c 60%, #4a3324)",
 ]
+const SAMPLES: Record<string, { className: string; backgrounds: string[] }> = {
+    homes: { className: "usecase-front", backgrounds: FRONTS },
+    materials: { className: "usecase-stone", backgrounds: STONES },
+    heritage: { className: "usecase-frame", backgrounds: FRAMES },
+}
 ---
 
 <section
@@ -45,22 +59,19 @@ const FRAMES = [
             {copy.title}
         </h2>
 
-        <ul role="list" data-reveal-stagger class="grid md:grid-cols-2 gap-6 lg:gap-8 mt-16 md:mt-20">
+        <ul role="list" data-reveal-stagger class="usecase-list grid md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 mt-16 md:mt-20">
             {
                 copy.items.map((item, index) => (
                     <li class="usecase" data-spotlight>
                         <div class="usecase-samples" aria-hidden="true">
-                            {(index === 0 ? STONES : FRAMES).map((background) => (
-                                <span
-                                    class={index === 0 ? "usecase-stone" : "usecase-frame"}
-                                    style={`--sample:${background}`}
-                                />
+                            {SAMPLES[item.id].backgrounds.map((background) => (
+                                <span class={SAMPLES[item.id].className} style={`--sample:${background}`} />
                             ))}
                         </div>
                         <p class="usecase-number" aria-hidden="true">
                             {String(index + 1).padStart(2, "0")}
                         </p>
-                        <h3 class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.15] text-text-primary">
+                        <h3 class="font-heading text-[clamp(1.75rem,3vw,2.5rem)] xl:text-[2rem] leading-[1.15] text-text-primary">
                             {item.title}
                         </h3>
                         <p class="text-sm font-medium text-accent mt-3">{item.audience}</p>
@@ -138,6 +149,35 @@ const FRAMES = [
         transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
+    /* Con tres tarjetas en dos columnas, la última ocupa la fila entera. */
+    @media (min-width: 48rem) and (max-width: 79.98rem) {
+        .usecase-list > .usecase:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    /* Frente de mueble de cocina, con su tirador. */
+    .usecase-front {
+        position: relative;
+        flex: 1;
+        border-radius: 3px;
+        background: var(--sample);
+        box-shadow: 0 14px 24px -14px rgb(0 0 0 / 0.8);
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .usecase-front::after {
+        content: "";
+        position: absolute;
+        top: 14%;
+        left: 50%;
+        width: 40%;
+        height: 3px;
+        border-radius: 2px;
+        background: rgb(20 20 20 / 0.45);
+        transform: translateX(-50%);
+    }
+
     .usecase-frame {
         flex: 1;
         border: 5px solid #2a2622;
@@ -161,12 +201,14 @@ const FRAMES = [
 
     @media (prefers-reduced-motion: no-preference) {
         .usecase:hover .usecase-stone:nth-child(odd),
-        .usecase:hover .usecase-frame:nth-child(odd) {
+        .usecase:hover .usecase-frame:nth-child(odd),
+        .usecase:hover .usecase-front:nth-child(odd) {
             transform: translateY(-6px);
         }
 
         .usecase:hover .usecase-stone:nth-child(even),
-        .usecase:hover .usecase-frame:nth-child(even) {
+        .usecase:hover .usecase-frame:nth-child(even),
+        .usecase:hover .usecase-front:nth-child(even) {
             transform: translateY(4px);
         }
     }

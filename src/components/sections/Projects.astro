@@ -2,7 +2,7 @@
 //@ts-nocheck
 import type { Lang } from "../../types"
 import { useTranslations } from "../../i18n/utils"
-import { projects, projectHref, type ProjectSlug } from "../../data/projects"
+import { projects, projectHref, projectImage, type ProjectSlug } from "../../data/projects"
 import SectionLabel from "../ui/SectionLabel.astro"
 import ProjectCard from "../ui/ProjectCard.astro"
 
@@ -32,6 +32,23 @@ interface Props {
 
 const { lang, label, title, intro, slugs, id = "proyectos", cases = {}, problemLabel, note, surface = false } = Astro.props
 const t = useTranslations(lang)
+
+// Enlace secundario de cada proyecto dentro de esta web: su ficha de
+// accesibilidad (solo en castellano) o, si no la tiene, la página del caso.
+const secondaryLinkFor = (slug: ProjectSlug) => {
+    const project = projects[slug]
+    if (project.accessibilitySheet) {
+        return {
+            href: project.accessibilitySheet,
+            cta: t.projectSheet.accessibilitySheet,
+            hreflang: lang === "es" ? undefined : "es",
+        }
+    }
+    if (project.casePage) {
+        return { href: project.casePage(lang), cta: t.projectSheet.casePage, hreflang: undefined }
+    }
+    return undefined
+}
 ---
 
 <section
@@ -83,6 +100,7 @@ const t = useTranslations(lang)
                     const project = projects[slug]
                     const copy = t.portfolio.items[slug]
                     const study = cases[slug]
+                    const secondary = secondaryLinkFor(slug)
                     return (
                         <ProjectCard
                             category={study?.category ?? copy.category}
@@ -92,7 +110,7 @@ const t = useTranslations(lang)
                             problem={study?.problem}
                             problemLabel={problemLabel}
                             facts={study?.facts}
-                            image={project.image}
+                            image={projectImage(project, lang)}
                             imageAlt={copy.imageAlt}
                             imageFit={project.imageFit}
                             href={projectHref(project, lang)}
@@ -100,9 +118,9 @@ const t = useTranslations(lang)
                             ofLabel={t.projectSheet.of}
                             newWindowLabel={t.projectSheet.newWindow}
                             cta={copy.cta}
-                            sheetHref={project.accessibilitySheet}
-                            sheetCta={t.projectSheet.accessibilitySheet}
-                            sheetHreflang={lang === "es" ? undefined : "es"}
+                            secondaryHref={secondary?.href}
+                            secondaryCta={secondary?.cta}
+                            secondaryHreflang={secondary?.hreflang}
                             reverse={index % 2 !== 0}
                             index={index}
                             total={slugs.length}

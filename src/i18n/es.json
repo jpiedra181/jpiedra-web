@@ -554,7 +554,7 @@
     "work": {
       "label": "Proyectos",
       "title": "No te lo cuento. Pruébalo.",
-      "intro": "Dos proyectos propios en vivo y un caso real de accesibilidad. Ábrelos en el móvil y prueba también con el teclado."
+      "intro": "Tres proyectos propios en vivo y un caso real de accesibilidad. Ábrelos en el móvil y prueba también con el teclado."
     },
     "about": {
       "profileTitle": "El camino hasta aquí",
@@ -597,7 +597,7 @@
   "immersive": {
     "meta": {
       "title": "Experiencias web 3D rápidas y accesibles · Javier Piedra",
-      "description": "Catálogos 3D y salas inmersivas que cargan rápido en el móvil, que Google encuentra y que cumplen WCAG 2.2 AA. Con dos proyectos en línea como prueba."
+      "description": "Catálogos 3D y salas inmersivas que cargan rápido en el móvil, que Google encuentra y que cumplen WCAG 2.2 AA. Con proyectos en línea como prueba."
     },
     "hero": {
       "label": "Experiencias web 3D",
@@ -636,11 +636,19 @@
       "title": "Una foto aplana justo lo que hace que alguien compre.",
       "items": [
         {
+          "id": "homes",
+          "title": "Si vendes una vivienda o una cocina que todavía no existe",
+          "audience": "Promotoras, inmobiliarias, estudios de cocina e interioristas",
+          "description": "Un plano no se entiende y un render enseña una sola versión: cada cambio es otro render y otra espera. Tu cliente duda entre dos acabados, no sabe cuánto sube el presupuesto con cada uno y no se imagina el resultado."
+        },
+        {
+          "id": "materials",
           "title": "Si vendes superficies, materiales o producto",
           "audience": "Cerámica, piedra, madera, mobiliario",
           "description": "En una ficha con foto todo se parece. El pulido y el mate salen iguales, el tono cambia con cada pantalla y nadie se hace una idea del tamaño. Tu cliente pide muestras para salir de dudas, o se va a mirar a otra parte."
         },
         {
+          "id": "heritage",
           "title": "Si cuidas una colección, un patrimonio o un destino",
           "audience": "Museos, fundaciones, galerías, ayuntamientos y oficinas de turismo",
           "description": "La colección solo la ve quien puede ir, y en horario. Una galería de fotos no transmite lo que se siente dentro de una sala. Y si eres un organismo público, tu web tiene que ser accesible por ley (RD 1112/2018)."
@@ -649,11 +657,34 @@
     },
     "proof": {
       "label": "Los proyectos",
-      "title": "Dos proyectos en línea. Ábrelos en tu móvil.",
-      "intro": "No son encargos de clientes: los hice para demostrar que el 3D puede ser rápido, encontrable y fácil de usar para cualquiera. Están publicados, medidos y auditados.",
-      "note": "Rendimiento medido con Lighthouse en modo móvil el 10 de octubre de 2026.",
+      "title": "Tres proyectos en línea. Ábrelos en tu móvil.",
+      "intro": "No son encargos de clientes: los hice para demostrar lo que el 3D puede hacer por un negocio. Los tres están publicados y medidos en el móvil, y VETA e Inside the Frame, además, auditados en accesibilidad.",
+      "note": "Rendimiento medido con Lighthouse en modo móvil: VETA e Inside the Frame, el 10 de octubre de 2026; el configurador, el 15 de noviembre de 2026.",
       "problemLabel": "El problema",
       "cases": {
+        "kitchenConfigurator": {
+          "category": "Interiorismo · Configurador 3D",
+          "problem": "«Es que no me lo imagino.»",
+          "description": "Una cocina abierta al comedor y al salón: 101 m² que se recorren como si estuvieras dentro. Se pulsa un mueble, se cambia el acabado y el presupuesto se actualiza al momento. Pensado para promotoras, inmobiliarias, estudios de cocina e interioristas: el cliente decide viéndolo, no imaginándolo.",
+          "facts": [
+            {
+              "value": "88–95",
+              "label": "en rendimiento de Lighthouse en el móvil, con la vivienda entera y su luz calculada en Blender. En escritorio, 94–97."
+            },
+            {
+              "value": "74",
+              "label": "acabados en 15 superficies, de la encimera a la tela del sofá. Cada uno con su precio."
+            },
+            {
+              "value": "A | B",
+              "label": "dos versiones a pantalla partida y con la misma vista. También amueblada frente a vacía."
+            },
+            {
+              "value": "1 enlace",
+              "label": "con toda la configuración, para compartirla. Y una hoja con la vista, los acabados y el presupuesto, para imprimir."
+            }
+          ]
+        },
         "veta": {
           "category": "Superficies · Catálogo 3D",
           "problem": "«En la foto parecía otro color.»",
@@ -705,12 +736,12 @@
     "doubts": {
       "label": "Las pruebas",
       "title": "El 3D tiene mala fama. Casi siempre, con razón.",
-      "subtitle": "Webs que tardan una eternidad en cargar, que Google no entiende y que sin ratón no hay forma de usar. Estas son las dudas que me plantean antes de encargar algo en 3D, cada una con su prueba medida. Salen de VETA e Inside the Frame, dos proyectos míos publicados que tienes justo debajo.",
+      "subtitle": "Webs que tardan una eternidad en cargar, que Google no entiende y que sin ratón no hay forma de usar. Estas son las dudas que me plantean antes de encargar algo en 3D, cada una con su prueba medida. Salen de mis proyectos publicados, que tienes justo debajo.",
       "items": [
         {
           "id": "speed",
           "title": "¿Irá lenta en el móvil?",
-          "description": "No tiene por qué. Se construye para el móvil desde el principio: texturas a la medida de cada pantalla, el 3D se carga cuando hace falta y nada se vuelve a pintar si no se mueve."
+          "description": "No tiene por qué. Se construye para el móvil desde el principio: texturas a la medida de cada pantalla, el 3D se carga cuando hace falta y nada se vuelve a pintar si no se mueve. Vale también para una escena pesada: el configurador de cocina, una vivienda entera con su luz, saca 88–95 en el móvil."
         },
         {
           "id": "seo",
@@ -720,7 +751,7 @@
         {
           "id": "reader",
           "title": "¿La podrá usar cualquiera?",
-          "description": "Sí: con ratón, con el dedo, con teclado y con lector de pantalla. Y sin tener que arrastrar, porque hay botones para girar y acercar. Los dos proyectos cumplen WCAG 2.2 AA, la norma europea de accesibilidad, y su auditoría está publicada."
+          "description": "Sí: con ratón, con el dedo, con teclado y con lector de pantalla. Y sin tener que arrastrar, porque hay botones para girar y acercar. VETA e Inside the Frame cumplen WCAG 2.2 AA, la norma europea de accesibilidad, y su auditoría está publicada."
         },
         {
           "id": "fallback",
@@ -852,6 +883,18 @@
   },
   "portfolio": {
     "items": {
+      "kitchenConfigurator": {
+        "category": "Configurador 3D · Concepto propio",
+        "title": "Ardela, configurador de cocina",
+        "description": "Para quien vende una cocina o una vivienda que todavía no existe y oye «es que no me lo imagino». Se recorre por dentro y se cambia todo, de la encimera al sofá, con el presupuesto al día. De día o de noche, con muebles o vacía, y dos versiones a pantalla partida para decidir.",
+        "tags": [
+          "Three.js",
+          "Luz calculada en Blender",
+          "Presupuesto en vivo"
+        ],
+        "imageAlt": "El configurador a pantalla partida: la misma cocina con dos estilos, Nogal y mármol y Nórdico claro, cada uno con su presupuesto.",
+        "cta": "Abrir el configurador"
+      },
       "veta": {
         "category": "Experiencia 3D · Concepto propio",
         "title": "VETA, atlas de superficies",
@@ -1294,6 +1337,168 @@
     "sheet": "Hoja",
     "of": "de",
     "newWindow": "se abre en una pestaña nueva",
-    "accessibilitySheet": "Leer su ficha de accesibilidad"
+    "accessibilitySheet": "Leer su ficha de accesibilidad",
+    "casePage": "Ver cómo está hecho, con vídeo"
+  },
+  "configuratorCase": {
+    "meta": {
+      "title": "Configurador de cocina en 3D: vídeo y cómo está hecho | Javier Piedra",
+      "description": "Una cocina abierta al salón que tu cliente recorre en el navegador, con cada acabado y su precio. Vídeo, cómo está hecho y su rendimiento en el móvil."
+    },
+    "breadcrumb": "Caso: configurador de cocina en 3D",
+    "hero": {
+      "eyebrow": "Caso · Configurador 3D",
+      "titleStart": "Que tu cliente decida",
+      "titleHighlight": "viéndolo,",
+      "titleEnd": "no imaginándolo.",
+      "subtitle": "Ardela es un configurador de cocina en 3D: una cocina abierta al comedor y al salón, 101 m² que se recorren en el navegador. Se pulsa un mueble, se cambia el acabado y el presupuesto se actualiza al momento. No es un encargo: lo hice como demostración, y está publicado.",
+      "ctaPrimary": "Abrir el configurador",
+      "ctaSecondary": "Cuéntame tu proyecto"
+    },
+    "video": {
+      "label": "El recorrido",
+      "title": "Así se usa",
+      "videoLabel": "Vídeo del configurador de cocina en uso",
+      "caption": "1 min 11 s, sin sonido.",
+      "fallback": "Tu navegador no puede reproducir el vídeo.",
+      "download": "Descargarlo (MP4, 7 MB)",
+      "transcriptTitle": "Qué se ve en el vídeo, paso a paso",
+      "steps": [
+        "La bienvenida explica cómo moverse: arrastrar para mirar, pulsar el suelo para ir hasta allí y pulsar un mueble para cambiarlo. Se pulsa «Empezar».",
+        "Se prueban los cuatro estilos, uno tras otro: Nórdico claro, Verde salvia, Grafito y piedra, y de vuelta a Nogal y mármol. Cada uno cambia a la vez el suelo, los muebles, la encimera, las tapicerías y las lámparas.",
+        "Desde «Recorrer», la cámara va hasta la cocina.",
+        "Se pulsa la encimera y se abre su ficha. Se prueban el mármol Calacatta Viola, el granito negro y el mármol blanco, y el presupuesto cambia con cada uno.",
+        "En «Ambiente» se pasa a la noche, con las lámparas y la chimenea encendidas. Después se enciende la luz general y se vuelve al día.",
+        "La casa se vacía de muebles y se vuelve a amueblar.",
+        "Con «Comparar», la pantalla se parte: Nogal y mármol a un lado y Nórdico claro al otro. Se arrastra la línea de un lado a otro y se elige Nórdico claro.",
+        "Con «Medidas» aparecen las cotas sobre la escena: la isla, la altura de la encimera y el paso de trabajo.",
+        "Se pulsa el salón en el plano de planta y la cámara va hasta allí.",
+        "Se abre el resumen: cada partida con su precio, el total y los botones para copiar el enlace, imprimir o guardar en PDF y solicitar esa configuración."
+      ]
+    },
+    "problem": {
+      "label": "El problema",
+      "title": "«Es que no me lo imagino.»",
+      "paragraphs": [
+        "Quien compra una vivienda sobre plano o encarga una cocina decide sobre algo que todavía no existe. Un plano no se entiende, y un render enseña una sola versión: cada cambio es otro render y otra espera.",
+        "Mientras tanto, la duda entre dos acabados se alarga, y nadie sabe cuánto sube el presupuesto con cada uno hasta que alguien lo calcula a mano.",
+        "El configurador responde a todo eso en la pantalla, al momento y sin que tengas que estar delante."
+      ]
+    },
+    "features": {
+      "label": "Qué hace",
+      "title": "Lo que tu cliente puede hacer sin esperar a nadie",
+      "items": [
+        {
+          "id": "acabados",
+          "title": "Cambiar cualquier acabado y ver su precio",
+          "text": "74 acabados en 15 superficies, de la encimera a la tela del sofá. Los grifos, las lámparas y los taburetes se cambian por otros modelos o se quitan. Cada cosa con su precio, y el total siempre al día.",
+          "alt": "La ficha de la encimera abierta junto a la isla de mármol Calacatta Viola, con los materiales para elegir y el presupuesto abajo."
+        },
+        {
+          "id": "estilos",
+          "title": "Probar un estilo completo de un clic",
+          "text": "Cuatro estilos, del suelo a las lámparas, para quien no quiere elegir pieza a pieza. Después se puede retocar lo que se quiera.",
+          "alt": "El comedor y la zona de estar con el estilo Verde salvia."
+        },
+        {
+          "id": "comparador",
+          "title": "Comparar dos versiones a pantalla partida",
+          "text": "La misma vista, con un estilo a cada lado y el presupuesto de cada uno. Se queda con la que prefiera de un clic.",
+          "alt": "La cocina a pantalla partida: Nogal y mármol a la izquierda y Nórdico claro a la derecha, cada uno con su presupuesto."
+        },
+        {
+          "id": "noche",
+          "title": "Verla de día y de noche",
+          "text": "Con la luz del sol o con las lámparas, la chimenea y los focos, cada grupo con su interruptor. Es la luz calculada en Blender, no una aproximación.",
+          "alt": "La cocina de noche, con las lámparas encendidas y el panel de luz, mobiliario y vistas abierto."
+        },
+        {
+          "id": "vacia",
+          "title": "Verla amueblada o vacía",
+          "text": "Para quien compra sobre plano y quiere ver el espacio tal cual. Las sombras de los muebles se van con ellos.",
+          "alt": "El comedor y el salón a pantalla partida: amueblados a un lado y vacíos al otro."
+        },
+        {
+          "id": "medidas",
+          "title": "Saber cuánto mide cada cosa",
+          "text": "Un plano de planta para orientarse e ir a cualquier zona, y cotas sobre la escena: el largo de la isla, la altura de la encimera, el paso entre muebles.",
+          "alt": "La isla de la cocina con sus medidas sobre la escena y el plano de planta en la esquina."
+        },
+        {
+          "id": "resumen",
+          "title": "Llevarse el resultado",
+          "text": "Un resumen con cada partida y el total, un enlace con toda la configuración para compartirla y una hoja con la vista, los acabados y el presupuesto, para imprimir o guardar en PDF. Y un botón para pedirla.",
+          "alt": "El resumen «Tu configuración», con cada partida, su precio y el total, y los botones para copiar el enlace, imprimir y solicitarla."
+        },
+        {
+          "id": "movil",
+          "title": "Y todo, en el móvil",
+          "text": "Se camina tocando el suelo, la ficha sube desde abajo y el resumen cabe en la pantalla.",
+          "alt": "Tres pantallas de móvil: la vista de la cocina, la ficha de los muebles con sus acabados y el resumen con el presupuesto."
+        }
+      ],
+      "pricesNote": "Los precios de la demostración son de ejemplo. En el tuyo, los tuyos."
+    },
+    "brand": {
+      "label": "Con tu marca",
+      "title": "Tu vivienda, tu catálogo y tu marca",
+      "paragraphs": [
+        "Todo sale de un fichero de configuración: acabados, precios, estilos, logo, colores y textos. La interfaz se genera a partir de él, en español o en inglés. Cambiar el catálogo o los precios no es rehacer el configurador.",
+        "Así se ve la misma cocina con la marca de una promotora inventada, con sus textos y un botón para enviar la configuración a su asesor comercial:"
+      ],
+      "link": "Abrirlo como Residencial Valdeolmo",
+      "closing": "Y en vez de esta cocina, la tuya: a partir de tus planos, o de tus modelos 3D si los tienes.",
+      "imageAlt": "El resumen de la misma configuración con la marca Residencial Valdeolmo: «Importe orientativo» y el botón «Enviar a mi asesor comercial»."
+    },
+    "process": {
+      "label": "Cómo está hecho",
+      "title": "Por qué parece un render y carga como una web",
+      "intro": "Un render tarda minutos en cada imagen; el móvil tiene que pintar decenas por segundo. La diferencia está en qué se calcula antes y qué se calcula en el momento.",
+      "steps": [
+        {
+          "title": "La luz, calculada en Blender",
+          "text": "Cómo cae la luz del sol, de las lámparas y de la chimenea, con sus sombras suaves, se calcula en Blender y se guarda aparte del color. Por eso, al cambiar un acabado, las sombras siguen en su sitio y el material nuevo se ve igual de real."
+        },
+        {
+          "title": "Por capas, para encender y apagar",
+          "text": "Cada grupo de luces se calcula por separado: la natural, las lámparas y los focos. El navegador las suma, y así funcionan el día, la noche y los interruptores sin volver a calcular nada. La casa vacía tiene sus propias capas, sin las sombras de los muebles."
+        },
+        {
+          "title": "Ligera desde el principio",
+          "text": "Modelos comprimidos, texturas en WebP y una versión de cada textura a la medida del móvil. Lo que no se ve al entrar, como el jardín desde un móvil en vertical o las luces de noche, llega cuando hace falta."
+        }
+      ]
+    },
+    "data": {
+      "label": "Medido",
+      "title": "Una vivienda entera, rápida en el móvil",
+      "facts": [
+        {
+          "value": "88–95",
+          "label": "en rendimiento de Lighthouse en el móvil, en seis pasadas. En escritorio, 94–97."
+        },
+        {
+          "value": "< 1 s",
+          "label": "hasta ver la bienvenida en un móvil con 4G. La casa se descarga mientras la lees."
+        },
+        {
+          "value": "6 MB",
+          "label": "para empezar a recorrerla en el móvil, con las texturas a su medida. Unos 6 segundos con 4G."
+        },
+        {
+          "value": "195 KB",
+          "label": "de JavaScript para arrancar."
+        }
+      ],
+      "imageAlt": "Informe de Lighthouse del configurador. En el móvil, 89 en rendimiento y 100 en accesibilidad, buenas prácticas y SEO. En escritorio, 97 en rendimiento y 100 en las otras tres.",
+      "imageCaption": "Una de las pasadas, en inglés, como sale en Lighthouse. Su nota de accesibilidad es una comprobación automática, no una auditoría: la del configurador está pendiente.",
+      "note": "Medido el 15 de noviembre de 2026 en la web publicada, con Lighthouse 13.5: seis pasadas en modo móvil y dos en escritorio. Los tiempos con 4G, con un perfil de móvil de gama media."
+    },
+    "credits": "Algunos muebles y lámparas son modelos de terceros con licencia CC BY. Los créditos están en el propio configurador, en «Demo de Javier Piedra».",
+    "contact": {
+      "title": "¿Tus clientes tampoco se lo imaginan?",
+      "subtitle": "Cuéntame qué vendes y cómo lo enseñas ahora. Te digo si un configurador tiene sentido para tu caso y qué haría falta, con un presupuesto cerrado. Sin compromiso, sin PowerPoints, sin humo."
+    }
   }
 }
