@@ -513,9 +513,11 @@ const scoreValue = Number(visual.score ?? 0)
         background: var(--color-text-primary);
     }
 
+    /* Parpadea cuatro veces (4,4 s) y se queda quieto: un parpadeo sin fin al
+       lado del texto distrae y no se podía parar (WCAG 2.2.2). */
     @media (prefers-reduced-motion: no-preference) {
         .dv-search-caret {
-            animation: dv-blink 1.1s steps(1) infinite;
+            animation: dv-blink 1.1s steps(1) 4;
         }
     }
 

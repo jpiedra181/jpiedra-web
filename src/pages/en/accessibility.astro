@@ -1,0 +1,278 @@
+---
+import Layout from "../../components/layout/BaseLayout.astro"
+
+// English version of /accesibilidad/ (same audit, same dates). The dates come
+// from the audit file (jpiedra-clientes/jpiedra/auditorias/2026-11-13/) and
+// only change when the evaluation is repeated. Spanish legal names carry
+// lang="es" so that a screen reader pronounces them correctly.
+const evaluationDate = "13 November 2026"
+const verificationDate = "16 November 2026"
+const nextReview = "November 2027"
+---
+
+<Layout
+    lang="en"
+    title="Accessibility of jpiedra.com — WCAG 2.2 AA conformance"
+    description="How accessible jpiedra.com is, in English and in Spanish: result of the evaluation against WCAG 2.2 AA and EN 301 549, scope, method and how to report a barrier."
+>
+    <article class="max-w-3xl mx-auto px-6 lg:px-8 py-32 lg:py-40">
+        <header class="mb-16">
+            <p
+                class="text-xs font-body font-medium tracking-[0.3em] text-accent uppercase mb-6"
+            >
+                Accessibility
+            </p>
+            <h1
+                class="font-heading text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.1] text-text-primary mb-6"
+            >
+                Accessibility of jpiedra.com
+            </h1>
+            <p class="text-lg text-text-secondary font-body leading-relaxed">
+                This page tells you how accessible this website is, how that
+                was checked and what to do if you find a barrier.
+            </p>
+            <p class="text-sm text-text-muted font-body mt-6">
+                Last reviewed: {verificationDate}
+            </p>
+        </header>
+
+        <div
+            class="legal-content flex flex-col gap-10 text-text-primary font-body leading-relaxed"
+        >
+            <section
+                class="border border-border-hover bg-bg-surface rounded-xl p-6 md:p-8"
+            >
+                <h2 class="font-heading text-2xl mb-4">Conformance status</h2>
+                <p class="text-lg">
+                    <strong
+                        >jpiedra.com fully conforms to WCAG 2.2 level AA</strong
+                    >, the version adopted by the European standard EN 301 549
+                    V4.1.1, in English and in Spanish, within the scope described
+                    below.
+                </p>
+                <p class="mt-4">
+                    Of the 55 level A and AA success criteria in WCAG 2.2, 49
+                    apply to this site and all 49 are met. The other 6 do not
+                    apply because the site has nothing they evaluate: the only
+                    video has no sound, there is no live broadcast, no transaction
+                    with legal or financial effects and no sign-in. Requirement 9.7
+                    of EN 301 549 V4.1.1 is met too: the site respects forced
+                    colours and the text size you choose.
+                </p>
+                <p class="mt-4">
+                    The legal reference in Spain is still, for now, UNE-EN 301 549
+                    V3.2.1, which is equivalent to WCAG 2.1 AA. Against it the result
+                    is the same: <strong>fully conformant</strong>, with 45
+                    applicable criteria out of 50 and all 45 met.
+                </p>
+                <p class="mt-4 text-text-secondary">
+                    “Fully conformant” means that no failure remains on the
+                    pages and processes evaluated. <strong
+                        >It does not mean the site is perfect</strong
+                    >: in Spanish a sample was evaluated, not every page, and no
+                    evaluation replaces what you find when you use it yourself.
+                    If you run into a barrier, tell me: how is explained below.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">Scope</h2>
+                <p>
+                    The evaluation covers <strong
+                        >both versions of jpiedra.com</strong
+                    >, English and Spanish, and the site’s complete processes.
+                </p>
+                <ul class="mt-4 space-y-2 list-disc pl-5">
+                    <li>
+                        <strong>In English:</strong> every page, with no sampling.
+                    </li>
+                    <li>
+                        <strong>In Spanish:</strong> a sample of 9 pages: the 3D home
+                        page, the classic version, the web accessibility and 3D
+                        experiences pages, the Law 11/2023 self-assessment tool, a
+                        blog post, an accessibility report, the cookie policy and
+                        the kitchen configurator case study.
+                    </li>
+                    <li>
+                        <strong>Complete processes:</strong> the contact form in both
+                        languages and the self-assessment tool, including their error
+                        messages.
+                    </li>
+                    <li>
+                        <strong>Also:</strong> an automated sweep of every page in
+                        Spanish.
+                    </li>
+                </ul>
+                <p class="mt-4">
+                    <strong>Not covered:</strong> the specific content of the Spanish
+                    pages and blog posts outside the sample, beyond the automated
+                    sweep. The blog and the self-assessment tool exist only in
+                    Spanish.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">How it was checked</h2>
+                <p>
+                    <strong>Method: self-assessment.</strong> I carried out the review
+                    myself. I own the site and audit web accessibility for a living,
+                    and I used the same protocol I apply to any client.
+                    <strong>It is not an evaluation by an independent third party</strong
+                    >, and it is worth reading it with that in mind.
+                </p>
+                <p class="mt-4">
+                    The sample was chosen with the WCAG-EM 2.0 methodology, and
+                    automated testing was combined with manual checks:
+                </p>
+                <ul class="mt-4 space-y-2 list-disc pl-5">
+                    <li>Automated testing with axe-core 4.11.4, on desktop and mobile.</li>
+                    <li>
+                        A keyboard walk-through, stop by stop, on every page, on
+                        desktop and on mobile with the menus open, and the complete
+                        processes done with the keyboard only.
+                    </li>
+                    <li>
+                        Each of the 55 WCAG 2.2 criteria checked one by one on every
+                        page, each with its procedure and its result recorded.
+                    </li>
+                    <li>
+                        Contrast measured against the real background wherever it is
+                        not a flat colour, such as the 3D relief on the home page, by
+                        day, by night and with snow.
+                    </li>
+                    <li>
+                        The <strong>NVDA</strong> screen reader on the forms, the home
+                        pages and the header, in both languages, and a virtual screen
+                        reader on the rest.
+                    </li>
+                </ul>
+                <p class="mt-4">
+                    <strong>Evaluation date:</strong> {evaluationDate}, on the live
+                    site. It found six failures, none serious and none specific to
+                    the English version: the contrast of the home page buttons when
+                    pressed, the order of the mobile menu, a drawn cursor that blinked
+                    endlessly, some English names not marked as English, the line above
+                    the home page headline with increased text spacing, and a notice
+                    that covered the last link on narrow screens. All six were fixed,
+                    and on {verificationDate} they were checked again with the same test
+                    that found them, together with a full pass over the sample to make
+                    sure nothing else had broken.
+                </p>
+                <p class="mt-4">
+                    Browsers and assistive technology tested: Chromium on desktop
+                    (1280 px) and mobile (375 px), and NVDA on Windows. VoiceOver,
+                    JAWS, TalkBack, Safari and Firefox were not tested, so nothing
+                    is claimed about them.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">If you find a barrier</h2>
+                <p>
+                    If there is anything on this site you cannot use, with a
+                    keyboard, a screen reader, zoom or whatever contrast you
+                    need, write to me and I will look into it:
+                </p>
+                <p class="mt-4 text-lg">
+                    <a
+                        href="mailto:contacto@jpiedra.com?subject=Accessibility%20of%20jpiedra.com"
+                        class="text-accent underline underline-offset-4 hover:text-accent-hover rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                        >contacto@jpiedra.com</a
+                    >
+                </p>
+                <p class="mt-4">
+                    <strong>I reply within 5 working days</strong>, telling you what
+                    I checked, whether it will be fixed and when. If you need any
+                    content from this site in another format, ask for it at the same
+                    address and tell me which format works for you. You can write in
+                    English or in Spanish.
+                </p>
+                <p class="mt-4 text-text-secondary">
+                    As a consumer, you can also contact consumer services,
+                    independently of this channel. In Spain, market surveillance
+                    is the responsibility of the authorities designated by each
+                    autonomous community.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">
+                    Why I publish this when I don’t have to
+                </h2>
+                <p>
+                    To be clear: <strong>I am not currently required</strong> to
+                    publish this. jpiedra.com is the website of a self-employed
+                    professional based in Spain who designs, builds and audits
+                    websites, so neither Spain’s rules for the public sector
+                    (<span lang="es">Real Decreto 1112/2018</span>) nor Spain’s
+                    transposition of the European Accessibility Act
+                    (<span lang="es">Ley 11/2023</span>) apply to it.
+                </p>
+                <p class="mt-4">
+                    It does fall under <strong
+                        ><span lang="es">Real Decreto 193/2023</span>, article
+                        14.2</strong
+                    >, which requires private websites about goods and services
+                    offered to the public to meet the accessibility criteria of the
+                    public-sector rules (today, the standard UNE-EN 301 549). That
+                    requirement applies from <strong>1 January 2029</strong> for new
+                    private services and from <strong>1 January 2030</strong> for
+                    existing ones. Article 14.3, which requires companies “of
+                    special economic significance” to state how accessible they are,
+                    does not apply either: I am well below its thresholds.
+                </p>
+                <p class="mt-4">
+                    I evaluate against WCAG 2.2 even though the legal reference is
+                    still 2.1 because the new version of the European standard, EN
+                    301 549 V4.1.1, was published in September 2026 and will become
+                    the reference once it is cited in the Official Journal of the
+                    European Union. I would rather be early.
+                </p>
+                <p class="mt-4">
+                    I publish this for transparency, to be ready ahead of that
+                    timetable, and because someone who sells accessibility audits
+                    should be able to show the state of their own website without
+                    being asked.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-heading text-2xl mb-4">Dates and review</h2>
+                <ul class="space-y-2 list-disc pl-5">
+                    <li>
+                        <strong>Evaluation carried out on:</strong>
+                        {evaluationDate}
+                    </li>
+                    <li>
+                        <strong>Fixes verified on:</strong>
+                        {verificationDate}
+                    </li>
+                    <li>
+                        <strong>Method:</strong> self-assessment by the site’s owner
+                    </li>
+                    <li>
+                        <strong>Last review of this page:</strong>
+                        {verificationDate}
+                    </li>
+                    <li>
+                        <strong>Next planned review:</strong>
+                        {nextReview}, or earlier if there is a redesign or a new
+                        interactive component
+                    </li>
+                </ul>
+            </section>
+
+            <section class="border-t border-border pt-8">
+                <p class="text-sm text-text-muted">
+                    This is transparency information about the accessibility of
+                    the site. <strong
+                        >It is not a certificate or an accreditation of legal
+                        conformance</strong
+                    >, and no authority has validated it. It was written by an
+                    accessibility specialist, not a lawyer: how the law applies to
+                    a specific case may have nuances that call for legal advice.
+                </p>
+            </section>
+        </div>
+    </article>
+</Layout>

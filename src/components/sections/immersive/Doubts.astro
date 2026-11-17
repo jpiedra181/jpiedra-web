@@ -93,8 +93,15 @@ const fallbackShots = [
                                 <figure class="doubt-proof">
                                     <figcaption class="doubt-proof-label">{proofs.reader.label}</figcaption>
                                     <ol role="list" class="reader-lines">
+                                        {/* Cada línea es lo que dijo NVDA, mezcla de nombres en inglés
+                                            (los de la web) y palabras del lector: cada trozo lleva su
+                                            idioma para que un lector lo pronuncie bien (WCAG 3.1.2). */}
                                         {proofs.reader.lines.map((line) => (
-                                            <li lang={line.lang || undefined}>{line.text}</li>
+                                            <li lang={line.lang || undefined}>
+                                                {line.parts.map((part) =>
+                                                    part.lang ? <span lang={part.lang}>{part.text}</span> : part.text,
+                                                )}
+                                            </li>
                                         ))}
                                     </ol>
                                     <p class="doubt-proof-note">{proofs.reader.note}</p>
@@ -296,8 +303,9 @@ const fallbackShots = [
         color: var(--color-text-primary);
     }
 
+    /* Texto alternativo vacío: es un adorno y un lector no tiene que decirlo. */
     .reader-lines li::before {
-        content: "›";
+        content: "›" / "";
         position: absolute;
         left: 0;
         color: var(--color-accent);

@@ -113,15 +113,17 @@ const homeLabel = lang === "es" ? "Javier Piedra, inicio" : "Javier Piedra, home
             </a>
         ))
     }
+    <!-- El idioma va antes de «Hablemos», como en la cabecera de escritorio y
+         en el menú de la portada 3D: mismo orden en todas partes (WCAG 3.2.3). -->
+    <div class="mt-2">
+        <LanguageSwitcher lang={lang} />
+    </div>
     <a
         href={cta.href}
-        class="mobile-nav-link inline-flex items-center font-body font-medium text-base tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3 mt-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        class="mobile-nav-link inline-flex items-center font-body font-medium text-base tracking-wide transition-all duration-300 rounded-full bg-accent text-bg-primary hover:bg-accent-hover px-7 py-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
     >
         {cta.label}
     </a>
-    <div class="mt-4">
-        <LanguageSwitcher lang={lang} />
-    </div>
 </div>
 
 <script>

@@ -789,16 +789,43 @@
           "label": "What NVDA, a screen reader, said while going through Inside the Frame with the keyboard",
           "lines": [
             {
-              "text": "Room III, Stillness: 360 degrees view inside Water Lily Pond, 360 degrees view",
-              "lang": ""
+              "lang": "",
+              "parts": [
+                {
+                  "text": "Room III, Stillness: 360 degrees view inside Water Lily Pond, 360 degrees view"
+                }
+              ]
             },
             {
-              "text": "Things to look for, lista, con 3 elementos, Weeping willows, botón, expandido",
-              "lang": "es"
+              "lang": "es",
+              "parts": [
+                {
+                  "text": "Things to look for",
+                  "lang": "en"
+                },
+                {
+                  "text": ", lista, con 3 elementos, "
+                },
+                {
+                  "text": "Weeping willows",
+                  "lang": "en"
+                },
+                {
+                  "text": ", botón, expandido"
+                }
+              ]
             },
             {
-              "text": "Rooms, botón, abre diálogo",
-              "lang": "es"
+              "lang": "es",
+              "parts": [
+                {
+                  "text": "Rooms",
+                  "lang": "en"
+                },
+                {
+                  "text": ", botón, abre diálogo"
+                }
+              ]
             }
           ],
           "note": "The site is in English; NVDA was set to Spanish. Recorded on 9 October 2026.",

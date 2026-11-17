@@ -1,19 +1,20 @@
 ---
 import Layout from "../components/layout/BaseLayout.astro"
 
-// Estas tres fechas salen del expediente de la auditoría
-// (jpiedra-clientes/jpiedra/auditorias/). Se actualizan cuando se repita la
-// evaluación, no antes: publicar una fecha de revisión que no corresponde a una
-// comprobación real vacía el documento de sentido.
-const fechaEvaluacion = "8 de octubre de 2026"
-const fechaRevision = "8 de octubre de 2026"
-const proximaRevision = "octubre de 2027"
+// Estas fechas salen del expediente de la auditoría
+// (jpiedra-clientes/jpiedra/auditorias/2026-11-13/). Se actualizan cuando se
+// repita la evaluación, no antes: publicar una fecha de revisión que no
+// corresponde a una comprobación real vacía el documento de sentido.
+// Versión inglesa: src/pages/en/accessibility.astro (mismo contenido).
+const fechaEvaluacion = "13 de noviembre de 2026"
+const fechaVerificacion = "16 de noviembre de 2026"
+const proximaRevision = "noviembre de 2027"
 ---
 
 <Layout
     lang="es"
     title="Accesibilidad de jpiedra.com — grado de conformidad WCAG 2.2 AA"
-    description="Grado de accesibilidad de jpiedra.com: resultado de la evaluación según WCAG 2.2 AA y UNE-EN 301 549, alcance, método y canal para comunicar barreras."
+    description="Grado de accesibilidad de jpiedra.com en español y en inglés: resultado de la evaluación según WCAG 2.2 AA y UNE-EN 301 549, alcance, método y canal para comunicar barreras."
 >
     <article class="max-w-3xl mx-auto px-6 lg:px-8 py-32 lg:py-40">
         <header class="mb-16">
@@ -32,7 +33,7 @@ const proximaRevision = "octubre de 2027"
                 cómo se ha comprobado y qué hacer si encuentras una barrera.
             </p>
             <p class="text-sm text-text-muted font-body mt-6">
-                Última revisión: {fechaRevision}
+                Última revisión: {fechaVerificacion}
             </p>
         </header>
 
@@ -48,13 +49,14 @@ const proximaRevision = "octubre de 2027"
                         >jpiedra.com es plenamente conforme con WCAG 2.2, nivel
                         AA</strong
                     >, la versión que recoge la norma europea EN 301 549 V4.1.1,
-                    en el alcance evaluado que se describe más abajo.
+                    en español y en inglés, en el alcance evaluado que se describe
+                    más abajo.
                 </p>
                 <p class="mt-4">
-                    De los 55 criterios de nivel A y AA de WCAG 2.2, 48 se
-                    aplican a esta web y los 48 se cumplen. Los 7 restantes no
-                    aplican porque aquí no hay lo que evalúan: no hay vídeo ni
-                    audio grabado, no hay emisiones en directo, no hay
+                    De los 55 criterios de nivel A y AA de WCAG 2.2, 49 se
+                    aplican a esta web y los 49 se cumplen. Los 6 restantes no
+                    aplican porque aquí no hay lo que evalúan: el único vídeo no
+                    tiene sonido, no hay emisiones en directo, no hay
                     transacciones con efectos legales o económicos y no hay
                     inicio de sesión. También se cumple el requisito 9.7 de la
                     EN 301 549 V4.1.1: la web respeta los colores forzados y el
@@ -65,49 +67,54 @@ const proximaRevision = "octubre de 2027"
                     UNE-EN 301 549 V3.2.1, que equivale a WCAG 2.1 AA. Con esa
                     norma el resultado es el mismo: <strong
                         >plenamente conforme</strong
-                    >, con 44 criterios aplicables de 50 y los 44 cumplidos.
+                    >, con 45 criterios aplicables de 50 y los 45 cumplidos.
                 </p>
                 <p class="mt-4 text-text-secondary">
                     «Plenamente conforme» significa que en las páginas y
                     procesos evaluados no queda ningún incumplimiento.
-                    <strong>No significa que la web sea perfecta</strong>: se ha
-                    evaluado una muestra, no las 33 páginas en español, y ninguna
-                    evaluación sustituye a lo que te encuentres tú usándola. Si
-                    das con una barrera, cuéntamela: está más abajo cómo.
+                    <strong>No significa que la web sea perfecta</strong>: en
+                    español se ha evaluado una muestra, no las 36 páginas, y
+                    ninguna evaluación sustituye a lo que te encuentres tú
+                    usándola. Si das con una barrera, cuéntamela: está más abajo
+                    cómo.
                 </p>
             </section>
 
             <section>
                 <h2 class="font-heading text-2xl mb-4">Alcance evaluado</h2>
                 <p>
-                    La evaluación cubre la <strong
-                        >versión en español de jpiedra.com</strong
-                    >: 8 páginas seleccionadas y los 2 procesos completos del
+                    La evaluación cubre <strong
+                        >las dos versiones de jpiedra.com</strong
+                    >, en español y en inglés, y los procesos completos del
                     sitio.
                 </p>
                 <ul class="mt-4 space-y-2 list-disc pl-5">
                     <li>
-                        <strong>Páginas:</strong> la portada en 3D, la versión
-                        clásica, la página de accesibilidad web, la de
-                        experiencias 3D, el autoevaluador de la Ley 11/2023, una
-                        entrada del blog, la política de cookies y el caso de
-                        auditoría.
+                        <strong>En español:</strong> 9 páginas seleccionadas: la
+                        portada en 3D, la versión clásica, las páginas de
+                        accesibilidad web y de experiencias 3D, el autoevaluador de
+                        la Ley 11/2023, una entrada del blog, una ficha de
+                        accesibilidad, la política de cookies y el caso del
+                        configurador de cocina.
+                    </li>
+                    <li>
+                        <strong>En inglés:</strong> todas las páginas, sin muestreo.
                     </li>
                     <li>
                         <strong>Procesos completos:</strong> el formulario de
-                        contacto y el autoevaluador, incluidos sus mensajes de
-                        error.
+                        contacto en los dos idiomas y el autoevaluador, incluidos sus
+                        mensajes de error.
                     </li>
                     <li>
-                        <strong>Además:</strong> un barrido automático sobre las 33
-                        páginas en español del sitio.
+                        <strong>Además:</strong> un barrido automático sobre todas
+                        las páginas en español del sitio.
                     </li>
                 </ul>
                 <p class="mt-4">
-                    <strong>Qué queda fuera:</strong> la versión en inglés de este
-                    sitio, que se evaluará por separado, y el contenido concreto
-                    de las entradas del blog que no entraron en la muestra, más allá
-                    del barrido automático.
+                    <strong>Qué queda fuera:</strong> el contenido concreto de las
+                    entradas del blog y de las páginas en español que no entraron
+                    en la muestra, más allá del barrido automático. El blog solo
+                    existe en español.
                 </p>
             </section>
 
@@ -135,12 +142,13 @@ const proximaRevision = "octubre de 2027"
                         en escritorio y en móvil.
                     </li>
                     <li>
-                        Recorrido de teclado parada a parada en cada página, y
-                        los dos procesos completos hechos solo con teclado.
+                        Recorrido de teclado parada a parada en cada página, en
+                        escritorio y en móvil con los menús abiertos, y los procesos
+                        completos hechos solo con teclado.
                     </li>
                     <li>
-                        Comprobación de los 55 criterios de WCAG 2.2 uno a uno, cada
-                        uno con su procedimiento y su resultado anotado.
+                        Comprobación de los 55 criterios de WCAG 2.2 uno a uno en cada
+                        página, cada uno con su procedimiento y su resultado anotado.
                     </li>
                     <li>
                         Contraste medido sobre el fondo real allí donde no hay un
@@ -148,21 +156,23 @@ const proximaRevision = "octubre de 2027"
                         noche y con nieve.
                     </li>
                     <li>
-                        Lector de pantalla <strong>NVDA</strong> real sobre los dos
-                        procesos y la portada, y lector virtual sobre el resto de la
-                        muestra.
+                        Lector de pantalla <strong>NVDA</strong> real sobre los
+                        formularios, las portadas y la cabecera, en los dos idiomas,
+                        y lector virtual sobre el resto.
                     </li>
                 </ul>
                 <p class="mt-4">
-                    <strong>Fecha de la evaluación:</strong> {fechaEvaluacion}. Se
-                    hizo sobre la versión rediseñada de la web, antes de publicarla.
-                    Encontró nueve incumplimientos: el más serio, que la portada en
-                    3D no dejaba desplazarse con el zoom alto; el resto, de
-                    contraste, de orden de la navegación, de foco y de animaciones
-                    que no se paraban. Los nueve se corrigieron y se volvieron a
-                    comprobar repitiendo la prueba que los detectó. Al corregirlos
-                    apareció un problema nuevo de contraste en móvil, que también se
-                    corrigió y se comprobó antes de publicar.
+                    <strong>Fecha de la evaluación:</strong> {fechaEvaluacion}, sobre
+                    la web publicada. Encontró seis incumplimientos, ninguno grave y
+                    ninguno propio de la versión en inglés: el contraste de los
+                    botones de la portada al pulsarlos, el orden del menú en el
+                    móvil, un cursor dibujado que parpadeaba sin parar, unos nombres
+                    en inglés sin marcar como tales, el antetítulo de la portada con
+                    el texto más espaciado y un aviso que tapaba el último enlace en
+                    pantallas estrechas. Los seis se corrigieron y el {fechaVerificacion}
+                    se volvieron a comprobar repitiendo la prueba que los detectó,
+                    junto con un repaso completo de la muestra para confirmar que no
+                    se había roto nada.
                 </p>
                 <p class="mt-4">
                     Navegadores y tecnologías con los que se ha comprobado:
@@ -254,11 +264,15 @@ const proximaRevision = "octubre de 2027"
                         {fechaEvaluacion}
                     </li>
                     <li>
+                        <strong>Correcciones verificadas el:</strong>
+                        {fechaVerificacion}
+                    </li>
+                    <li>
                         <strong>Método:</strong> autoevaluación del titular del sitio
                     </li>
                     <li>
                         <strong>Última revisión de esta página:</strong>
-                        {fechaRevision}
+                        {fechaVerificacion}
                     </li>
                     <li>
                         <strong>Próxima revisión prevista:</strong>

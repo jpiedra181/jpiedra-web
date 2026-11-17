@@ -190,24 +190,41 @@ const t = useTranslations(lang)
         notice.hidden = false
         // Mientras el aviso está abierto, el navegador deja libre su altura al
         // llevar el foco a la vista: así nada enfocado queda debajo (WCAG 2.4.11).
+        // El relleno inferior da además sitio al final de la página: sin él, el
+        // último enlace del pie no podía subir por encima del aviso en móvil.
         const root = document.documentElement
         const reserveSpace = () => {
-            root.style.scrollPaddingBottom = `${notice.offsetHeight + 24}px`
+            const room = `${notice.offsetHeight + 24}px`
+            root.style.scrollPaddingBottom = room
+            document.body.style.paddingBottom = room
         }
         reserveSpace()
         const resizeObserver = new ResizeObserver(reserveSpace)
         resizeObserver.observe(notice)
-        notice.querySelector("[data-restore-close]")?.addEventListener("click", () => {
+        const closeNotice = (moveFocus: boolean) => {
             notice.hidden = true
             resizeObserver.disconnect()
             root.style.scrollPaddingBottom = ""
-            // El foco vuelve al titular de la página, no al documento vacío.
+            document.body.style.paddingBottom = ""
+            document.removeEventListener("keydown", onEscape, true)
+            // Si el foco estaba en el aviso, vuelve al titular de la página, no
+            // al documento vacío; si estaba en otro sitio, se queda donde está.
             const heading = document.querySelector<HTMLElement>("main h1")
-            if (heading) {
+            if (moveFocus && heading) {
                 heading.tabIndex = -1
                 heading.focus({ preventScroll: true })
             }
-        })
+        }
+        // Escape lo cierra, como cualquier otra capa superpuesta del sitio. Con
+        // el menú móvil abierto, Escape es del menú: el aviso se queda.
+        const onEscape = (event: KeyboardEvent) => {
+            if (event.key !== "Escape" || notice.hidden) return
+            if (document.getElementById("mobile-menu-btn")?.getAttribute("aria-expanded") === "true") return
+            closeNotice(notice.contains(document.activeElement))
+        }
+        // En captura: corre antes que el Escape del menú, que lo cierra y cambia aria-expanded.
+        document.addEventListener("keydown", onEscape, true)
+        notice.querySelector("[data-restore-close]")?.addEventListener("click", () => closeNotice(true))
     }
 
     document.addEventListener(

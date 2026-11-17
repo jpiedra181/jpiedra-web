@@ -41,16 +41,14 @@ const legalItems = [
     },
 ]
 
-// La página de accesibilidad solo existe en español porque la evaluación cubre
-// solo la versión en español. En cuanto se audite /en/ se añade su equivalente;
-// enlazar aquí a un documento cuyo alcance no incluye la página desde la que se
-// enlaza sería justo lo que este sitio critica.
-if (lang === "es") {
-    legalItems.push({
-        href: "/accesibilidad/",
-        label: t.footer.legal.accessibility,
-    })
-}
+// La información de accesibilidad cubre los dos idiomas desde la auditoría del
+// 13-11-2026, así que cada versión enlaza la suya. Si algún día una parte del
+// sitio queda fuera del alcance evaluado, no se enlaza desde ella: un documento
+// que no incluye la página desde la que se enlaza es justo lo que este sitio critica.
+legalItems.push({
+    href: lang === "es" ? "/accesibilidad/" : "/en/accessibility/",
+    label: t.footer.legal.accessibility,
+})
 ---
 
 <footer class="border-t border-border py-12">

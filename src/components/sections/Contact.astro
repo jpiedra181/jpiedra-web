@@ -233,7 +233,10 @@ const privacyHref =
 
             <!-- Submit + feedback + note + privacy + availability -->
             <div class="flex flex-col gap-3 pt-2">
-                <!-- Privacy consent checkbox -->
+                <!-- Privacy consent checkbox. Sin el `required` nativo: con él,
+                     Chromium la exponía como «inválida» antes de enviar nada y
+                     NVDA lo decía al llegar. La obligación la dice aria-required
+                     y la comprueba el script al enviar. -->
                 <div class="flex flex-col gap-2 mb-4">
                     <label
                         for="contact-privacy"
@@ -243,7 +246,6 @@ const privacyHref =
                             type="checkbox"
                             id="contact-privacy"
                             name="privacy"
-                            required
                             aria-required="true"
                             aria-describedby="contact-privacy-error"
                             class="w-6 h-6 -mt-0.5 accent-accent cursor-pointer flex-shrink-0"

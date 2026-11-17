@@ -116,7 +116,7 @@ const structuredData = {
         <main class="survey-main">
             <div class="survey-intro">
                 <p class="survey-eyebrow">{copy.eyebrow}</p>
-                <h1 class="survey-title">
+                <h1 id="survey-title" class="survey-title">
                     {copy.titleStart}
                     <em>{copy.titleHighlight}</em>
                     <span class="block">{copy.titleEnd}</span>
@@ -294,14 +294,39 @@ const structuredData = {
             // (--survey-intro-h), plegado o desplegado.
             const controls = document.querySelector<HTMLElement>(".survey-controls")!
             const intro = document.querySelector<HTMLElement>(".survey-intro")!
+            // En escritorio el bloque tiene un tope de altura (CSS). Si el texto
+            // no cabe en él (p. ej. con el espaciado de texto aumentado, WCAG
+            // 1.4.12), se desplaza por dentro en vez de salirse de la pantalla o
+            // meterse bajo los controles; mientras tanto es una región con
+            // nombre que se puede enfocar y mover con el teclado. Se mide dónde
+            // acaban los hijos: scrollHeight cuenta también la sombra, que
+            // desborda a propósito.
+            const fitIntro = () => {
+                const box = intro.getBoundingClientRect()
+                const children = Array.from(intro.children).filter((child) => getComputedStyle(child).display !== "none")
+                const contentBottom = Math.max(...children.map((child) => child.getBoundingClientRect().bottom + intro.scrollTop))
+                const overflowing = contentBottom > box.bottom + 1
+                intro.classList.toggle("is-overflowing", overflowing)
+                if (overflowing) {
+                    intro.tabIndex = 0
+                    intro.setAttribute("role", "region")
+                    intro.setAttribute("aria-labelledby", "survey-title")
+                } else {
+                    intro.removeAttribute("tabindex")
+                    intro.removeAttribute("role")
+                    intro.removeAttribute("aria-labelledby")
+                }
+            }
             const setBlockHeights = () => {
                 const style = document.documentElement.style
                 style.setProperty("--survey-controls-h", `${controls.offsetHeight}px`)
                 style.setProperty("--survey-intro-h", `${intro.offsetHeight}px`)
+                fitIntro()
             }
             const blockObserver = new ResizeObserver(setBlockHeights)
             blockObserver.observe(controls)
             blockObserver.observe(intro)
+            for (const child of intro.children) blockObserver.observe(child)
             setBlockHeights()
 
             const query = <T extends Element>(selector: string) =>
@@ -601,6 +626,35 @@ const structuredData = {
                 pointer-events: none;
             }
 
+            /* El titular va anclado abajo y crece hacia arriba. Si alguien
+               aumenta el espaciado del texto (WCAG 1.4.12), sin este tope subía
+               hasta la cabecera y el antetítulo se montaba sobre el logo. Con
+               él, la caja nunca empieza por encima de la cabecera: si no cabe,
+               lo que sobra sale por abajo. Solo en escritorio: en móvil la
+               altura del bloque la mide el script para la sombra. */
+            @media (min-width: 768px) and (min-height: 561px) {
+                .survey-intro {
+                    max-height: calc(100dvh - 5.5rem - clamp(5.5rem, 12vh, 7.5rem));
+                }
+                /* Solo si no cabe (lo decide el script): se desplaza por dentro,
+                   con un fondo propio en vez de la sombra redonda, que aquí se
+                   recortaría. */
+                .survey-intro.is-overflowing {
+                    overflow-y: auto;
+                    overscroll-behavior: contain;
+                    pointer-events: auto;
+                    background: rgb(11 15 20 / 0.88);
+                    border-radius: 0.75rem;
+                }
+                .survey-intro.is-overflowing::before {
+                    display: none;
+                }
+                .survey-intro.is-overflowing:focus-visible {
+                    outline: 2px solid #fff;
+                    outline-offset: 4px;
+                }
+            }
+
             /* Sombra que separa el titular de las curvas sin taparlas. De día
                las laderas al sol son más claras y, al girar la sierra, puede
                pasar cualquiera por detrás: es algo más densa que cuando la
@@ -716,8 +770,13 @@ const structuredData = {
                 color: var(--color-accent);
             }
 
+            /* Pulsado conserva el fondo oscuro del botón: el texto dorado nunca
+               queda sobre el relieve, que con nieve o con las luces de los
+               pueblos lo dejaba en 2:1 (WCAG 1.4.3). El estado lo marcan el
+               borde y el color del texto. */
             .survey-button[aria-pressed="true"] {
-                background: transparent;
+                background: rgba(11, 15, 20, 0.85);
+                border-color: var(--color-accent);
                 color: var(--color-accent);
             }
 
