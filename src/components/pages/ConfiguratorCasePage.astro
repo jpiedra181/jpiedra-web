@@ -19,9 +19,10 @@ import {
     VIDEO_UPLOAD_DATE,
 } from "../../data/configurator-case"
 
-// Caso del configurador de cocina: el problema, el vídeo, lo que puede hacer el
-// cliente final, la marca blanca, cómo está hecho y lo medido. Cierra con el
-// formulario de contacto, como la landing de 3D de la que cuelga.
+// Caso del configurador de cocina: la ficha técnica, el vídeo, el problema, lo
+// que puede hacer el cliente final, la marca blanca, cómo está hecho y lo
+// medido (antes y después de optimizarlo). Cierra con el formulario de
+// contacto, como la landing de 3D de la que cuelga.
 interface Props {
     lang: Lang
 }
@@ -87,6 +88,21 @@ const structuredData = [
                 <p class="text-lg lg:text-xl text-text-secondary leading-relaxed max-w-2xl">
                     {c.hero.subtitle}
                 </p>
+                <div class="case-factsheet">
+                    <h2 class="case-factsheet-title text-accent uppercase mb-4">
+                        {c.factSheet.title}
+                    </h2>
+                    <dl>
+                        {
+                            c.factSheet.items.map((item) => (
+                                <div class="case-factsheet-row">
+                                    <dt class="font-mono text-sm text-text-secondary">{item.term}</dt>
+                                    <dd class="text-text-primary leading-relaxed">{item.value}</dd>
+                                </div>
+                            ))
+                        }
+                    </dl>
+                </div>
                 <div class="button-pair">
                     <!-- Se abre en otra pestaña, como los proyectos: se avisa en texto
                          para quien no ve la flecha (WCAG G201). -->
@@ -297,7 +313,53 @@ const structuredData = [
             >
                 {c.data.title}
             </h2>
-            <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-start mt-14 md:mt-16">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-16 items-start mt-14 md:mt-16">
+                <div data-reveal>
+                    <h3 class="font-heading text-2xl lg:text-[1.75rem] leading-tight text-text-primary">
+                        {c.data.turnaround.title}
+                    </h3>
+                    <div class="flex flex-col gap-5 mt-6">
+                        {
+                            c.data.turnaround.paragraphs.map((paragraph) => (
+                                <p class="text-base md:text-lg text-text-secondary leading-relaxed">{paragraph}</p>
+                            ))
+                        }
+                    </div>
+                    <p class="text-base md:text-lg text-text-primary leading-relaxed mt-8">
+                        {c.data.turnaround.changesIntro}
+                    </p>
+                    <ul class="case-changes mt-4">
+                        {c.data.turnaround.changes.map((change) => <li>{change}</li>)}
+                    </ul>
+                </div>
+                <div data-reveal class="case-table-wrap">
+                    <table class="case-table">
+                        <caption>{c.data.turnaround.table.caption}</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">{c.data.turnaround.table.metricHeader}</th>
+                                <th scope="col" class="case-table-number">{c.data.turnaround.table.beforeHeader}</th>
+                                <th scope="col" class="case-table-number">{c.data.turnaround.table.afterHeader}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                c.data.turnaround.table.rows.map((row) => (
+                                    <tr>
+                                        <th scope="row">{row.metric}</th>
+                                        <td class="case-table-number">{row.before}</td>
+                                        <td class="case-table-number case-table-after">{row.after}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h3 class="font-heading text-2xl lg:text-[1.75rem] leading-tight text-text-primary mt-20 md:mt-24">
+                {c.data.currentTitle}
+            </h3>
+            <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-start mt-10">
                 <dl data-reveal-stagger class="grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-6">
                     {
                         c.data.facts.map((fact) => (
@@ -427,6 +489,109 @@ const structuredData = [
     .case-fact {
         padding-top: 1rem;
         border-top: 1px solid var(--color-border-hover);
+    }
+
+    .case-factsheet {
+        max-width: 42rem;
+    }
+
+    /* Es un h2 por estructura, pero se ve como una etiqueta: la regla global
+       de los encabezados le pondría la serif de titulares. */
+    .case-factsheet-title {
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        line-height: 1.5;
+    }
+
+    .case-factsheet-row {
+        display: grid;
+        gap: 0.25rem 1.5rem;
+        padding-block: 0.75rem;
+        border-top: 1px solid var(--color-border-hover);
+    }
+
+    .case-factsheet-row:last-child {
+        border-bottom: 1px solid var(--color-border-hover);
+    }
+
+    @media (min-width: 40rem) {
+        .case-factsheet-row {
+            grid-template-columns: 8.5rem 1fr;
+            align-items: baseline;
+        }
+    }
+
+    .case-changes {
+        list-style: disc;
+        padding-left: 1.25rem;
+        display: grid;
+        gap: 0.625rem;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+    }
+
+    .case-changes li::marker {
+        color: var(--color-accent);
+    }
+
+    .case-table-wrap {
+        padding: 1.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-bg-surface);
+    }
+
+    .case-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9375rem;
+    }
+
+    .case-table caption {
+        caption-side: top;
+        text-align: left;
+        padding-bottom: 1rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: var(--color-text-secondary);
+    }
+
+    .case-table th,
+    .case-table td {
+        padding: 0.75rem 0.5rem;
+        border-bottom: 1px solid var(--color-border-hover);
+        text-align: left;
+        vertical-align: baseline;
+    }
+
+    .case-table thead th {
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+    }
+
+    .case-table tbody th {
+        font-weight: 400;
+        color: var(--color-text-primary);
+    }
+
+    .case-table tbody tr:last-child > * {
+        border-bottom: 0;
+    }
+
+    .case-table .case-table-number {
+        text-align: right;
+        white-space: nowrap;
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        color: var(--color-text-secondary);
+    }
+
+    .case-table .case-table-after {
+        color: var(--color-accent);
     }
 </style>
 

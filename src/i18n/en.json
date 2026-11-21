@@ -663,8 +663,8 @@
           "description": "A kitchen open to the dining and living room: 101 m² you walk through as if you were inside. Pick a piece of furniture, change its finish and the budget updates on the spot. Built for developers, estate agents, kitchen studios and interior designers: the client decides by seeing it, not by imagining it.",
           "facts": [
             {
-              "value": "88–95",
-              "label": "for performance in Lighthouse on mobile, with the whole home and its lighting baked in Blender. On desktop, 94–97."
+              "value": "88–91",
+              "label": "for performance in Lighthouse on mobile, with the whole home and its lighting baked in Blender. On desktop, 97."
             },
             {
               "value": "74",
@@ -736,7 +736,7 @@
         {
           "id": "speed",
           "title": "Won't it be slow on a phone?",
-          "description": "It doesn't have to be. It's built for phones from the start: textures sized for each screen, 3D loaded when it's needed, and nothing redrawn unless it moves. It holds for a heavy scene too: the kitchen configurator, a whole home with its lighting, scores 88–95 on mobile."
+          "description": "It doesn't have to be. It's built for phones from the start: textures sized for each screen, 3D loaded when it's needed, and nothing redrawn unless it moves. It holds for a heavy scene too: the kitchen configurator, a whole home with its lighting, scores 88–91 on mobile."
         },
         {
           "id": "seo",
@@ -1372,6 +1372,21 @@
       "ctaPrimary": "Open the configurator",
       "ctaSecondary": "Tell me about your project"
     },
+    "factSheet": {
+      "title": "Fact sheet",
+      "items": [
+        { "term": "Type", "value": "My own demo, not a commission" },
+        { "term": "Date", "value": "November 2026" },
+        {
+          "term": "What I did",
+          "value": "Preparing and optimising the model, lighting baked in Blender in layers, and the whole web build"
+        },
+        {
+          "term": "Tools",
+          "value": "Blender (Cycles), Three.js, TypeScript, Vite, gltf-transform, meshoptimizer, Netlify"
+        }
+      ]
+    },
     "video": {
       "label": "The walkthrough",
       "title": "How it’s used",
@@ -1490,10 +1505,40 @@
     "data": {
       "label": "Measured",
       "title": "A whole home, fast on a phone",
+      "turnaround": {
+        "title": "From 44 seconds to 2",
+        "paragraphs": [
+          "The first version I published took 44.5 seconds to show the main content on a phone. That’s what Lighthouse calls LCP, and here it was the welcome text. Its mobile performance score ran from 47 to 53.",
+          "The same day I made these changes, published it again and measured it the same way: 2.0 seconds and 88 to 91. Nothing you see or can do changed."
+        ],
+        "changesIntro": "What I changed:",
+        "changes": [
+          "The welcome is painted first, and the home isn’t requested until it’s on screen.",
+          "Reflections are rebuilt on the graphics card instead of in JavaScript.",
+          "Shaders compile in parallel from the start. Before, they froze the page for almost a second.",
+          "Textures are uploaded to the card in small batches.",
+          "Night lighting and the garden load only when they’re needed.",
+          "Lighter models and textures, checked in the scene screenshot by screenshot."
+        ],
+        "table": {
+          "caption": "Before and after, both measured on the live site on 15 November 2026, the same way.",
+          "metricHeader": "Measure",
+          "beforeHeader": "Before",
+          "afterHeader": "After",
+          "rows": [
+            { "metric": "Mobile performance (Lighthouse)", "before": "47–53", "after": "88–91" },
+            { "metric": "Mobile LCP", "before": "44.5 s", "after": "2.0 s" },
+            { "metric": "Desktop performance (Lighthouse)", "before": "72", "after": "97" },
+            { "metric": "Desktop LCP", "before": "8.6 s", "after": "0.6 s" },
+            { "metric": "Transferred on mobile", "before": "14.3 MB", "after": "6.0 MB" }
+          ]
+        }
+      },
+      "currentTitle": "Where it stands now",
       "facts": [
         {
-          "value": "88–95",
-          "label": "for performance in Lighthouse on mobile, across six runs. On desktop, 94–97."
+          "value": "88–91",
+          "label": "for performance in Lighthouse on mobile, across three runs. On desktop, 97."
         },
         {
           "value": "< 1 s",
@@ -1510,7 +1555,7 @@
       ],
       "imageAlt": "Lighthouse report for the configurator. On mobile, 89 for performance and 100 for accessibility, best practices and SEO. On desktop, 97 for performance and 100 for the other three.",
       "imageCaption": "One of the runs. Lighthouse’s accessibility score is an automated check, not an audit: the configurator’s audit is still to come.",
-      "note": "Measured on 15 November 2026 on the live site, with Lighthouse 13.5: six runs in mobile mode and two on desktop. Times over 4G use a mid-range phone profile."
+      "note": "Measured on 15 November 2026 on the live site, with Lighthouse 13.5: three runs in mobile mode and one on desktop, both before and after the changes. Times over 4G use a mid-range phone profile."
     },
     "credits": "Some furniture and lamps are third-party models under a CC BY licence. The credits are in the configurator itself, under “Demo by Javier Piedra”.",
     "contact": {

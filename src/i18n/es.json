@@ -668,8 +668,8 @@
           "description": "Una cocina abierta al comedor y al salón: 101 m² que se recorren como si estuvieras dentro. Se pulsa un mueble, se cambia el acabado y el presupuesto se actualiza al momento. Pensado para promotoras, inmobiliarias, estudios de cocina e interioristas: el cliente decide viéndolo, no imaginándolo.",
           "facts": [
             {
-              "value": "88–95",
-              "label": "en rendimiento de Lighthouse en el móvil, con la vivienda entera y su luz calculada en Blender. En escritorio, 94–97."
+              "value": "88–91",
+              "label": "en rendimiento de Lighthouse en el móvil, con la vivienda entera y su luz calculada en Blender. En escritorio, 97."
             },
             {
               "value": "74",
@@ -741,7 +741,7 @@
         {
           "id": "speed",
           "title": "¿Irá lenta en el móvil?",
-          "description": "No tiene por qué. Se construye para el móvil desde el principio: texturas a la medida de cada pantalla, el 3D se carga cuando hace falta y nada se vuelve a pintar si no se mueve. Vale también para una escena pesada: el configurador de cocina, una vivienda entera con su luz, saca 88–95 en el móvil."
+          "description": "No tiene por qué. Se construye para el móvil desde el principio: texturas a la medida de cada pantalla, el 3D se carga cuando hace falta y nada se vuelve a pintar si no se mueve. Vale también para una escena pesada: el configurador de cocina, una vivienda entera con su luz, saca 88–91 en el móvil."
         },
         {
           "id": "seo",
@@ -1382,6 +1382,21 @@
       "ctaPrimary": "Abrir el configurador",
       "ctaSecondary": "Cuéntame tu proyecto"
     },
+    "factSheet": {
+      "title": "Ficha técnica",
+      "items": [
+        { "term": "Tipo", "value": "Demo propia, no es un encargo" },
+        { "term": "Fecha", "value": "Noviembre de 2026" },
+        {
+          "term": "Qué hice",
+          "value": "Preparación y optimización del modelo, iluminación horneada en Blender por capas y desarrollo web completo"
+        },
+        {
+          "term": "Herramientas",
+          "value": "Blender (Cycles), Three.js, TypeScript, Vite, gltf-transform, meshoptimizer, Netlify"
+        }
+      ]
+    },
     "video": {
       "label": "El recorrido",
       "title": "Así se usa",
@@ -1500,10 +1515,40 @@
     "data": {
       "label": "Medido",
       "title": "Una vivienda entera, rápida en el móvil",
+      "turnaround": {
+        "title": "De 44 segundos a 2",
+        "paragraphs": [
+          "La primera versión que publiqué tardaba 44,5 segundos en enseñar lo principal en un móvil. Es lo que Lighthouse llama LCP, y aquí era el texto de la bienvenida. Su nota de rendimiento en el móvil iba de 47 a 53.",
+          "Ese mismo día hice estos cambios, la volví a publicar y la medí igual: 2,0 segundos y de 88 a 91. Sin cambiar nada de lo que se ve ni de lo que hace."
+        ],
+        "changesIntro": "Lo que cambié:",
+        "changes": [
+          "La bienvenida se pinta primero, y la casa no se pide hasta que está en pantalla.",
+          "Los reflejos se reconstruyen en la tarjeta gráfica en vez de en JavaScript.",
+          "Los sombreadores se compilan en paralelo desde el principio. Antes congelaban la página casi un segundo.",
+          "Las texturas se suben a la tarjeta en tandas pequeñas.",
+          "La noche y el jardín se cargan solo cuando hacen falta.",
+          "Modelos y texturas más ligeros, comprobados en la escena captura contra captura."
+        ],
+        "table": {
+          "caption": "Antes y después, los dos medidos en la web publicada el 15 de noviembre de 2026 y de la misma forma.",
+          "metricHeader": "Medida",
+          "beforeHeader": "Antes",
+          "afterHeader": "Después",
+          "rows": [
+            { "metric": "Rendimiento en el móvil (Lighthouse)", "before": "47–53", "after": "88–91" },
+            { "metric": "LCP en el móvil", "before": "44,5 s", "after": "2,0 s" },
+            { "metric": "Rendimiento en escritorio (Lighthouse)", "before": "72", "after": "97" },
+            { "metric": "LCP en escritorio", "before": "8,6 s", "after": "0,6 s" },
+            { "metric": "Transferido en el móvil", "before": "14,3 MB", "after": "6,0 MB" }
+          ]
+        }
+      },
+      "currentTitle": "Cómo está ahora",
       "facts": [
         {
-          "value": "88–95",
-          "label": "en rendimiento de Lighthouse en el móvil, en seis pasadas. En escritorio, 94–97."
+          "value": "88–91",
+          "label": "en rendimiento de Lighthouse en el móvil, en tres pasadas. En escritorio, 97."
         },
         {
           "value": "< 1 s",
@@ -1520,7 +1565,7 @@
       ],
       "imageAlt": "Informe de Lighthouse del configurador. En el móvil, 89 en rendimiento y 100 en accesibilidad, buenas prácticas y SEO. En escritorio, 97 en rendimiento y 100 en las otras tres.",
       "imageCaption": "Una de las pasadas, en inglés, como sale en Lighthouse. Su nota de accesibilidad es una comprobación automática, no una auditoría: la del configurador está pendiente.",
-      "note": "Medido el 15 de noviembre de 2026 en la web publicada, con Lighthouse 13.5: seis pasadas en modo móvil y dos en escritorio. Los tiempos con 4G, con un perfil de móvil de gama media."
+      "note": "Medido el 15 de noviembre de 2026 en la web publicada, con Lighthouse 13.5: tres pasadas en modo móvil y una en escritorio, tanto antes como después de los cambios. Los tiempos con 4G, con un perfil de móvil de gama media."
     },
     "credits": "Algunos muebles y lámparas son modelos de terceros con licencia CC BY. Los créditos están en el propio configurador, en «Demo de Javier Piedra».",
     "contact": {
